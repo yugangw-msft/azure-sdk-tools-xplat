@@ -100,6 +100,7 @@
   "bin": {
     "azure": "./bin/azure",
     "azure-node": "./bin/azure-node",
-    "azure-nodejs": "./bin/azure-nodejs"
+    "azure-nodejs": "./bin/azure-nodejs",
+    "azure.cmd":  "./bin/azure.cmd"
   }
 }
