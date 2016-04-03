@@ -1,3 +1,84 @@
+##2016-03-30 Version 0.9.19
+* Graph-RBAC
+  * RBAC cmdlets consuming new graph version
+* Batch
+  * Added batch management and service commands
+* HDInsight
+  * Added commands for managing HDInsight script actions: create, persisted, and history.
+* CDN
+  * Added commands for CDN Management in ARM mode
+* Insights
+  * Introduced log profiles commands for CLI
+* DataLake
+  * Migrated to Autorest generated node sdk
+* ResourceManager
+  * Added debugSetting parameter for group deployment create
+  * Added group export command
+  * Added group deployment template download command
+  * Brought back the validation step when submitting an ARM deployment
+  * Fixed tests
+* VM
+  * Added more tests for command "azure vm enable-aem"
+  * Fixed storage account name case sensitive issue for command "azure vm enable-aem"
+  * Updated vm commands to consume Compute API Version to 2016-03-30
+  * Updated Linux Diagnostic version to 2.3
+  * Added VMSS Commands
+  * Added VM Redeploy Command
+* Network 
+  * vnet/lb/publicip/nic/nsg/traffic-manager profile/express-route circuit list commands now support --resource-group as optional parameter for backward compatibility
+  * Removed extra-error message when authorization item was not found
+  * Fixed network dns zone import for record sets with multiple records of type A
+  * Fixed dns record-set create regression issue which throws exception 'The record set of type '<...>' cannot be null'
+  * Fixed 'azure network public-ip list' command  to output 'IP Address' column
+  * Added support for --default-site-id and --default-site-name options to attach Local Network Gateway as Default Site for VPN Gateway in 'azure network vpn-gateway create/set' commands
+  * Added prompt for --priority if not specified
+  * Changed default values to '*''network nsg rule create'
+  * Added support for --sku-name option in 'network vpn-gateway create/set' commands
+  * Added support for --address-prefixes option in 'network vpn-gateway create/set'
+  * Implemented commands for vpn gateways to manage Root/Revoked Certificates
+  * Fixed incorrect properties of provider in the listProviders method #2667
+* General
+  * Fixed #2619, #2579
+  * Improved warn output to respect --json option
+  * Implemented ARM network application gateways commands
+  * Fixed silly logging of Buffer types in the cli 
+
+##2016-03-11 Version 0.9.18
+* Upgraded Graph to 1.6-internal api-version and consumed it in ad commands
+* Fixed issue #2619, #2616
+* Made role assignment commands work with 1.6-internal
+
+##2016-03-07 Version 0.9.17
+* Fixed login for US Government Environment
+
+##2016-03-03 Version 0.9.16
+* General
+  * Fixed harvesting script bugs
+  * Fixed issues #2560, #2388, #2529, #2530, #1913, #2486,  #2518
+  * Added support for Github issues/pr templates feature
+  * Leap Year Fix for adding years
+  * Fixed broken link for contribution guidelines
+  * Removed apiapp commands
+* Resource Management
+  * Ported ARM cmdlets to use autorest generated resource mgmt client
+  * Fixed display of innerdetail message only when present
+  * Fixed json output issue for deployment create/show
+* Network
+  * Fixed #2493, #1771, #2505, #2510, 2563
+  * Improved tests #2564
+  * --resource-group now optional for 'azure network traffic-manager profile list'
+* VM
+  * Fixed #2502, #2507, #2575, #2546
+  * Support RSA format ssh cert in "vm reset-access" #2437
+  * Fixed reading storage account data vm for enable-aem command
+  * Fix NIC-IP Association Issue #2551
+  * Fixed issue #2524 VM Create License Type Option
+  * Fix #2539 VM Image List/Show
+  * Added test for vm list-usage
+* Redis Cache
+  * Added delete-diagnostics command for redis cache
+  * Added set-diagnostics command to redis cache
+
 ## 2016-02-01 Version 0.9.15
 * General
   * Improved tests and the tests infrastructure #2422, #2433, #2460, #2467, #2468, #2472
