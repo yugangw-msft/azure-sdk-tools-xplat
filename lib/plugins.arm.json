@@ -67927,7 +67927,7 @@
               "name": "list",
               "description": "List application gateways",
               "fullName": "network application-gateway list",
-              "usage": "[options]",
+              "usage": "[options] [resource-group]",
               "filePath": "commands/arm/network/network._js",
               "options": [
                 {
