@@ -38800,6 +38800,14 @@
                   "short": "-s",
                   "long": "--subscription",
                   "description": "the subscription id"
+                },
+                {
+                  "flags": "--json-attributes <json-attributes>",
+                  "required": -19,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json-attributes",
+                  "description": "A JSON string to be added to the first run of chef-client. Ex: --json-attributes '{\"foo\" : \"bar\"}'"
                 }
               ]
             },
@@ -41729,7 +41737,7 @@
                 },
                 {
                   "name": "import",
-                  "description": "Uploads the specified the specified file, to the target destination in an Azure Data Lake. NOTE: Only text files are supported by this command at present.",
+                  "description": "Uploads the specified the specified file, to the target destination in an Azure Data Lake.",
                   "fullName": "datalake store filesystem import",
                   "usage": "[options] <accountName> <path> <destination>",
                   "filePath": "commands/arm/datalakestore/datalakestore._js",
@@ -42036,7 +42044,7 @@
                 },
                 {
                   "name": "export",
-                  "description": "Downloads the specified file to the target location. NOTE: Only text files are supported by this command at present.",
+                  "description": "Downloads the specified file to the target location.",
                   "fullName": "datalake store filesystem export",
                   "usage": "[options] <accountName> <path> <destination>",
                   "filePath": "commands/arm/datalakestore/datalakestore._js",
