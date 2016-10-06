@@ -9130,7 +9130,7 @@
               "description": "Show application",
               "fullName": "servicefabric application show",
               "usage": "[options]",
-              "filePath": "commands/serviceFabric/serviceFabricApplication._js",
+              "filePath": "commands/servicefabric/serviceFabricApplication._js",
               "options": [
                 {
                   "flags": "-v, --verbose",
@@ -9181,7 +9181,7 @@
               "description": "Create application, Example: azure servicefabric application create --application-name fabric:/app --application-type-name type1 --application-type-version 1.0",
               "fullName": "servicefabric application create",
               "usage": "[options] [applicationName] [applicationTypeName] [applicationTypeVersion]",
-              "filePath": "commands/serviceFabric/serviceFabricApplication._js",
+              "filePath": "commands/servicefabric/serviceFabricApplication._js",
               "options": [
                 {
                   "flags": "-v, --verbose",
@@ -9251,7 +9251,7 @@
               "description": "Delete application",
               "fullName": "servicefabric application delete",
               "usage": "[options] [applicationName]",
-              "filePath": "commands/serviceFabric/serviceFabricApplication._js",
+              "filePath": "commands/servicefabric/serviceFabricApplication._js",
               "options": [
                 {
                   "flags": "-v, --verbose",
@@ -9303,7 +9303,7 @@
                   "description": "Show application manifest",
                   "fullName": "servicefabric application manifest show",
                   "usage": "[options] [applicationTypeName] [applicationTypeVersion]",
-                  "filePath": "commands/serviceFabric/serviceFabricApplication._js",
+                  "filePath": "commands/servicefabric/serviceFabricApplication._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -9365,7 +9365,7 @@
                   "description": "Show application type, Example: azure servicefabric application type show --application-type-name type1",
                   "fullName": "servicefabric application type show",
                   "usage": "[options]",
-                  "filePath": "commands/serviceFabric/serviceFabricApplication._js",
+                  "filePath": "commands/servicefabric/serviceFabricApplication._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -9416,7 +9416,7 @@
                   "description": "Register application type, Example: azure servicefabric application type register --application-type-build-path Package1",
                   "fullName": "servicefabric application type register",
                   "usage": "[options] [applicationTypeBuildPath]",
-                  "filePath": "commands/serviceFabric/serviceFabricApplication._js",
+                  "filePath": "commands/servicefabric/serviceFabricApplication._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -9459,7 +9459,7 @@
                   "description": "Unregister application type, Example: azure servicefabric application type unregister --application-type-name type1 --application-type-version 1.0",
                   "fullName": "servicefabric application type unregister",
                   "usage": "[options] [applicationTypeName] [applicationTypeVersion]",
-                  "filePath": "commands/serviceFabric/serviceFabricApplication._js",
+                  "filePath": "commands/servicefabric/serviceFabricApplication._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -9521,7 +9521,7 @@
                   "description": "Show application health",
                   "fullName": "servicefabric application health show",
                   "usage": "[options] [applicationName]",
-                  "filePath": "commands/serviceFabric/serviceFabricApplication._js",
+                  "filePath": "commands/servicefabric/serviceFabricApplication._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -9590,7 +9590,7 @@
                   "description": "Send application health, Example: azure servicefabric application health send --application-name fabric:app --source-id monitor --property pc --health-state Ok --description healthy",
                   "fullName": "servicefabric application health send",
                   "usage": "[options] [applicationName] [sourceId] [property] [healthState]",
-                  "filePath": "commands/serviceFabric/serviceFabricApplication._js",
+                  "filePath": "commands/servicefabric/serviceFabricApplication._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -9714,7 +9714,7 @@
                   "description": "Show deployed application",
                   "fullName": "servicefabric application deployed show",
                   "usage": "[options] [nodeName]",
-                  "filePath": "commands/serviceFabric/serviceFabricApplication._js",
+                  "filePath": "commands/servicefabric/serviceFabricApplication._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -9783,7 +9783,7 @@
                       "description": "Show deployed application health",
                       "fullName": "servicefabric application deployed health show",
                       "usage": "[options] [nodeName] [applicationName]",
-                      "filePath": "commands/serviceFabric/serviceFabricApplication._js",
+                      "filePath": "commands/servicefabric/serviceFabricApplication._js",
                       "options": [
                         {
                           "flags": "-v, --verbose",
@@ -9861,7 +9861,7 @@
                       "description": "Send deployed application health, Example: azure servicefabric deployed application health send --node-name node1 --application-name fabric:app --source-id monitor --property pc --health-state Ok --description healthy",
                       "fullName": "servicefabric application deployed health send",
                       "usage": "[options] [nodeName] [applicationName] [sourceId] [property] [healthState]",
-                      "filePath": "commands/serviceFabric/serviceFabricApplication._js",
+                      "filePath": "commands/servicefabric/serviceFabricApplication._js",
                       "options": [
                         {
                           "flags": "-v, --verbose",
@@ -9988,7 +9988,7 @@
                   "description": "Show application upgrade",
                   "fullName": "servicefabric application upgrade show",
                   "usage": "[options] [applicationName]",
-                  "filePath": "commands/serviceFabric/serviceFabricApplication._js",
+                  "filePath": "commands/servicefabric/serviceFabricApplication._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -10031,7 +10031,7 @@
                   "description": "Start application upgrade, Example: azure servicefabric application upgrade start --application-name fabric:/app --target-application-type-version 1.1 --rolling-upgrade-mode Monitored --force-restart true",
                   "fullName": "servicefabric application upgrade start",
                   "usage": "[options] [applicationName] [targetApplicationTypeVersion] [rollingUpgradeMode]",
-                  "filePath": "commands/serviceFabric/serviceFabricApplication._js",
+                  "filePath": "commands/servicefabric/serviceFabricApplication._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -10137,7 +10137,7 @@
                   "description": "Update application upgrade, Example: azure servicefabric application upgrade update --application-name fabric:/app --rolling-upgrade-mode Monitored",
                   "fullName": "servicefabric application upgrade update",
                   "usage": "[options] [applicationName]",
-                  "filePath": "commands/serviceFabric/serviceFabricApplication._js",
+                  "filePath": "commands/servicefabric/serviceFabricApplication._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -10270,7 +10270,7 @@
                   "description": "Resume application upgrade",
                   "fullName": "servicefabric application upgrade resume",
                   "usage": "[options] [applicationName] [upgradeDomainName]",
-                  "filePath": "commands/serviceFabric/serviceFabricApplication._js",
+                  "filePath": "commands/servicefabric/serviceFabricApplication._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -10322,7 +10322,7 @@
                   "description": "Start application upgrade rollback",
                   "fullName": "servicefabric application upgrade rollback",
                   "usage": "[options] [applicationName]",
-                  "filePath": "commands/serviceFabric/serviceFabricApplication._js",
+                  "filePath": "commands/servicefabric/serviceFabricApplication._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -10375,7 +10375,7 @@
                   "description": "Copy application package, Example: azure servicefabric application package copy --application-package-path /tmp/package1 --image-store-connection-string fabric:ImageStore",
                   "fullName": "servicefabric application package copy",
                   "usage": "[options] [applicationPackagePath] [imageStoreConnectionString]",
-                  "filePath": "commands/serviceFabric/serviceFabricPackage._js",
+                  "filePath": "commands/servicefabric/serviceFabricPackage._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -10439,7 +10439,7 @@
               "description": "Connect cluster, Example: azure servicefabric cluster connect --connection-endpoint http://127.0.0.1:19080",
               "fullName": "servicefabric cluster connect",
               "usage": "[options] [connectionEndpoint]",
-              "filePath": "commands/serviceFabric/serviceFabricCluster._js",
+              "filePath": "commands/servicefabric/serviceFabricCluster._js",
               "options": [
                 {
                   "flags": "-v, --verbose",
@@ -10527,7 +10527,7 @@
               "description": "Show cluster",
               "fullName": "servicefabric cluster show",
               "usage": "[options]",
-              "filePath": "commands/serviceFabric/serviceFabricCluster._js",
+              "filePath": "commands/servicefabric/serviceFabricCluster._js",
               "options": [
                 {
                   "flags": "-v, --verbose",
@@ -10578,7 +10578,7 @@
                   "description": "Show cluster manifest",
                   "fullName": "servicefabric cluster manifest show",
                   "usage": "[options]",
-                  "filePath": "commands/serviceFabric/serviceFabricCluster._js",
+                  "filePath": "commands/servicefabric/serviceFabricCluster._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -10622,7 +10622,7 @@
                   "description": "Show cluster health",
                   "fullName": "servicefabric cluster health show",
                   "usage": "[options]",
-                  "filePath": "commands/serviceFabric/serviceFabricCluster._js",
+                  "filePath": "commands/servicefabric/serviceFabricCluster._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -10691,7 +10691,7 @@
                   "description": "Send cluster health, Example: azure servicefabric cluster health send --source-id monitor --property pc --health-state Ok --description healthy",
                   "fullName": "servicefabric cluster health send",
                   "usage": "[options] [sourceId] [property] [healthState]",
-                  "filePath": "commands/serviceFabric/serviceFabricCluster._js",
+                  "filePath": "commands/servicefabric/serviceFabricCluster._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -10798,7 +10798,7 @@
                   "description": "Show load information",
                   "fullName": "servicefabric cluster load show",
                   "usage": "[options]",
-                  "filePath": "commands/serviceFabric/serviceFabricCluster._js",
+                  "filePath": "commands/servicefabric/serviceFabricCluster._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -10850,7 +10850,7 @@
                   "description": "Show cluster upgrade",
                   "fullName": "servicefabric cluster upgrade show",
                   "usage": "[options]",
-                  "filePath": "commands/serviceFabric/serviceFabricCluster._js",
+                  "filePath": "commands/servicefabric/serviceFabricCluster._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -10896,7 +10896,7 @@
               "description": "Show node",
               "fullName": "servicefabric node show",
               "usage": "[options]",
-              "filePath": "commands/serviceFabric/serviceFabricNode._js",
+              "filePath": "commands/servicefabric/serviceFabricNode._js",
               "options": [
                 {
                   "flags": "-v, --verbose",
@@ -10947,7 +10947,7 @@
               "description": "Enable node, Example: azure servicefabric node enable --node-name node1",
               "fullName": "servicefabric node enable",
               "usage": "[options] [nodeName]",
-              "filePath": "commands/serviceFabric/serviceFabricNode._js",
+              "filePath": "commands/servicefabric/serviceFabricNode._js",
               "options": [
                 {
                   "flags": "-v, --verbose",
@@ -10990,7 +10990,7 @@
               "description": "Disable node, Example: azure servicefabric node enable --node-name node1 --deactivation-intent Pause",
               "fullName": "servicefabric node disable",
               "usage": "[options] [nodeName] [deactivationIntent]",
-              "filePath": "commands/serviceFabric/serviceFabricNode._js",
+              "filePath": "commands/servicefabric/serviceFabricNode._js",
               "options": [
                 {
                   "flags": "-v, --verbose",
@@ -11051,7 +11051,7 @@
                   "description": "Delete node state",
                   "fullName": "servicefabric node state delete",
                   "usage": "[options] [nodeName]",
-                  "filePath": "commands/serviceFabric/serviceFabricNode._js",
+                  "filePath": "commands/servicefabric/serviceFabricNode._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -11104,7 +11104,7 @@
                   "description": "Show node load information",
                   "fullName": "servicefabric node load show",
                   "usage": "[options] [nodeName]",
-                  "filePath": "commands/serviceFabric/serviceFabricNode._js",
+                  "filePath": "commands/servicefabric/serviceFabricNode._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -11165,7 +11165,7 @@
                   "description": "Show node health",
                   "fullName": "servicefabric node health show",
                   "usage": "[options] [nodeName]",
-                  "filePath": "commands/serviceFabric/serviceFabricNode._js",
+                  "filePath": "commands/servicefabric/serviceFabricNode._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -11225,7 +11225,7 @@
                   "description": "Send node health, Example: azure servicefabric node health send --node-name node1 fabric:app --source-id monitor --property pc --health-state Ok --description healthy",
                   "fullName": "servicefabric node health send",
                   "usage": "[options] [nodeName] [sourceId] [property] [healthState]",
-                  "filePath": "commands/serviceFabric/serviceFabricNode._js",
+                  "filePath": "commands/servicefabric/serviceFabricNode._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -11359,7 +11359,7 @@
                       "description": "Show deployed application health",
                       "fullName": "servicefabric code package deployed show",
                       "usage": "[options] [nodeName] [applicationName]",
-                      "filePath": "commands/serviceFabric/serviceFabricPackage._js",
+                      "filePath": "commands/servicefabric/serviceFabricPackage._js",
                       "options": [
                         {
                           "flags": "-v, --verbose",
@@ -11433,7 +11433,7 @@
               "description": "Show service",
               "fullName": "servicefabric service show",
               "usage": "[options] [applicationName]",
-              "filePath": "commands/serviceFabric/serviceFabricService._js",
+              "filePath": "commands/servicefabric/serviceFabricService._js",
               "options": [
                 {
                   "flags": "-v, --verbose",
@@ -11493,7 +11493,7 @@
               "description": "Create service, Example: servicefabric service create --application-name fabric:/app --service-name fabric:/app/service --service-type-name ServiceType1 --service-kind Stateless --instance-count 1 --partition-scheme Singleton",
               "fullName": "servicefabric service create",
               "usage": "[options] [applicationName] [serviceName] [serviceTypeName] [serviceKind] [partitionScheme]",
-              "filePath": "commands/serviceFabric/serviceFabricService._js",
+              "filePath": "commands/servicefabric/serviceFabricService._js",
               "options": [
                 {
                   "flags": "-v, --verbose",
@@ -11680,7 +11680,7 @@
               "description": "Update service, Example: azure servicefabric service update --service-name fabric:/app --instance-count 1",
               "fullName": "servicefabric service update",
               "usage": "[options] [serviceName] [serviceKind]",
-              "filePath": "commands/serviceFabric/serviceFabricService._js",
+              "filePath": "commands/servicefabric/serviceFabricService._js",
               "options": [
                 {
                   "flags": "-v, --verbose",
@@ -11786,7 +11786,7 @@
               "description": "Delete service",
               "fullName": "servicefabric service delete",
               "usage": "[options] [serviceName]",
-              "filePath": "commands/serviceFabric/serviceFabricService._js",
+              "filePath": "commands/servicefabric/serviceFabricService._js",
               "options": [
                 {
                   "flags": "-v, --verbose",
@@ -11829,7 +11829,7 @@
               "description": "Resolve service",
               "fullName": "servicefabric service resolve",
               "usage": "[options] [serviceName]",
-              "filePath": "commands/serviceFabric/serviceFabricService._js",
+              "filePath": "commands/servicefabric/serviceFabricService._js",
               "options": [
                 {
                   "flags": "-v, --verbose",
@@ -11924,7 +11924,7 @@
                       "description": "Show deployed service package",
                       "fullName": "servicefabric service package deployed show",
                       "usage": "[options] [nodeName] [applicationName]",
-                      "filePath": "commands/serviceFabric/serviceFabricPackage._js",
+                      "filePath": "commands/servicefabric/serviceFabricPackage._js",
                       "options": [
                         {
                           "flags": "-v, --verbose",
@@ -11993,7 +11993,7 @@
                           "description": "Show deployed service package health",
                           "fullName": "servicefabric service package deployed health show",
                           "usage": "[options] [nodeName] [applicationName] [servicePackageName]",
-                          "filePath": "commands/serviceFabric/serviceFabricPackage._js",
+                          "filePath": "commands/servicefabric/serviceFabricPackage._js",
                           "options": [
                             {
                               "flags": "-v, --verbose",
@@ -12071,7 +12071,7 @@
                           "description": "Send deployed service package health, Example: azure servicefabric application health send --node-name node1 fabric:app --source-id monitor --property pc --health-state Ok --description healthy",
                           "fullName": "servicefabric service package deployed health send",
                           "usage": "[options] [nodeName] [applicationName] [serviceManifestName] [sourceId] [property] [healthState]",
-                          "filePath": "commands/serviceFabric/serviceFabricPackage._js",
+                          "filePath": "commands/servicefabric/serviceFabricPackage._js",
                           "options": [
                             {
                               "flags": "-v, --verbose",
@@ -12209,7 +12209,7 @@
                   "description": "Create service from template",
                   "fullName": "servicefabric service template create",
                   "usage": "[options] [applicationName] [serviceName] [serviceTypeName]",
-                  "filePath": "commands/serviceFabric/serviceFabricService._js",
+                  "filePath": "commands/servicefabric/serviceFabricService._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -12280,7 +12280,7 @@
                   "description": "Show service type",
                   "fullName": "servicefabric service type show",
                   "usage": "[options] [applicationTypeName] [applicationTypeVersion]",
-                  "filePath": "commands/serviceFabric/serviceFabricService._js",
+                  "filePath": "commands/servicefabric/serviceFabricService._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -12349,7 +12349,7 @@
                       "description": "Show deployed service type",
                       "fullName": "servicefabric service type deployed show",
                       "usage": "[options] [nodeName] [applicationName]",
-                      "filePath": "commands/serviceFabric/serviceFabricService._js",
+                      "filePath": "commands/servicefabric/serviceFabricService._js",
                       "options": [
                         {
                           "flags": "-v, --verbose",
@@ -12430,7 +12430,7 @@
                   "description": "Show service manifest",
                   "fullName": "servicefabric service manifest show",
                   "usage": "[options] [applicationTypeName] [applicationTypeVersion] [serviceManifestName]",
-                  "filePath": "commands/serviceFabric/serviceFabricService._js",
+                  "filePath": "commands/servicefabric/serviceFabricService._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -12501,7 +12501,7 @@
                   "description": "Show service description",
                   "fullName": "servicefabric service description show",
                   "usage": "[options] [serviceName]",
-                  "filePath": "commands/serviceFabric/serviceFabricService._js",
+                  "filePath": "commands/servicefabric/serviceFabricService._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -12562,7 +12562,7 @@
                   "description": "Show service health",
                   "fullName": "servicefabric service health show",
                   "usage": "[options] [serviceName]",
-                  "filePath": "commands/serviceFabric/serviceFabricService._js",
+                  "filePath": "commands/servicefabric/serviceFabricService._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -12613,7 +12613,7 @@
                   "description": "Send service health, Example: azure servicefabric service health send --service-name fabric:/app/svc fabric:app --source-id monitor --property pc --health-state Ok --description healthy",
                   "fullName": "servicefabric service health send",
                   "usage": "[options] [serviceName] [sourceId] [property] [healthState]",
-                  "filePath": "commands/serviceFabric/serviceFabricService._js",
+                  "filePath": "commands/servicefabric/serviceFabricService._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -12729,7 +12729,7 @@
                   "description": "Create service group, Example: servicefabric service create --application-name fabric:/app --service-name fabric:/app/service --service-type-name ServiceType1 --service-kind Stateless --instance-count 1 --partition-scheme Singleton",
                   "fullName": "servicefabric service group create",
                   "usage": "[options] [applicationName] [serviceName] [serviceTypeName] [serviceKind] [partitionScheme]",
-                  "filePath": "commands/serviceFabric/serviceFabricServiceGroup._js",
+                  "filePath": "commands/servicefabric/serviceFabricServiceGroup._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -12925,7 +12925,7 @@
                   "description": "Update service group",
                   "fullName": "servicefabric service group update",
                   "usage": "[options] [applicationName] [serviceName] [serviceKind]",
-                  "filePath": "commands/serviceFabric/serviceFabricServiceGroup._js",
+                  "filePath": "commands/servicefabric/serviceFabricServiceGroup._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -13040,7 +13040,7 @@
                   "description": "Delete service group",
                   "fullName": "servicefabric service group delete",
                   "usage": "[options] [applicationName] [serviceName]",
-                  "filePath": "commands/serviceFabric/serviceFabricServiceGroup._js",
+                  "filePath": "commands/servicefabric/serviceFabricServiceGroup._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -13101,7 +13101,7 @@
                       "description": "Create service group from template",
                       "fullName": "servicefabric service group template create",
                       "usage": "[options] [applicationName] [serviceName] [serviceTypeName]",
-                      "filePath": "commands/serviceFabric/serviceFabricServiceGroup._js",
+                      "filePath": "commands/servicefabric/serviceFabricServiceGroup._js",
                       "options": [
                         {
                           "flags": "-v, --verbose",
@@ -13172,7 +13172,7 @@
                       "description": "Show service group description",
                       "fullName": "servicefabric service group description show",
                       "usage": "[options] [serviceName]",
-                      "filePath": "commands/serviceFabric/serviceFabricServiceGroup._js",
+                      "filePath": "commands/servicefabric/serviceFabricServiceGroup._js",
                       "options": [
                         {
                           "flags": "-v, --verbose",
@@ -13233,7 +13233,7 @@
                       "description": "Show service group member",
                       "fullName": "servicefabric service group member show",
                       "usage": "[options] [applicationName] [serviceName]",
-                      "filePath": "commands/serviceFabric/serviceFabricServiceGroup._js",
+                      "filePath": "commands/servicefabric/serviceFabricServiceGroup._js",
                       "options": [
                         {
                           "flags": "-v, --verbose",
@@ -13307,7 +13307,7 @@
               "description": "Show partition",
               "fullName": "servicefabric partition show",
               "usage": "[options] [serviceName]",
-              "filePath": "commands/serviceFabric/serviceFabricPartition._js",
+              "filePath": "commands/servicefabric/serviceFabricPartition._js",
               "options": [
                 {
                   "flags": "-v, --verbose",
@@ -13367,7 +13367,7 @@
               "description": "Repair partition",
               "fullName": "servicefabric partition repair",
               "usage": "[options]",
-              "filePath": "commands/serviceFabric/serviceFabricPartition._js",
+              "filePath": "commands/servicefabric/serviceFabricPartition._js",
               "options": [
                 {
                   "flags": "-v, --verbose",
@@ -13428,7 +13428,7 @@
                   "description": "Show partition health",
                   "fullName": "servicefabric partition health show",
                   "usage": "[options] [partitionId]",
-                  "filePath": "commands/serviceFabric/serviceFabricPartition._js",
+                  "filePath": "commands/servicefabric/serviceFabricPartition._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -13497,7 +13497,7 @@
                   "description": "Send partition health, Example: azure servicefabric partition health send --partition-id 1234 fabric:app --source-id monitor --property pc --health-state Ok --description healthy",
                   "fullName": "servicefabric partition health send",
                   "usage": "[options] [partitionId] [sourceId] [property] [healthState]",
-                  "filePath": "commands/serviceFabric/serviceFabricPartition._js",
+                  "filePath": "commands/servicefabric/serviceFabricPartition._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -13613,7 +13613,7 @@
                   "description": "Show partition load information",
                   "fullName": "servicefabric partition load show",
                   "usage": "[options] [partitionId]",
-                  "filePath": "commands/serviceFabric/serviceFabricPartition._js",
+                  "filePath": "commands/servicefabric/serviceFabricPartition._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -13664,7 +13664,7 @@
                   "description": "Reset partition",
                   "fullName": "servicefabric partition load reset",
                   "usage": "[options] [partitionId]",
-                  "filePath": "commands/serviceFabric/serviceFabricPartition._js",
+                  "filePath": "commands/servicefabric/serviceFabricPartition._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -13719,7 +13719,7 @@
               "description": "Show replica",
               "fullName": "servicefabric replica show",
               "usage": "[options] [partitionId]",
-              "filePath": "commands/serviceFabric/serviceFabricReplica._js",
+              "filePath": "commands/servicefabric/serviceFabricReplica._js",
               "options": [
                 {
                   "flags": "-v, --verbose",
@@ -13788,7 +13788,7 @@
                   "description": "Show deployed replica",
                   "fullName": "servicefabric replica deployed show",
                   "usage": "[options] [nodeName] [applicationName]",
-                  "filePath": "commands/serviceFabric/serviceFabricReplica._js",
+                  "filePath": "commands/servicefabric/serviceFabricReplica._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -13848,7 +13848,7 @@
                   "description": "Show deployed replica detail",
                   "fullName": "servicefabric replica deployed detail",
                   "usage": "[options] [nodeName] [partitionName] [replicaId]",
-                  "filePath": "commands/serviceFabric/serviceFabricReplica._js",
+                  "filePath": "commands/servicefabric/serviceFabricReplica._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -13927,7 +13927,7 @@
                   "description": "Show replica health",
                   "fullName": "servicefabric replica health show",
                   "usage": "[options] [partitionId] [replicaId]",
-                  "filePath": "commands/serviceFabric/serviceFabricReplica._js",
+                  "filePath": "commands/servicefabric/serviceFabricReplica._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -13996,7 +13996,7 @@
                   "description": "Send replica health, Example: azure servicefabric replica health send --partition-id 1234 fabric:app --source-id monitor --property pc --health-state Ok --description healthy",
                   "fullName": "servicefabric replica health send",
                   "usage": "[options] [partitionId] [replicaId] [sourceId] [property] [healthState]",
-                  "filePath": "commands/serviceFabric/serviceFabricReplica._js",
+                  "filePath": "commands/servicefabric/serviceFabricReplica._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -14121,7 +14121,7 @@
                   "description": "Show replica load information",
                   "fullName": "servicefabric replica load show",
                   "usage": "[options] [partitionId] [replicaId]",
-                  "filePath": "commands/serviceFabric/serviceFabricReplica._js",
+                  "filePath": "commands/servicefabric/serviceFabricReplica._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -25001,24 +25001,6 @@
                   "description": "the URL to the application homepage"
                 },
                 {
-                  "flags": "-a --available",
-                  "required": 0,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-a",
-                  "long": "--available",
-                  "description": "indicates if the application will be available to other tenants"
-                },
-                {
-                  "flags": "-p --password <password>",
-                  "required": -15,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-p",
-                  "long": "--password",
-                  "description": "the value for the password credential associated with the application that will be valid for one year by default"
-                },
-                {
                   "flags": "-i --identifier-uris <identifier-uris>",
                   "required": -22,
                   "optional": 0,
@@ -25026,6 +25008,15 @@
                   "short": "-i",
                   "long": "--identifier-uris",
                   "description": "the comma-delimitied URIs that identify the application"
+                },
+                {
+                  "flags": "-l --available <available>",
+                  "required": -16,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-l",
+                  "long": "--available",
+                  "description": "the value specifying whether the application is a single tenant or a multi-tenant. \"true\" if the application will be available to other tenants, \"false\" if its a single tenant application. Default is false."
                 },
                 {
                   "flags": "-r --reply-urls <reply-urls>",
@@ -25037,28 +25028,21 @@
                   "description": "the comma-delimitied application reply urls"
                 },
                 {
-                  "flags": "--key-value <key-value>",
-                  "required": -13,
+                  "flags": "-p --password <password>",
+                  "required": -15,
                   "optional": 0,
                   "bool": true,
-                  "long": "--key-value",
-                  "description": "the value for the key credentials associated with the application that will be valid for one year by default"
+                  "short": "-p",
+                  "long": "--password",
+                  "description": "the value for the password credential associated with the application that will be valid for one year by default"
                 },
                 {
-                  "flags": "--key-type <key-type>",
-                  "required": -12,
+                  "flags": "--cert-value <cert-value>",
+                  "required": -14,
                   "optional": 0,
                   "bool": true,
-                  "long": "--key-type",
-                  "description": "the type of the key credentials associated with the application. Acceptable values are AsymmetricX509Cert, Password and Symmetric"
-                },
-                {
-                  "flags": "--key-usage <key-usage>",
-                  "required": -13,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "--key-usage",
-                  "description": "the usage of the key credentials associated with the application. Acceptable values are Sign and Verify"
+                  "long": "--cert-value",
+                  "description": "the value of the \"asymmetric\" credential type. It represents the base 64 encoded certificate."
                 },
                 {
                   "flags": "--start-date <start-date>",
@@ -25129,6 +25113,15 @@
                   "description": "the applicationId of the application to update. If you have created a service principal using this application then this will be the spn of the service principal."
                 },
                 {
+                  "flags": "-l --available <available>",
+                  "required": -16,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-l",
+                  "long": "--available",
+                  "description": "the new value specifying whether the application is a single tenant or a multi-tenant. \"true\" if the application will be available to other tenants, \"false\" if its a single tenant application."
+                },
+                {
                   "flags": "-n --name <name>",
                   "required": -11,
                   "optional": 0,
@@ -25145,15 +25138,6 @@
                   "short": "-m",
                   "long": "--home-page",
                   "description": "the new URL to the application homepage"
-                },
-                {
-                  "flags": "-p --password <password>",
-                  "required": -15,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-p",
-                  "long": "--password",
-                  "description": "new value for the password credential associated with the application that will be valid for one year by default"
                 },
                 {
                   "flags": "-i --identifier-uris <identifier-uris>",
@@ -25174,28 +25158,21 @@
                   "description": "new comma-delimitied application reply urls"
                 },
                 {
-                  "flags": "--key-value <key-value>",
-                  "required": -13,
+                  "flags": "-p --password <password>",
+                  "required": -15,
                   "optional": 0,
                   "bool": true,
-                  "long": "--key-value",
-                  "description": "new value for the key credentials associated with the application that will be valid for one year by default"
+                  "short": "-p",
+                  "long": "--password",
+                  "description": "new value for the password credential associated with the application that will be valid for one year by default"
                 },
                 {
-                  "flags": "--key-type <key-type>",
-                  "required": -12,
+                  "flags": "--cert-value <cert-value>",
+                  "required": -14,
                   "optional": 0,
                   "bool": true,
-                  "long": "--key-type",
-                  "description": "new type of the key credentials associated with the application. Acceptable values are AsymmetricX509Cert, Password and Symmetric. Default value: AsymmetricX509Cert"
-                },
-                {
-                  "flags": "--key-usage <key-usage>",
-                  "required": -13,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "--key-usage",
-                  "description": "new usage of the key credentials associated with the application. Acceptable values are Sign and Verify. Default value: Verify"
+                  "long": "--cert-value",
+                  "description": "new value of the \"asymmetric\" credential type. It represents the base 64 encoded certificate."
                 },
                 {
                   "flags": "--start-date <start-date>",
@@ -25982,24 +25959,6 @@
                   "description": "the display name for the application"
                 },
                 {
-                  "flags": "-m --home-page <home-page>",
-                  "required": -16,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-m",
-                  "long": "--home-page",
-                  "description": "the URL to the application homepage"
-                },
-                {
-                  "flags": "-b --available",
-                  "required": 0,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-b",
-                  "long": "--available",
-                  "description": "indicates if the application will be available to other tenants"
-                },
-                {
                   "flags": "-p --password <password>",
                   "required": -15,
                   "optional": 0,
@@ -26009,46 +25968,12 @@
                   "description": "the value for the password credential associated with the application that will be valid for one year by default"
                 },
                 {
-                  "flags": "-i --identifier-uris <identifier-uris>",
-                  "required": -22,
+                  "flags": "--cert-value <cert-value>",
+                  "required": -14,
                   "optional": 0,
                   "bool": true,
-                  "short": "-i",
-                  "long": "--identifier-uris",
-                  "description": "the comma-delimitied URIs that identify the application"
-                },
-                {
-                  "flags": "-r --reply-urls <reply-urls>",
-                  "required": -17,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-r",
-                  "long": "--reply-urls",
-                  "description": "the comma-delimitied application reply urls"
-                },
-                {
-                  "flags": "--key-value <key-value>",
-                  "required": -13,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "--key-value",
-                  "description": "the value for the key credentials associated with the application that will be valid for one year by default"
-                },
-                {
-                  "flags": "--key-type <key-type>",
-                  "required": -12,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "--key-type",
-                  "description": "the type of the key credentials associated with the application. Acceptable values are AsymmetricX509Cert, Password and Symmetric"
-                },
-                {
-                  "flags": "--key-usage <key-usage>",
-                  "required": -13,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "--key-usage",
-                  "description": "the usage of the key credentials associated with the application. Acceptable values are Sign and Verify"
+                  "long": "--cert-value",
+                  "description": "the value of the \"asymmetric\" credential type. It represents the base 64 encoded certificate"
                 },
                 {
                   "flags": "--start-date <start-date>",
@@ -26119,15 +26044,6 @@
                   "description": "the new display name for the application."
                 },
                 {
-                  "flags": "-m --home-page <home-page>",
-                  "required": -16,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-m",
-                  "long": "--home-page",
-                  "description": "the new URL to the application homepage"
-                },
-                {
                   "flags": "-p --password <password>",
                   "required": -15,
                   "optional": 0,
@@ -26137,46 +26053,12 @@
                   "description": "new value for the password credential associated with the application that will be valid for one year by default"
                 },
                 {
-                  "flags": "-i --identifier-uris <identifier-uris>",
-                  "required": -22,
+                  "flags": "--cert-value <cert-value>",
+                  "required": -14,
                   "optional": 0,
                   "bool": true,
-                  "short": "-i",
-                  "long": "--identifier-uris",
-                  "description": "new comma-delimitied URI values that identify the application"
-                },
-                {
-                  "flags": "-r --reply-urls <reply-urls>",
-                  "required": -17,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-r",
-                  "long": "--reply-urls",
-                  "description": "new comma-delimitied application reply urls"
-                },
-                {
-                  "flags": "--key-value <key-value>",
-                  "required": -13,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "--key-value",
-                  "description": "new value for the key credentials associated with the application that will be valid for one year by default"
-                },
-                {
-                  "flags": "--key-type <key-type>",
-                  "required": -12,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "--key-type",
-                  "description": "new type of the key credentials associated with the application. Acceptable values are AsymmetricX509Cert, Password and Symmetric. Default value: AsymmetricX509Cert"
-                },
-                {
-                  "flags": "--key-usage <key-usage>",
-                  "required": -13,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "--key-usage",
-                  "description": "new usage of the key credentials associated with the application. Acceptable values are Sign and Verify. Default value: Verify"
+                  "long": "--cert-value",
+                  "description": "new value of the \"asymmetric\" credential type. It represents the base 64 encoded certificate"
                 },
                 {
                   "flags": "--start-date <start-date>",
@@ -26238,13 +26120,13 @@
                   "description": "the object id of the service principal to delete"
                 },
                 {
-                  "flags": "-p --preserve-application",
+                  "flags": "-d --delete-application",
                   "required": 0,
                   "optional": 0,
                   "bool": true,
-                  "short": "-p",
-                  "long": "--preserve-application",
-                  "description": "Default value: false. If you do not want to delete the underlying application then set this flag."
+                  "short": "-d",
+                  "long": "--delete-application",
+                  "description": "Default value: false. If you want to delete the underlying application then set this flag."
                 },
                 {
                   "flags": "-q, --quiet",
@@ -56093,7 +55975,7 @@
                   "name": "create",
                   "description": "Create virtual network subnet",
                   "fullName": "network vnet subnet create",
-                  "usage": "[options] <resource-group> <vnet-name> <name>",
+                  "usage": "[options] <resource-group> <vnet-name> <name> <address-prefix>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -56543,7 +56425,7 @@
                   "name": "create",
                   "description": "Create a virtual network peering",
                   "fullName": "network vnet peering create",
-                  "usage": "[options] <resource-group> <vnet-name> <name>",
+                  "usage": "[options] <resource-group> <vnet-name> <name> <remote-vnet-id>",
                   "filePath": "commands/arm/network/virtualNetworkPeerings._js",
                   "options": [
                     {
@@ -62024,7 +61906,7 @@
                   "name": "create",
                   "description": "Create a network security group rule",
                   "fullName": "network nsg rule create",
-                  "usage": "[options] <resource-group> <nsg-name> <name>",
+                  "usage": "[options] <resource-group> <nsg-name> <name> <priority>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -64099,7 +63981,7 @@
                   "name": "create",
                   "description": "Create a Traffic Manager profile",
                   "fullName": "network traffic-manager profile create",
-                  "usage": "[options] <resource-group> <name>",
+                  "usage": "[options] <resource-group> <name> <relative-dns-name>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -65387,7 +65269,7 @@
                   "name": "create",
                   "description": "Create route in a Route Table",
                   "fullName": "network route-table route create",
-                  "usage": "[options] <resource-group> <route-table-name> <name>",
+                  "usage": "[options] <resource-group> <route-table-name> <name> <address-prefix> <next-hop-type>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -65803,7 +65685,7 @@
               "name": "create",
               "description": "Create a local network gateway",
               "fullName": "network local-gateway create",
-              "usage": "[options] <resource-group> <name> <location>",
+              "usage": "[options] <resource-group> <name> <location> <ip-address>",
               "filePath": "commands/arm/network/network._js",
               "options": [
                 {
@@ -66657,7 +66539,7 @@
                   "name": "create",
                   "description": "Add a root certificate to a virtual network gateway",
                   "fullName": "network vpn-gateway root-cert create",
-                  "usage": "[options] <resource-group> <name> <cert-name>",
+                  "usage": "[options] <resource-group> <name> <cert-name> <cert-file>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -66825,7 +66707,7 @@
                   "name": "create",
                   "description": "Add a revoked certificate to a virtual network gateway",
                   "fullName": "network vpn-gateway revoked-cert create",
-                  "usage": "[options] <resource-group> <name> <cert-name>",
+                  "usage": "[options] <resource-group> <name> <cert-name> <thumbprint>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -66995,7 +66877,7 @@
               "name": "create",
               "description": "Create a gateway connection",
               "fullName": "network vpn-connection create",
-              "usage": "[options] <resource-group> <name> <location>",
+              "usage": "[options] <resource-group> <name> <location> <vnet-gateway1>",
               "filePath": "commands/arm/network/network._js",
               "options": [
                 {
@@ -67639,7 +67521,7 @@
               "name": "create",
               "description": "Create an application gateway",
               "fullName": "network application-gateway create",
-              "usage": "[options] <resource-group> <name> <location>",
+              "usage": "[options] <resource-group> <name> <location> <servers>",
               "filePath": "commands/arm/network/network._js",
               "options": [
                 {
@@ -68045,7 +67927,7 @@
               "name": "list",
               "description": "List application gateways",
               "fullName": "network application-gateway list",
-              "usage": "[options]",
+              "usage": "[options] [resource-group]",
               "filePath": "commands/arm/network/network._js",
               "options": [
                 {
@@ -68306,7 +68188,7 @@
                   "name": "create",
                   "description": "Add application gateway SSL certificate",
                   "fullName": "network application-gateway ssl-cert create",
-                  "usage": "[options] <resource-group> <gateway-name> <name>",
+                  "usage": "[options] <resource-group> <gateway-name> <name> <cert-file> <cert-password>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -69218,7 +69100,7 @@
                   "name": "create",
                   "description": "Add a frontend port to an application gateway",
                   "fullName": "network application-gateway frontend-port create",
-                  "usage": "[options] <resource-group> <gateway-name> <name>",
+                  "usage": "[options] <resource-group> <gateway-name> <name> <port>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -69620,7 +69502,7 @@
                   "name": "create",
                   "description": "Add a backend address pool to an application gateway",
                   "fullName": "network application-gateway address-pool create",
-                  "usage": "[options] <resource-group> <gateway-name> <name>",
+                  "usage": "[options] <resource-group> <gateway-name> <name> <servers>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -70022,7 +69904,7 @@
                   "name": "create",
                   "description": "Add http settings to an application gateway",
                   "fullName": "network application-gateway http-settings create",
-                  "usage": "[options] <resource-group> <gateway-name> <name>",
+                  "usage": "[options] <resource-group> <gateway-name> <name> <port>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -70460,7 +70342,7 @@
                   "name": "create",
                   "description": "Add an http listener to an application gateway",
                   "fullName": "network application-gateway http-listener create",
-                  "usage": "[options] <resource-group> <gateway-name> <name>",
+                  "usage": "[options] <resource-group> <gateway-name> <name> <frontend-ip-name> <frontend-port-name>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -70890,7 +70772,7 @@
                   "name": "create",
                   "description": "Add request routing rule to application gateway",
                   "fullName": "network application-gateway rule create",
-                  "usage": "[options] <resource-group> <gateway-name> <name>",
+                  "usage": "[options] <resource-group> <gateway-name> <name> <http-settings-name> <http-listener-name> <address-pool-name>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -71838,7 +71720,7 @@
                   "name": "create",
                   "description": "Add url path map to application gateway",
                   "fullName": "network application-gateway url-path-map create",
-                  "usage": "[options] <resource-group> <gateway-name> <name>",
+                  "usage": "[options] <resource-group> <gateway-name> <name> <rule-name> <path> <http-settings-name> <address-pool-name>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -72273,9 +72155,9 @@
                   "commands": [
                     {
                       "name": "create",
-                      "description": "Add url path map rule to application gateway",
+                      "description": "Add url path map to application gateway",
                       "fullName": "network application-gateway url-path-map rule create",
-                      "usage": "[options] <resource-group> <gateway-name> <url-path-map-name> <name>",
+                      "usage": "[options] <resource-group> <gateway-name> <url-path-map-name> <name> <path> <http-settings-name> <address-pool-name>",
                       "filePath": "commands/arm/network/network._js",
                       "options": [
                         {
@@ -72389,7 +72271,7 @@
                       "name": "set",
                       "description": "Set url path map rule in application gateway",
                       "fullName": "network application-gateway url-path-map rule set",
-                      "usage": "[options] <resource-group> <gateway-name> <url-path-map-name> <name>",
+                      "usage": "[options] <resource-group> <gateway-name> <name>",
                       "filePath": "commands/arm/network/network._js",
                       "options": [
                         {
@@ -72652,7 +72534,7 @@
                       "name": "delete",
                       "description": "Delete an url path map rule from an application gateway",
                       "fullName": "network application-gateway url-path-map rule delete",
-                      "usage": "[options] <resource-group> <gateway-name> <url-path-map-name> <name>",
+                      "usage": "[options] <resource-group> <gateway-name> <name>",
                       "filePath": "commands/arm/network/network._js",
                       "options": [
                         {
@@ -72760,7 +72642,7 @@
                   "name": "create",
                   "description": "Create an application gateway ssl policy",
                   "fullName": "network application-gateway ssl-policy create",
-                  "usage": "[options] <resource-group> <gateway-name>",
+                  "usage": "[options] <resource-group> <gateway-name> <disable-ssl-protocols>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -72971,7 +72853,7 @@
                   "name": "create",
                   "description": "Create an application gateway authentication certificate",
                   "fullName": "network application-gateway auth-cert create",
-                  "usage": "[options] <resource-group> <gateway-name> <name>",
+                  "usage": "[options] <resource-group> <gateway-name> <name> <cert-file>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -73566,6 +73448,77 @@
                 }
               ],
               "categories": {}
+            },
+            "backend-health": {
+              "name": "backend-health",
+              "description": "Commands to manage application gateway backend health",
+              "fullName": "network application-gateway backend-health",
+              "usage": "[options] [command]",
+              "options": [],
+              "commands": [
+                {
+                  "name": "show",
+                  "description": "Show an application gateway backend health",
+                  "fullName": "network application-gateway backend-health show",
+                  "usage": "[options] <resource-group> <gateway-name>",
+                  "filePath": "commands/arm/network/network._js",
+                  "options": [
+                    {
+                      "flags": "-v, --verbose",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-v",
+                      "long": "--verbose",
+                      "description": "use verbose output"
+                    },
+                    {
+                      "flags": "-vv",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "long": "-vv",
+                      "description": "more verbose with debug output"
+                    },
+                    {
+                      "flags": "--json",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "long": "--json",
+                      "description": "use json output"
+                    },
+                    {
+                      "flags": "-g, --resource-group <resource-group>",
+                      "required": -22,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-g",
+                      "long": "--resource-group",
+                      "description": "the name of the resource group"
+                    },
+                    {
+                      "flags": "-w, --gateway-name <gateway-name>",
+                      "required": -20,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-w",
+                      "long": "--gateway-name",
+                      "description": "the name of the application gateway"
+                    },
+                    {
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-s",
+                      "long": "--subscription",
+                      "description": "the subscription identifier"
+                    }
+                  ]
+                }
+              ],
+              "categories": {}
             }
           }
         },
@@ -73641,7 +73594,7 @@
                   "name": "create",
                   "description": "Create express route circuit",
                   "fullName": "network express-route circuit create",
-                  "usage": "[options] <resource-group> <name> <location>",
+                  "usage": "[options] <resource-group> <name> <location> <service-provider-name> <peering-location>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -74055,7 +74008,7 @@
                   "name": "create",
                   "description": "Create express route peering",
                   "fullName": "network express-route peering create",
-                  "usage": "[options] <resource-group> <circuit-name> <name>",
+                  "usage": "[options] <resource-group> <circuit-name> <name> <primary-address-prefix> <secondary-address-prefix>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -74640,7 +74593,7 @@
                   "name": "create",
                   "description": "Create express route circuit authorization",
                   "fullName": "network express-route authorization create",
-                  "usage": "[options] <resource-group> <circuit-name> <auth-name>",
+                  "usage": "[options] <resource-group> <circuit-name> <auth-name> <key>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
