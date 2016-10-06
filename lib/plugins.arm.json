@@ -72164,9 +72164,9 @@
                   "commands": [
                     {
                       "name": "create",
-                      "description": "Add url path map to application gateway",
+                      "description": "Add url path map rule to application gateway",
                       "fullName": "network application-gateway url-path-map rule create",
-                      "usage": "[options] <resource-group> <gateway-name> <url-path-map-name> <name> <path> <http-settings-name> <address-pool-name>",
+                      "usage": "[options] <resource-group> <gateway-name> <url-path-map-name> <name>",
                       "filePath": "commands/arm/network/network._js",
                       "options": [
                         {
@@ -72280,7 +72280,7 @@
                       "name": "set",
                       "description": "Set url path map rule in application gateway",
                       "fullName": "network application-gateway url-path-map rule set",
-                      "usage": "[options] <resource-group> <gateway-name> <name>",
+                      "usage": "[options] <resource-group> <gateway-name> <url-path-map-name> <name>",
                       "filePath": "commands/arm/network/network._js",
                       "options": [
                         {
@@ -72543,7 +72543,7 @@
                       "name": "delete",
                       "description": "Delete an url path map rule from an application gateway",
                       "fullName": "network application-gateway url-path-map rule delete",
-                      "usage": "[options] <resource-group> <gateway-name> <name>",
+                      "usage": "[options] <resource-group> <gateway-name> <url-path-map-name> <name>",
                       "filePath": "commands/arm/network/network._js",
                       "options": [
                         {
