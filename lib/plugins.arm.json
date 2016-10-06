@@ -55975,7 +55975,7 @@
                   "name": "create",
                   "description": "Create virtual network subnet",
                   "fullName": "network vnet subnet create",
-                  "usage": "[options] <resource-group> <vnet-name> <name>",
+                  "usage": "[options] <resource-group> <vnet-name> <name> <address-prefix>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -56425,7 +56425,7 @@
                   "name": "create",
                   "description": "Create a virtual network peering",
                   "fullName": "network vnet peering create",
-                  "usage": "[options] <resource-group> <vnet-name> <name>",
+                  "usage": "[options] <resource-group> <vnet-name> <name> <remote-vnet-id>",
                   "filePath": "commands/arm/network/virtualNetworkPeerings._js",
                   "options": [
                     {
@@ -61906,7 +61906,7 @@
                   "name": "create",
                   "description": "Create a network security group rule",
                   "fullName": "network nsg rule create",
-                  "usage": "[options] <resource-group> <nsg-name> <name>",
+                  "usage": "[options] <resource-group> <nsg-name> <name> <priority>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -63981,7 +63981,7 @@
                   "name": "create",
                   "description": "Create a Traffic Manager profile",
                   "fullName": "network traffic-manager profile create",
-                  "usage": "[options] <resource-group> <name>",
+                  "usage": "[options] <resource-group> <name> <relative-dns-name>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -65269,7 +65269,7 @@
                   "name": "create",
                   "description": "Create route in a Route Table",
                   "fullName": "network route-table route create",
-                  "usage": "[options] <resource-group> <route-table-name> <name>",
+                  "usage": "[options] <resource-group> <route-table-name> <name> <address-prefix> <next-hop-type>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -65685,7 +65685,7 @@
               "name": "create",
               "description": "Create a local network gateway",
               "fullName": "network local-gateway create",
-              "usage": "[options] <resource-group> <name> <location>",
+              "usage": "[options] <resource-group> <name> <location> <ip-address>",
               "filePath": "commands/arm/network/network._js",
               "options": [
                 {
@@ -66539,7 +66539,7 @@
                   "name": "create",
                   "description": "Add a root certificate to a virtual network gateway",
                   "fullName": "network vpn-gateway root-cert create",
-                  "usage": "[options] <resource-group> <name> <cert-name>",
+                  "usage": "[options] <resource-group> <name> <cert-name> <cert-file>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -66707,7 +66707,7 @@
                   "name": "create",
                   "description": "Add a revoked certificate to a virtual network gateway",
                   "fullName": "network vpn-gateway revoked-cert create",
-                  "usage": "[options] <resource-group> <name> <cert-name>",
+                  "usage": "[options] <resource-group> <name> <cert-name> <thumbprint>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -66877,7 +66877,7 @@
               "name": "create",
               "description": "Create a gateway connection",
               "fullName": "network vpn-connection create",
-              "usage": "[options] <resource-group> <name> <location>",
+              "usage": "[options] <resource-group> <name> <location> <vnet-gateway1>",
               "filePath": "commands/arm/network/network._js",
               "options": [
                 {
@@ -67521,7 +67521,7 @@
               "name": "create",
               "description": "Create an application gateway",
               "fullName": "network application-gateway create",
-              "usage": "[options] <resource-group> <name> <location>",
+              "usage": "[options] <resource-group> <name> <location> <servers>",
               "filePath": "commands/arm/network/network._js",
               "options": [
                 {
@@ -68188,7 +68188,7 @@
                   "name": "create",
                   "description": "Add application gateway SSL certificate",
                   "fullName": "network application-gateway ssl-cert create",
-                  "usage": "[options] <resource-group> <gateway-name> <name>",
+                  "usage": "[options] <resource-group> <gateway-name> <name> <cert-file> <cert-password>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -69100,7 +69100,7 @@
                   "name": "create",
                   "description": "Add a frontend port to an application gateway",
                   "fullName": "network application-gateway frontend-port create",
-                  "usage": "[options] <resource-group> <gateway-name> <name>",
+                  "usage": "[options] <resource-group> <gateway-name> <name> <port>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -69502,7 +69502,7 @@
                   "name": "create",
                   "description": "Add a backend address pool to an application gateway",
                   "fullName": "network application-gateway address-pool create",
-                  "usage": "[options] <resource-group> <gateway-name> <name>",
+                  "usage": "[options] <resource-group> <gateway-name> <name> <servers>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -69904,7 +69904,7 @@
                   "name": "create",
                   "description": "Add http settings to an application gateway",
                   "fullName": "network application-gateway http-settings create",
-                  "usage": "[options] <resource-group> <gateway-name> <name>",
+                  "usage": "[options] <resource-group> <gateway-name> <name> <port>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -70342,7 +70342,7 @@
                   "name": "create",
                   "description": "Add an http listener to an application gateway",
                   "fullName": "network application-gateway http-listener create",
-                  "usage": "[options] <resource-group> <gateway-name> <name>",
+                  "usage": "[options] <resource-group> <gateway-name> <name> <frontend-ip-name> <frontend-port-name>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -70772,7 +70772,7 @@
                   "name": "create",
                   "description": "Add request routing rule to application gateway",
                   "fullName": "network application-gateway rule create",
-                  "usage": "[options] <resource-group> <gateway-name> <name>",
+                  "usage": "[options] <resource-group> <gateway-name> <name> <http-settings-name> <http-listener-name> <address-pool-name>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -71720,7 +71720,7 @@
                   "name": "create",
                   "description": "Add url path map to application gateway",
                   "fullName": "network application-gateway url-path-map create",
-                  "usage": "[options] <resource-group> <gateway-name> <name>",
+                  "usage": "[options] <resource-group> <gateway-name> <name> <rule-name> <path> <http-settings-name> <address-pool-name>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -72155,9 +72155,9 @@
                   "commands": [
                     {
                       "name": "create",
-                      "description": "Add url path map rule to application gateway",
+                      "description": "Add url path map to application gateway",
                       "fullName": "network application-gateway url-path-map rule create",
-                      "usage": "[options] <resource-group> <gateway-name> <name>",
+                      "usage": "[options] <resource-group> <gateway-name> <url-path-map-name> <name> <path> <http-settings-name> <address-pool-name>",
                       "filePath": "commands/arm/network/network._js",
                       "options": [
                         {
@@ -72642,7 +72642,7 @@
                   "name": "create",
                   "description": "Create an application gateway ssl policy",
                   "fullName": "network application-gateway ssl-policy create",
-                  "usage": "[options] <resource-group> <gateway-name>",
+                  "usage": "[options] <resource-group> <gateway-name> <disable-ssl-protocols>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -72853,7 +72853,7 @@
                   "name": "create",
                   "description": "Create an application gateway authentication certificate",
                   "fullName": "network application-gateway auth-cert create",
-                  "usage": "[options] <resource-group> <gateway-name> <name>",
+                  "usage": "[options] <resource-group> <gateway-name> <name> <cert-file>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -73523,7 +73523,7 @@
                   "name": "create",
                   "description": "Create express route circuit",
                   "fullName": "network express-route circuit create",
-                  "usage": "[options] <resource-group> <name> <location>",
+                  "usage": "[options] <resource-group> <name> <location> <service-provider-name> <peering-location>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -73937,7 +73937,7 @@
                   "name": "create",
                   "description": "Create express route peering",
                   "fullName": "network express-route peering create",
-                  "usage": "[options] <resource-group> <circuit-name> <name>",
+                  "usage": "[options] <resource-group> <circuit-name> <name> <primary-address-prefix> <secondary-address-prefix>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -74522,7 +74522,7 @@
                   "name": "create",
                   "description": "Create express route circuit authorization",
                   "fullName": "network express-route authorization create",
-                  "usage": "[options] <resource-group> <circuit-name> <auth-name>",
+                  "usage": "[options] <resource-group> <circuit-name> <auth-name> <key>",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
