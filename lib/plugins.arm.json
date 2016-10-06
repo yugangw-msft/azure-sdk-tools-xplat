@@ -41729,7 +41729,7 @@
                 },
                 {
                   "name": "import",
-                  "description": "Uploads the specified the specified file, to the target destination in an Azure Data Lake. NOTE: Only text files are supported by this command at present.",
+                  "description": "Uploads the specified the specified file, to the target destination in an Azure Data Lake.",
                   "fullName": "datalake store filesystem import",
                   "usage": "[options] <accountName> <path> <destination>",
                   "filePath": "commands/arm/datalakestore/datalakestore._js",
@@ -42036,7 +42036,7 @@
                 },
                 {
                   "name": "export",
-                  "description": "Downloads the specified file to the target location. NOTE: Only text files are supported by this command at present.",
+                  "description": "Downloads the specified file to the target location.",
                   "fullName": "datalake store filesystem export",
                   "usage": "[options] <accountName> <path> <destination>",
                   "filePath": "commands/arm/datalakestore/datalakestore._js",
@@ -72155,9 +72155,9 @@
                   "commands": [
                     {
                       "name": "create",
-                      "description": "Add url path map to application gateway",
+                      "description": "Add url path map rule to application gateway",
                       "fullName": "network application-gateway url-path-map rule create",
-                      "usage": "[options] <resource-group> <gateway-name> <url-path-map-name> <name> <path> <http-settings-name> <address-pool-name>",
+                      "usage": "[options] <resource-group> <gateway-name> <url-path-map-name> <name>",
                       "filePath": "commands/arm/network/network._js",
                       "options": [
                         {
@@ -72271,7 +72271,7 @@
                       "name": "set",
                       "description": "Set url path map rule in application gateway",
                       "fullName": "network application-gateway url-path-map rule set",
-                      "usage": "[options] <resource-group> <gateway-name> <name>",
+                      "usage": "[options] <resource-group> <gateway-name> <url-path-map-name> <name>",
                       "filePath": "commands/arm/network/network._js",
                       "options": [
                         {
@@ -72534,7 +72534,7 @@
                       "name": "delete",
                       "description": "Delete an url path map rule from an application gateway",
                       "fullName": "network application-gateway url-path-map rule delete",
-                      "usage": "[options] <resource-group> <gateway-name> <name>",
+                      "usage": "[options] <resource-group> <gateway-name> <url-path-map-name> <name>",
                       "filePath": "commands/arm/network/network._js",
                       "options": [
                         {
