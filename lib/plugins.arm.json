@@ -26634,6 +26634,15 @@
               "description": "the number of instances in the App Service Plan, Default is 1"
             },
             {
+              "flags": "-x --islinux <islinux>",
+              "required": -14,
+              "optional": 0,
+              "bool": true,
+              "short": "-x",
+              "long": "--islinux",
+              "description": "enables a linux App Service Plan, E.g --islinux true"
+            },
+            {
               "flags": "-s --subscription <subscription>",
               "required": -19,
               "optional": 0,
@@ -41729,7 +41738,7 @@
                 },
                 {
                   "name": "import",
-                  "description": "Uploads the specified the specified file, to the target destination in an Azure Data Lake. NOTE: Only text files are supported by this command at present.",
+                  "description": "Uploads the specified the specified file, to the target destination in an Azure Data Lake.",
                   "fullName": "datalake store filesystem import",
                   "usage": "[options] <accountName> <path> <destination>",
                   "filePath": "commands/arm/datalakestore/datalakestore._js",
@@ -42036,7 +42045,7 @@
                 },
                 {
                   "name": "export",
-                  "description": "Downloads the specified file to the target location. NOTE: Only text files are supported by this command at present.",
+                  "description": "Downloads the specified file to the target location.",
                   "fullName": "datalake store filesystem export",
                   "usage": "[options] <accountName> <path> <destination>",
                   "filePath": "commands/arm/datalakestore/datalakestore._js",
