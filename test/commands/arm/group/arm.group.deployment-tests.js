@@ -310,13 +310,13 @@ describe('arm', function () {
                   templateResult.exitStatus.should.equal(0);
                   var expireTime = thirtyMinutesFromNow();
 
-                  suite.execute('storage blob sas create --container %s --blob arm-deployment-template.json --permissions r --expiry %s -a %s -k %s --json', storageContainerName, expireTime, storageAccountName, key, function (SASResult) { 
+                  suite.execute('storage blob sas create --container %s --blob arm-deployment-template.json --permissions r --expiry %s -a %s -k %s --json', storageContainerName, expireTime, storageAccountName, key, function (SASResult) {
                     var URIwithSAS = JSON.parse(SASResult.text).url;
                     SASResult.exitStatus.should.equal(0);                          
                     // This URIwithSAS was generated on the recorded test if a new test is generated then this variable should be replaced with 
                     // the new URIwithSAS created in that recorded session. The reason is nock will record requests with the expiration time
                     // set to thiry minutes after the SAS token generation relative to the time the test was recorded.
-                    URIwithSAS = 'https://xstorageaccount4917.blob.core.windows.net/xstoragecontainer6712/arm-deployment-template.json?se=2016-08-27T02%3A02%3A00Z&sp=r&sv=2015-04-05&sr=b&sig=HjRq7q8o23pXnCyix2ZAJHXPLiuWB5ktibPQn%2FizoKw%3D';
+                    URIwithSAS = 'https://xstorageaccount764.blob.core.windows.net/xstoragecontainer6074/arm-deployment-template.json?se=2016-10-07T04%3A17%3A00Z&sp=r&sv=2015-12-11&sr=b&sig=8qPO0%2B3yrsXtCD9PixZjAM0rhl10E9yUzd6WgQ3PHts%3D';
 
                     suite.execute('group deployment create --template-uri %s -g %s -n %s -e %s --nowait --json', URIwithSAS, groupName, deploymentName, parameterFile, function (deployResult) { 
                       deployResult.exitStatus.should.equal(0);
@@ -371,7 +371,7 @@ describe('arm', function () {
                     // This URIwithSAS was generated on the recorded test if a new test is generated then this variable should be replaced with 
                     // the new URIwithSAS created in that recorded session. The reason is nock records the requests with the expiration time 
                     // set to thiry minutes after the SAS token generation relative to the time the test was recorded.
-                    URIwithSAS = 'https://xstorageaccount714.blob.core.windows.net/xstoragecontainer9648/arm-deployment-template.json?se=2016-08-27T02%3A34%3A00Z&sp=r&sv=2015-04-05&sr=b&sig=H%2B3Fx10IynilQ4hssMCwOlIjmYiBGIUOzGey3pJ5ATI%3D';
+                    URIwithSAS = 'https://xstorageaccount2031.blob.core.windows.net/xstoragecontainer7970/arm-deployment-template.json?se=2016-10-07T03%3A50%3A00Z&sp=r&sv=2015-12-11&sr=b&sig=wm50z9hmC3tHm52rWBYFQNngXLj2aTTnj47k%2Bkdvv8M%3D';
 
                     suite.execute('group deployment create --template-uri %s -g %s -e %s --nowait --json', URIwithSAS, groupName, parameterFile, function (deployResult) { 
                       deployResult.exitStatus.should.equal(0);
