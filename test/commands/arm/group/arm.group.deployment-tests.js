@@ -519,6 +519,48 @@ describe('arm', function () {
         });
       });
 
+      it('should prompt for missing parameter excluding any defaults', function (done) {
+        var parameterString = "{ \"siteName\":{\"value\":\"xDeploymentTestSite1\"}, \"hostingPlanName\":{ \"value\":\"xDeploymentTestHost1\" }, \"workerSize\":{ \"value\":\"0\" }}";
+        var groupName = suite.generateId('xDeploymentTestGroup', createdGroups, suite.isMocked);
+        var deploymentName = suite.generateId('Deploy1', createdDeployments, suite.isMocked);
+        var templateFile = path.join(__dirname, '../../../data/arm-deployment-template.json');
+
+        suite.execute('group create %s --location %s --json', groupName, testLocation, function (result) {
+          result.exitStatus.should.equal(0);
+          suite.execute('group deployment create -f %s -g %s -n %s -p %s --json', templateFile, groupName, deploymentName, parameterString, function (result) {
+            result.exitStatus.should.equal(1);
+            result.errorText.should.include("file does not have { siteLocation } defined.");
+            cleanup(done);
+          });
+        });
+      });
+
+      it('should work with defaults', function (done) {
+        var parameterString = "{ \"siteName\":{\"value\":\"xDeploymentTestSite1\"},\"siteLocation\":{\"value\":\"westus\"}, \"hostingPlanName\":{ \"value\":\"xDeploymentTestHost1\" }, \"workerSize\":{ \"value\":\"0\" }}";
+        var groupName = suite.generateId('xDeploymentTestGroup', createdGroups, suite.isMocked);
+        var deploymentName = suite.generateId('Deploy1', createdDeployments, suite.isMocked);
+        var templateFile = path.join(__dirname, '../../../data/arm-deployment-template.json');
+
+        suite.execute('group create %s --location %s --json', groupName, testLocation, function (result) {
+          result.exitStatus.should.equal(0);
+          suite.execute('group deployment create -f %s -g %s -n %s -p %s --nowait --json -vv',
+            templateFile, groupName, deploymentName, parameterString, function (result) {
+            result.exitStatus.should.equal(0);
+
+            suite.execute('group deployment show -g %s -n %s --json', groupName, deploymentName, function (showResult) {
+              showResult.exitStatus.should.equal(0);
+              showResult.text.indexOf(deploymentName).should.be.above(-1);
+
+              suite.execute('group deployment list -g %s --json', groupName, function (listResult) {
+                listResult.exitStatus.should.equal(0);
+                listResult.text.indexOf(deploymentName).should.be.above(-1);
+                cleanup(done);
+              });
+            });
+          });
+        });
+      });
+
       it('should fail when a parameter is missing for a deployment template', function (done) {
         var parameterString = "{ \"siteName\":{\"value\":\"xDeploymentTestSite1\"}, \"hostingPlanName\":{ \"value\":\"xDeploymentTestHost1\" }, \"sku\":{ \"value\":\"Free\" }, \"workerSize\":{ \"value\":\"0\" }}";
         var groupName = suite.generateId('xDeploymentTestGroup', createdGroups, suite.isMocked);
