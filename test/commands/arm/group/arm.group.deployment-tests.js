@@ -529,7 +529,7 @@ describe('arm', function () {
           result.exitStatus.should.equal(0);
           suite.execute('group deployment create -f %s -g %s -n %s -p %s --json', templateFile, groupName, deploymentName, parameterString, function (result) {
             result.exitStatus.should.equal(1);
-            result.errorText.should.include("file does not have { siteLocation } defined.");
+            result.errorText.should.include("file does not have parameters { siteLocation } defined.");
             cleanup(done);
           });
         });
@@ -571,7 +571,7 @@ describe('arm', function () {
           result.exitStatus.should.equal(0);
           suite.execute('group deployment create -f %s -g %s -n %s -p %s --json', templateFile, groupName, deploymentName, parameterString, function (result) {
             result.exitStatus.should.equal(1);
-            result.errorText.should.include("file does not have { siteLocation } defined.");
+            result.errorText.should.include("file does not have parameters { siteLocation } defined.");
             cleanup(done);
           });
         });
