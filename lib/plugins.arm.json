@@ -66997,6 +66997,24 @@
                   "description": "the resource group name of the connected local network gateway"
                 },
                 {
+                  "flags": "-p, --peer-name <peer-name>",
+                  "required": -17,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-p",
+                  "long": "--peer-name",
+                  "description": "the name of the connected express route circuit"
+                },
+                {
+                  "flags": "-x, --peer-group <peer-group>",
+                  "required": -18,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-x",
+                  "long": "--peer-group",
+                  "description": "the resource group of the connected express route circuit"
+                },
+                {
                   "flags": "-y, --type <type>",
                   "required": -12,
                   "optional": 0,
