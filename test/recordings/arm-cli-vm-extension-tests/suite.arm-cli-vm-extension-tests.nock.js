@@ -27,4 +27,4 @@ exports.setEnvironment = function() {
 
 exports.scopes = [];
 
- exports.randomTestIdsGenerated = function() { return ['xplatTestGExtension8441','xplatstoragext1227','xplatstoragecntext7003','xplatdnsext3640'];};
+ exports.randomTestIdsGenerated = function() { return ['xplatTestGExtension9012','xplatstoragext2584','xplatstoragecntext923','xplatdnsext958'];};
