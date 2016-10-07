@@ -950,509 +950,6 @@
       "options": [],
       "commands": [],
       "categories": {
-        "account": {
-          "name": "account",
-          "description": "Commands to manage your Batch accounts",
-          "fullName": "batch account",
-          "usage": "[options] [command]",
-          "options": [],
-          "commands": [
-            {
-              "name": "list",
-              "description": "List the Batch accounts associated with the subscription or resource group",
-              "fullName": "batch account list",
-              "usage": "[options]",
-              "filePath": "commands/batch/batch.account._js",
-              "options": [
-                {
-                  "flags": "-v, --verbose",
-                  "required": 0,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-v",
-                  "long": "--verbose",
-                  "description": "use verbose output"
-                },
-                {
-                  "flags": "-vv",
-                  "required": 0,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "-vv",
-                  "description": "more verbose with debug output"
-                },
-                {
-                  "flags": "--json",
-                  "required": 0,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "--json",
-                  "description": "use json output"
-                },
-                {
-                  "flags": "-g, --resource-group <resource-group>",
-                  "required": -22,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-g",
-                  "long": "--resource-group",
-                  "description": "the resource group name"
-                },
-                {
-                  "flags": "-s, --subscription <subscription>",
-                  "required": -20,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-s",
-                  "long": "--subscription",
-                  "description": "the subscription id"
-                }
-              ]
-            },
-            {
-              "name": "show",
-              "description": "Show detailed information about the specified Batch account",
-              "fullName": "batch account show",
-              "usage": "[options] <name>",
-              "filePath": "commands/batch/batch.account._js",
-              "options": [
-                {
-                  "flags": "-v, --verbose",
-                  "required": 0,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-v",
-                  "long": "--verbose",
-                  "description": "use verbose output"
-                },
-                {
-                  "flags": "-vv",
-                  "required": 0,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "-vv",
-                  "description": "more verbose with debug output"
-                },
-                {
-                  "flags": "--json",
-                  "required": 0,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "--json",
-                  "description": "use json output"
-                },
-                {
-                  "flags": "-g, --resource-group <resource-group>",
-                  "required": -22,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-g",
-                  "long": "--resource-group",
-                  "description": "the resource group name"
-                },
-                {
-                  "flags": "-s, --subscription <subscription>",
-                  "required": -20,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-s",
-                  "long": "--subscription",
-                  "description": "the subscription id"
-                }
-              ]
-            },
-            {
-              "name": "create",
-              "description": "Creates a new Batch account with the specified parameters",
-              "fullName": "batch account create",
-              "usage": "[options] <name>",
-              "filePath": "commands/batch/batch.account._js",
-              "options": [
-                {
-                  "flags": "-v, --verbose",
-                  "required": 0,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-v",
-                  "long": "--verbose",
-                  "description": "use verbose output"
-                },
-                {
-                  "flags": "-vv",
-                  "required": 0,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "-vv",
-                  "description": "more verbose with debug output"
-                },
-                {
-                  "flags": "--json",
-                  "required": 0,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "--json",
-                  "description": "use json output"
-                },
-                {
-                  "flags": "-l, --location <location>",
-                  "required": -16,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-l",
-                  "long": "--location",
-                  "description": "the location"
-                },
-                {
-                  "flags": "--tags <tags>",
-                  "required": -8,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "--tags",
-                  "description": "the account tags. Tags are key=value pairs and separated with semicolon(;)"
-                },
-                {
-                  "flags": "--autostorage-account-id <autostorageAccountId>",
-                  "required": -26,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "--autostorage-account-id",
-                  "description": "the resource id of the storage account to be used for auto storage"
-                },
-                {
-                  "flags": "-g, --resource-group <resource-group>",
-                  "required": -22,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-g",
-                  "long": "--resource-group",
-                  "description": "the resource group name"
-                },
-                {
-                  "flags": "-s, --subscription <subscription>",
-                  "required": -20,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-s",
-                  "long": "--subscription",
-                  "description": "the subscription id"
-                }
-              ]
-            },
-            {
-              "name": "set",
-              "description": "Updates the properties of an existing Batch account in the specified resource group",
-              "fullName": "batch account set",
-              "usage": "[options] <name>",
-              "filePath": "commands/batch/batch.account._js",
-              "options": [
-                {
-                  "flags": "-v, --verbose",
-                  "required": 0,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-v",
-                  "long": "--verbose",
-                  "description": "use verbose output"
-                },
-                {
-                  "flags": "-vv",
-                  "required": 0,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "-vv",
-                  "description": "more verbose with debug output"
-                },
-                {
-                  "flags": "--json",
-                  "required": 0,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "--json",
-                  "description": "use json output"
-                },
-                {
-                  "flags": "--tags <tags>",
-                  "required": -8,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "--tags",
-                  "description": "the account tags. Tags are key=value pairs and separated with semicolon(;)"
-                },
-                {
-                  "flags": "--autostorage-account-id <autostorageAccountId>",
-                  "required": -26,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "--autostorage-account-id",
-                  "description": "the resource id of the storage account to be used for auto storage"
-                },
-                {
-                  "flags": "-g, --resource-group <resource-group>",
-                  "required": -22,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-g",
-                  "long": "--resource-group",
-                  "description": "the resource group name"
-                },
-                {
-                  "flags": "-s, --subscription <subscription>",
-                  "required": -20,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-s",
-                  "long": "--subscription",
-                  "description": "the subscription id"
-                }
-              ]
-            },
-            {
-              "name": "delete",
-              "description": "Deletes the specified Batch account",
-              "fullName": "batch account delete",
-              "usage": "[options] <name>",
-              "filePath": "commands/batch/batch.account._js",
-              "options": [
-                {
-                  "flags": "-v, --verbose",
-                  "required": 0,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-v",
-                  "long": "--verbose",
-                  "description": "use verbose output"
-                },
-                {
-                  "flags": "-vv",
-                  "required": 0,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "-vv",
-                  "description": "more verbose with debug output"
-                },
-                {
-                  "flags": "--json",
-                  "required": 0,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "--json",
-                  "description": "use json output"
-                },
-                {
-                  "flags": "-g, --resource-group <resource-group>",
-                  "required": -22,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-g",
-                  "long": "--resource-group",
-                  "description": "the resource group name"
-                },
-                {
-                  "flags": "-s, --subscription <subscription>",
-                  "required": -20,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-s",
-                  "long": "--subscription",
-                  "description": "the subscription id"
-                },
-                {
-                  "flags": "-q, --quiet",
-                  "required": 0,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-q",
-                  "long": "--quiet",
-                  "description": "quiet mode, do not ask for delete confirmation"
-                }
-              ]
-            },
-            {
-              "name": "sync-autostorage-keys",
-              "description": "Synchronizes access keys for the auto storage account configured for the specified Batch account",
-              "fullName": "batch account sync-autostorage-keys",
-              "usage": "[options] <name>",
-              "filePath": "commands/batch/batch.account._js",
-              "options": [
-                {
-                  "flags": "-v, --verbose",
-                  "required": 0,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-v",
-                  "long": "--verbose",
-                  "description": "use verbose output"
-                },
-                {
-                  "flags": "-vv",
-                  "required": 0,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "-vv",
-                  "description": "more verbose with debug output"
-                },
-                {
-                  "flags": "--json",
-                  "required": 0,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "--json",
-                  "description": "use json output"
-                },
-                {
-                  "flags": "-g, --resource-group <resource-group>",
-                  "required": -22,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-g",
-                  "long": "--resource-group",
-                  "description": "the resource group name"
-                },
-                {
-                  "flags": "-s, --subscription <subscription>",
-                  "required": -20,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-s",
-                  "long": "--subscription",
-                  "description": "the subscription id"
-                }
-              ]
-            }
-          ],
-          "categories": {
-            "keys": {
-              "name": "keys",
-              "description": "Commands to manage your Batch account keys",
-              "fullName": "batch account keys",
-              "usage": "[options] [command]",
-              "options": [],
-              "commands": [
-                {
-                  "name": "list",
-                  "description": "Gets the account keys for the given Batch account",
-                  "fullName": "batch account keys list",
-                  "usage": "[options] <name>",
-                  "filePath": "commands/batch/batch.account._js",
-                  "options": [
-                    {
-                      "flags": "-v, --verbose",
-                      "required": 0,
-                      "optional": 0,
-                      "bool": true,
-                      "short": "-v",
-                      "long": "--verbose",
-                      "description": "use verbose output"
-                    },
-                    {
-                      "flags": "-vv",
-                      "required": 0,
-                      "optional": 0,
-                      "bool": true,
-                      "long": "-vv",
-                      "description": "more verbose with debug output"
-                    },
-                    {
-                      "flags": "--json",
-                      "required": 0,
-                      "optional": 0,
-                      "bool": true,
-                      "long": "--json",
-                      "description": "use json output"
-                    },
-                    {
-                      "flags": "-g, --resource-group <resource-group>",
-                      "required": -22,
-                      "optional": 0,
-                      "bool": true,
-                      "short": "-g",
-                      "long": "--resource-group",
-                      "description": "the resource group name"
-                    },
-                    {
-                      "flags": "-s, --subscription <subscription>",
-                      "required": -20,
-                      "optional": 0,
-                      "bool": true,
-                      "short": "-s",
-                      "long": "--subscription",
-                      "description": "the subscription id"
-                    }
-                  ]
-                },
-                {
-                  "name": "renew",
-                  "description": "Regenerates the specified account key for the given Batch account",
-                  "fullName": "batch account keys renew",
-                  "usage": "[options] <name>",
-                  "filePath": "commands/batch/batch.account._js",
-                  "options": [
-                    {
-                      "flags": "-v, --verbose",
-                      "required": 0,
-                      "optional": 0,
-                      "bool": true,
-                      "short": "-v",
-                      "long": "--verbose",
-                      "description": "use verbose output"
-                    },
-                    {
-                      "flags": "-vv",
-                      "required": 0,
-                      "optional": 0,
-                      "bool": true,
-                      "long": "-vv",
-                      "description": "more verbose with debug output"
-                    },
-                    {
-                      "flags": "--json",
-                      "required": 0,
-                      "optional": 0,
-                      "bool": true,
-                      "long": "--json",
-                      "description": "use json output"
-                    },
-                    {
-                      "flags": "--primary",
-                      "required": 0,
-                      "optional": 0,
-                      "bool": true,
-                      "long": "--primary",
-                      "description": "Update the primary key"
-                    },
-                    {
-                      "flags": "--secondary",
-                      "required": 0,
-                      "optional": 0,
-                      "bool": true,
-                      "long": "--secondary",
-                      "description": "Update the secondary key"
-                    },
-                    {
-                      "flags": "-g, --resource-group <resource-group>",
-                      "required": -22,
-                      "optional": 0,
-                      "bool": true,
-                      "short": "-g",
-                      "long": "--resource-group",
-                      "description": "the resource group name"
-                    },
-                    {
-                      "flags": "-s, --subscription <subscription>",
-                      "required": -20,
-                      "optional": 0,
-                      "bool": true,
-                      "short": "-s",
-                      "long": "--subscription",
-                      "description": "the subscription id"
-                    }
-                  ]
-                }
-              ],
-              "categories": {}
-            }
-          }
-        },
         "application": {
           "name": "application",
           "description": "Commands to manage your Batch Application",
@@ -1985,7 +1482,7 @@
                   "description": "Creates an application package record",
                   "fullName": "batch application package create",
                   "usage": "[options] [resource-group] [account-name] [application-id] [version] [package-file]",
-                  "filePath": "commands/batch/batch.application._js",
+                  "filePath": "commands/batch/batch.applicationPackage._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -2069,7 +1566,7 @@
                   "description": "Deletes an application package record",
                   "fullName": "batch application package delete",
                   "usage": "[options] [resource-group] [account-name] [application-id] [version]",
-                  "filePath": "commands/batch/batch.application._js",
+                  "filePath": "commands/batch/batch.applicationPackage._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -2154,7 +1651,7 @@
                   "description": "Show details of the Batch application package",
                   "fullName": "batch application package show",
                   "usage": "[options] [resource-group] [account-name] [application-id] [version]",
-                  "filePath": "commands/batch/batch.application._js",
+                  "filePath": "commands/batch/batch.applicationPackage._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -2230,7 +1727,7 @@
                   "description": "Activate an application package",
                   "fullName": "batch application package activate",
                   "usage": "[options] [resource-group] [account-name] [application-id] [version] [format]",
-                  "filePath": "commands/batch/batch.application._js",
+                  "filePath": "commands/batch/batch.applicationPackage._js",
                   "options": [
                     {
                       "flags": "-v, --verbose",
@@ -2288,6 +1785,509 @@
                       "bool": true,
                       "long": "--format",
                       "description": "the format of the application package binary file"
+                    },
+                    {
+                      "flags": "-g, --resource-group <resource-group>",
+                      "required": -22,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-g",
+                      "long": "--resource-group",
+                      "description": "the resource group name"
+                    },
+                    {
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-s",
+                      "long": "--subscription",
+                      "description": "the subscription id"
+                    }
+                  ]
+                }
+              ],
+              "categories": {}
+            }
+          }
+        },
+        "account": {
+          "name": "account",
+          "description": "Commands to manage your Batch accounts",
+          "fullName": "batch account",
+          "usage": "[options] [command]",
+          "options": [],
+          "commands": [
+            {
+              "name": "list",
+              "description": "List the Batch accounts associated with the subscription or resource group",
+              "fullName": "batch account list",
+              "usage": "[options]",
+              "filePath": "commands/batch/batch.batchAccount._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "-g, --resource-group <resource-group>",
+                  "required": -22,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-g",
+                  "long": "--resource-group",
+                  "description": "the resource group name"
+                },
+                {
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-s",
+                  "long": "--subscription",
+                  "description": "the subscription id"
+                }
+              ]
+            },
+            {
+              "name": "show",
+              "description": "Show detailed information about the specified Batch account",
+              "fullName": "batch account show",
+              "usage": "[options] <name>",
+              "filePath": "commands/batch/batch.batchAccount._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "-g, --resource-group <resource-group>",
+                  "required": -22,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-g",
+                  "long": "--resource-group",
+                  "description": "the resource group name"
+                },
+                {
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-s",
+                  "long": "--subscription",
+                  "description": "the subscription id"
+                }
+              ]
+            },
+            {
+              "name": "create",
+              "description": "Creates a new Batch account with the specified parameters",
+              "fullName": "batch account create",
+              "usage": "[options] <name>",
+              "filePath": "commands/batch/batch.batchAccount._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "-l, --location <location>",
+                  "required": -16,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-l",
+                  "long": "--location",
+                  "description": "the location"
+                },
+                {
+                  "flags": "--tags <tags>",
+                  "required": -8,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--tags",
+                  "description": "the account tags. Tags are key=value pairs and separated with semicolon(;)"
+                },
+                {
+                  "flags": "--autostorage-account-id <autostorageAccountId>",
+                  "required": -26,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--autostorage-account-id",
+                  "description": "the resource id of the storage account to be used for auto storage"
+                },
+                {
+                  "flags": "-g, --resource-group <resource-group>",
+                  "required": -22,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-g",
+                  "long": "--resource-group",
+                  "description": "the resource group name"
+                },
+                {
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-s",
+                  "long": "--subscription",
+                  "description": "the subscription id"
+                }
+              ]
+            },
+            {
+              "name": "set",
+              "description": "Updates the properties of an existing Batch account in the specified resource group",
+              "fullName": "batch account set",
+              "usage": "[options] <name>",
+              "filePath": "commands/batch/batch.batchAccount._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "--tags <tags>",
+                  "required": -8,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--tags",
+                  "description": "the account tags. Tags are key=value pairs and separated with semicolon(;)"
+                },
+                {
+                  "flags": "--autostorage-account-id <autostorageAccountId>",
+                  "required": -26,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--autostorage-account-id",
+                  "description": "the resource id of the storage account to be used for auto storage"
+                },
+                {
+                  "flags": "-g, --resource-group <resource-group>",
+                  "required": -22,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-g",
+                  "long": "--resource-group",
+                  "description": "the resource group name"
+                },
+                {
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-s",
+                  "long": "--subscription",
+                  "description": "the subscription id"
+                }
+              ]
+            },
+            {
+              "name": "delete",
+              "description": "Deletes the specified Batch account",
+              "fullName": "batch account delete",
+              "usage": "[options] <name>",
+              "filePath": "commands/batch/batch.batchAccount._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "-g, --resource-group <resource-group>",
+                  "required": -22,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-g",
+                  "long": "--resource-group",
+                  "description": "the resource group name"
+                },
+                {
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-s",
+                  "long": "--subscription",
+                  "description": "the subscription id"
+                },
+                {
+                  "flags": "-q, --quiet",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-q",
+                  "long": "--quiet",
+                  "description": "quiet mode, do not ask for delete confirmation"
+                }
+              ]
+            },
+            {
+              "name": "sync-autostorage-keys",
+              "description": "Synchronizes access keys for the auto storage account configured for the specified Batch account",
+              "fullName": "batch account sync-autostorage-keys",
+              "usage": "[options] <name>",
+              "filePath": "commands/batch/batch.batchAccount._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "-g, --resource-group <resource-group>",
+                  "required": -22,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-g",
+                  "long": "--resource-group",
+                  "description": "the resource group name"
+                },
+                {
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-s",
+                  "long": "--subscription",
+                  "description": "the subscription id"
+                }
+              ]
+            }
+          ],
+          "categories": {
+            "keys": {
+              "name": "keys",
+              "description": "Commands to manage your Batch account keys",
+              "fullName": "batch account keys",
+              "usage": "[options] [command]",
+              "options": [],
+              "commands": [
+                {
+                  "name": "list",
+                  "description": "Gets the account keys for the given Batch account",
+                  "fullName": "batch account keys list",
+                  "usage": "[options] <name>",
+                  "filePath": "commands/batch/batch.batchAccount._js",
+                  "options": [
+                    {
+                      "flags": "-v, --verbose",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-v",
+                      "long": "--verbose",
+                      "description": "use verbose output"
+                    },
+                    {
+                      "flags": "-vv",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "long": "-vv",
+                      "description": "more verbose with debug output"
+                    },
+                    {
+                      "flags": "--json",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "long": "--json",
+                      "description": "use json output"
+                    },
+                    {
+                      "flags": "-g, --resource-group <resource-group>",
+                      "required": -22,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-g",
+                      "long": "--resource-group",
+                      "description": "the resource group name"
+                    },
+                    {
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-s",
+                      "long": "--subscription",
+                      "description": "the subscription id"
+                    }
+                  ]
+                },
+                {
+                  "name": "renew",
+                  "description": "Regenerates the specified account key for the given Batch account",
+                  "fullName": "batch account keys renew",
+                  "usage": "[options] <name>",
+                  "filePath": "commands/batch/batch.batchAccount._js",
+                  "options": [
+                    {
+                      "flags": "-v, --verbose",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-v",
+                      "long": "--verbose",
+                      "description": "use verbose output"
+                    },
+                    {
+                      "flags": "-vv",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "long": "-vv",
+                      "description": "more verbose with debug output"
+                    },
+                    {
+                      "flags": "--json",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "long": "--json",
+                      "description": "use json output"
+                    },
+                    {
+                      "flags": "--primary",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "long": "--primary",
+                      "description": "Update the primary key"
+                    },
+                    {
+                      "flags": "--secondary",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "long": "--secondary",
+                      "description": "Update the secondary key"
                     },
                     {
                       "flags": "-g, --resource-group <resource-group>",
@@ -5477,6 +5477,69 @@
           ],
           "categories": {}
         },
+        "location": {
+          "name": "location",
+          "description": "Commands to manage Batch service options for a subscription at the region level",
+          "fullName": "batch location",
+          "usage": "[options]",
+          "options": [],
+          "commands": [],
+          "categories": {
+            "quotas": {
+              "name": "quotas",
+              "description": "Commands to manage Batch service quotas at the region level",
+              "fullName": "batch location quotas",
+              "usage": "[options] [command]",
+              "options": [],
+              "commands": [
+                {
+                  "name": "show",
+                  "description": "Get the Batch service quotas for the specified subscription at the given region",
+                  "fullName": "batch location quotas show",
+                  "usage": "[options] <location>",
+                  "filePath": "commands/batch/batch.location._js",
+                  "options": [
+                    {
+                      "flags": "-v, --verbose",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-v",
+                      "long": "--verbose",
+                      "description": "use verbose output"
+                    },
+                    {
+                      "flags": "-vv",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "long": "-vv",
+                      "description": "more verbose with debug output"
+                    },
+                    {
+                      "flags": "--json",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "long": "--json",
+                      "description": "use json output"
+                    },
+                    {
+                      "flags": "-s, --subscription <id>",
+                      "required": -20,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-s",
+                      "long": "--subscription",
+                      "description": "the subscription id"
+                    }
+                  ]
+                }
+              ],
+              "categories": {}
+            }
+          }
+        },
         "node": {
           "name": "node",
           "description": "Commands to manage your Batch compute nodes",
@@ -8036,59 +8099,6 @@
               "categories": {}
             }
           }
-        },
-        "subscription": {
-          "name": "subscription",
-          "description": "Commands to manage Batch options at the subscription level",
-          "fullName": "batch subscription",
-          "usage": "[options] [command]",
-          "options": [],
-          "commands": [
-            {
-              "name": "list-quotas",
-              "description": "List the subscription level Batch quotas in the specified region",
-              "fullName": "batch subscription list-quotas",
-              "usage": "[options] <location>",
-              "filePath": "commands/batch/batch.subscription._js",
-              "options": [
-                {
-                  "flags": "-v, --verbose",
-                  "required": 0,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-v",
-                  "long": "--verbose",
-                  "description": "use verbose output"
-                },
-                {
-                  "flags": "-vv",
-                  "required": 0,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "-vv",
-                  "description": "more verbose with debug output"
-                },
-                {
-                  "flags": "--json",
-                  "required": 0,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "--json",
-                  "description": "use json output"
-                },
-                {
-                  "flags": "-s, --subscription <id>",
-                  "required": -20,
-                  "optional": 0,
-                  "bool": true,
-                  "short": "-s",
-                  "long": "--subscription",
-                  "description": "the subscription id"
-                }
-              ]
-            }
-          ],
-          "categories": {}
         },
         "task": {
           "name": "task",
