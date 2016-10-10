@@ -68707,7 +68707,7 @@
                       "bool": true,
                       "short": "-a",
                       "long": "--static-ip-address",
-                      "description": "the static IP address name"
+                      "description": "the static IP address"
                     },
                     {
                       "flags": "-p, --public-ip-name <public-ip-name>",
@@ -68839,7 +68839,7 @@
                       "bool": true,
                       "short": "-a",
                       "long": "--static-ip-address",
-                      "description": "the static IP address name"
+                      "description": "the static IP address"
                     },
                     {
                       "flags": "-p, --public-ip-name <public-ip-name>",
