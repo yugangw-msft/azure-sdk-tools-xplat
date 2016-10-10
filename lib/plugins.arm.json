@@ -26644,6 +26644,15 @@
               "description": "the number of instances in the App Service Plan, Default is 1"
             },
             {
+              "flags": "-x --islinux <islinux>",
+              "required": -14,
+              "optional": 0,
+              "bool": true,
+              "short": "-x",
+              "long": "--islinux",
+              "description": "enables a linux App Service Plan, E.g --islinux true"
+            },
+            {
               "flags": "-s --subscription <subscription>",
               "required": -19,
               "optional": 0,
