@@ -53,7 +53,7 @@ group.command('set [name]')
 ```
 
 ## Generating help for commands that you are developing
-The help is read from lib/plugins.arm.json and lib/plugins.asm.json based on the mode that you are currently in (`azure config mode arm|asm`).
+The help is read from `lib/plugins.arm.json` and `lib/plugins.asm.json` based on the mode that you are currently in (`azure config mode arm|asm`).
 
 To autogenerate the help, from the root of the cloned repo, you can execute:
 - will generate help for all the commands in arm and asm mode `node bin/azure --gen`
