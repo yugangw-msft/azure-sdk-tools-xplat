@@ -1,4 +1,4 @@
-﻿##2016-10-12 Version 0.10.6
+##2016-10-12 Version 0.10.6
 * General
   * Changed log output filename to be trivially sortable into chronological order #3215
 * Datalake
