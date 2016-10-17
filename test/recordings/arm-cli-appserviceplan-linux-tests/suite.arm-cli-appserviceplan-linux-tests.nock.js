@@ -6,12 +6,8 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '46241355-bb95-46a9-ba6c-42b554d71925',
-    managementCertificate: {
-      key: 'mockedKey',
-      cert: 'mockedCert'
-    },
-    name: 'Microsoft Azure Internal Consumption',
+    id: '8d57ddbd-c779-40ea-b660-1015f4bf027d',
+    name: 'Visual Studio Enterprise',
     user: {
       name: 'user@domain.example',
       type: 'user'
@@ -27,9 +23,8 @@ exports.getMockedProfile = function () {
 };
 
 exports.setEnvironment = function() {
-  process.env['AZURE_ARM_TEST_LOCATION'] = 'westus';
 };
 
 exports.scopes = [];
 
- exports.randomTestIdsGenerated = function() { return ['armclibatch2928','armclibatch9879','armclibatchgroup7389'];};
+ exports.randomTestIdsGenerated = function() { return ['armappserviceplanlinuxtests3884','testrg14049'];};
