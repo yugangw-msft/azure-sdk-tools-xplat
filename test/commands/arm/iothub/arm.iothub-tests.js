@@ -158,7 +158,6 @@ describe('arm', function () {
           function setIpFilterRulesMustSucceed() {
               suite.execute('iothub ipfilter-rules set --name %s --resource-group %s -f ipfilterrules.txt', iothubName, testResourceGroup, function(result) {
                   result.exitStatus.should.be.equal(0);
-                  done();
               });
           }
 
