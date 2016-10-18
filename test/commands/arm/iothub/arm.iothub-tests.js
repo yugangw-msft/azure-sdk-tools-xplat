@@ -138,6 +138,40 @@ describe('arm', function () {
         });
       });
 
+      it('ip filter rules set and list command using files should work', function (done) {
+          listAndSetIpFilterRulesMustSucceed();
+
+          function listAndSetIpFilterRulesMustSucceed() {
+              var fs = require("fs");
+              suite.execute('iothub ipfilter-rules list --name %s --resource-group %s --json -f ipfilterrules.txt', iothubName, testResourceGroup, function (result) {
+                  result.exitStatus.should.be.equal(0);
+                  var jsonFile = fs.readFileSync("ipfilterrules.txt");
+                  var ipFilterRules = JSON.parse(utils.stripBOM(jsonFile));
+                  ipFilterRules.length.should.be.equal(0);
+                  fs.writeFileSync("ipfilterrules.txt",
+                      "[ { \"filterName\": \"deny\",  \"action\": \"Accept\", \"ipMask\": \"0.0.0.0/0\" }, { \"filterName\": \"test\",  \"action\": \"Reject\", \"ipMask\": \"0.0.0.0/0\" } ]");
+                  setIpFilterRulesMustSucceed();
+                  listIpFilterRulesMustSucceed();
+              });
+          }
+
+          function setIpFilterRulesMustSucceed() {
+              suite.execute('iothub ipfilter-rules set --name %s --resource-group %s -f ipfilterrules.txt', iothubName, testResourceGroup, function(result) {
+                  result.exitStatus.should.be.equal(0);
+                  done();
+              });
+          }
+
+          function listIpFilterRulesMustSucceed() {
+              suite.execute('iothub ipfilter-rules list --name %s --resource-group %s -f ipfilterrules.txt', iothubName, testResourceGroup, function (result) {
+                  result.exitStatus.should.be.equal(0);
+                  var jsonFile = fs.readFileSync("ipfilterrules.txt");
+                  var ipFilterRules = JSON.parse(utils.stripBOM(jsonFile));
+                  ipFilterRules.length.should.be.equal(2);
+                  done();
+             });
+          }
+      });
     });
 
     describe.skip('All Tests', function () {
