@@ -142,14 +142,13 @@ describe('arm', function () {
           listAndSetIpFilterRulesMustSucceed();
 
           function listAndSetIpFilterRulesMustSucceed() {
-              var fs = require("fs");
               suite.execute('iothub ipfilter-rules list --name %s --resource-group %s --json -f ipfilterrules.txt', iothubName, testResourceGroup, function (result) {
                   result.exitStatus.should.be.equal(0);
+                  var fs = require("fs");
                   var jsonFile = fs.readFileSync("ipfilterrules.txt");
                   var ipFilterRules = JSON.parse(utils.stripBOM(jsonFile));
                   ipFilterRules.length.should.be.equal(0);
-                  fs.writeFileSync("ipfilterrules.txt",
-                      "[ { \"filterName\": \"deny\",  \"action\": \"Accept\", \"ipMask\": \"0.0.0.0/0\" }, { \"filterName\": \"test\",  \"action\": \"Reject\", \"ipMask\": \"0.0.0.0/0\" } ]");
+                  fs.writeFileSync("ipfilterrules.txt", "[ { \"filterName\": \"deny\",  \"action\": \"Accept\", \"ipMask\": \"0.0.0.0/0\" }, { \"filterName\": \"test\",  \"action\": \"Reject\", \"ipMask\": \"0.0.0.0/0\" } ]");
                   setIpFilterRulesMustSucceed();
                   listIpFilterRulesMustSucceed();
               });
@@ -164,8 +163,8 @@ describe('arm', function () {
           function listIpFilterRulesMustSucceed() {
               suite.execute('iothub ipfilter-rules list --name %s --resource-group %s -f ipfilterrules.txt', iothubName, testResourceGroup, function (result) {
                   result.exitStatus.should.be.equal(0);
-                  var jsonFile = fs.readFileSync("ipfilterrules.txt");
-                  var ipFilterRules = JSON.parse(utils.stripBOM(jsonFile));
+                  jsonFile = fs.readFileSync("ipfilterrules.txt");
+                  ipFilterRules = JSON.parse(utils.stripBOM(jsonFile));
                   ipFilterRules.length.should.be.equal(2);
                   done();
              });
