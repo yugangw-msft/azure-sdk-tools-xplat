@@ -140,8 +140,7 @@ describe('arm', function () {
       });
 
       it('ip filter rules set and list command using files should work', function (done) {
-          var fs = require("fs");
-          fs.unlinkSync(ipFilterRulesFile);
+
           listAndSetIpFilterRulesMustSucceed();
 
           function setIpFilterRulesMustSucceed() {
@@ -162,12 +161,15 @@ describe('arm', function () {
           function listAndSetIpFilterRulesMustSucceed() {
               suite.execute('iothub ipfilter-rules list --name %s --resource-group %s --output-file %s', iothubName, testResourceGroup, ipFilterRulesFile, function (result) {
                   result.exitStatus.should.be.equal(0);
+                  var fs = require("fs");
                   var jsonFile = fs.readFileSync(ipFilterRulesFile);
                   var ipFilterRules = JSON.parse(utils.stripBOM(jsonFile));
                   ipFilterRules.length.should.be.equal(0);
                   fs.writeFileSync(ipFilterRulesFile, '[ { \"filterName\": \"deny\",  \"action\": \"Accept\", \"ipMask\": \"0.0.0.0/0\" }, { \"filterName\": \"test\",  \"action\": \"Reject\", \"ipMask\": \"0.0.0.0/0\" } ]');
                   setIpFilterRulesMustSucceed();
+                  fs.unlinkSync(ipFilterRulesFile);
                   listIpFilterRulesMustSucceed();
+                  fs.unlinkSync(ipFilterRulesFile);
                   done();
               });
           }
