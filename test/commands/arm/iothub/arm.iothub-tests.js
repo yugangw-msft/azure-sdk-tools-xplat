@@ -142,13 +142,13 @@ describe('arm', function () {
           listAndSetIpFilterRulesMustSucceed();
 
           function setIpFilterRulesMustSucceed() {
-              suite.execute('iothub ipfilter-rules set --name %s --resource-group %s -f ipfilterrules.txt', iothubName, testResourceGroup, function (setResult) {
+              suite.execute('iothub ipfilter-rules set --name %s --resource-group %s --input-file %s', iothubName, testResourceGroup, 'ipfilterrules.txt', function (setResult) {
                   setResult.exitStatus.should.be.equal(0);
               });
           }
 
           function listIpFilterRulesMustSucceed() {
-              suite.execute('iothub ipfilter-rules list --name %s --resource-group %s -f ipfilterrules.txt', iothubName, testResourceGroup, function (listResult) {
+              suite.execute('iothub ipfilter-rules list --name %s --resource-group %s --output-file %s', iothubName, testResourceGroup, 'ipfilterrules.txt', function (listResult) {
                   listResult.exitStatus.should.be.equal(0);
                   jsonFile = fs.readFileSync("ipfilterrules.txt");
                   ipFilterRules = JSON.parse(utils.stripBOM(jsonFile));
@@ -157,13 +157,13 @@ describe('arm', function () {
           }
 
           function listAndSetIpFilterRulesMustSucceed() {
-              suite.execute('iothub ipfilter-rules list --name %s --resource-group %s -f ipfilterrules.txt', iothubName, testResourceGroup, function (result) {
-                  result.exitStatus.should.be.equal(0);
+              suite.execute('iothub ipfilter-rules list --name %s --resource-group %s --output-file %s', iothubName, testResourceGroup, 'ipfilterrules.txt', function (listAndSetResult) {
+                  listAndSetResult.exitStatus.should.be.equal(0);
                   var fs = require("fs");
-                  var jsonFile = fs.readFileSync("ipfilterrules.txt");
+                  var jsonFile = fs.readFileSync('ipfilterrules.txt');
                   var ipFilterRules = JSON.parse(utils.stripBOM(jsonFile));
                   ipFilterRules.length.should.be.equal(0);
-                  fs.writeFileSync("ipfilterrules.txt", "[ { \"filterName\": \"deny\",  \"action\": \"Accept\", \"ipMask\": \"0.0.0.0/0\" }, { \"filterName\": \"test\",  \"action\": \"Reject\", \"ipMask\": \"0.0.0.0/0\" } ]");
+                  fs.writeFileSync('ipfilterrules.txt', '[ { \"filterName\": \"deny\",  \"action\": \"Accept\", \"ipMask\": \"0.0.0.0/0\" }, { \"filterName\": \"test\",  \"action\": \"Reject\", \"ipMask\": \"0.0.0.0/0\" } ]');
                   setIpFilterRulesMustSucceed();
                   listIpFilterRulesMustSucceed();
                   done();
