@@ -167,16 +167,14 @@ describe('arm', function () {
                   ipFilterRules.length.should.be.equal(0);
                   fs.writeFileSync(ipFilterRulesFile, '[ { \"filterName\": \"deny\",  \"action\": \"Accept\", \"ipMask\": \"0.0.0.0/0\" }, { \"filterName\": \"test\",  \"action\": \"Reject\", \"ipMask\": \"0.0.0.0/0\" } ]');
                   setIpFilterRulesMustSucceed();
-                  fs.unlinkSync(ipFilterRulesFile);
                   listIpFilterRulesMustSucceed();
-                  fs.unlinkSync(ipFilterRulesFile);
                   done();
               });
           }
       });
     });
 
-    describe('All Tests', function () {
+    describe.skip('All Tests', function () {
 
       it('create command should work', function (done) {
         iothubName = suite.generateId(iothubPrefix, knownNames);

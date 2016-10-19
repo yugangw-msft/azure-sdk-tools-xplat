@@ -6,13 +6,13 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '9690a5bf-d489-4fd8-8c26-640da72502bd',
-    name: 'Windows Azure MSDN - Visual Studio Ultimate',
+    id: 'e0b81f36-36ba-44f7-b550-7c9344a35893',
+    name: 'IOTHUB_PERF_1',
     user: {
       name: 'user@domain.example',
-      type: 'user'
+      type: 'servicePrincipal'
     },
-    tenantId: '461e517d-31f6-4789-9060-c6e4162eaf38',
+    tenantId: 'microsoft.com',
     state: 'Enabled',
     registeredProviders: [],
     _eventsCount: '1',
