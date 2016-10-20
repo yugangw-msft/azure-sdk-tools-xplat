@@ -19,7 +19,7 @@ var should = require('should');
 
 var path = require('path');
 var util = require('util');
-var fs = require('fs')
+var fs = require('fs');
 
 var CLITest = require('../../../framework/arm-cli-test');
 var log = require('../../../framework/test-logger');
@@ -28,7 +28,7 @@ var utils = require('../../../../lib/util/utils');
 
 var testPrefix = 'arm-cli-iothub-tests';
 var iothubPrefix = 'xplattestiothub';
-var ipFilterRulesFile = 'ipfilterrules.txt';
+var ipFilterRulesFile = path.join(__dirname, '/ipfilterrules.txt');
 var knownNames = [];
 
 var requiredEnvironment = [{
@@ -143,31 +143,30 @@ describe('arm', function () {
 
           listAndSetIpFilterRulesMustSucceed();
 
+          function listAndSetIpFilterRulesMustSucceed() {
+              suite.execute('iothub ipfilter-rules list --name %s --resource-group %s --output-file %s', iothubName, testResourceGroup, ipFilterRulesFile, function (result) {
+                  result.exitStatus.should.be.equal(0);
+                  var jsonFile = fs.readFileSync(ipFilterRulesFile);
+                  var ipFilterRules = JSON.parse(utils.stripBOM(jsonFile));
+                  ipFilterRules.length.should.be.equal(0);
+                  fs.writeFileSync(ipFilterRulesFile, '[ { \"filterName\": \"deny\",  \"action\": \"Accept\", \"ipMask\": \"0.0.0.0/0\" }, { \"filterName\": \"test\",  \"action\": \"Reject\", \"ipMask\": \"0.0.0.0/0\" } ]');
+                  setIpFilterRulesMustSucceed();
+              });
+          }
+
           function setIpFilterRulesMustSucceed() {
               suite.execute('iothub ipfilter-rules set --name %s --resource-group %s --input-file %s', iothubName, testResourceGroup, ipFilterRulesFile, function (result) {
                   result.exitStatus.should.be.equal(0);
+                  listIpFilterRulesMustSucceed();
               });
           }
 
           function listIpFilterRulesMustSucceed() {
               suite.execute('iothub ipfilter-rules list --name %s --resource-group %s --output-file %s', iothubName, testResourceGroup, ipFilterRulesFile, function (result) {
                   result.exitStatus.should.be.equal(0);
-                  jsonFile = fs.readFileSync(ipFilterRulesFile);
-                  ipFilterRules = JSON.parse(utils.stripBOM(jsonFile));
-                  ipFilterRules.length.should.be.equal(2);
-              });
-          }
-
-          function listAndSetIpFilterRulesMustSucceed() {
-              suite.execute('iothub ipfilter-rules list --name %s --resource-group %s --output-file %s', iothubName, testResourceGroup, ipFilterRulesFile, function (result) {
-                  result.exitStatus.should.be.equal(0);
-                  var fs = require("fs");
                   var jsonFile = fs.readFileSync(ipFilterRulesFile);
                   var ipFilterRules = JSON.parse(utils.stripBOM(jsonFile));
-                  ipFilterRules.length.should.be.equal(0);
-                  fs.writeFileSync(ipFilterRulesFile, '[ { \"filterName\": \"deny\",  \"action\": \"Accept\", \"ipMask\": \"0.0.0.0/0\" }, { \"filterName\": \"test\",  \"action\": \"Reject\", \"ipMask\": \"0.0.0.0/0\" } ]');
-                  setIpFilterRulesMustSucceed();
-                  listIpFilterRulesMustSucceed();
+                  ipFilterRules.length.should.be.equal(2);
                   done();
               });
           }
