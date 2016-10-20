@@ -78,6 +78,7 @@ var location = "West Europe",
     domainUsername = 'admin@ignitedemoad.onmicrosoft.com',
     domainUserPassword = 'dummypassword';
 
+
 describe('arm', function () {
   describe('hdinsight', function () {
     var suite;
