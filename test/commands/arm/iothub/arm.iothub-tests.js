@@ -145,6 +145,7 @@ describe('arm', function () {
 
           function listAndSetIpFilterRulesMustSucceed() {
               suite.execute('iothub ipfilter-rules list --name %s --resource-group %s --output-file %s', iothubName, testResourceGroup, ipFilterRulesFile, function (result) {
+                  console.log(">>>>>>>>>>>>>> IPFilterRules 1 " + util.inspect(result, { depth: null }));
                   result.exitStatus.should.be.equal(0);
                   var jsonFile = fs.readFileSync(ipFilterRulesFile);
                   var ipFilterRules = JSON.parse(utils.stripBOM(jsonFile));
@@ -156,6 +157,7 @@ describe('arm', function () {
 
           function setIpFilterRulesMustSucceed() {
               suite.execute('iothub ipfilter-rules set --name %s --resource-group %s --input-file %s', iothubName, testResourceGroup, ipFilterRulesFile, function (result) {
+                  console.log(">>>>>>>>>>>>>> IPFilterRules 2 " + util.inspect(result, { depth: null }));
                   result.exitStatus.should.be.equal(0);
                   listIpFilterRulesMustSucceed();
               });
@@ -163,6 +165,7 @@ describe('arm', function () {
 
           function listIpFilterRulesMustSucceed() {
               suite.execute('iothub ipfilter-rules list --name %s --resource-group %s --output-file %s', iothubName, testResourceGroup, ipFilterRulesFile, function (result) {
+                  console.log(">>>>>>>>>>>>>> IPFilterRules 3 " + util.inspect(result, { depth: null }));
                   result.exitStatus.should.be.equal(0);
                   var jsonFile = fs.readFileSync(ipFilterRulesFile);
                   var ipFilterRules = JSON.parse(utils.stripBOM(jsonFile));
