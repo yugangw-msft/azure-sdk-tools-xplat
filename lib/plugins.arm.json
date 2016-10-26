@@ -80108,12 +80108,12 @@
               "description": "Value is either daily (default) or hourly to tell the API how to return the results grouped by day or hour."
             },
             {
-              "flags": "--showDetails <bool>",
-              "required": -15,
+              "flags": "--showDetails",
+              "required": 0,
               "optional": 0,
               "bool": true,
               "long": "--showDetails",
-              "description": "When set to true (default), the aggregates are broken down into the instance metadata which is more granular."
+              "description": "When this boolean flag is provided, the aggregates are broken down into the instance metadata which is more granular."
             },
             {
               "flags": "--continuationToken <url>",
@@ -80130,6 +80130,15 @@
               "bool": true,
               "long": "--subscription",
               "description": "the subscription identifier"
+            },
+            {
+              "flags": "| more",
+              "required": 0,
+              "optional": 0,
+              "bool": true,
+              "short": "",
+              "long": "more",
+              "description": "Provides paging support. Press 'Enter' for more information."
             }
           ]
         }
