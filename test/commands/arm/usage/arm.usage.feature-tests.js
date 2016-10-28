@@ -62,7 +62,9 @@ describe('arm', function () {
     it('list should work', function (done) {
       suite.execute('usage list 2016-10-05 2016-10-22 --showDetails --json', function (result) {
         result.exitStatus.should.equal(0);
-        result.text.length.should.be.above(0);
+        var usages = JSON.parse(result.text);
+        Array.isArray(usages).should.be.true;
+        usages.length.should.be.above(0);
         done();
       });
     });
