@@ -55917,9 +55917,9 @@
                   "description": "the list of tags.\n     Can be multiple. In the format of \"name=value\".\n     Name is required and value is optional.\n     For example, -t \"tag1=value1;tag2\""
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -56005,9 +56005,9 @@
                   "description": "the list of tags.\n     Can be multiple. In the format of \"name=value\".\n     Name is required and value is optional.\n     Existing tag values will be replaced by the values specified.\n     For example, -t \"tag1=value1;tag2\""
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -56057,9 +56057,9 @@
                   "description": "the name of the resource group"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -56118,9 +56118,9 @@
                   "description": "the name of the virtual network"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -56188,9 +56188,9 @@
                   "description": "quiet mode, do not ask for delete confirmation"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -56312,9 +56312,9 @@
                       "description": "the route table name"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -56427,9 +56427,9 @@
                       "description": "the route table name"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -56488,9 +56488,9 @@
                       "description": "the name of the virtual network"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -56558,9 +56558,9 @@
                       "description": "the name of the subnet"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -56637,9 +56637,9 @@
                       "description": "quiet mode, do not ask for delete confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -57142,9 +57142,9 @@
                   "description": "the location"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -57231,9 +57231,9 @@
                   "description": "the list of tags.\n     Can be multiple. In the format of \"name=value\".\n     Name is required and value is optional.\n     For example, -t \"tag1=value1;tag2\""
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -57301,9 +57301,9 @@
                   "description": "the list of tags.\n     Can be multiple. In the format of \"name=value\".\n     Name is required and value is optional.\n     Existing tag values will be replaced by the values specified.\n     For example, -t \"tag1=value1;tag2\""
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -57353,9 +57353,9 @@
                   "description": "the name of the resource group"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -57414,9 +57414,9 @@
                   "description": "the name of the load balancer"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -57484,9 +57484,9 @@
                   "description": "quiet mode, do not ask for delete confirmation"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -57617,9 +57617,9 @@
                       "description": "the virtual network name in which subnet exists.\n     This virtual network must exist in the same resource group as the load balancer.\n     Please use subnet-id if that is not the case."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -57741,9 +57741,9 @@
                       "description": "the virtual network name in which subnet exists.\n     This virtual network must exist in the same resource group as the load balancer.\n     Please use subnet-id if that is not the case."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -57802,9 +57802,9 @@
                       "description": "the name of the load balancer"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -57881,9 +57881,9 @@
                       "description": "quiet mode, do not ask for delete confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -58006,9 +58006,9 @@
                       "description": "the number of probes"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -58121,9 +58121,9 @@
                       "description": "the number of probes"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -58182,9 +58182,9 @@
                       "description": "the name of the load balancer"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -58261,9 +58261,9 @@
                       "description": "quiet mode, do not ask for delete confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -58341,9 +58341,9 @@
                       "description": "the name of the backend address pool"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -58402,9 +58402,9 @@
                       "description": "the name of the load balancer"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -58481,9 +58481,9 @@
                       "description": "quiet mode, do not ask for delete confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -58642,9 +58642,9 @@
                       "description": "the name of the probe defined in the same load balancer"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -58793,9 +58793,9 @@
                       "description": "the name of the probe defined in the same load balancer"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -58854,9 +58854,9 @@
                       "description": "the name of the load balancer"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -58933,9 +58933,9 @@
                       "description": "quiet mode, do not ask for delete confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -59067,9 +59067,9 @@
                       "description": "the name of the frontend ip configuration"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -59191,9 +59191,9 @@
                       "description": "the name of the frontend ip configuration"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -59252,9 +59252,9 @@
                       "description": "the name of the load balancer"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -59331,9 +59331,9 @@
                       "description": "quiet mode, do not ask for delete confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -59456,9 +59456,9 @@
                       "description": "the name of the frontend ip configuration"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -59571,9 +59571,9 @@
                       "description": "the name of the frontend ip configuration"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -59632,9 +59632,9 @@
                       "description": "the name of the load balancer"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -59711,9 +59711,9 @@
                       "description": "quiet mode, do not ask for delete confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -59847,9 +59847,9 @@
                   "description": "the list of tags.\n     Can be multiple. In the format of \"name=value\".\n     Name is required and value is optional.\n     For example, -t \"tag1=value1;tag2\""
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -59953,9 +59953,9 @@
                   "description": "the list of tags.\n     Can be multiple. In the format of \"name=value\".\n     Name is required and value is optional.\n     Existing tag values will be replaced by the values specified.\n     For example, -t \"tag1=value1;tag2\""
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -60005,9 +60005,9 @@
                   "description": "the name of the resource group"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -60066,9 +60066,9 @@
                   "description": "the name of the public IP"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -60136,9 +60136,9 @@
                   "description": "quiet mode, do not ask for delete confirmation"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -60351,9 +60351,9 @@
                   "description": "the list of tags.\n     Can be multiple. In the format of \"name=value\".\n     Name is required and value is optional.\n     For example, -t \"tag1=value1;tag2\""
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -60457,9 +60457,9 @@
                   "description": "the list of tags.\n     Can be multiple. In the format of \"name=value\".\n     Name is required and value is optional.\n     Existing tag values will be replaced by the values specified.\n     For example, -t \"tag1=value1;tag2\""
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -60527,9 +60527,9 @@
                   "description": "the index of the virtual machine in scale set"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -60606,9 +60606,9 @@
                   "description": "the index of virtual machine in scale set"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -60676,9 +60676,9 @@
                   "description": "quiet mode, do not ask for delete confirmation"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -60746,9 +60746,9 @@
                       "description": "the name of the network interface"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -60817,9 +60817,9 @@
                       "description": "the name of the network interface"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -60996,9 +60996,9 @@
                       "description": "the private ip version, valid values are\n     [IPv4,IPv6], default is IPv4"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -61156,9 +61156,9 @@
                       "description": "the private ip version, valid values are\n     [IPv4,IPv6]"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -61217,9 +61217,9 @@
                       "description": "the name of the network interface"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -61287,9 +61287,9 @@
                       "description": "the name of the ip configuration"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -61366,9 +61366,9 @@
                       "description": "quiet mode, do not ask for delete confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -61472,9 +61472,9 @@
                           "description": "the name of the address pool that exists in the load balancer\n   Please use --lb-address-pool-id if that is not the case."
                         },
                         {
-                          "flags": "-s, --subscription [subscription]",
-                          "required": 0,
-                          "optional": -20,
+                          "flags": "-s, --subscription <subscription>",
+                          "required": -20,
+                          "optional": 0,
                           "bool": true,
                           "short": "-s",
                           "long": "--subscription",
@@ -61569,9 +61569,9 @@
                           "description": "the name of the address pool that exists in the load balancer\n   Please use --lb-address-pool-id if that is not the case."
                         },
                         {
-                          "flags": "-s, --subscription [subscription]",
-                          "required": 0,
-                          "optional": -20,
+                          "flags": "-s, --subscription <subscription>",
+                          "required": -20,
+                          "optional": 0,
                           "bool": true,
                           "short": "-s",
                           "long": "--subscription",
@@ -61676,9 +61676,9 @@
                           "description": "the name of the inbound NAT rule that exists in the load balancer.\n   Please use --inbound-nat-rule-id if that is not the case."
                         },
                         {
-                          "flags": "-s, --subscription [subscription]",
-                          "required": 0,
-                          "optional": -20,
+                          "flags": "-s, --subscription <subscription>",
+                          "required": -20,
+                          "optional": 0,
                           "bool": true,
                           "short": "-s",
                           "long": "--subscription",
@@ -61773,9 +61773,9 @@
                           "description": "the name of the inbound NAT rule that exists in the load balancer.\n   Please use --inbound-nat-rule-id if that is not the case."
                         },
                         {
-                          "flags": "-s, --subscription [subscription]",
-                          "required": 0,
-                          "optional": -20,
+                          "flags": "-s, --subscription <subscription>",
+                          "required": -20,
+                          "optional": 0,
                           "bool": true,
                           "short": "-s",
                           "long": "--subscription",
@@ -61866,9 +61866,9 @@
                   "description": "the list of tags.\n     Can be multiple. In the format of \"name=value\".\n     Name is required and value is optional.\n     For example, -t \"tag1=value1;tag2\""
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -61936,9 +61936,9 @@
                   "description": "the list of tags.\n     Can be multiple. In the format of \"name=value\".\n     Name is required and value is optional.\n     Existing tag values will be replaced by the values specified.\n     For example, -t \"tag1=value1;tag2\""
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -61988,9 +61988,9 @@
                   "description": "the name of the resource group"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -62049,9 +62049,9 @@
                   "description": "the name of the network security group"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -62119,9 +62119,9 @@
                   "description": "quiet mode, do not ask for delete confirmation"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -62279,9 +62279,9 @@
                       "description": "the direction [Inbound,Outbound]"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -62430,9 +62430,9 @@
                       "description": "the direction [Inbound,Outbound]"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -62491,9 +62491,9 @@
                       "description": "the name of the network security group"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -62561,9 +62561,9 @@
                       "description": "the name of the rule"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -62640,9 +62640,9 @@
                       "description": "quiet mode, do not ask for delete confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -62730,9 +62730,9 @@
                       "description": "the list of tags.\n     Can be multiple. In the format of \"name=value\".\n     Name is required and value is optional.\n     For example, -t \"tag1=value1;tag2\""
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -62800,9 +62800,9 @@
                       "description": "the list of tags.\n     Can be multiple. In the format of \"name=value\".\n     Name is required and value is optional.\n     Existing tag values will be replaced by the values specified.\n     For example, -t \"tag1=value1;tag2\""
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -62852,9 +62852,9 @@
                       "description": "the name of the resource group"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -62913,9 +62913,9 @@
                       "description": "the name of the DNS zone\n     You can specify \"*\" (in quotes) for this parameter"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -62983,9 +62983,9 @@
                       "description": "quiet mode, do not ask for clear confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -63053,9 +63053,9 @@
                       "description": "quiet mode, do not ask for delete confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -63147,9 +63147,9 @@
                       "description": "parse zone file only, without import"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -63226,9 +63226,9 @@
                       "description": "quiet mode, do not ask for overwrite confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -63333,9 +63333,9 @@
                       "description": "the list of tags.\n     Can be multiple. In the format of \"name=value\".\n     Name is required and value is optional.\n     For example, -t \"tag1=value1;tag2\""
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -63430,9 +63430,9 @@
                       "description": "the list of tags.\n     Can be multiple. In the format of \"name=value\".\n     Name is required and value is optional.\n     For example, -t \"tag1=value1;tag2\""
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -63563,9 +63563,9 @@
                       "description": "the list of tags.\n     Can be multiple. In the format of \"name=value\".\n     Name is required and value is optional.\n     For example, -t \"tag1=value1;tag2\""
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -63633,9 +63633,9 @@
                       "description": "the type of the record set, \n     If specified only record sets of this type will be listed.\n     valid values are [A,AAAA,CNAME,MX,NS,PTR,SOA,SRV,TXT]"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -63712,9 +63712,9 @@
                       "description": "the type of the record set, \n     valid values are [A,AAAA,CNAME,MX,NS,PTR,SOA,SRV,TXT]"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -63800,9 +63800,9 @@
                       "description": "quiet mode, do not ask for delete confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -63987,9 +63987,9 @@
                       "description": "the text attribute\n"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -64183,9 +64183,9 @@
                       "description": "quiet mode, do not ask for delete confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -64336,9 +64336,9 @@
                       "description": "the list of tags.\n     Can be multiple. In the format of \"name=value\".\n     Name is required and value is optional.\n     For example, -t \"tag1=value1;tag2\""
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -64460,9 +64460,9 @@
                       "description": "the list of tags.\n     Can be multiple. In the format of \"name=value\".\n     Name is required and value is optional.\n     Existing tag values will be replaced by the values specified.\n     For example, -t \"tag1=value1;tag2\""
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -64512,9 +64512,9 @@
                       "description": "the name of the resource group"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -64573,9 +64573,9 @@
                       "description": "the name of the profile"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -64643,9 +64643,9 @@
                       "description": "quiet mode, do not ask for delete confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -64695,9 +64695,9 @@
                       "description": "the relative DNS name to check for availability"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -64838,9 +64838,9 @@
                       "description": "the endpoint priority used in the traffic-routing method,\n       valid range is [1, 1000] This is only used if the Traffic Manager profile is configured to use the \"Priority\" traffic-routing method.\n       Lower values represent higher priority"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -64971,9 +64971,9 @@
                       "description": "the endpoint priority used in the traffic-routing method,\n       valid range is [1, 1000] This is only used if the Traffic Manager profile is configured to use the \"Priority\" traffic-routing method.\n       Lower values represent higher priority"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -65050,9 +65050,9 @@
                       "description": "the endpoint type, valid values are:\n       [ExternalEndpoints,AzureEndpoints,NestedEndpoints], where ExternalEndpoints represents endpoint\n       for a service with FQDN external to Azure\n       e.g. foobar.contoso.com"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -65138,9 +65138,9 @@
                       "description": "quiet mode, do not ask for delete confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -65229,9 +65229,9 @@
                   "description": "the list of tags.\n     Can be multiple. In the format of \"name=value\".\n     Name is required and value is optional.\n     For example, -t \"tag1=value1;tag2\""
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -65299,9 +65299,9 @@
                   "description": "the list of tags.\n     Can be multiple. In the format of \"name=value\".\n     Name is required and value is optional.\n     Existing tag values will be replaced by the values specified.\n     For example, -t \"tag1=value1;tag2\""
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -65351,9 +65351,9 @@
                   "description": "the name of the resource group"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -65412,9 +65412,9 @@
                   "description": "the name of the Route Table"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -65482,9 +65482,9 @@
                   "description": "quiet mode, do not ask for delete confirmation"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -65588,9 +65588,9 @@
                       "description": "the route next hop ip addresses, this parameter is valid\n       only for next hop type VirtualAppliance"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -65685,9 +65685,9 @@
                       "description": "the route next hop ip addresses, this parameter is valid\n       only for next hop type VirualAppliance"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -65746,9 +65746,9 @@
                       "description": "the name of the Route Table"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -65816,9 +65816,9 @@
                       "description": "the name of the route"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -65895,9 +65895,9 @@
                       "description": "quiet mode, do not ask for delete confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -66004,9 +66004,9 @@
                   "description": "the list of tags.\n     Can be multiple. In the format of \"name=value\".\n     Name is required and value is optional.\n     For example, -t \"tag1=value1;tag2\""
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -66083,9 +66083,9 @@
                   "description": "the list of tags.\n     Can be multiple. In the format of \"name=value\".\n     Name is required and value is optional.\n     Existing tag values will be replaced by the values specified.\n     For example, -t \"tag1=value1;tag2\""
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -66135,9 +66135,9 @@
                   "description": "the name of the resource group"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -66196,9 +66196,9 @@
                   "description": "the name of the local network gateway"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -66266,9 +66266,9 @@
                   "description": "quiet mode, do not ask for delete confirmation"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -66463,9 +66463,9 @@
                   "description": "the list of tags.\n     Can be multiple. In the format of \"name=value\".\n     Name is required and value is optional.\n     For example, -t \"tag1=value1;tag2\""
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -66569,9 +66569,9 @@
                   "description": "the list of tags.\n     Can be multiple. In the format of \"name=value\".\n     Name is required and value is optional.\n     Existing tag values will be replaced by the values specified.\n     For example, -t \"tag1=value1;tag2\""
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -66621,9 +66621,9 @@
                   "description": "the name of the resource group"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -66682,9 +66682,9 @@
                   "description": "the name of the virtual network gateway"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -66752,9 +66752,9 @@
                   "description": "quiet mode, do not ask for delete confirmation"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -66840,9 +66840,9 @@
                       "description": "the path to the root certificate"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -66919,9 +66919,9 @@
                       "description": "quiet mode, do not ask for delete confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -67008,9 +67008,9 @@
                       "description": "the certificate thumbprint"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -67087,9 +67087,9 @@
                       "description": "quiet mode, do not ask for delete confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -67268,9 +67268,9 @@
                   "description": "the IPsec shared key"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -67347,9 +67347,9 @@
                   "description": "the routing weight"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -67408,9 +67408,9 @@
                   "description": "the name of the resource group"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -67469,9 +67469,9 @@
                   "description": "the name of the gateway connection"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -67539,9 +67539,9 @@
                   "description": "quiet mode, do not ask for delete confirmation"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -67618,9 +67618,9 @@
                       "description": "the shared key value"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -67688,9 +67688,9 @@
                       "description": "the shared key length"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -67749,9 +67749,9 @@
                       "description": "the name of the gateway connection"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -68001,9 +68001,9 @@
                   "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -68106,9 +68106,9 @@
                   "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -68167,9 +68167,9 @@
                   "description": "the name of the application gateway"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -68219,9 +68219,9 @@
                   "description": "the name of the resource group"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -68297,9 +68297,9 @@
                   "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -68358,9 +68358,9 @@
                   "description": "the name of the application gateway"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -68419,9 +68419,9 @@
                   "description": "the name of the application gateway"
                 },
                 {
-                  "flags": "-s, --subscription [subscription]",
-                  "required": 0,
-                  "optional": -20,
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
                   "bool": true,
                   "short": "-s",
                   "long": "--subscription",
@@ -68524,9 +68524,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -68620,9 +68620,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -68690,9 +68690,9 @@
                       "description": "the name of the certificate"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -68751,9 +68751,9 @@
                       "description": "the name of the application gateway"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -68838,9 +68838,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -68980,9 +68980,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -69112,9 +69112,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -69182,9 +69182,9 @@
                       "description": "the name of the frontend IP configuration"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -69243,9 +69243,9 @@
                       "description": "the name of the application gateway"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -69330,9 +69330,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -69427,9 +69427,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -69514,9 +69514,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -69584,9 +69584,9 @@
                       "description": "the name of the frontend port"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -69645,9 +69645,9 @@
                       "description": "the name of the application gateway"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -69732,9 +69732,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -69829,9 +69829,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -69916,9 +69916,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -69986,9 +69986,9 @@
                       "description": "the name of the backend address pool"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -70047,9 +70047,9 @@
                       "description": "the name of the application gateway"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -70134,9 +70134,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -70249,9 +70249,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -70354,9 +70354,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -70424,9 +70424,9 @@
                       "description": "the name of the http settings"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -70485,9 +70485,9 @@
                       "description": "the name of the application gateway"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -70572,9 +70572,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -70696,9 +70696,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -70784,9 +70784,9 @@
                       "description": "the name of an existing SSL certificate.\n   This parameter is required when --protocol is Https"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -70854,9 +70854,9 @@
                       "description": "the name of the HTTP listener"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -70915,9 +70915,9 @@
                       "description": "the name of the application gateway"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -71002,9 +71002,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -71126,9 +71126,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -71240,9 +71240,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -71310,9 +71310,9 @@
                       "description": "the name of the request routing rule"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -71371,9 +71371,9 @@
                       "description": "the name of the application gateway"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -71458,9 +71458,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -71600,9 +71600,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -71732,9 +71732,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -71802,9 +71802,9 @@
                       "description": "the name of the http settings"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -71863,9 +71863,9 @@
                       "description": "the name of the application gateway"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -71950,9 +71950,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -72074,9 +72074,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -72170,9 +72170,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -72240,9 +72240,9 @@
                       "description": "the name of the url path map"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -72301,9 +72301,9 @@
                       "description": "the name of the application gateway"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -72388,9 +72388,9 @@
                       "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -72511,9 +72511,9 @@
                           "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                         },
                         {
-                          "flags": "-s, --subscription [subscription]",
-                          "required": 0,
-                          "optional": -20,
+                          "flags": "-s, --subscription <subscription>",
+                          "required": -20,
+                          "optional": 0,
                           "bool": true,
                           "short": "-s",
                           "long": "--subscription",
@@ -72625,9 +72625,9 @@
                           "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                         },
                         {
-                          "flags": "-s, --subscription [subscription]",
-                          "required": 0,
-                          "optional": -20,
+                          "flags": "-s, --subscription <subscription>",
+                          "required": -20,
+                          "optional": 0,
                           "bool": true,
                           "short": "-s",
                           "long": "--subscription",
@@ -72704,9 +72704,9 @@
                           "description": "the name of the url path map rule"
                         },
                         {
-                          "flags": "-s, --subscription [subscription]",
-                          "required": 0,
-                          "optional": -20,
+                          "flags": "-s, --subscription <subscription>",
+                          "required": -20,
+                          "optional": 0,
                           "bool": true,
                           "short": "-s",
                           "long": "--subscription",
@@ -72774,9 +72774,9 @@
                           "description": "the name of the url path map"
                         },
                         {
-                          "flags": "-s, --subscription [subscription]",
-                          "required": 0,
-                          "optional": -20,
+                          "flags": "-s, --subscription <subscription>",
+                          "required": -20,
+                          "optional": 0,
                           "bool": true,
                           "short": "-s",
                           "long": "--subscription",
@@ -72870,9 +72870,9 @@
                           "description": "does not wait for the operation to complete. Returns as soon as the intial request is received by the server."
                         },
                         {
-                          "flags": "-s, --subscription [subscription]",
-                          "required": 0,
-                          "optional": -20,
+                          "flags": "-s, --subscription <subscription>",
+                          "required": -20,
+                          "optional": 0,
                           "bool": true,
                           "short": "-s",
                           "long": "--subscription",
@@ -72952,9 +72952,9 @@
                       "description": "Comma separated list of SSL protocols to be disabled on application gateway\n      supported values are [TLSv1_0,TLSv1_1,TLSv1_2]"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -73013,9 +73013,9 @@
                       "description": "the name of the application gateway"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -73083,9 +73083,9 @@
                       "description": "quiet mode, do not ask for delete confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -73172,9 +73172,9 @@
                       "description": "the certificate file for application gateway authentication certificate"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -73251,9 +73251,9 @@
                       "description": "the certificate file for application gateway authentication certificate"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -73321,9 +73321,9 @@
                       "description": "the application gateway authentication certificate name"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -73391,9 +73391,9 @@
                       "description": "quiet mode, do not ask for delete confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -73470,9 +73470,9 @@
                       "description": "quiet mode, do not ask for delete confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -73559,9 +73559,9 @@
                       "description": "If web application firewall enabled on application gateway\n      supported values are [true, false]"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -73620,9 +73620,9 @@
                       "description": "the name of the application gateway"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -73690,9 +73690,9 @@
                       "description": "quiet mode, do not ask for delete confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -73761,9 +73761,9 @@
                       "description": "the name of the application gateway"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -73824,9 +73824,9 @@
                       "description": "use json output"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -73958,9 +73958,9 @@
                       "description": "the list of tags.\n     Can be multiple. In the format of \"name=value\".\n     Name is required and value is optional.\n     For example, -t \"tag1=value1;tag2\""
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -74055,9 +74055,9 @@
                       "description": "the list of tags.\n     Can be multiple. In the format of \"name=value\".\n     Name is required and value is optional.\n     Existing tag values will be replaced by the values specified.\n     For example, -t \"tag1=value1;tag2\""
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -74107,9 +74107,9 @@
                       "description": "the name of the resource group"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -74168,9 +74168,9 @@
                       "description": "the name of the express route circuit"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -74238,9 +74238,9 @@
                       "description": "quiet mode, do not ask for delete confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -74435,9 +74435,9 @@
                       "description": "Internet Routing Registry / Regional Internet Registry,\n     supported values are [ARIN,APNIC,AFRINIC,LACNIC,RIPENCC,RADB,ALTDB,LEVEL3]"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -74613,9 +74613,9 @@
                       "description": "Internet Routing Registry / Regional Internet Registry,\n     supported values are [ARIN,APNIC,AFRINIC,LACNIC,RIPENCC,RADB,ALTDB,LEVEL3]"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -74683,9 +74683,9 @@
                       "description": "the name of the express route circuit express route peering"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -74744,9 +74744,9 @@
                       "description": "the name of the express route circuit"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -74823,9 +74823,9 @@
                       "description": "quiet mode, do not ask for delete confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -74912,9 +74912,9 @@
                       "description": "the express route circuit authorization key"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -74991,9 +74991,9 @@
                       "description": "the express route circuit authorization key"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -75061,9 +75061,9 @@
                       "description": "the name of the express route circuit express route authorization"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -75140,9 +75140,9 @@
                       "description": "quiet mode, do not ask for delete confirmation"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
@@ -75201,9 +75201,9 @@
                       "description": "the name of the express route circuit"
                     },
                     {
-                      "flags": "-s, --subscription [subscription]",
-                      "required": 0,
-                      "optional": -20,
+                      "flags": "-s, --subscription <subscription>",
+                      "required": -20,
+                      "optional": 0,
                       "bool": true,
                       "short": "-s",
                       "long": "--subscription",
