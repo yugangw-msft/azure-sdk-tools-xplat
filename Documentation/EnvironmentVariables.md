@@ -1,4 +1,15 @@
-## Environment Variables Setup
+##Supported environment variables for using the CLI
+
+| Variables | Description | Default |
+| :--- | :--- | :--- |
+| AZURE_CONFIG_DIR | Set base directory for azure-cli configs | `~/.azure` |
+| AZURE_HTTP_USER_AGENT | Add customer HTTP user agent for azure-cli | `''` |
+| AZURE_NON_INTERACTIVE_MODE | Enable non-interactive mode. Azure-cli will exit with error if required arguments omitted when non-interactive mode is enabled | Disabled |
+| AZURE_USE_FILE_TOKEN_STORAGE | Enable file token storage for ADAL auth | Disabled |
+| AZURE_ADAL_LOGGING_ENABLED | Enable logging for ADAL auth | Disabled |
+
+
+## Environment Variables Setup for running tests
 
 From an admin cmd console/terminal, at the root directory of your cloned repo, run the following for environment setup:
 * **Windows**
