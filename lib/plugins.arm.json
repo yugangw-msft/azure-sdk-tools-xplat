@@ -62222,7 +62222,7 @@
                       "bool": true,
                       "short": "-p",
                       "long": "--protocol",
-                      "description": "the protocol [Tcp,Udp,*]"
+                      "description": "the protocol [*,Tcp,Udp]. Default value is \"*\""
                     },
                     {
                       "flags": "-f, --source-address-prefix <source-address-prefix>",
@@ -62240,7 +62240,7 @@
                       "bool": true,
                       "short": "-o",
                       "long": "--source-port-range",
-                      "description": "the source port range [0-65535]"
+                      "description": "the source port range [0-65535]. Default value is \"*\""
                     },
                     {
                       "flags": "-e, --destination-address-prefix <destination-address-prefix>",
@@ -62258,7 +62258,7 @@
                       "bool": true,
                       "short": "-u",
                       "long": "--destination-port-range",
-                      "description": "the destination port range [0-65535]"
+                      "description": "the destination port range [0-65535]. Default value is \"80\""
                     },
                     {
                       "flags": "-c, --access <access>",
@@ -62267,7 +62267,7 @@
                       "bool": true,
                       "short": "-c",
                       "long": "--access",
-                      "description": "the access mode [Allow,Deny]"
+                      "description": "the access mode [Allow,Deny]. Default value is \"Allow\""
                     },
                     {
                       "flags": "-y, --priority <priority>",
@@ -62276,7 +62276,7 @@
                       "bool": true,
                       "short": "-y",
                       "long": "--priority",
-                      "description": "the priority [100-4096]"
+                      "description": "the priority [100-4096]. Default value is \"100\""
                     },
                     {
                       "flags": "-r, --direction <direction>",
@@ -62285,7 +62285,7 @@
                       "bool": true,
                       "short": "-r",
                       "long": "--direction",
-                      "description": "the direction [Inbound,Outbound]"
+                      "description": "the direction [Inbound,Outbound]. Default value is \"Inbound\""
                     },
                     {
                       "flags": "-s, --subscription <subscription>",
@@ -62373,7 +62373,7 @@
                       "bool": true,
                       "short": "-p",
                       "long": "--protocol",
-                      "description": "the protocol [Tcp,Udp,*]"
+                      "description": "the protocol [*,Tcp,Udp]"
                     },
                     {
                       "flags": "-f, --source-address-prefix <source-address-prefix>",
