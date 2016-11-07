@@ -25370,7 +25370,7 @@
           "commands": [
             {
               "name": "list",
-              "description": "Get Active Directory groups in current subscription's tenant",
+              "description": "Get Active Directory groups in current subscription's tenant. When --json flag is used, it will get the information from all the pages and then provide the final json array.",
               "fullName": "ad group list",
               "usage": "[options]",
               "filePath": "commands/arm/ad/ad.groups._js",
@@ -25578,7 +25578,7 @@
               "commands": [
                 {
                   "name": "list",
-                  "description": "Provides an Active Directory sub group or member info",
+                  "description": "Provides an Active Directory sub group or member info. When --json flag is used, it will get the information from all the pages and then provide the final json array.",
                   "fullName": "ad group member list",
                   "usage": "[options] <objectId>",
                   "filePath": "commands/arm/ad/ad.groups._js",
@@ -25616,6 +25616,15 @@
                       "short": "-o",
                       "long": "--objectId",
                       "description": "Object id of group whose members to return."
+                    },
+                    {
+                      "flags": "| more",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "",
+                      "long": "more",
+                      "description": "Provides paging support. Press 'Enter' for more information."
                     }
                   ]
                 },
@@ -25816,7 +25825,7 @@
           "commands": [
             {
               "name": "list",
-              "description": "Get all Active Directory service principals in current subscription's tenant",
+              "description": "Get all Active Directory service principals in current subscription's tenant. When --json flag is used, it will get the information from all the pages and then provide the final json array.",
               "fullName": "ad sp list",
               "usage": "[options]",
               "filePath": "commands/arm/ad/ad.servicePrincipals._js",
@@ -26161,7 +26170,7 @@
           "commands": [
             {
               "name": "list",
-              "description": "Get all Active Directory users in current subscription's tenant",
+              "description": "Get all Active Directory users in current subscription's tenant. When --json flag is used, it will get the information from all the pages and then provide the final json array.",
               "fullName": "ad user list",
               "usage": "[options]",
               "filePath": "commands/arm/ad/ad.users._js",
@@ -45823,6 +45832,54 @@
                   "description": "(Optional) HDInsight cluster configuration file path"
                 },
                 {
+                  "flags": "--domain <domain>",
+                  "required": -10,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--domain",
+                  "description": "(Optional) Active Directory domain name (for Secure Clusters)"
+                },
+                {
+                  "flags": "--organizationalUnitDN <organizationalUnitDN>",
+                  "required": -24,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--organizationalUnitDN",
+                  "description": "(Optional) Distinguished Name for OU to use for creating principals (for Secure Clusters)"
+                },
+                {
+                  "flags": "--ldapsUrls <ldapsUrls>",
+                  "required": -13,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--ldapsUrls",
+                  "description": "(Optional) List of comma separated secure LDAP URLs (for Secure Clusters)"
+                },
+                {
+                  "flags": "--domainUsername <domainUsername>",
+                  "required": -18,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--domainUsername",
+                  "description": "(Optional) Active Directory domain user name (for Secure Clusters)"
+                },
+                {
+                  "flags": "--domainUserPassword <domainUserPassword>",
+                  "required": -22,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--domainUserPassword",
+                  "description": "(Optional) Active Directory domain user password (for Secure Clusters)"
+                },
+                {
+                  "flags": "--clusterUsersGroupDNs <clusterUsersGroupDNs>",
+                  "required": -24,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--clusterUsersGroupDNs",
+                  "description": "(Optional) List of comma separated user groups that can access the cluster (for Secure Clusters)"
+                },
+                {
                   "flags": "-s, --subscription <id>",
                   "required": -20,
                   "optional": 0,
@@ -50184,6 +50241,158 @@
         }
       ],
       "categories": {
+        "ipfilter-rules": {
+          "name": "ipfilter-rules",
+          "description": "Commands to manage the IP filter rules of an IoT hub",
+          "fullName": "iothub ipfilter-rules",
+          "usage": "[options] [command]",
+          "options": [],
+          "commands": [
+            {
+              "name": "list",
+              "description": "List the IoT hub IP filter rules",
+              "fullName": "iothub ipfilter-rules list",
+              "usage": "<resourceGroup> <name> [options]",
+              "filePath": "commands/arm/iothub/iothub._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "-g --resource-group <resourceGroup>",
+                  "required": -21,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-g",
+                  "long": "--resource-group",
+                  "description": "The name of the resource group"
+                },
+                {
+                  "flags": "-n --name <name>",
+                  "required": -11,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-n",
+                  "long": "--name",
+                  "description": "The name of the IoT hub"
+                },
+                {
+                  "flags": "-s --subscription [subscription]",
+                  "required": 0,
+                  "optional": -19,
+                  "bool": true,
+                  "short": "-s",
+                  "long": "--subscription",
+                  "description": "The subscription identifier"
+                },
+                {
+                  "flags": "-f --output-file [output-file]",
+                  "required": 0,
+                  "optional": -18,
+                  "bool": true,
+                  "short": "-f",
+                  "long": "--output-file",
+                  "description": "the path to the JSON-formatted output IP filter rules file in the file system",
+                  "fileRelatedOption": true
+                }
+              ]
+            },
+            {
+              "name": "set",
+              "description": "set the IoT hub IP filter rules",
+              "fullName": "iothub ipfilter-rules set",
+              "usage": "<resourceGroup> <name> <inputFile> [options]",
+              "filePath": "commands/arm/iothub/iothub._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "-g --resource-group <resourceGroup>",
+                  "required": -21,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-g",
+                  "long": "--resource-group",
+                  "description": "The name of the resource group"
+                },
+                {
+                  "flags": "-n --name <name>",
+                  "required": -11,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-n",
+                  "long": "--name",
+                  "description": "The name of the IoT hub"
+                },
+                {
+                  "flags": "-s --subscription [subscription]",
+                  "required": 0,
+                  "optional": -19,
+                  "bool": true,
+                  "short": "-s",
+                  "long": "--subscription",
+                  "description": "The subscription identifier"
+                },
+                {
+                  "flags": "-f --input-file <inputFile>",
+                  "required": -17,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-f",
+                  "long": "--input-file",
+                  "description": "the path to the JSON-formatted input IP filter rules file in the file system",
+                  "fileRelatedOption": true
+                }
+              ]
+            }
+          ],
+          "categories": {}
+        },
         "device-to-cloud-properties": {
           "name": "device-to-cloud-properties",
           "description": "Commands to manage the Device to Cloud Properties of an IoT hub",
@@ -79853,7 +80062,7 @@
       "commands": [
         {
           "name": "list",
-          "description": "List the usage aggregates for a provided time range",
+          "description": "List the usage aggregates for a provided time range. When --json flag is used, it will get the information from all the pages and then provide the final json array.",
           "fullName": "usage list",
           "usage": "[options] [reportedStartTime] [reportedEndTime]",
           "filePath": "commands/arm/usage/usage._js",
@@ -79908,12 +80117,12 @@
               "description": "Value is either daily (default) or hourly to tell the API how to return the results grouped by day or hour."
             },
             {
-              "flags": "--showDetails <bool>",
-              "required": -15,
+              "flags": "--showDetails",
+              "required": 0,
               "optional": 0,
               "bool": true,
               "long": "--showDetails",
-              "description": "When set to true (default), the aggregates are broken down into the instance metadata which is more granular."
+              "description": "When this boolean flag is provided, the aggregates are broken down into the instance metadata which is more granular."
             },
             {
               "flags": "--continuationToken <url>",
@@ -79930,6 +80139,15 @@
               "bool": true,
               "long": "--subscription",
               "description": "the subscription identifier"
+            },
+            {
+              "flags": "| more",
+              "required": 0,
+              "optional": 0,
+              "bool": true,
+              "short": "",
+              "long": "more",
+              "description": "Provides paging support. Press 'Enter' for more information."
             }
           ]
         }
@@ -80501,7 +80719,7 @@
                   "optional": 0,
                   "bool": true,
                   "long": "--slot",
-                  "description": "the name of the slot to show"
+                  "description": "the name of the slot"
                 },
                 {
                   "flags": "-s --subscription <subscription>",
@@ -80715,7 +80933,7 @@
                   "optional": 0,
                   "bool": true,
                   "long": "--slot",
-                  "description": "the name of the slot to update"
+                  "description": "the name of the slot"
                 },
                 {
                   "flags": "-s --subscription <subscription>",
@@ -80802,7 +81020,7 @@
                       "optional": 0,
                       "bool": true,
                       "long": "--slot",
-                      "description": "the name of the slot to show"
+                      "description": "the name of the slot"
                     },
                     {
                       "flags": "-s --subscription <subscription>",
@@ -80872,7 +81090,7 @@
                       "bool": true,
                       "short": "-a",
                       "long": "--appsettings",
-                      "description": "the appsettings of the webapp to add"
+                      "description": "the appsettings of the webapp to delete"
                     },
                     {
                       "flags": "--slot <slot>",
@@ -80880,7 +81098,7 @@
                       "optional": 0,
                       "bool": true,
                       "long": "--slot",
-                      "description": "the name of the slot to show"
+                      "description": "the name of the slot"
                     },
                     {
                       "flags": "-s --subscription <subscription>",
@@ -80949,7 +81167,260 @@
                       "optional": 0,
                       "bool": true,
                       "long": "--slot",
-                      "description": "the name of the slot to list"
+                      "description": "the name of the slot"
+                    },
+                    {
+                      "flags": "-s --subscription <subscription>",
+                      "required": -19,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-s",
+                      "long": "--subscription",
+                      "description": "the subscription identifier"
+                    }
+                  ]
+                }
+              ],
+              "categories": {}
+            },
+            "container": {
+              "name": "container",
+              "description": "Commands to manage your Azure webapps container configurations",
+              "fullName": "webapp config container",
+              "usage": "[options] [command]",
+              "options": [],
+              "commands": [
+                {
+                  "name": "set",
+                  "description": "Set webapp Container configurations (available only for linux webapps)",
+                  "fullName": "webapp config container set",
+                  "usage": "[options] <resource-group> <name>",
+                  "filePath": "commands/arm/webapp/webapp.config._js",
+                  "options": [
+                    {
+                      "flags": "-v, --verbose",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-v",
+                      "long": "--verbose",
+                      "description": "use verbose output"
+                    },
+                    {
+                      "flags": "-vv",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "long": "-vv",
+                      "description": "more verbose with debug output"
+                    },
+                    {
+                      "flags": "--json",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "long": "--json",
+                      "description": "use json output"
+                    },
+                    {
+                      "flags": "-g --resource-group <resource-group>",
+                      "required": -21,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-g",
+                      "long": "--resource-group",
+                      "description": "the name of the resource group"
+                    },
+                    {
+                      "flags": "-n --name <name>",
+                      "required": -11,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-n",
+                      "long": "--name",
+                      "description": "the name of the webapp"
+                    },
+                    {
+                      "flags": "-r --url <url>",
+                      "required": -10,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-r",
+                      "long": "--url",
+                      "description": "the container registry server url"
+                    },
+                    {
+                      "flags": "-u --username <username>",
+                      "required": -15,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-u",
+                      "long": "--username",
+                      "description": "the container registry server username"
+                    },
+                    {
+                      "flags": "-p --password <password>",
+                      "required": -15,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-p",
+                      "long": "--password",
+                      "description": "the container registry server password"
+                    },
+                    {
+                      "flags": "-c --custom-image-name <custom-image-name>",
+                      "required": -24,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-c",
+                      "long": "--custom-image-name",
+                      "description": "the container custom image name and optionally the tag name"
+                    },
+                    {
+                      "flags": "--slot <slot>",
+                      "required": -8,
+                      "optional": 0,
+                      "bool": true,
+                      "long": "--slot",
+                      "description": "the name of the slot"
+                    },
+                    {
+                      "flags": "-s --subscription <subscription>",
+                      "required": -19,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-s",
+                      "long": "--subscription",
+                      "description": "the subscription identifier"
+                    }
+                  ]
+                },
+                {
+                  "name": "list",
+                  "description": "List Container configurations  (available only for linux webapps)",
+                  "fullName": "webapp config container list",
+                  "usage": "[options] <resource-group> <name>",
+                  "filePath": "commands/arm/webapp/webapp.config._js",
+                  "options": [
+                    {
+                      "flags": "-v, --verbose",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-v",
+                      "long": "--verbose",
+                      "description": "use verbose output"
+                    },
+                    {
+                      "flags": "-vv",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "long": "-vv",
+                      "description": "more verbose with debug output"
+                    },
+                    {
+                      "flags": "--json",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "long": "--json",
+                      "description": "use json output"
+                    },
+                    {
+                      "flags": "-g --resource-group <resource-group>",
+                      "required": -21,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-g",
+                      "long": "--resource-group",
+                      "description": "the name of the resource group"
+                    },
+                    {
+                      "flags": "-n --name <name>",
+                      "required": -11,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-n",
+                      "long": "--name",
+                      "description": "the name of the webapp"
+                    },
+                    {
+                      "flags": "--slot <slot>",
+                      "required": -8,
+                      "optional": 0,
+                      "bool": true,
+                      "long": "--slot",
+                      "description": "the name of the slot"
+                    },
+                    {
+                      "flags": "-s --subscription <subscription>",
+                      "required": -19,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-s",
+                      "long": "--subscription",
+                      "description": "the subscription identifier"
+                    }
+                  ]
+                },
+                {
+                  "name": "delete",
+                  "description": "Delete all webapp Container configurations (available only for linux webapps)",
+                  "fullName": "webapp config container delete",
+                  "usage": "[options] <resource-group> <name>",
+                  "filePath": "commands/arm/webapp/webapp.config._js",
+                  "options": [
+                    {
+                      "flags": "-v, --verbose",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-v",
+                      "long": "--verbose",
+                      "description": "use verbose output"
+                    },
+                    {
+                      "flags": "-vv",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "long": "-vv",
+                      "description": "more verbose with debug output"
+                    },
+                    {
+                      "flags": "--json",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "long": "--json",
+                      "description": "use json output"
+                    },
+                    {
+                      "flags": "-g --resource-group <resource-group>",
+                      "required": -21,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-g",
+                      "long": "--resource-group",
+                      "description": "the name of the resource group"
+                    },
+                    {
+                      "flags": "-n --name <name>",
+                      "required": -11,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-n",
+                      "long": "--name",
+                      "description": "the name of the webapp"
+                    },
+                    {
+                      "flags": "--slot <slot>",
+                      "required": -8,
+                      "optional": 0,
+                      "bool": true,
+                      "long": "--slot",
+                      "description": "the name of the slot"
                     },
                     {
                       "flags": "-s --subscription <subscription>",
@@ -80967,7 +81438,7 @@
             },
             "hostnames": {
               "name": "hostnames",
-              "description": "Commands to get your Azure webapps hostnames",
+              "description": "Commands to manage your Azure webapps hostnames",
               "fullName": "webapp config hostnames",
               "usage": "[options] [command]",
               "options": [],
@@ -81163,6 +81634,14 @@
                       "description": "the name of the web app"
                     },
                     {
+                      "flags": "--slot <slot>",
+                      "required": -8,
+                      "optional": 0,
+                      "bool": true,
+                      "long": "--slot",
+                      "description": "the name of the slot"
+                    },
+                    {
                       "flags": "-s --subscription <subscription>",
                       "required": -19,
                       "optional": 0,
@@ -81241,7 +81720,7 @@
                   "optional": 0,
                   "bool": true,
                   "long": "--slot",
-                  "description": "the name of the slot to show"
+                  "description": "the name of the slot"
                 },
                 {
                   "flags": "-s --subscription <subscription>",
