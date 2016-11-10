@@ -62231,7 +62231,7 @@
                       "bool": true,
                       "short": "-f",
                       "long": "--source-address-prefix",
-                      "description": "the source address prefix"
+                      "description": "the source address prefix\n      Can be in CIDR format or \"*,Asterisk,Internet,VirtualNetwork,AzureLoadBalancer\""
                     },
                     {
                       "flags": "-o, --source-port-range <source-port-range>",
