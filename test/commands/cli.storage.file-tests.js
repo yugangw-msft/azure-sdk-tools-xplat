@@ -33,7 +33,7 @@ function fetchAccountName(connectionString) {
 }
 
 var requiredEnvironment = [
-  { name: 'AZURE_STORAGE_CONNECTION_STRING', secure: true, }
+  { name: 'AZURE_STORAGE_CONNECTION_STRING', secure: true}
 ];
 
 /**
