@@ -38679,6 +38679,14 @@
                   "description": "Pick the highest minor version of the extension"
                 },
                 {
+                  "flags": "--force-update-tag <force-update-tag>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--force-update-tag",
+                  "description": "Sample input: RerunExtension. Specifies that the extension should be run again with the same public or protected settings. The value can be any string different from the current value. If forceUpdateTag is not changed, updates to public or protected settings would still be applied by the handler."
+                },
+                {
                   "flags": "-s, --subscription <id>",
                   "required": -20,
                   "optional": 0,
