@@ -62270,9 +62270,9 @@
                       "description": "the access mode [Allow,Deny]. Default value is \"Allow\""
                     },
                     {
-                      "flags": "-y, --priority <priority>",
-                      "required": -16,
-                      "optional": 0,
+                      "flags": "-y, --priority [priority]",
+                      "required": 0,
+                      "optional": -16,
                       "bool": true,
                       "short": "-y",
                       "long": "--priority",
