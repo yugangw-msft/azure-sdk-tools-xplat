@@ -70256,7 +70256,7 @@
                       "bool": true,
                       "short": "-r",
                       "long": "--probe-name",
-                      "description": "the associated application gateway probe name"
+                      "description": "specified application gateway probe name"
                     },
                     {
                       "flags": "-i, --probe-id [probe-id]",
@@ -70265,7 +70265,7 @@
                       "bool": true,
                       "short": "-i",
                       "long": "--probe-id",
-                      "description": "the associated application gateway probe ID"
+                      "description": "application gateway probe ID"
                     },
                     {
                       "flags": "--nowait",
@@ -70379,7 +70379,7 @@
                       "bool": true,
                       "short": "-r",
                       "long": "--probe-name",
-                      "description": "the associated application gateway probe name"
+                      "description": "specified application gateway probe name"
                     },
                     {
                       "flags": "-i, --probe-id [probe-id]",
@@ -70388,7 +70388,7 @@
                       "bool": true,
                       "short": "-i",
                       "long": "--probe-id",
-                      "description": "the associated application gateway probe ID"
+                      "description": "application gateway probe ID"
                     },
                     {
                       "flags": "--nowait",
