@@ -70250,6 +70250,15 @@
                       "description": "enable or disable cookie based affinity, valid values are\n     [Disabled,Enabled],\n     default value is [Disabled]"
                     },
                     {
+                      "flags": "-r, --probe-name [probe-name]",
+                      "required": 0,
+                      "optional": -18,
+                      "bool": true,
+                      "short": "-r",
+                      "long": "--probe-name",
+                      "description": "the associated application gateway probe name"
+                    },
+                    {
                       "flags": "-i, --probe-id [probe-id]",
                       "required": 0,
                       "optional": -16,
@@ -70362,6 +70371,15 @@
                       "short": "-c",
                       "long": "--cookie-based-affinity",
                       "description": "enable or disable cookie based affinity, valid values are\n     [Disabled,Enabled],\n     default value is [Disabled]"
+                    },
+                    {
+                      "flags": "-r, --probe-name [probe-name]",
+                      "required": 0,
+                      "optional": -18,
+                      "bool": true,
+                      "short": "-r",
+                      "long": "--probe-name",
+                      "description": "the associated application gateway probe name"
                     },
                     {
                       "flags": "-i, --probe-id [probe-id]",
