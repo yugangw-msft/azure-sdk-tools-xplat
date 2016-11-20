@@ -70258,6 +70258,24 @@
                       "description": "enable or disable cookie based affinity, valid values are\n     [Disabled,Enabled],\n     default value is [Disabled]"
                     },
                     {
+                      "flags": "-r, --probe-name [probe-name]",
+                      "required": 0,
+                      "optional": -18,
+                      "bool": true,
+                      "short": "-r",
+                      "long": "--probe-name",
+                      "description": "specified application gateway probe name"
+                    },
+                    {
+                      "flags": "-i, --probe-id [probe-id]",
+                      "required": 0,
+                      "optional": -16,
+                      "bool": true,
+                      "short": "-i",
+                      "long": "--probe-id",
+                      "description": "application gateway probe ID"
+                    },
+                    {
                       "flags": "--nowait",
                       "required": 0,
                       "optional": 0,
@@ -70361,6 +70379,24 @@
                       "short": "-c",
                       "long": "--cookie-based-affinity",
                       "description": "enable or disable cookie based affinity, valid values are\n     [Disabled,Enabled],\n     default value is [Disabled]"
+                    },
+                    {
+                      "flags": "-r, --probe-name [probe-name]",
+                      "required": 0,
+                      "optional": -18,
+                      "bool": true,
+                      "short": "-r",
+                      "long": "--probe-name",
+                      "description": "specified application gateway probe name"
+                    },
+                    {
+                      "flags": "-i, --probe-id [probe-id]",
+                      "required": 0,
+                      "optional": -16,
+                      "bool": true,
+                      "short": "-i",
+                      "long": "--probe-id",
+                      "description": "application gateway probe ID"
                     },
                     {
                       "flags": "--nowait",
