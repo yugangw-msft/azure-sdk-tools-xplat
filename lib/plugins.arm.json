@@ -40059,6 +40059,192 @@
             }
           ],
           "categories": {}
+        },
+        "secret": {
+          "name": "secret",
+          "description": "Commands to manage VM secrets",
+          "fullName": "vm secret",
+          "usage": "[options] [command]",
+          "options": [],
+          "commands": [
+            {
+              "name": "add",
+              "description": "Adds a secret to the VM",
+              "fullName": "vm secret add",
+              "usage": "[options] <resource-group> <name> <source-vault-id>",
+              "filePath": "commands/arm/vm/vm._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "-g, --resource-group <resource-group>",
+                  "required": -22,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-g",
+                  "long": "--resource-group",
+                  "description": "the resource group"
+                },
+                {
+                  "flags": "-n, --name <name>",
+                  "required": -12,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-n",
+                  "long": "--name",
+                  "description": "the VM name"
+                },
+                {
+                  "flags": "-r, --source-vault-id <source-vault-id>",
+                  "required": -23,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-r",
+                  "long": "--source-vault-id",
+                  "description": "the source-vault-id"
+                },
+                {
+                  "flags": "-c, --certificate-url <certificate-url>",
+                  "required": -23,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-c",
+                  "long": "--certificate-url",
+                  "description": "certificate-url"
+                },
+                {
+                  "flags": "-t, --certificate-store <certificate-store>",
+                  "required": -25,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-t",
+                  "long": "--certificate-store",
+                  "description": "certificate-store"
+                },
+                {
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-s",
+                  "long": "--subscription",
+                  "description": "the subscription identifier"
+                }
+              ]
+            },
+            {
+              "name": "delete",
+              "description": "Deletes a secret to the VM",
+              "fullName": "vm secret delete",
+              "usage": "[options] <resource-group> <name> <source-vault-id>",
+              "filePath": "commands/arm/vm/vm._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "-g, --resource-group <resource-group>",
+                  "required": -22,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-g",
+                  "long": "--resource-group",
+                  "description": "the resource group"
+                },
+                {
+                  "flags": "-n, --name <name>",
+                  "required": -12,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-n",
+                  "long": "--name",
+                  "description": "the VM name"
+                },
+                {
+                  "flags": "-r, --source-vault-id <source-vault-id>",
+                  "required": -23,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-r",
+                  "long": "--source-vault-id",
+                  "description": "the source-vault-id"
+                },
+                {
+                  "flags": "-c, --certificate-url <certificate-url>",
+                  "required": -23,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-c",
+                  "long": "--certificate-url",
+                  "description": "certificate-url"
+                },
+                {
+                  "flags": "-t, --certificate-store <certificate-store>",
+                  "required": -25,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-t",
+                  "long": "--certificate-store",
+                  "description": "certificate-store"
+                },
+                {
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-s",
+                  "long": "--subscription",
+                  "description": "the subscription identifier"
+                }
+              ]
+            }
+          ],
+          "categories": {}
         }
       }
     },
