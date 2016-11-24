@@ -62230,7 +62230,7 @@
                       "bool": true,
                       "short": "-p",
                       "long": "--protocol",
-                      "description": "the protocol [Tcp,Udp,*]"
+                      "description": "the protocol [*,Tcp,Udp]. Default value is \"*\""
                     },
                     {
                       "flags": "-f, --source-address-prefix [source-address-prefix]",
@@ -62248,7 +62248,7 @@
                       "bool": true,
                       "short": "-o",
                       "long": "--source-port-range",
-                      "description": "the source port range [0-65535]"
+                      "description": "the source port range [0-65535]. Default value is \"*\""
                     },
                     {
                       "flags": "-e, --destination-address-prefix [destination-address-prefix]",
@@ -62266,7 +62266,7 @@
                       "bool": true,
                       "short": "-u",
                       "long": "--destination-port-range",
-                      "description": "the destination port range [0-65535]"
+                      "description": "the destination port range [0-65535]. Default value is \"80\""
                     },
                     {
                       "flags": "-c, --access [access]",
@@ -62275,16 +62275,16 @@
                       "bool": true,
                       "short": "-c",
                       "long": "--access",
-                      "description": "the access mode [Allow,Deny]"
+                      "description": "the access mode [Allow,Deny]. Default value is \"Allow\""
                     },
                     {
-                      "flags": "-y, --priority <priority>",
-                      "required": -16,
-                      "optional": 0,
+                      "flags": "-y, --priority [priority]",
+                      "required": 0,
+                      "optional": -16,
                       "bool": true,
                       "short": "-y",
                       "long": "--priority",
-                      "description": "the priority [100-4096]"
+                      "description": "the priority [100-4096]. Default value is \"100\""
                     },
                     {
                       "flags": "-r, --direction [direction]",
@@ -62293,7 +62293,7 @@
                       "bool": true,
                       "short": "-r",
                       "long": "--direction",
-                      "description": "the direction [Inbound,Outbound]"
+                      "description": "the direction [Inbound,Outbound]. Default value is \"Inbound\""
                     },
                     {
                       "flags": "-s, --subscription <subscription>",
@@ -62381,7 +62381,7 @@
                       "bool": true,
                       "short": "-p",
                       "long": "--protocol",
-                      "description": "the protocol [Tcp,Udp,*]"
+                      "description": "the protocol [*,Tcp,Udp]"
                     },
                     {
                       "flags": "-f, --source-address-prefix [source-address-prefix]",
@@ -70258,6 +70258,24 @@
                       "description": "enable or disable cookie based affinity, valid values are\n     [Disabled,Enabled],\n     default value is [Disabled]"
                     },
                     {
+                      "flags": "-r, --probe-name [probe-name]",
+                      "required": 0,
+                      "optional": -18,
+                      "bool": true,
+                      "short": "-r",
+                      "long": "--probe-name",
+                      "description": "specified application gateway probe name"
+                    },
+                    {
+                      "flags": "-i, --probe-id [probe-id]",
+                      "required": 0,
+                      "optional": -16,
+                      "bool": true,
+                      "short": "-i",
+                      "long": "--probe-id",
+                      "description": "application gateway probe ID"
+                    },
+                    {
                       "flags": "--nowait",
                       "required": 0,
                       "optional": 0,
@@ -70361,6 +70379,24 @@
                       "short": "-c",
                       "long": "--cookie-based-affinity",
                       "description": "enable or disable cookie based affinity, valid values are\n     [Disabled,Enabled],\n     default value is [Disabled]"
+                    },
+                    {
+                      "flags": "-r, --probe-name [probe-name]",
+                      "required": 0,
+                      "optional": -18,
+                      "bool": true,
+                      "short": "-r",
+                      "long": "--probe-name",
+                      "description": "specified application gateway probe name"
+                    },
+                    {
+                      "flags": "-i, --probe-id [probe-id]",
+                      "required": 0,
+                      "optional": -16,
+                      "bool": true,
+                      "short": "-i",
+                      "long": "--probe-id",
+                      "description": "application gateway probe ID"
                     },
                     {
                       "flags": "--nowait",
