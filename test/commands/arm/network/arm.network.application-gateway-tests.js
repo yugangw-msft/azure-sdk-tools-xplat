@@ -47,7 +47,7 @@ var location, groupName = 'xplatTestGroupCreateAppGw3',
     tags: networkUtil.tags,
     newCapacity: 5,
     newTags: networkUtil.newTags,
-    configName: 'ipConfig01',
+    configName: constants.appGateway.gatewayIp.name,
     frontendIpName: 'testFrontendIp',
     publicIpName: 'xplatTestPublicIp',
     portName: 'xplatTestPoolName',
@@ -65,7 +65,7 @@ var location, groupName = 'xplatTestGroupCreateAppGw3',
     httpProtocol: 'Http',
     httpsProtocol: 'Https',
     httpListenerName: 'xplatTestListener',
-    defHttpListenerName: 'listener01',
+    defHttpListenerName: constants.appGateway.httpListener.name,
     ruleName: 'xplatTestRule',
     probeName: 'xplatTestProbe',
     probePublicIpName: 'probePublicIp',
@@ -88,7 +88,7 @@ var location, groupName = 'xplatTestGroupCreateAppGw3',
     httpSettingsName1: 'httpSettingsName1',
     defPoolName: constants.appGateway.pool.name,
     mapPath: '/test',
-    newUrlMapRuleName: 'rule01',
+    newUrlMapRuleName: constants.appGateway.routingRule.name,
     newMapPath: '/test01',
     newMapPath1: '/test02',
     sslCertName: 'cert02',
@@ -103,7 +103,8 @@ var location, groupName = 'xplatTestGroupCreateAppGw3',
     firewallMode: "Prevention",
     firewallEnabled: true,
     wafSkuName: constants.appGateway.sku.name[3],
-    wafSkuTier: constants.appGateway.sku.tier[1]
+    wafSkuTier: constants.appGateway.sku.tier[1],
+    createConfigName: 'config02'
   };
 
 var requiredEnvironment = [{
@@ -136,6 +137,7 @@ describe('arm', function () {
         gatewayProp.probeName = suite.isMocked ? gatewayProp.probeName : suite.generateId(gatewayProp.probeName, null);
         gatewayProp.urlPathMapName = suite.isMocked ? gatewayProp.urlPathMapName : suite.generateId(gatewayProp.urlPathMapName, null);
         gatewayProp.urlMapRuleName = suite.isMocked ? gatewayProp.urlMapRuleName : suite.generateId(gatewayProp.urlMapRuleName, null);
+        gatewayProp.sslCertName = suite.isMocked ? gatewayProp.sslCertName : suite.generateId(gatewayProp.sslCertName, null);
         gatewayProp.sslCertName = suite.isMocked ? gatewayProp.sslCertName : suite.generateId(gatewayProp.sslCertName, null);
         done();
       });
@@ -1144,8 +1146,10 @@ describe('arm', function () {
 
       it('create again should pass', function (done) {
         var cmd = util.format('network application-gateway create {group} {name} -l {location} -e {vnetName} -m {subnetName} ' +
-          '-r {servers} -y {defaultSslCertPath} -x {sslPassword} -i {httpSettingsProtocol} -o {httpSettingsPortAddress} -f {cookieBasedAffinity} ' +
-          '-j {portValue} -b {httpListenerProtocol} -w {ruleType} -a {skuName} -u {skuTier} -z {capacity} -t {tags} --json').formatArgs(gatewayProp);
+          '-r {servers} -y {defaultSslCertPath} -x {sslPassword} -i {httpSettingsProtocol} -o {httpSettingsPortAddress} ' +
+          '-f {cookieBasedAffinity} -j {portValue} -b {httpListenerProtocol} -w {ruleType} -a {skuName} -u {skuTier} ' +
+          '-z {capacity} -t {tags} -O {httpSettingsName} -L {httpListenerName} -J {portName} -F {frontendIpName} ' +
+          '-A {poolName} -G {createConfigName} -R {ruleName} --json').formatArgs(gatewayProp);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var appGateway = JSON.parse(result.text);
@@ -1154,6 +1158,7 @@ describe('arm', function () {
           appGateway.sku.name.should.equal(gatewayProp.skuName);
           appGateway.sku.tier.should.equal(gatewayProp.skuTier);
           appGateway.sku.capacity.should.equal(gatewayProp.capacity);
+          appGateway.httpSettingsName
 
           var frontendPort = appGateway.frontendPorts[0];
           frontendPort.port.should.equal(gatewayProp.portValue);
