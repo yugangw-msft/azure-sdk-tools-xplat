@@ -1152,7 +1152,7 @@ describe('arm', function () {
           result.exitStatus.should.equal(0);
           done();
         });
-      });*/
+      });
 
       it('create again should pass', function (done) {
         var cmd = util.format('network application-gateway create {group} {name} -l {location} -e {vnetName} -m {subnetName} ' +
