@@ -175,14 +175,23 @@ describe('arm', function () {
                 appGateway.sku.capacity.should.equal(gatewayProp.capacity);
 
                 var frontendPort = appGateway.frontendPorts[0];
+                frontendPort.name.should.equal(constants.appGateway.frontendPort.name);
                 frontendPort.port.should.equal(gatewayProp.portValue);
 
+                var frontendIp = appGateway.frontendIPConfigurations[0];
+                frontendIp.name.should.equal(constants.appGateway.frontendIp.name);
+
+                var gatewayIp = appGateway.gatewayIPConfigurations[0];
+                gatewayIp.name.should.equal(constants.appGateway.gatewayIp.name);
+
                 var backendHttpSettings = appGateway.backendHttpSettingsCollection[0];
+                backendHttpSettings.name.should.equal(constants.appGateway.settings.name);
                 backendHttpSettings.port.should.equal(gatewayProp.httpSettingsPortAddress);
                 backendHttpSettings.protocol.toLowerCase().should.equal(gatewayProp.httpSettingsProtocol.toLowerCase());
                 backendHttpSettings.cookieBasedAffinity.should.equal(gatewayProp.cookieBasedAffinity);
 
                 var httpListener = appGateway.httpListeners[0];
+                httpListener.name.should.equal(constants.appGateway.httpListener.name);
                 httpListener.protocol.toLowerCase().should.equal(gatewayProp.httpListenerProtocol.toLowerCase());
 
                 networkUtil.shouldHaveTags(appGateway);
@@ -580,6 +589,7 @@ describe('arm', function () {
           done();
         });
       });
+
       it('http-listener show command should show default http listener in application gateway', function (done) {
         var cmd = util.format('network application-gateway http-listener show {group} {name} {defHttpListenerName} --json')
           .formatArgs(gatewayProp);
@@ -1142,7 +1152,7 @@ describe('arm', function () {
           result.exitStatus.should.equal(0);
           done();
         });
-      });
+      });*/
 
       it('create again should pass', function (done) {
         var cmd = util.format('network application-gateway create {group} {name} -l {location} -e {vnetName} -m {subnetName} ' +
@@ -1158,17 +1168,27 @@ describe('arm', function () {
           appGateway.sku.name.should.equal(gatewayProp.skuName);
           appGateway.sku.tier.should.equal(gatewayProp.skuTier);
           appGateway.sku.capacity.should.equal(gatewayProp.capacity);
-          appGateway.httpSettingsName
+
+          var addressPool = appGateway.backendAddressPools[0];
+          addressPool.name.should.equal(gatewayProp.poolName);
+
+          var frontendIp = appGateway.frontendIPConfigurations[0];
+          frontendIp.name.should.equal(gatewayProp.frontendIpName);
 
           var frontendPort = appGateway.frontendPorts[0];
-          frontendPort.port.should.equal(gatewayProp.portValue);
+          frontendPort.name.should.equal(gatewayProp.portName);
+
+          var gatewayIp = appGateway.gatewayIPConfigurations[0];
+          gatewayIp.name.should.equal(gatewayProp.createConfigName);
 
           var backendHttpSettings = appGateway.backendHttpSettingsCollection[0];
+          backendHttpSettings.name.should.equal(gatewayProp.httpSettingsName);
           backendHttpSettings.port.should.equal(gatewayProp.httpSettingsPortAddress);
           backendHttpSettings.protocol.toLowerCase().should.equal(gatewayProp.httpSettingsProtocol.toLowerCase());
           backendHttpSettings.cookieBasedAffinity.should.equal(gatewayProp.cookieBasedAffinity);
 
           var httpListener = appGateway.httpListeners[0];
+          httpListener.name.toLowerCase().should.equal(gatewayProp.httpListenerName.toLowerCase());
           httpListener.protocol.toLowerCase().should.equal(gatewayProp.httpListenerProtocol.toLowerCase());
 
           networkUtil.shouldHaveTags(appGateway);
