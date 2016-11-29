@@ -45280,7 +45280,7 @@
           "categories": {
             "template": {
               "name": "template",
-              "description": "Commands to manager your deployment template in a resource group",
+              "description": "Commands to manage your deployment template in a resource group",
               "fullName": "group deployment template",
               "usage": "[options] [command]",
               "options": [],
@@ -68079,6 +68079,15 @@
                   "description": "the certificate password"
                 },
                 {
+                  "flags": "-A, --address-pool-name [address-pool-name]",
+                  "required": 0,
+                  "optional": -25,
+                  "bool": true,
+                  "short": "-A",
+                  "long": "--address-pool-name",
+                  "description": "the address pool name. \n     Default value is \"pool01\""
+                },
+                {
                   "flags": "-r, --servers <servers>",
                   "required": -15,
                   "optional": 0,
@@ -68086,6 +68095,15 @@
                   "short": "-r",
                   "long": "--servers",
                   "description": "comma separated list of IP addresses or DNS names corresponding to backend servers"
+                },
+                {
+                  "flags": "-O, --http-settings-name [http-settings-name]",
+                  "required": 0,
+                  "optional": -26,
+                  "bool": true,
+                  "short": "-O",
+                  "long": "--http-settings-name",
+                  "description": "the HTTP settings name. \n     Default value is \"httpSettings01\""
                 },
                 {
                   "flags": "-i, --http-settings-protocol [http-settings-protocol]",
@@ -68115,6 +68133,15 @@
                   "description": "Enable or disable HTTP settings cookie based affinity, valid values are\n     [Disabled,Enabled],\n     default value is \"Disabled\""
                 },
                 {
+                  "flags": "-J, --frontend-port-name [frontend-port-name]",
+                  "required": 0,
+                  "optional": -26,
+                  "bool": true,
+                  "short": "-J",
+                  "long": "--frontend-port-name",
+                  "description": "the frontend port name.\n     Default value is \"frontendPort01\""
+                },
+                {
                   "flags": "-j, --frontend-port [frontend-port]",
                   "required": 0,
                   "optional": -21,
@@ -68122,6 +68149,15 @@
                   "short": "-j",
                   "long": "--frontend-port",
                   "description": "the frontend port value, valid range is [0-65535]"
+                },
+                {
+                  "flags": "-F, --frontend-ip-name [frontend-ip-name]",
+                  "required": 0,
+                  "optional": -24,
+                  "bool": true,
+                  "short": "-F",
+                  "long": "--frontend-ip-name",
+                  "description": "the frontend ip name. \n     Default value is \"frontendIp01\""
                 },
                 {
                   "flags": "-k, --public-ip-name [public-ip-name]",
@@ -68142,6 +68178,24 @@
                   "description": "the public ip identifier.\n     e.g. /subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Network/publicIPAddresses/<public-ip-name>"
                 },
                 {
+                  "flags": "-G, --gateway-ip-name [gateway-ip-name]",
+                  "required": 0,
+                  "optional": -23,
+                  "bool": true,
+                  "short": "-G",
+                  "long": "--gateway-ip-name",
+                  "description": "the gateway ip name.\n     Default value is \"ipConfig01\""
+                },
+                {
+                  "flags": "-L, --http-listener-name [http-listener-name]",
+                  "required": 0,
+                  "optional": -26,
+                  "bool": true,
+                  "short": "-L",
+                  "long": "--http-listener-name",
+                  "description": "the HTTP listener name.\n     Default value is \"listener01\""
+                },
+                {
                   "flags": "-b, --http-listener-protocol [http-listener-protocol]",
                   "required": 0,
                   "optional": -30,
@@ -68149,6 +68203,15 @@
                   "short": "-b",
                   "long": "--http-listener-protocol",
                   "description": "the HTTP listener protocol, valid values are [http,https]"
+                },
+                {
+                  "flags": "-R, --routing-rule-name [routing-rule-name]",
+                  "required": 0,
+                  "optional": -25,
+                  "bool": true,
+                  "short": "-R",
+                  "long": "--routing-rule-name",
+                  "description": "the routing rule name.\n     Default name is \"rule01\""
                 },
                 {
                   "flags": "-w, --routing-rule-type [routing-rule-type]",
