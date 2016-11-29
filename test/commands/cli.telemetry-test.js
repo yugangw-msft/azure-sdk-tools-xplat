@@ -25,6 +25,8 @@ describe('cli', function() {
   describe('telemetry', function() {
     var sandbox = sinon.sandbox.create();
     var telemetry = require('../../lib/util/telemetry');
+    var userAgentCore = require('../../lib/util/userAgentCore');
+
     var testInstrumentationKey = "1234";
 
     beforeEach(function (done) {
@@ -83,7 +85,7 @@ describe('cli', function() {
 
     it('should construct user agent info object with some data', function (done) {
 
-      sandbox.stub(telemetry, 'getUserAgentInfo', function () {
+      sandbox.stub(userAgentCore, 'getUserAgentData', function () {
         return {
           osType: 'WindowsNT',
           osVersion: '2.0',
@@ -103,7 +105,7 @@ describe('cli', function() {
 
       telemetry.onFinish(function () { });
 
-      var userAgentInfo = telemetry.getUserAgentInfo();
+      var userAgentInfo = userAgentCore.getUserAgentData();
       should(userAgentInfo).have.property('osType', 'WindowsNT');
       should(userAgentInfo).have.property('osVersion', '2.0');
       should(userAgentInfo).have.property('mode', 'baz');
@@ -119,16 +121,17 @@ describe('cli', function() {
       var command = 'azure group list';
       telemetry.init(true)
       telemetry.start(['foo', 'bar', 'azure', 'group', 'list']);
+      telemetry.setMode('arm');
+
       telemetry.currentCommand({
         fullName: function () {
           return command;
         }
       });
 
-      telemetry.setMode('arm');
       telemetry.onFinish(function () { });
 
-      var userAgentInfo = telemetry.getUserAgentInfo();
+      var userAgentInfo = userAgentCore.getUserAgentData();
 
       // assert properties
       should(userAgentInfo).have.property('osType').with.type('string');
@@ -163,7 +166,7 @@ describe('cli', function() {
       telemetry.setMode('arm');
       telemetry.onFinish(function () { });
 
-      var userAgentInfo = telemetry.getUserAgentInfo();
+      var userAgentInfo = userAgentCore.getUserAgentData();
 
       // assert command name and parameters.
       should(userAgentInfo).have.property('commandName').with.type('string').be.equal(givenCommand);
@@ -180,20 +183,21 @@ describe('cli', function() {
       // disable telemetry
       telemetry.init(false)
       telemetry.start(['foo', 'bar', 'azure', 'group', 'list']);
+      telemetry.setMode('arm');
+
       telemetry.currentCommand({
         fullName: function () {
           return givenCommand;
         }
       });
 
-      telemetry.setMode('arm');
       telemetry.onFinish(function () { });
 
       // assert telemetry is not enabled.
       (track.called).should.be.false;
 
       // verify userAgent is properly constructed
-      var userAgentInfo = telemetry.getUserAgentInfo();
+      var userAgentInfo = userAgentCore.getUserAgentData();
 
       (userAgentInfo).should.be.ok;
       (userAgentInfo.osType).should.be.ok;
