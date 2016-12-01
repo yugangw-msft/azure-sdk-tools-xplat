@@ -24,6 +24,8 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Content Include="CONTRIBUTORS.txt" />
+    <Content Include="lib\commands\arm\datalakeanalytics\datalakeanalytics._js" />
+    <Content Include="lib\commands\arm\datalakestore\datalakestore._js" />
     <Content Include="lib\commands\arm\insights\insights.alerts.actions.js" />
     <Content Include="lib\commands\arm\insights\insights.alerts.rule.log._js" />
     <Content Include="lib\commands\arm\insights\insights.alerts.rule.metric._js" />
@@ -76,6 +78,8 @@
     <Content Include="lib\cli.js" />
     <Content Include="lib\cmdLoader.js" />
     <Content Include="lib\commands\arm\insights\insights.autoscale.notifications.js" />
+    <Compile Include="lib\commands\arm\datalakeanalytics\datalakeanalytics.utils.js" />
+    <Compile Include="lib\commands\arm\datalakestore\datalakestore.utils.js" />
     <Compile Include="lib\util\authentication\adalAuthForUser.js" />
     <Compile Include="lib\util\authentication\adalAuthForServicePrincipal.js" />
     <Compile Include="lib\util\interaction.js" />
@@ -479,6 +483,8 @@
     <Folder Include="lib\commands\arm\armsdk" />
     <Folder Include="lib\commands\arm\availabilityset" />
     <Folder Include="lib\commands\arm\cdnmanagement\" />
+    <Folder Include="lib\commands\arm\datalakeanalytics\" />
+    <Folder Include="lib\commands\arm\datalakestore\" />
     <Folder Include="lib\commands\arm\feature" />
     <Folder Include="lib\commands\arm\group" />
     <Folder Include="lib\commands\arm\hdinsight" />
@@ -564,6 +570,13 @@
     <Folder Include="tools\windows\scripts" />
     <Folder Include="tools\windows\wix" />
     <Folder Include="tools\windows\wix\3.6.3303.0" />
+    <Folder Include="typings\" />
+    <Folder Include="typings\globals\" />
+    <Folder Include="typings\globals\node\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="typings\globals\node\index.d.ts" />
+    <TypeScriptCompile Include="typings\index.d.ts" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <!--Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them.-->
