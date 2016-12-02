@@ -45629,7 +45629,7 @@
                   "optional": 0,
                   "bool": true,
                   "long": "--defaultStorageAccountName",
-                  "description": "Storage account url to use for default HDInsight storage"
+                  "description": "Fully Qualified Domain Name of the storage account to use for default HDInsight storage. For example : \"AccountName.azuredatalakestore.net\" or \"AccountName.blob.core.windows.net\""
                 },
                 {
                   "flags": "--defaultStorageAccountKey <storageAccountKey>",
@@ -45637,7 +45637,7 @@
                   "optional": 0,
                   "bool": true,
                   "long": "--defaultStorageAccountKey",
-                  "description": "Key to the storage account to use for default HDInsight storage (only for clusters with WASB default Storage)"
+                  "description": "Key to the Azure storage account to use for default HDInsight storage (only for clusters with WASB default storage)"
                 },
                 {
                   "flags": "--defaultStorageContainer <storageContainer>",
@@ -45645,7 +45645,7 @@
                   "optional": 0,
                   "bool": true,
                   "long": "--defaultStorageContainer",
-                  "description": "Container in the storage account to use for HDInsight default storage (only for clusters with WASB default Storage)"
+                  "description": "Container in the Azure storage account to use for HDInsight default storage (only for clusters with WASB default storage)"
                 },
                 {
                   "flags": "--defaultStorageRootPath <defaultStorageRootPath>",
@@ -45661,7 +45661,7 @@
                   "optional": 0,
                   "bool": true,
                   "long": "--objectId",
-                  "description": "Service principal object Id used to access Azure Data Lake Store account (only for Data Lake enabled clusters)"
+                  "description": "Object Id of the service principal used to access Azure Data Lake Store account (only for Data Lake enabled clusters)"
                 },
                 {
                   "flags": "--aadTenantId <aadTenantId>",
