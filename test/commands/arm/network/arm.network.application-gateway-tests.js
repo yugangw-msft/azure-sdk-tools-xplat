@@ -172,16 +172,42 @@ describe('arm', function () {
                 appGateway.sku.tier.should.equal(gatewayProp.skuTier);
                 appGateway.sku.capacity.should.equal(gatewayProp.capacity);
 
-                var frontendPort = appGateway.frontendPorts[0];
-                frontendPort.port.should.equal(gatewayProp.portValue);
+                var ipConfigs = appGateway.gatewayIPConfigurations;
+                _.some(ipConfigs, function (ipConfig) {
+                  return ipConfig.name === gatewayProp.configName;
+                }).should.be.true;
 
-                var backendHttpSettings = appGateway.backendHttpSettingsCollection[0];
-                backendHttpSettings.port.should.equal(gatewayProp.httpSettingsPortAddress);
-                backendHttpSettings.protocol.toLowerCase().should.equal(gatewayProp.httpSettingsProtocol.toLowerCase());
-                backendHttpSettings.cookieBasedAffinity.should.equal(gatewayProp.cookieBasedAffinity);
+                var sslCertificates = appGateway.sslCertificates;
+                _.some(sslCertificates, function(sslCert) {
+                  return sslCert.name === gatewayProp.defSslCertName;
+                }).should.be.true;
 
-                var httpListener = appGateway.httpListeners[0];
-                httpListener.protocol.toLowerCase().should.equal(gatewayProp.httpListenerProtocol.toLowerCase());
+                var frontendIPs = appGateway.frontendIPConfigurations;
+                _.some(frontendIPs, function(frontendIP) {
+                  return frontendIP.name === constants.appGateway.frontendIp.name;
+                }).should.be.true;
+
+                var frontendPorts = appGateway.frontendPorts;
+                _.some(frontendPorts, function(frontendPort) {
+                  return frontendPort.port === gatewayProp.portValue;
+                }).should.be.true;
+
+                var addressPools = appGateway.backendAddressPools;
+                _.some(addressPools, function(addressPool) {
+                  return addressPool.name === constants.appGateway.pool.name;
+                }).should.be.true;
+
+                var backendHttpSettings = appGateway.backendHttpSettingsCollection;
+                _.some(backendHttpSettings, function(backendHttpSettings) {
+                  backendHttpSettings.port === gatewayProp.httpSettingsPortAddress &&
+                  backendHttpSettings.protocol.toLowerCase() === gatewayProp.httpSettingsProtocol.toLowerCase() &&
+                  backendHttpSettings.cookieBasedAffinity === gatewayProp.cookieBasedAffinity;
+                }).should.be.true;
+
+                var httpListeners = appGateway.httpListeners;
+                _.some(httpListeners, function(httpListener) {
+                  httpListener.protocol.toLowerCase() === gatewayProp.httpListenerProtocol.toLowerCase();
+                });
 
                 networkUtil.shouldHaveTags(appGateway);
                 networkUtil.shouldBeSucceeded(appGateway);
@@ -211,6 +237,48 @@ describe('arm', function () {
           result.exitStatus.should.equal(0);
           var appGateway = JSON.parse(result.text);
           appGateway.name.should.equal(gatewayProp.name);
+          appGateway.location.should.equal(gatewayProp.location);
+          appGateway.sku.name.should.equal(gatewayProp.skuName);
+          appGateway.sku.tier.should.equal(gatewayProp.skuTier);
+          appGateway.sku.capacity.should.equal(gatewayProp.capacity);
+
+          var ipConfigs = appGateway.gatewayIPConfigurations;
+          _.some(ipConfigs, function (ipConfig) {
+            return ipConfig.name === gatewayProp.configName;
+          }).should.be.true;
+
+          var sslCertificates = appGateway.sslCertificates;
+          _.some(sslCertificates, function(sslCert) {
+            return sslCert.name === gatewayProp.defSslCertName;
+          }).should.be.true;
+
+          var frontendIPs = appGateway.frontendIPConfigurations;
+          _.some(frontendIPs, function(frontendIP) {
+            return frontendIP.name === constants.appGateway.frontendIp.name;
+          }).should.be.true;
+
+          var frontendPorts = appGateway.frontendPorts;
+          _.some(frontendPorts, function(frontendPort) {
+            return frontendPort.port === gatewayProp.portValue;
+          }).should.be.true;
+
+          var addressPools = appGateway.backendAddressPools;
+          _.some(addressPools, function(addressPool) {
+            return addressPool.name === constants.appGateway.pool.name;
+          }).should.be.true;
+
+          var backendHttpSettings = appGateway.backendHttpSettingsCollection;
+          _.some(backendHttpSettings, function(backendHttpSettings) {
+            backendHttpSettings.port === gatewayProp.httpSettingsPortAddress &&
+            backendHttpSettings.protocol.toLowerCase() === gatewayProp.httpSettingsProtocol.toLowerCase() &&
+            backendHttpSettings.cookieBasedAffinity === gatewayProp.cookieBasedAffinity;
+          }).should.be.true;
+
+          var httpListeners = appGateway.httpListeners;
+          _.some(httpListeners, function(httpListener) {
+            httpListener.protocol.toLowerCase() === gatewayProp.httpListenerProtocol.toLowerCase();
+          });
+
           networkUtil.shouldBeSucceeded(appGateway);
           done();
         });
