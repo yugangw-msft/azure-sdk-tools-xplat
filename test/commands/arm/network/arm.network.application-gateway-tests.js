@@ -165,6 +165,7 @@ describe('arm', function () {
                 '-j {portValue} -b {httpListenerProtocol} -w {ruleType} -a {skuName} -u {skuTier} -z {capacity} -t {tags} --json').formatArgs(gatewayProp);
               testUtils.executeCommand(suite, retry, cmd, function (result) {
                 result.exitStatus.should.equal(0);
+
                 var appGateway = JSON.parse(result.text);
                 appGateway.name.should.equal(gatewayProp.name);
                 appGateway.location.should.equal(gatewayProp.location);
@@ -197,17 +198,13 @@ describe('arm', function () {
                   return addressPool.name === constants.appGateway.pool.name;
                 }).should.be.true;
 
-                var backendHttpSettings = appGateway.backendHttpSettingsCollection;
-                _.some(backendHttpSettings, function(backendHttpSettings) {
-                  backendHttpSettings.port === gatewayProp.httpSettingsPortAddress &&
-                  backendHttpSettings.protocol.toLowerCase() === gatewayProp.httpSettingsProtocol.toLowerCase() &&
-                  backendHttpSettings.cookieBasedAffinity === gatewayProp.cookieBasedAffinity;
-                }).should.be.true;
+                var backendHttpSetting = appGateway.backendHttpSettingsCollection[0];
+                backendHttpSetting.port.should.be.equal(gatewayProp.httpSettingsPortAddress);
+                backendHttpSetting.protocol.toLowerCase().should.be.equal(gatewayProp.httpSettingsProtocol.toLowerCase());
+                backendHttpSetting.cookieBasedAffinity.should.be.equal(gatewayProp.cookieBasedAffinity);
 
-                var httpListeners = appGateway.httpListeners;
-                _.some(httpListeners, function(httpListener) {
-                  httpListener.protocol.toLowerCase() === gatewayProp.httpListenerProtocol.toLowerCase();
-                });
+                var httpListener = appGateway.httpListeners[0];
+                httpListener.protocol.toLowerCase().should.be.equal(gatewayProp.httpListenerProtocol.toLowerCase());
 
                 networkUtil.shouldHaveTags(appGateway);
                 networkUtil.shouldBeSucceeded(appGateway);
@@ -235,6 +232,7 @@ describe('arm', function () {
         var cmd = 'network application-gateway show {group} {name} --json'.formatArgs(gatewayProp);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
+
           var appGateway = JSON.parse(result.text);
           appGateway.name.should.equal(gatewayProp.name);
           appGateway.location.should.equal(gatewayProp.location);
@@ -267,17 +265,13 @@ describe('arm', function () {
             return addressPool.name === constants.appGateway.pool.name;
           }).should.be.true;
 
-          var backendHttpSettings = appGateway.backendHttpSettingsCollection;
-          _.some(backendHttpSettings, function(backendHttpSettings) {
-            backendHttpSettings.port === gatewayProp.httpSettingsPortAddress &&
-            backendHttpSettings.protocol.toLowerCase() === gatewayProp.httpSettingsProtocol.toLowerCase() &&
-            backendHttpSettings.cookieBasedAffinity === gatewayProp.cookieBasedAffinity;
-          }).should.be.true;
+          var backendHttpSetting = appGateway.backendHttpSettingsCollection[0];
+          backendHttpSetting.port.should.be.equal(gatewayProp.httpSettingsPortAddress);
+          backendHttpSetting.protocol.toLowerCase().should.be.equal(gatewayProp.httpSettingsProtocol.toLowerCase());
+          backendHttpSetting.cookieBasedAffinity.should.be.equal(gatewayProp.cookieBasedAffinity);
 
-          var httpListeners = appGateway.httpListeners;
-          _.some(httpListeners, function(httpListener) {
-            httpListener.protocol.toLowerCase() === gatewayProp.httpListenerProtocol.toLowerCase();
-          });
+          var httpListener = appGateway.httpListeners[0];
+          httpListener.protocol.toLowerCase().should.be.equal(gatewayProp.httpListenerProtocol.toLowerCase());
 
           networkUtil.shouldBeSucceeded(appGateway);
           done();
