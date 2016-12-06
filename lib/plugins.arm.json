@@ -40583,7 +40583,7 @@
                       "bool": true,
                       "short": "-j",
                       "long": "--jobId",
-                      "description": "the job ID of the job to wait for completion."
+                      "description": "the job identifier of the job to wait for completion."
                     },
                     {
                       "flags": "-w --waitInterval <wait in seconds>",
@@ -44281,7 +44281,7 @@
                       "description": "if the encryption type is UserAssigned, this is the id of the key vault the user wishes to use"
                     },
                     {
-                      "flags": "-y --keyName <key vault id>",
+                      "flags": "-y --keyName <key name>",
                       "required": -14,
                       "optional": 0,
                       "bool": true,
