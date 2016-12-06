@@ -40059,6 +40059,192 @@
             }
           ],
           "categories": {}
+        },
+        "secret": {
+          "name": "secret",
+          "description": "Commands to manage VM secrets",
+          "fullName": "vm secret",
+          "usage": "[options] [command]",
+          "options": [],
+          "commands": [
+            {
+              "name": "add",
+              "description": "Adds a secret to the VM",
+              "fullName": "vm secret add",
+              "usage": "[options] <resource-group> <name> <source-vault-id>",
+              "filePath": "commands/arm/vm/vm._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "-g, --resource-group <resource-group>",
+                  "required": -22,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-g",
+                  "long": "--resource-group",
+                  "description": "the resource group"
+                },
+                {
+                  "flags": "-n, --name <name>",
+                  "required": -12,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-n",
+                  "long": "--name",
+                  "description": "the VM name"
+                },
+                {
+                  "flags": "-r, --source-vault-id <source-vault-id>",
+                  "required": -23,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-r",
+                  "long": "--source-vault-id",
+                  "description": "the source-vault-id"
+                },
+                {
+                  "flags": "-c, --certificate-url <certificate-url>",
+                  "required": -23,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-c",
+                  "long": "--certificate-url",
+                  "description": "certificate-url"
+                },
+                {
+                  "flags": "-t, --certificate-store <certificate-store>",
+                  "required": -25,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-t",
+                  "long": "--certificate-store",
+                  "description": "certificate-store"
+                },
+                {
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-s",
+                  "long": "--subscription",
+                  "description": "the subscription identifier"
+                }
+              ]
+            },
+            {
+              "name": "delete",
+              "description": "Deletes a secret to the VM",
+              "fullName": "vm secret delete",
+              "usage": "[options] <resource-group> <name> <source-vault-id>",
+              "filePath": "commands/arm/vm/vm._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "-g, --resource-group <resource-group>",
+                  "required": -22,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-g",
+                  "long": "--resource-group",
+                  "description": "the resource group"
+                },
+                {
+                  "flags": "-n, --name <name>",
+                  "required": -12,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-n",
+                  "long": "--name",
+                  "description": "the VM name"
+                },
+                {
+                  "flags": "-r, --source-vault-id <source-vault-id>",
+                  "required": -23,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-r",
+                  "long": "--source-vault-id",
+                  "description": "the source-vault-id"
+                },
+                {
+                  "flags": "-c, --certificate-url <certificate-url>",
+                  "required": -23,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-c",
+                  "long": "--certificate-url",
+                  "description": "certificate-url"
+                },
+                {
+                  "flags": "-t, --certificate-store <certificate-store>",
+                  "required": -25,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-t",
+                  "long": "--certificate-store",
+                  "description": "certificate-store"
+                },
+                {
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-s",
+                  "long": "--subscription",
+                  "description": "the subscription identifier"
+                }
+              ]
+            }
+          ],
+          "categories": {}
         }
       }
     },
@@ -45094,7 +45280,7 @@
           "categories": {
             "template": {
               "name": "template",
-              "description": "Commands to manager your deployment template in a resource group",
+              "description": "Commands to manage your deployment template in a resource group",
               "fullName": "group deployment template",
               "usage": "[options] [command]",
               "options": [],
@@ -62230,7 +62416,7 @@
                       "bool": true,
                       "short": "-p",
                       "long": "--protocol",
-                      "description": "the protocol [Tcp,Udp,*]"
+                      "description": "the protocol [*,Tcp,Udp]. Default value is \"*\""
                     },
                     {
                       "flags": "-f, --source-address-prefix [source-address-prefix]",
@@ -62248,7 +62434,7 @@
                       "bool": true,
                       "short": "-o",
                       "long": "--source-port-range",
-                      "description": "the source port range [0-65535]"
+                      "description": "the source port range [0-65535]. Default value is \"*\""
                     },
                     {
                       "flags": "-e, --destination-address-prefix [destination-address-prefix]",
@@ -62266,7 +62452,7 @@
                       "bool": true,
                       "short": "-u",
                       "long": "--destination-port-range",
-                      "description": "the destination port range [0-65535]"
+                      "description": "the destination port range [0-65535]. Default value is \"80\""
                     },
                     {
                       "flags": "-c, --access [access]",
@@ -62275,16 +62461,16 @@
                       "bool": true,
                       "short": "-c",
                       "long": "--access",
-                      "description": "the access mode [Allow,Deny]"
+                      "description": "the access mode [Allow,Deny]. Default value is \"Allow\""
                     },
                     {
-                      "flags": "-y, --priority <priority>",
-                      "required": -16,
-                      "optional": 0,
+                      "flags": "-y, --priority [priority]",
+                      "required": 0,
+                      "optional": -16,
                       "bool": true,
                       "short": "-y",
                       "long": "--priority",
-                      "description": "the priority [100-4096]"
+                      "description": "the priority [100-4096]. Default value is \"100\""
                     },
                     {
                       "flags": "-r, --direction [direction]",
@@ -62293,7 +62479,7 @@
                       "bool": true,
                       "short": "-r",
                       "long": "--direction",
-                      "description": "the direction [Inbound,Outbound]"
+                      "description": "the direction [Inbound,Outbound]. Default value is \"Inbound\""
                     },
                     {
                       "flags": "-s, --subscription <subscription>",
@@ -62381,7 +62567,7 @@
                       "bool": true,
                       "short": "-p",
                       "long": "--protocol",
-                      "description": "the protocol [Tcp,Udp,*]"
+                      "description": "the protocol [*,Tcp,Udp]"
                     },
                     {
                       "flags": "-f, --source-address-prefix [source-address-prefix]",
@@ -67893,6 +68079,15 @@
                   "description": "the certificate password"
                 },
                 {
+                  "flags": "-A, --address-pool-name [address-pool-name]",
+                  "required": 0,
+                  "optional": -25,
+                  "bool": true,
+                  "short": "-A",
+                  "long": "--address-pool-name",
+                  "description": "the address pool name. \n     Default value is \"pool01\""
+                },
+                {
                   "flags": "-r, --servers <servers>",
                   "required": -15,
                   "optional": 0,
@@ -67900,6 +68095,15 @@
                   "short": "-r",
                   "long": "--servers",
                   "description": "comma separated list of IP addresses or DNS names corresponding to backend servers"
+                },
+                {
+                  "flags": "-O, --http-settings-name [http-settings-name]",
+                  "required": 0,
+                  "optional": -26,
+                  "bool": true,
+                  "short": "-O",
+                  "long": "--http-settings-name",
+                  "description": "the HTTP settings name. \n     Default value is \"httpSettings01\""
                 },
                 {
                   "flags": "-i, --http-settings-protocol [http-settings-protocol]",
@@ -67929,6 +68133,15 @@
                   "description": "Enable or disable HTTP settings cookie based affinity, valid values are\n     [Disabled,Enabled],\n     default value is \"Disabled\""
                 },
                 {
+                  "flags": "-J, --frontend-port-name [frontend-port-name]",
+                  "required": 0,
+                  "optional": -26,
+                  "bool": true,
+                  "short": "-J",
+                  "long": "--frontend-port-name",
+                  "description": "the frontend port name.\n     Default value is \"frontendPort01\""
+                },
+                {
                   "flags": "-j, --frontend-port [frontend-port]",
                   "required": 0,
                   "optional": -21,
@@ -67936,6 +68149,15 @@
                   "short": "-j",
                   "long": "--frontend-port",
                   "description": "the frontend port value, valid range is [0-65535]"
+                },
+                {
+                  "flags": "-F, --frontend-ip-name [frontend-ip-name]",
+                  "required": 0,
+                  "optional": -24,
+                  "bool": true,
+                  "short": "-F",
+                  "long": "--frontend-ip-name",
+                  "description": "the frontend ip name. \n     Default value is \"frontendIp01\""
                 },
                 {
                   "flags": "-k, --public-ip-name [public-ip-name]",
@@ -67956,6 +68178,24 @@
                   "description": "the public ip identifier.\n     e.g. /subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Network/publicIPAddresses/<public-ip-name>"
                 },
                 {
+                  "flags": "-G, --gateway-ip-name [gateway-ip-name]",
+                  "required": 0,
+                  "optional": -23,
+                  "bool": true,
+                  "short": "-G",
+                  "long": "--gateway-ip-name",
+                  "description": "the gateway ip name.\n     Default value is \"ipConfig01\""
+                },
+                {
+                  "flags": "-L, --http-listener-name [http-listener-name]",
+                  "required": 0,
+                  "optional": -26,
+                  "bool": true,
+                  "short": "-L",
+                  "long": "--http-listener-name",
+                  "description": "the HTTP listener name.\n     Default value is \"listener01\""
+                },
+                {
                   "flags": "-b, --http-listener-protocol [http-listener-protocol]",
                   "required": 0,
                   "optional": -30,
@@ -67963,6 +68203,15 @@
                   "short": "-b",
                   "long": "--http-listener-protocol",
                   "description": "the HTTP listener protocol, valid values are [http,https]"
+                },
+                {
+                  "flags": "-R, --routing-rule-name [routing-rule-name]",
+                  "required": 0,
+                  "optional": -25,
+                  "bool": true,
+                  "short": "-R",
+                  "long": "--routing-rule-name",
+                  "description": "the routing rule name.\n     Default name is \"rule01\""
                 },
                 {
                   "flags": "-w, --routing-rule-type [routing-rule-type]",
@@ -70258,6 +70507,24 @@
                       "description": "enable or disable cookie based affinity, valid values are\n     [Disabled,Enabled],\n     default value is [Disabled]"
                     },
                     {
+                      "flags": "-r, --probe-name [probe-name]",
+                      "required": 0,
+                      "optional": -18,
+                      "bool": true,
+                      "short": "-r",
+                      "long": "--probe-name",
+                      "description": "specified application gateway probe name"
+                    },
+                    {
+                      "flags": "-i, --probe-id [probe-id]",
+                      "required": 0,
+                      "optional": -16,
+                      "bool": true,
+                      "short": "-i",
+                      "long": "--probe-id",
+                      "description": "application gateway probe ID"
+                    },
+                    {
                       "flags": "--nowait",
                       "required": 0,
                       "optional": 0,
@@ -70361,6 +70628,24 @@
                       "short": "-c",
                       "long": "--cookie-based-affinity",
                       "description": "enable or disable cookie based affinity, valid values are\n     [Disabled,Enabled],\n     default value is [Disabled]"
+                    },
+                    {
+                      "flags": "-r, --probe-name [probe-name]",
+                      "required": 0,
+                      "optional": -18,
+                      "bool": true,
+                      "short": "-r",
+                      "long": "--probe-name",
+                      "description": "specified application gateway probe name"
+                    },
+                    {
+                      "flags": "-i, --probe-id [probe-id]",
+                      "required": 0,
+                      "optional": -16,
+                      "bool": true,
+                      "short": "-i",
+                      "long": "--probe-id",
+                      "description": "application gateway probe ID"
                     },
                     {
                       "flags": "--nowait",
