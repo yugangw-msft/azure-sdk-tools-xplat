@@ -45629,7 +45629,7 @@
                   "optional": 0,
                   "bool": true,
                   "long": "--defaultStorageAccountName",
-                  "description": "Fully Qualified Domain Name of the storage account to use for default HDInsight storage. For example : \"AccountName.azuredatalakestore.net\" or \"AccountName.blob.core.windows.net\""
+                  "description": "Fully Qualified Domain Name of the storage account to use for default HDInsight storage. For example : \"accountName.azuredatalakestore.net\" or \"accountName.blob.core.windows.net\""
                 },
                 {
                   "flags": "--defaultStorageAccountKey <storageAccountKey>",
@@ -45672,11 +45672,11 @@
                   "description": "Service principal AADTenant Id used to access Azure Data Lake Store account (only for Data Lake enabled clusters)"
                 },
                 {
-                  "flags": "--certificatePath <certificatePath>",
-                  "required": -19,
+                  "flags": "--certificateFilePath <certificateFilePath>",
+                  "required": -23,
                   "optional": 0,
                   "bool": true,
-                  "long": "--certificatePath",
+                  "long": "--certificateFilePath",
                   "description": "Service principal certificate file path used to access Azure Data Lake Store account (only for Data Lake enabled clusters)"
                 },
                 {
@@ -45688,11 +45688,11 @@
                   "description": "Service principal certificate password used to access Azure Data Lake Store account (only for Data Lake enabled clusters)"
                 },
                 {
-                  "flags": "--resourceUri <resourceUri>",
-                  "required": -15,
+                  "flags": "--datalakeResourceUri <datalakeResourceUri>",
+                  "required": -23,
                   "optional": 0,
                   "bool": true,
-                  "long": "--resourceUri",
+                  "long": "--datalakeResourceUri",
                   "description": "Resource URI to access Azure Data Lake Store Account (only for Data Lake enabled clusters)"
                 },
                 {

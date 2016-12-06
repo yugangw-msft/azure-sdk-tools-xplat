@@ -6,8 +6,8 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: 'ce6570fa-18fb-4503-80d9-4a225591a428',
-    name: 'BDHadoopHumboldtAdhocTestShortTermTeam2',
+    id: '2c224e7e-3ef5-431d-a57b-e71f4662e3a6',
+    name: 'Node CLI Test',
     user: {
       name: 'user@domain.example',
       type: 'user'
@@ -15,6 +15,7 @@ exports.getMockedProfile = function () {
     tenantId: '72f988bf-86f1-41af-91ab-2d7cd011db47',
     state: 'Enabled',
     registeredProviders: [],
+    _eventsCount: '1',
     isDefault: true
   }, newProfile.environments['AzureCloud']));
 
@@ -28,4 +29,4 @@ exports.setEnvironment = function() {
 
 exports.scopes = [];
 
- exports.randomTestIdsGenerated = function() { return ['xplatTestRgHDInsightClusterCreate1918','xplatTestHDInsightClusterCreate2527','xplatTestHDInsightClusterCreate6553','xplatTestHDInsightClusterCreate7184','xplatTestHDInsightClusterCreate3249','xplatSampleApp5907'];};
+exports.randomTestIdsGenerated = function () { return ['xplatTestRgHDInsightClusterCreate5990', 'xplatTestHDInsightClusterCreate5806', 'xplatTestHDInsightClusterCreate8208', 'xplatTestHDInsightClusterCreate2772', 'xplatTestHDInsightClusterCreate4415', 'xplatSampleApp378', 'xplatTestHDInsightClusterCreate4189', 'xplatTestHDInsightClusterCreate3418', 'xplatTestHDInsightClusterCreate885', 'xplatTestHDInsightClusterCreate7666', 'xplatSampleApp9509']; };

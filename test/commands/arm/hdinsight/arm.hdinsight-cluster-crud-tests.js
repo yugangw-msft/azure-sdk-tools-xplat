@@ -57,9 +57,9 @@ var location = "West Europe",
     defaultStorageContainer = 'xplatteststoragecnt1',
     defaultAdlStorageAccount = 'xplattestdummyadlstorage', 
     defaultStorageRootPath = '/clusters/clustername/',
-    objectId = '00000000-0000-0000-0000-000000000001', 
+    objectId = '3e185977-0364-488a-ae72-64bf148a17ba', 
     aadTenantId = '00000000-0000-0000-0000-000000000001', 
-    certificatePath = 'test/data/hdinsight-test-datalake-cert.pfx', 
+    certificatePath = 'test/data/fakecert.pfx', 
     certificatePassword = 'dummypassword',
     workerNodeCount = 3,
     headNodeSize = "Standard_D3",
@@ -247,7 +247,7 @@ describe('arm', function () {
           '--defaultStorageRootPath %s ' +
           '--objectId %s ' +
           '--aadTenantId %s ' +
-          '--certificatePath %s ' +
+          '--certificateFilePath %s ' +
           '--certificatePassword %s ' +
           '--headNodeSize %s ' +
           '--workerNodeCount %s ' +
@@ -258,7 +258,7 @@ describe('arm', function () {
           '--clusterType %s ' +
           '--version %s ' +
           '--json ',
-          groupName, clusterNameLinux, location, 'Linux',
+          groupName, 'xplatTestHDInsightClusterCreate7274', location, 'Linux',
           defaultAdlStorageAccount, defaultStorageRootPath, objectId, aadTenantId, certificatePath, certificatePassword,
           headNodeSize, workerNodeCount, workerNodeSize, zookeeperNodeSize,
           username, password, sshUserName, sshPassword,
@@ -291,7 +291,7 @@ describe('arm', function () {
           '--defaultStorageContainer %s ' +
           '--objectId %s ' +
           '--aadTenantId %s ' +
-          '--certificatePath %s ' +
+          '--certificateFilePath %s ' +
           '--certificatePassword %s ' +
           '--headNodeSize %s ' +
           '--workerNodeCount %s ' +
@@ -302,7 +302,7 @@ describe('arm', function () {
           '--clusterType %s ' +
           '--version %s ' +
           '--json ',
-          groupName, clusterNameLinux, location, 'Linux',
+          groupName, 'xplatTestHDInsightClusterCreate1942', location, 'Linux',
           defaultStorageAccount, defaultStorageAccountKey, defaultStorageContainer,
           objectId, aadTenantId, certificatePath, certificatePassword,
           headNodeSize, workerNodeCount, workerNodeSize, zookeeperNodeSize,
