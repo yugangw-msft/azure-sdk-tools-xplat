@@ -65,6 +65,31 @@ describe('arm', function () {
     });
 
     describe('create', function () {
+      it('should work when properties is passed', function (done) {
+        var groupName = suite.generateId('xTestResource', createdGroups, suite.isMocked);
+        var resourceName = suite.generateId('xtestgrpres', createdResources, suite.isMocked);
+        suite.execute('group create -n %s --location %s --json', groupName, testGroupLocation, function (result) {
+          result.exitStatus.should.equal(0);
+
+          suite.execute('resource create -g %s -n %s -r %s -o %s -p %s -l %s --json', groupName, resourceName, 'Microsoft.Storage/storageAccounts', '2015-06-15', '{"accountType": "Standard_LRS" }', 'westus', function (result) {
+            result.exitStatus.should.equal(0);
+
+            var resource = JSON.parse(result.text);
+            suite.execute('resource show -i %s -o %s --json', resource.id, '2015-06-15', function (showResult) {
+              showResult.exitStatus.should.equal(0);
+              var resourceGet = JSON.parse(showResult.text);
+              resourceGet.name.should.equal(resourceName);
+              resourceGet.properties.accountType.should.equal('Standard_LRS');
+
+              suite.execute('group delete %s --quiet --json', groupName, function () {
+                done();
+              });
+            });
+
+          });
+        });
+      });
+
       it('should work without switches', function (done) {
         var groupName = suite.generateId('xTestResource', createdGroups, suite.isMocked);
         var resourceName = suite.generateId('xTestGrpRes', createdResources, suite.isMocked);
@@ -88,7 +113,7 @@ describe('arm', function () {
             });
           });
         });
-            });
+      });
 
       it('should work with sku', function (done) {
         var groupName = suite.generateId('xTestResource', createdGroups, suite.isMocked);
