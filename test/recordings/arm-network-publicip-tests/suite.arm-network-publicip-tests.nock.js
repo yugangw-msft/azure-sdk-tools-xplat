@@ -27,4 +27,4 @@ exports.setEnvironment = function() {
 
 exports.scopes = [];
 
- exports.randomTestIdsGenerated = function() { return ['foo-domain1676','bar-domain4617'];};
+ exports.randomTestIdsGenerated = function() { return ['foo-domain6071','bar-domain6869'];};
