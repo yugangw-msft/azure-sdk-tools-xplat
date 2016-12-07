@@ -28,7 +28,7 @@ var requiredEnvironment = [
   { requiresToken: true },
   { name: 'AZURE_ARM_TEST_LOCATION', defaultValue: 'West US' },
   { name: 'AZURE_ARM_TEST_SQL_RESOURCE_LOCATION', defaultValue: 'West US' },
-  { name: 'AZURE_ARM_TEST_WEBSITES_RESOURCE_LOCATION', defaultValue: 'South Central US' }
+  { name: 'AZURE_ARM_TEST_WEBSITES_RESOURCE_LOCATION', defaultValue: 'West US' }
 ];
 
 var createdGroups = [];
@@ -96,7 +96,7 @@ describe('arm', function () {
         suite.execute('group create -n %s --location %s --json', groupName, testGroupLocation, function (result) {
           result.exitStatus.should.equal(0);
 
-          suite.execute('resource create %s %s %s %s %s --json', groupName, resourceName, 'Microsoft.Web/sites', testApiVersion, '{ "name": "' + resourceName + '", "siteMode": "Limited", "computeMode": "Shared" }', function (result) {
+          suite.execute('resource create %s %s %s %s -p %s --json', groupName, resourceName, 'Microsoft.Web/sites', testApiVersion, '{ "name": "' + resourceName + '", "siteMode": "Limited", "computeMode": "Shared" }', function (result) {
             result.exitStatus.should.equal(0);
 
             suite.execute('group show %s --json', groupName, function (showResult) {
@@ -131,7 +131,7 @@ describe('arm', function () {
               group.resources.some(function (res) {
                 return res.name === resourceName && utils.stringEndsWith(res.id, resourceName);
               }).should.be.true;
-                          
+
               suite.execute('resource show -i %s -o %s --json', resourceId, testApiVersion, function (showResult) {
                 showResult.exitStatus.should.equal(0);
                 JSON.parse(showResult.text).properties.sku.should.equal('Free');
@@ -333,7 +333,7 @@ describe('arm', function () {
                 }).should.be.false;
 
                 suite.execute('group delete %s --quiet --json', groupName, function () {
-                                        done();
+                  done();
                   });
                 });
               });
@@ -528,19 +528,22 @@ describe('arm', function () {
             suite.execute('resource show %s %s %s %s --json', groupName, resourceName, 'Microsoft.Web/sites', testApiVersion, function (showResult) {
               showResult.exitStatus.should.equal(0);
               var resourceId = JSON.parse(showResult.text).id;
-              
+
               //perform move to destination group
               suite.execute('group create %s --location %s --json', destinationGroupName, testGroupLocation, function (result) {
                 suite.execute('resource move -i %s -d %s -q', resourceId, destinationGroupName, function (moveResult) {
                   moveResult.exitStatus.should.equal(0);
-                  
+
                   //validate move was successful
                   suite.execute('resource show %s %s %s %s --json', destinationGroupName, resourceName, 'Microsoft.Web/sites', testApiVersion, function (showResult) {
-                    showResult.exitStatus.should.equal(0);
-                    suite.execute('group delete %s --quiet --json', groupName, function () {
-                      suite.execute('group delete %s --quiet --json', destinationGroupName, function () {
-                        done();
-                      });
+                     showResult.exitStatus.should.equal(0);
+                     suite.execute('resource delete %s %s %s %s --quiet --json', destinationGroupName, resourceName, 'Microsoft.Web/sites', testApiVersion, function (deleteResult) {
+                       deleteResult.exitStatus.should.equal(0);
+                       suite.execute('group delete %s --quiet --json', groupName, function () {
+                          suite.execute('group delete %s --quiet --json', destinationGroupName, function () {
+                            done();
+                         });
+                       });
                     });
                   });
                 });
@@ -591,9 +594,15 @@ describe('arm', function () {
                         var results = JSON.parse(listResult.text);
                         results.length.should.equal(2);
 
-                        suite.execute('group delete %s --quiet --json', groupName, function () {
-                          suite.execute('group delete %s --quiet --json', destinationGroupName, function () {
-                            done();
+                        suite.execute('resource delete %s %s %s %s --quiet --json', destinationGroupName, resourceName1, 'Microsoft.Web/sites', testApiVersion, function (deleteResult) {
+                          deleteResult.exitStatus.should.equal(0);
+                          suite.execute('resource delete %s %s %s %s --quiet --json', destinationGroupName, resourceName2, 'Microsoft.Web/sites', testApiVersion, function (deleteResult2) {
+                            deleteResult2.exitStatus.should.equal(0);
+                            suite.execute('group delete %s --quiet --json', groupName, function () {
+                              suite.execute('group delete %s --quiet --json', destinationGroupName, function () {
+                                done();
+                              });
+                            });
                           });
                         });
                       });
@@ -630,12 +639,15 @@ describe('arm', function () {
                               
                               //validate move was successful
                               suite.execute('resource show %s %s %s %s --json', destinationGroupName, resourceName, 'Microsoft.Web/sites', testApiVersion, function (showResult) {
-                                  showResult.exitStatus.should.equal(0);
+                                showResult.exitStatus.should.equal(0);
+                                suite.execute('resource delete %s %s %s %s --quiet --json', destinationGroupName, resourceName, 'Microsoft.Web/sites', testApiVersion, function (deleteResult) {
+                                  deleteResult.exitStatus.should.equal(0);
                                   suite.execute('group delete %s --quiet --json', groupName, function () {
-                                      suite.execute('group delete %s --quiet --json', destinationGroupName, function () {
-                                          done();
-                                      });
+                                    suite.execute('group delete %s --quiet --json', destinationGroupName, function () {
+                                      done();
+                                    });
                                   });
+                                });
                               });
                           });
                       });
@@ -668,12 +680,15 @@ describe('arm', function () {
                               
                               //validate move was successful
                               suite.execute('resource show %s %s %s %s --json', destinationGroupName, resourceName, 'Microsoft.Web/sites', testApiVersion, function (showResult) {
-                                  showResult.exitStatus.should.equal(0);
+                                showResult.exitStatus.should.equal(0);
+                                suite.execute('resource delete %s %s %s %s --quiet --json', destinationGroupName, resourceName, 'Microsoft.Web/sites', testApiVersion, function (deleteResult) {
+                                  deleteResult.exitStatus.should.equal(0);
                                   suite.execute('group delete %s --quiet --json', groupName, function () {
-                                      suite.execute('group delete %s --quiet --json', destinationGroupName, function () {
-                                          done();
-                                      });
+                                    suite.execute('group delete %s --quiet --json', destinationGroupName, function () {
+                                      done();
+                                    });
                                   });
+                                });
                               });
                           });
                       });
