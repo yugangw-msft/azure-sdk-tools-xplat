@@ -28025,11 +28025,11 @@
                   "description": "The port http traffic used on the origin server"
                 },
                 {
-                  "flags": "-w, --https-port [https-port]",
+                  "flags": "-s, --https-port [https-port]",
                   "required": 0,
                   "optional": -18,
                   "bool": true,
-                  "short": "-w",
+                  "short": "-s",
                   "long": "--https-port",
                   "description": "The port https traffic used on the origin server"
                 },
@@ -29189,6 +29189,355 @@
                   "short": "-d",
                   "long": "--custom-domain-host-name",
                   "description": "The host name of the custom domain"
+                },
+                {
+                  "flags": "--subscription <subscription>",
+                  "required": -16,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--subscription",
+                  "description": "the subscription identifier"
+                }
+              ]
+            }
+          ],
+          "categories": {}
+        },
+        "geofilter": {
+          "name": "geofilter",
+          "description": "Commands to manage Azure cdn profile endpoint geo filters",
+          "fullName": "cdn geofilter",
+          "usage": "[options] [command]",
+          "options": [],
+          "commands": [
+            {
+              "name": "list",
+              "description": "List geo filters by endpoint name, profile name, and resource group",
+              "fullName": "cdn geofilter list",
+              "usage": "[options] <endpoint-name> <profile-name> <resource-group>",
+              "filePath": "commands/arm/cdnmanagement/cdnmanagement._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "-e, --endpoint-name <endpoint-name>",
+                  "required": -21,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-e",
+                  "long": "--endpoint-name",
+                  "description": "Name of the endpoint"
+                },
+                {
+                  "flags": "-p, --profile-name <profile-name>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-p",
+                  "long": "--profile-name",
+                  "description": "Name of the profile"
+                },
+                {
+                  "flags": "-g, --resource-group <resource-group>",
+                  "required": -22,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-g",
+                  "long": "--resource-group",
+                  "description": "The resource group of the Azure Cdn Profile"
+                },
+                {
+                  "flags": "--subscription <subscription>",
+                  "required": -16,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--subscription",
+                  "description": "the subscription identifier"
+                }
+              ]
+            },
+            {
+              "name": "add",
+              "description": "Add a geo filters by endpoint name, profile name, and resource group",
+              "fullName": "cdn geofilter add",
+              "usage": "[options] <relative-path> <endpoint-name> <profile-name> <resource-group> <action> <country-codes>",
+              "filePath": "commands/arm/cdnmanagement/cdnmanagement._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "-r, --relative-path <relative-path>",
+                  "required": -21,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-r",
+                  "long": "--relative-path",
+                  "description": "Relative path of the geo filter"
+                },
+                {
+                  "flags": "-e, --endpoint-name <endpoint-name>",
+                  "required": -21,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-e",
+                  "long": "--endpoint-name",
+                  "description": "Name of the endpoint"
+                },
+                {
+                  "flags": "-p, --profile-name <profile-name>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-p",
+                  "long": "--profile-name",
+                  "description": "Name of the profile"
+                },
+                {
+                  "flags": "-g, --resource-group <resource-group>",
+                  "required": -22,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-g",
+                  "long": "--resource-group",
+                  "description": "The resource group of the Azure Cdn Profile"
+                },
+                {
+                  "flags": "-a, --action <action>",
+                  "required": -14,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-a",
+                  "long": "--action",
+                  "description": "Action of the geo filter. Valid input: -a [Block|Allow]"
+                },
+                {
+                  "flags": "-c, --country-codes <country-codes>",
+                  "required": -21,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-c",
+                  "long": "--country-codes",
+                  "description": "List of country codes to apply the geo filter"
+                },
+                {
+                  "flags": "--subscription <subscription>",
+                  "required": -16,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--subscription",
+                  "description": "the subscription identifier"
+                }
+              ]
+            },
+            {
+              "name": "set",
+              "description": "Update a geo filters by endpoint name, profile name, and resource group",
+              "fullName": "cdn geofilter set",
+              "usage": "[options] <relative-path> <endpoint-name> <profile-name> <resource-group> [action] [country-codes]",
+              "filePath": "commands/arm/cdnmanagement/cdnmanagement._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "-r, --relative-path <relative-path>",
+                  "required": -21,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-r",
+                  "long": "--relative-path",
+                  "description": "Relative path of the geo filter"
+                },
+                {
+                  "flags": "-e, --endpoint-name <endpoint-name>",
+                  "required": -21,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-e",
+                  "long": "--endpoint-name",
+                  "description": "Name of the endpoint"
+                },
+                {
+                  "flags": "-p, --profile-name <profile-name>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-p",
+                  "long": "--profile-name",
+                  "description": "Name of the profile"
+                },
+                {
+                  "flags": "-g, --resource-group <resource-group>",
+                  "required": -22,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-g",
+                  "long": "--resource-group",
+                  "description": "The resource group of the Azure Cdn Profile"
+                },
+                {
+                  "flags": "-a, --action [action]",
+                  "required": 0,
+                  "optional": -14,
+                  "bool": true,
+                  "short": "-a",
+                  "long": "--action",
+                  "description": "Action of the geo filter. Block or Allow."
+                },
+                {
+                  "flags": "-c, --country-codes [country-codes]",
+                  "required": 0,
+                  "optional": -21,
+                  "bool": true,
+                  "short": "-c",
+                  "long": "--country-codes",
+                  "description": "List of country codes to apply the geo filter"
+                },
+                {
+                  "flags": "--subscription <subscription>",
+                  "required": -16,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--subscription",
+                  "description": "the subscription identifier"
+                }
+              ]
+            },
+            {
+              "name": "delete",
+              "description": "Delete a geo filters by relative path, endpoint name, profile name, and resource group",
+              "fullName": "cdn geofilter delete",
+              "usage": "[options] <relative-path> <endpoint-name> <profile-name> <resource-group> <action> <country-codes>",
+              "filePath": "commands/arm/cdnmanagement/cdnmanagement._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "-r, --relative-path <relative-path>",
+                  "required": -21,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-r",
+                  "long": "--relative-path",
+                  "description": "Relative path of the geo filter"
+                },
+                {
+                  "flags": "-e, --endpoint-name <endpoint-name>",
+                  "required": -21,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-e",
+                  "long": "--endpoint-name",
+                  "description": "Name of the endpoint"
+                },
+                {
+                  "flags": "-p, --profile-name <profile-name>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-p",
+                  "long": "--profile-name",
+                  "description": "Name of the profile"
+                },
+                {
+                  "flags": "-g, --resource-group <resource-group>",
+                  "required": -22,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-g",
+                  "long": "--resource-group",
+                  "description": "The resource group of the Azure Cdn Profile"
                 },
                 {
                   "flags": "--subscription <subscription>",

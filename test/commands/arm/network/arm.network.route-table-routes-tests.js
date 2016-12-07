@@ -97,6 +97,18 @@ describe('arm', function () {
           });
         });
       });
+      it('show should display details about route', function (done) {
+        var cmd = 'network route-table route show -g {group} -r {tableName} -n {name} --json'.formatArgs(routeProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var route = JSON.parse(result.text);
+          route.name.should.equal(routeProp.name);
+          route.addressPrefix.should.equal(routeProp.addressPrefix);
+          route.nextHopType.should.equal(routeProp.nextHopType);
+          networkUtil.shouldBeSucceeded(route);
+          done();
+        });
+      });
       it('set should modify route in route table', function (done) {
         var cmd = util.format('network route-table route set -g {group} -r {tableName} -n {name} -a {newAddressPrefix} ' +
           '-y {newNextHopType} -p {nextHopIpAddress} --json').formatArgs(routeProp);
@@ -119,15 +131,6 @@ describe('arm', function () {
           _.some(routes, function (route) {
             return route.name === routeProp.name;
           }).should.be.true;
-          done();
-        });
-      });
-      it('show should display details about route', function (done) {
-        var cmd = 'network route-table route show -g {group} -r {tableName} -n {name} --json'.formatArgs(routeProp);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
-          result.exitStatus.should.equal(0);
-          var route = JSON.parse(result.text);
-          route.name.should.equal(routeProp.name);
           done();
         });
       });

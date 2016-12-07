@@ -166,6 +166,7 @@ describe('arm', function () {
                 '-j {portValue} -b {httpListenerProtocol} -w {ruleType} -a {skuName} -u {skuTier} -z {capacity} -t {tags} --json').formatArgs(gatewayProp);
               testUtils.executeCommand(suite, retry, cmd, function (result) {
                 result.exitStatus.should.equal(0);
+
                 var appGateway = JSON.parse(result.text);
                 appGateway.name.should.equal(gatewayProp.name);
                 appGateway.location.should.equal(gatewayProp.location);
@@ -173,25 +174,38 @@ describe('arm', function () {
                 appGateway.sku.tier.should.equal(gatewayProp.skuTier);
                 appGateway.sku.capacity.should.equal(gatewayProp.capacity);
 
-                var frontendPort = appGateway.frontendPorts[0];
-                frontendPort.name.should.equal(constants.appGateway.frontendPort.name);
-                frontendPort.port.should.equal(gatewayProp.portValue);
+                var ipConfigs = appGateway.gatewayIPConfigurations;
+                _.some(ipConfigs, function (ipConfig) {
+                  return ipConfig.name === gatewayProp.configName;
+                }).should.be.true;
 
-                var frontendIp = appGateway.frontendIPConfigurations[0];
-                frontendIp.name.should.equal(constants.appGateway.frontendIp.name);
+                var sslCertificates = appGateway.sslCertificates;
+                _.some(sslCertificates, function(sslCert) {
+                  return sslCert.name === gatewayProp.defSslCertName;
+                }).should.be.true;
 
-                var gatewayIp = appGateway.gatewayIPConfigurations[0];
-                gatewayIp.name.should.equal(constants.appGateway.gatewayIp.name);
+                var frontendIPs = appGateway.frontendIPConfigurations;
+                _.some(frontendIPs, function(frontendIP) {
+                  return frontendIP.name === constants.appGateway.frontendIp.name;
+                }).should.be.true;
 
-                var backendHttpSettings = appGateway.backendHttpSettingsCollection[0];
-                backendHttpSettings.name.should.equal(constants.appGateway.settings.name);
-                backendHttpSettings.port.should.equal(gatewayProp.httpSettingsPortAddress);
-                backendHttpSettings.protocol.toLowerCase().should.equal(gatewayProp.httpSettingsProtocol.toLowerCase());
-                backendHttpSettings.cookieBasedAffinity.should.equal(gatewayProp.cookieBasedAffinity);
+                var frontendPorts = appGateway.frontendPorts;
+                _.some(frontendPorts, function(frontendPort) {
+                  return frontendPort.port === gatewayProp.portValue;
+                }).should.be.true;
+
+                var addressPools = appGateway.backendAddressPools;
+                _.some(addressPools, function(addressPool) {
+                  return addressPool.name === constants.appGateway.pool.name;
+                }).should.be.true;
+
+                var backendHttpSetting = appGateway.backendHttpSettingsCollection[0];
+                backendHttpSetting.port.should.be.equal(gatewayProp.httpSettingsPortAddress);
+                backendHttpSetting.protocol.toLowerCase().should.be.equal(gatewayProp.httpSettingsProtocol.toLowerCase());
+                backendHttpSetting.cookieBasedAffinity.should.be.equal(gatewayProp.cookieBasedAffinity);
 
                 var httpListener = appGateway.httpListeners[0];
-                httpListener.name.should.equal(constants.appGateway.httpListener.name);
-                httpListener.protocol.toLowerCase().should.equal(gatewayProp.httpListenerProtocol.toLowerCase());
+                httpListener.protocol.toLowerCase().should.be.equal(gatewayProp.httpListenerProtocol.toLowerCase());
 
                 networkUtil.shouldHaveTags(appGateway);
                 networkUtil.shouldBeSucceeded(appGateway);
@@ -219,8 +233,47 @@ describe('arm', function () {
         var cmd = 'network application-gateway show {group} {name} --json'.formatArgs(gatewayProp);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
+
           var appGateway = JSON.parse(result.text);
           appGateway.name.should.equal(gatewayProp.name);
+          appGateway.location.should.equal(gatewayProp.location);
+          appGateway.sku.name.should.equal(gatewayProp.skuName);
+          appGateway.sku.tier.should.equal(gatewayProp.skuTier);
+          appGateway.sku.capacity.should.equal(gatewayProp.capacity);
+
+          var ipConfigs = appGateway.gatewayIPConfigurations;
+          _.some(ipConfigs, function (ipConfig) {
+            return ipConfig.name === gatewayProp.configName;
+          }).should.be.true;
+
+          var sslCertificates = appGateway.sslCertificates;
+          _.some(sslCertificates, function(sslCert) {
+            return sslCert.name === gatewayProp.defSslCertName;
+          }).should.be.true;
+
+          var frontendIPs = appGateway.frontendIPConfigurations;
+          _.some(frontendIPs, function(frontendIP) {
+            return frontendIP.name === constants.appGateway.frontendIp.name;
+          }).should.be.true;
+
+          var frontendPorts = appGateway.frontendPorts;
+          _.some(frontendPorts, function(frontendPort) {
+            return frontendPort.port === gatewayProp.portValue;
+          }).should.be.true;
+
+          var addressPools = appGateway.backendAddressPools;
+          _.some(addressPools, function(addressPool) {
+            return addressPool.name === constants.appGateway.pool.name;
+          }).should.be.true;
+
+          var backendHttpSetting = appGateway.backendHttpSettingsCollection[0];
+          backendHttpSetting.port.should.be.equal(gatewayProp.httpSettingsPortAddress);
+          backendHttpSetting.protocol.toLowerCase().should.be.equal(gatewayProp.httpSettingsProtocol.toLowerCase());
+          backendHttpSetting.cookieBasedAffinity.should.be.equal(gatewayProp.cookieBasedAffinity);
+
+          var httpListener = appGateway.httpListeners[0];
+          httpListener.protocol.toLowerCase().should.be.equal(gatewayProp.httpListenerProtocol.toLowerCase());
+
           networkUtil.shouldBeSucceeded(appGateway);
           done();
         });

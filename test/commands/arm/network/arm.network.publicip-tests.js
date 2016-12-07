@@ -86,6 +86,20 @@ describe('arm', function () {
           });
         });
       });
+      it('show should display publicip details', function (done) {
+        var cmd = 'network public-ip show -g {group} -n {name} --json'.formatArgs(publicIpProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var ip = JSON.parse(result.text);
+          ip.name.should.equal(publicIpProp.name);
+          ip.publicIPAllocationMethod.should.equal(publicIpProp.allocationMethod);
+          // ip.publicIPAddressVersion.should.equal(publicIpProp.ipVersion);
+          ip.idleTimeoutInMinutes.should.equal(publicIpProp.idleTimeout);
+          ip.dnsSettings.domainNameLabel.should.equal(publicIpProp.domainName);
+          networkUtil.shouldHaveTags(ip);
+          done();
+        });
+      });
       it('set should modify publicip', function (done) {
         var cmd = 'network public-ip set -g {group} -n {name} -d {newDomainName} -a {newAllocationMethod} -i {newIdleTimeout} -t {newTags} --json'
           .formatArgs(publicIpProp);
@@ -102,15 +116,7 @@ describe('arm', function () {
           done();
         });
       });
-      it('show should display publicip details', function (done) {
-        var cmd = 'network public-ip show -g {group} -n {name} --json'.formatArgs(publicIpProp);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
-          result.exitStatus.should.equal(0);
-          var ip = JSON.parse(result.text);
-          ip.name.should.equal(publicIpProp.name);
-          done();
-        });
-      });
+
       it('list should display all publicips in resource group', function (done) {
         var cmd = 'network public-ip list -g {group} --json'.formatArgs(publicIpProp);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
