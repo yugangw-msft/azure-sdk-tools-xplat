@@ -43241,7 +43241,7 @@
                   "name": "create",
                   "description": "adds the specified firewall rule to the specified Data Lake Store account.",
                   "fullName": "datalake store firewall create",
-                  "usage": "[options] <accountName> <name> <startIpAddress> <endIpAddress> <resource-group>",
+                  "usage": "[options] <accountName> <name> <startIpAddress> <endIpAddress>",
                   "filePath": "commands/arm/datalakestore/datalakestore._js",
                   "options": [
                     {
@@ -43329,7 +43329,7 @@
                   "name": "set",
                   "description": "updates the specified firewall rule in the specified Data Lake Store account.",
                   "fullName": "datalake store firewall set",
-                  "usage": "[options] <accountName> <name> <resource-group>",
+                  "usage": "[options] <accountName> <name>",
                   "filePath": "commands/arm/datalakestore/datalakestore._js",
                   "options": [
                     {
@@ -43417,7 +43417,7 @@
                   "name": "show",
                   "description": "retrieves the specified firewall rule in the specified Data Lake Store account.",
                   "fullName": "datalake store firewall show",
-                  "usage": "[options] <accountName> <resource-group> <name>",
+                  "usage": "[options] <accountName> <name>",
                   "filePath": "commands/arm/datalakestore/datalakestore._js",
                   "options": [
                     {
@@ -43487,7 +43487,7 @@
                   "name": "list",
                   "description": "retrieves all firewall rules in the specified Data Lake Store account.",
                   "fullName": "datalake store firewall list",
-                  "usage": "[options] <accountName> <resource-group>",
+                  "usage": "[options] <accountName>",
                   "filePath": "commands/arm/datalakestore/datalakestore._js",
                   "options": [
                     {
@@ -43548,7 +43548,7 @@
                   "name": "delete",
                   "description": "removes the specified firewall rule in the specified Data Lake Store account.",
                   "fullName": "datalake store firewall delete",
-                  "usage": "[options] <accountName> <resource-group> <name>",
+                  "usage": "[options] <accountName> <name>",
                   "filePath": "commands/arm/datalakestore/datalakestore._js",
                   "options": [
                     {
@@ -43637,7 +43637,7 @@
                   "name": "create",
                   "description": "adds the specified trusted identity provider to the specified Data Lake Store account.",
                   "fullName": "datalake store provider create",
-                  "usage": "[options] <accountName> <resource-group> <name> <providerEndpoint>",
+                  "usage": "[options] <accountName> <name> <providerEndpoint>",
                   "filePath": "commands/arm/datalakestore/datalakestore._js",
                   "options": [
                     {
@@ -43716,7 +43716,7 @@
                   "name": "set",
                   "description": "updates the specified trusted identity provider in the specified Data Lake Store account.",
                   "fullName": "datalake store provider set",
-                  "usage": "[options] <accountName> <resource-group> <name> <providerEndpoint>",
+                  "usage": "[options] <accountName> <name> <providerEndpoint>",
                   "filePath": "commands/arm/datalakestore/datalakestore._js",
                   "options": [
                     {
@@ -43795,7 +43795,7 @@
                   "name": "show",
                   "description": "retrieves the specified trusted identity provider in the specified Data Lake Store account.",
                   "fullName": "datalake store provider show",
-                  "usage": "[options] <accountName> <resource-group> <name>",
+                  "usage": "[options] <accountName> <name>",
                   "filePath": "commands/arm/datalakestore/datalakestore._js",
                   "options": [
                     {
@@ -43865,7 +43865,7 @@
                   "name": "list",
                   "description": "retrieves all trusted identity providers in the specified Data Lake Store account.",
                   "fullName": "datalake store provider list",
-                  "usage": "[options] <accountName> <resource-group>",
+                  "usage": "[options] <accountName>",
                   "filePath": "commands/arm/datalakestore/datalakestore._js",
                   "options": [
                     {
@@ -43926,7 +43926,7 @@
                   "name": "delete",
                   "description": "removes the specified trusted identity provider in the specified Data Lake Store account.",
                   "fullName": "datalake store provider delete",
-                  "usage": "[options] <accountName> <resource-group> <name>",
+                  "usage": "[options] <accountName> <name>",
                   "filePath": "commands/arm/datalakestore/datalakestore._js",
                   "options": [
                     {
@@ -44378,40 +44378,22 @@
                       "description": "the optional default permissions group to set in the existing account"
                     },
                     {
-                      "flags": "-e --encryption <'UserManaged'|'ServiceManaged'>",
-                      "required": -17,
+                      "flags": "-t --trustedIdProviderState <Enabled|Disabled>",
+                      "required": -29,
                       "optional": 0,
                       "bool": true,
-                      "short": "-e",
-                      "long": "--encryption",
-                      "description": "optionally indicates what type of encryption to provision the account with, if any. Valid values are UserManaged or ServiceManaged"
+                      "short": "-t",
+                      "long": "--trustedIdProviderState",
+                      "description": "optionally enable or disable existing trusted identity providers. Valid values are 'Enabled' or 'Disabled'"
                     },
                     {
-                      "flags": "-k --keyVaultId <key vault id>",
-                      "required": -17,
+                      "flags": "-f --firewallState <Enabled|Disabled>",
+                      "required": -20,
                       "optional": 0,
                       "bool": true,
-                      "short": "-k",
-                      "long": "--keyVaultId",
-                      "description": "if the encryption type is UserAssigned, this is the id of the key vault the user wishes to use"
-                    },
-                    {
-                      "flags": "-y --keyName <key name>",
-                      "required": -14,
-                      "optional": 0,
-                      "bool": true,
-                      "short": "-y",
-                      "long": "--keyName",
-                      "description": "if the encryption type is UserAssigned, this is the key name in the key vault the user wishes to use"
-                    },
-                    {
-                      "flags": "-s --keyVersion <key version>",
-                      "required": -17,
-                      "optional": 0,
-                      "bool": true,
-                      "short": "-s",
-                      "long": "--keyVersion",
-                      "description": "if the encryption type is UserAssigned, this is the key version of the key the user wishes to use"
+                      "short": "-f",
+                      "long": "--firewallState",
+                      "description": "optionally enable or disable existing firewall rules. Valid values are 'Enabled' or 'Disabled'"
                     },
                     {
                       "flags": "-t --tags <tags>",
