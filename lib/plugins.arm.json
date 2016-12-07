@@ -41960,7 +41960,7 @@
                       "name": "set",
                       "description": "Sets an existing data source (Azure Blob) in the Data Lake Analytics Account. Typically used to update the access key (for Azure Blob)",
                       "fullName": "datalake analytics account datasource set",
-                      "usage": "[options] <accountName>",
+                      "usage": "[options] <accountName> <azureBlob> <accessKey>",
                       "filePath": "commands/arm/datalakeanalytics/datalakeanalytics._js",
                       "options": [
                         {
