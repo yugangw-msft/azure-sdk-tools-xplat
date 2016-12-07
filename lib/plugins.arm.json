@@ -28025,11 +28025,11 @@
                   "description": "The port http traffic used on the origin server"
                 },
                 {
-                  "flags": "-w, --https-port [https-port]",
+                  "flags": "-s, --https-port [https-port]",
                   "required": 0,
                   "optional": -18,
                   "bool": true,
-                  "short": "-w",
+                  "short": "-s",
                   "long": "--https-port",
                   "description": "The port https traffic used on the origin server"
                 },
@@ -29189,6 +29189,355 @@
                   "short": "-d",
                   "long": "--custom-domain-host-name",
                   "description": "The host name of the custom domain"
+                },
+                {
+                  "flags": "--subscription <subscription>",
+                  "required": -16,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--subscription",
+                  "description": "the subscription identifier"
+                }
+              ]
+            }
+          ],
+          "categories": {}
+        },
+        "geofilter": {
+          "name": "geofilter",
+          "description": "Commands to manage Azure cdn profile endpoint geo filters",
+          "fullName": "cdn geofilter",
+          "usage": "[options] [command]",
+          "options": [],
+          "commands": [
+            {
+              "name": "list",
+              "description": "List geo filters by endpoint name, profile name, and resource group",
+              "fullName": "cdn geofilter list",
+              "usage": "[options] <endpoint-name> <profile-name> <resource-group>",
+              "filePath": "commands/arm/cdnmanagement/cdnmanagement._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "-e, --endpoint-name <endpoint-name>",
+                  "required": -21,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-e",
+                  "long": "--endpoint-name",
+                  "description": "Name of the endpoint"
+                },
+                {
+                  "flags": "-p, --profile-name <profile-name>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-p",
+                  "long": "--profile-name",
+                  "description": "Name of the profile"
+                },
+                {
+                  "flags": "-g, --resource-group <resource-group>",
+                  "required": -22,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-g",
+                  "long": "--resource-group",
+                  "description": "The resource group of the Azure Cdn Profile"
+                },
+                {
+                  "flags": "--subscription <subscription>",
+                  "required": -16,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--subscription",
+                  "description": "the subscription identifier"
+                }
+              ]
+            },
+            {
+              "name": "add",
+              "description": "Add a geo filters by endpoint name, profile name, and resource group",
+              "fullName": "cdn geofilter add",
+              "usage": "[options] <relative-path> <endpoint-name> <profile-name> <resource-group> <action> <country-codes>",
+              "filePath": "commands/arm/cdnmanagement/cdnmanagement._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "-r, --relative-path <relative-path>",
+                  "required": -21,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-r",
+                  "long": "--relative-path",
+                  "description": "Relative path of the geo filter"
+                },
+                {
+                  "flags": "-e, --endpoint-name <endpoint-name>",
+                  "required": -21,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-e",
+                  "long": "--endpoint-name",
+                  "description": "Name of the endpoint"
+                },
+                {
+                  "flags": "-p, --profile-name <profile-name>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-p",
+                  "long": "--profile-name",
+                  "description": "Name of the profile"
+                },
+                {
+                  "flags": "-g, --resource-group <resource-group>",
+                  "required": -22,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-g",
+                  "long": "--resource-group",
+                  "description": "The resource group of the Azure Cdn Profile"
+                },
+                {
+                  "flags": "-a, --action <action>",
+                  "required": -14,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-a",
+                  "long": "--action",
+                  "description": "Action of the geo filter. Valid input: -a [Block|Allow]"
+                },
+                {
+                  "flags": "-c, --country-codes <country-codes>",
+                  "required": -21,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-c",
+                  "long": "--country-codes",
+                  "description": "List of country codes to apply the geo filter"
+                },
+                {
+                  "flags": "--subscription <subscription>",
+                  "required": -16,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--subscription",
+                  "description": "the subscription identifier"
+                }
+              ]
+            },
+            {
+              "name": "set",
+              "description": "Update a geo filters by endpoint name, profile name, and resource group",
+              "fullName": "cdn geofilter set",
+              "usage": "[options] <relative-path> <endpoint-name> <profile-name> <resource-group> [action] [country-codes]",
+              "filePath": "commands/arm/cdnmanagement/cdnmanagement._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "-r, --relative-path <relative-path>",
+                  "required": -21,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-r",
+                  "long": "--relative-path",
+                  "description": "Relative path of the geo filter"
+                },
+                {
+                  "flags": "-e, --endpoint-name <endpoint-name>",
+                  "required": -21,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-e",
+                  "long": "--endpoint-name",
+                  "description": "Name of the endpoint"
+                },
+                {
+                  "flags": "-p, --profile-name <profile-name>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-p",
+                  "long": "--profile-name",
+                  "description": "Name of the profile"
+                },
+                {
+                  "flags": "-g, --resource-group <resource-group>",
+                  "required": -22,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-g",
+                  "long": "--resource-group",
+                  "description": "The resource group of the Azure Cdn Profile"
+                },
+                {
+                  "flags": "-a, --action [action]",
+                  "required": 0,
+                  "optional": -14,
+                  "bool": true,
+                  "short": "-a",
+                  "long": "--action",
+                  "description": "Action of the geo filter. Block or Allow."
+                },
+                {
+                  "flags": "-c, --country-codes [country-codes]",
+                  "required": 0,
+                  "optional": -21,
+                  "bool": true,
+                  "short": "-c",
+                  "long": "--country-codes",
+                  "description": "List of country codes to apply the geo filter"
+                },
+                {
+                  "flags": "--subscription <subscription>",
+                  "required": -16,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--subscription",
+                  "description": "the subscription identifier"
+                }
+              ]
+            },
+            {
+              "name": "delete",
+              "description": "Delete a geo filters by relative path, endpoint name, profile name, and resource group",
+              "fullName": "cdn geofilter delete",
+              "usage": "[options] <relative-path> <endpoint-name> <profile-name> <resource-group> <action> <country-codes>",
+              "filePath": "commands/arm/cdnmanagement/cdnmanagement._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "-r, --relative-path <relative-path>",
+                  "required": -21,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-r",
+                  "long": "--relative-path",
+                  "description": "Relative path of the geo filter"
+                },
+                {
+                  "flags": "-e, --endpoint-name <endpoint-name>",
+                  "required": -21,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-e",
+                  "long": "--endpoint-name",
+                  "description": "Name of the endpoint"
+                },
+                {
+                  "flags": "-p, --profile-name <profile-name>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-p",
+                  "long": "--profile-name",
+                  "description": "Name of the profile"
+                },
+                {
+                  "flags": "-g, --resource-group <resource-group>",
+                  "required": -22,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-g",
+                  "long": "--resource-group",
+                  "description": "The resource group of the Azure Cdn Profile"
                 },
                 {
                   "flags": "--subscription <subscription>",
@@ -66159,7 +66508,7 @@
                   "bool": true,
                   "short": "-g",
                   "long": "--resource-group",
-                  "description": "the name of the resource group"
+                  "description": "the resource group"
                 },
                 {
                   "flags": "-n, --name <name>",
@@ -66180,6 +66529,15 @@
                   "description": "the location"
                 },
                 {
+                  "flags": "-i, --ip-address <ip-address>",
+                  "required": -18,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-i",
+                  "long": "--ip-address",
+                  "description": "the IP address of the local network site"
+                },
+                {
                   "flags": "-a, --address-space [address-space]",
                   "required": 0,
                   "optional": -21,
@@ -66189,13 +66547,31 @@
                   "description": "the comma separated list of address prefixes in CIDR format"
                 },
                 {
-                  "flags": "-i, --ip-address <ip-address>",
-                  "required": -18,
-                  "optional": 0,
+                  "flags": "-j, --asn [asn]",
+                  "required": 0,
+                  "optional": -11,
                   "bool": true,
-                  "short": "-i",
-                  "long": "--ip-address",
-                  "description": "the IP address of the local network site"
+                  "short": "-j",
+                  "long": "--asn",
+                  "description": "The BGP speaker's ASN."
+                },
+                {
+                  "flags": "-b, --bgp-peering-address [bgp-peering-address]",
+                  "required": 0,
+                  "optional": -27,
+                  "bool": true,
+                  "short": "-b",
+                  "long": "--bgp-peering-address",
+                  "description": "The BGP peering address and BGP identifier of this BGP speaker."
+                },
+                {
+                  "flags": "-w, --peer-weight [peer-weight]",
+                  "required": 0,
+                  "optional": -19,
+                  "bool": true,
+                  "short": "-w",
+                  "long": "--peer-weight",
+                  "description": "The weight added to routes learned from this BGP speaker."
                 },
                 {
                   "flags": "-t, --tags [tags]",
@@ -66275,6 +66651,42 @@
                   "short": "-a",
                   "long": "--address-space",
                   "description": "the comma separated list of address prefixes in CIDR format"
+                },
+                {
+                  "flags": "-i, --ip-address [ip-address]",
+                  "required": 0,
+                  "optional": -18,
+                  "bool": true,
+                  "short": "-i",
+                  "long": "--ip-address",
+                  "description": "IP address of local network gateway."
+                },
+                {
+                  "flags": "-j, --asn [asn]",
+                  "required": 0,
+                  "optional": -11,
+                  "bool": true,
+                  "short": "-j",
+                  "long": "--asn",
+                  "description": "The BGP speaker's ASN."
+                },
+                {
+                  "flags": "-b, --bgp-peering-address [bgp-peering-address]",
+                  "required": 0,
+                  "optional": -27,
+                  "bool": true,
+                  "short": "-b",
+                  "long": "--bgp-peering-address",
+                  "description": "The BGP peering address and BGP identifier of this BGP speaker."
+                },
+                {
+                  "flags": "-w, --peer-weight [peer-weight]",
+                  "required": 0,
+                  "optional": -19,
+                  "bool": true,
+                  "short": "-w",
+                  "long": "--peer-weight",
+                  "description": "The weight added to routes learned from this BGP speaker."
                 },
                 {
                   "flags": "-t, --tags [tags]",
