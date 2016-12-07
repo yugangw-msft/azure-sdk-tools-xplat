@@ -116,6 +116,25 @@ describe('arm', function () {
           });
         });
       });
+      it('show should display details about nsg rule ', function (done) {
+        var cmd = 'network nsg rule show -g {group} -a {nsgName} -n {name} --json'.formatArgs(ruleProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var rule = JSON.parse(result.text);
+          rule.name.should.equal(ruleProp.name);
+          rule.description.should.equal(ruleProp.description);
+          rule.protocol.should.equal(ruleProp.protocol);
+          rule.sourceAddressPrefix.should.equal(ruleProp.sourceAddressPrefix);
+          rule.sourcePortRange.should.equal(ruleProp.sourcePortRange);
+          rule.destinationAddressPrefix.should.equal(ruleProp.destinationAddressPrefix);
+          rule.destinationPortRange.should.equal(ruleProp.destinationPortRange);
+          rule.access.should.equal(ruleProp.access);
+          rule.priority.should.equal(ruleProp.priority);
+          rule.direction.should.equal(ruleProp.direction);
+          networkUtil.shouldBeSucceeded(rule);
+          done();
+        });
+      });
       it('set should modify nsg rule', function (done) {
         var cmd = util.format('network nsg rule set -g {group} -a {nsgName} -n {name} -d {newDescription} -p {newProtocol} ' +
           '-f {newSourceAddressPrefix} -o {newSourcePortRange} -e {newDestinationAddressPrefix} -u {newDestinationPortRange} ' +
@@ -135,15 +154,6 @@ describe('arm', function () {
           rule.priority.should.equal(ruleProp.newPriority);
           rule.direction.should.equal(ruleProp.newDirection);
           networkUtil.shouldBeSucceeded(rule);
-          done();
-        });
-      });
-      it('show should display details about nsg rule ', function (done) {
-        var cmd = 'network nsg rule show -g {group} -a {nsgName} -n {name} --json'.formatArgs(ruleProp);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
-          result.exitStatus.should.equal(0);
-          var rule = JSON.parse(result.text);
-          rule.name.should.equal(ruleProp.name);
           done();
         });
       });
