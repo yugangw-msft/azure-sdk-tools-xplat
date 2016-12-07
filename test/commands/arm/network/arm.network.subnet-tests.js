@@ -97,6 +97,18 @@ describe('arm', function () {
           });
         });
       });
+      it('show should display details about subnet', function (done) {
+        var cmd = 'network vnet subnet show -g {group} -e {vnetName} -n {name} --json'.formatArgs(subnetProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var subnet = JSON.parse(result.text);
+          subnet.name.should.equal(subnetProp.name);
+          subnet.networkSecurityGroup.id.should.containEql(subnetProp.nsgName);
+          subnet.routeTable.id.should.containEql(subnetProp.routeTableName);
+          networkUtil.shouldBeSucceeded(subnet);
+          done();
+        });
+      });
       it('set should unset nsg and route table', function (done) {
         var cmd = 'network vnet subnet set -g {group} -e {vnetName} -n {name} -o -r --json'.formatArgs(subnetProp);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
@@ -131,15 +143,6 @@ describe('arm', function () {
           _.some(subnets, function (subnet) {
             return subnet.name === subnetProp.name;
           }).should.be.true;
-          done();
-        });
-      });
-      it('show should display details about subnet', function (done) {
-        var cmd = 'network vnet subnet show -g {group} -e {vnetName} -n {name} --json'.formatArgs(subnetProp);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
-          result.exitStatus.should.equal(0);
-          var subnet = JSON.parse(result.text);
-          subnet.name.should.equal(subnetProp.name);
           done();
         });
       });
