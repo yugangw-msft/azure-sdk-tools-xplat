@@ -44290,7 +44290,7 @@
                       "description": "if the encryption type is UserAssigned, this is the key name in the key vault the user wishes to use"
                     },
                     {
-                      "flags": "-s --keyVersion <key vault id>",
+                      "flags": "-s --keyVersion <key version>",
                       "required": -17,
                       "optional": 0,
                       "bool": true,
@@ -44396,7 +44396,7 @@
                       "description": "if the encryption type is UserAssigned, this is the id of the key vault the user wishes to use"
                     },
                     {
-                      "flags": "-y --keyName <key vault id>",
+                      "flags": "-y --keyName <key name>",
                       "required": -14,
                       "optional": 0,
                       "bool": true,
@@ -44405,7 +44405,7 @@
                       "description": "if the encryption type is UserAssigned, this is the key name in the key vault the user wishes to use"
                     },
                     {
-                      "flags": "-s --keyVersion <key vault id>",
+                      "flags": "-s --keyVersion <key version>",
                       "required": -17,
                       "optional": 0,
                       "bool": true,
