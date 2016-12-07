@@ -40349,8 +40349,8 @@
                       "description": "optionally specify the type of compilation to do. Valid values are 'Semantic', 'Full', and 'SingleBox' Default is Full."
                     },
                     {
-                      "flags": "-c --compileOnly <compileOnly>",
-                      "required": -18,
+                      "flags": "-c --compileOnly",
+                      "required": 0,
                       "optional": 0,
                       "bool": true,
                       "short": "-c",
@@ -40592,7 +40592,7 @@
                       "bool": true,
                       "short": "-w",
                       "long": "--waitInterval",
-                      "description": "the amount of time to wait between each poll of the job, in seconds. Default is five seconds."
+                      "description": "the optional amount of time to wait between each poll of the job, in seconds. Default is five seconds."
                     },
                     {
                       "flags": "-t --timeout <max time to wait in seconds>",
@@ -40601,7 +40601,7 @@
                       "bool": true,
                       "short": "-t",
                       "long": "--timeout",
-                      "description": "the maximum amount of time to wait for the job to complete, in seconds. Default is to never timeout."
+                      "description": "the optional maximum amount of time to wait for the job to complete, in seconds. Default is to never timeout."
                     },
                     {
                       "flags": "-s, --subscription <id>",
@@ -42745,7 +42745,7 @@
                   "name": "read",
                   "description": "Previews the specified Data Lake Store file starting at index 0 (or the specified offset) until the length is reached, displaying the results to the console.",
                   "fullName": "datalake store filesystem read",
-                  "usage": "[options] <accountName> <path> <length>",
+                  "usage": "[options] <accountName> <path>",
                   "filePath": "commands/arm/datalakestore/datalakestore._js",
                   "options": [
                     {
@@ -43241,7 +43241,7 @@
                   "name": "create",
                   "description": "adds the specified firewall rule to the specified Data Lake Store account.",
                   "fullName": "datalake store firewall create",
-                  "usage": "[options] <accountName> <resource-group> <name> <startIpAddress> <endIpAddress>",
+                  "usage": "[options] <accountName> <name> <startIpAddress> <endIpAddress> <resource-group>",
                   "filePath": "commands/arm/datalakestore/datalakestore._js",
                   "options": [
                     {
@@ -43270,29 +43270,20 @@
                       "description": "use json output"
                     },
                     {
-                      "flags": "-n --accountName <accountName>",
+                      "flags": "-a --accountName <accountName>",
                       "required": -18,
                       "optional": 0,
                       "bool": true,
-                      "short": "-n",
+                      "short": "-a",
                       "long": "--accountName",
                       "description": "the Data Lake Store account name to execute the action on"
                     },
                     {
-                      "flags": "-g --resource-group <resource-group>",
-                      "required": -21,
-                      "optional": 0,
-                      "bool": true,
-                      "short": "-g",
-                      "long": "--resource-group",
-                      "description": "optionally explicitly set the resource group. If not specified, will attempt to discover it."
-                    },
-                    {
-                      "flags": "-f --name <firewall rule name>",
+                      "flags": "-n --name <firewall rule name>",
                       "required": -11,
                       "optional": 0,
                       "bool": true,
-                      "short": "-f",
+                      "short": "-n",
                       "long": "--name",
                       "description": "the name of the firewall rule to add"
                     },
@@ -43315,6 +43306,15 @@
                       "description": "the end of the valid ip range for the firewall rule"
                     },
                     {
+                      "flags": "-g --resource-group <resource-group>",
+                      "required": -21,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-g",
+                      "long": "--resource-group",
+                      "description": "optionally explicitly set the resource group. If not specified, will attempt to discover it."
+                    },
+                    {
                       "flags": "-s, --subscription <id>",
                       "required": -20,
                       "optional": 0,
@@ -43329,7 +43329,7 @@
                   "name": "set",
                   "description": "updates the specified firewall rule in the specified Data Lake Store account.",
                   "fullName": "datalake store firewall set",
-                  "usage": "[options] <accountName> <resource-group> <name> <startIpAddress> <endIpAddress>",
+                  "usage": "[options] <accountName> <name> <resource-group>",
                   "filePath": "commands/arm/datalakestore/datalakestore._js",
                   "options": [
                     {
@@ -43358,29 +43358,20 @@
                       "description": "use json output"
                     },
                     {
-                      "flags": "-n --accountName <accountName>",
+                      "flags": "-a --accountName <accountName>",
                       "required": -18,
                       "optional": 0,
                       "bool": true,
-                      "short": "-n",
+                      "short": "-a",
                       "long": "--accountName",
                       "description": "the Data Lake Store account name to execute the action on"
                     },
                     {
-                      "flags": "-g --resource-group <resource-group>",
-                      "required": -21,
-                      "optional": 0,
-                      "bool": true,
-                      "short": "-g",
-                      "long": "--resource-group",
-                      "description": "optionally explicitly set the resource group. If not specified, will attempt to discover it."
-                    },
-                    {
-                      "flags": "-f --name <firewall rule name>",
+                      "flags": "-n --name <firewall rule name>",
                       "required": -11,
                       "optional": 0,
                       "bool": true,
-                      "short": "-f",
+                      "short": "-n",
                       "long": "--name",
                       "description": "the name of the firewall rule to update"
                     },
@@ -43401,6 +43392,15 @@
                       "short": "-e",
                       "long": "--endIpAddress",
                       "description": "the optional new end of the valid ip range for the firewall rule"
+                    },
+                    {
+                      "flags": "-g --resource-group <resource-group>",
+                      "required": -21,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-g",
+                      "long": "--resource-group",
+                      "description": "optionally explicitly set the resource group. If not specified, will attempt to discover it."
                     },
                     {
                       "flags": "-s, --subscription <id>",
@@ -43446,11 +43446,11 @@
                       "description": "use json output"
                     },
                     {
-                      "flags": "-n --accountName <accountName>",
+                      "flags": "-a --accountName <accountName>",
                       "required": -18,
                       "optional": 0,
                       "bool": true,
-                      "short": "-n",
+                      "short": "-a",
                       "long": "--accountName",
                       "description": "the Data Lake Store account name to execute the action on"
                     },
@@ -43464,11 +43464,11 @@
                       "description": "optionally explicitly set the resource group. If not specified, will attempt to discover it."
                     },
                     {
-                      "flags": "-f --name <firewall rule name>",
+                      "flags": "-n --name <firewall rule name>",
                       "required": -11,
                       "optional": 0,
                       "bool": true,
-                      "short": "-f",
+                      "short": "-n",
                       "long": "--name",
                       "description": "the name of the firewall rule to display"
                     },
@@ -43577,11 +43577,11 @@
                       "description": "use json output"
                     },
                     {
-                      "flags": "-n --accountName <accountName>",
+                      "flags": "-a --accountName <accountName>",
                       "required": -18,
                       "optional": 0,
                       "bool": true,
-                      "short": "-n",
+                      "short": "-a",
                       "long": "--accountName",
                       "description": "the Data Lake Store account name to execute the action on"
                     },
@@ -43595,11 +43595,11 @@
                       "description": "the optional resource group to list the accounts in"
                     },
                     {
-                      "flags": "-f --name <firewall rule name>",
+                      "flags": "-n --name <firewall rule name>",
                       "required": -11,
                       "optional": 0,
                       "bool": true,
-                      "short": "-f",
+                      "short": "-n",
                       "long": "--name",
                       "description": "the name of the firewall rule to delete"
                     },
@@ -43666,11 +43666,11 @@
                       "description": "use json output"
                     },
                     {
-                      "flags": "-n --accountName <accountName>",
+                      "flags": "-a --accountName <accountName>",
                       "required": -18,
                       "optional": 0,
                       "bool": true,
-                      "short": "-n",
+                      "short": "-a",
                       "long": "--accountName",
                       "description": "the Data Lake Store account name to execute the action on"
                     },
@@ -43684,11 +43684,11 @@
                       "description": "optionally explicitly set the resource group. If not specified, will attempt to discover it."
                     },
                     {
-                      "flags": "-t --name <trusted identity provider name>",
+                      "flags": "-n --name <trusted identity provider name>",
                       "required": -11,
                       "optional": 0,
                       "bool": true,
-                      "short": "-t",
+                      "short": "-n",
                       "long": "--name",
                       "description": "the name of the trusted identity provider to add"
                     },
@@ -43699,7 +43699,7 @@
                       "bool": true,
                       "short": "-e",
                       "long": "--providerEndpoint",
-                      "description": "the new valid trusted provider endpoint in the format: https://sts.windows.net/<provider identity>"
+                      "description": "the valid trusted provider endpoint in the format: https://sts.windows.net/<provider identity>"
                     },
                     {
                       "flags": "-s, --subscription <id>",
@@ -43745,11 +43745,11 @@
                       "description": "use json output"
                     },
                     {
-                      "flags": "-n --accountName <accountName>",
+                      "flags": "-a --accountName <accountName>",
                       "required": -18,
                       "optional": 0,
                       "bool": true,
-                      "short": "-n",
+                      "short": "-a",
                       "long": "--accountName",
                       "description": "the Data Lake Store account name to execute the action on"
                     },
@@ -43763,11 +43763,11 @@
                       "description": "optionally explicitly set the resource group. If not specified, will attempt to discover it."
                     },
                     {
-                      "flags": "-t --name <trusted identity provider name>",
+                      "flags": "-n --name <trusted identity provider name>",
                       "required": -11,
                       "optional": 0,
                       "bool": true,
-                      "short": "-t",
+                      "short": "-n",
                       "long": "--name",
                       "description": "the name of the trusted identity provider to update"
                     },
@@ -43824,11 +43824,11 @@
                       "description": "use json output"
                     },
                     {
-                      "flags": "-n --accountName <accountName>",
+                      "flags": "-a --accountName <accountName>",
                       "required": -18,
                       "optional": 0,
                       "bool": true,
-                      "short": "-n",
+                      "short": "-a",
                       "long": "--accountName",
                       "description": "the Data Lake Store account name to execute the action on"
                     },
@@ -43842,11 +43842,11 @@
                       "description": "optionally explicitly set the resource group. If not specified, will attempt to discover it."
                     },
                     {
-                      "flags": "-t --name <trusted identity provider name>",
+                      "flags": "-n --name <trusted identity provider name>",
                       "required": -11,
                       "optional": 0,
                       "bool": true,
-                      "short": "-t",
+                      "short": "-n",
                       "long": "--name",
                       "description": "the name of the trusted identity provider to display"
                     },
@@ -43955,11 +43955,11 @@
                       "description": "use json output"
                     },
                     {
-                      "flags": "-n --accountName <accountName>",
+                      "flags": "-a --accountName <accountName>",
                       "required": -18,
                       "optional": 0,
                       "bool": true,
-                      "short": "-n",
+                      "short": "-a",
                       "long": "--accountName",
                       "description": "the Data Lake Store account name to execute the action on"
                     },
@@ -43973,11 +43973,11 @@
                       "description": "the optional resource group to list the accounts in"
                     },
                     {
-                      "flags": "-f --name <trusted identity provider name>",
+                      "flags": "-n --name <trusted identity provider name>",
                       "required": -11,
                       "optional": 0,
                       "bool": true,
-                      "short": "-f",
+                      "short": "-n",
                       "long": "--name",
                       "description": "the name of the trusted identity provider to delete"
                     },
