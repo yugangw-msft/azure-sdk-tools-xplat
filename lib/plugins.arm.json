@@ -66159,7 +66159,7 @@
                   "bool": true,
                   "short": "-g",
                   "long": "--resource-group",
-                  "description": "the name of the resource group"
+                  "description": "the resource group"
                 },
                 {
                   "flags": "-n, --name <name>",
@@ -66180,6 +66180,15 @@
                   "description": "the location"
                 },
                 {
+                  "flags": "-i, --ip-address <ip-address>",
+                  "required": -18,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-i",
+                  "long": "--ip-address",
+                  "description": "the IP address of the local network site"
+                },
+                {
                   "flags": "-a, --address-space [address-space]",
                   "required": 0,
                   "optional": -21,
@@ -66189,13 +66198,31 @@
                   "description": "the comma separated list of address prefixes in CIDR format"
                 },
                 {
-                  "flags": "-i, --ip-address <ip-address>",
-                  "required": -18,
-                  "optional": 0,
+                  "flags": "-j, --asn [asn]",
+                  "required": 0,
+                  "optional": -11,
                   "bool": true,
-                  "short": "-i",
-                  "long": "--ip-address",
-                  "description": "the IP address of the local network site"
+                  "short": "-j",
+                  "long": "--asn",
+                  "description": "The BGP speaker's ASN."
+                },
+                {
+                  "flags": "-b, --bgp-peering-address [bgp-peering-address]",
+                  "required": 0,
+                  "optional": -27,
+                  "bool": true,
+                  "short": "-b",
+                  "long": "--bgp-peering-address",
+                  "description": "The BGP peering address and BGP identifier of this BGP speaker."
+                },
+                {
+                  "flags": "-w, --peer-weight [peer-weight]",
+                  "required": 0,
+                  "optional": -19,
+                  "bool": true,
+                  "short": "-w",
+                  "long": "--peer-weight",
+                  "description": "The weight added to routes learned from this BGP speaker."
                 },
                 {
                   "flags": "-t, --tags [tags]",
@@ -66275,6 +66302,42 @@
                   "short": "-a",
                   "long": "--address-space",
                   "description": "the comma separated list of address prefixes in CIDR format"
+                },
+                {
+                  "flags": "-i, --ip-address [ip-address]",
+                  "required": 0,
+                  "optional": -18,
+                  "bool": true,
+                  "short": "-i",
+                  "long": "--ip-address",
+                  "description": "IP address of local network gateway."
+                },
+                {
+                  "flags": "-j, --asn [asn]",
+                  "required": 0,
+                  "optional": -11,
+                  "bool": true,
+                  "short": "-j",
+                  "long": "--asn",
+                  "description": "The BGP speaker's ASN."
+                },
+                {
+                  "flags": "-b, --bgp-peering-address [bgp-peering-address]",
+                  "required": 0,
+                  "optional": -27,
+                  "bool": true,
+                  "short": "-b",
+                  "long": "--bgp-peering-address",
+                  "description": "The BGP peering address and BGP identifier of this BGP speaker."
+                },
+                {
+                  "flags": "-w, --peer-weight [peer-weight]",
+                  "required": 0,
+                  "optional": -19,
+                  "bool": true,
+                  "short": "-w",
+                  "long": "--peer-weight",
+                  "description": "The weight added to routes learned from this BGP speaker."
                 },
                 {
                   "flags": "-t, --tags [tags]",
