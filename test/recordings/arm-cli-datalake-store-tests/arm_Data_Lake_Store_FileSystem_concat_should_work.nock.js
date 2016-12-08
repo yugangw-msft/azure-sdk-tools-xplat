@@ -29,69 +29,69 @@ exports.setEnvironment = function() {
 
 exports.scopes = [[function (nock) { 
 var result = 
-nock('http://xplattestadls333.azuredatalakestore.net:443')
+nock('http://xplattestadls3965.azuredatalakestore.net:443')
   .filteringRequestBody(function (path) { return '*';})
 .post('/webhdfs/v1/adlsclifolder01%2Fconcatfile.txt?op=MSCONCAT&api-version=2016-11-01', '*')
   .reply(200, "", { 'cache-control': 'no-cache, no-cache, no-store, max-age=0',
   pragma: 'no-cache',
   expires: '-1',
-  'x-ms-request-id': '4cfd21a2-5e8d-4bd6-8fc8-1aeb25f2f979',
+  'x-ms-request-id': 'fdca94bd-9b23-4617-bb76-991365695cc7',
   'x-ms-webhdfs-version': '16.07.18.01',
   status: '0x0',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=15724800; includeSubDomains',
-  date: 'Fri, 02 Dec 2016 01:06:32 GMT',
+  date: 'Thu, 08 Dec 2016 01:56:57 GMT',
   connection: 'close',
   'content-length': '0' });
  return result; },
 function (nock) { 
 var result = 
-nock('https://xplattestadls333.azuredatalakestore.net:443')
+nock('https://xplattestadls3965.azuredatalakestore.net:443')
   .filteringRequestBody(function (path) { return '*';})
 .post('/webhdfs/v1/adlsclifolder01%2Fconcatfile.txt?op=MSCONCAT&api-version=2016-11-01', '*')
   .reply(200, "", { 'cache-control': 'no-cache, no-cache, no-store, max-age=0',
   pragma: 'no-cache',
   expires: '-1',
-  'x-ms-request-id': '4cfd21a2-5e8d-4bd6-8fc8-1aeb25f2f979',
+  'x-ms-request-id': 'fdca94bd-9b23-4617-bb76-991365695cc7',
   'x-ms-webhdfs-version': '16.07.18.01',
   status: '0x0',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=15724800; includeSubDomains',
-  date: 'Fri, 02 Dec 2016 01:06:32 GMT',
+  date: 'Thu, 08 Dec 2016 01:56:57 GMT',
   connection: 'close',
   'content-length': '0' });
  return result; },
 function (nock) { 
 var result = 
-nock('http://xplattestadls333.azuredatalakestore.net:443')
+nock('http://xplattestadls3965.azuredatalakestore.net:443')
   .get('/webhdfs/v1/adlsclifolder01%2Fconcatfile.txt?op=MSGETFILESTATUS&api-version=2016-11-01')
-  .reply(200, "{\"FileStatus\":{\"length\":44,\"pathSuffix\":\"\",\"type\":\"FILE\",\"blockSize\":268435456,\"accessTime\":1480640793103,\"modificationTime\":1480640793134,\"replication\":1,\"permission\":\"770\",\"owner\":\"2e6c02d2-a364-4530-9137-d17403996cbf\",\"group\":\"2e6c02d2-a364-4530-9137-d17403996cbf\",\"expirationTime\":0,\"msExpirationTime\":0}}", { 'cache-control': 'no-cache, no-cache, no-store, max-age=0',
+  .reply(200, "{\"FileStatus\":{\"length\":44,\"pathSuffix\":\"\",\"type\":\"FILE\",\"blockSize\":268435456,\"accessTime\":1481162218133,\"modificationTime\":1481162218180,\"replication\":1,\"permission\":\"770\",\"owner\":\"2e6c02d2-a364-4530-9137-d17403996cbf\",\"group\":\"2e6c02d2-a364-4530-9137-d17403996cbf\",\"expirationTime\":0,\"msExpirationTime\":0}}", { 'cache-control': 'no-cache, no-cache, no-store, max-age=0',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '9e24607f-f347-458a-a32c-6d5ee3794572',
+  'x-ms-request-id': 'fbb3e2ae-b2e5-415d-9235-bbfc2fc4e223',
   'x-ms-webhdfs-version': '16.07.18.01',
   status: '0x0',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=15724800; includeSubDomains',
-  date: 'Fri, 02 Dec 2016 01:06:33 GMT',
+  date: 'Thu, 08 Dec 2016 01:56:58 GMT',
   connection: 'close',
   'content-length': '309' });
  return result; },
 function (nock) { 
 var result = 
-nock('https://xplattestadls333.azuredatalakestore.net:443')
+nock('https://xplattestadls3965.azuredatalakestore.net:443')
   .get('/webhdfs/v1/adlsclifolder01%2Fconcatfile.txt?op=MSGETFILESTATUS&api-version=2016-11-01')
-  .reply(200, "{\"FileStatus\":{\"length\":44,\"pathSuffix\":\"\",\"type\":\"FILE\",\"blockSize\":268435456,\"accessTime\":1480640793103,\"modificationTime\":1480640793134,\"replication\":1,\"permission\":\"770\",\"owner\":\"2e6c02d2-a364-4530-9137-d17403996cbf\",\"group\":\"2e6c02d2-a364-4530-9137-d17403996cbf\",\"expirationTime\":0,\"msExpirationTime\":0}}", { 'cache-control': 'no-cache, no-cache, no-store, max-age=0',
+  .reply(200, "{\"FileStatus\":{\"length\":44,\"pathSuffix\":\"\",\"type\":\"FILE\",\"blockSize\":268435456,\"accessTime\":1481162218133,\"modificationTime\":1481162218180,\"replication\":1,\"permission\":\"770\",\"owner\":\"2e6c02d2-a364-4530-9137-d17403996cbf\",\"group\":\"2e6c02d2-a364-4530-9137-d17403996cbf\",\"expirationTime\":0,\"msExpirationTime\":0}}", { 'cache-control': 'no-cache, no-cache, no-store, max-age=0',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '9e24607f-f347-458a-a32c-6d5ee3794572',
+  'x-ms-request-id': 'fbb3e2ae-b2e5-415d-9235-bbfc2fc4e223',
   'x-ms-webhdfs-version': '16.07.18.01',
   status: '0x0',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=15724800; includeSubDomains',
-  date: 'Fri, 02 Dec 2016 01:06:33 GMT',
+  date: 'Thu, 08 Dec 2016 01:56:58 GMT',
   connection: 'close',
   'content-length': '309' });
  return result; }]];

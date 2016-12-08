@@ -43179,7 +43179,88 @@
                   ]
                 }
               ],
-              "categories": {}
+              "categories": {
+                "expiry": {
+                  "name": "expiry",
+                  "description": "Commands to manage expiration of your Data Lake Storage FileSystem",
+                  "fullName": "datalake store filesystem expiry",
+                  "usage": "[options] [command]",
+                  "options": [],
+                  "commands": [
+                    {
+                      "name": "set",
+                      "description": "sets or removes the absolute expiration time of the specified path (files only).",
+                      "fullName": "datalake store filesystem expiry set",
+                      "usage": "[options] <accountName> <path>",
+                      "filePath": "commands/arm/datalakestore/datalakestore._js",
+                      "options": [
+                        {
+                          "flags": "-v, --verbose",
+                          "required": 0,
+                          "optional": 0,
+                          "bool": true,
+                          "short": "-v",
+                          "long": "--verbose",
+                          "description": "use verbose output"
+                        },
+                        {
+                          "flags": "-vv",
+                          "required": 0,
+                          "optional": 0,
+                          "bool": true,
+                          "long": "-vv",
+                          "description": "more verbose with debug output"
+                        },
+                        {
+                          "flags": "--json",
+                          "required": 0,
+                          "optional": 0,
+                          "bool": true,
+                          "long": "--json",
+                          "description": "use json output"
+                        },
+                        {
+                          "flags": "-n --accountName <accountName>",
+                          "required": -18,
+                          "optional": 0,
+                          "bool": true,
+                          "short": "-n",
+                          "long": "--accountName",
+                          "description": "the Data Lake Store account name to execute the action on"
+                        },
+                        {
+                          "flags": "-p --path <path>",
+                          "required": -11,
+                          "optional": 0,
+                          "bool": true,
+                          "short": "-p",
+                          "long": "--path",
+                          "description": "the full path to the folder to list (e.g. /someFolder or /someFolder/someNestedFolder)"
+                        },
+                        {
+                          "flags": "-e --expiration <expiration time in ticks since epoch>",
+                          "required": -17,
+                          "optional": 0,
+                          "bool": true,
+                          "short": "-e",
+                          "long": "--expiration",
+                          "description": "the expiration time to set for the file. Values <= 0 or >= 253402300800000 indicate the file will never expire.)"
+                        },
+                        {
+                          "flags": "-s, --subscription <id>",
+                          "required": -20,
+                          "optional": 0,
+                          "bool": true,
+                          "short": "-s",
+                          "long": "--subscription",
+                          "description": "the subscription identifier"
+                        }
+                      ]
+                    }
+                  ],
+                  "categories": {}
+                }
+              }
             },
             "permissions": {
               "name": "permissions",

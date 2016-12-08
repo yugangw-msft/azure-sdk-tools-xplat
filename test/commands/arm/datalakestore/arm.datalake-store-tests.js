@@ -59,6 +59,7 @@ var importFile = firstFolder + '/importfile.txt';
 var concatFile = firstFolder + '/concatfile.txt';
 var moveFolder = 'adlsclifolder02';
 var moveFile = firstFolder + '/movefile.txt';
+var expirefile = 'adlsclifolder03/expirefile.txt';
 
 
 // account sub resource variables
@@ -301,6 +302,41 @@ describe('arm', function () {
           // confirm that the account no longer exists
           result.exitStatus.should.be.equal(1);
           done();
+        });
+      });
+    });
+  });
+  describe('Data Lake Store FileSystem Expiry', function () {
+    it('set command should work', function (done) {
+      var expireValue = 4636834628007; // 100 years from now...ish
+      // create a file
+      suite.execute('datalake store filesystem create --accountName %s --path %s --json', filesystemAccountName, expirefile, function (result) {
+        result.exitStatus.should.be.equal(0);
+        // now get the file and validate no expiration.
+        suite.execute('datalake store filesystem show --accountName %s --path %s --json', filesystemAccountName, expirefile, function (result) {
+          result.exitStatus.should.be.equal(0);
+          var fileJson = JSON.parse(result.text);
+          fileJson.type.should.be.equal('FILE');
+          fileJson.length.should.be.equal(0);
+          fileJson.expirationTime.should.be.equal(0);
+          // now set expiration to a value slightly less than "never"
+          suite.execute('datalake store filesystem expiry set --accountName %s --path %s --expiration %s --json', filesystemAccountName, expirefile, expireValue, function (result) {
+            result.exitStatus.should.be.equal(0);
+            var fileJson = JSON.parse(result.text);
+            fileJson.type.should.be.equal('FILE');
+            fileJson.length.should.be.equal(0);
+            // should be +- 500 ticks from the value set.
+            fileJson.expirationTime.should.be.within(expireValue - 500, expireValue + 500);
+            // now remove the expiration
+            suite.execute('datalake store filesystem expiry set --accountName %s --path %s --json', filesystemAccountName, expirefile, function (result) {
+              result.exitStatus.should.be.equal(0);
+              var fileJson = JSON.parse(result.text);
+              fileJson.type.should.be.equal('FILE');
+              fileJson.length.should.be.equal(0);
+              fileJson.expirationTime.should.be.equal(0);
+              done();
+            });
+          });
         });
       });
     });
