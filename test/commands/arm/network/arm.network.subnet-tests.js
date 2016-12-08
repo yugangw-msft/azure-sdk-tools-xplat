@@ -32,6 +32,8 @@ var subnetProp = {
   vnetAddressSpace: '10.0.0.0/8',
   addressPrefix: '10.0.0.0/25',
   newAddressPrefix: '10.0.0.0/24',
+  addressPrefixInvalid: '10.0.0.0',
+  addressPrefixOutOfRange: '11.0.0.0/8',
   routeTableName: 'test-route-table',
   nsgName: 'test-nsg'
 };
@@ -150,7 +152,6 @@ describe('arm', function () {
         var cmd = 'network vnet subnet delete -g {group} -e {vnetName} -n {name} --quiet --json'.formatArgs(subnetProp);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-
           cmd = 'network vnet subnet show -g {group} -e {vnetName} -n {name} --json'.formatArgs(subnetProp);
           testUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
@@ -158,6 +159,20 @@ describe('arm', function () {
             subnet.should.be.empty;
             done();
           });
+        });
+      });
+      it('create should fail for invalid prefixes', function (done) {
+        var cmd = 'network-autogen vnet subnet create -g {group} -n {name} --address-prefix {addressPrefixInvalid} --vnet-name {vnetName} --json'.formatArgs(subnetProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.not.equal(0);
+          done();
+        });
+      });
+      it('create should fail for prefixes out of range', function (done) {
+        var cmd = 'network-autogen vnet subnet create -g {group} -n {name} --address-prefix {addressPrefixOutOfRange} --vnet-name {vnetName} --json'.formatArgs(subnetProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.not.equal(0);
+          done();
         });
       });
     });

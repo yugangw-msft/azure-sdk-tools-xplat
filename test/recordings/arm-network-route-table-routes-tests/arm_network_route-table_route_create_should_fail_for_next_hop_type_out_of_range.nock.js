@@ -26,4 +26,4 @@ exports.setEnvironment = function() {
   process.env['AZURE_VM_TEST_LOCATION'] = 'westus';
 };
 
-exports.scopes = [];
+exports.scopes = [[]];

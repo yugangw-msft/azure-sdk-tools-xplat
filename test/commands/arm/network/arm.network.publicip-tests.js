@@ -38,7 +38,22 @@ var publicIpProp = {
   idleTimeout: 4,
   newIdleTimeout: 15,
   tags: networkUtil.tags,
-  newTags: networkUtil.newTags
+  newTags: networkUtil.newTags,
+  // Negative test values
+  ipAllocationMethodOutOfRange: 'Any',
+  ipVersionOutOfRange: 'IPv9',
+  invalidSymbolsLable: 'l-a_b-1-e',
+  idleTimeoutUnderRange: '3',
+  idleTimeoutOverRange: '31'
+};
+
+var publicIPAddressDefaults = {
+  location: 'westus',
+  publicIPAllocationMethod: 'Dynamic',
+  publicIPAddressVersion: 'IPv4',
+  idleTimeoutInMinutes: '4',
+  name: 'publicIPAddressDefaultsName',
+  group: groupName
 };
 
 var requiredEnvironment = [{
@@ -142,7 +157,78 @@ describe('arm', function () {
           });
         });
       });
-
+      it('create with defaults should create public ip addresses with default values', function (done) {
+        var cmd = 'network public-ip create -g {group} -n {name} --location {location} --json'.formatArgs(publicIPAddressDefaults);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var output = JSON.parse(result.text);
+          output.name.should.equal(publicIPAddressDefaults.name);
+          output.publicIPAllocationMethod.toLowerCase().should.equal(publicIPAddressDefaults.publicIPAllocationMethod.toLowerCase());;
+          output.publicIPAddressVersion.toLowerCase().should.equal(publicIPAddressDefaults.publicIPAddressVersion.toLowerCase());;
+          output.idleTimeoutInMinutes.should.equal(parseInt(publicIPAddressDefaults.idleTimeoutInMinutes, 10));
+          var cmd = 'network public-ip delete -g {group} -n {name} --quiet --json'.formatArgs(publicIPAddressDefaults);
+          testUtils.executeCommand(suite, retry, cmd, function (result) {
+            result.exitStatus.should.equal(0);
+            done();
+          });
+        });
+      });
+      it('create should fail for ip allocation method out of range', function (done) {
+        var cmd = 'network public-ip create -g {group} -n {name} --allocation-method {ipAllocationMethodOutOfRange} --location {location} --json'.formatArgs(publicIpProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.not.equal(0);
+          done();
+        });
+      });
+      it('create should fail for ip version out of range', function (done) {
+        var cmd = 'network public-ip create -g {group} -n {name} --ip-version {ipVersionOutOfRange} --location {location}  --json'.formatArgs(publicIpProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.not.equal(0);
+          done();
+        });
+      });
+      it('create should fail for invalid symbols in lable', function (done) {
+        var cmd = 'network public-ip create -g {group} -n {name} --domain-name-label {invalidSymbolsLable} --location {location} --json'.formatArgs(publicIpProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.not.equal(0);
+          done();
+        });
+      });
+      it('create should fail for idle timeout under range', function (done) {
+        var cmd = 'network public-ip create -g {group} -n {name} --idle-timeout {idleTimeoutUnderRange} --location {location}  --json'.formatArgs(publicIpProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.not.equal(0);
+          done();
+        });
+      });
+      it('create should fail for idle timeout over range', function (done) {
+        var cmd = 'network public-ip create -g {group} -n {name} --idle-timeout {idleTimeoutOverRange} --location {location}  --json'.formatArgs(publicIpProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.not.equal(0);
+          done();
+        });
+      });
+      it('create should pass for delete of domain name label', function (done) {
+        var cmd = 'network public-ip create -g {group} -n {name} --domain-name-label {domainName} --location {location} --json'.formatArgs(publicIpProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var output = JSON.parse(result.text);
+          output.name.should.equal(publicIpProp.name);
+          output.dnsSettings.domainNameLabel.toLowerCase().should.equal(publicIpProp.domainName.toLowerCase());
+          var cmd = 'network public-ip set -g {group} -n {name} --domain-name-label --json'.formatArgs(publicIpProp);
+          testUtils.executeCommand(suite, retry, cmd, function (result) {
+            result.exitStatus.should.equal(0);
+            var output = JSON.parse(result.text);
+            output.name.should.equal(publicIpProp.name);
+            should.not.exist(output.dnsSettings); 
+            var cmd = 'network public-ip delete -g {group} -n {name} --json --quiet'.formatArgs(publicIpProp);
+            testUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              done();
+            });
+          });
+        });
+      });
     });
   });
 });
