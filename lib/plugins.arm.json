@@ -28025,11 +28025,11 @@
                   "description": "The port http traffic used on the origin server"
                 },
                 {
-                  "flags": "-s, --https-port [https-port]",
+                  "flags": "-f, --https-port [https-port]",
                   "required": 0,
                   "optional": -18,
                   "bool": true,
-                  "short": "-s",
+                  "short": "-f",
                   "long": "--https-port",
                   "description": "The port https traffic used on the origin server"
                 },
@@ -29363,7 +29363,7 @@
                   "bool": true,
                   "short": "-c",
                   "long": "--country-codes",
-                  "description": "List of country codes to apply the geo filter"
+                  "description": "List of country codes to apply the geo filter. Country codes are two letters and comma separated."
                 },
                 {
                   "flags": "--subscription <subscription>",
@@ -29414,7 +29414,7 @@
                   "bool": true,
                   "short": "-r",
                   "long": "--relative-path",
-                  "description": "Relative path of the geo filter"
+                  "description": "Relative path of the geo filter. e.g. /mycars "
                 },
                 {
                   "flags": "-e, --endpoint-name <endpoint-name>",
@@ -29459,7 +29459,7 @@
                   "bool": true,
                   "short": "-c",
                   "long": "--country-codes",
-                  "description": "List of country codes to apply the geo filter"
+                  "description": "List of country codes to apply the geo filter. Country codes are two letters and comma separated."
                 },
                 {
                   "flags": "--subscription <subscription>",
@@ -29510,7 +29510,7 @@
                   "bool": true,
                   "short": "-r",
                   "long": "--relative-path",
-                  "description": "Relative path of the geo filter"
+                  "description": "Relative path of the geo filter. e.g. /mycars "
                 },
                 {
                   "flags": "-e, --endpoint-name <endpoint-name>",
@@ -42028,7 +42028,7 @@
                   "name": "set",
                   "description": "Updates the properties of an existing Data Lake Analytics Account",
                   "fullName": "datalake analytics account set",
-                  "usage": "[options] <accountName> <defaultDataLakeStore>",
+                  "usage": "[options] <accountName>",
                   "filePath": "commands/arm/datalakeanalytics/datalakeanalytics._js",
                   "options": [
                     {
