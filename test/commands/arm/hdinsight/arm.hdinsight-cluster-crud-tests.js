@@ -245,10 +245,10 @@ describe('arm', function () {
           '--osType %s ' +
           '--defaultStorageAccountName %s.azuredatalakestore.net ' +
           '--defaultStorageRootPath %s ' +
-          '--objectId %s ' +
-          '--aadTenantId %s ' +
-          '--certificateFilePath %s ' +
-          '--certificatePassword %s ' +
+          '--servicePrincipalObjectId %s ' +
+          '--servicePrincipalTenantId %s ' +
+          '--servicePrincipalCertFilePath %s ' +
+          '--servicePrincipalCertPassword %s ' +
           '--headNodeSize %s ' +
           '--workerNodeCount %s ' +
           '--workerNodeSize %s ' +
@@ -289,10 +289,10 @@ describe('arm', function () {
           '--defaultStorageAccountName %s.blob.core.windows.net ' +
           '--defaultStorageAccountKey %s ' +
           '--defaultStorageContainer %s ' +
-          '--objectId %s ' +
-          '--aadTenantId %s ' +
-          '--certificateFilePath %s ' +
-          '--certificatePassword %s ' +
+          '--servicePrincipalObjectId %s ' +
+          '--servicePrincipalTenantId %s ' +
+          '--servicePrincipalCertFilePath %s ' +
+          '--servicePrincipalCertPassword %s ' +
           '--headNodeSize %s ' +
           '--workerNodeCount %s ' +
           '--workerNodeSize %s ' +
