@@ -45653,47 +45653,39 @@
                   "optional": 0,
                   "bool": true,
                   "long": "--defaultStorageRootPath",
-                  "description": "Path-prefix in the Azure Data Lake store account that this cluster will use as default File System (only for clusters with Azure Data Lake Store as default Storage)"
+                  "description": "Path-prefix in the Azure Data Lake Store account that this cluster will use as default File System (required only for clusters using Azure Data Lake Store as default Storage)"
                 },
                 {
-                  "flags": "--objectId <objectId>",
-                  "required": -12,
+                  "flags": "--servicePrincipalObjectId <servicePrincipalObjectId>",
+                  "required": -28,
                   "optional": 0,
                   "bool": true,
-                  "long": "--objectId",
-                  "description": "Object Id of the service principal used to access Azure Data Lake Store account (only for Data Lake enabled clusters)"
+                  "long": "--servicePrincipalObjectId",
+                  "description": "Object Id of the service principal used to access Azure Data Lake Store (required only for Data Lake Store enabled clusters)"
                 },
                 {
-                  "flags": "--aadTenantId <aadTenantId>",
-                  "required": -15,
+                  "flags": "--servicePrincipalTenantId <servicePrincipalTenantId>",
+                  "required": -28,
                   "optional": 0,
                   "bool": true,
-                  "long": "--aadTenantId",
-                  "description": "Service principal AADTenant Id used to access Azure Data Lake Store account (only for Data Lake enabled clusters)"
+                  "long": "--servicePrincipalTenantId",
+                  "description": "Service principal AAD Tenant Id used to access Azure Data Lake Store (required only for Data Lake Store enabled clusters)"
                 },
                 {
-                  "flags": "--certificateFilePath <certificateFilePath>",
-                  "required": -23,
+                  "flags": "--servicePrincipalCertFilePath <servicePrincipalCertFilePath>",
+                  "required": -32,
                   "optional": 0,
                   "bool": true,
-                  "long": "--certificateFilePath",
-                  "description": "Service principal certificate file path used to access Azure Data Lake Store account (only for Data Lake enabled clusters)"
+                  "long": "--servicePrincipalCertFilePath",
+                  "description": "Service principal certificate file path used to access Azure Data Lake Store (required only for Data Lake Store enabled clusters)"
                 },
                 {
-                  "flags": "--certificatePassword <certificatePassword>",
-                  "required": -23,
+                  "flags": "--servicePrincipalCertPassword <servicePrincipalCertPassword>",
+                  "required": -32,
                   "optional": 0,
                   "bool": true,
-                  "long": "--certificatePassword",
-                  "description": "Service principal certificate password used to access Azure Data Lake Store account (only for Data Lake enabled clusters)"
-                },
-                {
-                  "flags": "--datalakeResourceUri <datalakeResourceUri>",
-                  "required": -23,
-                  "optional": 0,
-                  "bool": true,
-                  "long": "--datalakeResourceUri",
-                  "description": "Resource URI to access Azure Data Lake Store Account (only for Data Lake enabled clusters)"
+                  "long": "--servicePrincipalCertPassword",
+                  "description": "Service principal certificate password used to access Azure Data Lake Store (required only for Data Lake Store enabled clusters)"
                 },
                 {
                   "flags": "--headNodeSize <headNodeSize>",
