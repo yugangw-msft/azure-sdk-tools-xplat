@@ -13,7 +13,7 @@
     "Wang, Yugang <yugangw@microsoft.com>",
     "Chen, Hao <hach@microsoft.com>"
   ],
-  "version": "0.10.7",
+  "version": "0.10.8",
   "description": "Microsoft Azure Cross Platform Command Line tool",
   "tags": [
     "azure",
@@ -74,7 +74,7 @@
     "azure-arm-batch": "0.3.0",
     "azure-batch": "0.5.2",
     "azure-servicefabric": "0.1.4",
-    "applicationinsights": "0.15.12",
+    "applicationinsights": "0.16.0",
     "caller-id": "0.1.x",
     "colors": "1.1.2",
     "commander": "1.0.4",
