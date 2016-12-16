@@ -39151,6 +39151,15 @@
                   "description": "Bootstrap options in JSON format. Ex: -j '{\"chef_node_name\":\"test_node\"}'"
                 },
                 {
+                  "flags": "-v, --bootstrap-version <number>",
+                  "required": -25,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--bootstrap-version",
+                  "description": "chef-client version to be installed"
+                },
+                {
                   "flags": "-u, --uninstall",
                   "required": 0,
                   "optional": 0,
