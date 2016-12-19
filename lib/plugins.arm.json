@@ -39160,6 +39160,22 @@
                   "description": "chef-client version to be installed"
                 },
                 {
+                  "flags": "--chef-service-interval <chef-service-interval>",
+                  "required": -25,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--chef-service-interval",
+                  "description": "It specifies the frequency (in minutes) at which the chef-service runs. Pass 0 if you don't want the chef-service to be installed on the target machine."
+                },
+                {
+                  "flags": "--daemon <daemon>",
+                  "required": -10,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--daemon",
+                  "description": "Use only for windows node. Options: 'auto' or 'service'. 'auto' - Provide when you don't want to run the chef-client as service. 'service' - Provide when you want to run chef-client as service"
+                },
+                {
                   "flags": "-u, --uninstall",
                   "required": 0,
                   "optional": 0,
