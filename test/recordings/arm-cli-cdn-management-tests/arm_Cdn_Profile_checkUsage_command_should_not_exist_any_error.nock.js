@@ -40,46 +40,44 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .filteringRequestBody(function (path) { return '*';})
-.post('/subscriptions/8fbd19e9-e8e0-4224-89f6-b1d5d86fb4c4/resourceGroups/xplattestadlsrgr01/providers/Microsoft.Cdn/profiles/cliTestProfile01/endpoints/cliTestEndpoint001/validateCustomDomain?api-version=2016-10-02', '*')
-  .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"BadRequest\",\r\n    \"message\": \"HostName \\\"??cli-6029da3a-835e-4506-b4ea-bd5375165cdf??\\\" is invalid. It must be a valid domain name, IP version 4, or IP version 6.\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
+  .post('/subscriptions/8fbd19e9-e8e0-4224-89f6-b1d5d86fb4c4/resourceGroups/xplattestadlsrgr01/providers/Microsoft.Cdn/profiles/cliTestProfile01/checkResourceUsage?api-version=2016-10-02')
+  .reply(200, "{\r\n  \"value\":[\r\n    {\r\n      \"resourceType\":\"endpoint\",\"unit\":\"count\",\"currentValue\":0,\"limit\":10\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
-  'content-length': '201',
-  'content-type': 'application/json; charset=utf-8',
-  'content-language': 'en-US',
+  'content-length': '112',
+  'content-type': 'application/json; odata.metadata=minimal',
   expires: '-1',
-  'x-ms-request-id': 'dedf8b6b-33c7-413b-94a4-04858eb2ebd3',
-  'x-ms-client-request-id': '61045d66-8136-4940-b540-1a9095ccc1dd',
+  'x-ms-request-id': '1a6ffcde-d559-4a87-a9f1-cd050c9c04f2',
+  'x-ms-client-request-id': 'f14f1681-9690-4296-9457-9369c57debb7',
+  'odata-version': '4.0',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-IIS/8.5',
   'x-aspnet-version': '4.0.30319',
   'x-powered-by': 'ASP.NET',
-  'x-ms-ratelimit-remaining-subscription-writes': '1197',
-  'x-ms-correlation-request-id': '1fe552e1-c161-41de-bdec-9f6bc6cd9e0a',
-  'x-ms-routing-request-id': 'WESTUS2:20161219T231634Z:1fe552e1-c161-41de-bdec-9f6bc6cd9e0a',
-  date: 'Mon, 19 Dec 2016 23:16:33 GMT',
+  'x-ms-ratelimit-remaining-subscription-writes': '1193',
+  'x-ms-correlation-request-id': 'a2da3f83-fa98-4ab4-9ab1-91833c028783',
+  'x-ms-routing-request-id': 'CENTRALUS:20161219T230505Z:a2da3f83-fa98-4ab4-9ab1-91833c028783',
+  date: 'Mon, 19 Dec 2016 23:05:05 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .filteringRequestBody(function (path) { return '*';})
-.post('/subscriptions/8fbd19e9-e8e0-4224-89f6-b1d5d86fb4c4/resourceGroups/xplattestadlsrgr01/providers/Microsoft.Cdn/profiles/cliTestProfile01/endpoints/cliTestEndpoint001/validateCustomDomain?api-version=2016-10-02', '*')
-  .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"BadRequest\",\r\n    \"message\": \"HostName \\\"??cli-6029da3a-835e-4506-b4ea-bd5375165cdf??\\\" is invalid. It must be a valid domain name, IP version 4, or IP version 6.\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
+  .post('/subscriptions/8fbd19e9-e8e0-4224-89f6-b1d5d86fb4c4/resourceGroups/xplattestadlsrgr01/providers/Microsoft.Cdn/profiles/cliTestProfile01/checkResourceUsage?api-version=2016-10-02')
+  .reply(200, "{\r\n  \"value\":[\r\n    {\r\n      \"resourceType\":\"endpoint\",\"unit\":\"count\",\"currentValue\":0,\"limit\":10\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
-  'content-length': '201',
-  'content-type': 'application/json; charset=utf-8',
-  'content-language': 'en-US',
+  'content-length': '112',
+  'content-type': 'application/json; odata.metadata=minimal',
   expires: '-1',
-  'x-ms-request-id': 'dedf8b6b-33c7-413b-94a4-04858eb2ebd3',
-  'x-ms-client-request-id': '61045d66-8136-4940-b540-1a9095ccc1dd',
+  'x-ms-request-id': '1a6ffcde-d559-4a87-a9f1-cd050c9c04f2',
+  'x-ms-client-request-id': 'f14f1681-9690-4296-9457-9369c57debb7',
+  'odata-version': '4.0',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-IIS/8.5',
   'x-aspnet-version': '4.0.30319',
   'x-powered-by': 'ASP.NET',
-  'x-ms-ratelimit-remaining-subscription-writes': '1197',
-  'x-ms-correlation-request-id': '1fe552e1-c161-41de-bdec-9f6bc6cd9e0a',
-  'x-ms-routing-request-id': 'WESTUS2:20161219T231634Z:1fe552e1-c161-41de-bdec-9f6bc6cd9e0a',
-  date: 'Mon, 19 Dec 2016 23:16:33 GMT',
+  'x-ms-ratelimit-remaining-subscription-writes': '1193',
+  'x-ms-correlation-request-id': 'a2da3f83-fa98-4ab4-9ab1-91833c028783',
+  'x-ms-routing-request-id': 'CENTRALUS:20161219T230505Z:a2da3f83-fa98-4ab4-9ab1-91833c028783',
+  date: 'Mon, 19 Dec 2016 23:05:05 GMT',
   connection: 'close' });
  return result; }]];

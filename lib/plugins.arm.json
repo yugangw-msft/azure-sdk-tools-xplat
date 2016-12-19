@@ -27656,6 +27656,66 @@
                   "description": "the subscription identifier"
                 }
               ]
+            },
+            {
+              "name": "checkUsage",
+              "description": "List the usages of resources under profile.",
+              "fullName": "cdn profile checkUsage",
+              "usage": "[options] <name> <profile-name> <resource-group>",
+              "filePath": "commands/arm/cdnmanagement/cdnmanagement._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "-n, --name <name>",
+                  "required": -12,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-n",
+                  "long": "--name",
+                  "description": "Name of the profile"
+                },
+                {
+                  "flags": "-g, --resource-group <resource-group>",
+                  "required": -22,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-g",
+                  "long": "--resource-group",
+                  "description": "The resource group of the Azure Cdn Profile"
+                },
+                {
+                  "flags": "--subscription <subscription>",
+                  "required": -16,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--subscription",
+                  "description": "the subscription identifier"
+                }
+              ]
             }
           ],
           "categories": {}
@@ -28606,6 +28666,75 @@
                   "description": "the subscription identifier"
                 }
               ]
+            },
+            {
+              "name": "checkUsage",
+              "description": "List the usages of resources under endpoint.",
+              "fullName": "cdn endpoint checkUsage",
+              "usage": "[options] <name> <profile-name> <resource-group>",
+              "filePath": "commands/arm/cdnmanagement/cdnmanagement._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "-n, --name <name>",
+                  "required": -12,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-n",
+                  "long": "--name",
+                  "description": "Name of the endpoint"
+                },
+                {
+                  "flags": "-p, --profile-name <profile-name>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-p",
+                  "long": "--profile-name",
+                  "description": "Name of the profile"
+                },
+                {
+                  "flags": "-g, --resource-group <resource-group>",
+                  "required": -22,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-g",
+                  "long": "--resource-group",
+                  "description": "The resource group of the Azure Cdn Profile"
+                },
+                {
+                  "flags": "--subscription <subscription>",
+                  "required": -16,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--subscription",
+                  "description": "the subscription identifier"
+                }
+              ]
             }
           ],
           "categories": {}
@@ -29538,6 +29667,110 @@
                   "short": "-g",
                   "long": "--resource-group",
                   "description": "The resource group of the Azure Cdn Profile"
+                },
+                {
+                  "flags": "--subscription <subscription>",
+                  "required": -16,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--subscription",
+                  "description": "the subscription identifier"
+                }
+              ]
+            }
+          ],
+          "categories": {}
+        },
+        "edgeNode": {
+          "name": "edgeNode",
+          "description": "Commands to get edge nodes of Azure CDN service",
+          "fullName": "cdn edgeNode",
+          "usage": "[options] [command]",
+          "options": [],
+          "commands": [
+            {
+              "name": "list",
+              "description": "Get the edge node list of Azure CDN service",
+              "fullName": "cdn edgeNode list",
+              "usage": "[options]",
+              "filePath": "commands/arm/cdnmanagement/cdnmanagement._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "--subscription <subscription>",
+                  "required": -16,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--subscription",
+                  "description": "the subscription identifier"
+                }
+              ]
+            }
+          ],
+          "categories": {}
+        },
+        "usage": {
+          "name": "usage",
+          "description": "Commands to get the usage of subscription",
+          "fullName": "cdn usage",
+          "usage": "[options] [command]",
+          "options": [],
+          "commands": [
+            {
+              "name": "list",
+              "description": "List the usages of resources under subscription",
+              "fullName": "cdn usage list",
+              "usage": "[options]",
+              "filePath": "commands/arm/cdnmanagement/cdnmanagement._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
                 },
                 {
                   "flags": "--subscription <subscription>",

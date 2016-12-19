@@ -45,10 +45,10 @@ var requiredEnvironment = [{
   defaultValue: 'cliTestProfile02'
 }, {
   name: 'AZURE_ARM_TEST_CDN_ENDPOINT_1',
-  defaultValue: 'cliTestEndpoint01'
+  defaultValue: 'cliTestEndpoint001'
 }, {
   name: 'AZURE_ARM_TEST_CDN_ENDPOINT_2',
-  defaultValue: 'cliTestEndpoint02'
+  defaultValue: 'cliTestEndpoint002'
 }, {
   name: 'AZURE_ARM_TEST_CDN_ORIGIN_1',
   defaultValue: 'cliTestOrigin01'
@@ -63,7 +63,7 @@ var requiredEnvironment = [{
   defaultValue: 'cliTestCustomDomain01',
 }, {
   name: 'AZURE_ARM_TEST_CUSTOM_DOMAIN_HOST_NAME_1',
-  defaultValue: 'cli-0dbedc55-0d09-4eb8-974a-ed9cfe6f9558.azureedge-test.net',
+  defaultValue: 'cli-59e92ce9-af32-4879-baad-d5f36a9ede94.azureedge-test.net',
 }];
 
 var suite;
@@ -228,6 +228,20 @@ describe('arm', function() {
         done();
       });
     });
+    
+    it('checkUsage command on subscription should not exist error', function(done) {
+      suite.execute('cdn usage list --json', function(result) {
+        result.exitStatus.should.be.equal(0);
+        done();
+      });
+    });
+    
+    it('checkUsage command should not exist any error', function(done) {
+      suite.execute('cdn profile checkUsage %s %s --json', testProfileName_1, testResourceGroup_1, function(result) {
+        result.exitStatus.should.be.equal(0);
+        done();
+      });
+    });
   });
 
   describe('Cdn Endpoints', function() {
@@ -357,6 +371,13 @@ describe('arm', function() {
           endpointJson.origins[0].name.should.equal(testOriginName_2);
           done();
         });
+    });
+    
+    it('checkUsage command should not exist any error on endpiont', function(done) {
+      suite.execute('cdn endpoint checkUsage %s %s %s --json', testEndpointName_1, testProfileName_1, testResourceGroup_1 , function(result) {
+        result.exitStatus.should.be.equal(0);
+        done();
+      });
     });
 
     it('delete command should delete the endpoint succesfully', function(done) {
@@ -539,6 +560,15 @@ describe('arm', function() {
         result.exitStatus.should.be.equal(0);
         var customDomainListJson = JSON.parse(result.text);
         customDomainListJson.length.should.equal(0);
+        done();
+      });
+    });
+  });
+  
+  describe('Cdn edge node', function() {
+    it('list command should not exist any error', function(done) {
+      suite.execute('cdn edgeNode list --json', function(result) {
+        result.exitStatus.should.be.equal(0);
         done();
       });
     });
