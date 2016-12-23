@@ -156,6 +156,15 @@ describe('cli', function() {
           done();
         });
       });
+
+      it('Set Chef extensions with bootstrap-version option', function(done) {
+        var cmd = util.format('vm extension set-chef %s -V %s -c %s -O %s --bootstrap-version %s --json',
+          vmName, chefversion, clientconfig, validationpem, '12.14.89').split(' ');
+        testUtils.executeCommand(suite, retry, cmd, function(result) {
+          result.exitStatus.should.equal(0);
+          done();
+        });
+      });
     });
   });
 });
