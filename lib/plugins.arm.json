@@ -76203,7 +76203,7 @@
                       "bool": true,
                       "short": "-y",
                       "long": "--type",
-                      "description": "the type of the record set.\n     If specified only record sets of this type will be listed.\n     Valid values are [A,AAAA,CNAME,MX,NS,PTR,SRV,TXT]\nThe record type A \n"
+                      "description": "the type of the record set.\n     Valid values are [A,AAAA,CNAME,MX,NS,PTR,SRV,TXT]\nThe record type A \n"
                     },
                     {
                       "flags": "-a  --ipv4-address [ipv4-address]",
