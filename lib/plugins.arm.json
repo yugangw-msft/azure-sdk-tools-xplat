@@ -45629,7 +45629,7 @@
                   "optional": 0,
                   "bool": true,
                   "long": "--defaultStorageAccountName",
-                  "description": "Fully Qualified Domain Name of the storage account to use for default HDInsight storage. For example : \"accountName.azuredatalakestore.net\" or \"accountName.blob.core.windows.net\""
+                  "description": "Fully Qualified Domain Name of the storage account to use for default HDInsight storage. For example, \"accountName.azuredatalakestore.net\" or \"accountName.blob.core.windows.net\""
                 },
                 {
                   "flags": "--defaultStorageAccountKey <storageAccountKey>",
@@ -45637,7 +45637,7 @@
                   "optional": 0,
                   "bool": true,
                   "long": "--defaultStorageAccountKey",
-                  "description": "Key to the Azure storage account to use for default HDInsight storage (only for clusters with WASB default storage)"
+                  "description": "Azure Storage key (required only for clusters using Azure Storage as default storage)"
                 },
                 {
                   "flags": "--defaultStorageContainer <storageContainer>",
@@ -45645,7 +45645,7 @@
                   "optional": 0,
                   "bool": true,
                   "long": "--defaultStorageContainer",
-                  "description": "Container in the Azure storage account to use for HDInsight default storage (only for clusters with WASB default storage)"
+                  "description": "Azure Storage container name (required only for clusters using Azure Storage as default storage)"
                 },
                 {
                   "flags": "--defaultStorageRootPath <defaultStorageRootPath>",
@@ -45664,12 +45664,12 @@
                   "description": "Object Id of the service principal used to access Azure Data Lake Store (required only for Data Lake Store enabled clusters)"
                 },
                 {
-                  "flags": "--servicePrincipalTenantId <servicePrincipalTenantId>",
-                  "required": -28,
+                  "flags": "--servicePrincipalAuthorityUri <servicePrincipalAuthorityUri>",
+                  "required": -32,
                   "optional": 0,
                   "bool": true,
-                  "long": "--servicePrincipalTenantId",
-                  "description": "Service principal AAD Tenant Id used to access Azure Data Lake Store (required only for Data Lake Store enabled clusters)"
+                  "long": "--servicePrincipalAuthorityUri",
+                  "description": "URI specifying the authority to acquire access token for Azure Data Lake Store For example, \"https://login.windows.net/<tenant>\" (required only for Data Lake Store enabled clusters)"
                 },
                 {
                   "flags": "--servicePrincipalCertFilePath <servicePrincipalCertFilePath>",

@@ -58,7 +58,7 @@ var location = "West Europe",
     defaultAdlStorageAccount = 'xplattestdummyadlstorage', 
     defaultStorageRootPath = '/clusters/clustername/',
     objectId = '3e185977-0364-488a-ae72-64bf148a17ba', 
-    aadTenantId = '00000000-0000-0000-0000-000000000001', 
+    aadTenant = 'https://login.windows.net/00000000-0000-0000-0000-000000000001', 
     certificatePath = 'test/data/fakecert.pfx', 
     certificatePassword = 'dummypassword',
     workerNodeCount = 3,
@@ -235,7 +235,7 @@ describe('arm', function () {
       });  
 
       // To record this test assign appropriate values to the following variables in the declaration section
-      // defaultAdlStorageAccount, defaultStorageRootPath, objectId, aadTenantId, certificatePath, certificatePassword
+      // defaultAdlStorageAccount, defaultStorageRootPath, objectId, aadTenant, certificatePath, certificatePassword
       it('create linux cluster with ADLS as default storage should pass', function (done) {
         this.timeout(hdinsightTest.timeoutLarge);
         var cmd = util.format('hdinsight cluster create ' +
@@ -246,7 +246,7 @@ describe('arm', function () {
           '--defaultStorageAccountName %s.azuredatalakestore.net ' +
           '--defaultStorageRootPath %s ' +
           '--servicePrincipalObjectId %s ' +
-          '--servicePrincipalTenantId %s ' +
+          '--servicePrincipalAuthorityUri %s ' +
           '--servicePrincipalCertFilePath %s ' +
           '--servicePrincipalCertPassword %s ' +
           '--headNodeSize %s ' +
@@ -259,7 +259,7 @@ describe('arm', function () {
           '--version %s ' +
           '--json ',
           groupName, 'xplatTestHDInsightClusterCreate7274', location, 'Linux',
-          defaultAdlStorageAccount, defaultStorageRootPath, objectId, aadTenantId, certificatePath, certificatePassword,
+          defaultAdlStorageAccount, defaultStorageRootPath, objectId, aadTenant, certificatePath, certificatePassword,
           headNodeSize, workerNodeCount, workerNodeSize, zookeeperNodeSize,
           username, password, sshUserName, sshPassword,
           'Hadoop', '3.5',
@@ -278,7 +278,7 @@ describe('arm', function () {
       });
 
       // To record this test assign appropriate values to the following variables in the declaration section
-      // objectId, aadTenantId, certificatePath, certificatePassword
+      // objectId, aadTenant, certificatePath, certificatePassword
       it('create linux cluster with ADLS as additional storage should pass', function (done) {
         this.timeout(hdinsightTest.timeoutLarge);
         var cmd = util.format('hdinsight cluster create ' +
@@ -290,7 +290,7 @@ describe('arm', function () {
           '--defaultStorageAccountKey %s ' +
           '--defaultStorageContainer %s ' +
           '--servicePrincipalObjectId %s ' +
-          '--servicePrincipalTenantId %s ' +
+          '--servicePrincipalAuthorityUri %s ' +
           '--servicePrincipalCertFilePath %s ' +
           '--servicePrincipalCertPassword %s ' +
           '--headNodeSize %s ' +
@@ -304,7 +304,7 @@ describe('arm', function () {
           '--json ',
           groupName, 'xplatTestHDInsightClusterCreate1942', location, 'Linux',
           defaultStorageAccount, defaultStorageAccountKey, defaultStorageContainer,
-          objectId, aadTenantId, certificatePath, certificatePassword,
+          objectId, aadTenant, certificatePath, certificatePassword,
           headNodeSize, workerNodeCount, workerNodeSize, zookeeperNodeSize,
           username, password, sshUserName, sshPassword,
           'Hadoop', '3.5',
