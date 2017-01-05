@@ -75708,7 +75708,7 @@
                   "name": "list",
                   "description": "Get all record sets in a DNS zone",
                   "fullName": "network dns record-set list",
-                  "usage": "[options] <resource-group> <dns-zone-name>",
+                  "usage": "[options] <resource-group> <dns-zone-name> [type]",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -76124,7 +76124,7 @@
                       "bool": true,
                       "short": "-q",
                       "long": "--quiet",
-                      "description": "quiet mode, do not ask for delete confirmation"
+                      "description": "quiet mode, do not ask before replacing existing CNAME record"
                     },
                     {
                       "flags": "-s, --subscription <subscription>",
@@ -76321,6 +76321,14 @@
                       "short": "-q",
                       "long": "--quiet",
                       "description": "quiet mode, do not ask for delete confirmation"
+                    },
+                    {
+                      "flags": "--keep-empty-record-set",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "long": "--keep-empty-record-set",
+                      "description": "mode, which hepls to remove record only and save empty record set"
                     },
                     {
                       "flags": "-s, --subscription <subscription>",
