@@ -4,10 +4,10 @@ var profile = require('../../../lib/util/profile');
 
 exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
-
+  
   newProfile.addSubscription(new profile.Subscription({
-    id: '67db6ec8-1e63-4a12-a263-eb3b69b7588f',
-    name: 'CacheTeam - Alfan TP',
+    id: '04db7ed3-6ed9-4861-8b22-7c0c0c98490b',
+    name: 'AAPT Cache10',
     user: {
       name: 'user@domain.example',
       type: 'user'
@@ -18,15 +18,15 @@ exports.getMockedProfile = function () {
     _eventsCount: '1',
     isDefault: true
   }, newProfile.environments['AzureCloud']));
-
+  
   return newProfile;
 };
 
-exports.setEnvironment = function() {
+exports.setEnvironment = function () {
   process.env['AZURE_ARM_TEST_LOCATION'] = 'West US';
   process.env['AZURE_ARM_TEST_RESOURCE_GROUP'] = 'xplatTestCacheRG';
 };
 
 exports.scopes = [];
 
- exports.randomTestIdsGenerated = function() { return ['xplatTestCache9570','xplatTestCache2297'];};
+exports.randomTestIdsGenerated = function () { return ['xplatTestCache5287', 'xplatTestCache1228']; };
