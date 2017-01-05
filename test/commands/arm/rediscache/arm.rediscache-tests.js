@@ -53,6 +53,10 @@ var testSku;
 var testMaxMemoryPolicy;
 var testEnableNonSSLPort;
 var testNewMaxMemoryPolicy;
+var exportPrefix;
+var exportContainer;
+var importFiles;
+var rebootType;
 
 var galleryTemplateName;
 var galleryTemplateUrl;
@@ -68,6 +72,10 @@ describe('arm', function () {
       testSize = 'C2';
       testSku = 'Basic';
       testNewMaxMemoryPolicy = 'VolatileLRU';
+	  exportPrefix = 'cliexportprefix';
+	  exportContainer = 'cliexportcontainer';
+	  importFiles = 'importfilesSAS';
+	  rebootType = 'AllNodes'
       cacheName = suite.generateId(cachePrefix, knownNames);
       storageName = cacheName;
       newCacheName = suite.generateId(cachePrefix, knownNames);
@@ -172,6 +180,27 @@ describe('arm', function () {
 
     it.skip('Delete Diagnostics command should work', function (done) {
       suite.execute('rediscache delete-diagnostics --name %s --resource-group %s --json', cacheName, testResourceGroup, function (result) {
+        result.exitStatus.should.be.equal(0);
+        done();
+      });
+    });
+	
+	it.skip('Export command should work', function (done) {
+      suite.execute('rediscache export --name %s --resource-group %s --prefix %s --container %s --json', cacheName, testResourceGroup, exportPrefix, exportContainer, function (result) {
+        result.exitStatus.should.be.equal(0);
+        done();
+      });
+    });
+	
+	it.skip('Import command should work', function (done) {
+      suite.execute('rediscache import --name %s --resource-group %s --files %s --json', cacheName, testResourceGroup, importFiles, function (result) {
+        result.exitStatus.should.be.equal(0);
+        done();
+      });
+    });
+	
+	it.skip('Reset command should work', function (done) {
+      suite.execute('rediscache reset --name %s --resource-group %s --reboot-type %s --json', cacheName, testResourceGroup, rebootType, function (result) {
         result.exitStatus.should.be.equal(0);
         done();
       });

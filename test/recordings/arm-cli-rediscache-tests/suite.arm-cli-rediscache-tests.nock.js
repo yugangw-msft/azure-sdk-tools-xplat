@@ -6,8 +6,8 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '04db7ed3-6ed9-4861-8b22-7c0c0c98490b',
-    name: 'AAPT Cache10',
+    id: '67db6ec8-1e63-4a12-a263-eb3b69b7588f',
+    name: 'CacheTeam - Alfan TP',
     user: {
       name: 'user@domain.example',
       type: 'user'
@@ -29,4 +29,4 @@ exports.setEnvironment = function() {
 
 exports.scopes = [];
 
- exports.randomTestIdsGenerated = function() { return ['xplatTestCache5287','xplatTestCache1228'];};
+ exports.randomTestIdsGenerated = function() { return ['xplatTestCache9570','xplatTestCache2297'];};
