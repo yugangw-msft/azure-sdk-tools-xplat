@@ -78919,7 +78919,7 @@
             }
           ]
         },
-		{
+        {
           "name": "export",
           "description": "Exports data from Azure Redis Cache to a specified container",
           "fullName": "rediscache export",
@@ -78969,32 +78969,32 @@
               "long": "--resource-group",
               "description": "Name of the Resource Group under which the cache exists"
             },
-			{
+            {
               "flags": "-p, --prefix <prefix>",
-              "required": -22,
+              "required": -14,
               "optional": 0,
               "bool": true,
               "short": "-p",
               "long": "--prefix",
               "description": "Prefix to use for blob names"
             },
-			{
+            {
               "flags": "-c, --container <container>",
-              "required": -22,
+              "required": -17,
               "optional": 0,
               "bool": true,
               "short": "-c",
               "long": "--container",
               "description": "SAS url of container where data should be exported"
             },
-			{
+            {
               "flags": "-f, --format <format>",
-              "required": -22,
-              "optional": 1,
+              "required": -14,
+              "optional": 0,
               "bool": true,
               "short": "-f",
               "long": "--format",
-              "description": "Format for the blob.  Currently 'rdb' is the only supported, with other formats expected in the future"
+              "description": "Format for the blob.  Currently rdb is the only supported, with other formats expected in the future"
             },
             {
               "flags": "-s, --subscription <subscription>",
@@ -79007,7 +79007,7 @@
             }
           ]
         },
-		{
+        {
           "name": "import",
           "description": "Import data from blobs to Azure Redis Cache",
           "fullName": "rediscache import",
@@ -79057,23 +79057,23 @@
               "long": "--resource-group",
               "description": "Name of the Resource Group under which the cache exists"
             },
-			{
+            {
               "flags": "-d, --files <files>",
-              "required": -22,
+              "required": -13,
               "optional": 0,
               "bool": true,
               "short": "-d",
               "long": "--files",
-              "description": "SAS urls of blobs whose content should be imported into the cache in comma separated format"
+              "description": "SAS urls of blobs whose content should be imported into the cache."
             },
-			{
+            {
               "flags": "-f, --format <format>",
-              "required": -22,
-              "optional": 1,
+              "required": -14,
+              "optional": 0,
               "bool": true,
               "short": "-f",
               "long": "--format",
-              "description": "Format for the blob.  Currently 'rdb' is the only supported, with other formats expected in the future"
+              "description": "Format for the blob.  Currently rdb is the only supported, with other formats expected in the future"
             },
             {
               "flags": "-s, --subscription <subscription>",
@@ -79086,7 +79086,7 @@
             }
           ]
         },
-		{
+        {
           "name": "reset",
           "description": "Reboot specified node(s) of an Azure Redis Cache instance",
           "fullName": "rediscache reset",
@@ -79136,19 +79136,19 @@
               "long": "--resource-group",
               "description": "Name of the Resource Group under which the cache exists"
             },
-			{
+            {
               "flags": "-r, --reboot-type <reboot-type>",
-              "required": -22,
+              "required": -19,
               "optional": 0,
               "bool": true,
               "short": "-r",
               "long": "--reboot-type",
-              "description": "Which node to reboot. Possible values are [PrimaryNode, SecondaryNode, AllNodes]"
+              "description": "Which node to reboot. Valid values: [PrimaryNode, SecondaryNode, AllNodes]"
             },
-			{
+            {
               "flags": "-d, --shard-id <shard-id>",
-              "required": -22,
-              "optional": 1,
+              "required": -16,
+              "optional": 0,
               "bool": true,
               "short": "-d",
               "long": "--shard-id",
