@@ -76328,7 +76328,7 @@
                       "optional": 0,
                       "bool": true,
                       "long": "--keep-empty-record-set",
-                      "description": "mode, which hepls to remove record only and save empty record set"
+                      "description": "keep the empty record set when deleting the last record in the record set"
                     },
                     {
                       "flags": "-s, --subscription <subscription>",
