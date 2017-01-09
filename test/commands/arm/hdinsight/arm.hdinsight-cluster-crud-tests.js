@@ -246,7 +246,7 @@ describe('arm', function () {
           '--defaultStorageAccountName %s.azuredatalakestore.net ' +
           '--defaultStorageRootPath %s ' +
           '--servicePrincipalObjectId %s ' +
-          '--servicePrincipalAuthorityUri %s ' +
+          '--servicePrincipalTenant %s ' +
           '--servicePrincipalCertFilePath %s ' +
           '--servicePrincipalCertPassword %s ' +
           '--headNodeSize %s ' +
@@ -290,7 +290,7 @@ describe('arm', function () {
           '--defaultStorageAccountKey %s ' +
           '--defaultStorageContainer %s ' +
           '--servicePrincipalObjectId %s ' +
-          '--servicePrincipalAuthorityUri %s ' +
+          '--servicePrincipalTenant %s ' +
           '--servicePrincipalCertFilePath %s ' +
           '--servicePrincipalCertPassword %s ' +
           '--headNodeSize %s ' +

@@ -45653,7 +45653,7 @@
                   "optional": 0,
                   "bool": true,
                   "long": "--defaultStorageRootPath",
-                  "description": "Path-prefix in the Azure Data Lake Store account that this cluster will use as default File System (required only for clusters using Azure Data Lake Store as default Storage)"
+                  "description": "Path-prefix in the Azure Data Lake Store account that this cluster will use as default File System (required only for clusters using Azure Data Lake Store as default storage)"
                 },
                 {
                   "flags": "--servicePrincipalObjectId <servicePrincipalObjectId>",
@@ -45664,12 +45664,12 @@
                   "description": "Object Id of the service principal used to access Azure Data Lake Store (required only for Data Lake Store enabled clusters)"
                 },
                 {
-                  "flags": "--servicePrincipalAuthorityUri <servicePrincipalAuthorityUri>",
-                  "required": -32,
+                  "flags": "--servicePrincipalTenant <servicePrincipalTenant>",
+                  "required": -26,
                   "optional": 0,
                   "bool": true,
-                  "long": "--servicePrincipalAuthorityUri",
-                  "description": "URI specifying the authority to acquire access token for Azure Data Lake Store For example, \"https://login.windows.net/<tenant>\" (required only for Data Lake Store enabled clusters)"
+                  "long": "--servicePrincipalTenant",
+                  "description": "Service principal AAD Tenant used to access Azure Data Lake Store For example, \"https://login.windows.net/<tenantId>\" (required only for Data Lake Store enabled clusters)"
                 },
                 {
                   "flags": "--servicePrincipalCertFilePath <servicePrincipalCertFilePath>",
