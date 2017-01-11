@@ -69291,6 +69291,15 @@
                   "description": "the resource group of the connected express route circuit"
                 },
                 {
+                  "flags": "-b, --enable-bgp [enable-bgp]",
+                  "required": 0,
+                  "optional": -18,
+                  "bool": true,
+                  "short": "-b",
+                  "long": "--enable-bgp",
+                  "description": "whether BGP is enabled for this virtual network gateway or not"
+                },
+                {
                   "flags": "-y, --type [type]",
                   "required": 0,
                   "optional": -12,
@@ -69395,6 +69404,15 @@
                   "short": "-w",
                   "long": "--routing-weight",
                   "description": "the routing weight"
+                },
+                {
+                  "flags": "-b, --enable-bgp [enable-bgp]",
+                  "required": 0,
+                  "optional": -18,
+                  "bool": true,
+                  "short": "-b",
+                  "long": "--enable-bgp",
+                  "description": "whether BGP is enabled for this virtual network gateway or not"
                 },
                 {
                   "flags": "-s, --subscription <subscription>",
