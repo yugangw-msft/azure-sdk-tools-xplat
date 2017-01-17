@@ -68504,6 +68504,33 @@
                   "description": "enable bgp [true, false]"
                 },
                 {
+                  "flags": "-a, --bgp-asn [bgp-asn]",
+                  "required": 0,
+                  "optional": -15,
+                  "bool": true,
+                  "short": "-a",
+                  "long": "--bgp-asn",
+                  "description": "The BGP speaker's ASN"
+                },
+                {
+                  "flags": "-o, --bgp-peering-address [bgp-peering-address]",
+                  "required": 0,
+                  "optional": -27,
+                  "bool": true,
+                  "short": "-o",
+                  "long": "--bgp-peering-address",
+                  "description": "The BGP peering address and BGP identifier of this BGP speaker"
+                },
+                {
+                  "flags": "-j, --bgp-peer-weight [bgp-peer-weight]",
+                  "required": 0,
+                  "optional": -23,
+                  "bool": true,
+                  "short": "-j",
+                  "long": "--bgp-peer-weight",
+                  "description": "The weight added to routes learned from this BGP speaker"
+                },
+                {
                   "flags": "-t, --tags [tags]",
                   "required": 0,
                   "optional": -12,
@@ -68608,6 +68635,33 @@
                   "short": "-f",
                   "long": "--address-prefixes",
                   "description": "the comma separated list of address prefixes.\n     For example, -f \"10.0.0.0/24,10.0.1.0/24\""
+                },
+                {
+                  "flags": "-b, --enable-bgp [enable-bgp]",
+                  "required": 0,
+                  "optional": -18,
+                  "bool": true,
+                  "short": "-b",
+                  "long": "--enable-bgp",
+                  "description": "enable bgp [true, false]"
+                },
+                {
+                  "flags": "-a, --bgp-asn [bgp-asn]",
+                  "required": 0,
+                  "optional": -15,
+                  "bool": true,
+                  "short": "-a",
+                  "long": "--bgp-asn",
+                  "description": "The BGP speaker's ASN"
+                },
+                {
+                  "flags": "-j, --bgp-peer-weight [bgp-peer-weight]",
+                  "required": 0,
+                  "optional": -23,
+                  "bool": true,
+                  "short": "-j",
+                  "long": "--bgp-peer-weight",
+                  "description": "The weight added to routes learned from this BGP speaker"
                 },
                 {
                   "flags": "-t, --tags [tags]",
