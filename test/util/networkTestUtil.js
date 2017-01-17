@@ -357,8 +357,9 @@ _.extend(NetworkTestUtil.prototype, {
     });
   },
   deleteDnsRecord: function (rsetProp, suite, callback) {
-    var cmd = 'network dns record-set delete-record -g {group} -z {zoneName} -n {name} -y {type} {params} --quiet --json'
-      .formatArgs(rsetProp);
+    var keepEmptyRecordSet = rsetProp.keepEmptyRecordSet ? '--keep-empty-record-set' : '';
+    var cmd = util.format('network dns record-set delete-record -g {group} -z {zoneName} -n {name} -y {type} {params} ' +
+      '--keep-empty-record-set --quiet %s --json', keepEmptyRecordSet).formatArgs(rsetProp);
     testUtils.executeCommand(suite, retry, cmd, function (result) {
       result.exitStatus.should.equal(0);
       callback();
