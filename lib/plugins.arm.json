@@ -68411,7 +68411,7 @@
                   "bool": true,
                   "short": "-y",
                   "long": "--vpn-type",
-                  "description": "the vpn type\n     Valid values are [RouteBased,PolicyBased,Dedicated]\n     Default is RouteBased"
+                  "description": "the vpn type\n     Valid values are [RouteBased,PolicyBased]\n     Default is RouteBased"
                 },
                 {
                   "flags": "-k, --sku-name [sku-name]",
@@ -68420,7 +68420,7 @@
                   "bool": true,
                   "short": "-k",
                   "long": "--sku-name",
-                  "description": "the SKU name\n     Valid values are [Basic,HighPerformance,Standard]\n     Default is Basic"
+                  "description": "the SKU name\n     Valid values are [Basic,HighPerformance,Standard,UltraPerformance]\n     Default is Basic"
                 },
                 {
                   "flags": "-u, --public-ip-id [public-ip-id]",
@@ -68607,7 +68607,7 @@
                   "bool": true,
                   "short": "-k",
                   "long": "--sku-name",
-                  "description": "the SKU name\n     Valid values are [Basic,HighPerformance,Standard]"
+                  "description": "the SKU name\n     Valid values are [Basic,HighPerformance,Standard,UltraPerformance]"
                 },
                 {
                   "flags": "-d, --default-site-name [default-site-name]",
