@@ -9461,6 +9461,15 @@
                       "short": "-p",
                       "long": "--application-type-build-path",
                       "description": "the path of the application type build"
+                    },
+                    {
+                      "flags": "-t --timeout <timeout>",
+                      "required": -14,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-t",
+                      "long": "--timeout",
+                      "description": "the timeout, seconds"
                     }
                   ]
                 },
@@ -65564,7 +65573,7 @@
                   "name": "list",
                   "description": "Get all record sets in a DNS zone",
                   "fullName": "network dns record-set list",
-                  "usage": "[options] <resource-group> <dns-zone-name>",
+                  "usage": "[options] <resource-group> <dns-zone-name> [type]",
                   "filePath": "commands/arm/network/network._js",
                   "options": [
                     {
@@ -65974,6 +65983,15 @@
                       "description": "the text attribute\n"
                     },
                     {
+                      "flags": "-q, --quiet",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "short": "-q",
+                      "long": "--quiet",
+                      "description": "quiet mode, do not ask before replacing existing CNAME record"
+                    },
+                    {
                       "flags": "-s, --subscription <subscription>",
                       "required": -20,
                       "optional": 0,
@@ -66050,7 +66068,7 @@
                       "bool": true,
                       "short": "-y",
                       "long": "--type",
-                      "description": "the type of the record set.\n     If specified only record sets of this type will be listed.\n     Valid values are [A,AAAA,CNAME,MX,NS,PTR,SRV,TXT]\nThe record type A \n"
+                      "description": "the type of the record set.\n     Valid values are [A,AAAA,CNAME,MX,NS,PTR,SRV,TXT]\nThe record type A \n"
                     },
                     {
                       "flags": "-a  --ipv4-address [ipv4-address]",
@@ -66168,6 +66186,14 @@
                       "short": "-q",
                       "long": "--quiet",
                       "description": "quiet mode, do not ask for delete confirmation"
+                    },
+                    {
+                      "flags": "--keep-empty-record-set",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "long": "--keep-empty-record-set",
+                      "description": "keep the empty record set when deleting the last record in the record set"
                     },
                     {
                       "flags": "-s, --subscription <subscription>",
