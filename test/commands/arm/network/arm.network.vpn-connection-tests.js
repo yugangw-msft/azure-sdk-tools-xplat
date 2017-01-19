@@ -117,13 +117,15 @@ describe('arm', function () {
       });
     });
     after(function (done) {
-      // Note: VPN operations are long running and takes about 20-30 minutes to complete,
-      // so we need to increase mocha timeout a lot
+      /*
+       Note: VPN operations are long running and takes about 20-30 minutes to complete,
+       so we need to increase mocha timeout a lot
+      */
       this.timeout(hour);
 
       networkUtil.deleteGroup(firstGatewayProp.group, suite, function () {
         networkUtil.deleteGroup(secondGatewayProp.group, suite, function () {
-          suite.teardownSuite(done);
+           suite.teardownSuite(done);
         });
       });
     });
@@ -135,8 +137,10 @@ describe('arm', function () {
     });
 
     describe('vpn-connection', function () {
-      // Note: VPN operations are long running and takes about 20-30 minutes to complete,
-      // so we need to increase mocha timeout a lot
+      /*
+       Note: VPN operations are long running and takes about 20-30 minutes to complete,
+       so we need to increase mocha timeout a lot
+      */
       this.timeout(hour);
 
       it('create first gateway should create vpn gateway in resource group', function (done) {
