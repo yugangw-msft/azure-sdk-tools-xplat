@@ -47608,7 +47608,7 @@
                   "optional": 0,
                   "bool": true,
                   "long": "--defaultStorageAccountName",
-                  "description": "Storage account url to use for default HDInsight storage"
+                  "description": "Fully Qualified Domain Name of the storage account to use for default HDInsight storage. For example, \"accountName.azuredatalakestore.net\" or \"accountName.blob.core.windows.net\""
                 },
                 {
                   "flags": "--defaultStorageAccountKey <storageAccountKey>",
@@ -47616,7 +47616,7 @@
                   "optional": 0,
                   "bool": true,
                   "long": "--defaultStorageAccountKey",
-                  "description": "Key to the storage account to use for default HDInsight storage"
+                  "description": "Azure Storage key (required only for clusters using Azure Storage as default storage)"
                 },
                 {
                   "flags": "--defaultStorageContainer <storageContainer>",
@@ -47624,7 +47624,47 @@
                   "optional": 0,
                   "bool": true,
                   "long": "--defaultStorageContainer",
-                  "description": "Container in the storage account to use for HDInsight default storage"
+                  "description": "Azure Storage container name (required only for clusters using Azure Storage as default storage)"
+                },
+                {
+                  "flags": "--defaultStorageRootPath <defaultStorageRootPath>",
+                  "required": -26,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--defaultStorageRootPath",
+                  "description": "Path-prefix in the Azure Data Lake Store account that this cluster will use as default File System (required only for clusters using Azure Data Lake Store as default storage)"
+                },
+                {
+                  "flags": "--servicePrincipalObjectId <servicePrincipalObjectId>",
+                  "required": -28,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--servicePrincipalObjectId",
+                  "description": "Object Id of the service principal used to access Azure Data Lake Store (required only for Data Lake Store enabled clusters)"
+                },
+                {
+                  "flags": "--servicePrincipalTenant <servicePrincipalTenant>",
+                  "required": -26,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--servicePrincipalTenant",
+                  "description": "Service principal AAD Tenant used to access Azure Data Lake Store For example, \"https://login.windows.net/<tenantId>\" (required only for Data Lake Store enabled clusters)"
+                },
+                {
+                  "flags": "--servicePrincipalCertFilePath <servicePrincipalCertFilePath>",
+                  "required": -32,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--servicePrincipalCertFilePath",
+                  "description": "Service principal certificate file path used to access Azure Data Lake Store (required only for Data Lake Store enabled clusters)"
+                },
+                {
+                  "flags": "--servicePrincipalCertPassword <servicePrincipalCertPassword>",
+                  "required": -32,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--servicePrincipalCertPassword",
+                  "description": "Service principal certificate password used to access Azure Data Lake Store (required only for Data Lake Store enabled clusters)"
                 },
                 {
                   "flags": "--headNodeSize <headNodeSize>",
@@ -49081,6 +49121,14 @@
                   "optional": 0,
                   "bool": true,
                   "long": "--hive-site",
+                  "description": "Config values in the format of 'name=value'"
+                },
+                {
+                  "flags": "--clusterIdentity <clusterIdentity>",
+                  "required": -19,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--clusterIdentity",
                   "description": "Config values in the format of 'name=value'"
                 },
                 {
