@@ -7,7 +7,7 @@
     <WixTargetsPath>$(WixToolPath)Wix.targets</WixTargetsPath>
     <WixTasksPath>wixtasks.dll</WixTasksPath>
     <AzureCliSource>$(HOMEDRIVE)$(HOMEPATH)\zcli</AzureCliSource>
-	<NodeExeSource>$(HOMEDRIVE)$(HOMEPATH)\zNode</NodeExeSource>
+    <NodeExeSource>$(HOMEDRIVE)$(HOMEPATH)\zNode</NodeExeSource>
   </PropertyGroup>
   <!-- Project -->
   <PropertyGroup>

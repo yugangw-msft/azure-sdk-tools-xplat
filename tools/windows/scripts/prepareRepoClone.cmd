@@ -65,8 +65,8 @@ echo Temporary clone of auxilary repo exists. Removing it...
 pushd %TEMP_AUX_REPO%\..\
 if exist %TEMP_AUX_REPO_FOLDER% rmdir /s /q %TEMP_AUX_REPO_FOLDER%
 if exist %TEMP_AUX_REPO_FOLDER% (
-	echo Failed to delete %TEMP_AUX_REPO_FOLDER%.
-	goto ERROR
+    echo Failed to delete %TEMP_AUX_REPO_FOLDER%.
+    goto ERROR
 )
 popd
 
@@ -167,7 +167,7 @@ for %%i in (
     .gitignore
     ChangeLog.txt
     bin\npm.cmd
-	bin\node.exe
+    bin\node.exe
     LICENSE.txt
 ) do (
     if exist %%i (
