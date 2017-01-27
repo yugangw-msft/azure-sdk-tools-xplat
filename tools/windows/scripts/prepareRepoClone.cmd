@@ -75,7 +75,7 @@ mkdir %TEMP_AUX_REPO%
 echo Downloading node x86 and x64...
 pushd %TEMP_AUX_REPO%
 mkdir %X86%
-pushd %x86%
+pushd %X86%
 curl -o node.exe %NODE_X86_DOWNLOAD_URL%
 if %errorlevel% neq 0 goto ERROR
 popd
