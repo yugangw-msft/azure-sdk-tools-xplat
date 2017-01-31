@@ -134,7 +134,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-nic/providers/Microsoft.Compute/virtualMachines/tempXplatVMForNicTests?api-version=2016-03-30')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-nic/providers/Microsoft.Compute/virtualMachines/tempXplatVMForNicTests?api-version=2016-04-30-preview')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Compute/virtualMachines/tempXplatVMForNicTests' under resource group 'xplat-test-nic' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
@@ -186,13 +186,13 @@ function (nock) {
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-nic/providers/Microsoft.Compute/virtualMachines/tempXplatVMForNicTests?api-version=2016-03-30', '*')
+.put('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-nic/providers/Microsoft.Compute/virtualMachines/tempXplatVMForNicTests?api-version=2016-04-30-preview', '*')
   .reply(201, "{\r\n  \"properties\": {\r\n    \"vmId\": \"6a80c6d4-698b-4e13-a7a1-23012c7899ff\",\r\n    \"hardwareProfile\": {\r\n      \"vmSize\": \"Standard_DS1\"\r\n    },\r\n    \"storageProfile\": {\r\n      \"imageReference\": {\r\n        \"publisher\": \"credativ\",\r\n        \"offer\": \"Debian\",\r\n        \"sku\": \"8\",\r\n        \"version\": \"latest\"\r\n      },\r\n      \"osDisk\": {\r\n        \"osType\": \"Linux\",\r\n        \"name\": \"clid16a364e79cdb636-os-1481120621299\",\r\n        \"createOption\": \"FromImage\",\r\n        \"vhd\": {\r\n          \"uri\": \"https://xplattemptestaccount.blob.core.windows.net/vhds/clid16a364e79cdb636-os-1481120621299.vhd\"\r\n        },\r\n        \"caching\": \"ReadWrite\"\r\n      },\r\n      \"dataDisks\": []\r\n    },\r\n    \"osProfile\": {\r\n      \"computerName\": \"tempXplatVMForNicTests\",\r\n      \"adminUsername\": \"xplatuser\",\r\n      \"linuxConfiguration\": {\r\n        \"disablePasswordAuthentication\": false\r\n      },\r\n      \"secrets\": []\r\n    },\r\n    \"networkProfile\": {\"networkInterfaces\":[{\"id\":\"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-nic/providers/Microsoft.Network/networkInterfaces/test-nic\",\"properties\":{\"primary\":true}}]},\r\n    \"diagnosticsProfile\": {\r\n      \"bootDiagnostics\": {\r\n        \"enabled\": true,\r\n        \"storageUri\": \"https://xplattemptestaccount.blob.core.windows.net/\"\r\n      }\r\n    },\r\n    \"provisioningState\": \"Creating\"\r\n  },\r\n  \"type\": \"Microsoft.Compute/virtualMachines\",\r\n  \"location\": \"westeurope\",\r\n  \"tags\": {},\r\n  \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-nic/providers/Microsoft.Compute/virtualMachines/tempXplatVMForNicTests\",\r\n  \"name\": \"tempXplatVMForNicTests\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '1635',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Compute/locations/westeurope/operations/5832afa6-d6d3-4aeb-a353-d65e67e4500e?api-version=2016-03-30',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Compute/locations/westeurope/operations/5832afa6-d6d3-4aeb-a353-d65e67e4500e?api-version=2016-04-30-preview',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   'x-ms-served-by': '1140e0c9-b189-4861-9735-8154d3d824c8_131238889939254749',
   'x-ms-request-id': '5832afa6-d6d3-4aeb-a353-d65e67e4500e',
@@ -205,7 +205,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Compute/locations/westeurope/operations/5832afa6-d6d3-4aeb-a353-d65e67e4500e?api-version=2016-03-30')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Compute/locations/westeurope/operations/5832afa6-d6d3-4aeb-a353-d65e67e4500e?api-version=2016-04-30-preview')
   .reply(200, "{\r\n  \"startTime\": \"2016-12-07T14:23:37.5689827+00:00\",\r\n  \"status\": \"InProgress\",\r\n  \"name\": \"5832afa6-d6d3-4aeb-a353-d65e67e4500e\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '134',
@@ -223,7 +223,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Compute/locations/westeurope/operations/5832afa6-d6d3-4aeb-a353-d65e67e4500e?api-version=2016-03-30')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Compute/locations/westeurope/operations/5832afa6-d6d3-4aeb-a353-d65e67e4500e?api-version=2016-04-30-preview')
   .reply(200, "{\r\n  \"startTime\": \"2016-12-07T14:23:37.5689827+00:00\",\r\n  \"status\": \"InProgress\",\r\n  \"name\": \"5832afa6-d6d3-4aeb-a353-d65e67e4500e\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '134',
@@ -241,7 +241,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Compute/locations/westeurope/operations/5832afa6-d6d3-4aeb-a353-d65e67e4500e?api-version=2016-03-30')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Compute/locations/westeurope/operations/5832afa6-d6d3-4aeb-a353-d65e67e4500e?api-version=2016-04-30-preview')
   .reply(200, "{\r\n  \"startTime\": \"2016-12-07T14:23:37.5689827+00:00\",\r\n  \"status\": \"InProgress\",\r\n  \"name\": \"5832afa6-d6d3-4aeb-a353-d65e67e4500e\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '134',
@@ -259,7 +259,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Compute/locations/westeurope/operations/5832afa6-d6d3-4aeb-a353-d65e67e4500e?api-version=2016-03-30')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Compute/locations/westeurope/operations/5832afa6-d6d3-4aeb-a353-d65e67e4500e?api-version=2016-04-30-preview')
   .reply(200, "{\r\n  \"startTime\": \"2016-12-07T14:23:37.5689827+00:00\",\r\n  \"status\": \"InProgress\",\r\n  \"name\": \"5832afa6-d6d3-4aeb-a353-d65e67e4500e\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '134',
@@ -277,7 +277,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Compute/locations/westeurope/operations/5832afa6-d6d3-4aeb-a353-d65e67e4500e?api-version=2016-03-30')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Compute/locations/westeurope/operations/5832afa6-d6d3-4aeb-a353-d65e67e4500e?api-version=2016-04-30-preview')
   .reply(200, "{\r\n  \"startTime\": \"2016-12-07T14:23:37.5689827+00:00\",\r\n  \"endTime\": \"2016-12-07T14:25:48.4659374+00:00\",\r\n  \"status\": \"Succeeded\",\r\n  \"name\": \"5832afa6-d6d3-4aeb-a353-d65e67e4500e\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '184',
@@ -295,7 +295,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-nic/providers/Microsoft.Compute/virtualMachines/tempXplatVMForNicTests?api-version=2016-03-30')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-nic/providers/Microsoft.Compute/virtualMachines/tempXplatVMForNicTests?api-version=2016-04-30-preview')
   .reply(200, "{\r\n  \"properties\": {\r\n    \"vmId\": \"6a80c6d4-698b-4e13-a7a1-23012c7899ff\",\r\n    \"hardwareProfile\": {\r\n      \"vmSize\": \"Standard_DS1\"\r\n    },\r\n    \"storageProfile\": {\r\n      \"imageReference\": {\r\n        \"publisher\": \"credativ\",\r\n        \"offer\": \"Debian\",\r\n        \"sku\": \"8\",\r\n        \"version\": \"latest\"\r\n      },\r\n      \"osDisk\": {\r\n        \"osType\": \"Linux\",\r\n        \"name\": \"clid16a364e79cdb636-os-1481120621299\",\r\n        \"createOption\": \"FromImage\",\r\n        \"vhd\": {\r\n          \"uri\": \"https://xplattemptestaccount.blob.core.windows.net/vhds/clid16a364e79cdb636-os-1481120621299.vhd\"\r\n        },\r\n        \"caching\": \"ReadWrite\"\r\n      },\r\n      \"dataDisks\": []\r\n    },\r\n    \"osProfile\": {\r\n      \"computerName\": \"tempXplatVMForNicTests\",\r\n      \"adminUsername\": \"xplatuser\",\r\n      \"linuxConfiguration\": {\r\n        \"disablePasswordAuthentication\": false\r\n      },\r\n      \"secrets\": []\r\n    },\r\n    \"networkProfile\": {\"networkInterfaces\":[{\"id\":\"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-nic/providers/Microsoft.Network/networkInterfaces/test-nic\",\"properties\":{\"primary\":true}}]},\r\n    \"diagnosticsProfile\": {\r\n      \"bootDiagnostics\": {\r\n        \"enabled\": true,\r\n        \"storageUri\": \"https://xplattemptestaccount.blob.core.windows.net/\"\r\n      }\r\n    },\r\n    \"provisioningState\": \"Succeeded\"\r\n  },\r\n  \"type\": \"Microsoft.Compute/virtualMachines\",\r\n  \"location\": \"westeurope\",\r\n  \"tags\": {},\r\n  \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-nic/providers/Microsoft.Compute/virtualMachines/tempXplatVMForNicTests\",\r\n  \"name\": \"tempXplatVMForNicTests\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '1636',
@@ -349,7 +349,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-nic/providers/Microsoft.Compute/virtualMachines/tempXplatVMForNicTests?api-version=2016-03-30')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-nic/providers/Microsoft.Compute/virtualMachines/tempXplatVMForNicTests?api-version=2016-04-30-preview')
   .reply(200, "{\r\n  \"properties\": {\r\n    \"vmId\": \"6a80c6d4-698b-4e13-a7a1-23012c7899ff\",\r\n    \"hardwareProfile\": {\r\n      \"vmSize\": \"Standard_DS1\"\r\n    },\r\n    \"storageProfile\": {\r\n      \"imageReference\": {\r\n        \"publisher\": \"credativ\",\r\n        \"offer\": \"Debian\",\r\n        \"sku\": \"8\",\r\n        \"version\": \"latest\"\r\n      },\r\n      \"osDisk\": {\r\n        \"osType\": \"Linux\",\r\n        \"name\": \"clid16a364e79cdb636-os-1481120621299\",\r\n        \"createOption\": \"FromImage\",\r\n        \"vhd\": {\r\n          \"uri\": \"https://xplattemptestaccount.blob.core.windows.net/vhds/clid16a364e79cdb636-os-1481120621299.vhd\"\r\n        },\r\n        \"caching\": \"ReadWrite\"\r\n      },\r\n      \"dataDisks\": []\r\n    },\r\n    \"osProfile\": {\r\n      \"computerName\": \"tempXplatVMForNicTests\",\r\n      \"adminUsername\": \"xplatuser\",\r\n      \"linuxConfiguration\": {\r\n        \"disablePasswordAuthentication\": false\r\n      },\r\n      \"secrets\": []\r\n    },\r\n    \"networkProfile\": {\"networkInterfaces\":[{\"id\":\"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-nic/providers/Microsoft.Network/networkInterfaces/test-nic\",\"properties\":{\"primary\":true}}]},\r\n    \"diagnosticsProfile\": {\r\n      \"bootDiagnostics\": {\r\n        \"enabled\": true,\r\n        \"storageUri\": \"https://xplattemptestaccount.blob.core.windows.net/\"\r\n      }\r\n    },\r\n    \"provisioningState\": \"Succeeded\"\r\n  },\r\n  \"type\": \"Microsoft.Compute/virtualMachines\",\r\n  \"location\": \"westeurope\",\r\n  \"tags\": {},\r\n  \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-nic/providers/Microsoft.Compute/virtualMachines/tempXplatVMForNicTests\",\r\n  \"name\": \"tempXplatVMForNicTests\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '1636',
@@ -367,13 +367,13 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .delete('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-nic/providers/Microsoft.Compute/virtualMachines/tempXplatVMForNicTests?api-version=2016-03-30')
+  .delete('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-nic/providers/Microsoft.Compute/virtualMachines/tempXplatVMForNicTests?api-version=2016-04-30-preview')
   .reply(202, "", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '0',
   expires: '-1',
-  location: 'https://management.azure.com/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Compute/locations/westeurope/operations/10d8a0b7-f3fe-437c-b262-1d855a2c670f?monitor=true&api-version=2016-03-30',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Compute/locations/westeurope/operations/10d8a0b7-f3fe-437c-b262-1d855a2c670f?api-version=2016-03-30',
+  location: 'https://management.azure.com/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Compute/locations/westeurope/operations/10d8a0b7-f3fe-437c-b262-1d855a2c670f?monitor=true&api-version=2016-04-30-preview',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Compute/locations/westeurope/operations/10d8a0b7-f3fe-437c-b262-1d855a2c670f?api-version=2016-04-30-preview',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   'x-ms-served-by': '1140e0c9-b189-4861-9735-8154d3d824c8_131238889939254749',
   'x-ms-request-id': '10d8a0b7-f3fe-437c-b262-1d855a2c670f',
@@ -386,7 +386,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Compute/locations/westeurope/operations/10d8a0b7-f3fe-437c-b262-1d855a2c670f?api-version=2016-03-30')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Compute/locations/westeurope/operations/10d8a0b7-f3fe-437c-b262-1d855a2c670f?api-version=2016-04-30-preview')
   .reply(200, "{\r\n  \"startTime\": \"2016-12-07T14:26:32.8566032+00:00\",\r\n  \"status\": \"InProgress\",\r\n  \"name\": \"10d8a0b7-f3fe-437c-b262-1d855a2c670f\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '134',
@@ -404,7 +404,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Compute/locations/westeurope/operations/10d8a0b7-f3fe-437c-b262-1d855a2c670f?api-version=2016-03-30')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Compute/locations/westeurope/operations/10d8a0b7-f3fe-437c-b262-1d855a2c670f?api-version=2016-04-30-preview')
   .reply(200, "{\r\n  \"startTime\": \"2016-12-07T14:26:32.8566032+00:00\",\r\n  \"status\": \"InProgress\",\r\n  \"name\": \"10d8a0b7-f3fe-437c-b262-1d855a2c670f\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '134',
@@ -422,7 +422,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Compute/locations/westeurope/operations/10d8a0b7-f3fe-437c-b262-1d855a2c670f?api-version=2016-03-30')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Compute/locations/westeurope/operations/10d8a0b7-f3fe-437c-b262-1d855a2c670f?api-version=2016-04-30-preview')
   .reply(200, "{\r\n  \"startTime\": \"2016-12-07T14:26:32.8566032+00:00\",\r\n  \"endTime\": \"2016-12-07T14:27:43.6865382+00:00\",\r\n  \"status\": \"Succeeded\",\r\n  \"name\": \"10d8a0b7-f3fe-437c-b262-1d855a2c670f\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '184',
