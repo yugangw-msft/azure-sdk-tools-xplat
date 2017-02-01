@@ -37,7 +37,7 @@
     "async": "1.4.2",
     "azure-common": "0.9.18",
     "azure-arm-authorization": "2.0.0",
-    "azure-arm-cdn": "1.0.0",
+    "azure-arm-cdn": "1.0.2",
     "azure-arm-commerce": "0.2.0",
     "azure-arm-compute": "0.19.1",
     "azure-arm-datalake-analytics": "^1.0.1-preview",
