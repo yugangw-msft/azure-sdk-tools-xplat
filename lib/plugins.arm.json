@@ -83693,6 +83693,14 @@
                   "description": "java container version of webapp"
                 },
                 {
+                  "flags": "--scmtype <scmtype>",
+                  "required": -11,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--scmtype",
+                  "description": "scm type of webapp"
+                },
+                {
                   "flags": "--slot <slot>",
                   "required": -8,
                   "optional": 0,
