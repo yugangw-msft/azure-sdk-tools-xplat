@@ -218,6 +218,8 @@ describe('arm', function() {
 
 /*
 
+WILL RE-RUN AFTER --access IS FIXED
+
       it('disk grant access parameter should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
         vmTest.createGroup(groupName, location, suite, function(result) {
@@ -266,7 +268,6 @@ describe('arm', function() {
         });
       });
 
-/*
       it('disk empty list should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
         var cmd = util.format('managed-disk list -g %s --json', groupName).split(' ');
@@ -276,7 +277,6 @@ describe('arm', function() {
           done();
         });
       });
-      */
     });
   });
 });
