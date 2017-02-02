@@ -35,7 +35,8 @@ var groupName,
   diskPrefix = 'xplatDisk',
   paramFileName = 'test/data/diskParam.json',
   updateFileName = 'test/data/updateDiskParam.json',
-  grantAccessFileName = 'test/data/grantAccessParam.json',
+  grantAccessParamFileName = 'test/data/grantAccessParam.json',
+  grantAccessFileName = 'test/data/grantAccess.json',
   subscriptionId,
   imageId,
   diskEncryptionKeyVaultId,
@@ -90,8 +91,7 @@ describe('arm', function() {
     });
 
     describe('disk', function() {
-      
-      
+
       it('disk config set, disk create, disk delete should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
         vmTest.createGroup(groupName, location, suite, function(result) {
@@ -122,11 +122,7 @@ describe('arm', function() {
                           var cmd = util.format('managed-disk create --resource-group %s --name %s --parameter-file %s --json', groupName, diskPrefix, paramFileName).split(' ');
                           testUtils.executeCommand(suite, retry, cmd, function(result) {
                             result.exitStatus.should.equal(0);
-                            var cmd = util.format('managed-disk delete -g %s -n %s --json', groupName, diskPrefix).split(' ');
-                            testUtils.executeCommand(suite, retry, cmd, function(result) {
-                              result.exitStatus.should.equal(0);
-                              done();
-                            });
+                            done();
                           });
                         });
                       });
@@ -152,8 +148,6 @@ describe('arm', function() {
         });
       });
 
-
-      
 
       it('disk update parameters should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
@@ -200,7 +194,11 @@ describe('arm', function() {
                                       var cmd = util.format('managed-disk update -g %s -n %s --parameter-file %s --json', groupName, diskPrefix, updateFileName).split(' ');
                                       testUtils.executeCommand(suite, retry, cmd, function(result) {
                                         result.exitStatus.should.equal(0);
-                                        done();
+                                        var cmd = util.format('managed-disk delete -g %s -n %s --json', groupName, diskPrefix).split(' ');
+                                        testUtils.executeCommand(suite, retry, cmd, function(result) {
+                                          result.exitStatus.should.equal(0);
+                                          done();
+                                        });
                                       });
                                     });
                                   });
@@ -220,16 +218,16 @@ describe('arm', function() {
 
 /*
 
-      it('disk grant access should pass', function(done) {
+      it('disk grant access parameter should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
         vmTest.createGroup(groupName, location, suite, function(result) {
-        var cmd = util.format('managed-disk grant-access-parameters create --parameter-file %s --json', grantAccessFileName).split(' ');
+        var cmd = util.format('managed-disk grant-access-parameters create --parameter-file %s --json', grantAccessParamFileName).split(' ');
         testUtils.executeCommand(suite, retry, cmd, function(result) {
           result.exitStatus.should.equal(0);
-          var cmd = makeGrantAccessCommandStr('grant-access-data', 'set', grantAccessFileName, util.format('--access %s --duration-in-seconds %s', 0, 2)).split(' ');
+          var cmd = makeGrantAccessCommandStr('grant-access-data', 'set', grantAccessParamFileName, util.format('--access %s --duration-in-seconds %s', 0, 2)).split(' ');
           testUtils.executeCommand(suite, retry, cmd, function(result) {
             result.exitStatus.should.equal(0);
-            var cmd = makeGrantAccessCommandStr('grant-access-data', 'delete', grantAccessFileName, '--duration-in-seconds').split(' ');
+            var cmd = makeGrantAccessCommandStr('grant-access-data', 'delete', grantAccessParamFileName, '--duration-in-seconds').split(' ');
             testUtils.executeCommand(suite, retry, cmd, function(result) {
               result.exitStatus.should.equal(0);
             done();
@@ -238,7 +236,7 @@ describe('arm', function() {
           });
         });
       });
-
+*/
 
       it('disk grant access should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
@@ -246,12 +244,16 @@ describe('arm', function() {
           var cmd = util.format('managed-disk create --resource-group %s --name %s --parameter-file %s --json', groupName, diskPrefix, paramFileName).split(' ');
           testUtils.executeCommand(suite, retry, cmd, function(result) {
             result.exitStatus.should.equal(0);
-        var cmd = util.format('managed-disk grant-access -g %s -n %s --parameter-file %s --json', groupName, diskPrefix, grantAccessFileName).split(' ');
-        testUtils.executeCommand(suite, retry, cmd, function(result) {
-          result.exitStatus.should.equal(0);
-          done();
-        });
-        });
+            var cmd = util.format('managed-disk grant-access-parameters patch --parameter-file %s --operation replace --path "/access" --value %s', grantAccessFileName, 'Read').split(' ');
+            testUtils.executeCommand(suite, retry, cmd, function(result) {
+              result.exitStatus.should.equal(0);
+              var cmd = util.format('managed-disk grant-access -g %s -n %s --parameter-file %s --json', groupName, diskPrefix, grantAccessFileName).split(' ');
+              testUtils.executeCommand(suite, retry, cmd, function(result) {
+                result.exitStatus.should.equal(0);
+                done();
+              });
+            });
+          });
         });
       });
 
@@ -264,9 +266,7 @@ describe('arm', function() {
         });
       });
 
-      
-      */
-
+/*
       it('disk empty list should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
         var cmd = util.format('managed-disk list -g %s --json', groupName).split(' ');
@@ -276,7 +276,7 @@ describe('arm', function() {
           done();
         });
       });
-
+      */
     });
   });
 });
