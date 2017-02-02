@@ -240,7 +240,11 @@ describe('arm', function() {
         var cmd = util.format('managed-disk revoke-access -g %s -n %s --json', groupName, diskPrefix).split(' ');
         testUtils.executeCommand(suite, retry, cmd, function(result) {
           result.exitStatus.should.equal(0);
-          done();
+          var cmd = util.format('managed-disk delete -g %s -n %s --json', groupName, diskPrefix).split(' ');
+          testUtils.executeCommand(suite, retry, cmd, function(result) {
+            result.exitStatus.should.equal(0);
+            done();
+          });
         });
       });
 
