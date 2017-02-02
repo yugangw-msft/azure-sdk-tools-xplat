@@ -92,7 +92,7 @@ describe('arm', function() {
 
     describe('disk', function() {
 
-      it('disk config set, disk create, disk delete should pass', function(done) {
+      it('disk config set, disk create should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
         vmTest.createGroup(groupName, location, suite, function(result) {
           var cmd = util.format('managed-disk config create --parameter-file %s --json', paramFileName).split(' ');
@@ -149,7 +149,7 @@ describe('arm', function() {
       });
 
 
-      it('disk update parameters should pass', function(done) {
+      it('disk update parameters, disk delete should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
         vmTest.createGroup(groupName, location, suite, function(result) {
         var cmd = util.format('managed-disk update-parameters create --parameter-file %s --json', updateFileName).split(' ');
@@ -216,37 +216,13 @@ describe('arm', function() {
           });
         });
 
-/*
-
-WILL RE-RUN AFTER --access IS FIXED
-
-      it('disk grant access parameter should pass', function(done) {
-        this.timeout(vmTest.timeoutLarge * 10);
-        vmTest.createGroup(groupName, location, suite, function(result) {
-        var cmd = util.format('managed-disk grant-access-parameters create --parameter-file %s --json', grantAccessParamFileName).split(' ');
-        testUtils.executeCommand(suite, retry, cmd, function(result) {
-          result.exitStatus.should.equal(0);
-          var cmd = makeGrantAccessCommandStr('grant-access-data', 'set', grantAccessParamFileName, util.format('--access %s --duration-in-seconds %s', 0, 2)).split(' ');
-          testUtils.executeCommand(suite, retry, cmd, function(result) {
-            result.exitStatus.should.equal(0);
-            var cmd = makeGrantAccessCommandStr('grant-access-data', 'delete', grantAccessParamFileName, '--duration-in-seconds').split(' ');
-            testUtils.executeCommand(suite, retry, cmd, function(result) {
-              result.exitStatus.should.equal(0);
-            done();
-            });
-            });
-          });
-        });
-      });
-*/
-
-      it('disk grant access should pass', function(done) {
+      it('disk grant access, disk grant-access-parameters patch should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
          vmTest.createGroup(groupName, location, suite, function(result) {
           var cmd = util.format('managed-disk create --resource-group %s --name %s --parameter-file %s --json', groupName, diskPrefix, paramFileName).split(' ');
           testUtils.executeCommand(suite, retry, cmd, function(result) {
             result.exitStatus.should.equal(0);
-            var cmd = util.format('managed-disk grant-access-parameters patch --parameter-file %s --operation replace --path "/access" --value %s', grantAccessFileName, 'Read').split(' ');
+            var cmd = util.format('managed-disk grant-access-parameters patch --parameter-file %s --operation replace --path /access --value %s', grantAccessFileName, 'Read').split(' ');
             testUtils.executeCommand(suite, retry, cmd, function(result) {
               result.exitStatus.should.equal(0);
               var cmd = util.format('managed-disk grant-access -g %s -n %s --parameter-file %s --json', groupName, diskPrefix, grantAccessFileName).split(' ');
