@@ -1,0 +1,17 @@
+{
+  "accountType": "Standard_LRS",
+  "timeCreated": null,
+  "osType": "Windows",
+  "creationData": {
+    "createOption": "Empty"
+  },
+  "diskSizeGB": 5,
+  "encryptionSettings": "null",
+  "ownerId": "",
+  "provisioningState": "",
+  "id": null,
+  "name": "xplatSnapshot9903",
+  "type": null,
+  "location": "southeastasia",
+  "tags": {}
+}
