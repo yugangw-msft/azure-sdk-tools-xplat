@@ -34,6 +34,7 @@ var requiredEnvironment = [{
 
 var groupName,
   avsPrefix6 = 'xplattestavs6',
+  imgPrefix6 = 'xplattestimg6',
   vm1Prefix = 'vm1',
   location,
   username = 'azureuser',
@@ -42,13 +43,15 @@ var groupName,
   sshcert,
   avsParamFileName = 'test/data/avs6Param.json',
   pvmParamFileName = 'test/data/pvm6Param.json',
+  imgParamFileName = 'test/data/img6Param.json',
   storageAccount = 'xplatteststorage1',
   nicName = 'xplattestnic',
   vNetPrefix = 'xplattestvnet',
   subnetName = 'xplattestsubnet',
   publicipName = 'xplattestip',
   dnsPrefix = 'xplattestipdns',
-  osdiskvhd = 'xplattestvhd';
+  osdiskvhd = 'xplattestvhd',
+  osVhdUri = 'https://foo.blob.core.windows.net/bar/baz.vhd';
   
 var makeCommandStr = function(category, component, verb, file, others) {
   var cmdFormat = category + ' config %s %s --parameter-file %s %s --json';
@@ -151,7 +154,7 @@ describe('arm', function() {
         this.timeout(vmTest.timeoutLarge * 10);
         var subscription = profile.current.getSubscription();
         var avsetId = '/subscriptions/' + subscription.id + '/resourceGroups/' + groupName + '/providers/Microsoft.Compute/availabilitySets/' + avsPrefix6;
-        var osVhdUri = util.format('https://%s.blob.core.windows.net/%s/%s.vhd', storageAccount, vm1Prefix, osdiskvhd);
+        osVhdUri = util.format('https://%s.blob.core.windows.net/%s/%s.vhd', storageAccount, vm1Prefix, osdiskvhd);
         var nicId = util.format('/subscriptions/%s/resourceGroups/%s/providers/Microsoft.Network/networkInterfaces/%s', subscription.id, groupName, nicName);
         vmTest.getVMSize(location, suite, function() {
           vmSize = VMTestUtil.vmSize;
@@ -199,7 +202,7 @@ describe('arm', function() {
                                       result.exitStatus.should.equal(0);
                                       var cmd = makeCommandStr('vm', 'network-interfaces', 'set', pvmParamFileName, util.format('--index 0 --id %s', nicId)).split(' ');
                                       testUtils.executeCommand(suite, retry, cmd, function(result) {
-                                        result.exitStatus.should.equal(0);                                        
+                                        result.exitStatus.should.equal(0);
                                         var cmd = util.format('vm create-or-update -g %s -n %s --parameter-file %s --json', groupName, vm1Prefix, pvmParamFileName).split(' ');
                                         testUtils.executeCommand(suite, retry, cmd, function(result) {
                                           result.exitStatus.should.equal(0);
@@ -223,6 +226,63 @@ describe('arm', function() {
         });
       });
 
+      it('managed-image create should pass', function(done) {
+        this.timeout(vmTest.timeoutLarge * 10);
+        vmTest.getVMSize(location, suite, function() {
+          var cmd = util.format('managed-image config create --parameter-file %s', imgParamFileName).split(' ');
+          testUtils.executeCommand(suite, retry, cmd, function(result) {
+            result.exitStatus.should.equal(0);
+            var cmd = makeCommandStr('managed-image', 'image', 'delete', imgParamFileName, '--tags --type --name --id --source-virtual-machine --provisioning-state').split(' ');
+            testUtils.executeCommand(suite, retry, cmd, function(result) {
+              result.exitStatus.should.equal(0);
+              var cmd = makeCommandStr('managed-image', 'image', 'set', imgParamFileName, util.format('--location %s --name %s', location, imgPrefix6)).split(' ');
+              testUtils.executeCommand(suite, retry, cmd, function(result) {
+                result.exitStatus.should.equal(0);
+                var cmd = makeCommandStr('managed-image', 'storage-profile', 'delete', imgParamFileName, '--data-disks').split(' ');
+                testUtils.executeCommand(suite, retry, cmd, function(result) {
+                  result.exitStatus.should.equal(0);
+                  var cmd = makeCommandStr('managed-image', 'os-disk', 'delete', imgParamFileName, '--managed-disk --snapshot').split(' ');
+                  testUtils.executeCommand(suite, retry, cmd, function(result) {
+                    result.exitStatus.should.equal(0);
+                    var cmd = makeCommandStr('managed-image', 'os-disk', 'set', imgParamFileName, util.format('--os-type %s --blob-uri %s --caching None --os-state Generalized', 'Linux', osVhdUri)).split(' ');
+                    testUtils.executeCommand(suite, retry, cmd, function(result) {
+                      result.exitStatus.should.equal(0);
+                      var cmd = util.format('managed-image create -g %s -n %s --parameter-file %s --json', groupName, imgPrefix6, imgParamFileName).split(' ');
+                      testUtils.executeCommand(suite, retry, cmd, function(result) {
+                        result.exitStatus.should.equal(0);
+                        done();
+                      });
+                    });
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+      
+      it('managed-image show and list command should pass', function(done) {
+        this.timeout(vmTest.timeoutLarge * 20);
+        var cmd = util.format('managed-image show %s %s exp --json', groupName, imgPrefix6).split(' ');
+        testUtils.executeCommand(suite, retry, cmd, function(result) {
+          result.exitStatus.should.equal(0);
+          var cmd = util.format('managed-image list --json').split(' ');
+          testUtils.executeCommand(suite, retry, cmd, function(result) {
+            result.exitStatus.should.equal(0);
+            done();
+          });
+        });
+      });
+      
+      it('managed-image delete command should pass', function(done) {
+        this.timeout(vmTest.timeoutLarge * 20);
+        var cmd = util.format('managed-image delete --resource-group %s --name %s --json', groupName, imgPrefix6).split(' ');
+        testUtils.executeCommand(suite, retry, cmd, function(result) {
+          result.exitStatus.should.equal(0);
+          done();
+        });
+      });
+      
       it('vm delete command should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 20);
         var cmd = util.format('vm delete --resource-group %s --name %s -q --json', groupName, vm1Prefix).split(' ');
