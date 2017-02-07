@@ -199,6 +199,7 @@ describe('arm', function() {
                                       var cmd = util.format('vm create-or-update -g %s -n %s --parameter-file %s --json', groupName, vm1Prefix, pvmParamFileName).split(' ');
                                       testUtils.executeCommand(suite, retry, cmd, function(result) {
                                         result.exitStatus.should.equal(0);
+                                        result.text.should.not.containEql('blob');
                                         done();
                                       });
                                     });
