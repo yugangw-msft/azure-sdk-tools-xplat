@@ -131,7 +131,7 @@ describe('arm', function() {
 
       it('Delete VM should work', function(done) {
         this.timeout(vmTest.timeoutLarge);
-        var cmd = util.format('vm delete %s %s --json', groupName, vmPrefix).split(' ');
+        var cmd = util.format('vm delete %s %s --quiet --json', groupName, vmPrefix).split(' ');
         testUtils.executeCommand(suite, retry, cmd, function(result) {
           result.exitStatus.should.equal(0);
           done();
