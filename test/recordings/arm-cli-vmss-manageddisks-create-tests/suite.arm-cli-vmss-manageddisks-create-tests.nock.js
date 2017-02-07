@@ -6,12 +6,8 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: 'e33f361b-53c2-4cc7-b829-78906708387b',
-    managementCertificate: {
-      key: 'mockedKey',
-      cert: 'mockedCert'
-    },
-    name: 'Microsoft Azure Internal Consumption',
+    id: '24fb23e3-6ba3-41f0-9b6e-e41131d5d61e',
+    name: 'AzureRT Powershell and SDK Testing',
     user: {
       name: 'user@domain.example',
       type: 'servicePrincipal'
@@ -32,4 +28,4 @@ exports.setEnvironment = function() {
 
 exports.scopes = [];
 
- exports.randomTestIdsGenerated = function() { return ['xTestDiskCreate465','xplatDisk7872'];};
+ exports.randomTestIdsGenerated = function() { return ['xplatTstVmssGCreate3280','xplattestnic9366','xplatteststorage11868','xplatteststorage25509','xplatteststorage31456','xplatteststoragecnt12745','xplatteststoragecnt25451','xplatteststoragecnt36389','xplattestvnet6811','xplattestsubnet9872','xplattestipdns1194'];};

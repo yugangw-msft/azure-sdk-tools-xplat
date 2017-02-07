@@ -27,9 +27,10 @@ exports.getMockedProfile = function () {
 };
 
 exports.setEnvironment = function() {
-  process.env['AZURE_VM_TEST_LOCATION'] = 'southeastasia';
+  process.env['AZURE_VM_TEST_LOCATION'] = 'westus';
+  process.env['SSHCERT'] = 'test/myCert.pem';
 };
 
 exports.scopes = [];
 
- exports.randomTestIdsGenerated = function() { return ['xTestDiskCreate465','xplatDisk7872'];};
+ exports.randomTestIdsGenerated = function() { return ['xplatTstPvmGCreate1506','vm13068','xplattestnic6235','xplatteststorage11481'];};

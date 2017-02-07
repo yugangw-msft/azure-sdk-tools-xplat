@@ -6,12 +6,8 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: 'e33f361b-53c2-4cc7-b829-78906708387b',
-    managementCertificate: {
-      key: 'mockedKey',
-      cert: 'mockedCert'
-    },
-    name: 'Microsoft Azure Internal Consumption',
+    id: '21466899-20b2-463c-8c30-b8fb28a43248',
+    name: 'Core-RP Alpha Subscription-11',
     user: {
       name: 'user@domain.example',
       type: 'servicePrincipal'
@@ -32,4 +28,4 @@ exports.setEnvironment = function() {
 
 exports.scopes = [];
 
- exports.randomTestIdsGenerated = function() { return ['xTestDiskCreate465','xplatDisk7872'];};
+ exports.randomTestIdsGenerated = function() { return ['xTestDiskCreate8193','xplatSnapshot9903'];};

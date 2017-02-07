@@ -1,0 +1,44 @@
+{
+  "hardwareProfile": {
+    "vmSize": "Standard_DS1"
+  },
+  "storageProfile": {
+    "imageReference": {
+      "publisher": "CoreOS",
+      "offer": "CoreOS",
+      "sku": "Stable",
+      "version": "latest",
+      "id": ""
+    },
+    "osDisk": {
+      "name": "test",
+      "vhd": {
+        "uri": "https://xplatteststorage11481.blob.core.windows.net/vm13068/xplattestvhd.vhd"
+      },
+      "caching": "None",
+      "createOption": "fromImage",
+      "diskSizeGB": null
+    }
+  },
+  "osProfile": {
+    "computerName": "diskvm1",
+    "adminUsername": "azureuser",
+    "adminPassword": "Brillio@2016",
+    "linuxConfiguration": {
+      "disablePasswordAuthentication": false
+    }
+  },
+  "networkProfile": {
+    "networkInterfaces": [
+      {
+        "primary": null,
+        "id": "/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstPvmGCreate1506/providers/Microsoft.Network/networkInterfaces/xplattestnic6235"
+      }
+    ]
+  },
+  "availabilitySet": {
+    "id": "/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstPvmGCreate1506/providers/Microsoft.Compute/availabilitySets/xplattestavs6"
+  },
+  "name": "vm13068",
+  "location": "westus"
+}
