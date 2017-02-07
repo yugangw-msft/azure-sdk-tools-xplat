@@ -265,10 +265,15 @@ describe('arm', function() {
         this.timeout(vmTest.timeoutLarge * 20);
         var cmd = util.format('managed-image show %s %s exp --json', groupName, imgPrefix6).split(' ');
         testUtils.executeCommand(suite, retry, cmd, function(result) {
+          result.text.should.containEql(groupName);
+          result.text.should.containEql(imgPrefix6);
+          result.text.should.containEql(osVhdUri);
           result.exitStatus.should.equal(0);
           var cmd = util.format('managed-image list --json').split(' ');
           testUtils.executeCommand(suite, retry, cmd, function(result) {
             result.exitStatus.should.equal(0);
+            result.text.should.containEql(imgPrefix6);
+            result.text.should.containEql(osVhdUri);
             done();
           });
         });
