@@ -42,6 +42,7 @@ include:./testlist-arm-vm.txt
 include:./testlist-arm-vmss.txt
 include:./testlist-arm-container.txt
 include:./testlist-arm-availset.txt
+include:./testlist-arm-diskvm.txt
 # Extension Tests
 commands/arm/vm/arm.vm.extension-tests.js
 #commands/arm/vm/arm.vm.enable-aem-tests.js
