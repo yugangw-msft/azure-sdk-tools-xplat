@@ -1,0 +1,7 @@
+{
+  "sourceVirtualMachine": {
+    "id": "/subscriptions/24fb23e3-6ba3-41f0-9b6e-e41131d5d61e/resourceGroups/xplatTstPvmGCreate6110/providers/Microsoft.Compute/virtualmachines/vm16864"
+  },
+  "location": "westus",
+  "name": "xplattestimg7"
+}

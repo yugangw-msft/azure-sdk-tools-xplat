@@ -3,10 +3,18 @@
     "osDisk": {
       "osType": "Linux",
       "osState": "Generalized",
-      "blobUri": "https://xplatteststorage11481.blob.core.windows.net/vm13068/xplattestvhd.vhd",
+      "blobUri": "https://xplatteststorage15950.blob.core.windows.net/vm16864/xplattestvhd.vhd",
       "caching": "None",
       "diskSizeGB": null
-    }
+    },
+    "dataDisks": [
+      {
+        "lun": 1,
+        "blobUri": "https://xplatteststorage15950.blob.core.windows.net/vm16864/xplattestvhd.vhd",
+        "caching": "None",
+        "diskSizeGB": null
+      }
+    ]
   },
   "location": "westus",
   "name": "xplattestimg6"
