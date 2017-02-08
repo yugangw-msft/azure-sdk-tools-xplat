@@ -28,56 +28,56 @@ exports.setEnvironment = function() {
   process.env['AZURE_ARM_TEST_CDN_PROFILE_1'] = 'cliTestProfile01';
   process.env['AZURE_ARM_TEST_RESOURCE_GROUP_2'] = 'xplattestadlsrgr02';
   process.env['AZURE_ARM_TEST_CDN_PROFILE_2'] = 'cliTestProfile02';
-  process.env['AZURE_ARM_TEST_CDN_ENDPOINT_1'] = 'cliTestEndpoint01';
-  process.env['AZURE_ARM_TEST_CDN_ENDPOINT_2'] = 'cliTestEndpoint02';
+  process.env['AZURE_ARM_TEST_CDN_ENDPOINT_1'] = 'cliTestEndpoint001';
+  process.env['AZURE_ARM_TEST_CDN_ENDPOINT_2'] = 'cliTestEndpoint002';
   process.env['AZURE_ARM_TEST_CDN_ORIGIN_1'] = 'cliTestOrigin01';
   process.env['AZURE_ARM_TEST_CDN_ORIGIN_2'] = 'cliTestOrigin02';
   process.env['AZURE_ARM_TEST_ENDPOINT_TEST_LOCATION_1'] = 'eastus';
   process.env['AZURE_ARM_TEST_CUSTOM_DOMAIN_NAME_1'] = 'cliTestCustomDomain01';
-  process.env['AZURE_ARM_TEST_CUSTOM_DOMAIN_HOST_NAME_1'] = 'cli-0a51dd4a-33ca-4c25-91d7-42ae35c12cdd.azureedge-test.net';
+  process.env['AZURE_ARM_TEST_CUSTOM_DOMAIN_HOST_NAME_1'] = 'cli-59e92ce9-af32-4879-baad-d5f36a9ede94.azureedge-test.net';
 };
 
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/8fbd19e9-e8e0-4224-89f6-b1d5d86fb4c4/providers/Microsoft.Cdn/profiles?api-version=2016-04-02')
+  .get('/subscriptions/8fbd19e9-e8e0-4224-89f6-b1d5d86fb4c4/providers/Microsoft.Cdn/profiles?api-version=2016-10-02')
   .reply(200, "{\r\n  \"value\":[\r\n    \r\n  ]\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '28',
   'content-type': 'application/json; odata.metadata=minimal; odata.streaming=true',
   expires: '-1',
-  'x-ms-request-id': '1ba38ead-8bdc-4c32-b74e-21258ed501ec',
-  'x-ms-client-request-id': 'a7c5d891-c838-4a57-9852-56d6efa7a2a2',
+  'x-ms-request-id': 'b31b549c-f392-4f7d-93ad-f2a78e7a5759',
+  'x-ms-client-request-id': '6a14e5cb-687a-41a5-b1ee-7ad9b9f0a53f',
   'odata-version': '4.0',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-IIS/8.5',
   'x-aspnet-version': '4.0.30319',
   'x-powered-by': 'ASP.NET',
-  'x-ms-ratelimit-remaining-subscription-reads': '14998',
-  'x-ms-correlation-request-id': '89e2a9c8-4832-4dd2-9df7-69dc26844966',
-  'x-ms-routing-request-id': 'WESTUS:20160518T213818Z:89e2a9c8-4832-4dd2-9df7-69dc26844966',
-  date: 'Wed, 18 May 2016 21:38:18 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14993',
+  'x-ms-correlation-request-id': 'e3fe075d-7ac8-4bd6-8289-e66df900cdbd',
+  'x-ms-routing-request-id': 'CENTRALUS:20161219T230245Z:e3fe075d-7ac8-4bd6-8289-e66df900cdbd',
+  date: 'Mon, 19 Dec 2016 23:02:44 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/8fbd19e9-e8e0-4224-89f6-b1d5d86fb4c4/providers/Microsoft.Cdn/profiles?api-version=2016-04-02')
+  .get('/subscriptions/8fbd19e9-e8e0-4224-89f6-b1d5d86fb4c4/providers/Microsoft.Cdn/profiles?api-version=2016-10-02')
   .reply(200, "{\r\n  \"value\":[\r\n    \r\n  ]\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '28',
   'content-type': 'application/json; odata.metadata=minimal; odata.streaming=true',
   expires: '-1',
-  'x-ms-request-id': '1ba38ead-8bdc-4c32-b74e-21258ed501ec',
-  'x-ms-client-request-id': 'a7c5d891-c838-4a57-9852-56d6efa7a2a2',
+  'x-ms-request-id': 'b31b549c-f392-4f7d-93ad-f2a78e7a5759',
+  'x-ms-client-request-id': '6a14e5cb-687a-41a5-b1ee-7ad9b9f0a53f',
   'odata-version': '4.0',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-IIS/8.5',
   'x-aspnet-version': '4.0.30319',
   'x-powered-by': 'ASP.NET',
-  'x-ms-ratelimit-remaining-subscription-reads': '14998',
-  'x-ms-correlation-request-id': '89e2a9c8-4832-4dd2-9df7-69dc26844966',
-  'x-ms-routing-request-id': 'WESTUS:20160518T213818Z:89e2a9c8-4832-4dd2-9df7-69dc26844966',
-  date: 'Wed, 18 May 2016 21:38:18 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14993',
+  'x-ms-correlation-request-id': 'e3fe075d-7ac8-4bd6-8289-e66df900cdbd',
+  'x-ms-routing-request-id': 'CENTRALUS:20161219T230245Z:e3fe075d-7ac8-4bd6-8289-e66df900cdbd',
+  date: 'Mon, 19 Dec 2016 23:02:44 GMT',
   connection: 'close' });
  return result; }]];

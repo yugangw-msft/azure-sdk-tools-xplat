@@ -28,58 +28,58 @@ exports.setEnvironment = function() {
   process.env['AZURE_ARM_TEST_CDN_PROFILE_1'] = 'cliTestProfile01';
   process.env['AZURE_ARM_TEST_RESOURCE_GROUP_2'] = 'xplattestadlsrgr02';
   process.env['AZURE_ARM_TEST_CDN_PROFILE_2'] = 'cliTestProfile02';
-  process.env['AZURE_ARM_TEST_CDN_ENDPOINT_1'] = 'cliTestEndpoint01';
-  process.env['AZURE_ARM_TEST_CDN_ENDPOINT_2'] = 'cliTestEndpoint02';
+  process.env['AZURE_ARM_TEST_CDN_ENDPOINT_1'] = 'cliTestEndpoint001';
+  process.env['AZURE_ARM_TEST_CDN_ENDPOINT_2'] = 'cliTestEndpoint002';
   process.env['AZURE_ARM_TEST_CDN_ORIGIN_1'] = 'cliTestOrigin01';
   process.env['AZURE_ARM_TEST_CDN_ORIGIN_2'] = 'cliTestOrigin02';
   process.env['AZURE_ARM_TEST_ENDPOINT_TEST_LOCATION_1'] = 'eastus';
   process.env['AZURE_ARM_TEST_CUSTOM_DOMAIN_NAME_1'] = 'cliTestCustomDomain01';
-  process.env['AZURE_ARM_TEST_CUSTOM_DOMAIN_HOST_NAME_1'] = 'cli-0a51dd4a-33ca-4c25-91d7-42ae35c12cdd.azureedge-test.net';
+  process.env['AZURE_ARM_TEST_CUSTOM_DOMAIN_HOST_NAME_1'] = 'cli-59e92ce9-af32-4879-baad-d5f36a9ede94.azureedge-test.net';
 };
 
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.post('/subscriptions/8fbd19e9-e8e0-4224-89f6-b1d5d86fb4c4/resourceGroups/xplattestadlsrgr01/providers/Microsoft.Cdn/profiles/cliTestProfile01/endpoints/cliTestEndpoint02/validateCustomDomain?api-version=2016-04-02', '*')
+.post('/subscriptions/8fbd19e9-e8e0-4224-89f6-b1d5d86fb4c4/resourceGroups/xplattestadlsrgr01/providers/Microsoft.Cdn/profiles/cliTestProfile01/endpoints/cliTestEndpoint001/validateCustomDomain?api-version=2016-10-02', '*')
   .reply(200, "{\r\n  \"customDomainValidated\":false,\"message\":\"We couldn't find a DNS record for custom domain that points to endpoint. To map a domain to this endpoint, create a CNAME record with your DNS provider for custom domain that points to endpoint.\",\"reason\":\"IncorrectMapping\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '272',
   'content-type': 'application/json; odata.metadata=minimal',
   expires: '-1',
-  'x-ms-request-id': '6fd0f87a-7cad-48cf-ac7c-92183bc662fd',
-  'x-ms-client-request-id': 'c8719da0-f817-40da-9c7a-0dd5251e173f',
+  'x-ms-request-id': '45a0a87c-9ae0-4e0c-95f3-deac33bc9f34',
+  'x-ms-client-request-id': 'e73678db-c658-4e97-b871-8b1d80b16142',
   'odata-version': '4.0',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-IIS/8.5',
   'x-aspnet-version': '4.0.30319',
   'x-powered-by': 'ASP.NET',
   'x-ms-ratelimit-remaining-subscription-writes': '1198',
-  'x-ms-correlation-request-id': '4e0a6bd3-32c5-4359-b1c2-b4a3d695cbd3',
-  'x-ms-routing-request-id': 'WESTUS:20160518T214855Z:4e0a6bd3-32c5-4359-b1c2-b4a3d695cbd3',
-  date: 'Wed, 18 May 2016 21:48:54 GMT',
+  'x-ms-correlation-request-id': '0cd4388e-fc9e-4485-a653-b75d530b1de6',
+  'x-ms-routing-request-id': 'WESTUS2:20161219T231633Z:0cd4388e-fc9e-4485-a653-b75d530b1de6',
+  date: 'Mon, 19 Dec 2016 23:16:32 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.post('/subscriptions/8fbd19e9-e8e0-4224-89f6-b1d5d86fb4c4/resourceGroups/xplattestadlsrgr01/providers/Microsoft.Cdn/profiles/cliTestProfile01/endpoints/cliTestEndpoint02/validateCustomDomain?api-version=2016-04-02', '*')
+.post('/subscriptions/8fbd19e9-e8e0-4224-89f6-b1d5d86fb4c4/resourceGroups/xplattestadlsrgr01/providers/Microsoft.Cdn/profiles/cliTestProfile01/endpoints/cliTestEndpoint001/validateCustomDomain?api-version=2016-10-02', '*')
   .reply(200, "{\r\n  \"customDomainValidated\":false,\"message\":\"We couldn't find a DNS record for custom domain that points to endpoint. To map a domain to this endpoint, create a CNAME record with your DNS provider for custom domain that points to endpoint.\",\"reason\":\"IncorrectMapping\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '272',
   'content-type': 'application/json; odata.metadata=minimal',
   expires: '-1',
-  'x-ms-request-id': '6fd0f87a-7cad-48cf-ac7c-92183bc662fd',
-  'x-ms-client-request-id': 'c8719da0-f817-40da-9c7a-0dd5251e173f',
+  'x-ms-request-id': '45a0a87c-9ae0-4e0c-95f3-deac33bc9f34',
+  'x-ms-client-request-id': 'e73678db-c658-4e97-b871-8b1d80b16142',
   'odata-version': '4.0',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-IIS/8.5',
   'x-aspnet-version': '4.0.30319',
   'x-powered-by': 'ASP.NET',
   'x-ms-ratelimit-remaining-subscription-writes': '1198',
-  'x-ms-correlation-request-id': '4e0a6bd3-32c5-4359-b1c2-b4a3d695cbd3',
-  'x-ms-routing-request-id': 'WESTUS:20160518T214855Z:4e0a6bd3-32c5-4359-b1c2-b4a3d695cbd3',
-  date: 'Wed, 18 May 2016 21:48:54 GMT',
+  'x-ms-correlation-request-id': '0cd4388e-fc9e-4485-a653-b75d530b1de6',
+  'x-ms-routing-request-id': 'WESTUS2:20161219T231633Z:0cd4388e-fc9e-4485-a653-b75d530b1de6',
+  date: 'Mon, 19 Dec 2016 23:16:32 GMT',
   connection: 'close' });
  return result; }]];

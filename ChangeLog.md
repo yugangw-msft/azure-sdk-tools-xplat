@@ -1,3 +1,76 @@
+##2016-12-14 Version 0.10.8
+* General
+  * Skipped output of progress spinners when running with AZURE_NON_INTERACTIVE_MODE set, mostly resolves #3292. #3296
+  * Updated uuid to version 3.0.0. #3383
+* Network
+  * Fixed ARM network commands descriptions. #3275
+  * Corrected inconsistent option naming in app gateways backend-health command. #3308
+  * Fixed issues in PTR record set records import.  #3298
+  * Fixed issue with record-set add-record command adding PTR type record.  #3298
+  * Fixed issue #3282 with record-set delete commands: type option is not case sensitive anymore.  #3298
+  * Fixed nsg rule create command descriptions. #3291
+  * Fixed issue #3339. #3345
+  * Added an ability to change default names for app gateway http-settings, http listener, frontend port, frontend ip, gateway IP config. #3345
+  * Fixed extra-logger and mistypes in commands. #3345
+  * Removed ssl cert param from app gw show command when listener protocol is http (fixes #3354). #3365
+  * Reworked url path map listing. #3366
+  * Fixed issue in app gateway show command (Fixes #3347). #3348
+  * Reworked app gateways rule list command (fixes #3353). #3368
+  * Fixed DNS zone import issue with semicolon symbol (fixes #2869). #3376
+  * Reworked local gateways (fixes #3351). #3367
+* Compute
+  * Fixed typographical error in user message for get VM images. #3311
+  * Added --force-update-tag support to VM Extension & update test #3314
+  * Added Linux support to showAzureDiskEncryptionStatus. #3324 
+  * Fixed issue #3283 and added an ability to associate app gw probe and http settings #3315
+  * Added VM Secrets Support. #3338
+  * Fixed get-serial-console (fixes #3266). #3343
+* ServiceFabric
+  * Provided support for app package copy to use persist connection. #3326
+  * Fixed update service command, instanceCount would not be udpated. #3372
+* Storage
+  * Fixed the issue that the `azure storage container set` will erase the existing policies #3319
+  * Fixed the issue that `azure storage file download` won't return to command prompt after download success #3319
+* ResourceManager
+  * Fixed typo in an user facing message in group.deployment._js. #3336
+  * Added manual polling to provide current state of deployment to the customer. #3360
+  * Fixed resource create and set commands to take in the passed in properties. #3342
+  * Changed parsing function from jsonlint.parse to JSON.parse. #3375
+* ServerSideTelemetry #3350
+  * Added OS info and command info to user agent string.
+  * Refactored code around telemetry.
+  * Added tests for the new scenarios.
+* CDN
+  * Added geo filter after CDN RP version change. #3300
+* Datalake #3362
+  * Added new commands for trusted id providers, firewall rules, and waiting for job completion
+  * Refactored return objects based on GA SDK
+  * Updated tests and add new tests
+  * Re-enabled the ability to delete full ACLs
+  * Removed unsupported/unused logic
+* WebApp
+  * Fixed cli.interaction in webapp config set (fixes #3302). #3364
+
+##2016-11-2 Version 0.10.7
+* IotHub #3265
+  * Added support for the following IP filter-rules commands in IotHub:
+    1. List IP filter rules: azure iothub ipfilter-rules list [resource-group] [name]
+    2. Set IP filter rules: azure iothub ipfilter-rules set [resource-group] [name] [input-file]
+* HDInsight #3268
+  * Added new securityProfile section to input payload when creating a cluster. This enables integration with Active Directory.
+* WebApp #3260
+  * Added slot support for all webapp commands
+  * Updated descriptions of some webapp commands
+  * Made some minor optimizations for appsettings and hostnames
+* ResourceManager #3277
+  * Modified the group deployment command to not throw when optional parameters are omitted
+* Usage #3276
+   * Ported azure-arm-commerce to use Autorest based library
+   * Provided support for `| more` while paging
+   * Fixed bugs #3239 and #3255.
+* ActiveDirectory #3276
+   * Fixed the implementation of `| more` while paging in `azure ad sp|user|group|group memeber list` commands
+
 ##2016-10-12 Version 0.10.6
 * General
   * Changed log output filename to be trivially sortable into chronological order #3215

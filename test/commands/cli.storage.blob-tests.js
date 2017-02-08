@@ -143,7 +143,7 @@ describe('cli', function () {
             var containers = JSON.parse(result.text);
             containers.length.should.greaterThan(0);
             containers.forEach(function(container) {
-              container.name.should.equal(containerName);
+              container.name.should.startWith(containerName);
             });
             done();
           });
@@ -167,6 +167,39 @@ describe('cli', function () {
             container.name.should.equal(containerName);
             container.publicAccessLevel.should.equal('Container');
             done();
+          });
+        });
+        
+        liveOnly('should NOT erase existing container policy', function(done) {
+          var containerName = 'storageclitest2';
+          var policyName1 = 'containerpolicy01';
+          var start = new Date('2014-12-01').toISOString();
+          var expiry = new Date('2099-12-31').toISOString();
+          var permissions = 'rl';
+
+          suite.execute('storage container create %s --json', containerName, function(result) {
+            var container = JSON.parse(result.text);
+            container.name.should.equal(containerName);
+            container.publicAccessLevel.should.equal('Off');
+
+            suite.execute('storage container policy create %s %s --permissions %s --start %s --expiry %s --json', containerName, policyName1, permissions, start, expiry, function (result) {
+              suite.execute('storage container set %s -p container --json', containerName, function(result) {
+                var container = JSON.parse(result.text);
+                container.name.should.equal(containerName);
+                container.publicAccessLevel.should.equal('Container');
+
+                setTimeout(function() {
+                  suite.execute('storage container policy list %s --json', containerName, function (result) {
+                    var policies = JSON.parse(result.text);
+                    Object.keys(policies).length.should.equal(1);
+
+                    suite.execute('storage container delete %s -q --json', containerName, function(result) {
+                      done();
+                    });
+                  });
+                }, aclTimeout);
+              });
+            });
           });
         });
       });
@@ -1331,7 +1364,7 @@ describe('cli', function () {
           });
         });
 
-        it('should show the copy status of the specified blob with SAS', function (done) {
+        liveOnly('should show the copy status of the specified blob with SAS', function (done) {
           var start = new Date('2014-10-01').toISOString();
           var expiry = new Date('2099-12-31').toISOString();
           suite.execute('storage container sas create %s r %s --start %s --json', destContainer, expiry, start, function (result) {
@@ -1375,17 +1408,18 @@ describe('cli', function () {
           }
         });
         
+        var copyid;
         it('should start to copy the blob specified by container and blob name asynchronously', function (done) {
           suite.execute('storage blob copy start --source-container %s --source-blob %s --dest-container %s -q --json', sourceContainer, blobName, destContainer, function (result) {
             var copy = JSON.parse(result.text);
-            copy.copy.id.length.should.greaterThan(0);
+            copyid = copy.copy.id;
+            copyid.length.should.greaterThan(0);
             result.errorText.should.be.empty;
             done();
           });
         });
         
-        var copyid;
-        it('should show the copy status of the specified blob', function (done) {
+        liveOnly('should show the copy status of the specified blob', function (done) {
           suite.execute('storage blob copy show --container %s --blob %s --json', destContainer, blobName, function (result) {
             var copy = JSON.parse(result.text);
             copyid = copy.copy.id;
@@ -1432,7 +1466,7 @@ describe('cli', function () {
           }
         });
 
-        it('should show the copy status of the specified file to the blob', function (done) {
+        liveOnly('should show the copy status of the specified file to the blob', function (done) {
           suite.execute('storage blob copy show --container %s --blob %s --json', destContainer, sourceFilePath, function (result) {
             var copy = JSON.parse(result.text);
             copyid = copy.copy.id;
@@ -1442,7 +1476,7 @@ describe('cli', function () {
           });
         });
         
-        it('should stop the copy of the specified file to the blob', function (done) {
+        liveOnly('should stop the copy of the specified file to the blob', function (done) {
           suite.execute('storage blob copy stop --container %s --blob %s --copyid %s --json', destContainer, sourceFilePath, copyid, function (result) {
             result.errorText.should.startWith('error: There is currently no pending copy operation');
             done();
