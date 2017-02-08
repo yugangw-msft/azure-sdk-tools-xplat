@@ -35,8 +35,8 @@ var requiredEnvironment = [{
 var groupName,
   vmId,
   subscriptionId,	
-  avsPrefix6 = 'xplattestavs6',
-  imgPrefix6 = 'xplattestimg6',
+  avsPrefix8 = 'xplattestavs8',
+  imgPrefix8A = 'xplattestimg8A',
   imgPrefix8 = 'xplattestimg8',
   vm1Prefix = 'vm1',
   location,
@@ -44,9 +44,9 @@ var groupName,
   password = 'Brillio@2016',
   vmSize,
   sshcert,
-  avsParamFileName = 'test/data/avs6Param.json',
-  pvmParamFileName = 'test/data/pvm6Param.json',
-  imgParamFileName = 'test/data/img6Param.json',
+  avsParamFileName = 'test/data/avs8Param.json',
+  pvmParamFileName = 'test/data/pvm8Param.json',
+  imgParamFileName = 'test/data/img8ParamA.json',
   imgCaptureParamFileName = 'test/data/img8Param.json',
   storageAccount = 'xplatteststorage1',
   nicName = 'xplattestnic',
@@ -73,7 +73,7 @@ describe('arm', function() {
         sshcert = process.env.SSHCERT;
         groupName = suite.generateId(groupPrefix, null);
         vm1Prefix = suite.generateId(vm1Prefix, null);
-        avsPrefix6 = suite.isMocked ? avsPrefix6 : suite.generateId(avsPrefix6, null);
+        avsPrefix8 = suite.generateId(avsPrefix8, null);
         nicName = suite.generateId(nicName, null);
         storageAccount = suite.generateId(storageAccount, null);
         subscriptionId = profile.current.getSubscription().id;
@@ -139,10 +139,10 @@ describe('arm', function() {
                 var cmd = makeCommandStr('availset', 'sku', 'set', avsParamFileName, util.format('--name %s', 'Classic')).split(' ');
                 testUtils.executeCommand(suite, retry, cmd, function(result) {
                   result.exitStatus.should.equal(0);
-                  var cmd = makeCommandStr('availset', 'availability-set', 'set', avsParamFileName, util.format('--name %s --location %s', avsPrefix6, location)).split(' ');
+                  var cmd = makeCommandStr('availset', 'availability-set', 'set', avsParamFileName, util.format('--name %s --location %s', avsPrefix8, location)).split(' ');
                   testUtils.executeCommand(suite, retry, cmd, function(result) {
                     result.exitStatus.should.equal(0);
-                    var cmd = util.format('availset create-or-update -g %s -n %s --parameter-file %s', groupName, avsPrefix6, avsParamFileName).split(' ');
+                    var cmd = util.format('availset create-or-update -g %s -n %s --parameter-file %s', groupName, avsPrefix8, avsParamFileName).split(' ');
                     testUtils.executeCommand(suite, retry, cmd, function(result) {
                       result.exitStatus.should.equal(0);
                       result.text.should.containEql('Classic');
@@ -159,7 +159,7 @@ describe('arm', function() {
       it('diskvm create-or-update-parameter generate set and remove should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
         var subscription = profile.current.getSubscription();
-        var avsetId = '/subscriptions/' + subscription.id + '/resourceGroups/' + groupName + '/providers/Microsoft.Compute/availabilitySets/' + avsPrefix6;
+        var avsetId = '/subscriptions/' + subscription.id + '/resourceGroups/' + groupName + '/providers/Microsoft.Compute/availabilitySets/' + avsPrefix8;
         osVhdUri = util.format('https://%s.blob.core.windows.net/%s/%s.vhd', storageAccount, vm1Prefix, osdiskvhd);
         var nicId = util.format('/subscriptions/%s/resourceGroups/%s/providers/Microsoft.Network/networkInterfaces/%s', subscription.id, groupName, nicName);
         vmTest.getVMSize(location, suite, function() {
@@ -235,36 +235,34 @@ describe('arm', function() {
 
       it('managed-image create should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
-        vmTest.getVMSize(location, suite, function() {
-          var cmd = util.format('managed-image config create --parameter-file %s', imgParamFileName).split(' ');
+        var cmd = util.format('managed-image config create --parameter-file %s', imgParamFileName).split(' ');
+        testUtils.executeCommand(suite, retry, cmd, function(result) {
+          result.exitStatus.should.equal(0);
+          var cmd = makeCommandStr('managed-image', 'image', 'delete', imgParamFileName, '--tags --type --name --id --source-virtual-machine --provisioning-state').split(' ');
           testUtils.executeCommand(suite, retry, cmd, function(result) {
             result.exitStatus.should.equal(0);
-            var cmd = makeCommandStr('managed-image', 'image', 'delete', imgParamFileName, '--tags --type --name --id --source-virtual-machine --provisioning-state').split(' ');
+            var cmd = makeCommandStr('managed-image', 'image', 'set', imgParamFileName, util.format('--location %s --name %s', location, imgPrefix8A)).split(' ');
             testUtils.executeCommand(suite, retry, cmd, function(result) {
               result.exitStatus.should.equal(0);
-              var cmd = makeCommandStr('managed-image', 'image', 'set', imgParamFileName, util.format('--location %s --name %s', location, imgPrefix6)).split(' ');
+              var cmd = makeCommandStr('managed-image', 'os-disk', 'delete', imgParamFileName, '--managed-disk --snapshot').split(' ');
               testUtils.executeCommand(suite, retry, cmd, function(result) {
                 result.exitStatus.should.equal(0);
-                var cmd = makeCommandStr('managed-image', 'os-disk', 'delete', imgParamFileName, '--managed-disk --snapshot').split(' ');
+                var cmd = makeCommandStr('managed-image', 'os-disk', 'set', imgParamFileName, util.format('--os-type %s --blob-uri %s --caching None --os-state Generalized', 'Linux', osVhdUri)).split(' ');
                 testUtils.executeCommand(suite, retry, cmd, function(result) {
                   result.exitStatus.should.equal(0);
-                  var cmd = makeCommandStr('managed-image', 'os-disk', 'set', imgParamFileName, util.format('--os-type %s --blob-uri %s --caching None --os-state Generalized', 'Linux', osVhdUri)).split(' ');
+                  var cmd = makeCommandStr('managed-image', 'data-disks', 'set', imgParamFileName, util.format('--blob-uri %s --caching None --index 0', osVhdUri)).split(' ');
                   testUtils.executeCommand(suite, retry, cmd, function(result) {
                     result.exitStatus.should.equal(0);
-                    var cmd = makeCommandStr('managed-image', 'data-disks', 'set', imgParamFileName, util.format('--blob-uri %s --caching None --index 0', osVhdUri)).split(' ');
+                    var cmd = makeCommandStr('managed-image', 'data-disks', 'set', imgParamFileName, util.format('--lun %s --index 0 --parse', '1')).split(' ');
                     testUtils.executeCommand(suite, retry, cmd, function(result) {
                       result.exitStatus.should.equal(0);
-                      var cmd = makeCommandStr('managed-image', 'data-disks', 'set', imgParamFileName, util.format('--lun %s --index 0 --parse', '1')).split(' ');
+                      var cmd = makeCommandStr('managed-image', 'data-disks', 'delete', imgParamFileName, util.format('--managed-disk --snapshot --index 0')).split(' ');
                       testUtils.executeCommand(suite, retry, cmd, function(result) {
                         result.exitStatus.should.equal(0);
-                        var cmd = makeCommandStr('managed-image', 'data-disks', 'delete', imgParamFileName, util.format('--managed-disk --snapshot --index 0')).split(' ');
+                        var cmd = util.format('managed-image create -g %s -n %s --parameter-file %s --json', groupName, imgPrefix8A, imgParamFileName).split(' ');
                         testUtils.executeCommand(suite, retry, cmd, function(result) {
                           result.exitStatus.should.equal(0);
-                          var cmd = util.format('managed-image create -g %s -n %s --parameter-file %s --json', groupName, imgPrefix6, imgParamFileName).split(' ');
-                          testUtils.executeCommand(suite, retry, cmd, function(result) {
-                            result.exitStatus.should.equal(0);
-                            done();
-                          });
+                          done();
                         });
                       });
                     });
@@ -278,16 +276,16 @@ describe('arm', function() {
       
       it('managed-image show and list command should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 20);
-        var cmd = util.format('managed-image show %s %s exp --json', groupName, imgPrefix6).split(' ');
+        var cmd = util.format('managed-image show %s %s exp --json', groupName, imgPrefix8A).split(' ');
         testUtils.executeCommand(suite, retry, cmd, function(result) {
           result.text.should.containEql(groupName);
-          result.text.should.containEql(imgPrefix6);
+          result.text.should.containEql(imgPrefix8A);
           result.text.should.containEql(osVhdUri);
           result.exitStatus.should.equal(0);
           var cmd = util.format('managed-image list --json').split(' ');
           testUtils.executeCommand(suite, retry, cmd, function(result) {
             result.exitStatus.should.equal(0);
-            result.text.should.containEql(imgPrefix6);
+            result.text.should.containEql(imgPrefix8A);
             result.text.should.containEql(osVhdUri);
             done();
           });
@@ -354,7 +352,7 @@ describe('arm', function() {
       
       it('availset delete command should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 20);
-        var cmd = util.format('availset delete --resource-group %s --name %s -q --json', groupName, avsPrefix6).split(' ');
+        var cmd = util.format('availset delete --resource-group %s --name %s -q --json', groupName, avsPrefix8).split(' ');
         testUtils.executeCommand(suite, retry, cmd, function(result) {
           result.exitStatus.should.equal(0);
           done();

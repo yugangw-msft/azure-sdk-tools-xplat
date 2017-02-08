@@ -1,21 +1,40 @@
 {
+  "sourceVirtualMachine": {
+    "id": ""
+  },
   "storageProfile": {
     "osDisk": {
-      "osType": "Linux",
-      "osState": "Generalized",
-      "blobUri": "https://xplatteststorage15950.blob.core.windows.net/vm16864/xplattestvhd.vhd",
-      "caching": "None",
+      "osType": null,
+      "osState": "",
+      "snapshot": {
+        "id": ""
+      },
+      "managedDisk": {
+        "id": ""
+      },
+      "blobUri": "",
+      "caching": null,
       "diskSizeGB": null
     },
     "dataDisks": [
       {
-        "lun": 1,
-        "blobUri": "https://xplatteststorage15950.blob.core.windows.net/vm16864/xplattestvhd.vhd",
-        "caching": "None",
+        "lun": "",
+        "snapshot": {
+          "id": ""
+        },
+        "managedDisk": {
+          "id": ""
+        },
+        "blobUri": "",
+        "caching": null,
         "diskSizeGB": null
       }
     ]
   },
-  "location": "westus",
-  "name": "xplattestimg6"
+  "provisioningState": "",
+  "id": null,
+  "name": null,
+  "type": null,
+  "location": "",
+  "tags": {}
 }
