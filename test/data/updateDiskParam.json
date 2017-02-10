@@ -1,0 +1,11 @@
+{
+  "accountType": "Premium_LRS",
+  "osType": "Windows",
+  "creationData": {
+    "createOption": "Empty"
+  },
+  "diskSizeGB": 5,
+  "encryptionSettings": "null",
+  "name": "xplatDisk8814",
+  "location": "southeastasia"
+}

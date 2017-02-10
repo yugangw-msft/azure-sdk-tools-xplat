@@ -38,6 +38,13 @@ var vnetProp = {
   newTags: networkUtil.newTags
 };
 
+var virtualNetworksDefault = {
+  location: 'westus',
+  addressPrefixes: '10.0.0.0/8',
+  name: 'virtualNetworksDefaultName',
+  group: groupName
+};
+
 var requiredEnvironment = [{
   name: 'AZURE_VM_TEST_LOCATION',
   defaultValue: 'eastus'
@@ -148,6 +155,43 @@ describe('arm', function () {
             var vnet = JSON.parse(result.text);
             vnet.should.be.empty;
             done();
+          });
+        });
+      });
+      it('create with defaults should create virtual networks with default values', function (done) {
+        var cmd = 'network vnet create -g {group} -n {name} --location {location}  --json'.formatArgs(virtualNetworksDefault);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var output = JSON.parse(result.text);
+          output.name.should.equal(virtualNetworksDefault.name);
+          virtualNetworksDefault.addressPrefixes.split(',').forEach(function(item) { output.addressSpace.addressPrefixes.should.containEql(item) });
+          var cmd = 'network vnet delete -g {group} -n {name} --quiet --json'.formatArgs(virtualNetworksDefault);
+          testUtils.executeCommand(suite, retry, cmd, function (result) {
+            result.exitStatus.should.equal(0);
+            done();
+          });
+        });
+      });
+      it('set should pass for changing dns servers from empty value to valid', function (done) {
+        var cmd = ('network vnet create -g {group} -n {name} --address-prefixes {addressPrefix} --location {location}  --json').formatArgs(vnetProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var output = JSON.parse(result.text);
+          output.name.should.equal(vnetProp.name);
+          vnetProp.addressPrefix.split(',').forEach(function(item) { output.addressSpace.addressPrefixes.should.containEql(item) });
+
+          var cmd = ('network vnet set -g {group} -n {name} --dns-servers {dnsServer}  --json').formatArgs(vnetProp);
+          testUtils.executeCommand(suite, retry, cmd, function (result) {
+            result.exitStatus.should.equal(0);
+            var output = JSON.parse(result.text);
+            output.name.should.equal(vnetProp.name);
+            vnetProp.dnsServer.split(',').forEach(function(item) { output.dhcpOptions.dnsServers.should.containEql(item) });
+
+            var cmd = ('network vnet delete -g {group} -n {name} --json --quiet').formatArgs(vnetProp);
+            testUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              done();
+            });
           });
         });
       });
