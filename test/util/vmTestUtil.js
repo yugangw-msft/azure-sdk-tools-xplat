@@ -83,10 +83,16 @@ VMTestUtil.prototype.CreateVmWithNic = function(group, name, location, os, urn, 
   suite.execute('storage account create %s --resource-group %s --location %s --sku-name LRS --kind Storage --json',
     storageAccount, group, location, function(result) {
     result.exitStatus.should.equal(0);
-    suite.execute('vm create %s %s %s %s --image-urn %s --nic-names %s --admin-username %s --admin-password %s --storage-account-name %s --json',
-      group, name, location, os, urn, nic, user, password, storageAccount, function(result) {
+    suite.execute('vm sizes -l %s --json', location, function(result) {
       result.exitStatus.should.equal(0);
-      callback();
+      // Choosing available size
+      var output = JSON.parse(result.text);
+      var vmSize = output[0].name;
+      suite.execute('vm create %s %s %s %s --image-urn %s --nic-names %s --admin-username %s --admin-password %s --storage-account-name %s -z %s --json',
+        group, name, location, os, urn, nic, user, password, storageAccount, vmSize, function(result) {
+        result.exitStatus.should.equal(0);
+        callback();
+      });
     });
   });
 };
