@@ -333,6 +333,12 @@ describe('arm', function () {
               var key = JSON.parse(keyResult.text)[0].value;
               keyResult.exitStatus.should.equal(0);
 
+              // storage data plane SDK rely on the setTimeout for client side timeout 
+              
+              if (suite.isPlayback()) {
+                setTimeout = originalSetTimeout;
+              }
+
               suite.execute('storage container create --container %s -a %s -k %s -p Off --json', storageContainerName, storageAccountName, key, function (containerResult) {
                 containerResult.exitStatus.should.equal(0);
 
@@ -347,6 +353,12 @@ describe('arm', function () {
                     // the new URIwithSAS created in that recorded session. The reason is nock will record requests with the expiration time
                     // set to thiry minutes after the SAS token generation relative to the time the test was recorded.
                     URIwithSAS = 'https://xstorageaccount764.blob.core.windows.net/xstoragecontainer6074/arm-deployment-template.json?se=2016-10-07T04%3A17%3A00Z&sp=r&sv=2015-12-11&sr=b&sig=8qPO0%2B3yrsXtCD9PixZjAM0rhl10E9yUzd6WgQ3PHts%3D';
+
+                    if (suite.isPlayback()) {
+                      setTimeout = function (action, timeout) {
+                        process.nextTick(action);
+                      };
+                    }
 
                     suite.execute('group deployment create --template-uri %s -g %s -n %s -e %s --nowait --json', URIwithSAS, groupName, deploymentName, parameterFile, function (deployResult) { 
                       deployResult.exitStatus.should.equal(0);
@@ -388,6 +400,11 @@ describe('arm', function () {
               var key = JSON.parse(keyResult.text)[0].value;
               keyResult.exitStatus.should.equal(0);
 
+              // storage data plane SDK rely on the setTimeout for client side timeout 
+              if (suite.isPlayback()) {
+                setTimeout = originalSetTimeout;
+              }
+
               suite.execute('storage container create --container %s -a %s -k %s -p Off --json', storageContainerName, storageAccountName, key, function (containerResult) {
                 containerResult.exitStatus.should.equal(0);
 
@@ -403,6 +420,12 @@ describe('arm', function () {
                     // set to thiry minutes after the SAS token generation relative to the time the test was recorded.
                     URIwithSAS = 'https://xstorageaccount2031.blob.core.windows.net/xstoragecontainer7970/arm-deployment-template.json?se=2016-10-07T03%3A50%3A00Z&sp=r&sv=2015-12-11&sr=b&sig=wm50z9hmC3tHm52rWBYFQNngXLj2aTTnj47k%2Bkdvv8M%3D';
 
+                    if (suite.isPlayback()) {
+                      setTimeout = function (action, timeout) {
+                        process.nextTick(action);
+                      };
+                    }
+                    
                     suite.execute('group deployment create --template-uri %s -g %s -e %s --nowait --json', URIwithSAS, groupName, parameterFile, function (deployResult) { 
                       deployResult.exitStatus.should.equal(0);
                       var deployment = JSON.parse(deployResult.text);
