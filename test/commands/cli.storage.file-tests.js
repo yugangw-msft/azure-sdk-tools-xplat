@@ -28,12 +28,16 @@ var aclTimeout;
 var testPrefix = 'cli.storage.file-tests';
 var crypto = require('crypto');
 
+function stripAccessKey(connectionString) {
+  return connectionString.replace(/AccountKey=[^;]+/, 'AccountKey=null');
+}
+
 function fetchAccountName(connectionString) {
   return connectionString.match(/AccountName=[^;]+/)[0].split('=')[1];
 }
 
 var requiredEnvironment = [
-  { name: 'AZURE_STORAGE_CONNECTION_STRING', secure: true}
+  { name: 'AZURE_STORAGE_CONNECTION_STRING', secure: stripAccessKey }
 ];
 
 /**
@@ -280,6 +284,7 @@ describe('cli', function () {
     
     describe('file', function () {
       
+      var prefix = 'testprefix-';
       var shareName = 'filetestshare';
       var directoryName = 'newdir';
       var localFile = 'localfile.txt';
@@ -291,14 +296,14 @@ describe('cli', function () {
       before(function (done) {
         var fileService = storage.createFileService(process.env.AZURE_STORAGE_CONNECTION_STRING);
         fileService.createShare(shareName, function () {
-          fileService.createDirectory(shareName, directoryName, function () {
+          fileService.createDirectory(shareName, prefix + directoryName, function () {
             var buf = new Buffer('HelloWord', 'utf8');
             for (var i = 0; i < testCount; i++) {
               var filePath = path.join(__dirname, i.toString() + localFile);
               var file = fs.openSync(filePath, 'w');
               fs.writeSync(file, buf, 0, buf.length, 0);
               testFiles.push(filePath);
-              fileService.createFileFromLocalFile(shareName, '', i.toString() + remoteFile, filePath, function () {
+              fileService.createFileFromLocalFile(shareName, '', prefix + i.toString() + remoteFile, filePath, function () {
                 if (++pushed == testCount) {
                   done();
                 }
@@ -386,18 +391,27 @@ describe('cli', function () {
         });
       });
 
-      describe('delete', function () {
-        it('should delete an existing file', function (done) {
-          suite.execute('storage file delete -q %s %s --json', shareName, remoteFile, function (result) {
-            result.errorText.should.be.empty;
-            done();
-          });
-        });
-      });
-
       describe('list', function () {
         it('should list files and directories', function (done) {
           suite.execute('storage file list %s --json', shareName, function (result) {
+            result.errorText.should.be.empty;
+            var listResult = JSON.parse(result.text);
+            listResult.should.have.enumerable('files');
+            listResult.should.have.enumerable('directories');
+            listResult.files.should.be.lengthOf(testCount + 1);
+            listResult.directories.should.be.lengthOf(1);
+            listResult.files.some(function (data) {
+              data.name.should.match(/^.*remotefile$/);
+            });
+            listResult.directories.some(function (data) {
+              data.name.should.match(/^.*dir$/);
+            });
+            done();
+          });
+        });
+
+        it('should list files and directories with prefix', function (done) {
+          suite.execute('storage file list %s --prefix %s --json', shareName, prefix, function (result) {
             result.errorText.should.be.empty;
             var listResult = JSON.parse(result.text);
             listResult.should.have.enumerable('files');
@@ -410,6 +424,15 @@ describe('cli', function () {
             listResult.directories.some(function (data) {
               data.name.should.match(/^.*dir$/);
             });
+            done();
+          });
+        });
+      });
+
+      describe('delete', function () {
+        it('should delete an existing file', function (done) {
+          suite.execute('storage file delete -q %s %s --json', shareName, remoteFile, function (result) {
+            result.errorText.should.be.empty;
             done();
           });
         });
