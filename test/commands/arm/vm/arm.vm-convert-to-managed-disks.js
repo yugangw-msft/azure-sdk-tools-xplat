@@ -53,16 +53,16 @@ describe('arm', function() {
       suite.setupSuite(function() {
         location = process.env.AZURE_VM_TEST_LOCATION;
         sshcert = process.env.SSHCERT;
-        groupName = suite.isMocked ? groupPrefix : suite.generateId(groupPrefix, null);
-        vmPrefix = suite.isMocked ? vmPrefix : suite.generateId(vmPrefix, null);
-        nicName = suite.isMocked ? nicName : suite.generateId(nicName, null);
+        groupName = suite.generateId(groupPrefix, null);
+        vmPrefix = suite.generateId(vmPrefix, null);
+        nicName = suite.generateId(nicName, null);
         storageAccount = suite.generateId(storageAccount, null);
-        storageCont = suite.isMocked ? storageCont : suite.generateId(storageCont, null);
-        osdiskvhd = suite.isMocked ? osdiskvhd : suite.generateId(osdiskvhd, null);
-        vNetPrefix = suite.isMocked ? vNetPrefix : suite.generateId(vNetPrefix, null);
-        subnetName = suite.isMocked ? subnetName : suite.generateId(subnetName, null);
-        publicipName = suite.isMocked ? publicipName : suite.generateId(publicipName, null);
-        dnsPrefix = suite.isMocked ? dnsPrefix : suite.generateId(dnsPrefix, null);
+        storageCont = suite.generateId(storageCont, null);
+        osdiskvhd = suite.generateId(osdiskvhd, null);
+        vNetPrefix =suite.generateId(vNetPrefix, null);
+        subnetName = suite.generateId(subnetName, null);
+        publicipName = suite.generateId(publicipName, null);
+        dnsPrefix = suite.generateId(dnsPrefix, null);
         done();
       });
     });

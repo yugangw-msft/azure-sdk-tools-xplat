@@ -6,7 +6,7 @@ environment:
   files: '%TEMP%/files'
   tool: '%TEMP%/tool'
   github_access_token:
-    secure: VMFbecLLHzDq/09YDPbcM0VDDSwwgY57vr5GXK6cZZ4Ti/Xs5RZoylzV8MMr1350
+    secure: JSOJKfdgXW09TdfN75l84f7+22GElWNgPo1Vab449RFYe8+BEbO/btueR3g0qldG
 before_build:
   - git clone -q --branch=master https://github.com/Visual-Studio-China/azure-xplat-cli-preprocessor %TEMP%/preprocessor
   - ps: |
