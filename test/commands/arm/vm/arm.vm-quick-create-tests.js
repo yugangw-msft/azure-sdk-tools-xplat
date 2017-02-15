@@ -45,13 +45,13 @@ var groupName,
   vmSize,
   sshcert;
 
-describe('arm', function () {
-  describe('compute', function () {
+describe('arm', function() {
+  describe('compute', function() {
     var suite, retry = 5;
     var vmTest = new VMTestUtil();
-    before(function (done) {
+    before(function(done) {
       suite = new CLITest(this, testprefix, requiredEnvironment);
-      suite.setupSuite(function () {
+      suite.setupSuite(function() {
         location = process.env.AZURE_VM_TEST_LOCATION;
         sshcert = process.env.SSHCERT;
         groupName = suite.generateId(groupPrefix, null);
@@ -65,35 +65,35 @@ describe('arm', function () {
       });
     });
 
-    after(function (done) {
+    after(function(done) {
       this.timeout(vmTest.timeoutLarge * 10);
-      vmTest.deleteUsedGroup(groupName, suite, function (result) {
+      vmTest.deleteUsedGroup(groupName, suite, function(result) {
         suite.teardownSuite(done);
       });
     });
 
-    beforeEach(function (done) {
+    beforeEach(function(done) {
       suite.setupTest(done);
     });
 
-    afterEach(function (done) {
+    afterEach(function(done) {
       suite.teardownTest(done);
     });
 
-    describe('vm', function () {
+    describe('vm', function() {
 
-      it('quick create with non-existing group should pass', function (done) {
+      it('quick create with non-existing group should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
-        vmTest.getVMSize(location, suite, function () {
+        vmTest.getVMSize(location, suite, function() {
           vmSize = VMTestUtil.vmSize;
-          vmTest.checkImagefile(function () {
+          vmTest.checkImagefile(function() {
             if (VMTestUtil.linuxImageUrn === '' || VMTestUtil.linuxImageUrn === undefined) {
-              vmTest.GetLinuxSkusList(location, suite, function (result) {
-                vmTest.GetLinuxImageList(location, suite, function (result) {
+              vmTest.GetLinuxSkusList(location, suite, function(result) {
+                vmTest.GetLinuxImageList(location, suite, function(result) {
                   var latestLinuxImageUrn = 'UbuntuLTS';
                   var cmd = util.format('vm quick-create %s %s %s Linux %s %s %s -M %s -z %s -w %s -C %s',
                     groupName, vm1Prefix, location, latestLinuxImageUrn, username, password, sshcert, vmSize, vm1Prefix + '-pip', customDataFile).split(' ');
-                  testUtils.executeCommand(suite, retry, cmd, function (result) {
+                  testUtils.executeCommand(suite, retry, cmd, function(result) {
                     result.exitStatus.should.equal(0);
                     result.text.should.containEql(vm1Prefix + '-pip.' + location.toLowerCase() + '.cloudapp.azure.com');
                     result.text.should.containEql('Custom Data (Base64 Encoded)');
@@ -106,7 +106,7 @@ describe('arm', function () {
               var latestLinuxImageUrn = 'UbuntuLTS';
               var cmd = util.format('vm quick-create %s %s %s Linux %s %s %s -M %s -z %s -w %s -C %s',
                 groupName, vm1Prefix, location, latestLinuxImageUrn, username, password, sshcert, vmSize, vm1Prefix + '-pip', customDataFile).split(' ');
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
+              testUtils.executeCommand(suite, retry, cmd, function(result) {
                 result.exitStatus.should.equal(0);
                 result.text.should.containEql(vm1Prefix + '-pip.' + location.toLowerCase() + '.cloudapp.azure.com');
                 result.text.should.containEql('Custom Data (Base64 Encoded)');
@@ -117,29 +117,29 @@ describe('arm', function () {
         });
       });
 
-      it('vm secret random add should fail', function (done) {
+      it('vm secret random add should fail', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
         var cmd = util.format('vm secret add %s %s %s -c c -t t', groupName, vm1Prefix, vm1Prefix).split(' ');
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        testUtils.executeCommand(suite, retry, cmd, function(result) {
           result.exitStatus.should.not.equal(0);
           should(result.errorText.indexOf('Property id \'' + vm1Prefix + '\' at path \'properties.osProfile.secrets') > -1).ok;
           done();
         });
       });
 
-      it('vm secret random delete should pass', function (done) {
+      it('vm secret random delete should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
         var cmd = util.format('vm secret delete %s %s %s -c %s', groupName, vm1Prefix, vm1Prefix, groupName).split(' ');
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        testUtils.executeCommand(suite, retry, cmd, function(result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
 
-      it('redeploy vm should pass', function (done) {
+      it('redeploy vm should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
         var cmd = util.format('vm redeploy %s %s', groupName, vm1Prefix).split(' ');
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        testUtils.executeCommand(suite, retry, cmd, function(result) {
           if (result.exitStatus !== 0) {
             result.text.should.containEql('redeployment failed due to an internal error. Please retry later.');
           }
@@ -147,18 +147,18 @@ describe('arm', function () {
         });
       });
 
-      it('quick create with existing group should pass', function (done) {
+      it('quick create with existing group should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
-        vmTest.checkImagefile(function () {
+        vmTest.checkImagefile(function() {
           var latestWindowsImageUrn = '';
           if (VMTestUtil.winImageUrn === '' || VMTestUtil.winImageUrn === undefined) {
-            vmTest.GetWindowsSkusList(location, suite, function (result) {
-              vmTest.GetWindowsImageList(location, suite, function (result) {
-                vmTest.setGroup(groupName, suite, function (result) {
+            vmTest.GetWindowsSkusList(location, suite, function(result) {
+              vmTest.GetWindowsImageList(location, suite, function(result) {
+                vmTest.setGroup(groupName, suite, function(result) {
                   var latestWindowsImageUrn = VMTestUtil.winImageUrn.substring(0, VMTestUtil.winImageUrn.lastIndexOf(':')) + ':latest';
                   var cmd = util.format('vm quick-create %s %s %s Windows %s %s %s',
                     groupName, vm2Prefix, location, latestWindowsImageUrn, username, password).split(' ');
-                  testUtils.executeCommand(suite, retry, cmd, function (result) {
+                  testUtils.executeCommand(suite, retry, cmd, function(result) {
                     result.exitStatus.should.equal(0);
                     result.text.should.containEql('-pip.' + location.toLowerCase() + '.cloudapp.azure.com');
                     result.text.should.not.containEql('Custom Data (Base64 Encoded)');
@@ -169,11 +169,11 @@ describe('arm', function () {
             });
           }
           else {
-            vmTest.setGroup(groupName, suite, function (result) {
+            vmTest.setGroup(groupName, suite, function(result) {
               var latestWindowsImageUrn = VMTestUtil.winImageUrn.substring(0, VMTestUtil.winImageUrn.lastIndexOf(':')) + ':latest';
               var cmd = util.format('vm quick-create %s %s %s Windows %s %s %s',
                 groupName, vm2Prefix, location, latestWindowsImageUrn, username, password).split(' ');
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
+              testUtils.executeCommand(suite, retry, cmd, function(result) {
                 result.exitStatus.should.equal(0);
                 result.text.should.containEql('-pip.' + location.toLowerCase() + '.cloudapp.azure.com');
                 result.text.should.not.containEql('Custom Data (Base64 Encoded)');
@@ -184,14 +184,14 @@ describe('arm', function () {
         });
       });
 
-      it('quick-create with non-existing provided storage account name should pass', function (done) {
+      it('quick-create with non-existing provided storage account name should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
-        vmTest.getVMSize(location, suite, function () {
+        vmTest.getVMSize(location, suite, function() {
           vmSize = VMTestUtil.vmSize;
-          vmTest.checkImagefile(function () {
+          vmTest.checkImagefile(function() {
             var cmd = util.format('vm quick-create %s %s %s Linux %s %s %s -M %s -z %s -w %s -C %s -a %s',
               groupName, vm3Prefix, location, 'UbuntuLTS', username, password, sshcert, vmSize, vm3Prefix + '-pip', customDataFile, stgPrefix).split(' ');
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            testUtils.executeCommand(suite, retry, cmd, function(result) {
               result.exitStatus.should.equal(0);
               result.text.should.containEql(vm3Prefix + '-pip.' + location.toLowerCase() + '.cloudapp.azure.com');
               result.text.should.containEql('Custom Data (Base64 Encoded)');
@@ -201,24 +201,24 @@ describe('arm', function () {
         });
       });
 
-      it('quick-create with user image in matching storage but missing vhd should fail', function (done) {
+      it('quick-create with user image in matching storage but missing vhd should fail', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
         var bogusImageUrn = util.format('https://%s.blob.core.windows.net/bar/vhds/baz.vhd', stgPrefix);
         var cmd = util.format('vm quick-create %s %s %s Linux %s %s %s -M %s -z %s -w %s -C %s -a %s',
           groupName, vm4Prefix, location, bogusImageUrn, username, password, sshcert, vmSize, vm4Prefix + '-pip', customDataFile, stgPrefix).split(' ');
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        testUtils.executeCommand(suite, retry, cmd, function(result) {
           result.exitStatus.should.not.equal(0);
           should(result.errorText.indexOf('Unable to find VHD blob with URI') > -1).ok;
           done();
         });
       });
 
-      it('quick-create with user image on mismatched storage account should fail', function (done) {
+      it('quick-create with user image on mismatched storage account should fail', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
         var bogusImageUrn = 'https://foo.blob.core.windows.net/bar/vhds/baz.vhd';
         var cmd = util.format('vm quick-create %s %s %s Linux %s %s %s -M %s -z %s -w %s -C %s',
           groupName, vm5Prefix, location, bogusImageUrn, username, password, sshcert, vmSize, vm5Prefix + '-pip', customDataFile).split(' ');
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        testUtils.executeCommand(suite, retry, cmd, function(result) {
           result.exitStatus.should.not.equal(0);
           should(result.errorText.indexOf('Source and destination storage accounts for disk') > -1).ok;
           should(result.errorText.indexOf('are different') > -1).ok;
