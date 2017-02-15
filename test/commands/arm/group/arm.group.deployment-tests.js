@@ -102,6 +102,8 @@ describe('arm', function () {
       if (filename.indexOf('nested') > -1) {
         var storageAccountName = suite.generateId('sdkdeploymenttest', [], suite.isMocked);
         deploymentParameters.StorageAccountName.value = storageAccountName;
+      } else if (filename.indexOf('keyvault') > -1) {
+        deploymentParameters.sku.value = 'Basic';
       } else {
         var siteName = suite.generateId('xDeploymentTestSite1', [], suite.isMocked);
         var hostingPlanName = suite.generateId('xDeploymentTestHost2', [], suite.isMocked);
@@ -652,6 +654,34 @@ describe('arm', function () {
         });
       });
 
+      it('should work with parameters containing kevault reference', function (done) {
+        var parameterFile = path.join(__dirname, '../../../data/arm-deployment-parameters-keyvault.json');
+        setUniqParameterNames(suite, parameterFile);
+        var groupName = suite.generateId('xDeploymentTestGroup', createdGroups, suite.isMocked);
+        var deploymentName = suite.generateId('Deploy1', createdDeployments, suite.isMocked);
+        var templateFile = path.join(__dirname, '../../../data/arm-deployment-template-keyvault.json');
+        var commandToCreateDeployment = util.format('group deployment create -f %s -g %s -n %s -e %s',
+            templateFile, groupName, deploymentName, parameterFile);
+
+        suite.execute('group create %s --location %s --json', groupName, testLocation, function (result) {
+          result.exitStatus.should.equal(0);
+          suite.execute(commandToCreateDeployment, function (result) {
+            result.exitStatus.should.equal(0);
+            result.text.indexOf('provisioning status is Succeeded').should.be.above(-1);
+
+            suite.execute('group deployment show -g %s -n %s --json', groupName, deploymentName, function (showResult) {
+              showResult.exitStatus.should.equal(0);
+              showResult.text.indexOf(deploymentName).should.be.above(-1);
+
+              suite.execute('group deployment list -g %s --json', groupName, function (listResult) {
+                listResult.exitStatus.should.equal(0);
+                listResult.text.indexOf(deploymentName).should.be.above(-1);
+                cleanup(done);
+              });
+            });
+          });
+        });
+      });
 
       it('should show nested error messages when deployment fails', function (done) {
         var groupName = suite.generateId('xDeploymentTestGroup', createdGroups, suite.isMocked);
