@@ -17248,7 +17248,7 @@
             },
             {
               "name": "upload",
-              "description": "Upload the specified file to storage blob",
+              "description": "Upload the specified file to storage blob. To upload to large block blob, please run on 64-bit machine with 64-bit node.",
               "fullName": "storage blob upload",
               "usage": "[options] [file] [container] [blob]",
               "filePath": "commands/storage/storage.blob._js",
@@ -38139,7 +38139,7 @@
               "optional": 0,
               "bool": true,
               "long": "--aspNetCore",
-              "description": "Create a deployment script for ASP.NET Core web application, specify the project.json file path"
+              "description": "Create a deployment script for ASP.NET Core web application, specify the project file path"
             },
             {
               "flags": "--aspWebSite",
@@ -38164,6 +38164,14 @@
               "bool": true,
               "long": "--node",
               "description": "Create a deployment script for node.js website"
+            },
+            {
+              "flags": "--ruby",
+              "required": 0,
+              "optional": 0,
+              "bool": true,
+              "long": "--ruby",
+              "description": "Create a deployment script for ruby website"
             },
             {
               "flags": "--php",
