@@ -7,10 +7,6 @@ exports.getMockedProfile = function () {
 
   newProfile.addSubscription(new profile.Subscription({
     id: 'e33f361b-53c2-4cc7-b829-78906708387b',
-    managementCertificate: {
-      key: 'mockedKey',
-      cert: 'mockedCert'
-    },
     name: 'Microsoft Azure Internal Consumption',
     user: {
       name: 'user@domain.example',
@@ -33,4 +29,4 @@ exports.setEnvironment = function() {
 
 exports.scopes = [];
 
- exports.randomTestIdsGenerated = function() { return ['xplatTstPvmGCreate2195','vm1995','xplattestnic6418','xplatteststorage17805'];};
+ exports.randomTestIdsGenerated = function() { return ['xplatTstPvmGCreate2929','vm18595','vm23629','xplattestnic9702','xplattestni27983','xplatteststorage18845'];};
