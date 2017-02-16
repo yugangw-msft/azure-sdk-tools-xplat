@@ -1,3 +1,49 @@
+##2017-02-08 Version 0.10.9
+* General
+  * Improved error message in the CLI about command not being valid (Fixes #3272, #3256, #3245). #3424
+  * Improved azure portal command to infer the environment if not passed in (Fixes #2074). #3426
+  * Made the application not prompt for telemetry if AZURE_NON_INTERACTIVE_MODE environment variable is set (Fixes #3297). #3432
+  * Client side telemetry: Added error classification (Fixes #2779). #3434
+  * Changed setup authoring of windows installer to install 32 or 64 bit Node based on target cpu architecture (Fixes #3451). #3454
+* Datalake
+  * Add support to create Clusters with ADLS as default Storage. #3431
+* ServiceFabric
+  * Add timeout to application type register command. #3427
+* Compute
+  * Added new commands to support managed disks. #3458
+  * Fixed the scenario of enabling disk encryption from the CLI when using a certificate instead of a password. #3433
+  * Chef Extension
+    * Added new options in azure vm extension set-chef command for both ASM and ARM mode. #3400
+      *  --daemon - Configures the chef-client service for unattended execution. The node platform to be Windows. Options: \'none\' or \'service\'. \n \'none\' - Currently prevents the chef-client service from being configured as a service. \n \'service\' - Configures the chef-client to run automatically in the background as a service.
+      * --chef-service-interval - It specifies the frequency (in minutes) at which the chef-service runs. Pass 0 if you don\'t want the chef-service to be installed on the target machine.
+      * --secret - The secret key to use to encrypt data bag item values.
+      * --secret-file  - A file containing the secret key to use to encrypt data bag item values.
+      * --bootstrap-version - chef-client version to be installed.
+* CDN
+  * Added support for usage and edgenode commands. #3402
+* Network
+  * Improved arm DNS services. #3419
+    * Added option --quiet in the ```dns record-set add-record``` command to make CNAME records corrections available for scripting
+    * Added a chance in the ```dns record-set list``` command to filter record sets by type without setting option name
+    * Fixed ```dns records-set delete-record``` ```--type``` option description
+    * Fixed ```dns record-set``` commands case-sensitive ```--type``` option issue
+    * Corrected record-set show command displaying format
+    * Added ```--keep-empty-record-set``` option to remove record saving empty record set.
+    * Added default functionality to remove record set is last record was deleted
+  * Fixed issues in arm vpn connections (Fixes #3409, #3411, #3413). #3441
+    * Fixed ```vpn-connection set``` command issues
+    * Added VPN gateway BGP settings options
+    * Added ```--enable-bgp``` option in VPN connection
+  * Fixed issues in vnet and nsg. #3450
+    * Stripped unreachable NSG code
+    * Updated vnet create/set: if vnet was created from portal w/o dns servers it was impossible to add them using `vnet set` command. Also, `vnet create` works more similar to creating vnet from Azure portal
+  * Fixed issue with TXT records import even if values contain record types (MX, TXT, etc). #3452
+  * Fixed TXT records output format. #3459
+* Redis Cache
+  * Added import, export and Reset commands for Azure Redis Cache. #3423
+* WebApp
+  * Fixed hostnames list "undefined" error (Fixes #3435). #3436
+
 ##2016-12-14 Version 0.10.8
 * General
   * Skipped output of progress spinners when running with AZURE_NON_INTERACTIVE_MODE set, mostly resolves #3292. #3296
