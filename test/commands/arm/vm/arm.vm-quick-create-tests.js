@@ -189,7 +189,7 @@ describe('arm', function() {
         vmTest.getVMSize(location, suite, function() {
           vmSize = VMTestUtil.vmSize;
           vmTest.checkImagefile(function() {
-            var cmd = util.format('vm quick-create %s %s %s Linux %s %s %s -M %s -z %s -w %s -C %s -a %s',
+            var cmd = util.format('vm quick-create %s %s %s Linux %s %s %s -M %s -z %s -w %s -C %s -t %s',
               groupName, vm3Prefix, location, 'UbuntuLTS', username, password, sshcert, vmSize, vm3Prefix + '-pip', customDataFile, stgPrefix).split(' ');
             testUtils.executeCommand(suite, retry, cmd, function(result) {
               result.exitStatus.should.equal(0);
@@ -204,7 +204,7 @@ describe('arm', function() {
       it('quick-create with user image in matching storage but missing vhd should fail', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
         var bogusImageUrn = util.format('https://%s.blob.core.windows.net/bar/vhds/baz.vhd', stgPrefix);
-        var cmd = util.format('vm quick-create %s %s %s Linux %s %s %s -M %s -z %s -w %s -C %s -a %s',
+        var cmd = util.format('vm quick-create %s %s %s Linux %s %s %s -M %s -z %s -w %s -C %s --storage-account-name %s',
           groupName, vm4Prefix, location, bogusImageUrn, username, password, sshcert, vmSize, vm4Prefix + '-pip', customDataFile, stgPrefix).split(' ');
         testUtils.executeCommand(suite, retry, cmd, function(result) {
           result.exitStatus.should.not.equal(0);
