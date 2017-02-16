@@ -1,0 +1,13 @@
+{
+  "storageProfile": {
+    "osDisk": {
+      "osType": "Linux",
+      "osState": "Generalized",
+      "blobUri": "https://xplatteststorage11612.blob.core.windows.net/vm12806/xplattestvhd.vhd",
+      "caching": "None",
+      "diskSizeGB": null
+    }
+  },
+  "location": "westus",
+  "name": "xplattestimg7"
+}
