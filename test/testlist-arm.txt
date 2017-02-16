@@ -75,6 +75,8 @@ commands/arm/network/arm.network.vpn-gateway-tests.js
 commands/arm/network/arm.network.vpn-connection-tests.js
 commands/arm/network/arm.network.application-gateway-tests.js
 commands/arm/network/arm.network.express-route-circuit-tests.js
+commands/arm/network/arm.network.watcher-tests.js
+commands/arm/network/arm.network.watcher-packet-capture-tests.js
 # TODO: Uncomment express-route-peering-tests line when fixed
 # commands/arm/network/arm.network.express-route-peering-tests.js
 commands/arm/network/arm.network.express-route-authorization-tests.js

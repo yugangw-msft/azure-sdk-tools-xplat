@@ -17248,7 +17248,7 @@
             },
             {
               "name": "upload",
-              "description": "Upload the specified file to storage blob",
+              "description": "Upload the specified file to storage blob. To upload to large block blob, please run on 64-bit machine with 64-bit node.",
               "fullName": "storage blob upload",
               "usage": "[options] [file] [container] [blob]",
               "filePath": "commands/storage/storage.blob._js",

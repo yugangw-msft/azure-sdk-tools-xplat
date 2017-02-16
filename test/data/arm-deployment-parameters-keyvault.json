@@ -1,0 +1,19 @@
+{
+  "siteLocation": {
+    "value": "West US"
+  },
+  "hostingPlanName": {
+    "reference": {
+      "keyVault": {
+        "id": "/subscriptions/38b598fc-e57a-423f-b2e7-dc0ddb631f1f/resourceGroups/vtest8/providers/Microsoft.KeyVault/vaults/vivsriaustest"
+      },
+      "secretName": "ITSecret"
+    }
+  },
+  "sku": {
+    "value": "Basic"
+  },
+  "workerSize": {
+    "value": 0
+  }
+}
