@@ -29,7 +29,7 @@ var vmUtil = new VMTestUtil();
 
 var testPrefix = 'arm-network-nic-tests',
   groupName = 'xplat-test-nic',
-  location = 'westus',
+  location = 'eastus',
   vnetName = 'test-vnet',
   vnetAddressSpace = '10.0.0.0/8',
   subnetName = 'test-subnet',
