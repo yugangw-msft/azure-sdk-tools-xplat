@@ -6,13 +6,14 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: 'e33f361b-53c2-4cc7-b829-78906708387b',
+    id: 'ace9b607-25c7-4695-b94d-9bfc8fde73d9',
     managementCertificate: {
       key: 'mockedKey',
       cert: 'mockedCert'
     },
-    name: 'Microsoft Azure Internal Consumption',
+    name: 'Azure Test',
     registeredProviders: [],
+    _eventsCount: '1',
     isDefault: true
   }, newProfile.environments['AzureCloud']));
 
@@ -28,86 +29,86 @@ exports.scopes = [[function (nock) {
 var result = 
 nock('http://management.core.windows.net:443')
   .filteringRequestBody(function (path) { return '*';})
-.post('/e33f361b-53c2-4cc7-b829-78906708387b/services/hostedservices/123/deployments/123/migration?comp=prepare', '*')
+.post('/ace9b607-25c7-4695-b94d-9bfc8fde73d9/services/hostedservices/123/deployments/123/migration?comp=prepare', '*')
   .reply(404, "<Error xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Code>ResourceNotFound</Code><Message>The deployment name '123' does not exist.</Message></Error>", { 'cache-control': 'no-cache',
   'content-length': '206',
   'content-type': 'application/xml; charset=utf-8',
-  server: '1.0.6198.387 (rd_rdfe_stable.160523-1235) Microsoft-HTTPAPI/2.0',
-  'x-ms-servedbyregion': 'ussouth3',
+  server: '1.0.6198.492 (rd_rdfe_stable.170314-1904) Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0',
+  'x-ms-servedbyregion': 'ussouth2',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': 'cc8d8138012aa713ad14fd51c7ad3631',
-  date: 'Fri, 27 May 2016 06:15:20 GMT',
+  'x-ms-request-id': 'c99526dd3e3475c18fda009701925d16',
+  date: 'Sat, 18 Mar 2017 20:42:47 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.core.windows.net:443')
   .filteringRequestBody(function (path) { return '*';})
-.post('/e33f361b-53c2-4cc7-b829-78906708387b/services/hostedservices/123/deployments/123/migration?comp=prepare', '*')
+.post('/ace9b607-25c7-4695-b94d-9bfc8fde73d9/services/hostedservices/123/deployments/123/migration?comp=prepare', '*')
   .reply(404, "<Error xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Code>ResourceNotFound</Code><Message>The deployment name '123' does not exist.</Message></Error>", { 'cache-control': 'no-cache',
   'content-length': '206',
   'content-type': 'application/xml; charset=utf-8',
-  server: '1.0.6198.387 (rd_rdfe_stable.160523-1235) Microsoft-HTTPAPI/2.0',
-  'x-ms-servedbyregion': 'ussouth3',
+  server: '1.0.6198.492 (rd_rdfe_stable.170314-1904) Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0',
+  'x-ms-servedbyregion': 'ussouth2',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': 'cc8d8138012aa713ad14fd51c7ad3631',
-  date: 'Fri, 27 May 2016 06:15:20 GMT',
+  'x-ms-request-id': 'c99526dd3e3475c18fda009701925d16',
+  date: 'Sat, 18 Mar 2017 20:42:47 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('http://management.core.windows.net:443')
-  .post('/e33f361b-53c2-4cc7-b829-78906708387b/services/hostedservices/123/deployments/123/migration?comp=commit')
+  .post('/ace9b607-25c7-4695-b94d-9bfc8fde73d9/services/hostedservices/123/deployments/123/migration?comp=commit')
   .reply(404, "<Error xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Code>ResourceNotFound</Code><Message>The deployment name '123' does not exist.</Message></Error>", { 'cache-control': 'no-cache',
   'content-length': '206',
   'content-type': 'application/xml; charset=utf-8',
-  server: '1.0.6198.387 (rd_rdfe_stable.160523-1235) Microsoft-HTTPAPI/2.0',
-  'x-ms-servedbyregion': 'ussouth3',
+  server: '1.0.6198.492 (rd_rdfe_stable.170314-1904) Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0',
+  'x-ms-servedbyregion': 'ussouth2',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': '9fb55ca37629abcbb6d3529170d234fb',
-  date: 'Fri, 27 May 2016 06:15:20 GMT',
+  'x-ms-request-id': '8df7ce6664b079bda7fa7eac403ea3d2',
+  date: 'Sat, 18 Mar 2017 20:42:48 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.core.windows.net:443')
-  .post('/e33f361b-53c2-4cc7-b829-78906708387b/services/hostedservices/123/deployments/123/migration?comp=commit')
+  .post('/ace9b607-25c7-4695-b94d-9bfc8fde73d9/services/hostedservices/123/deployments/123/migration?comp=commit')
   .reply(404, "<Error xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Code>ResourceNotFound</Code><Message>The deployment name '123' does not exist.</Message></Error>", { 'cache-control': 'no-cache',
   'content-length': '206',
   'content-type': 'application/xml; charset=utf-8',
-  server: '1.0.6198.387 (rd_rdfe_stable.160523-1235) Microsoft-HTTPAPI/2.0',
-  'x-ms-servedbyregion': 'ussouth3',
+  server: '1.0.6198.492 (rd_rdfe_stable.170314-1904) Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0',
+  'x-ms-servedbyregion': 'ussouth2',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': '9fb55ca37629abcbb6d3529170d234fb',
-  date: 'Fri, 27 May 2016 06:15:20 GMT',
+  'x-ms-request-id': '8df7ce6664b079bda7fa7eac403ea3d2',
+  date: 'Sat, 18 Mar 2017 20:42:48 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('http://management.core.windows.net:443')
-  .post('/e33f361b-53c2-4cc7-b829-78906708387b/services/hostedservices/123/deployments/123/migration?comp=abort')
+  .post('/ace9b607-25c7-4695-b94d-9bfc8fde73d9/services/hostedservices/123/deployments/123/migration?comp=abort')
   .reply(404, "<Error xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Code>ResourceNotFound</Code><Message>The deployment name '123' does not exist.</Message></Error>", { 'cache-control': 'no-cache',
   'content-length': '206',
   'content-type': 'application/xml; charset=utf-8',
-  server: '1.0.6198.387 (rd_rdfe_stable.160523-1235) Microsoft-HTTPAPI/2.0',
-  'x-ms-servedbyregion': 'ussouth3',
+  server: '1.0.6198.492 (rd_rdfe_stable.170314-1904) Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0',
+  'x-ms-servedbyregion': 'ussouth2',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': 'b087b8136605a340ba8b3213d99dd75d',
-  date: 'Fri, 27 May 2016 06:15:20 GMT',
+  'x-ms-request-id': '717a7cdecd3175ad973aae9cd711d4fe',
+  date: 'Sat, 18 Mar 2017 20:42:49 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.core.windows.net:443')
-  .post('/e33f361b-53c2-4cc7-b829-78906708387b/services/hostedservices/123/deployments/123/migration?comp=abort')
+  .post('/ace9b607-25c7-4695-b94d-9bfc8fde73d9/services/hostedservices/123/deployments/123/migration?comp=abort')
   .reply(404, "<Error xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Code>ResourceNotFound</Code><Message>The deployment name '123' does not exist.</Message></Error>", { 'cache-control': 'no-cache',
   'content-length': '206',
   'content-type': 'application/xml; charset=utf-8',
-  server: '1.0.6198.387 (rd_rdfe_stable.160523-1235) Microsoft-HTTPAPI/2.0',
-  'x-ms-servedbyregion': 'ussouth3',
+  server: '1.0.6198.492 (rd_rdfe_stable.170314-1904) Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0',
+  'x-ms-servedbyregion': 'ussouth2',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': 'b087b8136605a340ba8b3213d99dd75d',
-  date: 'Fri, 27 May 2016 06:15:20 GMT',
+  'x-ms-request-id': '717a7cdecd3175ad973aae9cd711d4fe',
+  date: 'Sat, 18 Mar 2017 20:42:49 GMT',
   connection: 'close' });
  return result; }]];
- exports.randomTestIdsGenerated = function() { return ['cliVmMigr2099'];};
+ exports.randomTestIdsGenerated = function() { return ['cliVmMigr2125'];};

@@ -6,13 +6,14 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: 'e33f361b-53c2-4cc7-b829-78906708387b',
+    id: 'ace9b607-25c7-4695-b94d-9bfc8fde73d9',
     managementCertificate: {
       key: 'mockedKey',
       cert: 'mockedCert'
     },
-    name: 'Microsoft Azure Internal Consumption',
+    name: 'Azure Test',
     registeredProviders: [],
+    _eventsCount: '1',
     isDefault: true
   }, newProfile.environments['AzureCloud']));
 
@@ -27,85 +28,85 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.core.windows.net:443')
-  .post('/e33f361b-53c2-4cc7-b829-78906708387b/services/networking/virtualnetwork/123/migration?comp=prepare')
-  .reply(400, "<Error xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Code>BadRequest</Code><Message>The virtual network 123 does not exist.</Message></Error>", { 'cache-control': 'no-cache',
-  'content-length': '198',
+  .post('/ace9b607-25c7-4695-b94d-9bfc8fde73d9/services/networking/virtualnetwork/123/migration?comp=prepare')
+  .reply(400, "<Error xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Code>BadRequest</Code><Message>Virtual network '123' not found. Either it does not exist or it is an Azure Resource Manager resource, which cannot be used with Cloud Services.</Message></Error>", { 'cache-control': 'no-cache',
+  'content-length': '303',
   'content-type': 'application/xml; charset=utf-8',
-  server: '1.0.6198.387 (rd_rdfe_stable.160523-1235) Microsoft-HTTPAPI/2.0',
-  'x-ms-servedbyregion': 'ussouth3',
+  server: '1.0.6198.492 (rd_rdfe_stable.170314-1904) Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0',
+  'x-ms-servedbyregion': 'ussouth2',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': '88cb4ce80fe5a6a69b911a3b154c7415',
-  date: 'Fri, 27 May 2016 06:15:20 GMT',
+  'x-ms-request-id': '172ddf750ed57848a1e998ef3ec76707',
+  date: 'Sat, 18 Mar 2017 20:42:49 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.core.windows.net:443')
-  .post('/e33f361b-53c2-4cc7-b829-78906708387b/services/networking/virtualnetwork/123/migration?comp=prepare')
-  .reply(400, "<Error xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Code>BadRequest</Code><Message>The virtual network 123 does not exist.</Message></Error>", { 'cache-control': 'no-cache',
-  'content-length': '198',
+  .post('/ace9b607-25c7-4695-b94d-9bfc8fde73d9/services/networking/virtualnetwork/123/migration?comp=prepare')
+  .reply(400, "<Error xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Code>BadRequest</Code><Message>Virtual network '123' not found. Either it does not exist or it is an Azure Resource Manager resource, which cannot be used with Cloud Services.</Message></Error>", { 'cache-control': 'no-cache',
+  'content-length': '303',
   'content-type': 'application/xml; charset=utf-8',
-  server: '1.0.6198.387 (rd_rdfe_stable.160523-1235) Microsoft-HTTPAPI/2.0',
-  'x-ms-servedbyregion': 'ussouth3',
+  server: '1.0.6198.492 (rd_rdfe_stable.170314-1904) Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0',
+  'x-ms-servedbyregion': 'ussouth2',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': '88cb4ce80fe5a6a69b911a3b154c7415',
-  date: 'Fri, 27 May 2016 06:15:20 GMT',
+  'x-ms-request-id': '172ddf750ed57848a1e998ef3ec76707',
+  date: 'Sat, 18 Mar 2017 20:42:49 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('http://management.core.windows.net:443')
-  .post('/e33f361b-53c2-4cc7-b829-78906708387b/services/networking/virtualnetwork/123/migration?comp=commit')
-  .reply(400, "<Error xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Code>BadRequest</Code><Message>The virtual network 123 does not exist.</Message></Error>", { 'cache-control': 'no-cache',
-  'content-length': '198',
+  .post('/ace9b607-25c7-4695-b94d-9bfc8fde73d9/services/networking/virtualnetwork/123/migration?comp=commit')
+  .reply(400, "<Error xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Code>BadRequest</Code><Message>Virtual network '123' not found. Either it does not exist or it is an Azure Resource Manager resource, which cannot be used with Cloud Services.</Message></Error>", { 'cache-control': 'no-cache',
+  'content-length': '303',
   'content-type': 'application/xml; charset=utf-8',
-  server: '1.0.6198.387 (rd_rdfe_stable.160523-1235) Microsoft-HTTPAPI/2.0',
-  'x-ms-servedbyregion': 'ussouth3',
+  server: '1.0.6198.492 (rd_rdfe_stable.170314-1904) Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0',
+  'x-ms-servedbyregion': 'ussouth2',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': 'd0fb420ae5b3aafb96d976aea10016e9',
-  date: 'Fri, 27 May 2016 06:15:21 GMT',
+  'x-ms-request-id': '28bdbefaa73f7be48f9014498826f9b5',
+  date: 'Sat, 18 Mar 2017 20:42:50 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.core.windows.net:443')
-  .post('/e33f361b-53c2-4cc7-b829-78906708387b/services/networking/virtualnetwork/123/migration?comp=commit')
-  .reply(400, "<Error xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Code>BadRequest</Code><Message>The virtual network 123 does not exist.</Message></Error>", { 'cache-control': 'no-cache',
-  'content-length': '198',
+  .post('/ace9b607-25c7-4695-b94d-9bfc8fde73d9/services/networking/virtualnetwork/123/migration?comp=commit')
+  .reply(400, "<Error xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Code>BadRequest</Code><Message>Virtual network '123' not found. Either it does not exist or it is an Azure Resource Manager resource, which cannot be used with Cloud Services.</Message></Error>", { 'cache-control': 'no-cache',
+  'content-length': '303',
   'content-type': 'application/xml; charset=utf-8',
-  server: '1.0.6198.387 (rd_rdfe_stable.160523-1235) Microsoft-HTTPAPI/2.0',
-  'x-ms-servedbyregion': 'ussouth3',
+  server: '1.0.6198.492 (rd_rdfe_stable.170314-1904) Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0',
+  'x-ms-servedbyregion': 'ussouth2',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': 'd0fb420ae5b3aafb96d976aea10016e9',
-  date: 'Fri, 27 May 2016 06:15:21 GMT',
+  'x-ms-request-id': '28bdbefaa73f7be48f9014498826f9b5',
+  date: 'Sat, 18 Mar 2017 20:42:50 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('http://management.core.windows.net:443')
-  .post('/e33f361b-53c2-4cc7-b829-78906708387b/services/networking/virtualnetwork/123/migration?comp=abort')
-  .reply(400, "<Error xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Code>BadRequest</Code><Message>The virtual network 123 does not exist.</Message></Error>", { 'cache-control': 'no-cache',
-  'content-length': '198',
+  .post('/ace9b607-25c7-4695-b94d-9bfc8fde73d9/services/networking/virtualnetwork/123/migration?comp=abort')
+  .reply(400, "<Error xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Code>BadRequest</Code><Message>Virtual network '123' not found. Either it does not exist or it is an Azure Resource Manager resource, which cannot be used with Cloud Services.</Message></Error>", { 'cache-control': 'no-cache',
+  'content-length': '303',
   'content-type': 'application/xml; charset=utf-8',
-  server: '1.0.6198.387 (rd_rdfe_stable.160523-1235) Microsoft-HTTPAPI/2.0',
-  'x-ms-servedbyregion': 'ussouth3',
+  server: '1.0.6198.492 (rd_rdfe_stable.170314-1904) Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0',
+  'x-ms-servedbyregion': 'ussouth2',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': '278165cf30e6a7d692d299a7a5e52459',
-  date: 'Fri, 27 May 2016 06:15:22 GMT',
+  'x-ms-request-id': 'fe419d413a737369b680379e88534207',
+  date: 'Sat, 18 Mar 2017 20:42:51 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.core.windows.net:443')
-  .post('/e33f361b-53c2-4cc7-b829-78906708387b/services/networking/virtualnetwork/123/migration?comp=abort')
-  .reply(400, "<Error xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Code>BadRequest</Code><Message>The virtual network 123 does not exist.</Message></Error>", { 'cache-control': 'no-cache',
-  'content-length': '198',
+  .post('/ace9b607-25c7-4695-b94d-9bfc8fde73d9/services/networking/virtualnetwork/123/migration?comp=abort')
+  .reply(400, "<Error xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Code>BadRequest</Code><Message>Virtual network '123' not found. Either it does not exist or it is an Azure Resource Manager resource, which cannot be used with Cloud Services.</Message></Error>", { 'cache-control': 'no-cache',
+  'content-length': '303',
   'content-type': 'application/xml; charset=utf-8',
-  server: '1.0.6198.387 (rd_rdfe_stable.160523-1235) Microsoft-HTTPAPI/2.0',
-  'x-ms-servedbyregion': 'ussouth3',
+  server: '1.0.6198.492 (rd_rdfe_stable.170314-1904) Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0',
+  'x-ms-servedbyregion': 'ussouth2',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': '278165cf30e6a7d692d299a7a5e52459',
-  date: 'Fri, 27 May 2016 06:15:22 GMT',
+  'x-ms-request-id': 'fe419d413a737369b680379e88534207',
+  date: 'Sat, 18 Mar 2017 20:42:51 GMT',
   connection: 'close' });
  return result; }]];
- exports.randomTestIdsGenerated = function() { return ['cliVmMigr469'];};
+ exports.randomTestIdsGenerated = function() { return ['cliVmMigr5731'];};
