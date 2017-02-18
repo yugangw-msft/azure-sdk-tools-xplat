@@ -99,6 +99,12 @@ echo 'source ~/azure.completion.sh' >> ~/.bash_profile
 echo 'source ~/azure.completion.sh' >> ~/.bashrc
 ```
 
+To enable it in fish, run:
+
+```bash
+echo 'azure --completion-fish | source' >> ~/.config/fish/config.fish
+```
+
 ## Get Started
 
 * First, get authenticated with Microsoft Azure. For details, read [this article](http://azure.microsoft.com/en-us/documentation/articles/xplat-cli/).
