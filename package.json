@@ -92,7 +92,7 @@
     "ms-rest": "^1.12.0",
     "ms-rest-azure": "^1.12.0",
     "node-forge": "0.6.23",
-    "omelette": "0.1.0",
+    "omelette": "0.3.2",
     "openssl-wrapper": "0.2.1",
     "progress": "^1.1.8",
     "prompt": "0.2.14",
