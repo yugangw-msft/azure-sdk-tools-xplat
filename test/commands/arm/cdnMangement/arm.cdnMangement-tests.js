@@ -523,6 +523,7 @@ describe('arm', function() {
         var customDomainJson = JSON.parse(result.text);
         customDomainJson.name.should.equal(testCustomDomainName_1);
         customDomainJson.hostName.should.equal(testCustomDomainHostName_1);
+        customDomainJson.customHttpsProvisioningState.should.equal("Disabled");
         done();
       });
     });
@@ -533,6 +534,7 @@ describe('arm', function() {
         var customDomainJson = JSON.parse(result.text);
         customDomainJson.name.should.equal(testCustomDomainName_1);
         customDomainJson.hostName.should.equal(testCustomDomainHostName_1);
+        customDomainJson.customHttpsProvisioningState.should.equal("Disabled");
         done();
       });
     });
@@ -544,6 +546,32 @@ describe('arm', function() {
         customDomainListJson.length.should.equal(1);
         customDomainListJson[0].name.should.equal(testCustomDomainName_1);
         customDomainListJson[0].hostName.should.equal(testCustomDomainHostName_1);
+        customDomainListJson[0].customHttpsProvisioningState.should.equal("Disabled");
+        done();
+      });
+    });
+    
+    it('disableHttps command should fail', function(done) {
+      suite.execute('cdn customDomain disableHttps %s %s %s %s testtest --json', testCustomDomainName_1, testEndpointName_1, testProfileName_1, testResourceGroup_1,function(result) {
+        result.exitStatus.should.be.equal(1);
+        done();
+      });
+    });
+    
+    it('enableHttps command should succeed', function(done) {
+      suite.execute('cdn customDomain enableHttps %s %s %s %s testtest --json', testCustomDomainName_1, testEndpointName_1, testProfileName_1, testResourceGroup_1,function(result) {
+        result.exitStatus.should.be.equal(0);
+        done();
+      });
+    });
+    
+    it('show command should get the custom domain with https in enabling', function(done) {
+      suite.execute('cdn customDomain show %s %s %s %s testtest --json', testCustomDomainName_1, testEndpointName_1, testProfileName_1, testResourceGroup_1, function(result) {
+        result.exitStatus.should.be.equal(0);
+        var customDomainJson = JSON.parse(result.text);
+        customDomainJson.name.should.equal(testCustomDomainName_1);
+        customDomainJson.hostName.should.equal(testCustomDomainHostName_1);
+        customDomainJson.customHttpsProvisioningState.should.equal("Enabling");
         done();
       });
     });
