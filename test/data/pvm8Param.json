@@ -13,7 +13,7 @@
     "osDisk": {
       "name": "test",
       "vhd": {
-        "uri": "https://xplatteststorage13710.blob.core.windows.net/vm13547/xplattestvhd.vhd"
+        "uri": "https://xplatteststorage18026.blob.core.windows.net/vm13299/xplattestvhd.vhd"
       },
       "caching": "None",
       "createOption": "fromImage",
@@ -32,13 +32,13 @@
     "networkInterfaces": [
       {
         "primary": null,
-        "id": "/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstPvmGCreate3540/providers/Microsoft.Network/networkInterfaces/xplattestnic6541"
+        "id": "/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstPvmGCreate7125/providers/Microsoft.Network/networkInterfaces/xplattestnic1078"
       }
     ]
   },
   "availabilitySet": {
-    "id": "/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstPvmGCreate3540/providers/Microsoft.Compute/availabilitySets/xplattestavs85436"
+    "id": "/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstPvmGCreate7125/providers/Microsoft.Compute/availabilitySets/xplattestavs8285"
   },
-  "name": "vm13547",
+  "name": "vm13299",
   "location": "westus"
 }

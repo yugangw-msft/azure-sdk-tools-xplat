@@ -29,10 +29,10 @@ var accountKind;
 var resourceGroupLocation;
 
 var requiredEnvironment = [
-  { name: 'AZURE_STORAGE_TEST_LOCATION', defaultValue: 'West Europe' },
+  { name: 'AZURE_STORAGE_TEST_LOCATION', defaultValue: 'East Asia' },
   { name: 'AZURE_STORAGE_TEST_TYPE', defaultValue: 'LRS' },
   { name: 'AZURE_STORAGE_TEST_KIND', defaultValue: 'storage' },
-  { name: 'AZURE_RESOURCE_GROUP_TEST_LOCATION', defaultValue: 'West US' }
+  { name: 'AZURE_RESOURCE_GROUP_TEST_LOCATION', defaultValue: 'East Asia' }
 ];
 
 var testPrefix = 'arm-cli-storage-account-tests';
@@ -97,7 +97,7 @@ describe('arm', function () {
       suite.execute('group create %s --location %s --json', resrouceGroupName, resourceGroupLocation, function (result) {
         result.exitStatus.should.equal(0);
         
-        suite.execute('storage account create %s --resource-group %s --sku-name %s --location %s --kind %s --enable-encryption-service blob --json', 
+        suite.execute('storage account create %s --resource-group %s --sku-name %s --location %s --kind %s --enable-encryption-service blob,file --json', 
           storageName, resrouceGroupName, accountType, storageLocation, accountKind, function (result) {
           result.text.should.equal('');
           result.exitStatus.should.equal(0);
@@ -109,11 +109,51 @@ describe('arm', function () {
     it('should create a COOL storage account', function(done) {
       storageName = suite.generateId(storageNamesPrefix, storageNames);
       storagePairs.push([storageName, resrouceGroupName]);
-      suite.execute('storage account create %s --resource-group %s --sku-name %s --location %s --kind %s --access-tier Cool --enable-encryption-service blob --json', 
+      suite.execute('storage account create %s --resource-group %s --sku-name %s --location %s --kind %s --access-tier Cool --enable-encryption-service blob,file --json', 
         storageName, resrouceGroupName, accountType, storageLocation, 'BlobStorage', function (result) {
         result.text.should.equal('');
         result.exitStatus.should.equal(0);
         done();
+      });
+    });
+
+    it('should be able to enable and disable encryption services', function(done) {
+      storageName = suite.generateId(storageNamesPrefix, storageNames);
+      resrouceGroupName = suite.generateId(storageGroupPrefix, createdResourceGroups);
+      storagePairs.push([storageName, resrouceGroupName]);
+      var storageAccount; 
+
+      suite.execute('group create %s --location %s --json', resrouceGroupName, resourceGroupLocation, function (result) {
+        result.exitStatus.should.equal(0);
+
+        suite.execute('storage account create %s --resource-group %s --sku-name %s --location %s --kind %s --enable-encryption-service blob,file --json', 
+          storageName, resrouceGroupName, accountType, storageLocation, accountKind, function (result) {
+          result.text.should.equal('');
+          result.exitStatus.should.equal(0);
+
+          suite.execute('storage account show %s --resource-group %s --json', storageName, resrouceGroupName, function(showResult) {
+            showResult.exitStatus.should.equal(0);
+            storageAccount = JSON.parse(showResult.text);
+            storageAccount.encryption.services.blob.enabled.should.be.true;
+            storageAccount.encryption.services.file.enabled.should.be.true;
+
+            suite.execute('storage account set %s --resource-group %s --enable-encryption-service blob --disable-encryption-service file --json', storageName, resrouceGroupName, function(result) {
+              result.exitStatus.should.equal(0);
+
+              suite.execute('storage account show %s --resource-group %s --json', storageName, resrouceGroupName,  function(showResult) {
+                showResult.exitStatus.should.equal(0);
+                storageAccount = JSON.parse(showResult.text);
+                storageAccount.encryption.services.blob.enabled.should.be.true;
+                should.not.exist(storageAccount.encryption.services.file);
+
+                suite.execute('storage account set %s --resource-group %s --enable-encryption-service blob,file --disable-encryption-service file --json', storageName, resrouceGroupName, function(result) {
+                  result.exitStatus.should.not.equal(0);
+                  done();
+                });
+              });
+            });
+          });
+        });
       });
     });
 

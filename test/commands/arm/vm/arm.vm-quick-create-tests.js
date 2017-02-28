@@ -35,6 +35,10 @@ var customDataFile = './test/data/customdata.txt';
 var groupName,
   vm1Prefix = 'vm1',
   vm2Prefix = 'vm2',
+  vm3Prefix = 'vm3',
+  vm4Prefix = 'vm4',
+  vm5Prefix = 'vm5',
+  stgPrefix = 'stg',
   location,
   username = 'azureuser',
   password = 'Brillio@2016',
@@ -53,6 +57,10 @@ describe('arm', function() {
         groupName = suite.generateId(groupPrefix, null);
         vm1Prefix = suite.generateId(vm1Prefix, null);
         vm2Prefix = suite.generateId(vm2Prefix, null);
+        vm3Prefix = suite.generateId(vm3Prefix, null);
+        vm4Prefix = suite.generateId(vm4Prefix, null);
+        vm5Prefix = suite.generateId(vm5Prefix, null);
+        stgPrefix = suite.generateId(stgPrefix, null);
         done();
       });
     });
@@ -118,7 +126,7 @@ describe('arm', function() {
           done();
         });
       });
-      
+
       it('vm secret random delete should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
         var cmd = util.format('vm secret delete %s %s %s -c %s', groupName, vm1Prefix, vm1Prefix, groupName).split(' ');
@@ -127,7 +135,7 @@ describe('arm', function() {
           done();
         });
       });
-      
+
       it('redeploy vm should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
         var cmd = util.format('vm redeploy %s %s', groupName, vm1Prefix).split(' ');
@@ -149,7 +157,7 @@ describe('arm', function() {
                 vmTest.setGroup(groupName, suite, function(result) {
                   var latestWindowsImageUrn = VMTestUtil.winImageUrn.substring(0, VMTestUtil.winImageUrn.lastIndexOf(':')) + ':latest';
                   var cmd = util.format('vm quick-create %s %s %s Windows %s %s %s',
-                  groupName, vm2Prefix, location, latestWindowsImageUrn, username, password).split(' ');
+                    groupName, vm2Prefix, location, latestWindowsImageUrn, username, password).split(' ');
                   testUtils.executeCommand(suite, retry, cmd, function(result) {
                     result.exitStatus.should.equal(0);
                     result.text.should.containEql('-pip.' + location.toLowerCase() + '.cloudapp.azure.com');
@@ -173,6 +181,48 @@ describe('arm', function() {
               });
             });
           }
+        });
+      });
+
+      it('quick-create with non-existing provided storage account name should pass', function(done) {
+        this.timeout(vmTest.timeoutLarge * 10);
+        vmTest.getVMSize(location, suite, function() {
+          vmSize = VMTestUtil.vmSize;
+          vmTest.checkImagefile(function() {
+            var cmd = util.format('vm quick-create %s %s %s Linux %s %s %s -M %s -z %s -w %s -C %s -t %s',
+              groupName, vm3Prefix, location, 'UbuntuLTS', username, password, sshcert, vmSize, vm3Prefix + '-pip', customDataFile, stgPrefix).split(' ');
+            testUtils.executeCommand(suite, retry, cmd, function(result) {
+              result.exitStatus.should.equal(0);
+              result.text.should.containEql(vm3Prefix + '-pip.' + location.toLowerCase() + '.cloudapp.azure.com');
+              result.text.should.containEql('Custom Data (Base64 Encoded)');
+              done();
+            });
+          });
+        });
+      });
+
+      it('quick-create with user image in matching storage but missing vhd should fail', function(done) {
+        this.timeout(vmTest.timeoutLarge * 10);
+        var bogusImageUrn = util.format('https://%s.blob.core.windows.net/bar/vhds/baz.vhd', stgPrefix);
+        var cmd = util.format('vm quick-create %s %s %s Linux %s %s %s -M %s -z %s -w %s -C %s --storage-account-name %s',
+          groupName, vm4Prefix, location, bogusImageUrn, username, password, sshcert, vmSize, vm4Prefix + '-pip', customDataFile, stgPrefix).split(' ');
+        testUtils.executeCommand(suite, retry, cmd, function(result) {
+          result.exitStatus.should.not.equal(0);
+          should(result.errorText.indexOf('Unable to find VHD blob with URI') > -1).ok;
+          done();
+        });
+      });
+
+      it('quick-create with user image on mismatched storage account should fail', function(done) {
+        this.timeout(vmTest.timeoutLarge * 10);
+        var bogusImageUrn = 'https://foo.blob.core.windows.net/bar/vhds/baz.vhd';
+        var cmd = util.format('vm quick-create %s %s %s Linux %s %s %s -M %s -z %s -w %s -C %s',
+          groupName, vm5Prefix, location, bogusImageUrn, username, password, sshcert, vmSize, vm5Prefix + '-pip', customDataFile).split(' ');
+        testUtils.executeCommand(suite, retry, cmd, function(result) {
+          result.exitStatus.should.not.equal(0);
+          should(result.errorText.indexOf('Source and destination storage accounts for disk') > -1).ok;
+          should(result.errorText.indexOf('are different') > -1).ok;
+          done();
         });
       });
 
