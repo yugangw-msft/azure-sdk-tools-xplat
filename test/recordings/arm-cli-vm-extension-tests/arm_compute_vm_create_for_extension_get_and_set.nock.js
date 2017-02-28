@@ -135,7 +135,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTestGExtension6462/providers/Microsoft.Storage/storageAccounts/xplatstoragext6487?api-version=2016-01-01')
+  .get('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTestGExtension6462/providers/Microsoft.Storage/storageAccounts/xplatstoragext6487?api-version=2016-12-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Storage/storageAccounts/xplatstoragext6487' under resource group 'xplatTestGExtension6462' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
@@ -152,7 +152,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTestGExtension6462/providers/Microsoft.Storage/storageAccounts/xplatstoragext6487?api-version=2016-01-01')
+  .get('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTestGExtension6462/providers/Microsoft.Storage/storageAccounts/xplatstoragext6487?api-version=2016-12-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Storage/storageAccounts/xplatstoragext6487' under resource group 'xplatTestGExtension6462' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
@@ -170,12 +170,12 @@ function (nock) {
 var result = 
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTestGExtension6462/providers/Microsoft.Storage/storageAccounts/xplatstoragext6487?api-version=2016-01-01', '*')
+.put('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTestGExtension6462/providers/Microsoft.Storage/storageAccounts/xplatstoragext6487?api-version=2016-12-01', '*')
   .reply(202, "", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '0',
   expires: '-1',
-  location: 'https://management.azure.com/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/providers/Microsoft.Storage/operations/c0c750a1-8761-4d97-80ac-fbfd7d660020?monitor=true&api-version=2016-01-01',
+  location: 'https://management.azure.com/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/providers/Microsoft.Storage/operations/c0c750a1-8761-4d97-80ac-fbfd7d660020?monitor=true&api-version=2016-12-01',
   'retry-after': '17',
   'x-ms-ratelimit-remaining-subscription-writes': '1198',
   'x-ms-request-id': '5844ce2b-d939-4b32-975f-87119ae4dfd5',
@@ -190,12 +190,12 @@ function (nock) {
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTestGExtension6462/providers/Microsoft.Storage/storageAccounts/xplatstoragext6487?api-version=2016-01-01', '*')
+.put('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTestGExtension6462/providers/Microsoft.Storage/storageAccounts/xplatstoragext6487?api-version=2016-12-01', '*')
   .reply(202, "", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '0',
   expires: '-1',
-  location: 'https://management.azure.com/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/providers/Microsoft.Storage/operations/c0c750a1-8761-4d97-80ac-fbfd7d660020?monitor=true&api-version=2016-01-01',
+  location: 'https://management.azure.com/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/providers/Microsoft.Storage/operations/c0c750a1-8761-4d97-80ac-fbfd7d660020?monitor=true&api-version=2016-12-01',
   'retry-after': '17',
   'x-ms-ratelimit-remaining-subscription-writes': '1198',
   'x-ms-request-id': '5844ce2b-d939-4b32-975f-87119ae4dfd5',
@@ -209,7 +209,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/providers/Microsoft.Storage/operations/c0c750a1-8761-4d97-80ac-fbfd7d660020?monitor=true&api-version=2016-01-01')
+  .get('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/providers/Microsoft.Storage/operations/c0c750a1-8761-4d97-80ac-fbfd7d660020?monitor=true&api-version=2016-12-01')
   .reply(200, "{\"id\":\"/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplattestgextension6462/providers/Microsoft.Storage/storageAccounts/xplatstoragext6487\",\"kind\":\"Storage\",\"location\":\"eastus\",\"name\":\"xplatstoragext6487\",\"properties\":{\"creationTime\":\"2017-01-30T01:35:24.5391116Z\",\"primaryEndpoints\":{\"blob\":\"https://xplatstoragext6487.blob.core.windows.net/\",\"file\":\"https://xplatstoragext6487.file.core.windows.net/\",\"queue\":\"https://xplatstoragext6487.queue.core.windows.net/\",\"table\":\"https://xplatstoragext6487.table.core.windows.net/\"},\"primaryLocation\":\"eastus\",\"provisioningState\":\"Succeeded\",\"statusOfPrimary\":\"available\"},\"sku\":{\"name\":\"Standard_LRS\",\"tier\":\"Standard\"},\"tags\":{},\"type\":\"Microsoft.Storage/storageAccounts\"}\n", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '740',
@@ -227,7 +227,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/providers/Microsoft.Storage/operations/c0c750a1-8761-4d97-80ac-fbfd7d660020?monitor=true&api-version=2016-01-01')
+  .get('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/providers/Microsoft.Storage/operations/c0c750a1-8761-4d97-80ac-fbfd7d660020?monitor=true&api-version=2016-12-01')
   .reply(200, "{\"id\":\"/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplattestgextension6462/providers/Microsoft.Storage/storageAccounts/xplatstoragext6487\",\"kind\":\"Storage\",\"location\":\"eastus\",\"name\":\"xplatstoragext6487\",\"properties\":{\"creationTime\":\"2017-01-30T01:35:24.5391116Z\",\"primaryEndpoints\":{\"blob\":\"https://xplatstoragext6487.blob.core.windows.net/\",\"file\":\"https://xplatstoragext6487.file.core.windows.net/\",\"queue\":\"https://xplatstoragext6487.queue.core.windows.net/\",\"table\":\"https://xplatstoragext6487.table.core.windows.net/\"},\"primaryLocation\":\"eastus\",\"provisioningState\":\"Succeeded\",\"statusOfPrimary\":\"available\"},\"sku\":{\"name\":\"Standard_LRS\",\"tier\":\"Standard\"},\"tags\":{},\"type\":\"Microsoft.Storage/storageAccounts\"}\n", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '740',
@@ -245,7 +245,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTestGExtension6462/providers/Microsoft.Storage/storageAccounts/xplatstoragext6487?api-version=2016-01-01')
+  .get('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTestGExtension6462/providers/Microsoft.Storage/storageAccounts/xplatstoragext6487?api-version=2016-12-01')
   .reply(200, "{\"id\":\"/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplattestgextension6462/providers/Microsoft.Storage/storageAccounts/xplatstoragext6487\",\"kind\":\"Storage\",\"location\":\"eastus\",\"name\":\"xplatstoragext6487\",\"properties\":{\"creationTime\":\"2017-01-30T01:35:24.5391116Z\",\"primaryEndpoints\":{\"blob\":\"https://xplatstoragext6487.blob.core.windows.net/\",\"file\":\"https://xplatstoragext6487.file.core.windows.net/\",\"queue\":\"https://xplatstoragext6487.queue.core.windows.net/\",\"table\":\"https://xplatstoragext6487.table.core.windows.net/\"},\"primaryLocation\":\"eastus\",\"provisioningState\":\"Succeeded\",\"statusOfPrimary\":\"available\"},\"sku\":{\"name\":\"Standard_LRS\",\"tier\":\"Standard\"},\"tags\":{},\"type\":\"Microsoft.Storage/storageAccounts\"}\n", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '740',
@@ -263,7 +263,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTestGExtension6462/providers/Microsoft.Storage/storageAccounts/xplatstoragext6487?api-version=2016-01-01')
+  .get('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTestGExtension6462/providers/Microsoft.Storage/storageAccounts/xplatstoragext6487?api-version=2016-12-01')
   .reply(200, "{\"id\":\"/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplattestgextension6462/providers/Microsoft.Storage/storageAccounts/xplatstoragext6487\",\"kind\":\"Storage\",\"location\":\"eastus\",\"name\":\"xplatstoragext6487\",\"properties\":{\"creationTime\":\"2017-01-30T01:35:24.5391116Z\",\"primaryEndpoints\":{\"blob\":\"https://xplatstoragext6487.blob.core.windows.net/\",\"file\":\"https://xplatstoragext6487.file.core.windows.net/\",\"queue\":\"https://xplatstoragext6487.queue.core.windows.net/\",\"table\":\"https://xplatstoragext6487.table.core.windows.net/\"},\"primaryLocation\":\"eastus\",\"provisioningState\":\"Succeeded\",\"statusOfPrimary\":\"available\"},\"sku\":{\"name\":\"Standard_LRS\",\"tier\":\"Standard\"},\"tags\":{},\"type\":\"Microsoft.Storage/storageAccounts\"}\n", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '740',

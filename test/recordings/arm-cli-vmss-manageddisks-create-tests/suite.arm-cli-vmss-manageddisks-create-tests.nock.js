@@ -6,11 +6,11 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '24fb23e3-6ba3-41f0-9b6e-e41131d5d61e',
-    name: 'AzureRT Powershell and SDK Testing',
+    id: 'ce4a7590-4722-4bcf-a2c6-e473e9f11778',
+    name: 'Azure Storage DM Test',
     user: {
       name: 'user@domain.example',
-      type: 'servicePrincipal'
+      type: 'user'
     },
     tenantId: '72f988bf-86f1-41af-91ab-2d7cd011db47',
     state: 'Enabled',
@@ -28,4 +28,4 @@ exports.setEnvironment = function() {
 
 exports.scopes = [];
 
- exports.randomTestIdsGenerated = function() { return ['xplatTstVmssGCreate3280','xplattestnic9366','xplatteststorage11868','xplatteststorage25509','xplatteststorage31456','xplatteststoragecnt12745','xplatteststoragecnt25451','xplatteststoragecnt36389','xplattestvnet6811','xplattestsubnet9872','xplattestipdns1194'];};
+ exports.randomTestIdsGenerated = function() { return ['xplatTstVmssGCreate8927','xplattestnic6309','xplatteststorage17406','xplatteststorage22021','xplatteststorage36649','xplatteststoragecnt13343','xplatteststoragecnt29737','xplatteststoragecnt31676','xplattestvnet4168','xplattestsubnet8387','xplattestipdns6891'];};

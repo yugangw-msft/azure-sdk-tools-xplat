@@ -6,15 +6,16 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '2c224e7e-3ef5-431d-a57b-e71f4662e3a6',
-    name: 'Node CLI Test',
+    id: 'ce4a7590-4722-4bcf-a2c6-e473e9f11778',
+    name: 'Azure Storage DM Test',
     user: {
       name: 'user@domain.example',
       type: 'user'
     },
     tenantId: '72f988bf-86f1-41af-91ab-2d7cd011db47',
     state: 'Enabled',
-    registeredProviders: ['mobileservice'],
+    registeredProviders: [],
+    _eventsCount: '1',
     isDefault: true
   }, newProfile.environments['AzureCloud']));
 
@@ -22,27 +23,47 @@ exports.getMockedProfile = function () {
 };
 
 exports.setEnvironment = function() {
-  process.env['AZURE_STORAGE_TEST_LOCATION'] = 'West Europe';
+  process.env['AZURE_STORAGE_TEST_LOCATION'] = 'East Asia';
   process.env['AZURE_STORAGE_TEST_TYPE'] = 'LRS';
   process.env['AZURE_STORAGE_TEST_KIND'] = 'storage';
-  process.env['AZURE_RESOURCE_GROUP_TEST_LOCATION'] = 'West US';
+  process.env['AZURE_RESOURCE_GROUP_TEST_LOCATION'] = 'East Asia';
 };
 
 exports.scopes = [[function (nock) { 
 var result = 
-nock('https://management.azure.com:443')
+nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.post('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Storage/checkNameAvailability?api-version=2016-01-01', '*')
-  .reply(200, "{\"message\":\"The storage account named armclistorageaccount5027 is already taken.\",\"nameAvailable\":false,\"reason\":\"AlreadyExists\"}\n", { 'cache-control': 'no-cache',
+.post('/subscriptions/ce4a7590-4722-4bcf-a2c6-e473e9f11778/providers/Microsoft.Storage/checkNameAvailability?api-version=2016-12-01', '*')
+  .reply(200, "{\"message\":\"The storage account named armclistorageaccount137 is already taken.\",\"nameAvailable\":false,\"reason\":\"AlreadyExists\"}\n", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
-  'content-length': '130',
+  'content-length': '129',
   'content-type': 'application/json',
   expires: '-1',
-  'x-ms-request-id': 'cceca168-66d2-4cf6-b1de-48d4b6d89084',
-  server: 'Microsoft-Azure-Storage-Resource-Provider/1.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14995',
-  'x-ms-correlation-request-id': 'cceca168-66d2-4cf6-b1de-48d4b6d89084',
-  'x-ms-routing-request-id': 'WESTEUROPE:20160901T105519Z:cceca168-66d2-4cf6-b1de-48d4b6d89084',
+  'x-ms-request-id': 'a2d20083-f199-481d-8ae5-4d813e80af69',
+  server: 'Microsoft-Azure-Storage-Resource-Provider/1.0, Microsoft-HTTPAPI/2.0',
+  'x-ms-ratelimit-remaining-subscription-reads': '14999',
+  'x-ms-correlation-request-id': 'a2d20083-f199-481d-8ae5-4d813e80af69',
+  'x-ms-routing-request-id': 'JAPANEAST:20170213T093941Z:a2d20083-f199-481d-8ae5-4d813e80af69',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Thu, 01 Sep 2016 10:55:19 GMT' });
+  date: 'Mon, 13 Feb 2017 09:39:40 GMT',
+  connection: 'close' });
+ return result; },
+function (nock) { 
+var result = 
+nock('https://management.azure.com:443')
+  .filteringRequestBody(function (path) { return '*';})
+.post('/subscriptions/ce4a7590-4722-4bcf-a2c6-e473e9f11778/providers/Microsoft.Storage/checkNameAvailability?api-version=2016-12-01', '*')
+  .reply(200, "{\"message\":\"The storage account named armclistorageaccount137 is already taken.\",\"nameAvailable\":false,\"reason\":\"AlreadyExists\"}\n", { 'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  'content-length': '129',
+  'content-type': 'application/json',
+  expires: '-1',
+  'x-ms-request-id': 'a2d20083-f199-481d-8ae5-4d813e80af69',
+  server: 'Microsoft-Azure-Storage-Resource-Provider/1.0, Microsoft-HTTPAPI/2.0',
+  'x-ms-ratelimit-remaining-subscription-reads': '14999',
+  'x-ms-correlation-request-id': 'a2d20083-f199-481d-8ae5-4d813e80af69',
+  'x-ms-routing-request-id': 'JAPANEAST:20170213T093941Z:a2d20083-f199-481d-8ae5-4d813e80af69',
+  'strict-transport-security': 'max-age=31536000; includeSubDomains',
+  date: 'Mon, 13 Feb 2017 09:39:40 GMT',
+  connection: 'close' });
  return result; }]];

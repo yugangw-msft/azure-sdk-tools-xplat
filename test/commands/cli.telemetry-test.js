@@ -137,6 +137,7 @@ describe('cli', function() {
       should(userAgentInfo).have.property('userId').with.type('string');
       should(userAgentInfo).have.property('subscriptionId').with.type('string');
       should(userAgentInfo).have.property('userType').with.type('string');
+      should(userAgentInfo).have.property('macAddressHash').with.type('string');
 
       // assert properties, with values.
       should(userAgentInfo).have.property('mode').with.type('string').be.equal('arm');

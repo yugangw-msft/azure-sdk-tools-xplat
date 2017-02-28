@@ -6,11 +6,11 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '24fb23e3-6ba3-41f0-9b6e-e41131d5d61e',
-    name: 'AzureRT Powershell and SDK Testing',
+    id: 'ce4a7590-4722-4bcf-a2c6-e473e9f11778',
+    name: 'Azure Storage DM Test',
     user: {
       name: 'user@domain.example',
-      type: 'servicePrincipal'
+      type: 'user'
     },
     tenantId: '72f988bf-86f1-41af-91ab-2d7cd011db47',
     state: 'Enabled',
@@ -30,39 +30,39 @@ exports.scopes = [[function (nock) {
 var result = 
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.post('/subscriptions/24fb23e3-6ba3-41f0-9b6e-e41131d5d61e/resourceGroups/xplatTstVmssGCreate3280/providers/Microsoft.Compute/virtualMachineScaleSets/xplattestvmss5/manualupgrade?api-version=2016-04-30-preview', '*')
+.post('/subscriptions/ce4a7590-4722-4bcf-a2c6-e473e9f11778/resourceGroups/xplatTstVmssGCreate8927/providers/Microsoft.Compute/virtualMachineScaleSets/xplattestvmss5/manualupgrade?api-version=2016-04-30-preview', '*')
   .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"InvalidParameter\",\r\n    \"target\": \"upgradePolicies.instanceIds\",\r\n    \"message\": \"The provided instanceId 999 is not an active Virtual Machine Scale Set VM instanceId.\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '206',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-served-by': 'd8479ab9-b4a1-4ca4-bfe5-eb2106eeb54c_131281312467851412',
-  'x-ms-request-id': '0cee69bc-b963-4e26-b16f-c8f1bca175d0',
-  server: 'Microsoft-HTTPAPI/2.0',
+  'x-ms-served-by': '7d05390c-5dc5-4a14-8588-dcae1a33dd6b_131292456099219588',
+  'x-ms-request-id': '0570ab7f-d610-448b-891a-88ea460f4a8b',
+  server: 'Microsoft-HTTPAPI/2.0, Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1198',
-  'x-ms-correlation-request-id': 'd168cdab-4ecf-498f-a5bc-e87c1495fad1',
-  'x-ms-routing-request-id': 'WESTUS2:20170205T224605Z:d168cdab-4ecf-498f-a5bc-e87c1495fad1',
-  date: 'Sun, 05 Feb 2017 22:46:05 GMT',
+  'x-ms-correlation-request-id': 'c42b9273-cd17-4909-a926-7d97e145cfc2',
+  'x-ms-routing-request-id': 'EASTASIA:20170216T110421Z:c42b9273-cd17-4909-a926-7d97e145cfc2',
+  date: 'Thu, 16 Feb 2017 11:04:20 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.post('/subscriptions/24fb23e3-6ba3-41f0-9b6e-e41131d5d61e/resourceGroups/xplatTstVmssGCreate3280/providers/Microsoft.Compute/virtualMachineScaleSets/xplattestvmss5/manualupgrade?api-version=2016-04-30-preview', '*')
+.post('/subscriptions/ce4a7590-4722-4bcf-a2c6-e473e9f11778/resourceGroups/xplatTstVmssGCreate8927/providers/Microsoft.Compute/virtualMachineScaleSets/xplattestvmss5/manualupgrade?api-version=2016-04-30-preview', '*')
   .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"InvalidParameter\",\r\n    \"target\": \"upgradePolicies.instanceIds\",\r\n    \"message\": \"The provided instanceId 999 is not an active Virtual Machine Scale Set VM instanceId.\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '206',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-served-by': 'd8479ab9-b4a1-4ca4-bfe5-eb2106eeb54c_131281312467851412',
-  'x-ms-request-id': '0cee69bc-b963-4e26-b16f-c8f1bca175d0',
-  server: 'Microsoft-HTTPAPI/2.0',
+  'x-ms-served-by': '7d05390c-5dc5-4a14-8588-dcae1a33dd6b_131292456099219588',
+  'x-ms-request-id': '0570ab7f-d610-448b-891a-88ea460f4a8b',
+  server: 'Microsoft-HTTPAPI/2.0, Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1198',
-  'x-ms-correlation-request-id': 'd168cdab-4ecf-498f-a5bc-e87c1495fad1',
-  'x-ms-routing-request-id': 'WESTUS2:20170205T224605Z:d168cdab-4ecf-498f-a5bc-e87c1495fad1',
-  date: 'Sun, 05 Feb 2017 22:46:05 GMT',
+  'x-ms-correlation-request-id': 'c42b9273-cd17-4909-a926-7d97e145cfc2',
+  'x-ms-routing-request-id': 'EASTASIA:20170216T110421Z:c42b9273-cd17-4909-a926-7d97e145cfc2',
+  date: 'Thu, 16 Feb 2017 11:04:20 GMT',
   connection: 'close' });
  return result; }]];
