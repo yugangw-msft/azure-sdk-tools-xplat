@@ -341,3 +341,128 @@ describe('account add for service principal', function () {
     });
   });
 });
+
+describe('account', function () {
+  var _fakedSubscriptions = [
+    {
+      subscriptionId: '0b1f6471-1bf0-4dda-aec3-cb9272f09590',
+      displayName: 'Account'
+    }
+  ];
+
+  var _mockedSubscriptionClient = {
+    subscriptions: {
+      list: function (callback) {
+        callback(null, _fakedSubscriptions);
+      }
+    }
+  };
+
+  var resourceClient = {
+    SubscriptionClient: function (cred, armEndpoint) {
+      return _mockedSubscriptionClient;
+    }
+  };
+  var findTokenInvoked = false;
+  var existingTokensInCache = [];
+  var tokensToAddIntoCache;
+  var tokenCache = {
+    find: function (query, callback) {
+      findTokenInvoked = true
+      return callback(null, existingTokensInCache);
+    },
+    add: function (entries, callback) {
+      //verify entries number and content
+      tokensToAddIntoCache = entries;
+      return callback(null);
+    }
+  };
+  var adalAuth = {
+    UserTokenCredentials: function UserTokenCredentials() { }
+  }
+  expectedUserName = 'admin3@AzureSDKTeam.onmicrosoft.com';
+  var account = new Account(environment, adalAuth, resourceClient, null/*log*/, tokenCache);
+  var armToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Il9VZ3FYR190TUxkdVNKMVQ4Y2FIeFU3Y090YyIsImtpZCI6Il9VZ3FYR190TUxkdVNKMVQ4Y2FIeFU3Y090YyJ9.eyJhdWQiOiJodHRwczovL21hbmFnZW1lbnQuY29yZS53aW5kb3dzLm5ldC8iLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC81NDgyNmIyMi0zOGQ2LTRmYjItYmFkOS1iN2I5M2EzZTljNWEvIiwiaWF0IjoxNDg4MjIxMzQ1LCJuYmYiOjE0ODgyMjEzNDUsImV4cCI6MTQ4ODIyNTI0NSwiYWNyIjoiMSIsImFpbyI6Ik5BIiwiYW1yIjpbInB3ZCJdLCJhcHBpZCI6IjA0YjA3Nzk1LThkZGItNDYxYS1iYmVlLTAyZjllMWJmN2I0NiIsImFwcGlkYWNyIjoiMCIsImVfZXhwIjoxMDgwMCwiZmFtaWx5X25hbWUiOiJzZGsiLCJnaXZlbl9uYW1lIjoiYWRtaW4zIiwiZ3JvdXBzIjpbImU0YmIwYjU2LTEwMTQtNDBmOC04OGFiLTNkOGE4Y2IwZTA4NiJdLCJpcGFkZHIiOiI1MC4zNS42NC4xNjEiLCJuYW1lIjoiYWRtaW4zIiwib2lkIjoiZTdlMTU4ZDMtN2NkYy00N2NkLTg4MjUtNTg1OWQ3YWIyYjU1IiwicGxhdGYiOiIxNCIsInB1aWQiOiIxMDAzM0ZGRjk1RDQ0RTg0Iiwic2NwIjoidXNlcl9pbXBlcnNvbmF0aW9uIiwic3ViIjoiaFF6eXdvcVMtQS1HMDJJOXpkTlNGa0Z3dHYwZXBnaVZjVWx2bU9kRkdoUSIsInRpZCI6IjU0ODI2YjIyLTM4ZDYtNGZiMi1iYWQ5LWI3YjkzYTNlOWM1YSIsInVuaXF1ZV9uYW1lIjoiYWRtaW4zQEF6dXJlU0RLVGVhbS5vbm1pY3Jvc29mdC5jb20iLCJ1cG4iOiJhZG1pbjNAQXp1cmVTREtUZWFtLm9ubWljcm9zb2Z0LmNvbSIsInZlciI6IjEuMCIsIndpZHMiOlsiNjJlOTAzOTQtNjlmNS00MjM3LTkxOTAtMDEyMTc3MTQ1ZTEwIl19.nu8k1D48F76n1Efod97aYbwKKQkf0duX3QSMGffjGoYyTc36enkq_9IIuOUizys-O2Wy8zGvcprA9pLu25ngR2H8UNJU6I9dV8kdx7C_vpWiVjuGJA4yPOkKJfrG_B8gpyh_dGNXLm81XHZn9UnOU-XY3DRc3I1hSAVoSVOW16JIRQEeEJ0WIi_PKAeuVg8hOEqRVvixEWQJN-yJV2_QxECt5LoAWoG3SlhBoU3-4dTYlceeXaQHVOOjkgZ0IE-dy-i550hsSAYzc1yKix-PL5F3We2_n1b8-bzBOkIjZsxjVegicrFuKbFvMaGwpiTqTBbsS0d6XihptTgEnef07A';
+
+  describe('load subscriptions using arm token provided by azure console', function () {
+    var subscriptions;
+    findTokenInvoked = false;
+    existingTokensInCache = [];
+    tokensToAddIntoCache = [];
+    beforeEach(function (done) {
+      process.env['AZURE_CONSOLE_TOKENS'] = armToken;
+      account.load(null/*user*/, null/*password*/, null/*tenant*/, { 'cloudConsoleLogin': true }, function (err, result) {
+        subscriptions = result.subscriptions;
+        delete process.env['AZURE_CONSOLE_TOKENS'];
+        done();
+      });
+    });
+
+    it('should look for existing token entries from cache', function () {
+      findTokenInvoked.should.be.true;
+    });
+
+    it('should add new token entries into cache', function () {
+      tokensToAddIntoCache.should.have.length(1)
+      tokensToAddIntoCache[0]._userId.should.equal(expectedUserName);
+    });
+
+    it('should return listed subscriptions', function () {
+      subscriptions.should.have.length(_fakedSubscriptions.length);
+      should.exist(subscriptions[0].user);
+      subscriptions[0].user.name.should.equal(expectedUserName);
+      for (var i = 0, len = subscriptions.length; i < len; ++i) {
+        subscriptions[i].id.should.equal(_fakedSubscriptions[i].subscriptionId);
+        subscriptions[i].name.should.equal(_fakedSubscriptions[i].displayName);
+      }
+    });
+  });
+
+  describe('merge with existing tokens provided by azure console', function () {
+    var subscriptions;
+
+    beforeEach(function (done) {
+      process.env['AZURE_CONSOLE_TOKENS'] = armToken;
+      findTokenInvoked = false;
+      tokensToAddIntoCache = [];
+      existingTokensInCache = [
+        {
+          "userId": "admin3@azuresdkteam.onmicrosoft.com",
+          "accessToken": "arm-token",
+          "resource": "https://management.core.windows.net/",
+          "_clientId": "04b07795-8ddb-461a-bbee-02f9e1bf7b46",
+          "_authority": "https://login.microsoftonline.com/54826b22-38d6-4fb2-bad9-b7b93a3e9c5a",
+        },
+        {
+          "userId": "admin3@azuresdkteam.onmicrosoft.com",
+          "accessToken": "graph-token",
+          "resource": "https://graph.windows.net/",
+          "_clientId": "04b07795-8ddb-461a-bbee-02f9e1bf7b46",
+          "_authority": "https://login.microsoftonline.com/54826b22-38d6-4fb2-bad9-b7b93a3e9c5a",
+        },
+        {
+          "userId": "admin3@AzureSDKTeam.onmicrosoft.com",
+          "accessToken": "keyvault-token",
+          "_authority": "https://login.microsoftonline.com/54826b22-38d6-4fb2-bad9-b7b93a3e9c5a",
+          "resource": "https://vault.azure.net",
+          "_clientId": "04b07795-8ddb-461a-bbee-02f9e1bf7b46",
+        }];
+      account.load(null/*user*/, null/*password*/, null/*tenant*/, { 'cloudConsoleLogin': true }, function (err, result) {
+        subscriptions = result.subscriptions;
+        delete process.env['AZURE_CONSOLE_TOKENS'];
+        done();
+      });
+    });
+
+    it('should look for existing token entries from cache', function () {
+      findTokenInvoked.should.be.true;
+    });
+
+    it('should add merged token entries into cache', function () {
+      tokensToAddIntoCache.should.have.length(3);
+      tokensToAddIntoCache[0].resource.should.equal('https://management.core.windows.net/');
+      tokensToAddIntoCache[1].resource.should.equal('https://graph.windows.net/');
+      tokensToAddIntoCache[2].resource.should.equal('https://vault.azure.net');
+    });
+  });
+});
