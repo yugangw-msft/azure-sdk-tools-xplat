@@ -53,27 +53,21 @@ var inboundNatRules = {
   idleTimeoutInMinutesNew: '17',
   enableFloatingIP: 'true',
   enableFloatingIPNew: 'false',
-
   name: 'inboundNatRuleName'
-}
+};
 inboundNatRules.loadBalancerName = 'loadBalancerName';
 inboundNatRules.publicIPAddressName = 'publicIPAddressName';
 inboundNatRules.frontendIPConfigurationName = 'frontendIPConfigurationName';
 
-
-
 var publicIPAddress = {
-  location: 'westus',
+  location: 'westus'
 };
 var loadBalancer = {
-  location: 'westus',
+  location: 'westus'
 };
 var frontendIPConfiguration = {
-
 };
-
 var inboundNatRulesDefault = {
-
   protocol: 'TCP',
   frontendPort: '80',
   backendPort: '80',
@@ -84,7 +78,6 @@ var inboundNatRulesDefault = {
   name: 'inboundNatRulesDefaultName',
   group: groupName
 };
-
 var protocolOutOfRange = {
   protocol: 'TcpUdp',
   loadBalancerName: 'loadBalancerName',
@@ -122,7 +115,6 @@ var idleTimeoutInMinutesUnderAllowedValue = {
   group: groupName
 };
 
-
 var requiredEnvironment = [{
   name: 'AZURE_VM_TEST_LOCATION',
   defaultValue: 'westus'
@@ -143,41 +135,41 @@ describe('arm', function () {
         inboundNatRules.name = suite.isMocked ? inboundNatRules.name : suite.generateId(inboundNatRules.name, null);
         if(!suite.isPlayback()) {
           networkUtil.createGroup(groupName, location, suite, function () {
-          var cmd = 'network lb create -g {1} -n loadBalancerName --location {location} --json'.formatArgs(loadBalancer, groupName);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
-            result.exitStatus.should.equal(0);
-            var output = JSON.parse(result.text);
-            protocolOutOfRange.loadBalancerId = suite.isMocked ? output.id : suite.generateId(protocolOutOfRange.loadBalancerId, null);
-            frontendPortUnderAllowedValue.loadBalancerId = suite.isMocked ? output.id : suite.generateId(frontendPortUnderAllowedValue.loadBalancerId, null);
-            frontendPortOverAllowedValue.loadBalancerId = suite.isMocked ? output.id : suite.generateId(frontendPortOverAllowedValue.loadBalancerId, null);
-            backendPortOutOfRange.loadBalancerId = suite.isMocked ? output.id : suite.generateId(backendPortOutOfRange.loadBalancerId, null);
-            idleTimeoutInMinutesOverAllowedValue.loadBalancerId = suite.isMocked ? output.id : suite.generateId(idleTimeoutInMinutesOverAllowedValue.loadBalancerId, null);
-            idleTimeoutInMinutesUnderAllowedValue.loadBalancerId = suite.isMocked ? output.id : suite.generateId(idleTimeoutInMinutesUnderAllowedValue.loadBalancerId, null);
-            var cmd = 'network public-ip create -g {1} -n publicIPAddressName --location {location} --json'.formatArgs(publicIPAddress, groupName);
+            var cmd = 'network lb create -g {1} -n loadBalancerName --location {location} --json'.formatArgs(loadBalancer, groupName);
             testUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               var output = JSON.parse(result.text);
-              protocolOutOfRange.publicIPAddressId = suite.isMocked ? output.id : suite.generateId(protocolOutOfRange.publicIPAddressId, null);
-              frontendPortUnderAllowedValue.publicIPAddressId = suite.isMocked ? output.id : suite.generateId(frontendPortUnderAllowedValue.publicIPAddressId, null);
-              frontendPortOverAllowedValue.publicIPAddressId = suite.isMocked ? output.id : suite.generateId(frontendPortOverAllowedValue.publicIPAddressId, null);
-              backendPortOutOfRange.publicIPAddressId = suite.isMocked ? output.id : suite.generateId(backendPortOutOfRange.publicIPAddressId, null);
-              idleTimeoutInMinutesOverAllowedValue.publicIPAddressId = suite.isMocked ? output.id : suite.generateId(idleTimeoutInMinutesOverAllowedValue.publicIPAddressId, null);
-              idleTimeoutInMinutesUnderAllowedValue.publicIPAddressId = suite.isMocked ? output.id : suite.generateId(idleTimeoutInMinutesUnderAllowedValue.publicIPAddressId, null);
-              var cmd = 'network lb frontend-ip create -g {1} -n frontendIPConfigurationName  --lb-name loadBalancerName --public-ip-name publicIPAddressName --json'.formatArgs(frontendIPConfiguration, groupName);
+              protocolOutOfRange.loadBalancerId = suite.isMocked ? output.id : suite.generateId(protocolOutOfRange.loadBalancerId, null);
+              frontendPortUnderAllowedValue.loadBalancerId = suite.isMocked ? output.id : suite.generateId(frontendPortUnderAllowedValue.loadBalancerId, null);
+              frontendPortOverAllowedValue.loadBalancerId = suite.isMocked ? output.id : suite.generateId(frontendPortOverAllowedValue.loadBalancerId, null);
+              backendPortOutOfRange.loadBalancerId = suite.isMocked ? output.id : suite.generateId(backendPortOutOfRange.loadBalancerId, null);
+              idleTimeoutInMinutesOverAllowedValue.loadBalancerId = suite.isMocked ? output.id : suite.generateId(idleTimeoutInMinutesOverAllowedValue.loadBalancerId, null);
+              idleTimeoutInMinutesUnderAllowedValue.loadBalancerId = suite.isMocked ? output.id : suite.generateId(idleTimeoutInMinutesUnderAllowedValue.loadBalancerId, null);
+              var cmd = 'network public-ip create -g {1} -n publicIPAddressName --location {location} --json'.formatArgs(publicIPAddress, groupName);
               testUtils.executeCommand(suite, retry, cmd, function (result) {
                 result.exitStatus.should.equal(0);
                 var output = JSON.parse(result.text);
-                protocolOutOfRange.frontendIPConfigurationId = suite.isMocked ? output.id : suite.generateId(protocolOutOfRange.frontendIPConfigurationId, null);
-                frontendPortUnderAllowedValue.frontendIPConfigurationId = suite.isMocked ? output.id : suite.generateId(frontendPortUnderAllowedValue.frontendIPConfigurationId, null);
-                frontendPortOverAllowedValue.frontendIPConfigurationId = suite.isMocked ? output.id : suite.generateId(frontendPortOverAllowedValue.frontendIPConfigurationId, null);
-                backendPortOutOfRange.frontendIPConfigurationId = suite.isMocked ? output.id : suite.generateId(backendPortOutOfRange.frontendIPConfigurationId, null);
-                idleTimeoutInMinutesOverAllowedValue.frontendIPConfigurationId = suite.isMocked ? output.id : suite.generateId(idleTimeoutInMinutesOverAllowedValue.frontendIPConfigurationId, null);
-                idleTimeoutInMinutesUnderAllowedValue.frontendIPConfigurationId = suite.isMocked ? output.id : suite.generateId(idleTimeoutInMinutesUnderAllowedValue.frontendIPConfigurationId, null);
+                protocolOutOfRange.publicIPAddressId = suite.isMocked ? output.id : suite.generateId(protocolOutOfRange.publicIPAddressId, null);
+                frontendPortUnderAllowedValue.publicIPAddressId = suite.isMocked ? output.id : suite.generateId(frontendPortUnderAllowedValue.publicIPAddressId, null);
+                frontendPortOverAllowedValue.publicIPAddressId = suite.isMocked ? output.id : suite.generateId(frontendPortOverAllowedValue.publicIPAddressId, null);
+                backendPortOutOfRange.publicIPAddressId = suite.isMocked ? output.id : suite.generateId(backendPortOutOfRange.publicIPAddressId, null);
+                idleTimeoutInMinutesOverAllowedValue.publicIPAddressId = suite.isMocked ? output.id : suite.generateId(idleTimeoutInMinutesOverAllowedValue.publicIPAddressId, null);
+                idleTimeoutInMinutesUnderAllowedValue.publicIPAddressId = suite.isMocked ? output.id : suite.generateId(idleTimeoutInMinutesUnderAllowedValue.publicIPAddressId, null);
+                var cmd = 'network lb frontend-ip create -g {1} -n frontendIPConfigurationName  --lb-name loadBalancerName --public-ip-name publicIPAddressName --json'.formatArgs(frontendIPConfiguration, groupName);
+                testUtils.executeCommand(suite, retry, cmd, function (result) {
+                  result.exitStatus.should.equal(0);
+                  var output = JSON.parse(result.text);
+                  protocolOutOfRange.frontendIPConfigurationId = suite.isMocked ? output.id : suite.generateId(protocolOutOfRange.frontendIPConfigurationId, null);
+                  frontendPortUnderAllowedValue.frontendIPConfigurationId = suite.isMocked ? output.id : suite.generateId(frontendPortUnderAllowedValue.frontendIPConfigurationId, null);
+                  frontendPortOverAllowedValue.frontendIPConfigurationId = suite.isMocked ? output.id : suite.generateId(frontendPortOverAllowedValue.frontendIPConfigurationId, null);
+                  backendPortOutOfRange.frontendIPConfigurationId = suite.isMocked ? output.id : suite.generateId(backendPortOutOfRange.frontendIPConfigurationId, null);
+                  idleTimeoutInMinutesOverAllowedValue.frontendIPConfigurationId = suite.isMocked ? output.id : suite.generateId(idleTimeoutInMinutesOverAllowedValue.frontendIPConfigurationId, null);
+                  idleTimeoutInMinutesUnderAllowedValue.frontendIPConfigurationId = suite.isMocked ? output.id : suite.generateId(idleTimeoutInMinutesUnderAllowedValue.frontendIPConfigurationId, null);
                   done();
                 });
               });
             });
-        });
+          });
         } else {
           var subscriptionId = profile.current.getSubscription().id;
           protocolOutOfRange.loadBalancerId = suite.isMocked ? generatorUtils.generateResourceIdCommon(subscriptionId, groupName, 'loadBalancers', protocolOutOfRange.loadBalancerName) : suite.generateId(protocolOutOfRange.loadBalancerId, null)
@@ -209,7 +201,7 @@ describe('arm', function () {
         var cmd = 'network lb inbound-nat-rule create -g {group} -n {name} --protocol {protocol} --frontend-port {frontendPort} --backend-port {backendPort} --idle-timeout {idleTimeoutInMinutes} --enable-floating-ip {enableFloatingIP} --lb-name {loadBalancerName}  --frontend-ip-name {frontendIPConfigurationName} --json'.formatArgs(inboundNatRules);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-            var output = JSON.parse(result.text);
+          var output = JSON.parse(result.text);
           output.name.should.equal(inboundNatRules.name);
           output.protocol.toLowerCase().should.equal(inboundNatRules.protocol.toLowerCase());
           output.frontendPort.should.equal(parseInt(inboundNatRules.frontendPort, 10));
@@ -238,7 +230,7 @@ describe('arm', function () {
         var cmd = 'network lb inbound-nat-rule set -g {group} -n {name} --protocol {protocolNew} --frontend-port {frontendPortNew} --backend-port {backendPortNew} --idle-timeout {idleTimeoutInMinutesNew} --enable-floating-ip {enableFloatingIPNew} --lb-name {loadBalancerName} --json'.formatArgs(inboundNatRules);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-            var output = JSON.parse(result.text);
+          var output = JSON.parse(result.text);
           output.name.should.equal(inboundNatRules.name);
           output.protocol.toLowerCase().should.equal(inboundNatRules.protocolNew.toLowerCase());
           output.frontendPort.should.equal(parseInt(inboundNatRules.frontendPortNew, 10));
@@ -277,7 +269,7 @@ describe('arm', function () {
         var cmd = 'network lb inbound-nat-rule create -g {group} -n {name}  --lb-name {loadBalancerName}  --json'.formatArgs(inboundNatRulesDefault);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var output = JSON.parse(result.text); 
+          var output = JSON.parse(result.text);
           output.name.should.equal(inboundNatRulesDefault.name);
           output.protocol.toLowerCase().should.equal(inboundNatRulesDefault.protocol.toLowerCase());;
           output.frontendPort.should.equal(parseInt(inboundNatRulesDefault.frontendPort, 10));;

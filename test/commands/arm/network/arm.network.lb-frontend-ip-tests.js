@@ -43,10 +43,7 @@ var subnetName;
 var subnetId;
 var publicIPAddressName;
 var publicIPAddressId;
-
 var frontendIPConfigurations = {
-
-
   name: 'frontendIPConfigurationName'
 }
 frontendIPConfigurations.loadBalancerName = 'loadBalancerName';
@@ -54,23 +51,21 @@ frontendIPConfigurations.virtualNetworkName = 'virtualNetworkName';
 frontendIPConfigurations.subnetName = 'subnetName';
 frontendIPConfigurations.publicIPAddressName = 'publicIPAddressName';
 
-
+var privateIpAllocationMethodDynamic = 'Dynamic';
 
 var subnet = {
   addressPrefix: '10.0.0.0/16',
-  addressPrefixNew: '10.0.0.0/24',
+  addressPrefixNew: '10.0.0.0/24'
 };
 var virtualNetwork = {
-  location: 'westus',
+  location: 'westus'
 };
 var loadBalancer = {
-  location: 'westus',
+  location: 'westus'
 };
 var publicIPAddress = {
-  location: 'westus',
+  location: 'westus'
 };
-
-
 var removePrivateIp = {
   privateIPAddress: '10.0.0.42',
   privateIPAddressNew: '',
@@ -80,7 +75,6 @@ var removePrivateIp = {
   name: 'RemovePrivateIpName',
   group: groupName
 };
-
 
 var requiredEnvironment = [{
   name: 'AZURE_VM_TEST_LOCATION',
@@ -158,7 +152,6 @@ describe('arm', function () {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(frontendIPConfigurations.name);
-
           done();
         });
       });
@@ -169,7 +162,6 @@ describe('arm', function () {
           var output = JSON.parse(result.text);
 
           output.name.should.equal(frontendIPConfigurations.name);
-
           done();
         });
       });
@@ -179,7 +171,6 @@ describe('arm', function () {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(frontendIPConfigurations.name);
-
           done();
         });
       });
@@ -209,7 +200,7 @@ describe('arm', function () {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text);
             output.name.should.equal(removePrivateIp.name);
-            output.privateIPAllocationMethod.toLowerCase().should.be.equal('Dynamic'.toLowerCase());
+            output.privateIPAllocationMethod.toLowerCase().should.be.equal(privateIpAllocationMethodDynamic.toLowerCase());
             done();
           });
         });

@@ -40,13 +40,8 @@ var expressRouteCircuitId;
 
 var loadBalancers = {
   location: 'westus',
-
   name: 'loadBalancerName'
-}
-
-
-
-
+};
 
 var requiredEnvironment = [{
   name: 'AZURE_VM_TEST_LOCATION',
@@ -68,8 +63,8 @@ describe('arm', function () {
         loadBalancers.name = suite.isMocked ? loadBalancers.name : suite.generateId(loadBalancers.name, null);
         if(!suite.isPlayback()) {
           networkUtil.createGroup(groupName, location, suite, function () {
-          done();
-        });
+            done();
+          });
         } else {
           var subscriptionId = profile.current.getSubscription().id;
           done();
@@ -95,7 +90,7 @@ describe('arm', function () {
         var cmd = 'network lb create -g {group} -n {name} --location {location}  --json'.formatArgs(loadBalancers);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-            var output = JSON.parse(result.text);
+          var output = JSON.parse(result.text);
           output.name.should.equal(loadBalancers.name);
 
           done();
@@ -116,7 +111,7 @@ describe('arm', function () {
         var cmd = 'network lb set -g {group} -n {name}  --json'.formatArgs(loadBalancers);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-            var output = JSON.parse(result.text);
+          var output = JSON.parse(result.text);
           output.name.should.equal(loadBalancers.name);
 
           done();
@@ -147,7 +142,6 @@ describe('arm', function () {
           });
         });
       });
-
     });
   });
 });

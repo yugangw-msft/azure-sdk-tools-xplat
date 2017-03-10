@@ -41,30 +41,21 @@ var publicIPAddressName;
 var publicIPAddressId;
 var frontendIPConfigurationName;
 var frontendIPConfigurationId;
-
 var backendAddressPools = {
-
-
   name: 'backendAddressPoolName'
-}
+};
 backendAddressPools.loadBalancerName = 'loadBalancerName';
 backendAddressPools.publicIPAddressName = 'publicIPAddressName';
 backendAddressPools.frontendIPConfigurationName = 'frontendIPConfigurationName';
 
-
-
 var publicIPAddress = {
-  location: 'westus',
+  location: 'westus'
 };
 var loadBalancer = {
-  location: 'westus',
+  location: 'westus'
 };
 var frontendIPConfiguration = {
-
 };
-
-
-
 
 var requiredEnvironment = [{
   name: 'AZURE_VM_TEST_LOCATION',
@@ -86,23 +77,23 @@ describe('arm', function () {
         backendAddressPools.name = suite.isMocked ? backendAddressPools.name : suite.generateId(backendAddressPools.name, null);
         if(!suite.isPlayback()) {
           networkUtil.createGroup(groupName, location, suite, function () {
-          var cmd = 'network lb create -g {1} -n loadBalancerName --location {location} --json'.formatArgs(loadBalancer, groupName);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
-            result.exitStatus.should.equal(0);
-            var output = JSON.parse(result.text);
-            var cmd = 'network public-ip create -g {1} -n publicIPAddressName --location {location} --json'.formatArgs(publicIPAddress, groupName);
+            var cmd = 'network lb create -g {1} -n loadBalancerName --location {location} --json'.formatArgs(loadBalancer, groupName);
             testUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               var output = JSON.parse(result.text);
-              var cmd = 'network lb frontend-ip create -g {1} -n frontendIPConfigurationName  --lb-name loadBalancerName --public-ip-name publicIPAddressName --json'.formatArgs(frontendIPConfiguration, groupName);
+              var cmd = 'network public-ip create -g {1} -n publicIPAddressName --location {location} --json'.formatArgs(publicIPAddress, groupName);
               testUtils.executeCommand(suite, retry, cmd, function (result) {
                 result.exitStatus.should.equal(0);
                 var output = JSON.parse(result.text);
+                var cmd = 'network lb frontend-ip create -g {1} -n frontendIPConfigurationName  --lb-name loadBalancerName --public-ip-name publicIPAddressName --json'.formatArgs(frontendIPConfiguration, groupName);
+                testUtils.executeCommand(suite, retry, cmd, function (result) {
+                  result.exitStatus.should.equal(0);
+                  var output = JSON.parse(result.text);
                   done();
                 });
               });
             });
-        });
+          });
         } else {
           var subscriptionId = profile.current.getSubscription().id;
           done();
@@ -128,7 +119,7 @@ describe('arm', function () {
         var cmd = 'network lb address-pool create -g {group} -n {name}  --lb-name {loadBalancerName}  --json'.formatArgs(backendAddressPools);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-            var output = JSON.parse(result.text);
+          var output = JSON.parse(result.text);
           output.name.should.equal(backendAddressPools.name);
 
           done();
@@ -170,7 +161,6 @@ describe('arm', function () {
           });
         });
       });
-
     });
   });
 });
