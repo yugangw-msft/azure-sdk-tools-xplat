@@ -59,7 +59,6 @@ var loadBalancingRules = {
   idleTimeoutInMinutesNew: '29',
   enableFloatingIP: 'true',
   enableFloatingIPNew: 'false',
-
   name: 'loadBalancingRuleName'
 }
 loadBalancingRules.loadBalancerName = 'loadBalancerName';
@@ -68,16 +67,14 @@ loadBalancingRules.frontendIPConfigurationName = 'frontendIPConfigurationName';
 loadBalancingRules.backendAddressPoolName = 'backendAddressPoolName';
 loadBalancingRules.probeName = 'probeName';
 
-
-
 var publicIPAddress = {
-  location: 'westus',
+  location: 'westus'
 };
 var backendAddressPool = {
 
 };
 var loadBalancer = {
-  location: 'westus',
+  location: 'westus'
 };
 var frontendIPConfiguration = {
 
@@ -87,7 +84,6 @@ var probe = {
 };
 
 var loadBalancingRulesDefault = {
-
   protocol: 'TCP',
   loadDistribution: 'Default',
   frontendPort: '80',
@@ -143,7 +139,6 @@ var idleTimeoutInMinutesUnderAllowedValue = {
   name: 'IdleTimeoutInMinutesUnderAllowedValueName',
   group: groupName
 };
-
 
 var requiredEnvironment = [{
   name: 'AZURE_VM_TEST_LOCATION',

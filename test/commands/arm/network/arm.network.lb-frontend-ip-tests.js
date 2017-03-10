@@ -102,32 +102,32 @@ describe('arm', function () {
         frontendIPConfigurations.name = suite.isMocked ? frontendIPConfigurations.name : suite.generateId(frontendIPConfigurations.name, null);
         if(!suite.isPlayback()) {
           networkUtil.createGroup(groupName, location, suite, function () {
-          var cmd = 'network lb create -g {1} -n loadBalancerName --location {location} --json'.formatArgs(loadBalancer, groupName);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
-            result.exitStatus.should.equal(0);
-            var output = JSON.parse(result.text);
-            removePrivateIp.loadBalancerId = suite.isMocked ? output.id : suite.generateId(removePrivateIp.loadBalancerId, null);
-            var cmd = 'network vnet create -g {1} -n virtualNetworkName --location {location} --json'.formatArgs(virtualNetwork, groupName);
+            var cmd = 'network lb create -g {1} -n loadBalancerName --location {location} --json'.formatArgs(loadBalancer, groupName);
             testUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               var output = JSON.parse(result.text);
-              removePrivateIp.virtualNetworkId = suite.isMocked ? output.id : suite.generateId(removePrivateIp.virtualNetworkId, null);
-              var cmd = 'network vnet subnet create -g {1} -n subnetName --address-prefix {addressPrefix} --vnet-name virtualNetworkName --json'.formatArgs(subnet, groupName);
+              removePrivateIp.loadBalancerId = suite.isMocked ? output.id : suite.generateId(removePrivateIp.loadBalancerId, null);
+              var cmd = 'network vnet create -g {1} -n virtualNetworkName --location {location} --json'.formatArgs(virtualNetwork, groupName);
               testUtils.executeCommand(suite, retry, cmd, function (result) {
                 result.exitStatus.should.equal(0);
                 var output = JSON.parse(result.text);
-                removePrivateIp.subnetId = suite.isMocked ? output.id : suite.generateId(removePrivateIp.subnetId, null);
-                var cmd = 'network public-ip create -g {1} -n publicIPAddressName --location {location} --json'.formatArgs(publicIPAddress, groupName);
+                removePrivateIp.virtualNetworkId = suite.isMocked ? output.id : suite.generateId(removePrivateIp.virtualNetworkId, null);
+                var cmd = 'network vnet subnet create -g {1} -n subnetName --address-prefix {addressPrefix} --vnet-name virtualNetworkName --json'.formatArgs(subnet, groupName);
                 testUtils.executeCommand(suite, retry, cmd, function (result) {
                   result.exitStatus.should.equal(0);
                   var output = JSON.parse(result.text);
-                  removePrivateIp.publicIPAddressId = suite.isMocked ? output.id : suite.generateId(removePrivateIp.publicIPAddressId, null);
+                  removePrivateIp.subnetId = suite.isMocked ? output.id : suite.generateId(removePrivateIp.subnetId, null);
+                  var cmd = 'network public-ip create -g {1} -n publicIPAddressName --location {location} --json'.formatArgs(publicIPAddress, groupName);
+                  testUtils.executeCommand(suite, retry, cmd, function (result) {
+                    result.exitStatus.should.equal(0);
+                    var output = JSON.parse(result.text);
+                    removePrivateIp.publicIPAddressId = suite.isMocked ? output.id : suite.generateId(removePrivateIp.publicIPAddressId, null);
                     done();
                   });
                 });
               });
             });
-        });
+          });
         } else {
           var subscriptionId = profile.current.getSubscription().id;
           removePrivateIp.loadBalancerId = suite.isMocked ? generatorUtils.generateResourceIdCommon(subscriptionId, groupName, 'loadBalancers', removePrivateIp.loadBalancerName) : suite.generateId(removePrivateIp.loadBalancerId, null)
@@ -156,7 +156,7 @@ describe('arm', function () {
         var cmd = 'network lb frontend-ip create -g {group} -n {name}  --lb-name {loadBalancerName}  --subnet-vnet-name {virtualNetworkName} --subnet-name {subnetName} --json'.formatArgs(frontendIPConfigurations);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-            var output = JSON.parse(result.text);
+          var output = JSON.parse(result.text);
           output.name.should.equal(frontendIPConfigurations.name);
 
           done();
@@ -177,7 +177,7 @@ describe('arm', function () {
         var cmd = 'network lb frontend-ip set -g {group} -n {name}  --lb-name {loadBalancerName} --json'.formatArgs(frontendIPConfigurations);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-            var output = JSON.parse(result.text);
+          var output = JSON.parse(result.text);
           output.name.should.equal(frontendIPConfigurations.name);
 
           done();
@@ -209,8 +209,7 @@ describe('arm', function () {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text);
             output.name.should.equal(removePrivateIp.name);
-          output.privateIPAllocationMethod.toLowerCase().should.be.equal('Dynamic'.toLowerCase());
- 
+            output.privateIPAllocationMethod.toLowerCase().should.be.equal('Dynamic'.toLowerCase());
             done();
           });
         });
