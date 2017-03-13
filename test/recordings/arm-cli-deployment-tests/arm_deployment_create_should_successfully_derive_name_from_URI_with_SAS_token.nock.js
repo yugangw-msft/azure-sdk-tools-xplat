@@ -102,7 +102,7 @@ function (nock) {
 var result = 
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.post('/subscriptions/d05f4e58-b80d-4ebd-a6d7-c9cac216cd39/providers/Microsoft.Storage/checkNameAvailability?api-version=2016-01-01', '*')
+.post('/subscriptions/d05f4e58-b80d-4ebd-a6d7-c9cac216cd39/providers/Microsoft.Storage/checkNameAvailability?api-version=2016-12-01', '*')
   .reply(200, "{\"nameAvailable\":true}\n", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '23',
@@ -121,7 +121,7 @@ function (nock) {
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.post('/subscriptions/d05f4e58-b80d-4ebd-a6d7-c9cac216cd39/providers/Microsoft.Storage/checkNameAvailability?api-version=2016-01-01', '*')
+.post('/subscriptions/d05f4e58-b80d-4ebd-a6d7-c9cac216cd39/providers/Microsoft.Storage/checkNameAvailability?api-version=2016-12-01', '*')
   .reply(200, "{\"nameAvailable\":true}\n", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '23',
@@ -140,12 +140,12 @@ function (nock) {
 var result = 
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/d05f4e58-b80d-4ebd-a6d7-c9cac216cd39/resourceGroups/xDeploymentTestGroup8327/providers/Microsoft.Storage/storageAccounts/xstorageaccount2640?api-version=2016-01-01', '*')
+.put('/subscriptions/d05f4e58-b80d-4ebd-a6d7-c9cac216cd39/resourceGroups/xDeploymentTestGroup8327/providers/Microsoft.Storage/storageAccounts/xstorageaccount2640?api-version=2016-12-01', '*')
   .reply(202, "", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '0',
   expires: '-1',
-  location: 'https://management.azure.com/subscriptions/d05f4e58-b80d-4ebd-a6d7-c9cac216cd39/providers/Microsoft.Storage/operations/58ca58ca-314e-4fdf-8ca6-02295459e404?monitor=true&api-version=2016-01-01',
+  location: 'https://management.azure.com/subscriptions/d05f4e58-b80d-4ebd-a6d7-c9cac216cd39/providers/Microsoft.Storage/operations/58ca58ca-314e-4fdf-8ca6-02295459e404?monitor=true&api-version=2016-12-01',
   'retry-after': '25',
   'x-ms-ratelimit-remaining-subscription-writes': '1197',
   'x-ms-request-id': '89ade639-6da3-42e6-b404-0eefbdb49c0b',
@@ -160,12 +160,12 @@ function (nock) {
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/d05f4e58-b80d-4ebd-a6d7-c9cac216cd39/resourceGroups/xDeploymentTestGroup8327/providers/Microsoft.Storage/storageAccounts/xstorageaccount2640?api-version=2016-01-01', '*')
+.put('/subscriptions/d05f4e58-b80d-4ebd-a6d7-c9cac216cd39/resourceGroups/xDeploymentTestGroup8327/providers/Microsoft.Storage/storageAccounts/xstorageaccount2640?api-version=2016-12-01', '*')
   .reply(202, "", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '0',
   expires: '-1',
-  location: 'https://management.azure.com/subscriptions/d05f4e58-b80d-4ebd-a6d7-c9cac216cd39/providers/Microsoft.Storage/operations/58ca58ca-314e-4fdf-8ca6-02295459e404?monitor=true&api-version=2016-01-01',
+  location: 'https://management.azure.com/subscriptions/d05f4e58-b80d-4ebd-a6d7-c9cac216cd39/providers/Microsoft.Storage/operations/58ca58ca-314e-4fdf-8ca6-02295459e404?monitor=true&api-version=2016-12-01',
   'retry-after': '25',
   'x-ms-ratelimit-remaining-subscription-writes': '1197',
   'x-ms-request-id': '89ade639-6da3-42e6-b404-0eefbdb49c0b',
@@ -179,7 +179,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/d05f4e58-b80d-4ebd-a6d7-c9cac216cd39/providers/Microsoft.Storage/operations/58ca58ca-314e-4fdf-8ca6-02295459e404?monitor=true&api-version=2016-01-01')
+  .get('/subscriptions/d05f4e58-b80d-4ebd-a6d7-c9cac216cd39/providers/Microsoft.Storage/operations/58ca58ca-314e-4fdf-8ca6-02295459e404?monitor=true&api-version=2016-12-01')
   .reply(200, "{\"id\":\"/subscriptions/d05f4e58-b80d-4ebd-a6d7-c9cac216cd39/resourceGroups/xdeploymenttestgroup8327/providers/Microsoft.Storage/storageAccounts/xstorageaccount2640\",\"kind\":\"Storage\",\"location\":\"eastus\",\"name\":\"xstorageaccount2640\",\"properties\":{\"creationTime\":\"2016-10-06T20:25:34.1392416Z\",\"primaryEndpoints\":{\"blob\":\"https://xstorageaccount2640.blob.core.windows.net/\",\"file\":\"https://xstorageaccount2640.file.core.windows.net/\",\"queue\":\"https://xstorageaccount2640.queue.core.windows.net/\",\"table\":\"https://xstorageaccount2640.table.core.windows.net/\"},\"primaryLocation\":\"eastus\",\"provisioningState\":\"Succeeded\",\"statusOfPrimary\":\"available\"},\"sku\":{\"name\":\"Standard_LRS\",\"tier\":\"Standard\"},\"tags\":{},\"type\":\"Microsoft.Storage/storageAccounts\"}\n", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '747',
@@ -197,7 +197,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/d05f4e58-b80d-4ebd-a6d7-c9cac216cd39/providers/Microsoft.Storage/operations/58ca58ca-314e-4fdf-8ca6-02295459e404?monitor=true&api-version=2016-01-01')
+  .get('/subscriptions/d05f4e58-b80d-4ebd-a6d7-c9cac216cd39/providers/Microsoft.Storage/operations/58ca58ca-314e-4fdf-8ca6-02295459e404?monitor=true&api-version=2016-12-01')
   .reply(200, "{\"id\":\"/subscriptions/d05f4e58-b80d-4ebd-a6d7-c9cac216cd39/resourceGroups/xdeploymenttestgroup8327/providers/Microsoft.Storage/storageAccounts/xstorageaccount2640\",\"kind\":\"Storage\",\"location\":\"eastus\",\"name\":\"xstorageaccount2640\",\"properties\":{\"creationTime\":\"2016-10-06T20:25:34.1392416Z\",\"primaryEndpoints\":{\"blob\":\"https://xstorageaccount2640.blob.core.windows.net/\",\"file\":\"https://xstorageaccount2640.file.core.windows.net/\",\"queue\":\"https://xstorageaccount2640.queue.core.windows.net/\",\"table\":\"https://xstorageaccount2640.table.core.windows.net/\"},\"primaryLocation\":\"eastus\",\"provisioningState\":\"Succeeded\",\"statusOfPrimary\":\"available\"},\"sku\":{\"name\":\"Standard_LRS\",\"tier\":\"Standard\"},\"tags\":{},\"type\":\"Microsoft.Storage/storageAccounts\"}\n", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '747',
@@ -215,7 +215,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .post('/subscriptions/d05f4e58-b80d-4ebd-a6d7-c9cac216cd39/resourceGroups/xDeploymentTestGroup8327/providers/Microsoft.Storage/storageAccounts/xstorageaccount2640/listKeys?api-version=2016-01-01')
+  .post('/subscriptions/d05f4e58-b80d-4ebd-a6d7-c9cac216cd39/resourceGroups/xDeploymentTestGroup8327/providers/Microsoft.Storage/storageAccounts/xstorageaccount2640/listKeys?api-version=2016-12-01')
   .reply(200, "{\"keys\":[{\"keyName\":\"key1\",\"permissions\":\"Full\",\"value\":\"lLncvVUei6wgfgIaEnT0E/bmUNwP0K9WBPJwlE8BVOnysXcSnlK2lH4zjejq/8piVLpo/xhCJIsc7k1ifsLoRg==\"},{\"keyName\":\"key2\",\"permissions\":\"Full\",\"value\":\"9qrmlh1wm8A6QgNm3O4ZnQhYB0PsFr9xDKNLBs/MpAqhTSyhWZ21KO/pksF1KNJGkDkVJvkHQ96dq7xCFrTm6g==\"}]}\n", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '289',
@@ -233,7 +233,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .post('/subscriptions/d05f4e58-b80d-4ebd-a6d7-c9cac216cd39/resourceGroups/xDeploymentTestGroup8327/providers/Microsoft.Storage/storageAccounts/xstorageaccount2640/listKeys?api-version=2016-01-01')
+  .post('/subscriptions/d05f4e58-b80d-4ebd-a6d7-c9cac216cd39/resourceGroups/xDeploymentTestGroup8327/providers/Microsoft.Storage/storageAccounts/xstorageaccount2640/listKeys?api-version=2016-12-01')
   .reply(200, "{\"keys\":[{\"keyName\":\"key1\",\"permissions\":\"Full\",\"value\":\"lLncvVUei6wgfgIaEnT0E/bmUNwP0K9WBPJwlE8BVOnysXcSnlK2lH4zjejq/8piVLpo/xhCJIsc7k1ifsLoRg==\"},{\"keyName\":\"key2\",\"permissions\":\"Full\",\"value\":\"9qrmlh1wm8A6QgNm3O4ZnQhYB0PsFr9xDKNLBs/MpAqhTSyhWZ21KO/pksF1KNJGkDkVJvkHQ96dq7xCFrTm6g==\"}]}\n", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '289',

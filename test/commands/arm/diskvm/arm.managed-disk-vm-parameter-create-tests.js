@@ -35,6 +35,7 @@ var requiredEnvironment = [{
 var groupName,
   avsPrefix7 = 'xplattestavs7',
   vm1Prefix = 'vm1',
+  vm2Prefix = 'vm2',
   location,
   username = 'azureuser',
   password = 'Brillio@2016',
@@ -42,9 +43,11 @@ var groupName,
   sshcert,
   avsParamFileName = 'test/data/avs7Param.json',
   pvmParamFileName = 'test/data/pvm7Param.json',
+  pvmParamFileName2 = 'test/data/pvm7Param2.json',
   imgParamFileName = 'test/data/img7Param.json',
   storageAccount = 'xplatteststorage1',
   nicName = 'xplattestnic',
+  nicName2 = 'xplattestni2',
   vNetPrefix = 'xplattestvnet',
   subnetName = 'xplattestsubnet',
   publicipName = 'xplattestip',
@@ -66,8 +69,10 @@ describe('arm', function() {
         sshcert = process.env.SSHCERT;
         groupName = suite.generateId(groupPrefix, null);
         vm1Prefix = suite.generateId(vm1Prefix, null);
+        vm2Prefix = suite.generateId(vm2Prefix, null);
         avsPrefix7 = suite.isMocked ? avsPrefix7 : suite.generateId(avsPrefix7, null);
         nicName = suite.generateId(nicName, null);
+        nicName2 = suite.generateId(nicName2, null);
         storageAccount = suite.generateId(storageAccount, null);
         done();
       });
@@ -106,7 +111,11 @@ describe('arm', function() {
                   var cmd = util.format('network nic create %s %s %s --subnet-vnet-name %s --subnet-name %s --json', groupName, nicName, location, vNetPrefix, subnetName).split(' ');
                   testUtils.executeCommand(suite, retry, cmd, function(result) {
                     result.exitStatus.should.equal(0);
-                    done();
+                    var cmd = util.format('network nic create %s %s %s --subnet-vnet-name %s --subnet-name %s --json', groupName, nicName2, location, vNetPrefix, subnetName).split(' ');
+                    testUtils.executeCommand(suite, retry, cmd, function(result) {
+                      result.exitStatus.should.equal(0);
+                      done();
+                    });
                   });
                 });
               });
@@ -146,7 +155,7 @@ describe('arm', function() {
           });
         });
       });
-
+      
       it('diskvm create-or-update-parameter generate set and remove should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
         var subscription = profile.current.getSubscription();
@@ -184,23 +193,27 @@ describe('arm', function() {
                             var cmd = makeCommandStr('vm', 'storage-profile', 'delete', pvmParamFileName, '--data-disks').split(' ');
                             testUtils.executeCommand(suite, retry, cmd, function(result) {
                               result.exitStatus.should.equal(0);
-                              var cmd = makeCommandStr('vm', 'image-reference', 'set', pvmParamFileName, '--publisher CoreOS --offer CoreOS --sku Stable --version latest').split(' ');
+                              var cmd = makeCommandStr('vm', 'image-reference', 'delete', pvmParamFileName, '--id').split(' ');
                               testUtils.executeCommand(suite, retry, cmd, function(result) {
                                 result.exitStatus.should.equal(0);
-                                var cmd = makeCommandStr('vm', 'os-disk', 'set', pvmParamFileName, '--caching None --create-option fromImage --name test').split(' ');
+                                var cmd = makeCommandStr('vm', 'image-reference', 'set', pvmParamFileName, '--publisher CoreOS --offer CoreOS --sku Stable --version latest').split(' ');
                                 testUtils.executeCommand(suite, retry, cmd, function(result) {
                                   result.exitStatus.should.equal(0);
-                                  var cmd = makeCommandStr('vm', 'os-disk', 'delete', pvmParamFileName, '--os-type --image --encryption-settings --managed-disk --vhd').split(' ');
+                                  var cmd = makeCommandStr('vm', 'os-disk', 'set', pvmParamFileName, '--caching None --create-option fromImage').split(' ');
                                   testUtils.executeCommand(suite, retry, cmd, function(result) {
                                     result.exitStatus.should.equal(0);
-                                    var cmd = makeCommandStr('vm', 'network-interfaces', 'set', pvmParamFileName, util.format('--index 0 --id %s', nicId)).split(' ');
+                                    var cmd = makeCommandStr('vm', 'os-disk', 'delete', pvmParamFileName, '--os-type --image --encryption-settings --managed-disk --vhd --name').split(' ');
                                     testUtils.executeCommand(suite, retry, cmd, function(result) {
                                       result.exitStatus.should.equal(0);
-                                      var cmd = util.format('vm create-or-update -g %s -n %s --parameter-file %s --json', groupName, vm1Prefix, pvmParamFileName).split(' ');
+                                      var cmd = makeCommandStr('vm', 'network-interfaces', 'set', pvmParamFileName, util.format('--index 0 --id %s', nicId)).split(' ');
                                       testUtils.executeCommand(suite, retry, cmd, function(result) {
                                         result.exitStatus.should.equal(0);
-                                        result.text.should.not.containEql('blob');
-                                        done();
+                                        var cmd = util.format('vm create-or-update -g %s -n %s --parameter-file %s --json', groupName, vm1Prefix, pvmParamFileName).split(' ');
+                                        testUtils.executeCommand(suite, retry, cmd, function(result) {
+                                          result.exitStatus.should.equal(0);
+                                          result.text.should.not.containEql('blob');
+                                          done();
+                                        });
                                       });
                                     });
                                   });
@@ -218,10 +231,103 @@ describe('arm', function() {
           });
         });
       });
-      
+
       it('vm delete command should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 20);
         var cmd = util.format('vm delete --resource-group %s --name %s -q --json', groupName, vm1Prefix).split(' ');
+        testUtils.executeCommand(suite, retry, cmd, function(result) {
+          result.exitStatus.should.equal(0);
+          done();
+        });
+      });
+      
+      it('diskvm 2nd create-or-update call should pass', function(done) {
+        this.timeout(vmTest.timeoutLarge * 10);
+        var subscription = profile.current.getSubscription();
+        var avsetId = '/subscriptions/' + subscription.id + '/resourceGroups/' + groupName + '/providers/Microsoft.Compute/availabilitySets/' + avsPrefix7;
+        var nicId2 = util.format('/subscriptions/%s/resourceGroups/%s/providers/Microsoft.Network/networkInterfaces/%s', subscription.id, groupName, nicName2);
+        vmTest.getVMSize(location, suite, function() {
+          vmSize = VMTestUtil.vmSize;
+          var cmd = util.format('vm config create --parameter-file %s', pvmParamFileName2).split(' ');
+          testUtils.executeCommand(suite, retry, cmd, function(result) {
+            result.exitStatus.should.equal(0);
+            var cmd = makeCommandStr('vm', 'virtual-machine', 'delete', pvmParamFileName2, '--plan --hardware-profile --storage-profile --os-profile --network-profile --diagnostics-profile --availability-set').split(' ');
+            testUtils.executeCommand(suite, retry, cmd, function(result) {
+              result.exitStatus.should.equal(0);
+              var cmd = makeCommandStr('vm', 'virtual-machine', 'delete', pvmParamFileName2, ' --provisioning-state --instance-view --license-type --vm-id --resources --id --name --type --location --tags').split(' ');
+              testUtils.executeCommand(suite, retry, cmd, function(result) {
+                result.exitStatus.should.equal(0);
+                var cmd = makeCommandStr('vm', 'virtual-machine', 'set', pvmParamFileName2, util.format('--location %s --name %s', location, vm2Prefix)).split(' ');
+                testUtils.executeCommand(suite, retry, cmd, function(result) {
+                  result.exitStatus.should.equal(0);
+                  var cmd = makeCommandStr('vm', 'virtual-machine', 'set', pvmParamFileName2, util.format('--hardware-profile {} --storage-profile {} --os-profile {} --network-profile {} --availability-set {} --parse')).split(' ');
+                  testUtils.executeCommand(suite, retry, cmd, function(result) {
+                    result.exitStatus.should.equal(0);
+                    var cmd = makeCommandStr('vm', 'availability-set', 'set', pvmParamFileName2, util.format('--id %s', avsetId)).split(' ');
+                    testUtils.executeCommand(suite, retry, cmd, function(result) {
+                      result.exitStatus.should.equal(0);
+                      var cmd = makeCommandStr('vm', 'hardware-profile', 'set', pvmParamFileName2, util.format('--vm-size', vmSize)).split(' ');
+                      testUtils.executeCommand(suite, retry, cmd, function(result) {
+                        result.exitStatus.should.equal(0);
+                        var cmd = makeCommandStr('vm', 'os-profile', 'set', pvmParamFileName2, '--linux-configuration {} --parse').split(' ');
+                        testUtils.executeCommand(suite, retry, cmd, function(result) {
+                          result.exitStatus.should.equal(0);
+                          var cmd = makeCommandStr('vm', 'os-profile', 'set', pvmParamFileName2, util.format('--computer-name %s --admin-username %s --admin-password %s', 'diskvm1', username, password)).split(' ');
+                          testUtils.executeCommand(suite, retry, cmd, function(result) {
+                            result.exitStatus.should.equal(0);
+                            var cmd = makeCommandStr('vm', 'linux-configuration', 'set', pvmParamFileName2, '--disable-password-authentication false').split(' ');
+                            testUtils.executeCommand(suite, retry, cmd, function(result) {
+                              result.exitStatus.should.equal(0);
+                              var cmd = makeCommandStr('vm', 'linux-configuration', 'delete', pvmParamFileName2, '--ssh').split(' ');
+                              testUtils.executeCommand(suite, retry, cmd, function(result) {
+                                result.exitStatus.should.equal(0);
+                                var cmd = makeCommandStr('vm', 'storage-profile', 'set', pvmParamFileName2, '--os-disk {} --image-reference {} --parse').split(' ');
+                                testUtils.executeCommand(suite, retry, cmd, function(result) {
+                                  result.exitStatus.should.equal(0);
+                                  var cmd = makeCommandStr('vm', 'image-reference', 'set', pvmParamFileName2, '--publisher CoreOS --offer CoreOS --sku Stable --version latest').split(' ');
+                                  testUtils.executeCommand(suite, retry, cmd, function(result) {
+                                    result.exitStatus.should.equal(0);
+                                    var cmd = makeCommandStr('vm', 'os-disk', 'set', pvmParamFileName2, '--caching None --create-option fromImage').split(' ');
+                                    testUtils.executeCommand(suite, retry, cmd, function(result) {
+                                      result.exitStatus.should.equal(0);
+                                      var cmd = makeCommandStr('vm', 'os-disk', 'delete', pvmParamFileName2, '--os-type --image --encryption-settings --managed-disk --vhd --name').split(' ');
+                                      testUtils.executeCommand(suite, retry, cmd, function(result) {
+                                        result.exitStatus.should.equal(0);
+                                        var cmd = makeCommandStr('vm', 'network-profile', 'set', pvmParamFileName2, '--network-interfaces [] --parse').split(' ');
+                                        testUtils.executeCommand(suite, retry, cmd, function(result) {
+                                          result.exitStatus.should.equal(0);
+                                          var cmd = makeCommandStr('vm', 'network-interfaces', 'set', pvmParamFileName2, util.format('--index 0 --id %s', nicId2)).split(' ');
+                                          testUtils.executeCommand(suite, retry, cmd, function(result) {
+                                            result.exitStatus.should.equal(0);
+                                            var cmd = util.format('vm create-or-update -g %s -n %s --parameter-file %s --json', groupName, vm2Prefix, pvmParamFileName2).split(' ');
+                                            testUtils.executeCommand(suite, retry, cmd, function(result) {
+                                              result.exitStatus.should.equal(0);
+                                              result.text.should.not.containEql('blob');
+                                              done();
+                                            });
+                                          });
+                                        });
+                                      });
+                                    });
+                                  });
+                                });
+                              });
+                            });
+                          });
+                        });
+                      });
+                    });
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+
+      it('vm 2nd delete command should pass', function(done) {
+        this.timeout(vmTest.timeoutLarge * 20);
+        var cmd = util.format('vm delete --resource-group %s --name %s -q --json', groupName, vm2Prefix).split(' ');
         testUtils.executeCommand(suite, retry, cmd, function(result) {
           result.exitStatus.should.equal(0);
           done();
