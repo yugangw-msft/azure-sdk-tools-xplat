@@ -6,13 +6,13 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: 'ce4a7590-4722-4bcf-a2c6-e473e9f11778',
-    name: 'Azure Storage DM Test',
+    id: '53d9063d-87ae-4ea8-be90-3686c3b8669f',
     user: {
       name: 'user@domain.example',
       type: 'user'
     },
-    tenantId: '72f988bf-86f1-41af-91ab-2d7cd011db47',
+    tenantId: '6e606ece-3a5a-4674-a654-d6b02bc5a51b',
+    name: 'Visual Studio Ultimate with MSDN',
     state: 'Enabled',
     registeredProviders: [],
     _eventsCount: '1',
@@ -29,114 +29,114 @@ exports.setEnvironment = function() {
 
 exports.scopes = [[function (nock) { 
 var result = 
-nock('http://xplattestadla4886.azuredatalakeanalytics.net:443')
+nock('http://xplattestadla8046.azuredatalakeanalytics.net:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/Jobs/4a1fd523-170b-48d4-8d3d-dfcf7ac20dcc?api-version=2016-11-01', '*')
-  .reply(200, "{\"jobId\":\"4a1fd523-170b-48d4-8d3d-dfcf7ac20dcc\",\"name\":\"xplattestjob\",\"type\":\"USql\",\"submitter\":\"hason@microsoft.com\",\"degreeOfParallelism\":1,\"priority\":1000,\"submitTime\":\"2017-02-17T07:52:49.9082889+00:00\",\"state\":\"Compiling\",\"result\":\"None\",\"stateAuditRecords\":[{\"newState\":\"New\",\"timeStamp\":\"2017-02-17T07:52:49.9082889+00:00\",\"details\":\"userName:;submitMachine:N/A\"}],\"properties\":{\"owner\":\"hason@microsoft.com\",\"resources\":[],\"runtimeVersion\":\"default\",\"rootProcessNodeId\":\"00000000-0000-0000-0000-000000000000\",\"algebraFilePath\":\"adl://xplattestadls9991.azuredatalakestore.net/system/jobservice/jobs/Usql/2017/02/17/07/52/4a1fd523-170b-48d4-8d3d-dfcf7ac20dcc/algebra.xml\",\"compileMode\":\"Semantic\",\"errorSource\":\"Unknown\",\"totalCompilationTime\":\"PT0S\",\"totalPausedTime\":\"PT0S\",\"totalQueuedTime\":\"PT0S\",\"totalRunningTime\":\"PT0S\",\"expirationTimeUtc\":\"0001-01-01T00:00:00Z\",\"type\":\"USql\"}}", { 'cache-control': 'private, no-cache, no-store, max-age=0',
+.put('/Jobs/5b8f41fb-fe45-416f-8796-5048e2c3e261?api-version=2016-11-01', '*')
+  .reply(200, "{\"jobId\":\"5b8f41fb-fe45-416f-8796-5048e2c3e261\",\"name\":\"xplattestjob\",\"type\":\"USql\",\"submitter\":\"adlsvc01@benwgoldoutlook.onmicrosoft.com\",\"degreeOfParallelism\":1,\"priority\":1000,\"submitTime\":\"2017-03-13T23:52:03.8137+00:00\",\"state\":\"Compiling\",\"result\":\"None\",\"stateAuditRecords\":[{\"newState\":\"New\",\"timeStamp\":\"2017-03-13T23:52:03.8137+00:00\",\"details\":\"userName:;submitMachine:N/A\"}],\"properties\":{\"owner\":\"adlsvc01@benwgoldoutlook.onmicrosoft.com\",\"resources\":[],\"runtimeVersion\":\"default\",\"rootProcessNodeId\":\"00000000-0000-0000-0000-000000000000\",\"algebraFilePath\":\"adl://xplattestadls2718.azuredatalakestore.net/system/jobservice/jobs/Usql/2017/03/13/23/52/5b8f41fb-fe45-416f-8796-5048e2c3e261/algebra.xml\",\"compileMode\":\"Semantic\",\"errorSource\":\"Unknown\",\"totalCompilationTime\":\"PT0S\",\"totalPausedTime\":\"PT0S\",\"totalQueuedTime\":\"PT0S\",\"totalRunningTime\":\"PT0S\",\"expirationTimeUtc\":\"0001-01-01T00:00:00Z\",\"type\":\"USql\"}}", { 'cache-control': 'private, no-cache, no-store, max-age=0',
   'transfer-encoding': 'chunked',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'c46ccf82-c79e-4a03-a1c7-c1fb4f2098b0',
+  'x-ms-request-id': '01f769df-e745-4052-b43d-2c808daf744b',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=15724800; includeSubDomains',
-  date: 'Fri, 17 Feb 2017 07:52:50 GMT',
+  date: 'Mon, 13 Mar 2017 23:52:03 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
-nock('https://xplattestadla4886.azuredatalakeanalytics.net:443')
+nock('https://xplattestadla8046.azuredatalakeanalytics.net:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/Jobs/4a1fd523-170b-48d4-8d3d-dfcf7ac20dcc?api-version=2016-11-01', '*')
-  .reply(200, "{\"jobId\":\"4a1fd523-170b-48d4-8d3d-dfcf7ac20dcc\",\"name\":\"xplattestjob\",\"type\":\"USql\",\"submitter\":\"hason@microsoft.com\",\"degreeOfParallelism\":1,\"priority\":1000,\"submitTime\":\"2017-02-17T07:52:49.9082889+00:00\",\"state\":\"Compiling\",\"result\":\"None\",\"stateAuditRecords\":[{\"newState\":\"New\",\"timeStamp\":\"2017-02-17T07:52:49.9082889+00:00\",\"details\":\"userName:;submitMachine:N/A\"}],\"properties\":{\"owner\":\"hason@microsoft.com\",\"resources\":[],\"runtimeVersion\":\"default\",\"rootProcessNodeId\":\"00000000-0000-0000-0000-000000000000\",\"algebraFilePath\":\"adl://xplattestadls9991.azuredatalakestore.net/system/jobservice/jobs/Usql/2017/02/17/07/52/4a1fd523-170b-48d4-8d3d-dfcf7ac20dcc/algebra.xml\",\"compileMode\":\"Semantic\",\"errorSource\":\"Unknown\",\"totalCompilationTime\":\"PT0S\",\"totalPausedTime\":\"PT0S\",\"totalQueuedTime\":\"PT0S\",\"totalRunningTime\":\"PT0S\",\"expirationTimeUtc\":\"0001-01-01T00:00:00Z\",\"type\":\"USql\"}}", { 'cache-control': 'private, no-cache, no-store, max-age=0',
+.put('/Jobs/5b8f41fb-fe45-416f-8796-5048e2c3e261?api-version=2016-11-01', '*')
+  .reply(200, "{\"jobId\":\"5b8f41fb-fe45-416f-8796-5048e2c3e261\",\"name\":\"xplattestjob\",\"type\":\"USql\",\"submitter\":\"adlsvc01@benwgoldoutlook.onmicrosoft.com\",\"degreeOfParallelism\":1,\"priority\":1000,\"submitTime\":\"2017-03-13T23:52:03.8137+00:00\",\"state\":\"Compiling\",\"result\":\"None\",\"stateAuditRecords\":[{\"newState\":\"New\",\"timeStamp\":\"2017-03-13T23:52:03.8137+00:00\",\"details\":\"userName:;submitMachine:N/A\"}],\"properties\":{\"owner\":\"adlsvc01@benwgoldoutlook.onmicrosoft.com\",\"resources\":[],\"runtimeVersion\":\"default\",\"rootProcessNodeId\":\"00000000-0000-0000-0000-000000000000\",\"algebraFilePath\":\"adl://xplattestadls2718.azuredatalakestore.net/system/jobservice/jobs/Usql/2017/03/13/23/52/5b8f41fb-fe45-416f-8796-5048e2c3e261/algebra.xml\",\"compileMode\":\"Semantic\",\"errorSource\":\"Unknown\",\"totalCompilationTime\":\"PT0S\",\"totalPausedTime\":\"PT0S\",\"totalQueuedTime\":\"PT0S\",\"totalRunningTime\":\"PT0S\",\"expirationTimeUtc\":\"0001-01-01T00:00:00Z\",\"type\":\"USql\"}}", { 'cache-control': 'private, no-cache, no-store, max-age=0',
   'transfer-encoding': 'chunked',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'c46ccf82-c79e-4a03-a1c7-c1fb4f2098b0',
+  'x-ms-request-id': '01f769df-e745-4052-b43d-2c808daf744b',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=15724800; includeSubDomains',
-  date: 'Fri, 17 Feb 2017 07:52:50 GMT',
+  date: 'Mon, 13 Mar 2017 23:52:03 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
-nock('http://xplattestadla4886.azuredatalakeanalytics.net:443')
-  .post('/Jobs/4a1fd523-170b-48d4-8d3d-dfcf7ac20dcc/CancelJob?api-version=2016-11-01')
+nock('http://xplattestadla8046.azuredatalakeanalytics.net:443')
+  .post('/Jobs/5b8f41fb-fe45-416f-8796-5048e2c3e261/CancelJob?api-version=2016-11-01')
   .reply(200, "", { 'cache-control': 'private, no-cache, no-store, max-age=0',
   'transfer-encoding': 'chunked',
   expires: '-1',
-  'x-ms-request-id': 'c2e06ac8-a9fb-4eef-9fff-3dc17873fc39',
+  'x-ms-request-id': '6b0e6078-71f2-4478-9cc9-1bbec1bf2a1f',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=15724800; includeSubDomains',
-  date: 'Fri, 17 Feb 2017 07:52:50 GMT',
+  date: 'Mon, 13 Mar 2017 23:52:04 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
-nock('https://xplattestadla4886.azuredatalakeanalytics.net:443')
-  .post('/Jobs/4a1fd523-170b-48d4-8d3d-dfcf7ac20dcc/CancelJob?api-version=2016-11-01')
+nock('https://xplattestadla8046.azuredatalakeanalytics.net:443')
+  .post('/Jobs/5b8f41fb-fe45-416f-8796-5048e2c3e261/CancelJob?api-version=2016-11-01')
   .reply(200, "", { 'cache-control': 'private, no-cache, no-store, max-age=0',
   'transfer-encoding': 'chunked',
   expires: '-1',
-  'x-ms-request-id': 'c2e06ac8-a9fb-4eef-9fff-3dc17873fc39',
+  'x-ms-request-id': '6b0e6078-71f2-4478-9cc9-1bbec1bf2a1f',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=15724800; includeSubDomains',
-  date: 'Fri, 17 Feb 2017 07:52:50 GMT',
+  date: 'Mon, 13 Mar 2017 23:52:04 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
-nock('http://xplattestadla4886.azuredatalakeanalytics.net:443')
-  .get('/Jobs/4a1fd523-170b-48d4-8d3d-dfcf7ac20dcc?api-version=2016-11-01')
-  .reply(200, "{\"jobId\":\"4a1fd523-170b-48d4-8d3d-dfcf7ac20dcc\",\"name\":\"xplattestjob\",\"type\":\"USql\",\"submitter\":\"hason@microsoft.com\",\"degreeOfParallelism\":1,\"priority\":1000,\"submitTime\":\"2017-02-17T07:52:49.9082889+00:00\",\"endTime\":\"2017-02-17T07:52:51.7208257+00:00\",\"state\":\"Ended\",\"result\":\"Cancelled\",\"errorMessage\":[{\"errorId\":\"I_USER_CJS_CANCELEDBYUSER\",\"name\":\"CANCELED_BY_USER\",\"severity\":\"Info\",\"source\":\"User\",\"component\":\"CJS\",\"message\":\"Job was cancelled.\",\"details\":\"\",\"description\":\"Job was cancelled by hason@microsoft.com.\",\"resolution\":\"\",\"helpLink\":\"\",\"innerError\":null}],\"stateAuditRecords\":[{\"newState\":\"New\",\"timeStamp\":\"2017-02-17T07:52:49.9082889+00:00\",\"details\":\"userName:;submitMachine:N/A\"},{\"newState\":\"Compiling\",\"timeStamp\":\"2017-02-17T07:52:50.1114181+00:00\",\"details\":\"CcsAttempts:1;Status:Dispatched\"},{\"newState\":\"Ended\",\"timeStamp\":\"2017-02-17T07:52:51.7208257+00:00\",\"details\":\"result:CanceledByUser\"}],\"properties\":{\"owner\":\"hason@microsoft.com\",\"resources\":[{\"name\":\"Profile\",\"resourcePath\":\"adl://xplattestadls9991.azuredatalakestore.net/system/jobservice/jobs/Usql/2017/02/17/07/52/4a1fd523-170b-48d4-8d3d-dfcf7ac20dcc/profile\",\"type\":\"StatisticsResource\"},{\"name\":\"__ScopeRuntimeStatistics__.xml\",\"resourcePath\":\"adl://xplattestadls9991.azuredatalakestore.net/system/jobservice/jobs/Usql/2017/02/17/07/52/4a1fd523-170b-48d4-8d3d-dfcf7ac20dcc/__ScopeRuntimeStatistics__.xml\",\"type\":\"StatisticsResource\"}],\"runtimeVersion\":\"default\",\"rootProcessNodeId\":\"00000000-0000-0000-0000-000000000000\",\"script\":\"DROP DATABASE IF EXISTS FOO; CREATE DATABASE FOO; DROP DATABASE IF EXISTS FOO;\",\"algebraFilePath\":\"adl://xplattestadls9991.azuredatalakestore.net/system/jobservice/jobs/Usql/2017/02/17/07/52/4a1fd523-170b-48d4-8d3d-dfcf7ac20dcc/algebra.xml\",\"compileMode\":\"Semantic\",\"errorSource\":\"UserError\",\"totalCompilationTime\":\"PT1.6094076S\",\"totalPausedTime\":\"PT0S\",\"totalQueuedTime\":\"PT0S\",\"totalRunningTime\":\"PT0S\",\"expirationTimeUtc\":\"0001-01-01T00:00:00\",\"type\":\"USql\"}}", { 'cache-control': 'private, no-cache, no-store, max-age=0',
+nock('http://xplattestadla8046.azuredatalakeanalytics.net:443')
+  .get('/Jobs/5b8f41fb-fe45-416f-8796-5048e2c3e261?api-version=2016-11-01')
+  .reply(200, "{\"jobId\":\"5b8f41fb-fe45-416f-8796-5048e2c3e261\",\"name\":\"xplattestjob\",\"type\":\"USql\",\"submitter\":\"adlsvc01@benwgoldoutlook.onmicrosoft.com\",\"degreeOfParallelism\":1,\"priority\":1000,\"submitTime\":\"2017-03-13T23:52:03.8137+00:00\",\"endTime\":\"2017-03-13T23:52:04.5793481+00:00\",\"state\":\"Ended\",\"result\":\"Cancelled\",\"errorMessage\":[{\"errorId\":\"I_USER_CJS_CANCELEDBYUSER\",\"name\":\"CANCELED_BY_USER\",\"severity\":\"Info\",\"source\":\"User\",\"component\":\"CJS\",\"message\":\"Job was cancelled.\",\"details\":\"\",\"description\":\"Job was cancelled by adlsvc01@benwgoldoutlook.onmicrosoft.com.\",\"resolution\":\"\",\"helpLink\":\"\",\"innerError\":null}],\"stateAuditRecords\":[{\"newState\":\"New\",\"timeStamp\":\"2017-03-13T23:52:03.8137+00:00\",\"details\":\"userName:;submitMachine:N/A\"},{\"newState\":\"Compiling\",\"timeStamp\":\"2017-03-13T23:52:03.9543349+00:00\",\"details\":\"CcsAttempts:1;Status:Dispatched\"},{\"newState\":\"Ended\",\"timeStamp\":\"2017-03-13T23:52:04.5793481+00:00\",\"details\":\"result:CanceledByUser\"}],\"properties\":{\"owner\":\"adlsvc01@benwgoldoutlook.onmicrosoft.com\",\"resources\":[{\"name\":\"Profile\",\"resourcePath\":\"adl://xplattestadls2718.azuredatalakestore.net/system/jobservice/jobs/Usql/2017/03/13/23/52/5b8f41fb-fe45-416f-8796-5048e2c3e261/profile\",\"type\":\"StatisticsResource\"},{\"name\":\"__ScopeRuntimeStatistics__.xml\",\"resourcePath\":\"adl://xplattestadls2718.azuredatalakestore.net/system/jobservice/jobs/Usql/2017/03/13/23/52/5b8f41fb-fe45-416f-8796-5048e2c3e261/__ScopeRuntimeStatistics__.xml\",\"type\":\"StatisticsResource\"}],\"runtimeVersion\":\"default\",\"rootProcessNodeId\":\"00000000-0000-0000-0000-000000000000\",\"script\":\"DROP DATABASE IF EXISTS FOO; CREATE DATABASE FOO; DROP DATABASE IF EXISTS FOO;\",\"algebraFilePath\":\"adl://xplattestadls2718.azuredatalakestore.net/system/jobservice/jobs/Usql/2017/03/13/23/52/5b8f41fb-fe45-416f-8796-5048e2c3e261/algebra.xml\",\"compileMode\":\"Semantic\",\"errorSource\":\"UserError\",\"totalCompilationTime\":\"PT0.6250132S\",\"totalPausedTime\":\"PT0S\",\"totalQueuedTime\":\"PT0S\",\"totalRunningTime\":\"PT0S\",\"expirationTimeUtc\":\"0001-01-01T00:00:00\",\"type\":\"USql\"}}", { 'cache-control': 'private, no-cache, no-store, max-age=0',
   'transfer-encoding': 'chunked',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '93993696-8939-45bc-9ba5-d01cea0ca421',
+  'x-ms-request-id': '8f712216-4ff8-4693-a1e5-7ca052306c5f',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=15724800; includeSubDomains',
-  date: 'Fri, 17 Feb 2017 07:52:53 GMT',
+  date: 'Mon, 13 Mar 2017 23:52:04 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
-nock('https://xplattestadla4886.azuredatalakeanalytics.net:443')
-  .get('/Jobs/4a1fd523-170b-48d4-8d3d-dfcf7ac20dcc?api-version=2016-11-01')
-  .reply(200, "{\"jobId\":\"4a1fd523-170b-48d4-8d3d-dfcf7ac20dcc\",\"name\":\"xplattestjob\",\"type\":\"USql\",\"submitter\":\"hason@microsoft.com\",\"degreeOfParallelism\":1,\"priority\":1000,\"submitTime\":\"2017-02-17T07:52:49.9082889+00:00\",\"endTime\":\"2017-02-17T07:52:51.7208257+00:00\",\"state\":\"Ended\",\"result\":\"Cancelled\",\"errorMessage\":[{\"errorId\":\"I_USER_CJS_CANCELEDBYUSER\",\"name\":\"CANCELED_BY_USER\",\"severity\":\"Info\",\"source\":\"User\",\"component\":\"CJS\",\"message\":\"Job was cancelled.\",\"details\":\"\",\"description\":\"Job was cancelled by hason@microsoft.com.\",\"resolution\":\"\",\"helpLink\":\"\",\"innerError\":null}],\"stateAuditRecords\":[{\"newState\":\"New\",\"timeStamp\":\"2017-02-17T07:52:49.9082889+00:00\",\"details\":\"userName:;submitMachine:N/A\"},{\"newState\":\"Compiling\",\"timeStamp\":\"2017-02-17T07:52:50.1114181+00:00\",\"details\":\"CcsAttempts:1;Status:Dispatched\"},{\"newState\":\"Ended\",\"timeStamp\":\"2017-02-17T07:52:51.7208257+00:00\",\"details\":\"result:CanceledByUser\"}],\"properties\":{\"owner\":\"hason@microsoft.com\",\"resources\":[{\"name\":\"Profile\",\"resourcePath\":\"adl://xplattestadls9991.azuredatalakestore.net/system/jobservice/jobs/Usql/2017/02/17/07/52/4a1fd523-170b-48d4-8d3d-dfcf7ac20dcc/profile\",\"type\":\"StatisticsResource\"},{\"name\":\"__ScopeRuntimeStatistics__.xml\",\"resourcePath\":\"adl://xplattestadls9991.azuredatalakestore.net/system/jobservice/jobs/Usql/2017/02/17/07/52/4a1fd523-170b-48d4-8d3d-dfcf7ac20dcc/__ScopeRuntimeStatistics__.xml\",\"type\":\"StatisticsResource\"}],\"runtimeVersion\":\"default\",\"rootProcessNodeId\":\"00000000-0000-0000-0000-000000000000\",\"script\":\"DROP DATABASE IF EXISTS FOO; CREATE DATABASE FOO; DROP DATABASE IF EXISTS FOO;\",\"algebraFilePath\":\"adl://xplattestadls9991.azuredatalakestore.net/system/jobservice/jobs/Usql/2017/02/17/07/52/4a1fd523-170b-48d4-8d3d-dfcf7ac20dcc/algebra.xml\",\"compileMode\":\"Semantic\",\"errorSource\":\"UserError\",\"totalCompilationTime\":\"PT1.6094076S\",\"totalPausedTime\":\"PT0S\",\"totalQueuedTime\":\"PT0S\",\"totalRunningTime\":\"PT0S\",\"expirationTimeUtc\":\"0001-01-01T00:00:00\",\"type\":\"USql\"}}", { 'cache-control': 'private, no-cache, no-store, max-age=0',
+nock('https://xplattestadla8046.azuredatalakeanalytics.net:443')
+  .get('/Jobs/5b8f41fb-fe45-416f-8796-5048e2c3e261?api-version=2016-11-01')
+  .reply(200, "{\"jobId\":\"5b8f41fb-fe45-416f-8796-5048e2c3e261\",\"name\":\"xplattestjob\",\"type\":\"USql\",\"submitter\":\"adlsvc01@benwgoldoutlook.onmicrosoft.com\",\"degreeOfParallelism\":1,\"priority\":1000,\"submitTime\":\"2017-03-13T23:52:03.8137+00:00\",\"endTime\":\"2017-03-13T23:52:04.5793481+00:00\",\"state\":\"Ended\",\"result\":\"Cancelled\",\"errorMessage\":[{\"errorId\":\"I_USER_CJS_CANCELEDBYUSER\",\"name\":\"CANCELED_BY_USER\",\"severity\":\"Info\",\"source\":\"User\",\"component\":\"CJS\",\"message\":\"Job was cancelled.\",\"details\":\"\",\"description\":\"Job was cancelled by adlsvc01@benwgoldoutlook.onmicrosoft.com.\",\"resolution\":\"\",\"helpLink\":\"\",\"innerError\":null}],\"stateAuditRecords\":[{\"newState\":\"New\",\"timeStamp\":\"2017-03-13T23:52:03.8137+00:00\",\"details\":\"userName:;submitMachine:N/A\"},{\"newState\":\"Compiling\",\"timeStamp\":\"2017-03-13T23:52:03.9543349+00:00\",\"details\":\"CcsAttempts:1;Status:Dispatched\"},{\"newState\":\"Ended\",\"timeStamp\":\"2017-03-13T23:52:04.5793481+00:00\",\"details\":\"result:CanceledByUser\"}],\"properties\":{\"owner\":\"adlsvc01@benwgoldoutlook.onmicrosoft.com\",\"resources\":[{\"name\":\"Profile\",\"resourcePath\":\"adl://xplattestadls2718.azuredatalakestore.net/system/jobservice/jobs/Usql/2017/03/13/23/52/5b8f41fb-fe45-416f-8796-5048e2c3e261/profile\",\"type\":\"StatisticsResource\"},{\"name\":\"__ScopeRuntimeStatistics__.xml\",\"resourcePath\":\"adl://xplattestadls2718.azuredatalakestore.net/system/jobservice/jobs/Usql/2017/03/13/23/52/5b8f41fb-fe45-416f-8796-5048e2c3e261/__ScopeRuntimeStatistics__.xml\",\"type\":\"StatisticsResource\"}],\"runtimeVersion\":\"default\",\"rootProcessNodeId\":\"00000000-0000-0000-0000-000000000000\",\"script\":\"DROP DATABASE IF EXISTS FOO; CREATE DATABASE FOO; DROP DATABASE IF EXISTS FOO;\",\"algebraFilePath\":\"adl://xplattestadls2718.azuredatalakestore.net/system/jobservice/jobs/Usql/2017/03/13/23/52/5b8f41fb-fe45-416f-8796-5048e2c3e261/algebra.xml\",\"compileMode\":\"Semantic\",\"errorSource\":\"UserError\",\"totalCompilationTime\":\"PT0.6250132S\",\"totalPausedTime\":\"PT0S\",\"totalQueuedTime\":\"PT0S\",\"totalRunningTime\":\"PT0S\",\"expirationTimeUtc\":\"0001-01-01T00:00:00\",\"type\":\"USql\"}}", { 'cache-control': 'private, no-cache, no-store, max-age=0',
   'transfer-encoding': 'chunked',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '93993696-8939-45bc-9ba5-d01cea0ca421',
+  'x-ms-request-id': '8f712216-4ff8-4693-a1e5-7ca052306c5f',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=15724800; includeSubDomains',
-  date: 'Fri, 17 Feb 2017 07:52:53 GMT',
+  date: 'Mon, 13 Mar 2017 23:52:04 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
-nock('http://xplattestadla4886.azuredatalakeanalytics.net:443')
-  .get('/Jobs/4a1fd523-170b-48d4-8d3d-dfcf7ac20dcc/GetStatistics?api-version=2016-11-01')
-  .reply(400, "{\"error\":{\"code\":\"JobHasNeverRun\",\"message\":\"Cannot find job debugging data or job statistics. Trace: a10509c3-b6b5-484a-a4ce-891ea06b9e97 Time: 2017-02-16T23:52:54.5267259-08:00\"}}", { 'cache-control': 'private, no-cache, no-store, max-age=0',
+nock('http://xplattestadla8046.azuredatalakeanalytics.net:443')
+  .get('/Jobs/5b8f41fb-fe45-416f-8796-5048e2c3e261/GetStatistics?api-version=2016-11-01')
+  .reply(400, "{\"error\":{\"code\":\"JobHasNeverRun\",\"message\":\"Cannot find job debugging data or job statistics. Trace: d4dd67b5-dbdc-4ef3-ad3f-023d924817d7 Time: 2017-03-13T16:52:06.1286653-07:00\"}}", { 'cache-control': 'private, no-cache, no-store, max-age=0',
   'transfer-encoding': 'chunked',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'a10509c3-b6b5-484a-a4ce-891ea06b9e97',
+  'x-ms-request-id': 'd4dd67b5-dbdc-4ef3-ad3f-023d924817d7',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=15724800; includeSubDomains',
-  date: 'Fri, 17 Feb 2017 07:52:54 GMT',
+  date: 'Mon, 13 Mar 2017 23:52:05 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
-nock('https://xplattestadla4886.azuredatalakeanalytics.net:443')
-  .get('/Jobs/4a1fd523-170b-48d4-8d3d-dfcf7ac20dcc/GetStatistics?api-version=2016-11-01')
-  .reply(400, "{\"error\":{\"code\":\"JobHasNeverRun\",\"message\":\"Cannot find job debugging data or job statistics. Trace: a10509c3-b6b5-484a-a4ce-891ea06b9e97 Time: 2017-02-16T23:52:54.5267259-08:00\"}}", { 'cache-control': 'private, no-cache, no-store, max-age=0',
+nock('https://xplattestadla8046.azuredatalakeanalytics.net:443')
+  .get('/Jobs/5b8f41fb-fe45-416f-8796-5048e2c3e261/GetStatistics?api-version=2016-11-01')
+  .reply(400, "{\"error\":{\"code\":\"JobHasNeverRun\",\"message\":\"Cannot find job debugging data or job statistics. Trace: d4dd67b5-dbdc-4ef3-ad3f-023d924817d7 Time: 2017-03-13T16:52:06.1286653-07:00\"}}", { 'cache-control': 'private, no-cache, no-store, max-age=0',
   'transfer-encoding': 'chunked',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'a10509c3-b6b5-484a-a4ce-891ea06b9e97',
+  'x-ms-request-id': 'd4dd67b5-dbdc-4ef3-ad3f-023d924817d7',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=15724800; includeSubDomains',
-  date: 'Fri, 17 Feb 2017 07:52:54 GMT',
+  date: 'Mon, 13 Mar 2017 23:52:05 GMT',
   connection: 'close' });
  return result; }]];
- exports.uuidsGenerated = function() { return ['4a1fd523-170b-48d4-8d3d-dfcf7ac20dcc'];};
+ exports.uuidsGenerated = function() { return ['5b8f41fb-fe45-416f-8796-5048e2c3e261'];};

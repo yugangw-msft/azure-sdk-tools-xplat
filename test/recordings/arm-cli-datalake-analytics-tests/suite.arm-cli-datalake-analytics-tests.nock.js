@@ -6,13 +6,13 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: 'ce4a7590-4722-4bcf-a2c6-e473e9f11778',
-    name: 'Azure Storage DM Test',
+    id: '53d9063d-87ae-4ea8-be90-3686c3b8669f',
     user: {
       name: 'user@domain.example',
       type: 'user'
     },
-    tenantId: '72f988bf-86f1-41af-91ab-2d7cd011db47',
+    tenantId: '6e606ece-3a5a-4674-a654-d6b02bc5a51b',
+    name: 'Visual Studio Ultimate with MSDN',
     state: 'Enabled',
     registeredProviders: [],
     _eventsCount: '1',
@@ -29,4 +29,4 @@ exports.setEnvironment = function() {
 
 exports.scopes = [];
 
- exports.randomTestIdsGenerated = function() { return ['xplattestadla1035','xplattestadla8566','xplattestadla4886','xplattestadls9991','xplattestadls7279','xplattestadls6820','adlacatalogitem8839','adlacatalogitem2058','adlacatalogitem2824','adlacatalogitem34','adlacatalogitem4285','adlacatalogitem1830','adlacatalogitem2344','adlacatalogitem1067'];};
+ exports.randomTestIdsGenerated = function() { return ['xplattestadla9547','xplattestadla4341','xplattestadla8046','xplattestadls2718','xplattestadls1796','xplattestadls6257','adlacatalogitem3809','adlacatalogitem2798','adlacatalogitem9495','adlacatalogitem2880','adlacatalogitem3869','adlacatalogitem8933','adlacatalogitem9366','adlacatalogitem2355'];};
