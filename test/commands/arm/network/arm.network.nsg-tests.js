@@ -40,13 +40,8 @@ var networkInterfaceId;
 
 var networkSecurityGroups = {
   location: 'westus',
-
   name: 'networkSecurityGroupName'
 }
-
-
-
-
 
 var requiredEnvironment = [{
   name: 'AZURE_VM_TEST_LOCATION',
@@ -68,8 +63,8 @@ describe('arm', function () {
         networkSecurityGroups.name = suite.isMocked ? networkSecurityGroups.name : suite.generateId(networkSecurityGroups.name, null);
         if(!suite.isPlayback()) {
           networkUtil.createGroup(groupName, location, suite, function () {
-          done();
-        });
+            done();
+          });
         } else {
           var subscriptionId = profile.current.getSubscription().id;
           done();
@@ -95,7 +90,7 @@ describe('arm', function () {
         var cmd = 'network nsg create -g {group} -n {name} --location {location}  --json'.formatArgs(networkSecurityGroups);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-            var output = JSON.parse(result.text);
+          var output = JSON.parse(result.text);
           output.name.should.equal(networkSecurityGroups.name);
 
           done();
@@ -116,7 +111,7 @@ describe('arm', function () {
         var cmd = 'network nsg set -g {group} -n {name}  --json'.formatArgs(networkSecurityGroups);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-            var output = JSON.parse(result.text);
+          var output = JSON.parse(result.text);
           output.name.should.equal(networkSecurityGroups.name);
 
           done();
@@ -147,7 +142,6 @@ describe('arm', function () {
           });
         });
       });
-
     });
   });
 });

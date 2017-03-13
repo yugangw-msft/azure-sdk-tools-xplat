@@ -14,7 +14,7 @@ exports.getMockedProfile = function () {
     },
     tenantId: '72f988bf-86f1-41af-91ab-2d7cd011db47',
     state: 'Enabled',
-    registeredProviders: ['mobileservice', 'website'],
+    registeredProviders: [],
     _eventsCount: '1',
     isDefault: true
   }, newProfile.environments['AzureCloud']));
@@ -35,13 +35,13 @@ nock('http://management.azure.com:443')
   'content-length': '302',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '6b56d048-7ec9-45b2-b376-5d447e87e11e',
+  'x-ms-request-id': 'fb60b3c1-ea69-4d82-ae76-e30596e9a09d',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0, Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14928',
-  'x-ms-correlation-request-id': '3d087f9e-ea5c-4680-a587-dcccc934f801',
-  'x-ms-routing-request-id': 'CANADAEAST:20170216T120844Z:3d087f9e-ea5c-4680-a587-dcccc934f801',
-  date: 'Thu, 16 Feb 2017 12:08:43 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14992',
+  'x-ms-correlation-request-id': '33aea97b-5bfc-4a16-bcba-d058f658dd64',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170313T084044Z:33aea97b-5bfc-4a16-bcba-d058f658dd64',
+  date: 'Mon, 13 Mar 2017 08:40:44 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
@@ -53,12 +53,12 @@ nock('https://management.azure.com:443')
   'content-length': '302',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '6b56d048-7ec9-45b2-b376-5d447e87e11e',
+  'x-ms-request-id': 'fb60b3c1-ea69-4d82-ae76-e30596e9a09d',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0, Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14928',
-  'x-ms-correlation-request-id': '3d087f9e-ea5c-4680-a587-dcccc934f801',
-  'x-ms-routing-request-id': 'CANADAEAST:20170216T120844Z:3d087f9e-ea5c-4680-a587-dcccc934f801',
-  date: 'Thu, 16 Feb 2017 12:08:43 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14992',
+  'x-ms-correlation-request-id': '33aea97b-5bfc-4a16-bcba-d058f658dd64',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170313T084044Z:33aea97b-5bfc-4a16-bcba-d058f658dd64',
+  date: 'Mon, 13 Mar 2017 08:40:44 GMT',
   connection: 'close' });
  return result; }]];
