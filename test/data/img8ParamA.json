@@ -1,0 +1,21 @@
+{
+  "storageProfile": {
+    "osDisk": {
+      "osType": "Linux",
+      "osState": "Generalized",
+      "blobUri": "https://xplatteststorage18026.blob.core.windows.net/vm13299/xplattestvhd.vhd",
+      "caching": "None",
+      "diskSizeGB": null
+    },
+    "dataDisks": [
+      {
+        "lun": 1,
+        "blobUri": "https://xplatteststorage18026.blob.core.windows.net/vm13299/xplattestvhd.vhd",
+        "caching": "None",
+        "diskSizeGB": null
+      }
+    ]
+  },
+  "location": "westus",
+  "name": "xplattestimg8A"
+}

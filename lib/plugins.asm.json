@@ -17248,7 +17248,7 @@
             },
             {
               "name": "upload",
-              "description": "Upload the specified file to storage blob",
+              "description": "Upload the specified file to storage blob. To upload to large block blob, please run on 64-bit machine with 64-bit node.",
               "fullName": "storage blob upload",
               "usage": "[options] [file] [container] [blob]",
               "filePath": "commands/storage/storage.blob._js",
@@ -19739,6 +19739,14 @@
                   "short": "-p",
                   "long": "--path",
                   "description": "the path to be listed"
+                },
+                {
+                  "flags": "--prefix <prefix>",
+                  "required": -10,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--prefix",
+                  "description": "the storage file name prefix"
                 },
                 {
                   "flags": "--sas <sas>",
@@ -38139,7 +38147,7 @@
               "optional": 0,
               "bool": true,
               "long": "--aspNetCore",
-              "description": "Create a deployment script for ASP.NET Core web application, specify the project.json file path"
+              "description": "Create a deployment script for ASP.NET Core web application, specify the project file path"
             },
             {
               "flags": "--aspWebSite",
@@ -38164,6 +38172,14 @@
               "bool": true,
               "long": "--node",
               "description": "Create a deployment script for node.js website"
+            },
+            {
+              "flags": "--ruby",
+              "required": 0,
+              "optional": 0,
+              "bool": true,
+              "long": "--ruby",
+              "description": "Create a deployment script for ruby website"
             },
             {
               "flags": "--php",
@@ -43747,7 +43763,7 @@
                   "optional": 0,
                   "bool": true,
                   "long": "--daemon",
-                  "description": "Configures the chef-client service for unattended execution. The node platform to be Windows. Options: 'none' or 'service'. \n 'none' - Currently prevents the chef-client service from being configured as a service. \n 'service' - Configures the chef-client to run automatically in the background as a service."
+                  "description": "Configures the chef-client service for unattended execution. The node platform to be Windows. Options: 'none' or 'service' or 'task'. \n 'none' - Currently prevents the chef-client service from being configured as a service. \n 'service' - Configures the chef-client to run automatically in the background as a service. \n 'task' - Configures the chef-client to run automatically in the background as a scheduled task."
                 },
                 {
                   "flags": "--secret <secret-key>",

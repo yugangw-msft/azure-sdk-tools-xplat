@@ -1,0 +1,40 @@
+{
+  "sourceVirtualMachine": {
+    "id": ""
+  },
+  "storageProfile": {
+    "osDisk": {
+      "osType": null,
+      "osState": "",
+      "snapshot": {
+        "id": ""
+      },
+      "managedDisk": {
+        "id": ""
+      },
+      "blobUri": "",
+      "caching": null,
+      "diskSizeGB": null
+    },
+    "dataDisks": [
+      {
+        "lun": "",
+        "snapshot": {
+          "id": ""
+        },
+        "managedDisk": {
+          "id": ""
+        },
+        "blobUri": "",
+        "caching": null,
+        "diskSizeGB": null
+      }
+    ]
+  },
+  "provisioningState": "",
+  "id": null,
+  "name": null,
+  "type": null,
+  "location": "",
+  "tags": {}
+}

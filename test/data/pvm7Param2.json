@@ -1,0 +1,37 @@
+{
+  "name": "vm27672",
+  "location": "westus",
+  "hardwareProfile": {
+    "vmSize": "Standard_DS1"
+  },
+  "storageProfile": {
+    "imageReference": {
+      "publisher": "CoreOS",
+      "offer": "CoreOS",
+      "sku": "Stable",
+      "version": "latest"
+    },
+    "osDisk": {
+      "caching": "None",
+      "createOption": "fromImage"
+    }
+  },
+  "osProfile": {
+    "linuxConfiguration": {
+      "disablePasswordAuthentication": false
+    },
+    "computerName": "diskvm1",
+    "adminUsername": "azureuser",
+    "adminPassword": "Brillio@2016"
+  },
+  "networkProfile": {
+    "networkInterfaces": [
+      {
+        "id": "/subscriptions/ce4a7590-4722-4bcf-a2c6-e473e9f11778/resourceGroups/xplatTstPvmGCreate9214/providers/Microsoft.Network/networkInterfaces/xplattestni25735"
+      }
+    ]
+  },
+  "availabilitySet": {
+    "id": "/subscriptions/ce4a7590-4722-4bcf-a2c6-e473e9f11778/resourceGroups/xplatTstPvmGCreate9214/providers/Microsoft.Compute/availabilitySets/xplattestavs7"
+  }
+}
