@@ -1,4 +1,12 @@
-##2017-02-22 Version 0.10.10
+##2017-03-14 Version 0.10.11 (npm only - hotfix)
+* General
+  * Added a SHA-256 hash of macAddress to userAgent header, per VS Telemetry standard #3520
+* Datalake
+  * Fixed bug with ADLA create credential not properly binding credentialName parameter #3533
+* CDN
+  * Added enable/disable https in CDN custom domain #3519
+ 
+##2017-02-22 Version 0.10.10 (npm only - hotfix)
 * General
   * Fixed a bug with appveyor integration. #3493
   * Added auto completion for fish shell. #3509
