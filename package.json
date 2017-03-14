@@ -13,7 +13,7 @@
     "Wang, Yugang <yugangw@microsoft.com>",
     "Chen, Hao <hach@microsoft.com>"
   ],
-  "version": "0.10.10",
+  "version": "0.10.11",
   "description": "Microsoft Azure Cross Platform Command Line tool",
   "tags": [
     "azure",
@@ -37,7 +37,7 @@
     "async": "1.4.2",
     "azure-common": "0.9.18",
     "azure-arm-authorization": "2.0.0",
-    "azure-arm-cdn": "1.0.2",
+    "azure-arm-cdn": "1.0.3",
     "azure-arm-commerce": "0.2.0",
     "azure-arm-compute": "0.20.0",
     "azure-arm-datalake-analytics": "^1.0.1-preview",
@@ -78,6 +78,7 @@
     "caller-id": "0.1.x",
     "colors": "1.1.2",
     "commander": "1.0.4",
+    "date-utils": "1.2.21",
     "easy-table": "0.0.1",
     "event-stream": "3.1.5",
     "eyes": "0.x.x",
@@ -87,6 +88,7 @@
     "jsonlint": "1.6.2",
     "jsonminify": "^0.4.1",
     "jsrsasign": "4.8.2 ",
+    "jwt-decode": "^2.1.0",
     "kuduscript": "1.0.13",
     "moment": "^2.8.0",
     "ms-rest": "^1.12.0",
