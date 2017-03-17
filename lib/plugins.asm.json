@@ -38147,7 +38147,7 @@
               "optional": 0,
               "bool": true,
               "long": "--aspNetCore",
-              "description": "Create a deployment script for ASP.NET Core web application, specify the project.json file path"
+              "description": "Create a deployment script for ASP.NET Core web application, specify the project file path"
             },
             {
               "flags": "--aspWebSite",
@@ -38172,6 +38172,14 @@
               "bool": true,
               "long": "--node",
               "description": "Create a deployment script for node.js website"
+            },
+            {
+              "flags": "--ruby",
+              "required": 0,
+              "optional": 0,
+              "bool": true,
+              "long": "--ruby",
+              "description": "Create a deployment script for ruby website"
             },
             {
               "flags": "--php",
