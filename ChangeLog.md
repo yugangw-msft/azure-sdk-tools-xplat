@@ -1,3 +1,35 @@
+##2017-03-14 Version 0.10.11 (npm only - hotfix)
+* General
+  * Added a SHA-256 hash of macAddress to userAgent header, per VS Telemetry standard #3520
+* Datalake
+  * Fixed bug with ADLA create credential not properly binding credentialName parameter #3533
+* CDN
+  * Added enable/disable https in CDN custom domain #3519
+ 
+##2017-02-22 Version 0.10.10 (npm only - hotfix)
+* General
+  * Fixed a bug with appveyor integration. #3493
+  * Added auto completion for fish shell. #3509
+* Compute
+  * Fixed issue of not being able to quick create a VM from a user image (Issue #3499). #3499
+  * Added optional --storage-account-name parameter to vm quick-create. #3499
+  * Fixed bug #3503 in managed disk scenario by adding a --skip-vm-backup option to the enable-encryption command #3504
+  * Chef Extension
+    * Added support for passing daemon as task. #3516
+* KeyVault
+  * Fixed bug #3444. Made CLI not prompt for parameter value if keyvault reference is included. #3488
+* Network
+  * Implemented commands for Network watcher #3494
+  * Fixed bug #2167 by adding multi-site support for app gateways (host name option). #3515
+* Storage
+  * Updated azure-storage module to 2.0.0 #3455
+  * Added support for large block blob #3455
+  * Added support for `file` for the `--enable-encryption-service` and `--disable-encryption-service` for commands  `azure storage account create` and `azure storage account set`. #3496
+  * Added `--prefix` option for command `azure storage file list`. #3496
+  * Updated the implementation for commands `azure storage container list` and `azure storage container show` to save unnecessary extra service call. #3496
+* Web
+  * Updated kuduscript package. #3479
+
 ##2017-02-08 Version 0.10.9
 * General
   * Improved error message in the CLI about command not being valid (Fixes #3272, #3256, #3245). #3424

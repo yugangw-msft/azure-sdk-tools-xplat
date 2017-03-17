@@ -67,7 +67,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .post('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTestGExtension6462/providers/Microsoft.Storage/storageAccounts/xplatstoragext6487/listKeys?api-version=2016-01-01')
+  .post('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTestGExtension6462/providers/Microsoft.Storage/storageAccounts/xplatstoragext6487/listKeys?api-version=2016-12-01')
   .reply(200, "{\"keys\":[{\"keyName\":\"key1\",\"permissions\":\"Full\",\"value\":\"K5qyPB8g9x4tf56Wa9GPiN745Wnqa8jrBecdj5uv4GrOoBG9tcQeJkwmEp9uVDVYGthoRk7TjcgUv63SBUXulA==\"},{\"keyName\":\"key2\",\"permissions\":\"Full\",\"value\":\"6ss8DZLrQvHZKEZtpvIiKyXyy3xuAEtwhU3nYV1XRK/JmxhJ9qBL00iQXdEvAXnHC1RoQsQMceW5s11yy3Xslw==\"}]}\n", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '289',
@@ -85,7 +85,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .post('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTestGExtension6462/providers/Microsoft.Storage/storageAccounts/xplatstoragext6487/listKeys?api-version=2016-01-01')
+  .post('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTestGExtension6462/providers/Microsoft.Storage/storageAccounts/xplatstoragext6487/listKeys?api-version=2016-12-01')
   .reply(200, "{\"keys\":[{\"keyName\":\"key1\",\"permissions\":\"Full\",\"value\":\"K5qyPB8g9x4tf56Wa9GPiN745Wnqa8jrBecdj5uv4GrOoBG9tcQeJkwmEp9uVDVYGthoRk7TjcgUv63SBUXulA==\"},{\"keyName\":\"key2\",\"permissions\":\"Full\",\"value\":\"6ss8DZLrQvHZKEZtpvIiKyXyy3xuAEtwhU3nYV1XRK/JmxhJ9qBL00iQXdEvAXnHC1RoQsQMceW5s11yy3Xslw==\"}]}\n", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '289',

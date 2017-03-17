@@ -26,9 +26,9 @@
         "caching": "None",
         "createOption": "fromImage",
         "vhdContainers": [
-          "https://xplatteststorage19579.blob.core.windows.net/xplatteststoragecnt15465",
-          "https://xplatteststorage22251.blob.core.windows.net/xplatteststoragecnt23167",
-          "https://xplatteststorage37742.blob.core.windows.net/xplatteststoragecnt34573"
+          "https://xplatteststorage18649.blob.core.windows.net/xplatteststoragecnt14275",
+          "https://xplatteststorage24310.blob.core.windows.net/xplatteststoragecnt2447",
+          "https://xplatteststorage34386.blob.core.windows.net/xplatteststoragecnt34825"
         ]
       }
     },
@@ -41,7 +41,7 @@
             {
               "name": "test",
               "subnet": {
-                "id": "/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstVmssGCreate9920/providers/Microsoft.Network/VirtualNetworks/xplattestvnet4131/subnets/xplattestsubnet6155"
+                "id": "/subscriptions/ce4a7590-4722-4bcf-a2c6-e473e9f11778/resourceGroups/xplatTstVmssGCreate5906/providers/Microsoft.Network/VirtualNetworks/xplattestvnet7294/subnets/xplattestsubnet2261"
               },
               "id": ""
             }
@@ -77,5 +77,5 @@
   "singlePlacementGroup": null,
   "id": null,
   "name": "xplattestvmss5",
-  "location": "eastus"
+  "location": "southeastasia"
 }

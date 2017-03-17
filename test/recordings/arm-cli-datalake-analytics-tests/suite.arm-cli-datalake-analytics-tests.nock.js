@@ -7,12 +7,12 @@ exports.getMockedProfile = function () {
 
   newProfile.addSubscription(new profile.Subscription({
     id: '53d9063d-87ae-4ea8-be90-3686c3b8669f',
-    name: 'Visual Studio Ultimate with MSDN',
     user: {
       name: 'user@domain.example',
       type: 'user'
     },
     tenantId: '6e606ece-3a5a-4674-a654-d6b02bc5a51b',
+    name: 'Visual Studio Ultimate with MSDN',
     state: 'Enabled',
     registeredProviders: [],
     _eventsCount: '1',
@@ -29,4 +29,4 @@ exports.setEnvironment = function() {
 
 exports.scopes = [];
 
- exports.randomTestIdsGenerated = function() { return ['xplattestadla6956','xplattestadla6971','xplattestadla1394','xplattestadls2014','xplattestadls9447','xplattestadls351','adlacatalogitem1270','adlacatalogitem4505','adlacatalogitem6592','adlacatalogitem9590','adlacatalogitem452','adlacatalogitem4324','adlacatalogitem3491','adlacatalogitem5976'];};
+ exports.randomTestIdsGenerated = function() { return ['xplattestadla9547','xplattestadla4341','xplattestadla8046','xplattestadls2718','xplattestadls1796','xplattestadls6257','adlacatalogitem3809','adlacatalogitem2798','adlacatalogitem9495','adlacatalogitem2880','adlacatalogitem3869','adlacatalogitem8933','adlacatalogitem9366','adlacatalogitem2355'];};

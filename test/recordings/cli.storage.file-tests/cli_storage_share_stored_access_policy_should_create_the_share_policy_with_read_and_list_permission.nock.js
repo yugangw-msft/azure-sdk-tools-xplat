@@ -6,14 +6,16 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: 'a0d901ba-9956-4f7d-830c-2d7974c36666',
-    name: 'Azure Storage DM Dev',
+    id: 'ce4a7590-4722-4bcf-a2c6-e473e9f11778',
+    name: 'Azure Storage DM Test',
     user: {
       name: 'user@domain.example',
       type: 'user'
     },
     tenantId: '72f988bf-86f1-41af-91ab-2d7cd011db47',
+    state: 'Enabled',
     registeredProviders: [],
+    _eventsCount: '1',
     isDefault: true
   }, newProfile.environments['AzureCloud']));
 
@@ -21,32 +23,62 @@ exports.getMockedProfile = function () {
 };
 
 exports.setEnvironment = function() {
-  process.env['AZURE_STORAGE_CONNECTION_STRING'] = 'DefaultEndpointsProtocol=http;TableEndpoint=http://yaxiatest.table.testrr1.xstore-test.windows-int.net/;QueueEndpoint=http://yaxiatest.queue.testrr1.xstore-test.windows-int.net/;FileEndpoint=http://yaxiatest.file.testrr1.xstore-test.windows-int.net/;BlobEndpoint=https://yaxiatest.blob.testrr1.xstore-test.windows-int.net/;AccountName=yaxiatest;AccountKey=null';
+  process.env['AZURE_STORAGE_CONNECTION_STRING'] = 'DefaultEndpointsProtocol=https;AccountName=xplat;AccountKey=null';
 };
 
 exports.scopes = [[function (nock) { 
 var result = 
-nock('http://yaxiatest.file.testrr1.xstore-test.windows-int.net:80')
+nock('http://xplat.file.core.windows.net:443')
   .get('/storageclitest3?restype=share&comp=acl')
   .reply(200, "﻿<?xml version=\"1.0\" encoding=\"utf-8\"?><SignedIdentifiers />", { 'transfer-encoding': 'chunked',
   'content-type': 'application/xml',
-  'last-modified': 'Fri, 03 Jul 2015 06:03:42 GMT',
-  etag: '"0x8D2836D2603BE68"',
+  'last-modified': 'Tue, 14 Feb 2017 06:23:32 GMT',
+  etag: '"0x8D454A2001FEE36"',
   server: 'Windows-Azure-File/1.0 Microsoft-HTTPAPI/2.0',
-  'x-ms-request-id': '3e8ab95c-001a-000d-2f56-b5c0da000000',
-  'x-ms-version': '2015-02-21',
-  date: 'Fri, 03 Jul 2015 06:03:42 GMT' });
+  'x-ms-request-id': '87841124-001a-003f-288a-8621db000000',
+  'x-ms-version': '2016-05-31',
+  date: 'Tue, 14 Feb 2017 06:23:35 GMT',
+  connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
-nock('http://yaxiatest.file.testrr1.xstore-test.windows-int.net:80')
+nock('https://xplat.file.core.windows.net:443')
+  .get('/storageclitest3?restype=share&comp=acl')
+  .reply(200, "﻿<?xml version=\"1.0\" encoding=\"utf-8\"?><SignedIdentifiers />", { 'transfer-encoding': 'chunked',
+  'content-type': 'application/xml',
+  'last-modified': 'Tue, 14 Feb 2017 06:23:32 GMT',
+  etag: '"0x8D454A2001FEE36"',
+  server: 'Windows-Azure-File/1.0 Microsoft-HTTPAPI/2.0',
+  'x-ms-request-id': '87841124-001a-003f-288a-8621db000000',
+  'x-ms-version': '2016-05-31',
+  date: 'Tue, 14 Feb 2017 06:23:35 GMT',
+  connection: 'close' });
+ return result; },
+function (nock) { 
+var result = 
+nock('http://xplat.file.core.windows.net:443')
   .filteringRequestBody(function (path) { return '*';})
 .put('/storageclitest3?restype=share&comp=acl', '*')
   .reply(200, "", { 'transfer-encoding': 'chunked',
-  'last-modified': 'Fri, 03 Jul 2015 06:03:45 GMT',
-  etag: '"0x8D2836D27B2265C"',
+  'last-modified': 'Tue, 14 Feb 2017 06:23:36 GMT',
+  etag: '"0x8D454A20214CA81"',
   server: 'Windows-Azure-File/1.0 Microsoft-HTTPAPI/2.0',
-  'x-ms-request-id': 'a364623a-001a-0004-2155-b536ac000000',
-  'x-ms-version': '2015-02-21',
-  date: 'Fri, 03 Jul 2015 06:03:12 GMT' });
+  'x-ms-request-id': '066d9419-001a-000c-128a-8678f6000000',
+  'x-ms-version': '2016-05-31',
+  date: 'Tue, 14 Feb 2017 06:23:36 GMT',
+  connection: 'close' });
+ return result; },
+function (nock) { 
+var result = 
+nock('https://xplat.file.core.windows.net:443')
+  .filteringRequestBody(function (path) { return '*';})
+.put('/storageclitest3?restype=share&comp=acl', '*')
+  .reply(200, "", { 'transfer-encoding': 'chunked',
+  'last-modified': 'Tue, 14 Feb 2017 06:23:36 GMT',
+  etag: '"0x8D454A20214CA81"',
+  server: 'Windows-Azure-File/1.0 Microsoft-HTTPAPI/2.0',
+  'x-ms-request-id': '066d9419-001a-000c-128a-8678f6000000',
+  'x-ms-version': '2016-05-31',
+  date: 'Tue, 14 Feb 2017 06:23:36 GMT',
+  connection: 'close' });
  return result; }]];

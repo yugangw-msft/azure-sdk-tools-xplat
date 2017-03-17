@@ -65,6 +65,7 @@ var location, groupName = 'xplatTestGroupCreateAppGw3',
     httpProtocol: 'Http',
     httpsProtocol: 'Https',
     httpListenerName: 'xplatTestListener',
+    listenerHostName: 'fabricam11.com',
     defHttpListenerName: constants.appGateway.httpListener.name,
     ruleName: 'xplatTestRule',
     probeName: 'xplatTestProbe',
@@ -612,7 +613,7 @@ describe('arm', function () {
 
       it('http-listener create command should create new http listener in application gateway', function (done) {
         var cmd = util.format('network application-gateway http-listener create {group} {name} {httpListenerName} ' +
-          '-i {frontendIpName} -p {portName} -r {httpProtocol} --json').formatArgs(gatewayProp);
+          '-i {frontendIpName} -p {portName} -r {httpProtocol} -o {listenerHostName} --json').formatArgs(gatewayProp);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var appGateway = JSON.parse(result.text);
@@ -621,6 +622,7 @@ describe('arm', function () {
           var listener = appGateway.httpListeners[1];
           listener.name.should.equal(gatewayProp.httpListenerName);
           listener.protocol.should.equal(gatewayProp.httpProtocol);
+          listener.hostName.should.equal(gatewayProp.listenerHostName);
           networkUtil.shouldBeSucceeded(listener);
           done();
         });
@@ -628,7 +630,7 @@ describe('arm', function () {
 
       it('http-listener set command should modify new http listener in application gateway', function (done) {
         var cmd = util.format('network application-gateway http-listener set {group} {name} {httpListenerName} ' +
-          '-r {httpsProtocol} -c {defSslCertName} --json').formatArgs(gatewayProp);
+          '-r {httpsProtocol} -c {defSslCertName} -o {hostNameNew} --json').formatArgs(gatewayProp);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var appGateway = JSON.parse(result.text);
@@ -637,6 +639,7 @@ describe('arm', function () {
           var listener = utils.findFirstCaseIgnore(appGateway.httpListeners, {name: gatewayProp.httpListenerName});
           listener.name.should.equal(gatewayProp.httpListenerName);
           listener.protocol.should.equal(gatewayProp.httpsProtocol);
+          listener.hostName.should.equal(gatewayProp.hostNameNew);
           networkUtil.shouldBeSucceeded(listener);
           done();
         });
