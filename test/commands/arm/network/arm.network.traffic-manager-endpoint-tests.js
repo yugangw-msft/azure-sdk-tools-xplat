@@ -24,19 +24,21 @@ var CLITest = require('../../../framework/arm-cli-test');
 var NetworkTestUtil = require('../../../util/networkTestUtil');
 var networkUtil = new NetworkTestUtil();
 
-var testPrefix = 'arm-network-traffic-manager-endpoint-tests',
+var testPrefix = 'arm-network-traffic-manager-endpoint-tests3',
   groupName = 'xplat-test-traffic-manager-profile',
   location;
 
 var endpointProp = {
-  name: 'test-enpoint',
+  name: 'test-endpoint',
   type: 'ExternalEndpoints',
   status: 'Enabled',
   newStatus: 'Disabled',
   weight: 100,
   newWeight: 101,
   priority: 200,
-  newPriority: 202
+  newPriority: 202,
+  geoMapping: 'RE,GEO-NA',
+  newGeoMapping: 'RU,GEO-AP'
 };
 
 var profileProp = {
@@ -44,6 +46,7 @@ var profileProp = {
   relativeDnsName: 'test-profile-dns',
   profileStatus: 'Enabled',
   trafficRoutingMethod: 'Performance',
+  geographic: 'Geographic',
   ttl: 300,
   monitorProtocol: 'HTTP',
   monitorPort: 80,
@@ -104,10 +107,10 @@ describe('arm', function () {
               result.exitStatus.should.equal(0);
               var endpoint = JSON.parse(result.text);
               endpoint.name.should.equal(endpointProp.name);
-              endpoint.properties.target.should.equal(endpointProp.target);
-              endpoint.properties.endpointStatus.should.equal(endpointProp.status);
-              endpoint.properties.weight.should.equal(endpointProp.weight);
-              endpoint.properties.priority.should.equal(endpointProp.priority);
+              endpoint.target.should.equal(endpointProp.target);
+              endpoint.endpointStatus.should.equal(endpointProp.status);
+              endpoint.weight.should.equal(endpointProp.weight);
+              endpoint.priority.should.equal(endpointProp.priority);
               done();
             });
           });
@@ -120,10 +123,10 @@ describe('arm', function () {
           result.exitStatus.should.equal(0);
           var endpoint = JSON.parse(result.text);
           endpoint.name.should.equal(endpointProp.name);
-          endpoint.properties.target.should.equal(endpointProp.target);
-          endpoint.properties.endpointStatus.should.equal(endpointProp.status);
-          endpoint.properties.weight.should.equal(endpointProp.weight);
-          endpoint.properties.priority.should.equal(endpointProp.priority);
+          endpoint.target.should.equal(endpointProp.target);
+          endpoint.endpointStatus.should.equal(endpointProp.status);
+          endpoint.weight.should.equal(endpointProp.weight);
+          endpoint.priority.should.equal(endpointProp.priority);
           done();
         });
       });
@@ -135,10 +138,10 @@ describe('arm', function () {
           result.exitStatus.should.equal(0);
           var endpoint = JSON.parse(result.text);
           endpoint.name.should.equal(endpointProp.name);
-          endpoint.properties.target.should.equal(endpointProp.newTarget);
-          endpoint.properties.endpointStatus.should.equal(endpointProp.newStatus);
-          endpoint.properties.weight.should.equal(endpointProp.newWeight);
-          endpoint.properties.priority.should.equal(endpointProp.newPriority);
+          endpoint.target.should.equal(endpointProp.newTarget);
+          endpoint.endpointStatus.should.equal(endpointProp.newStatus);
+          endpoint.weight.should.equal(endpointProp.newWeight);
+          endpoint.priority.should.equal(endpointProp.newPriority);
           done();
         });
       });
@@ -156,6 +159,30 @@ describe('arm', function () {
             endpoint.should.be.empty;
             done();
           });
+        });
+      });
+
+      it('create should create endpoint in traffic manager profile', function (done) {
+        profileProp.trafficRoutingMethod = profileProp.geographic;
+        var cmd = util.format('network traffic-manager endpoint create -g {group} -f {profileName} -n {name} -l {location} ' +
+          '-t {target} -y {type} -m {geoMapping} --json').formatArgs(endpointProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var endpoint = JSON.parse(result.text);
+          endpoint.name.should.equal(endpointProp.name);
+          endpoint.geoMapping.join(',').should.equal(endpointProp.geoMapping);
+          done();
+        });
+      });
+      it('set should modify endpoint in traffic manager profile', function (done) {
+        var cmd = util.format('network traffic-manager endpoint set -g {group} -f {profileName} -n {name} -y {type}' +
+          ' -m {newGeoMapping} --json').formatArgs(endpointProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var endpoint = JSON.parse(result.text);
+          endpoint.name.should.equal(endpointProp.name);
+          endpoint.geoMapping.join(',').should.equal(endpointProp.newGeoMapping);
+          done();
         });
       });
     });

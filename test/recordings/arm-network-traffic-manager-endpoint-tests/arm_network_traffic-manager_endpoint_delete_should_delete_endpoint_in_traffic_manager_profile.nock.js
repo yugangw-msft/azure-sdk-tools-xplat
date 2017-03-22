@@ -14,7 +14,8 @@ exports.getMockedProfile = function () {
     },
     tenantId: '72f988bf-86f1-41af-91ab-2d7cd011db47',
     state: 'Enabled',
-    registeredProviders: ['mobileservice'],
+    registeredProviders: [],
+    _eventsCount: '1',
     isDefault: true
   }, newProfile.environments['AzureCloud']));
 
@@ -27,54 +28,113 @@ exports.setEnvironment = function() {
 
 exports.scopes = [[function (nock) { 
 var result = 
-nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-traffic-manager-profile/providers/Microsoft.Network/trafficmanagerprofiles/test-profile/ExternalEndpoints/test-enpoint?api-version=2015-11-01')
-  .reply(200, "{\"id\":\"\\/subscriptions\\/2c224e7e-3ef5-431d-a57b-e71f4662e3a6\\/resourceGroups\\/xplat-test-traffic-manager-profile\\/providers\\/Microsoft.Network\\/trafficManagerProfiles\\/test-profile\\/externalEndpoints\\/test-enpoint\",\"name\":\"test-enpoint\",\"type\":\"Microsoft.Network\\/trafficManagerProfiles\\/externalEndpoints\",\"properties\":{\"endpointStatus\":\"Disabled\",\"endpointMonitorStatus\":\"Disabled\",\"target\":\"foobartest-profile-dns.azure.com\",\"weight\":101,\"priority\":202,\"endpointLocation\":\"East US\"}}", { 'cache-control': 'private',
-  'content-length': '486',
+nock('http://management.azure.com:443')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-traffic-manager-profile/providers/Microsoft.Network/trafficmanagerprofiles/test-profile/ExternalEndpoints/test-endpoint?api-version=2017-03-01')
+  .reply(200, "{\"id\":\"\\/subscriptions\\/2c224e7e-3ef5-431d-a57b-e71f4662e3a6\\/resourceGroups\\/xplat-test-traffic-manager-profile\\/providers\\/Microsoft.Network\\/trafficManagerProfiles\\/test-profile\\/externalEndpoints\\/test-endpoint\",\"name\":\"test-endpoint\",\"type\":\"Microsoft.Network\\/trafficManagerProfiles\\/externalEndpoints\",\"properties\":{\"endpointStatus\":\"Disabled\",\"endpointMonitorStatus\":\"Disabled\",\"target\":\"foobartest-profile-dns.azure.com\",\"weight\":101,\"priority\":202,\"endpointLocation\":\"East US\"}}", { 'cache-control': 'private',
+  'content-length': '488',
   'content-type': 'application/json; charset=utf-8',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': 'c0eaf412-a263-4a40-aaad-1ad6acc60489',
+  'x-ms-request-id': 'b831fd35-1649-4cc4-95f0-929662c38b3c',
   server: 'Microsoft-IIS/8.5',
   'x-aspnet-version': '4.0.30319',
   'x-powered-by': 'ASP.NET',
-  'x-ms-ratelimit-remaining-subscription-reads': '14947',
-  'x-ms-correlation-request-id': '7a75dd8c-ebca-43c3-9481-b921d130aa5e',
-  'x-ms-routing-request-id': 'WESTEUROPE:20161207T141755Z:7a75dd8c-ebca-43c3-9481-b921d130aa5e',
-  date: 'Wed, 07 Dec 2016 14:17:55 GMT' });
+  'x-ms-ratelimit-remaining-subscription-reads': '14981',
+  'x-ms-correlation-request-id': 'b698363e-e5dc-4aa0-9e89-7f480d1b2586',
+  'x-ms-routing-request-id': 'CANADAEAST:20170322T211137Z:b698363e-e5dc-4aa0-9e89-7f480d1b2586',
+  date: 'Wed, 22 Mar 2017 21:11:37 GMT',
+  connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .delete('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-traffic-manager-profile/providers/Microsoft.Network/trafficmanagerprofiles/test-profile/ExternalEndpoints/test-enpoint?api-version=2015-11-01')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-traffic-manager-profile/providers/Microsoft.Network/trafficmanagerprofiles/test-profile/ExternalEndpoints/test-endpoint?api-version=2017-03-01')
+  .reply(200, "{\"id\":\"\\/subscriptions\\/2c224e7e-3ef5-431d-a57b-e71f4662e3a6\\/resourceGroups\\/xplat-test-traffic-manager-profile\\/providers\\/Microsoft.Network\\/trafficManagerProfiles\\/test-profile\\/externalEndpoints\\/test-endpoint\",\"name\":\"test-endpoint\",\"type\":\"Microsoft.Network\\/trafficManagerProfiles\\/externalEndpoints\",\"properties\":{\"endpointStatus\":\"Disabled\",\"endpointMonitorStatus\":\"Disabled\",\"target\":\"foobartest-profile-dns.azure.com\",\"weight\":101,\"priority\":202,\"endpointLocation\":\"East US\"}}", { 'cache-control': 'private',
+  'content-length': '488',
+  'content-type': 'application/json; charset=utf-8',
+  'x-content-type-options': 'nosniff',
+  'strict-transport-security': 'max-age=31536000; includeSubDomains',
+  'x-ms-request-id': 'b831fd35-1649-4cc4-95f0-929662c38b3c',
+  server: 'Microsoft-IIS/8.5',
+  'x-aspnet-version': '4.0.30319',
+  'x-powered-by': 'ASP.NET',
+  'x-ms-ratelimit-remaining-subscription-reads': '14981',
+  'x-ms-correlation-request-id': 'b698363e-e5dc-4aa0-9e89-7f480d1b2586',
+  'x-ms-routing-request-id': 'CANADAEAST:20170322T211137Z:b698363e-e5dc-4aa0-9e89-7f480d1b2586',
+  date: 'Wed, 22 Mar 2017 21:11:37 GMT',
+  connection: 'close' });
+ return result; },
+function (nock) { 
+var result = 
+nock('http://management.azure.com:443')
+  .delete('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-traffic-manager-profile/providers/Microsoft.Network/trafficmanagerprofiles/test-profile/ExternalEndpoints/test-endpoint?api-version=2017-03-01')
   .reply(200, "", { 'cache-control': 'private',
   'content-length': '0',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': '5a2b342b-bf6e-45ba-9808-48cbdf341e33',
+  'x-ms-request-id': 'f6a331cb-29f9-40cf-970e-db5719e29b2f',
   server: 'Microsoft-IIS/8.5',
   'x-aspnet-version': '4.0.30319',
   'x-powered-by': 'ASP.NET',
-  'x-ms-ratelimit-remaining-subscription-writes': '1187',
-  'x-ms-correlation-request-id': '4b314244-45a0-4f41-986c-8c041d013fe6',
-  'x-ms-routing-request-id': 'WESTEUROPE:20161207T141756Z:4b314244-45a0-4f41-986c-8c041d013fe6',
-  date: 'Wed, 07 Dec 2016 14:17:55 GMT' });
+  'x-ms-ratelimit-remaining-subscription-writes': '1191',
+  'x-ms-correlation-request-id': '80c5d095-b9b8-4f74-ac53-83f903a2d87e',
+  'x-ms-routing-request-id': 'CANADAEAST:20170322T211139Z:80c5d095-b9b8-4f74-ac53-83f903a2d87e',
+  date: 'Wed, 22 Mar 2017 21:11:38 GMT',
+  connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-traffic-manager-profile/providers/Microsoft.Network/trafficmanagerprofiles/test-profile/ExternalEndpoints/test-enpoint?api-version=2015-11-01')
-  .reply(404, "{\"code\":\"NotFound\",\"message\":\"The endpoint 'test-enpoint' of type 'externalendpoints' does not exist in the profile 'test-profile'.\"}", { 'cache-control': 'private',
-  'content-length': '133',
-  'content-type': 'application/json; charset=utf-8',
+  .delete('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-traffic-manager-profile/providers/Microsoft.Network/trafficmanagerprofiles/test-profile/ExternalEndpoints/test-endpoint?api-version=2017-03-01')
+  .reply(200, "", { 'cache-control': 'private',
+  'content-length': '0',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': '2f9cf036-3209-44f9-ae9d-4f53c51e5f45',
+  'x-ms-request-id': 'f6a331cb-29f9-40cf-970e-db5719e29b2f',
   server: 'Microsoft-IIS/8.5',
   'x-aspnet-version': '4.0.30319',
   'x-powered-by': 'ASP.NET',
-  'x-ms-ratelimit-remaining-subscription-reads': '14974',
-  'x-ms-correlation-request-id': 'd8e1846b-423e-4bb5-95ba-6a794324d4c4',
-  'x-ms-routing-request-id': 'WESTEUROPE:20161207T141757Z:d8e1846b-423e-4bb5-95ba-6a794324d4c4',
-  date: 'Wed, 07 Dec 2016 14:17:56 GMT' });
+  'x-ms-ratelimit-remaining-subscription-writes': '1191',
+  'x-ms-correlation-request-id': '80c5d095-b9b8-4f74-ac53-83f903a2d87e',
+  'x-ms-routing-request-id': 'CANADAEAST:20170322T211139Z:80c5d095-b9b8-4f74-ac53-83f903a2d87e',
+  date: 'Wed, 22 Mar 2017 21:11:38 GMT',
+  connection: 'close' });
+ return result; },
+function (nock) { 
+var result = 
+nock('http://management.azure.com:443')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-traffic-manager-profile/providers/Microsoft.Network/trafficmanagerprofiles/test-profile/ExternalEndpoints/test-endpoint?api-version=2017-03-01')
+  .reply(404, "{\"code\":\"NotFound\",\"message\":\"The endpoint 'test-endpoint' of type 'externalendpoints' does not exist in the profile 'test-profile'.\"}", { 'cache-control': 'private',
+  'content-length': '134',
+  'content-type': 'application/json; charset=utf-8',
+  'x-content-type-options': 'nosniff',
+  'strict-transport-security': 'max-age=31536000; includeSubDomains',
+  'x-ms-request-id': '9e142914-5671-4668-a0df-41a1d74428c5',
+  server: 'Microsoft-IIS/8.5',
+  'x-aspnet-version': '4.0.30319',
+  'x-powered-by': 'ASP.NET',
+  'x-ms-ratelimit-remaining-subscription-reads': '14990',
+  'x-ms-correlation-request-id': '46bce4ae-778a-4185-87ef-baaf3ab4dd9d',
+  'x-ms-routing-request-id': 'CANADAEAST:20170322T211141Z:46bce4ae-778a-4185-87ef-baaf3ab4dd9d',
+  date: 'Wed, 22 Mar 2017 21:11:40 GMT',
+  connection: 'close' });
+ return result; },
+function (nock) { 
+var result = 
+nock('https://management.azure.com:443')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-traffic-manager-profile/providers/Microsoft.Network/trafficmanagerprofiles/test-profile/ExternalEndpoints/test-endpoint?api-version=2017-03-01')
+  .reply(404, "{\"code\":\"NotFound\",\"message\":\"The endpoint 'test-endpoint' of type 'externalendpoints' does not exist in the profile 'test-profile'.\"}", { 'cache-control': 'private',
+  'content-length': '134',
+  'content-type': 'application/json; charset=utf-8',
+  'x-content-type-options': 'nosniff',
+  'strict-transport-security': 'max-age=31536000; includeSubDomains',
+  'x-ms-request-id': '9e142914-5671-4668-a0df-41a1d74428c5',
+  server: 'Microsoft-IIS/8.5',
+  'x-aspnet-version': '4.0.30319',
+  'x-powered-by': 'ASP.NET',
+  'x-ms-ratelimit-remaining-subscription-reads': '14990',
+  'x-ms-correlation-request-id': '46bce4ae-778a-4185-87ef-baaf3ab4dd9d',
+  'x-ms-routing-request-id': 'CANADAEAST:20170322T211141Z:46bce4ae-778a-4185-87ef-baaf3ab4dd9d',
+  date: 'Wed, 22 Mar 2017 21:11:40 GMT',
+  connection: 'close' });
  return result; }]];
