@@ -39,6 +39,7 @@ var publicIpProp = {
   newIdleTimeout: 15,
   tags: networkUtil.tags,
   newTags: networkUtil.newTags,
+
   // Negative test values
   ipAllocationMethodOutOfRange: 'Any',
   ipVersionOutOfRange: 'IPv9',

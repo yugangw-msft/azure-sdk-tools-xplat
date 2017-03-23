@@ -101,7 +101,7 @@ describe('arm', function () {
                   suite.execute('datalake analytics account create --accountName %s --resource-group %s --location %s --defaultDataLakeStore %s --json', jobAndCatalogAccountName, testResourceGroup, testLocation, storeAccountName, function () {
                       setTimeout(function () {
                         done();
-                      }, 1); // sleep for two minutes to guarantee that the queue has been created to run jobs against
+                      }, 1); // sleep for one minute to guarantee that the queue has been created to run jobs against
                   });
                 });
               });
@@ -330,7 +330,7 @@ describe('arm', function () {
   });
   describe('Data Lake Analytics Catalog', function () {
     it('list commands should work', function (done) {
-      var scriptToRun = 'DROP DATABASE IF EXISTS ' + dbName + '; CREATE DATABASE ' + dbName + '; CREATE TABLE ' + dbName + '.dbo.' + tableName + '( UserId int, Start DateTime, Region string, Query string, Duration int, Urls string, ClickedUrls string, INDEX idx1 CLUSTERED (Region ASC) PARTITIONED BY BUCKETS (UserId) HASH (Region)); ALTER TABLE ' + dbName + '.dbo.' + tableName + ' ADD IF NOT EXISTS PARTITION (1); DROP FUNCTION IF EXISTS ' + dbName + '.dbo.' + tvfName + '; CREATE FUNCTION ' + dbName + '.dbo.' + tvfName + '() RETURNS @result TABLE ( s_date DateTime, s_time string, s_sitename string, cs_method string, cs_uristem string, cs_uriquery string, s_port int, cs_username string, c_ip string, cs_useragent string, cs_cookie string, cs_referer string, cs_host string, sc_status int, sc_substatus int, sc_win32status int, sc_bytes int, cs_bytes int, s_timetaken int) AS BEGIN @result = EXTRACT s_date DateTime, s_time string, s_sitename string, cs_method string, cs_uristem string, cs_uriquery string, s_port int, cs_username string, c_ip string, cs_useragent string, cs_cookie string, cs_referer string, cs_host string, sc_status int, sc_substatus int, sc_win32status int, sc_bytes int, cs_bytes int, s_timetaken int FROM @"/Samples/Data/WebLog.log" USING Extractors.Text(delimiter:\' \'); RETURN; END; CREATE VIEW ' + dbName + '.dbo.' + viewName + ' AS SELECT * FROM ( VALUES(1,2),(2,4) ) AS T(a, b); CREATE PROCEDURE ' + dbName + '.dbo.' + procName + '() AS BEGIN CREATE VIEW ' + dbName + '.dbo.' + viewName + ' AS SELECT * FROM ( VALUES(1,2),(2,4) ) AS T(a, b); END;';
+      var scriptToRun = 'DROP DATABASE IF EXISTS ' + dbName + '; CREATE DATABASE ' + dbName + '; CREATE TABLE ' + dbName + '.dbo.' + tableName + '( UserId int, Start DateTime, Region string, Query string, Duration int, Urls string, ClickedUrls string, INDEX idx1 CLUSTERED (Region ASC) PARTITIONED BY (UserId) HASH (Region)); ALTER TABLE ' + dbName + '.dbo.' + tableName + ' ADD IF NOT EXISTS PARTITION (1); DROP FUNCTION IF EXISTS ' + dbName + '.dbo.' + tvfName + '; CREATE FUNCTION ' + dbName + '.dbo.' + tvfName + '() RETURNS @result TABLE ( s_date DateTime, s_time string, s_sitename string, cs_method string, cs_uristem string, cs_uriquery string, s_port int, cs_username string, c_ip string, cs_useragent string, cs_cookie string, cs_referer string, cs_host string, sc_status int, sc_substatus int, sc_win32status int, sc_bytes int, cs_bytes int, s_timetaken int) AS BEGIN @result = EXTRACT s_date DateTime, s_time string, s_sitename string, cs_method string, cs_uristem string, cs_uriquery string, s_port int, cs_username string, c_ip string, cs_useragent string, cs_cookie string, cs_referer string, cs_host string, sc_status int, sc_substatus int, sc_win32status int, sc_bytes int, cs_bytes int, s_timetaken int FROM @"/Samples/Data/WebLog.log" USING Extractors.Text(delimiter:\' \'); RETURN; END; CREATE VIEW ' + dbName + '.dbo.' + viewName + ' AS SELECT * FROM ( VALUES(1,2),(2,4) ) AS T(a, b); CREATE PROCEDURE ' + dbName + '.dbo.' + procName + '() AS BEGIN CREATE VIEW ' + dbName + '.dbo.' + viewName + ' AS SELECT * FROM ( VALUES(1,2),(2,4) ) AS T(a, b); END;';
       // Get the default database (master) and all databases.
       suite.execute('datalake analytics catalog list --accountName %s --itemType database --itemPath master --json', jobAndCatalogAccountName, function (result) {
         result.exitStatus.should.be.equal(0);
@@ -434,11 +434,42 @@ describe('arm', function () {
       });
     });
     
+    it('create set get and delete commands should work for credentials', function (done) {
+      var catalogCredName = 'cliCredName01'
+      var catalogCredUserName = 'cliCredUserName01'
+      var hostUri = 'https://psrreporthistory.database.windows.net:443';
+      var setSecretPwd = 'clitestsetsecretpwd';
+      var databaseName = 'master';
+      // create a credential
+      suite.execute('datalake analytics catalog credential create --accountName %s --databaseName %s --hostUri %s --credentialName %s --credentialUserName %s --password %s --json', jobAndCatalogAccountName, databaseName, hostUri, catalogCredName, catalogCredUserName, secretPwd, function (result) {
+        result.exitStatus.should.be.equal(0);
+        // get the credential
+        suite.execute('datalake analytics catalog list --accountName %s --itemType credential --itemPath ' + databaseName + '.' + catalogCredName + ' --json', jobAndCatalogAccountName, function (result) {
+          result.exitStatus.should.be.equal(0);
+          var catalogItemJson = JSON.parse(result.text);
+          catalogItemJson.length.should.be.equal(1);
+          catalogItemJson[0].name.should.be.equal(catalogCredName);
+          // update the credential
+          suite.execute('datalake analytics catalog credential set --accountName %s --databaseName %s --hostUri %s --credentialName %s --credentialUserName %s --password %s --newPassword %s --json', jobAndCatalogAccountName, databaseName, hostUri, catalogCredName, catalogCredUserName, secretPwd, setSecretPwd, function (result) {
+            result.exitStatus.should.be.equal(0);
+            // delete the credential
+            suite.execute('datalake analytics catalog credential delete --accountName %s --databaseName %s --credentialName %s --password %s --json --quiet', jobAndCatalogAccountName, databaseName, catalogCredName, setSecretPwd, function (result) {
+              result.exitStatus.should.be.equal(0);
+              // verify that the cred is gone with a set (should fail).
+              suite.execute('datalake analytics catalog credential set --accountName %s --databaseName %s --hostUri %s --credentialName %s --credentialUserName %s --password %s --newPassword %s --json', jobAndCatalogAccountName, databaseName, hostUri, catalogCredName, catalogCredUserName, secretPwd, setSecretPwd, function (result) {
+                result.exitStatus.should.be.equal(1);
+                done();
+              });
+            });
+          });
+        });
+      });
+    });
+    
     it('create set get and delete commands should work for secrets', function (done) {
       var hostUri = 'https://psrreporthistory.database.windows.net:443';
       var setSecretPwd = 'clitestsetsecretpwd';
       var databaseName = 'master';
-      var scriptToRun = 'USE ' + databaseName + '; CREATE CREDENTIAL ' + credName + ' WITH USER_NAME = "scope@rkm4grspxa", IDENTITY = "' + secretName + '";';
       var secondSecretName = secretName + 'dup';
       suite.execute('datalake analytics catalog secret create --accountName %s --databaseName %s --secretName %s --hostUri %s --password %s --json', jobAndCatalogAccountName, databaseName, secretName, hostUri, secretPwd, function (result) {
         result.exitStatus.should.be.equal(0);
@@ -448,52 +479,26 @@ describe('arm', function () {
           // update the secret's password
           suite.execute('datalake analytics catalog secret set --accountName %s --databaseName %s --secretName %s --hostUri %s --password %s --json', jobAndCatalogAccountName, databaseName, secretName, hostUri, setSecretPwd, function (result) {
             result.exitStatus.should.be.equal(0);
-            // Create a credential that uses the secret
-            suite.execute('datalake analytics job create --accountName %s --jobName %s --script %s --json', jobAndCatalogAccountName, jobName, scriptToRun, function (result) {
+            // credential creation through jobs has been completely removed, however secret management is only deprecated.
+            // removing tests for catalog creation through jobs now, and in a future release secret management will be completely removed.
+            // get the secret
+            suite.execute('datalake analytics catalog list --accountName %s --itemType secret --itemPath ' + databaseName + '.' + secretName + ' --json', jobAndCatalogAccountName, function (result) {
               result.exitStatus.should.be.equal(0);
-              var jobJson = JSON.parse(result.text);
-              jobJson.jobId.should.not.be.empty;
-              jobJson.name.should.be.equal(jobName);
-              var jobId = jobJson.jobId;
-              listPoll(suite, 10, jobAndCatalogAccountName, jobId, function (result) {
-                suite.execute('datalake analytics job show --accountName %s --jobId %s --includeStatistics --json', jobAndCatalogAccountName, jobId, function (result) {
-                  result.exitStatus.should.be.equal(0);
-                  var jobJson = JSON.parse(result.text);
-                  jobJson.result.should.be.equal('Succeeded');
-                  // list all credentials in the db and confirm that there is one entry.
-                  suite.execute('datalake analytics catalog list --accountName %s --itemType credential --itemPath %s --json', jobAndCatalogAccountName, databaseName, function (result) {
+              var catalogItemJson = JSON.parse(result.text);
+              catalogItemJson[0].creationTime.should.not.be.empty;
+              // delete the secret
+              suite.execute('datalake analytics catalog secret delete --accountName %s --databaseName %s --secretName %s --quiet --json', jobAndCatalogAccountName, databaseName, secretName, function (result) {
+                result.exitStatus.should.be.equal(0);
+                // try to set the secret again (should fail)
+                suite.execute('datalake analytics catalog secret set --accountName %s --databaseName %s --secretName %s --hostUri %s --password %s --json', jobAndCatalogAccountName, databaseName, secretName, hostUri, setSecretPwd, function (result) {
+                  result.exitStatus.should.be.equal(1);
+                  // delete all the secrets in the db.
+                  suite.execute('datalake analytics catalog secret delete --accountName %s --databaseName %s --quiet --json', jobAndCatalogAccountName, databaseName, function (result) {
                     result.exitStatus.should.be.equal(0);
-                    var catalogItemJson = JSON.parse(result.text);
-                    catalogItemJson.length.should.be.equal(1);
-                    // now get the specific credential we created
-                    suite.execute('datalake analytics catalog list --accountName %s --itemType credential --itemPath ' + databaseName + '.' + credName + ' --json', jobAndCatalogAccountName, function (result) {
-                      result.exitStatus.should.be.equal(0);
-                      var catalogItemJson = JSON.parse(result.text);
-                      catalogItemJson.length.should.be.equal(1);
-                      catalogItemJson[0].name.should.be.equal(credName);
-                      // get the secret
-                      suite.execute('datalake analytics catalog list --accountName %s --itemType secret --itemPath ' + databaseName + '.' + secretName + ' --json', jobAndCatalogAccountName, function (result) {
-                        result.exitStatus.should.be.equal(0);
-                        var catalogItemJson = JSON.parse(result.text);
-                        catalogItemJson[0].creationTime.should.not.be.empty;
-                        // delete the secret
-                        suite.execute('datalake analytics catalog secret delete --accountName %s --databaseName %s --secretName %s --quiet --json', jobAndCatalogAccountName, databaseName, secretName, function (result) {
-                          result.exitStatus.should.be.equal(0);
-                          // try to set the secret again (should fail)
-                          suite.execute('datalake analytics catalog secret set --accountName %s --databaseName %s --secretName %s --hostUri %s --password %s --json', jobAndCatalogAccountName, databaseName, secretName, hostUri, setSecretPwd, function (result) {
-                            result.exitStatus.should.be.equal(1);
-                            // delete all the secrets in the db.
-                            suite.execute('datalake analytics catalog secret delete --accountName %s --databaseName %s --quiet --json', jobAndCatalogAccountName, databaseName, function (result) {
-                              result.exitStatus.should.be.equal(0);
-                              // try to set the secret again (should fail)
-                              suite.execute('datalake analytics catalog secret set --accountName %s --databaseName %s --secretName %s --hostUri %s --password %s --json', jobAndCatalogAccountName, databaseName, secondSecretName, hostUri, setSecretPwd, function (result) {
-                                result.exitStatus.should.be.equal(1);
-                                done();
-                              });
-                            });
-                          });
-                        });
-                      });
+                    // try to set the secret again (should fail)
+                    suite.execute('datalake analytics catalog secret set --accountName %s --databaseName %s --secretName %s --hostUri %s --password %s --json', jobAndCatalogAccountName, databaseName, secondSecretName, hostUri, setSecretPwd, function (result) {
+                      result.exitStatus.should.be.equal(1);
+                      done();
                     });
                   });
                 });
