@@ -27,7 +27,7 @@
     "deployment"
   ],
   "main": "./lib/cli.js",
-  "preferGlobal": "true",
+  "preferGlobal": true,
   "engines": {
     "node": ">= 4.2.4"
   },
@@ -120,7 +120,7 @@
     "istanbul": "0.3.19",
     "mocha": "1.16.0",
     "jshint": "<= 2.6.0",
-    "sinon": "*",
+    "sinon": "^2.1.0",
     "should": "3.3.2",
     "winston-memory": "*",
     "nock": "0.16"

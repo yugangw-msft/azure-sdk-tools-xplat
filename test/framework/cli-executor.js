@@ -63,7 +63,7 @@ function execute(cmd, cb) {
   });
 
   if (!process.exit.restore) {
-    sandbox.stub(process, 'exit', function (exitStatus) {
+    sandbox.stub(process, 'exit').callsFake(function (exitStatus) {
       result.exitStatus = exitStatus;
       end();
     });
@@ -74,7 +74,7 @@ function execute(cmd, cb) {
     cli.__proto__.exitProcess = function (exitCode) { process.exit(exitCode); };
     if(!AzureCli.prototype.recordError.restore) {
       var sandbox2 = sinon.sandbox.create();
-      sandbox2.stub(AzureCli.prototype, 'recordError', function (err) {
+      sandbox2.stub(AzureCli.prototype, 'recordError').callsFake(function (err) {
         testLogger.logError(err);
         sandbox2.restore();
         AzureCli.prototype.recordError(err);
