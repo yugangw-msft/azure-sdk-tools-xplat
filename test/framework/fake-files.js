@@ -78,8 +78,8 @@ _.extend(FakeFiles.prototype, {
   },
 
   setMocks: function (sinonObj) {
-    sinonObj.stub(fs, 'statSync', this.statSync);
-    sinonObj.stub(utils, 'pathExistsSync', this.existsSync);
+    sinonObj.stub(fs, 'statSync').callsFake(this.statSync);
+    sinonObj.stub(utils, 'pathExistsSync').callsFake(this.existsSync);
   }
 });
 
