@@ -284,6 +284,7 @@
     <Compile Include="test\commands\cli.vm.extension_set-custom_disable.js" />
     <Compile Include="test\commands\cli.vm.extension_set-tests.js" />
     <Compile Include="test\commands\cli.vm.image-tests.js" />
+    <Compile Include="test\commands\cli.vm.initiate-maintenance-tests.js" />
     <Compile Include="test\commands\cli.vm.list_show-tests.js" />
     <Compile Include="test\commands\cli.vm.loadbalancer-tests.js" />
     <Compile Include="test\commands\cli.vm.negative-tests.js">
