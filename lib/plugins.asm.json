@@ -18377,6 +18377,14 @@
                       "description": "the lease ID of the destination blob "
                     },
                     {
+                      "flags": "--incremental",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "long": "--incremental",
+                      "description": "whether start page blob incremental copy or not. If yes, the source must be a page blob snapshot. Refer to https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/incremental-copy-blob for more detailed information."
+                    },
+                    {
                       "flags": "-q, --quiet",
                       "required": 0,
                       "optional": 0,

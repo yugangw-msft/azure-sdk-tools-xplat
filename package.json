@@ -27,7 +27,7 @@
     "deployment"
   ],
   "main": "./lib/cli.js",
-  "preferGlobal": "true",
+  "preferGlobal": true,
   "engines": {
     "node": ">= 4.2.4"
   },
@@ -70,7 +70,7 @@
     "azure-asm-storage": "0.12.0",
     "azure-asm-subscription": "0.10.1",
     "azure-asm-website": "0.10.4",
-    "azure-storage": "2.0.0",
+    "azure-storage": "2.1.0",
     "azure-arm-batch": "0.3.0",
     "azure-batch": "0.5.2",
     "azure-servicefabric": "0.1.5",
@@ -120,7 +120,7 @@
     "istanbul": "0.3.19",
     "mocha": "1.16.0",
     "jshint": "<= 2.6.0",
-    "sinon": "*",
+    "sinon": "^2.1.0",
     "should": "3.3.2",
     "winston-memory": "*",
     "nock": "0.16"

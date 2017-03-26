@@ -40,7 +40,7 @@ var isWindows = process.platform === 'win32'
 
 function executeCmd(cmd, cb) {
   var originalReadConfig = utilsCore.readConfig;
-  sinon.stub(utilsCore, 'readConfig', function () {
+  sinon.stub(utilsCore, 'readConfig').callsFake(function () {
     var config = originalReadConfig();
     config.mode = 'asm';
     return config;

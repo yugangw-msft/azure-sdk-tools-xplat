@@ -1496,6 +1496,165 @@ describe('cli', function () {
           });
         });
       });
+      
+      describe('incremental copy', function () {
+        var destContainer = 'testblobinccopydest';
+        var sourceContainer = 'testblobinccopysource';
+        var blobName = 'tocopy';
+        var blockBlobName = 'blockblobtocopy';
+        var fileName = 'inccopytoblob.tmp.txt';
+        var fileName2 = 'inccopytoblob2.tmp.txt';
+        var fileName3 = 'inccopytoblob3.tmp.txt';
+        var fileNameDownload = 'inccopydownload.tmp.txt';
+        var blobService;
+        var snapshot1;
+        var snapshot2;
+        var snapshot3;
+
+        var incrementalCopyBlob;
+        var incrementalCopyBlobSnapshot;
+
+        
+        liveOnly('should prepare the source file and page blob', function(done) {
+          var buf = crypto.randomBytes(512);
+          var fd = fs.openSync(fileName, 'w');
+          fs.writeSync(fd, buf, 0, buf.length, 0);
+
+          blobService = storage.createBlobService(process.env.AZURE_STORAGE_CONNECTION_STRING);
+          fileService = storage.createFileService(process.env.AZURE_STORAGE_CONNECTION_STRING);
+
+          blobService.createContainerIfNotExists(sourceContainer, function (error) {
+            assert.equal(error, null);
+            blobService.createContainerIfNotExists(destContainer, function (error) {
+              assert.equal(error, null);
+              blobService.createPageBlobFromLocalFile(sourceContainer, blobName, fileName, function (error) {
+                assert.equal(error, null);
+                try { fs.unlinkSync(fileName); } catch(err) { }
+
+                blobService.createBlobSnapshot(sourceContainer, blobName, function (error, snapshotId) {
+                  assert.equal(error, null);
+                  snapshot1 = snapshotId;
+                
+                  buf = crypto.randomBytes(512);
+                  var fd = fs.openSync(fileName2, 'w');
+                  fs.writeSync(fd, buf, 0, buf.length, 0);
+                  blobService.createPagesFromStream(sourceContainer, blobName, fs.createReadStream(fileName2), 0, 511, function (error) {
+                    assert.equal(error, null);
+                    try { fs.unlinkSync(fileName2); } catch(err) { }
+
+                    blobService.createBlobSnapshot(sourceContainer, blobName, function (error, snapshotId) {
+                      assert.equal(error, null);
+                      snapshot2 = snapshotId;
+
+                      buf = crypto.randomBytes(512);
+                      var fd = fs.openSync(fileName3, 'w');
+                      fs.writeSync(fd, buf, 0, buf.length, 0);
+                      blobService.createBlockBlobFromLocalFile(sourceContainer, blockBlobName, fileName3, function (error) {
+                        assert.equal(error, null);
+                        try { fs.unlinkSync(fileName3); } catch(err) { }
+
+                        blobService.createBlobSnapshot(sourceContainer, blockBlobName, function (error, snapshotId) {
+                          assert.equal(error, null);
+                          snapshot3 = snapshotId;
+
+                          done();
+                        });
+                      });
+                    });
+                  });
+                });
+              });
+            });
+          });
+        });
+
+        liveOnly('should start to incremental copy page blob', function (done) {
+          suite.execute('storage blob copy start --source-container %s --source-blob %s --snapshot %s --dest-container %s --dest-blob %s --incremental -q --json', 
+            sourceContainer, blobName, snapshot1, destContainer, blobName, function(result) {
+            var copy = JSON.parse(result.text);
+            copy.copy.id.length.should.greaterThan(0);
+            result.errorText.should.be.empty;
+            done();
+          });
+        });
+
+        liveOnly('should start to incremental copy page blob again', function (done) {
+          suite.execute('storage blob copy start --source-container %s --source-blob %s --snapshot %s --dest-container %s --dest-blob %s --incremental -q --json', 
+            sourceContainer, blobName, snapshot2, destContainer, blobName, function(result) {
+            var copy = JSON.parse(result.text);
+            copy.copy.id.length.should.greaterThan(0);
+            result.errorText.should.be.empty;
+            done();
+          });
+        });
+
+        liveOnly('source block blob cannot incremental copy to page blob', function (done) {
+          suite.execute('storage blob copy start --source-container %s --source-blob %s --snapshot %s --dest-container %s --dest-blob %s --incremental -q --json', 
+            sourceContainer, blockBlobName, snapshot3, destContainer, blobName, function(result) {
+            (result.errorText.indexOf('The copy source blob type is invalid for this operation') !== -1).should.be.ok;
+            done();
+          });
+        });
+
+        liveOnly('list blobs should works for both base blob and blob snapshots', function (done) {
+          suite.execute('storage blob list %s --json', destContainer, blobName, function(result) {
+            var blobs = JSON.parse(result.text);
+            assert.equal(blobs.length, 3);
+            incrementalCopyBlob = blobs.find(function(b) {
+              return b.snapshot === undefined;
+            });
+            incrementalCopyBlobSnapshot = blobs.find(function(b) {
+              return b.snapshot !== undefined;
+            });
+            incrementalCopyBlob.isIncrementalCopy.should.be.ok;
+            (incrementalCopyBlob.snapshot === undefined).should.be.ok;
+            incrementalCopyBlobSnapshot.isIncrementalCopy.should.be.ok;
+            incrementalCopyBlobSnapshot.snapshot.should.not.be.empty;
+
+            done();
+          });
+        });
+
+        liveOnly('storage blob show should works fine for base blob', function (done) {
+          suite.execute('storage blob show %s %s --json', destContainer, blobName, function(result) {
+            var blob = JSON.parse(result.text);
+            blob.isIncrementalCopy.should.be.ok;
+            blob.name.should.equal(blobName);
+
+            done();
+          });
+        });
+
+        liveOnly('storage blob show should works fine for blob snapshot', function (done) {
+          suite.execute('storage blob show %s %s --snapshot %s --json', destContainer, blobName, incrementalCopyBlobSnapshot.snapshot, function(result) {
+            var blob = JSON.parse(result.text);
+            blob.isIncrementalCopy.should.be.ok;
+            blob.name.should.equal(blobName);
+
+            done();
+          });
+        });
+
+        liveOnly('incremental base blob can not be read', function (done) {
+          suite.execute('storage blob download %s %s %s -q --json', 
+            destContainer, blobName, fileNameDownload, function(result) {
+            (result.errorText.indexOf('The specified operation is not allowed on an incremental copy blob') !== -1).should.be.ok;
+            try { fs.unlinkSync(fileNameDownload); } catch(err) { }
+            done();
+          });
+        });
+
+        liveOnly('cleanup', function (done) {
+          suite.execute('storage container delete %s -q --json', sourceContainer, function(result) {
+            result.errorText.should.be.empty;
+
+            suite.execute('storage container delete %s -q --json', destContainer, function(result) {
+              result.errorText.should.be.empty;
+              done();
+            });
+          });
+        });
+      });
     });
   });
 });
