@@ -6,13 +6,13 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '3d1cd7a8-b035-4563-9288-dbe706cd672e',
-    name: 'SAAS InfoNav Test_564339',
+    id: '2c224e7e-3ef5-431d-a57b-e71f4662e3a6',
+    name: 'Node CLI Test',
     user: {
       name: 'user@domain.example',
-      type: 'servicePrincipal'
+      type: 'user'
     },
-    tenantId: 'microsoft.com',
+    tenantId: '72f988bf-86f1-41af-91ab-2d7cd011db47',
     state: 'Enabled',
     registeredProviders: [],
     _eventsCount: '1',
@@ -32,40 +32,40 @@ exports.scopes = [[function (nock) {
 var result = 
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/3d1cd7a8-b035-4563-9288-dbe706cd672e/resourceGroups/azureXplatCliTestResourceGroup5228/providers/Microsoft.PowerBI/workspaceCollections/azureXplatCliTestWorkspaceCollection1192?api-version=2016-01-29', '*')
-  .reply(200, "{\"id\":\"/subscriptions/3d1cd7a8-b035-4563-9288-dbe706cd672e/resourceGroups/azureXplatCliTestResourceGroup5228/providers/Microsoft.PowerBI/workspaceCollections/azureXplatCliTestWorkspaceCollection1192\",\"name\":\"azureXplatCliTestWorkspaceCollection1192\",\"type\":\"Microsoft.PowerBI/workspaceCollections\",\"location\":\"South Central US\",\"tags\":{\"tag1\":\"value1\",\"tag2\":\"value2\"},\"properties\":{\"provisioningState\":\"Succeeded\",\"createdDate\":\"2016-05-24T19:32:41.6472862Z\",\"status\":\"Active\"},\"sku\":{\"name\":\"S1\",\"tier\":\"Standard\"}}", { 'cache-control': 'no-store, must-revalidate, no-cache',
+.put('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/azureXplatCliTestResourceGroup2462/providers/Microsoft.PowerBI/workspaceCollections/azureXplatCliTestWorkspaceCollection9248?api-version=2016-01-29', '*')
+  .reply(200, "{\"type\":\"Microsoft.PowerBI/workspaceCollections\",\"id\":\"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/azureXplatCliTestResourceGroup2462/providers/Microsoft.PowerBI/workspaceCollections/azureXplatCliTestWorkspaceCollection9248\",\"name\":\"azureXplatCliTestWorkspaceCollection9248\",\"location\":\"South Central US\",\"tags\":{\"tag1\":\"value1\",\"tag2\":\"value2\"},\"properties\":{\"provisioningState\":\"Succeeded\",\"createdDate\":\"2017-03-26T05:08:05.3611752Z\",\"status\":\"Active\"},\"sku\":{\"name\":\"S1\",\"tier\":\"Standard\"}}", { 'cache-control': 'no-store, must-revalidate, no-cache',
   'content-length': '517',
   'content-type': 'application/json; charset=utf-8',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   'x-frame-options': 'deny',
   'x-content-type-options': 'nosniff',
-  requestid: '22a0546c-75b7-4b2a-b4a1-a01f880d289b',
-  server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-writes': '1199',
-  'x-ms-request-id': '627147fe-4b15-4c7f-9d42-4729dd1941fa',
-  'x-ms-correlation-request-id': '627147fe-4b15-4c7f-9d42-4729dd1941fa',
-  'x-ms-routing-request-id': 'WESTUS:20160524T193242Z:627147fe-4b15-4c7f-9d42-4729dd1941fa',
-  date: 'Tue, 24 May 2016 19:32:41 GMT',
+  requestid: '8c253269-b02b-4e51-b148-62c7958cc4a3',
+  'x-ms-request-id': '8c253269-b02b-4e51-b148-62c7958cc4a3',
+  server: 'Microsoft-HTTPAPI/2.0, Microsoft-HTTPAPI/2.0',
+  'x-ms-ratelimit-remaining-subscription-writes': '1196',
+  'x-ms-correlation-request-id': '860702cb-d456-4dfe-bb11-0bb96f5f93d4',
+  'x-ms-routing-request-id': 'CANADAEAST:20170326T050804Z:860702cb-d456-4dfe-bb11-0bb96f5f93d4',
+  date: 'Sun, 26 Mar 2017 05:08:03 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/3d1cd7a8-b035-4563-9288-dbe706cd672e/resourceGroups/azureXplatCliTestResourceGroup5228/providers/Microsoft.PowerBI/workspaceCollections/azureXplatCliTestWorkspaceCollection1192?api-version=2016-01-29', '*')
-  .reply(200, "{\"id\":\"/subscriptions/3d1cd7a8-b035-4563-9288-dbe706cd672e/resourceGroups/azureXplatCliTestResourceGroup5228/providers/Microsoft.PowerBI/workspaceCollections/azureXplatCliTestWorkspaceCollection1192\",\"name\":\"azureXplatCliTestWorkspaceCollection1192\",\"type\":\"Microsoft.PowerBI/workspaceCollections\",\"location\":\"South Central US\",\"tags\":{\"tag1\":\"value1\",\"tag2\":\"value2\"},\"properties\":{\"provisioningState\":\"Succeeded\",\"createdDate\":\"2016-05-24T19:32:41.6472862Z\",\"status\":\"Active\"},\"sku\":{\"name\":\"S1\",\"tier\":\"Standard\"}}", { 'cache-control': 'no-store, must-revalidate, no-cache',
+.put('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/azureXplatCliTestResourceGroup2462/providers/Microsoft.PowerBI/workspaceCollections/azureXplatCliTestWorkspaceCollection9248?api-version=2016-01-29', '*')
+  .reply(200, "{\"type\":\"Microsoft.PowerBI/workspaceCollections\",\"id\":\"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/azureXplatCliTestResourceGroup2462/providers/Microsoft.PowerBI/workspaceCollections/azureXplatCliTestWorkspaceCollection9248\",\"name\":\"azureXplatCliTestWorkspaceCollection9248\",\"location\":\"South Central US\",\"tags\":{\"tag1\":\"value1\",\"tag2\":\"value2\"},\"properties\":{\"provisioningState\":\"Succeeded\",\"createdDate\":\"2017-03-26T05:08:05.3611752Z\",\"status\":\"Active\"},\"sku\":{\"name\":\"S1\",\"tier\":\"Standard\"}}", { 'cache-control': 'no-store, must-revalidate, no-cache',
   'content-length': '517',
   'content-type': 'application/json; charset=utf-8',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   'x-frame-options': 'deny',
   'x-content-type-options': 'nosniff',
-  requestid: '22a0546c-75b7-4b2a-b4a1-a01f880d289b',
-  server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-writes': '1199',
-  'x-ms-request-id': '627147fe-4b15-4c7f-9d42-4729dd1941fa',
-  'x-ms-correlation-request-id': '627147fe-4b15-4c7f-9d42-4729dd1941fa',
-  'x-ms-routing-request-id': 'WESTUS:20160524T193242Z:627147fe-4b15-4c7f-9d42-4729dd1941fa',
-  date: 'Tue, 24 May 2016 19:32:41 GMT',
+  requestid: '8c253269-b02b-4e51-b148-62c7958cc4a3',
+  'x-ms-request-id': '8c253269-b02b-4e51-b148-62c7958cc4a3',
+  server: 'Microsoft-HTTPAPI/2.0, Microsoft-HTTPAPI/2.0',
+  'x-ms-ratelimit-remaining-subscription-writes': '1196',
+  'x-ms-correlation-request-id': '860702cb-d456-4dfe-bb11-0bb96f5f93d4',
+  'x-ms-routing-request-id': 'CANADAEAST:20170326T050804Z:860702cb-d456-4dfe-bb11-0bb96f5f93d4',
+  date: 'Sun, 26 Mar 2017 05:08:03 GMT',
   connection: 'close' });
  return result; }]];
- exports.randomTestIdsGenerated = function() { return ['azureXplatCliTestWorkspaceCollection1192'];};
+ exports.randomTestIdsGenerated = function() { return ['azureXplatCliTestWorkspaceCollection9248'];};

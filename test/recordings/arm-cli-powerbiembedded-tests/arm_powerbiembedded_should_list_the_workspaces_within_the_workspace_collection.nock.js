@@ -6,13 +6,13 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '3d1cd7a8-b035-4563-9288-dbe706cd672e',
-    name: 'SAAS InfoNav Test_564339',
+    id: '2c224e7e-3ef5-431d-a57b-e71f4662e3a6',
+    name: 'Node CLI Test',
     user: {
       name: 'user@domain.example',
-      type: 'servicePrincipal'
+      type: 'user'
     },
-    tenantId: 'microsoft.com',
+    tenantId: '72f988bf-86f1-41af-91ab-2d7cd011db47',
     state: 'Enabled',
     registeredProviders: [],
     _eventsCount: '1',
@@ -31,38 +31,38 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/3d1cd7a8-b035-4563-9288-dbe706cd672e/resourceGroups/azureXplatCliTestResourceGroup5228/providers/Microsoft.PowerBI/workspaceCollections/azureXplatCliTestWorkspaceCollection3663/workspaces?api-version=2016-01-29')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/azureXplatCliTestResourceGroup2462/providers/Microsoft.PowerBI/workspaceCollections/azureXplatCliTestWorkspaceCollection4503/workspaces?api-version=2016-01-29')
   .reply(200, "{\"value\":[]}", { 'cache-control': 'no-store, must-revalidate, no-cache',
   'content-length': '12',
   'content-type': 'application/json; charset=utf-8',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   'x-frame-options': 'deny',
   'x-content-type-options': 'nosniff',
-  requestid: '2ddcfc40-4bf2-4705-bac2-6e75b4836ce1',
-  server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14757',
-  'x-ms-request-id': 'd0bb773b-406b-4ebc-881f-24ae04faafd2',
-  'x-ms-correlation-request-id': 'd0bb773b-406b-4ebc-881f-24ae04faafd2',
-  'x-ms-routing-request-id': 'WESTUS:20160524T193245Z:d0bb773b-406b-4ebc-881f-24ae04faafd2',
-  date: 'Tue, 24 May 2016 19:32:44 GMT',
+  requestid: 'eeaa1457-276e-4720-a148-980fd46083e7',
+  'x-ms-request-id': 'eeaa1457-276e-4720-a148-980fd46083e7',
+  server: 'Microsoft-HTTPAPI/2.0, Microsoft-HTTPAPI/2.0',
+  'x-ms-ratelimit-remaining-subscription-reads': '14998',
+  'x-ms-correlation-request-id': '1513f697-b3c2-4b36-9b11-9d12d14e9d35',
+  'x-ms-routing-request-id': 'CANADAEAST:20170326T050812Z:1513f697-b3c2-4b36-9b11-9d12d14e9d35',
+  date: 'Sun, 26 Mar 2017 05:08:12 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/3d1cd7a8-b035-4563-9288-dbe706cd672e/resourceGroups/azureXplatCliTestResourceGroup5228/providers/Microsoft.PowerBI/workspaceCollections/azureXplatCliTestWorkspaceCollection3663/workspaces?api-version=2016-01-29')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/azureXplatCliTestResourceGroup2462/providers/Microsoft.PowerBI/workspaceCollections/azureXplatCliTestWorkspaceCollection4503/workspaces?api-version=2016-01-29')
   .reply(200, "{\"value\":[]}", { 'cache-control': 'no-store, must-revalidate, no-cache',
   'content-length': '12',
   'content-type': 'application/json; charset=utf-8',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   'x-frame-options': 'deny',
   'x-content-type-options': 'nosniff',
-  requestid: '2ddcfc40-4bf2-4705-bac2-6e75b4836ce1',
-  server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14757',
-  'x-ms-request-id': 'd0bb773b-406b-4ebc-881f-24ae04faafd2',
-  'x-ms-correlation-request-id': 'd0bb773b-406b-4ebc-881f-24ae04faafd2',
-  'x-ms-routing-request-id': 'WESTUS:20160524T193245Z:d0bb773b-406b-4ebc-881f-24ae04faafd2',
-  date: 'Tue, 24 May 2016 19:32:44 GMT',
+  requestid: 'eeaa1457-276e-4720-a148-980fd46083e7',
+  'x-ms-request-id': 'eeaa1457-276e-4720-a148-980fd46083e7',
+  server: 'Microsoft-HTTPAPI/2.0, Microsoft-HTTPAPI/2.0',
+  'x-ms-ratelimit-remaining-subscription-reads': '14998',
+  'x-ms-correlation-request-id': '1513f697-b3c2-4b36-9b11-9d12d14e9d35',
+  'x-ms-routing-request-id': 'CANADAEAST:20170326T050812Z:1513f697-b3c2-4b36-9b11-9d12d14e9d35',
+  date: 'Sun, 26 Mar 2017 05:08:12 GMT',
   connection: 'close' });
  return result; }]];
