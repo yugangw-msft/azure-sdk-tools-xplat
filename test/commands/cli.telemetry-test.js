@@ -33,27 +33,27 @@ describe('cli', function() {
       var client = applicationInsights.setup(testInstrumentationKey).client;
             
       // stub AppInsights functions.
-      sandbox.stub(applicationInsights, 'setup', function(ikey) {
+      sandbox.stub(applicationInsights, 'setup').callsFake(function(ikey) {
         return applicationInsights;
       });
 
-      sandbox.stub(applicationInsights, 'start', function() {
+      sandbox.stub(applicationInsights, 'start').callsFake(function() {
         return applicationInsights;
       });
 
-      sandbox.stub(applicationInsights, 'setAutoCollectExceptions', function(enabled) {
+      sandbox.stub(applicationInsights, 'setAutoCollectExceptions').callsFake(function(enabled) {
         return applicationInsights;
       });
 
-      sandbox.stub(applicationInsights, 'setAutoCollectPerformance', function(enabled) {
+      sandbox.stub(applicationInsights, 'setAutoCollectPerformance').callsFake(function(enabled) {
         return applicationInsights;
       });
 
-      sandbox.stub(applicationInsights, 'setAutoCollectRequests', function(enabled) {
+      sandbox.stub(applicationInsights, 'setAutoCollectRequests').callsFake(function(enabled) {
         return applicationInsights;
       });
 
-      sandbox.stub(client, 'sendPendingData', function(callback) {
+      sandbox.stub(client, 'sendPendingData').callsFake(function(callback) {
         if (typeof callback === 'function') {
           callback();
         }
@@ -85,7 +85,7 @@ describe('cli', function() {
 
     it('should construct user agent info object with some data', function (done) {
 
-      sandbox.stub(userAgentCore, 'getUserAgentData', function () {
+      sandbox.stub(userAgentCore, 'getUserAgentData').callsFake(function () {
         return {
           osType: 'WindowsNT',
           osVersion: '2.0',
@@ -187,7 +187,7 @@ describe('cli', function() {
 
     it('should encrypt user sensitive data', function(done) {
       var eventData;
-      sandbox.stub(applicationInsights.client, 'track', function(data) {
+      sandbox.stub(applicationInsights.client, 'track').callsFake(function(data) {
         eventData = data;
       });
 
@@ -207,7 +207,7 @@ describe('cli', function() {
 
     it('should catch exception and encrypt exception data', function(done) {
       var eventData;
-      sandbox.stub(applicationInsights.client, 'track', function(data) {
+      sandbox.stub(applicationInsights.client, 'track').callsFake(function(data) {
         eventData = data;
       });
 
@@ -229,7 +229,7 @@ describe('cli', function() {
 
     it('should filter username from the stacktrace', function(done) {
       var eventData;
-      sandbox.stub(applicationInsights.client, 'track', function(data) {
+      sandbox.stub(applicationInsights.client, 'track').callsFake(function(data) {
         eventData = data;
       });
 
@@ -253,7 +253,7 @@ describe('cli', function() {
 
     it('should classify cli internal errors as CLI_Error', function(done) {
       var eventData;
-      sandbox.stub(applicationInsights.client, 'trackEvent', function (key, event) {
+      sandbox.stub(applicationInsights.client, 'trackEvent').callsFake(function (key, event) {
         eventData = event;
       });
 
@@ -275,7 +275,7 @@ describe('cli', function() {
 
     it('should classify service errors by status code', function (done) {
       var eventData;
-      sandbox.stub(applicationInsights.client, 'trackEvent', function (key, event) {
+      sandbox.stub(applicationInsights.client, 'trackEvent').callsFake(function (key, event) {
         eventData = event;
       });
 

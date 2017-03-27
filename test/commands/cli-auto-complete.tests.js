@@ -23,7 +23,7 @@ var utilsCore = require('../../lib/util/utilsCore');
 
 function wrap(sinonObj, obj, functionName, setup) {
   var original = obj[functionName];
-  return sinonObj.stub(obj, functionName, setup(original));
+  return sinonObj.stub(obj, functionName).callsFake(setup(original));
 }
 
 var AutoComplete = require('../../lib/autocomplete');
@@ -52,7 +52,7 @@ describe('cli', function(){
       };
     });
 
-    sandbox.stub(console, 'log', function (d) {
+    sandbox.stub(console, 'log').callsFake(function (d) {
       results.push(d);
     });
     sandbox.stub(process, 'exit');

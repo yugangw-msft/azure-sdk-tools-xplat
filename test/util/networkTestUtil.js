@@ -377,13 +377,13 @@ _.extend(NetworkTestUtil.prototype, {
       result.exitStatus.should.equal(0);
       var profile = JSON.parse(result.text);
       profile.name.should.equal(profileProp.name);
-      profile.properties.profileStatus.should.equal(profileProp.profileStatus);
-      profile.properties.trafficRoutingMethod.should.equal(profileProp.trafficRoutingMethod);
-      profile.properties.dnsConfig.relativeName.should.equal(profileProp.relativeDnsName);
-      profile.properties.dnsConfig.ttl.should.equal(profileProp.ttl);
-      profile.properties.monitorConfig.protocol.should.equal(profileProp.monitorProtocol);
-      profile.properties.monitorConfig.port.should.equal(profileProp.monitorPort);
-      profile.properties.monitorConfig.path.should.equal(profileProp.monitorPath);
+      profile.profileStatus.should.equal(profileProp.profileStatus);
+      profile.trafficRoutingMethod.should.equal(profileProp.trafficRoutingMethod);
+      profile.dnsConfig.relativeName.should.equal(profileProp.relativeDnsName);
+      profile.dnsConfig.ttl.should.equal(profileProp.ttl);
+      profile.monitorConfig.protocol.should.equal(profileProp.monitorProtocol);
+      profile.monitorConfig.port.should.equal(profileProp.monitorPort);
+      profile.monitorConfig.path.should.equal(profileProp.monitorPath);
       callback(profile);
     });
   },

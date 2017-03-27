@@ -14,7 +14,8 @@ exports.getMockedProfile = function () {
     },
     tenantId: '72f988bf-86f1-41af-91ab-2d7cd011db47',
     state: 'Enabled',
-    registeredProviders: ['mobileservice'],
+    registeredProviders: [],
+    _eventsCount: '1',
     isDefault: true
   }, newProfile.environments['AzureCloud']));
 
@@ -27,6 +28,24 @@ exports.setEnvironment = function() {
 
 exports.scopes = [[function (nock) { 
 var result = 
+nock('http://management.azure.com:443')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourcegroups/xplat-test-traffic-manager-profile?api-version=2016-09-01')
+  .reply(404, "{\"error\":{\"code\":\"ResourceGroupNotFound\",\"message\":\"Resource group 'xplat-test-traffic-manager-profile' could not be found.\"}}", { 'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  'content-type': 'application/json; charset=utf-8',
+  expires: '-1',
+  'x-ms-failure-cause': 'gateway',
+  'x-ms-ratelimit-remaining-subscription-reads': '14999',
+  'x-ms-request-id': 'f60bc5b1-fa11-4b28-a342-5670173c1ca0',
+  'x-ms-correlation-request-id': 'f60bc5b1-fa11-4b28-a342-5670173c1ca0',
+  'x-ms-routing-request-id': 'CANADAEAST:20170326T180925Z:f60bc5b1-fa11-4b28-a342-5670173c1ca0',
+  'strict-transport-security': 'max-age=31536000; includeSubDomains',
+  date: 'Sun, 26 Mar 2017 18:09:25 GMT',
+  connection: 'close',
+  'content-length': '126' });
+ return result; },
+function (nock) { 
+var result = 
 nock('https://management.azure.com:443')
   .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourcegroups/xplat-test-traffic-manager-profile?api-version=2016-09-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceGroupNotFound\",\"message\":\"Resource group 'xplat-test-traffic-manager-profile' could not be found.\"}}", { 'cache-control': 'no-cache',
@@ -34,13 +53,32 @@ nock('https://management.azure.com:443')
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-ratelimit-remaining-subscription-reads': '14970',
-  'x-ms-request-id': '450a54a2-9299-423f-8209-d408fb3af426',
-  'x-ms-correlation-request-id': '450a54a2-9299-423f-8209-d408fb3af426',
-  'x-ms-routing-request-id': 'WESTEUROPE:20161207T143523Z:450a54a2-9299-423f-8209-d408fb3af426',
+  'x-ms-ratelimit-remaining-subscription-reads': '14999',
+  'x-ms-request-id': 'f60bc5b1-fa11-4b28-a342-5670173c1ca0',
+  'x-ms-correlation-request-id': 'f60bc5b1-fa11-4b28-a342-5670173c1ca0',
+  'x-ms-routing-request-id': 'CANADAEAST:20170326T180925Z:f60bc5b1-fa11-4b28-a342-5670173c1ca0',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Wed, 07 Dec 2016 14:35:23 GMT',
+  date: 'Sun, 26 Mar 2017 18:09:25 GMT',
+  connection: 'close',
   'content-length': '126' });
+ return result; },
+function (nock) { 
+var result = 
+nock('http://management.azure.com:443')
+  .filteringRequestBody(function (path) { return '*';})
+.put('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourcegroups/xplat-test-traffic-manager-profile?api-version=2016-09-01', '*')
+  .reply(201, "{\"id\":\"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-traffic-manager-profile\",\"name\":\"xplat-test-traffic-manager-profile\",\"location\":\"eastus\",\"tags\":{},\"properties\":{\"provisioningState\":\"Succeeded\"}}", { 'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  'content-length': '231',
+  'content-type': 'application/json; charset=utf-8',
+  expires: '-1',
+  'x-ms-ratelimit-remaining-subscription-writes': '1196',
+  'x-ms-request-id': '556180bb-38dc-4eb8-8757-4a1811ee63ed',
+  'x-ms-correlation-request-id': '556180bb-38dc-4eb8-8757-4a1811ee63ed',
+  'x-ms-routing-request-id': 'CANADAEAST:20170326T180927Z:556180bb-38dc-4eb8-8757-4a1811ee63ed',
+  'strict-transport-security': 'max-age=31536000; includeSubDomains',
+  date: 'Sun, 26 Mar 2017 18:09:26 GMT',
+  connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
@@ -52,45 +90,85 @@ nock('https://management.azure.com:443')
   'content-length': '231',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-ratelimit-remaining-subscription-writes': '1191',
-  'x-ms-request-id': '4bde0ea0-38b5-449b-8694-2ce770577b5b',
-  'x-ms-correlation-request-id': '4bde0ea0-38b5-449b-8694-2ce770577b5b',
-  'x-ms-routing-request-id': 'WESTEUROPE:20161207T143524Z:4bde0ea0-38b5-449b-8694-2ce770577b5b',
+  'x-ms-ratelimit-remaining-subscription-writes': '1196',
+  'x-ms-request-id': '556180bb-38dc-4eb8-8757-4a1811ee63ed',
+  'x-ms-correlation-request-id': '556180bb-38dc-4eb8-8757-4a1811ee63ed',
+  'x-ms-routing-request-id': 'CANADAEAST:20170326T180927Z:556180bb-38dc-4eb8-8757-4a1811ee63ed',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Wed, 07 Dec 2016 14:35:24 GMT' });
+  date: 'Sun, 26 Mar 2017 18:09:26 GMT',
+  connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
-nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-traffic-manager-profile/providers/Microsoft.Network/trafficmanagerprofiles/test-profile?api-version=2015-11-01')
+nock('http://management.azure.com:443')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-traffic-manager-profile/providers/Microsoft.Network/trafficmanagerprofiles/test-profile?api-version=2017-03-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/trafficmanagerprofiles/test-profile' under resource group 'xplat-test-traffic-manager-profile' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': '6e0dd550-b04b-4a7e-ac39-0a2438e83e92',
-  'x-ms-correlation-request-id': '6e0dd550-b04b-4a7e-ac39-0a2438e83e92',
-  'x-ms-routing-request-id': 'WESTEUROPE:20161207T143525Z:6e0dd550-b04b-4a7e-ac39-0a2438e83e92',
+  'x-ms-request-id': 'e81cb861-d16e-4b6c-abb5-484064e7abd1',
+  'x-ms-correlation-request-id': 'e81cb861-d16e-4b6c-abb5-484064e7abd1',
+  'x-ms-routing-request-id': 'CANADAEAST:20170326T180929Z:e81cb861-d16e-4b6c-abb5-484064e7abd1',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Wed, 07 Dec 2016 14:35:25 GMT',
+  date: 'Sun, 26 Mar 2017 18:09:28 GMT',
+  connection: 'close',
   'content-length': '191' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-traffic-manager-profile/providers/Microsoft.Network/trafficmanagerprofiles/test-profile?api-version=2017-03-01')
+  .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/trafficmanagerprofiles/test-profile' under resource group 'xplat-test-traffic-manager-profile' was not found.\"}}", { 'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  'content-type': 'application/json; charset=utf-8',
+  expires: '-1',
+  'x-ms-failure-cause': 'gateway',
+  'x-ms-request-id': 'e81cb861-d16e-4b6c-abb5-484064e7abd1',
+  'x-ms-correlation-request-id': 'e81cb861-d16e-4b6c-abb5-484064e7abd1',
+  'x-ms-routing-request-id': 'CANADAEAST:20170326T180929Z:e81cb861-d16e-4b6c-abb5-484064e7abd1',
+  'strict-transport-security': 'max-age=31536000; includeSubDomains',
+  date: 'Sun, 26 Mar 2017 18:09:28 GMT',
+  connection: 'close',
+  'content-length': '191' });
+ return result; },
+function (nock) { 
+var result = 
+nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-traffic-manager-profile/providers/Microsoft.Network/trafficmanagerprofiles/test-profile?api-version=2015-11-01', '*')
+.put('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-traffic-manager-profile/providers/Microsoft.Network/trafficmanagerprofiles/test-profile?api-version=2017-03-01', '*')
   .reply(201, "{\"id\":\"\\/subscriptions\\/2c224e7e-3ef5-431d-a57b-e71f4662e3a6\\/resourceGroups\\/xplat-test-traffic-manager-profile\\/providers\\/Microsoft.Network\\/trafficManagerProfiles\\/test-profile\",\"name\":\"test-profile\",\"type\":\"Microsoft.Network\\/trafficManagerProfiles\",\"location\":\"global\",\"tags\":{\"tag1\":\"aaa\",\"tag2\":\"bbb\"},\"properties\":{\"profileStatus\":\"Enabled\",\"trafficRoutingMethod\":\"Performance\",\"dnsConfig\":{\"relativeName\":\"test-profile-dns\",\"fqdn\":\"test-profile-dns.trafficmanager.net\",\"ttl\":300},\"monitorConfig\":{\"profileMonitorStatus\":\"Inactive\",\"protocol\":\"HTTP\",\"port\":80,\"path\":\"\\/healthcheck.html\"},\"endpoints\":[]}}", { 'cache-control': 'private',
   'content-length': '614',
   'content-type': 'application/json; charset=utf-8',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': 'e90e145a-854c-492c-8d88-fc0279800c8b',
+  'x-ms-request-id': '3e879ae1-27db-4fa2-82ae-757767617624',
   server: 'Microsoft-IIS/8.5',
   'x-aspnet-version': '4.0.30319',
   'x-powered-by': 'ASP.NET',
-  'x-ms-ratelimit-remaining-subscription-resource-requests': '10799',
-  'x-ms-correlation-request-id': '3dc5ace1-38c0-47ba-b982-74fa1323a01d',
-  'x-ms-routing-request-id': 'WESTEUROPE:20161207T143528Z:3dc5ace1-38c0-47ba-b982-74fa1323a01d',
-  date: 'Wed, 07 Dec 2016 14:35:27 GMT' });
+  'x-ms-ratelimit-remaining-subscription-resource-requests': '10798',
+  'x-ms-correlation-request-id': '124021d2-b02d-414c-a367-272e2d4f6f84',
+  'x-ms-routing-request-id': 'CANADAEAST:20170326T180932Z:124021d2-b02d-414c-a367-272e2d4f6f84',
+  date: 'Sun, 26 Mar 2017 18:09:32 GMT',
+  connection: 'close' });
+ return result; },
+function (nock) { 
+var result = 
+nock('https://management.azure.com:443')
+  .filteringRequestBody(function (path) { return '*';})
+.put('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-traffic-manager-profile/providers/Microsoft.Network/trafficmanagerprofiles/test-profile?api-version=2017-03-01', '*')
+  .reply(201, "{\"id\":\"\\/subscriptions\\/2c224e7e-3ef5-431d-a57b-e71f4662e3a6\\/resourceGroups\\/xplat-test-traffic-manager-profile\\/providers\\/Microsoft.Network\\/trafficManagerProfiles\\/test-profile\",\"name\":\"test-profile\",\"type\":\"Microsoft.Network\\/trafficManagerProfiles\",\"location\":\"global\",\"tags\":{\"tag1\":\"aaa\",\"tag2\":\"bbb\"},\"properties\":{\"profileStatus\":\"Enabled\",\"trafficRoutingMethod\":\"Performance\",\"dnsConfig\":{\"relativeName\":\"test-profile-dns\",\"fqdn\":\"test-profile-dns.trafficmanager.net\",\"ttl\":300},\"monitorConfig\":{\"profileMonitorStatus\":\"Inactive\",\"protocol\":\"HTTP\",\"port\":80,\"path\":\"\\/healthcheck.html\"},\"endpoints\":[]}}", { 'cache-control': 'private',
+  'content-length': '614',
+  'content-type': 'application/json; charset=utf-8',
+  'x-content-type-options': 'nosniff',
+  'strict-transport-security': 'max-age=31536000; includeSubDomains',
+  'x-ms-request-id': '3e879ae1-27db-4fa2-82ae-757767617624',
+  server: 'Microsoft-IIS/8.5',
+  'x-aspnet-version': '4.0.30319',
+  'x-powered-by': 'ASP.NET',
+  'x-ms-ratelimit-remaining-subscription-resource-requests': '10798',
+  'x-ms-correlation-request-id': '124021d2-b02d-414c-a367-272e2d4f6f84',
+  'x-ms-routing-request-id': 'CANADAEAST:20170326T180932Z:124021d2-b02d-414c-a367-272e2d4f6f84',
+  date: 'Sun, 26 Mar 2017 18:09:32 GMT',
+  connection: 'close' });
  return result; }]];

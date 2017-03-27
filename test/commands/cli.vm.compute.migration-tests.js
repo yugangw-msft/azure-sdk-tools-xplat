@@ -106,15 +106,15 @@ describe('cli', function() {
         var cmd = util.format('network vnet prepare-migration %s --json --verbose', rn).split(' ');
         testUtils.executeCommand(suite, retry, cmd, function(result) {
           result.exitStatus.should.equal(1);
-          result.text.should.containEql('The virtual network ' + rn + ' does not exist.');
+          result.text.should.containEql("Virtual network \'" + rn + "' not found."); 
           var cmd = util.format('network vnet commit-migration %s --json --verbose', rn).split(' ');
           testUtils.executeCommand(suite, retry, cmd, function(result) {
             result.exitStatus.should.equal(1);
-            result.text.should.containEql('The virtual network ' + rn + ' does not exist.');
+            result.text.should.containEql("Virtual network \'" + rn + "' not found."); 
             var cmd = util.format('network vnet abort-migration %s --json --verbose', rn).split(' ');
             testUtils.executeCommand(suite, retry, cmd, function(result) {
               result.exitStatus.should.equal(1);
-              result.text.should.containEql('The virtual network ' + rn + ' does not exist.');
+              result.text.should.containEql("Virtual network \'" + rn + "' not found."); 
               done();
             });
           });
@@ -162,7 +162,7 @@ describe('cli', function() {
         var cmd = util.format('network vnet validate-migration %s --json --verbose', rn).split(' ');
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          result.text.should.containEql('The virtual network ' + rn + ' does not exist.');
+          result.text.should.containEql("Virtual network \'" + rn + "' not found.");
           done();
         });
       });

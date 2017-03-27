@@ -61,9 +61,11 @@ describe('cli', function() {
       });
     });
     after(function(done) {
-      setTimeout(vmUtil.deleteVnet(vnetPrefix, suite, function() {
-        suite.teardownSuite(done);
-      }), timeout);
+      setTimeout(function() {
+          vmUtil.deleteVnet(vnetPrefix, suite, function() {
+              suite.teardownSuite(done);
+          });
+      }, timeout);
     });
     beforeEach(function(done) {
       suite.setupTest(function() {

@@ -6,14 +6,12 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '2c224e7e-3ef5-431d-a57b-e71f4662e3a6',
-    name: 'Node CLI Test',
-    user: {
-      name: 'user@domain.example',
-      type: 'user'
+    id: 'ace9b607-25c7-4695-b94d-9bfc8fde73d9',
+    managementCertificate: {
+      key: 'mockedKey',
+      cert: 'mockedCert'
     },
-    tenantId: '72f988bf-86f1-41af-91ab-2d7cd011db47',
-    state: 'Enabled',
+    name: 'Azure Test',
     registeredProviders: [],
     _eventsCount: '1',
     isDefault: true
@@ -28,4 +26,4 @@ exports.setEnvironment = function() {
 
 exports.scopes = [];
 
- exports.randomTestIdsGenerated = function() { return ['clitestvm2199'];};
+ exports.randomTestIdsGenerated = function() { return ['clitestvm1224'];};
