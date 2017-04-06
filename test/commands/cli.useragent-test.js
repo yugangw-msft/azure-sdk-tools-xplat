@@ -29,10 +29,6 @@ describe('cli', function () {
       uaParts.should.be.ok;
       uaParts[0].should.startWith('AzureXplatCLI');
 
-      var length = uaParts.length;
-      uaParts[length - 2].should.eql('Azure-SDK-For-Node');
-      uaParts[length - 1].should.startWith('ms-rest');
-
       done();
     });
   })

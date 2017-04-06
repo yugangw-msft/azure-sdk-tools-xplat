@@ -259,6 +259,10 @@
     <Compile Include="test\commands\cli.storage.table-tests.js" />
     <Compile Include="test\commands\cli.telemetry-test.js" />
     <Compile Include="test\commands\cli.useragent-test.js" />
+    <Compile Include="test\commands\cli.useragentfilter-test.js">
+      <TestFramework>
+      </TestFramework>
+    </Compile>
     <Compile Include="test\commands\cli.vm.acl-tests.js" />
     <Compile Include="test\commands\cli.vm.capture-tests.js" />
     <Compile Include="test\commands\cli.vm.create_affin_vnet_vm-tests.js" />
