@@ -30,12 +30,13 @@ describe('cli', function () {
         return;
       };
 
-      var callback = function () { done();}
+      var callback = function () { return; }
 
       userAgentFunc(resource, mocknext, callback);
 
       resource.should.be.ok;
       resource.headers[userAgentHeader].should.eql('AzureXplatCLI');
+      done();
     });
 
     it('should overwrite and set correct user agent string', function (done) {
@@ -51,12 +52,13 @@ describe('cli', function () {
         return;
       };
 
-      var callback = function () { done(); }
+      var callback = function () { return; }
 
       userAgentFunc(resource, mocknext, callback);
 
       resource.should.be.ok;
       resource.headers[userAgentHeader].should.eql('AzureXplatCLI');
+      done();
     });
   })
 });
