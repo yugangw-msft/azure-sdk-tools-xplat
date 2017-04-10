@@ -1,3 +1,5 @@
+## random
+
 ##2017-03-14 Version 0.10.11 (npm only - hotfix)
 * General
   * Added a SHA-256 hash of macAddress to userAgent header, per VS Telemetry standard #3520
