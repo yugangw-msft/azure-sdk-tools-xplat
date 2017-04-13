@@ -64,7 +64,7 @@ nock('https://xplattestadls3965.azuredatalakestore.net:443')
 function (nock) { 
 var result = 
 nock('http://xplattestadls3965.azuredatalakestore.net:443')
-  .get('/webhdfs/v1/adlsclifolder01%2Fmovefile.txt?op=MSGETFILESTATUS&api-version=2016-11-01')
+  .get('/webhdfs/v1/adlsclifolder01%2Fmovefile.txt?op=GETFILESTATUS&api-version=2016-11-01')
   .reply(404, "{\"RemoteException\":{\"exception\":\"FileNotFoundException\",\"message\":\"File/Folder does not exist: /adlsclifolder01/movefile.txt [9596b72c-946a-476c-9698-68646fafedd0][2016-12-07T17:57:06.0107355-08:00]\",\"javaClassName\":\"java.io.FileNotFoundException\"}}", { 'cache-control': 'no-cache, no-cache, no-store, max-age=0',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
@@ -81,7 +81,7 @@ nock('http://xplattestadls3965.azuredatalakestore.net:443')
 function (nock) { 
 var result = 
 nock('https://xplattestadls3965.azuredatalakestore.net:443')
-  .get('/webhdfs/v1/adlsclifolder01%2Fmovefile.txt?op=MSGETFILESTATUS&api-version=2016-11-01')
+  .get('/webhdfs/v1/adlsclifolder01%2Fmovefile.txt?op=GETFILESTATUS&api-version=2016-11-01')
   .reply(404, "{\"RemoteException\":{\"exception\":\"FileNotFoundException\",\"message\":\"File/Folder does not exist: /adlsclifolder01/movefile.txt [9596b72c-946a-476c-9698-68646fafedd0][2016-12-07T17:57:06.0107355-08:00]\",\"javaClassName\":\"java.io.FileNotFoundException\"}}", { 'cache-control': 'no-cache, no-cache, no-store, max-age=0',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
@@ -132,7 +132,7 @@ nock('https://xplattestadls3965.azuredatalakestore.net:443')
 function (nock) { 
 var result = 
 nock('http://xplattestadls3965.azuredatalakestore.net:443')
-  .get('/webhdfs/v1/adlsclifolder02?op=MSGETFILESTATUS&api-version=2016-11-01')
+  .get('/webhdfs/v1/adlsclifolder02?op=GETFILESTATUS&api-version=2016-11-01')
   .reply(404, "{\"RemoteException\":{\"exception\":\"FileNotFoundException\",\"message\":\"File/Folder does not exist: /adlsclifolder02 [37a3cb7e-2da1-4ef9-ab9a-13db8424d6d9][2016-12-07T17:57:07.2533640-08:00]\",\"javaClassName\":\"java.io.FileNotFoundException\"}}", { 'cache-control': 'no-cache, no-cache, no-store, max-age=0',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
@@ -149,7 +149,7 @@ nock('http://xplattestadls3965.azuredatalakestore.net:443')
 function (nock) { 
 var result = 
 nock('https://xplattestadls3965.azuredatalakestore.net:443')
-  .get('/webhdfs/v1/adlsclifolder02?op=MSGETFILESTATUS&api-version=2016-11-01')
+  .get('/webhdfs/v1/adlsclifolder02?op=GETFILESTATUS&api-version=2016-11-01')
   .reply(404, "{\"RemoteException\":{\"exception\":\"FileNotFoundException\",\"message\":\"File/Folder does not exist: /adlsclifolder02 [37a3cb7e-2da1-4ef9-ab9a-13db8424d6d9][2016-12-07T17:57:07.2533640-08:00]\",\"javaClassName\":\"java.io.FileNotFoundException\"}}", { 'cache-control': 'no-cache, no-cache, no-store, max-age=0',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
