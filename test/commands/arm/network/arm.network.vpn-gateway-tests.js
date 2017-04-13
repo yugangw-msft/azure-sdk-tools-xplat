@@ -25,7 +25,7 @@ var NetworkTestUtil = require('../../../util/networkTestUtil');
 var networkUtil = new NetworkTestUtil();
 
 var testPrefix = 'arm-network-vpn-gateway-tests',
-  groupName = 'xplat-test-vpn-gateway',
+  groupName = 'xplat-test-vpn-gateway1',
   location;
 
 var gatewayProp = {
@@ -131,7 +131,7 @@ describe('arm', function () {
         });
       });
       it('set should modify vpn gateway', function (done) {
-        var cmd = util.format('network vpn-gateway set -g {group} -n {name} -f {addressPrefix} ' +
+        var cmd = util.format('network vpn-gateway set -g {group} -n {name} -c {addressPrefix} ' +
           '-a {newBgpSettingsAsn} -j {newBgpPeerWeight} -t {newTags} --json').formatArgs(gatewayProp);
 
         testUtils.executeCommand(suite, retry, cmd, function (result) {
@@ -175,6 +175,7 @@ describe('arm', function () {
       it('set should attach default site to vpn gateway using site name', function (done) {
         var cmd = 'network vpn-gateway set -g {group} -n {name} -d {1} --json'.formatArgs(gatewayProp, localGatewayProp.name);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
+
           result.exitStatus.should.equal(0);
           var vpnGateway = JSON.parse(result.text);
           vpnGateway.gatewayDefaultSite.id.should.containEql(localGatewayProp.name);
