@@ -6,14 +6,12 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '11ae7815-2cd0-4896-b2f7-da0ca29fc64e',
-    name: 'ART SLA Test Tenants 2',
-    user: {
-      name: 'user@domain.example',
-      type: 'user'
+    id: 'ace9b607-25c7-4695-b94d-9bfc8fde73d9',
+    managementCertificate: {
+      key: 'mockedKey',
+      cert: 'mockedCert'
     },
-    tenantId: '72f988bf-86f1-41af-91ab-2d7cd011db47',
-    state: 'Enabled',
+    name: 'Azure Test',
     registeredProviders: [],
     _eventsCount: '1',
     isDefault: true
@@ -30,29 +28,29 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.core.windows.net:443')
-  .post('/11ae7815-2cd0-4896-b2f7-da0ca29fc64e/services/networking/virtualnetwork/123/migration?comp=validate')
-  .reply(200, "<ValidationMessages xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><ValidationMessage><ResourceType>VirtualNetwork</ResourceType><ResourceName>123</ResourceName><Category>Error</Category><Message>The virtual network 123 does not exist.</Message></ValidationMessage></ValidationMessages>", { 'cache-control': 'no-cache',
-  'content-length': '341',
+  .post('/ace9b607-25c7-4695-b94d-9bfc8fde73d9/services/networking/virtualnetwork/123/migration?comp=validate')
+  .reply(200, "<ValidationMessages xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><ValidationMessage><ResourceType>VirtualNetwork</ResourceType><ResourceName>123</ResourceName><Category>Error</Category><Message>Virtual network '123' not found. Either it does not exist or it is an Azure Resource Manager resource, which cannot be used with Cloud Services.</Message></ValidationMessage></ValidationMessages>", { 'cache-control': 'no-cache',
+  'content-length': '446',
   'content-type': 'application/xml; charset=utf-8',
-  server: '1.0.6198.397 (rd_rdfe_stable.160624-1024) Microsoft-HTTPAPI/2.0',
-  'x-ms-servedbyregion': 'ussouth3',
+  server: '1.0.6198.492 (rd_rdfe_stable.170314-1904) Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0',
+  'x-ms-servedbyregion': 'ussouth2',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': 'c201a4251c13afafaee23a1f22a0e676',
-  date: 'Thu, 07 Jul 2016 21:13:13 GMT',
+  'x-ms-request-id': 'd5f4e15a1c3d71d787ec3056000fcd45',
+  date: 'Sat, 18 Mar 2017 20:42:54 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.core.windows.net:443')
-  .post('/11ae7815-2cd0-4896-b2f7-da0ca29fc64e/services/networking/virtualnetwork/123/migration?comp=validate')
-  .reply(200, "<ValidationMessages xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><ValidationMessage><ResourceType>VirtualNetwork</ResourceType><ResourceName>123</ResourceName><Category>Error</Category><Message>The virtual network 123 does not exist.</Message></ValidationMessage></ValidationMessages>", { 'cache-control': 'no-cache',
-  'content-length': '341',
+  .post('/ace9b607-25c7-4695-b94d-9bfc8fde73d9/services/networking/virtualnetwork/123/migration?comp=validate')
+  .reply(200, "<ValidationMessages xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><ValidationMessage><ResourceType>VirtualNetwork</ResourceType><ResourceName>123</ResourceName><Category>Error</Category><Message>Virtual network '123' not found. Either it does not exist or it is an Azure Resource Manager resource, which cannot be used with Cloud Services.</Message></ValidationMessage></ValidationMessages>", { 'cache-control': 'no-cache',
+  'content-length': '446',
   'content-type': 'application/xml; charset=utf-8',
-  server: '1.0.6198.397 (rd_rdfe_stable.160624-1024) Microsoft-HTTPAPI/2.0',
-  'x-ms-servedbyregion': 'ussouth3',
+  server: '1.0.6198.492 (rd_rdfe_stable.170314-1904) Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0',
+  'x-ms-servedbyregion': 'ussouth2',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': 'c201a4251c13afafaee23a1f22a0e676',
-  date: 'Thu, 07 Jul 2016 21:13:13 GMT',
+  'x-ms-request-id': 'd5f4e15a1c3d71d787ec3056000fcd45',
+  date: 'Sat, 18 Mar 2017 20:42:54 GMT',
   connection: 'close' });
  return result; }]];
- exports.randomTestIdsGenerated = function() { return ['cliVmMigr726'];};
+ exports.randomTestIdsGenerated = function() { return ['cliVmMigr7819'];};

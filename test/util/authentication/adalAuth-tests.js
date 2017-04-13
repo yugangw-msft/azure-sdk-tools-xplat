@@ -34,11 +34,11 @@ describe('login as an user', function () {
   var configMatched;
   
   before(function (done) {
-    sandbox.stub(adalAuth, 'removeCachedToken', function (user, callback) {
+    sandbox.stub(adalAuth, 'removeCachedToken').callsFake(function (user, callback) {
       return callback();
     });
     
-    sandbox.stub(adalAuth, 'createAuthenticationContext', function () {
+    sandbox.stub(adalAuth, 'createAuthenticationContext').callsFake(function () {
       return {
         acquireToken: function (resource, user, clientId, callback) {
           configMatched = (resource === testConfig.resource || 

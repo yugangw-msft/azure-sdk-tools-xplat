@@ -6,13 +6,14 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: 'e33f361b-53c2-4cc7-b829-78906708387b',
+    id: 'ace9b607-25c7-4695-b94d-9bfc8fde73d9',
     managementCertificate: {
       key: 'mockedKey',
       cert: 'mockedCert'
     },
-    name: 'Microsoft Azure Internal Consumption',
+    name: 'Azure Test',
     registeredProviders: [],
+    _eventsCount: '1',
     isDefault: true
   }, newProfile.environments['AzureCloud']));
 
@@ -27,85 +28,85 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.core.windows.net:443')
-  .post('/e33f361b-53c2-4cc7-b829-78906708387b/services/storageservices/123/migration?comp=prepare')
+  .post('/ace9b607-25c7-4695-b94d-9bfc8fde73d9/services/storageservices/123/migration?comp=prepare')
   .reply(404, "<Error xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Code>ResourceNotFound</Code><Message>The storage account '123' was not found.</Message></Error>", { 'cache-control': 'no-cache',
   'content-length': '205',
   'content-type': 'application/xml; charset=utf-8',
-  server: '1.0.6198.387 (rd_rdfe_stable.160523-1235) Microsoft-HTTPAPI/2.0',
-  'x-ms-servedbyregion': 'ussouth3',
+  server: '1.0.6198.492 (rd_rdfe_stable.170314-1904) Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0',
+  'x-ms-servedbyregion': 'ussouth2',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': '3456ebb3c4c0a86ca74de34280d8e96a',
-  date: 'Fri, 27 May 2016 06:15:23 GMT',
+  'x-ms-request-id': '491bc688c54578c98af02f2740f4467f',
+  date: 'Sat, 18 Mar 2017 20:42:52 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.core.windows.net:443')
-  .post('/e33f361b-53c2-4cc7-b829-78906708387b/services/storageservices/123/migration?comp=prepare')
+  .post('/ace9b607-25c7-4695-b94d-9bfc8fde73d9/services/storageservices/123/migration?comp=prepare')
   .reply(404, "<Error xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Code>ResourceNotFound</Code><Message>The storage account '123' was not found.</Message></Error>", { 'cache-control': 'no-cache',
   'content-length': '205',
   'content-type': 'application/xml; charset=utf-8',
-  server: '1.0.6198.387 (rd_rdfe_stable.160523-1235) Microsoft-HTTPAPI/2.0',
-  'x-ms-servedbyregion': 'ussouth3',
+  server: '1.0.6198.492 (rd_rdfe_stable.170314-1904) Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0',
+  'x-ms-servedbyregion': 'ussouth2',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': '3456ebb3c4c0a86ca74de34280d8e96a',
-  date: 'Fri, 27 May 2016 06:15:23 GMT',
+  'x-ms-request-id': '491bc688c54578c98af02f2740f4467f',
+  date: 'Sat, 18 Mar 2017 20:42:52 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('http://management.core.windows.net:443')
-  .post('/e33f361b-53c2-4cc7-b829-78906708387b/services/storageservices/123/migration?comp=commit')
+  .post('/ace9b607-25c7-4695-b94d-9bfc8fde73d9/services/storageservices/123/migration?comp=commit')
   .reply(404, "<Error xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Code>ResourceNotFound</Code><Message>The storage account '123' was not found.</Message></Error>", { 'cache-control': 'no-cache',
   'content-length': '205',
   'content-type': 'application/xml; charset=utf-8',
-  server: '1.0.6198.387 (rd_rdfe_stable.160523-1235) Microsoft-HTTPAPI/2.0',
-  'x-ms-servedbyregion': 'ussouth3',
+  server: '1.0.6198.492 (rd_rdfe_stable.170314-1904) Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0',
+  'x-ms-servedbyregion': 'ussouth2',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': '4a0b0820342ca3cbbbfcd399a8f859de',
-  date: 'Fri, 27 May 2016 06:15:22 GMT',
+  'x-ms-request-id': '7e263f1587537d178ab5218713442fe9',
+  date: 'Sat, 18 Mar 2017 20:42:53 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.core.windows.net:443')
-  .post('/e33f361b-53c2-4cc7-b829-78906708387b/services/storageservices/123/migration?comp=commit')
+  .post('/ace9b607-25c7-4695-b94d-9bfc8fde73d9/services/storageservices/123/migration?comp=commit')
   .reply(404, "<Error xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Code>ResourceNotFound</Code><Message>The storage account '123' was not found.</Message></Error>", { 'cache-control': 'no-cache',
   'content-length': '205',
   'content-type': 'application/xml; charset=utf-8',
-  server: '1.0.6198.387 (rd_rdfe_stable.160523-1235) Microsoft-HTTPAPI/2.0',
-  'x-ms-servedbyregion': 'ussouth3',
+  server: '1.0.6198.492 (rd_rdfe_stable.170314-1904) Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0',
+  'x-ms-servedbyregion': 'ussouth2',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': '4a0b0820342ca3cbbbfcd399a8f859de',
-  date: 'Fri, 27 May 2016 06:15:22 GMT',
+  'x-ms-request-id': '7e263f1587537d178ab5218713442fe9',
+  date: 'Sat, 18 Mar 2017 20:42:53 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('http://management.core.windows.net:443')
-  .post('/e33f361b-53c2-4cc7-b829-78906708387b/services/storageservices/123/migration?comp=abort')
+  .post('/ace9b607-25c7-4695-b94d-9bfc8fde73d9/services/storageservices/123/migration?comp=abort')
   .reply(404, "<Error xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Code>ResourceNotFound</Code><Message>The storage account '123' was not found.</Message></Error>", { 'cache-control': 'no-cache',
   'content-length': '205',
   'content-type': 'application/xml; charset=utf-8',
-  server: '1.0.6198.387 (rd_rdfe_stable.160523-1235) Microsoft-HTTPAPI/2.0',
-  'x-ms-servedbyregion': 'ussouth3',
+  server: '1.0.6198.492 (rd_rdfe_stable.170314-1904) Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0',
+  'x-ms-servedbyregion': 'ussouth2',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': 'd49a2e30f876a149b838473bb91d5e8e',
-  date: 'Fri, 27 May 2016 06:15:24 GMT',
+  'x-ms-request-id': '9e789d1b23e67b2bbda3d295c1af4b4e',
+  date: 'Sat, 18 Mar 2017 20:42:54 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.core.windows.net:443')
-  .post('/e33f361b-53c2-4cc7-b829-78906708387b/services/storageservices/123/migration?comp=abort')
+  .post('/ace9b607-25c7-4695-b94d-9bfc8fde73d9/services/storageservices/123/migration?comp=abort')
   .reply(404, "<Error xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Code>ResourceNotFound</Code><Message>The storage account '123' was not found.</Message></Error>", { 'cache-control': 'no-cache',
   'content-length': '205',
   'content-type': 'application/xml; charset=utf-8',
-  server: '1.0.6198.387 (rd_rdfe_stable.160523-1235) Microsoft-HTTPAPI/2.0',
-  'x-ms-servedbyregion': 'ussouth3',
+  server: '1.0.6198.492 (rd_rdfe_stable.170314-1904) Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0',
+  'x-ms-servedbyregion': 'ussouth2',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': 'd49a2e30f876a149b838473bb91d5e8e',
-  date: 'Fri, 27 May 2016 06:15:24 GMT',
+  'x-ms-request-id': '9e789d1b23e67b2bbda3d295c1af4b4e',
+  date: 'Sat, 18 Mar 2017 20:42:54 GMT',
   connection: 'close' });
  return result; }]];
- exports.randomTestIdsGenerated = function() { return ['cliVmMigr7207'];};
+ exports.randomTestIdsGenerated = function() { return ['cliVmMigr2069'];};

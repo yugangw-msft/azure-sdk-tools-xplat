@@ -18377,6 +18377,14 @@
                       "description": "the lease ID of the destination blob "
                     },
                     {
+                      "flags": "--incremental",
+                      "required": 0,
+                      "optional": 0,
+                      "bool": true,
+                      "long": "--incremental",
+                      "description": "whether start page blob incremental copy or not. If yes, the source must be a page blob snapshot. Refer to https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/incremental-copy-blob for more detailed information."
+                    },
+                    {
                       "flags": "-q, --quiet",
                       "required": 0,
                       "optional": 0,
@@ -23820,6 +23828,125 @@
               ]
             },
             {
+              "name": "get-by-name",
+              "description": "The Get Deployment By Name operation returns configuration information, status, and system properties for a deployment.  (see http://msdn.microsoft.com/en-us/library/windowsazure/ee460804.aspx for more information)",
+              "fullName": "service deployment get-by-name",
+              "usage": "[options] <service-name> <name>",
+              "filePath": "commands/asm/compute/deployment._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "--service-name <service-name>",
+                  "required": -16,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--service-name",
+                  "description": "service-name"
+                },
+                {
+                  "flags": "-n, --name <name>",
+                  "required": -12,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-n",
+                  "long": "--name",
+                  "description": "name"
+                },
+                {
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-s",
+                  "long": "--subscription",
+                  "description": "The subscription identifier"
+                }
+              ]
+            },
+            {
+              "name": "get-by-slot",
+              "description": "The Get Deployment By Slot operation returns configuration information, status, and system properties for a deployment.  (see http://msdn.microsoft.com/en-us/library/windowsazure/ee460804.aspx for more information)",
+              "fullName": "service deployment get-by-slot",
+              "usage": "[options] <service-name> <deployment-slot>",
+              "filePath": "commands/asm/compute/deployment._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "--service-name <service-name>",
+                  "required": -16,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--service-name",
+                  "description": "service-name"
+                },
+                {
+                  "flags": "--deployment-slot <deployment-slot>",
+                  "required": -19,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--deployment-slot",
+                  "description": "deployment-slot"
+                },
+                {
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-s",
+                  "long": "--subscription",
+                  "description": "The subscription identifier"
+                }
+              ]
+            },
+            {
               "name": "prepare-migration",
               "description": "The Prepare Deployment Operation validates and prepares your deployment for IaaS Classic to ARM migration.",
               "fullName": "service deployment prepare-migration",
@@ -24834,6 +24961,94 @@
                   "short": "-s",
                   "long": "--subscription",
                   "description": "the subscription id"
+                }
+              ]
+            }
+          ],
+          "categories": {}
+        }
+      }
+    },
+    "compute": {
+      "name": "compute",
+      "description": "Commands to invoke service management operations.",
+      "fullName": "compute",
+      "usage": "[options]",
+      "options": [],
+      "commands": [],
+      "categories": {
+        "virtual-machine": {
+          "name": "virtual-machine",
+          "description": "Commands to manage your virtual machine.  ",
+          "fullName": "compute virtual-machine",
+          "usage": "[options] [command]",
+          "options": [],
+          "commands": [
+            {
+              "name": "initiate-maintenance",
+              "description": "The Initiate Maintenance on role operation initiates maintenance on the specified virtual machine.  (see http://msdn.microsoft.com/en-us/library/windowsazure/jj157197.aspx for more information)",
+              "fullName": "compute virtual-machine initiate-maintenance",
+              "usage": "[options] <service-name> <name> <virtual-machine-name>",
+              "filePath": "commands/asm/compute/virtualMachine._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "--service-name <service-name>",
+                  "required": -16,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--service-name",
+                  "description": "service-name"
+                },
+                {
+                  "flags": "-n, --name <name>",
+                  "required": -12,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-n",
+                  "long": "--name",
+                  "description": "name"
+                },
+                {
+                  "flags": "--virtual-machine-name <virtual-machine-name>",
+                  "required": -24,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--virtual-machine-name",
+                  "description": "virtual-machine-name"
+                },
+                {
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-s",
+                  "long": "--subscription",
+                  "description": "The subscription identifier"
                 }
               ]
             }
@@ -38147,7 +38362,7 @@
               "optional": 0,
               "bool": true,
               "long": "--aspNetCore",
-              "description": "Create a deployment script for ASP.NET Core web application, specify the project.json file path"
+              "description": "Create a deployment script for ASP.NET Core web application, specify the project file path"
             },
             {
               "flags": "--aspWebSite",
@@ -38172,6 +38387,14 @@
               "bool": true,
               "long": "--node",
               "description": "Create a deployment script for node.js website"
+            },
+            {
+              "flags": "--ruby",
+              "required": 0,
+              "optional": 0,
+              "bool": true,
+              "long": "--ruby",
+              "description": "Create a deployment script for ruby website"
             },
             {
               "flags": "--php",

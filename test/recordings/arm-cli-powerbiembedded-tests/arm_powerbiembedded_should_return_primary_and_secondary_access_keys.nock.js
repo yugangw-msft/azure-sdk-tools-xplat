@@ -6,13 +6,13 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '3d1cd7a8-b035-4563-9288-dbe706cd672e',
-    name: 'SAAS InfoNav Test_564339',
+    id: '2c224e7e-3ef5-431d-a57b-e71f4662e3a6',
+    name: 'Node CLI Test',
     user: {
       name: 'user@domain.example',
-      type: 'servicePrincipal'
+      type: 'user'
     },
-    tenantId: 'microsoft.com',
+    tenantId: '72f988bf-86f1-41af-91ab-2d7cd011db47',
     state: 'Enabled',
     registeredProviders: [],
     _eventsCount: '1',
@@ -31,38 +31,38 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .post('/subscriptions/3d1cd7a8-b035-4563-9288-dbe706cd672e/resourceGroups/azureXplatCliTestResourceGroup5228/providers/Microsoft.PowerBI/workspaceCollections/azureXplatCliTestWorkspaceCollection3663/listKeys?api-version=2016-01-29')
-  .reply(200, "{\"key1\":\"4TTyLU4Is9a2S5rcpEYp3xrq6zb3qHIaIyiaX5JlY97k4mlX5Vmuas0F2KysNa9l8KY7FNzHhXww/EF4h8fWBw==\",\"key2\":\"uWNtE0Wbmvnx9JNSF112X2TnBeq+lLEICrkr+EcTWi0lnkN0XPBt5oNVSL1yeGXwybHyAMAoDdeImYmKSQU5uw==\"}", { 'cache-control': 'no-store, must-revalidate, no-cache',
+  .post('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/azureXplatCliTestResourceGroup2462/providers/Microsoft.PowerBI/workspaceCollections/azureXplatCliTestWorkspaceCollection4503/listKeys?api-version=2016-01-29')
+  .reply(200, "{\"key1\":\"dLefiOWsNtg0zrQO2yTsyhqAYzs4qT9njnMNX8DuZg1No0m0TOKram1uB1Ba3k6jUWlKtd551EwHeWdctnn1RA==\",\"key2\":\"XFpRDutx/7t8saMLXoa00Mi4YdHYGqujP0dgvUj/8dq8rarXU+jB7PFxIwnMyEl9EKO0z/zFDRTZ86HX2zCh7g==\"}", { 'cache-control': 'no-store, must-revalidate, no-cache',
   'content-length': '197',
   'content-type': 'application/json; charset=utf-8',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   'x-frame-options': 'deny',
   'x-content-type-options': 'nosniff',
-  requestid: 'ce4d6652-9486-4a51-ae1a-8c7fb20ee1b9',
-  server: 'Microsoft-HTTPAPI/2.0',
+  requestid: '42b4ff6c-c8e9-4083-9603-58dbecc0d391',
+  'x-ms-request-id': '42b4ff6c-c8e9-4083-9603-58dbecc0d391',
+  server: 'Microsoft-HTTPAPI/2.0, Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1198',
-  'x-ms-request-id': '0d396c9f-4ebf-4195-80d8-d6343651decd',
-  'x-ms-correlation-request-id': '0d396c9f-4ebf-4195-80d8-d6343651decd',
-  'x-ms-routing-request-id': 'WESTUS:20160524T193244Z:0d396c9f-4ebf-4195-80d8-d6343651decd',
-  date: 'Tue, 24 May 2016 19:32:43 GMT',
+  'x-ms-correlation-request-id': 'a02fb8de-c4c9-4d86-b2ac-7860a9e916e1',
+  'x-ms-routing-request-id': 'CANADAEAST:20170326T050809Z:a02fb8de-c4c9-4d86-b2ac-7860a9e916e1',
+  date: 'Sun, 26 Mar 2017 05:08:08 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .post('/subscriptions/3d1cd7a8-b035-4563-9288-dbe706cd672e/resourceGroups/azureXplatCliTestResourceGroup5228/providers/Microsoft.PowerBI/workspaceCollections/azureXplatCliTestWorkspaceCollection3663/listKeys?api-version=2016-01-29')
-  .reply(200, "{\"key1\":\"4TTyLU4Is9a2S5rcpEYp3xrq6zb3qHIaIyiaX5JlY97k4mlX5Vmuas0F2KysNa9l8KY7FNzHhXww/EF4h8fWBw==\",\"key2\":\"uWNtE0Wbmvnx9JNSF112X2TnBeq+lLEICrkr+EcTWi0lnkN0XPBt5oNVSL1yeGXwybHyAMAoDdeImYmKSQU5uw==\"}", { 'cache-control': 'no-store, must-revalidate, no-cache',
+  .post('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/azureXplatCliTestResourceGroup2462/providers/Microsoft.PowerBI/workspaceCollections/azureXplatCliTestWorkspaceCollection4503/listKeys?api-version=2016-01-29')
+  .reply(200, "{\"key1\":\"dLefiOWsNtg0zrQO2yTsyhqAYzs4qT9njnMNX8DuZg1No0m0TOKram1uB1Ba3k6jUWlKtd551EwHeWdctnn1RA==\",\"key2\":\"XFpRDutx/7t8saMLXoa00Mi4YdHYGqujP0dgvUj/8dq8rarXU+jB7PFxIwnMyEl9EKO0z/zFDRTZ86HX2zCh7g==\"}", { 'cache-control': 'no-store, must-revalidate, no-cache',
   'content-length': '197',
   'content-type': 'application/json; charset=utf-8',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   'x-frame-options': 'deny',
   'x-content-type-options': 'nosniff',
-  requestid: 'ce4d6652-9486-4a51-ae1a-8c7fb20ee1b9',
-  server: 'Microsoft-HTTPAPI/2.0',
+  requestid: '42b4ff6c-c8e9-4083-9603-58dbecc0d391',
+  'x-ms-request-id': '42b4ff6c-c8e9-4083-9603-58dbecc0d391',
+  server: 'Microsoft-HTTPAPI/2.0, Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1198',
-  'x-ms-request-id': '0d396c9f-4ebf-4195-80d8-d6343651decd',
-  'x-ms-correlation-request-id': '0d396c9f-4ebf-4195-80d8-d6343651decd',
-  'x-ms-routing-request-id': 'WESTUS:20160524T193244Z:0d396c9f-4ebf-4195-80d8-d6343651decd',
-  date: 'Tue, 24 May 2016 19:32:43 GMT',
+  'x-ms-correlation-request-id': 'a02fb8de-c4c9-4d86-b2ac-7860a9e916e1',
+  'x-ms-routing-request-id': 'CANADAEAST:20170326T050809Z:a02fb8de-c4c9-4d86-b2ac-7860a9e916e1',
+  date: 'Sun, 26 Mar 2017 05:08:08 GMT',
   connection: 'close' });
  return result; }]];

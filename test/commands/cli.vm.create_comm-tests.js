@@ -62,7 +62,7 @@ describe('cli', function() {
       timeout = suite.isPlayback() ? 0 : testUtils.TIMEOUT_INTERVAL;
       retry = 5;
       if (suite.isMocked) {
-        sinon.stub(crypto, 'randomBytes', function() {
+        sinon.stub(crypto, 'randomBytes').callsFake(function() {
           return (++currentRandom).toString();
         });
       }

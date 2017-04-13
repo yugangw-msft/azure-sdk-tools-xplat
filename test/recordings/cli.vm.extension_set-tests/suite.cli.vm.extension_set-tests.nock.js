@@ -6,13 +6,14 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: 'e33f361b-53c2-4cc7-b829-78906708387b',
+    id: 'ace9b607-25c7-4695-b94d-9bfc8fde73d9',
     managementCertificate: {
       key: 'mockedKey',
       cert: 'mockedCert'
     },
-    name: 'Microsoft Azure Internal Consumption',
+    name: 'Azure Test',
     registeredProviders: [],
+    _eventsCount: '1',
     isDefault: true
   }, newProfile.environments['AzureCloud']));
 
@@ -20,9 +21,9 @@ exports.getMockedProfile = function () {
 };
 
 exports.setEnvironment = function() {
-  process.env['AZURE_VM_TEST_LOCATION'] = 'East US';
+  process.env['AZURE_VM_TEST_LOCATION'] = 'West US';
 };
 
 exports.scopes = [];
 
- exports.randomTestIdsGenerated = function() { return ['clitestvm5449'];};
+ exports.randomTestIdsGenerated = function() { return ['clitestvm8984'];};

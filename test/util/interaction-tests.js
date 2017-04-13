@@ -25,7 +25,7 @@ describe('logging-test', function () {
   var CANCEL_MSG = 'cancelled';
   before(function () {
     sandbox = sinon.sandbox.create();
-    sandbox.stub(promptPkg, 'get', function (props, callback) {
+    sandbox.stub(promptPkg, 'get').callsFake(function (props, callback) {
       return callback(new Error(CANCEL_MSG));
     });
   });

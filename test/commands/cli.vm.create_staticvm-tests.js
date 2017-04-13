@@ -55,7 +55,7 @@ describe('cli', function() {
         if (suite.isMocked) {
           //mock the behavior to provide a predictable storage account name 
           //in record and playback mode
-          sinon.stub(blobUtils, "normalizeServiceName", function() {
+          sinon.stub(blobUtils, "normalizeServiceName").callsFake(function() {
             return vmName + "14264783346";
           });
         }

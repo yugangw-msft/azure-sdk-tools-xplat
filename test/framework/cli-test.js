@@ -741,7 +741,7 @@ _.extend(CLITest.prototype, {
 */
 CLITest.wrap = function wrap(sinonObj, object, property, setup) {
   var original = object[property];
-  return sinonObj.stub(object, property, setup(original));
+  return sinonObj.stub(object, property).callsFake(setup(original));
 };
 
 /**
