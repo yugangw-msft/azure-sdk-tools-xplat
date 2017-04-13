@@ -11,9 +11,10 @@
     "Tavares, Chris <ctavares@microsoft.com>",
     "Zavery, Amar <amzavery@microsoft.com>",
     "Wang, Yugang <yugangw@microsoft.com>",
-    "Chen, Hao <hach@microsoft.com>"
+    "Chen, Hao <hach@microsoft.com>",
+    "Krishnan, Balaji <balajik@microsoft.com>"
   ],
-  "version": "0.10.11",
+  "version": "0.10.12",
   "description": "Microsoft Azure Cross Platform Command Line tool",
   "tags": [
     "azure",
@@ -28,9 +29,6 @@
   ],
   "main": "./lib/cli.js",
   "preferGlobal": true,
-  "engines": {
-    "node": ">= 4.2.4"
-  },
   "license": "Apache-2.0",
   "dependencies": {
     "adal-node": "0.1.21",
@@ -91,8 +89,8 @@
     "jwt-decode": "^2.1.0",
     "kuduscript": "1.0.13",
     "moment": "^2.8.0",
-    "ms-rest": "^1.12.0",
-    "ms-rest-azure": "^1.12.0",
+    "ms-rest": "^1.15.7",
+    "ms-rest-azure": "^1.15.7",
     "node-forge": "0.6.23",
     "omelette": "0.3.2",
     "openssl-wrapper": "0.2.1",

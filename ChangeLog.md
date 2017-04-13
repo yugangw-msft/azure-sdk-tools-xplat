@@ -1,3 +1,17 @@
+##2017-04-05 Version 0.10.12
+* Storage
+  * Upgraded azure-storage to 2.1.0 #3544
+  * Added --incremental parameter to azure storage blob copy start command to support page blob incremental copy #3544
+* General
+  * fixed sinon.stub warnings by changing to the new signature #3547
+  * Handled the os.networkInterfaces() exception thrown while getting the host nic on win10 bash subsystem
+* TrafficManager
+  * Added api-version=2017-03-01 #3543
+  * Added geo mapping for endpoints #3543
+* Compute (ASM)
+  * Added new CLI command "initiate-maintenance" for a new API called "PerformMaintenance" #3542
+  * Added MaintenanceStatus field in the GetDeployment response #3542
+
 ##2017-03-14 Version 0.10.11 (npm only - hotfix)
 * General
   * Added a SHA-256 hash of macAddress to userAgent header, per VS Telemetry standard #3520
