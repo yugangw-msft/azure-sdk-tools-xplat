@@ -82,6 +82,7 @@
     <Compile Include="lib\commands\arm\datalakestore\datalakestore.utils.js" />
     <Compile Include="lib\util\authentication\adalAuthForUser.js" />
     <Compile Include="lib\util\authentication\adalAuthForServicePrincipal.js" />
+    <Compile Include="lib\util\cliUserAgentFilter.js" />
     <Compile Include="lib\util\interaction.js" />
     <Compile Include="lib\util\profile\account.js" />
     <Compile Include="lib\util\storage.util.js" />
@@ -257,6 +258,11 @@
     <Compile Include="test\commands\cli.storage.service-tests.js" />
     <Compile Include="test\commands\cli.storage.table-tests.js" />
     <Compile Include="test\commands\cli.telemetry-test.js" />
+    <Compile Include="test\commands\cli.useragent-test.js" />
+    <Compile Include="test\commands\cli.useragentfilter-test.js">
+      <TestFramework>
+      </TestFramework>
+    </Compile>
     <Compile Include="test\commands\cli.vm.acl-tests.js" />
     <Compile Include="test\commands\cli.vm.capture-tests.js" />
     <Compile Include="test\commands\cli.vm.create_affin_vnet_vm-tests.js" />
