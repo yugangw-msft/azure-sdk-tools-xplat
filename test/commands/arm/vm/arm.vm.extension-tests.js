@@ -238,9 +238,9 @@ describe('arm', function() {
         });
       });
 
-      it('Set Chef extension with chef-service-interval', function(done){
+      it('Set Chef extension with chef-daemon-interval', function(done){
         this.timeout(vmTest.timeoutLarge);
-        var cmd = util.format('vm extension set-chef %s %s --client-config %s --validation-pem %s --chef-service-interval %s --json', groupName, vmPrefix, clientConfig, validationPem, 30).split(' ');
+        var cmd = util.format('vm extension set-chef %s %s --client-config %s --validation-pem %s --chef-daemon-interval %s --json', groupName, vmPrefix, clientConfig, validationPem, 30).split(' ');
         testUtils.executeCommand(suite, retry, cmd, function(result) {
           result.exitStatus.should.equal(0);
           done();

@@ -131,8 +131,8 @@ describe('cli', function() {
         });
       });
 
-      it('Set Chef extensions with chef-service-interval option', function(done) {
-        var cmd = util.format('vm extension set-chef %s -V %s -c %s -O %s --chef-service-interval %s --json', vmName, chefversion, clientconfig, validationpem, 30).split(' ');
+      it('Set Chef extensions with chef-daemon-interval option', function(done) {
+        var cmd = util.format('vm extension set-chef %s -V %s -c %s -O %s --chef-daemon-interval %s --json', vmName, chefversion, clientconfig, validationpem, 30).split(' ');
         testUtils.executeCommand(suite, retry, cmd, function(result) {
           result.exitStatus.should.equal(0);
           done();
