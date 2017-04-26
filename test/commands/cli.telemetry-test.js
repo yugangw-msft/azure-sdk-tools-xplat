@@ -88,8 +88,7 @@ describe('cli', function() {
       sandbox.stub(userAgentCore, 'getUserAgentData').callsFake(function () {
         return {
           osType: 'WindowsNT',
-          osVersion: '2.0',
-          mode: 'baz'
+          osVersion: '2.0'
         };
       });
 
@@ -106,7 +105,6 @@ describe('cli', function() {
       var userAgentInfo = userAgentCore.getUserAgentData();
       should(userAgentInfo).have.property('osType', 'WindowsNT');
       should(userAgentInfo).have.property('osVersion', '2.0');
-      should(userAgentInfo).have.property('mode', 'baz');
 
       sandbox.restore();
       done();
@@ -134,13 +132,8 @@ describe('cli', function() {
       should(userAgentInfo).have.property('osVersion').with.type('string');
       should(userAgentInfo).have.property('nodeVersion').with.type('string');
       should(userAgentInfo).have.property('installationType').with.type('string');
-      should(userAgentInfo).have.property('userId').with.type('string');
-      should(userAgentInfo).have.property('subscriptionId').with.type('string');
       should(userAgentInfo).have.property('userType').with.type('string');
       should(userAgentInfo).have.property('macAddressHash').with.type('string');
-
-      // assert properties, with values.
-      should(userAgentInfo).have.property('mode').with.type('string').be.equal('arm');
 
       done();
     });
@@ -174,13 +167,7 @@ describe('cli', function() {
       (userAgentInfo.osVersion).should.be.ok;
       (userAgentInfo.nodeVersion).should.be.ok;
       (userAgentInfo.installationType).should.be.ok;
-      (userAgentInfo.userId).should.be.ok;
-      (userAgentInfo.subscriptionId).should.be.ok;
       (userAgentInfo.userType).should.be.ok;
-      (userAgentInfo.mode).should.be.ok;
-
-      // verify values
-      (userAgentInfo.mode).should.be.equal('arm');
 
       done();
     });
