@@ -43958,7 +43958,7 @@
                 },
                 {
                   "flags": "--chef-daemon-interval <chef-daemon-interval>",
-                  "required": -25,
+                  "required": -24,
                   "optional": 0,
                   "bool": true,
                   "long": "--chef-daemon-interval",
