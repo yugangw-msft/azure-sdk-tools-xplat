@@ -387,6 +387,16 @@ _.extend(NetworkTestUtil.prototype, {
       callback(profile);
     });
   },
+  getAppGateway: function(gatewayProp, suite, callback) {
+    var cmd = 'network application-gateway show {group} {name} --json'.formatArgs(gatewayProp);
+    testUtils.executeCommand(suite, retry, cmd, function (result) {
+      result.exitStatus.should.equal(0);
+      var appGateway = JSON.parse(result.text);
+      appGateway.name.should.equal(gatewayProp.name);
+      appGateway.location.should.equal(gatewayProp.location);
+      callback(appGateway);
+    });
+  },
   stopAppGateway: function(gatewayProps, suite, callback) {
     var cmd = 'network application-gateway stop {group} {name} --json'.formatArgs(gatewayProps);
     testUtils.executeCommand(suite, retry, cmd, function(result) {
