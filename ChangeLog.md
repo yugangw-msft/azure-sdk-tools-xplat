@@ -1,3 +1,19 @@
+##2017-05-10 Version 0.10.13
+* General
+  * login: allow accesstokens.json to be configurable through env var #3552
+  * Standardize User Agent string in request header (Issue #3565). #3578
+* Compute
+  * Fixed help text for 'azure vm image show' (Issue #3548). #3563
+  * Chef Extension
+    * Renamed chef-service-interval option to chef-daemon-interval #3566
+* Storage
+  * Added support for large page blob (8TB) #3572
+* Batch
+  * Fixed confirmation string when removing nodes from Batch pool. #3570
+* Network
+  * Improved Network DNS Zone Import's data validation #3569
+  * Rewrote implementation for NIC (#3568), VPN Gateway (#3567), Local Gateway (#3576), Application Gateway (#3577), Express Routes (#3579).
+
 ##2017-04-05 Version 0.10.12
 * Storage
   * Upgraded azure-storage to 2.1.0 #3544
