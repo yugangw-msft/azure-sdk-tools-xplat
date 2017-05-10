@@ -14,7 +14,7 @@
     "Chen, Hao <hach@microsoft.com>",
     "Krishnan, Balaji <balajik@microsoft.com>"
   ],
-  "version": "0.10.12",
+  "version": "0.10.13",
   "description": "Microsoft Azure Cross Platform Command Line tool",
   "tags": [
     "azure",
@@ -38,8 +38,8 @@
     "azure-arm-cdn": "1.0.3",
     "azure-arm-commerce": "0.2.0",
     "azure-arm-compute": "0.20.0",
-    "azure-arm-datalake-analytics": "1.0.1-preview",
-    "azure-arm-datalake-store": "1.0.1-preview",
+    "azure-arm-datalake-analytics": "1.0.2-preview",
+    "azure-arm-datalake-store": "1.0.2-preview",
     "azure-arm-hdinsight": "0.2.2",
     "azure-arm-hdinsight-jobs": "0.1.0",
     "azure-arm-insights": "0.11.3",

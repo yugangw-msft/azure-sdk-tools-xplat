@@ -43957,11 +43957,11 @@
                   "description": "the subscription id"
                 },
                 {
-                  "flags": "--chef-service-interval <chef-service-interval>",
-                  "required": -25,
+                  "flags": "--chef-daemon-interval <chef-daemon-interval>",
+                  "required": -24,
                   "optional": 0,
                   "bool": true,
-                  "long": "--chef-service-interval",
+                  "long": "--chef-daemon-interval",
                   "description": "It specifies the frequency (in minutes) at which the chef-service runs. Pass 0 if you don't want the chef-service to be installed on the target machine."
                 },
                 {

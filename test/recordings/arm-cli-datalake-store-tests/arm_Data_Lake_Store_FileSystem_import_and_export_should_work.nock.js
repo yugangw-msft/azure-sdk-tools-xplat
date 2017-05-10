@@ -68,7 +68,7 @@ nock('https://xplattestadls3965.azuredatalakestore.net:443')
 function (nock) { 
 var result = 
 nock('http://xplattestadls3965.azuredatalakestore.net:443')
-  .get('/webhdfs/v1/adlsclifolder01%2Fimportfile.txt?op=MSGETFILESTATUS&api-version=2016-11-01')
+  .get('/webhdfs/v1/adlsclifolder01%2Fimportfile.txt?op=GETFILESTATUS&api-version=2016-11-01')
   .reply(200, "{\"FileStatus\":{\"length\":22,\"pathSuffix\":\"\",\"type\":\"FILE\",\"blockSize\":268435456,\"accessTime\":1481162213959,\"modificationTime\":1481162214004,\"replication\":1,\"permission\":\"770\",\"owner\":\"2e6c02d2-a364-4530-9137-d17403996cbf\",\"group\":\"2e6c02d2-a364-4530-9137-d17403996cbf\",\"expirationTime\":0,\"msExpirationTime\":0}}", { 'cache-control': 'no-cache, no-cache, no-store, max-age=0',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
@@ -85,7 +85,7 @@ nock('http://xplattestadls3965.azuredatalakestore.net:443')
 function (nock) { 
 var result = 
 nock('https://xplattestadls3965.azuredatalakestore.net:443')
-  .get('/webhdfs/v1/adlsclifolder01%2Fimportfile.txt?op=MSGETFILESTATUS&api-version=2016-11-01')
+  .get('/webhdfs/v1/adlsclifolder01%2Fimportfile.txt?op=GETFILESTATUS&api-version=2016-11-01')
   .reply(200, "{\"FileStatus\":{\"length\":22,\"pathSuffix\":\"\",\"type\":\"FILE\",\"blockSize\":268435456,\"accessTime\":1481162213959,\"modificationTime\":1481162214004,\"replication\":1,\"permission\":\"770\",\"owner\":\"2e6c02d2-a364-4530-9137-d17403996cbf\",\"group\":\"2e6c02d2-a364-4530-9137-d17403996cbf\",\"expirationTime\":0,\"msExpirationTime\":0}}", { 'cache-control': 'no-cache, no-cache, no-store, max-age=0',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
@@ -102,7 +102,7 @@ nock('https://xplattestadls3965.azuredatalakestore.net:443')
 function (nock) { 
 var result = 
 nock('http://xplattestadls3965.azuredatalakestore.net:443')
-  .get('/webhdfs/v1/adlsclifolder01%2Fimportfile.txt?op=MSGETFILESTATUS&api-version=2016-11-01')
+  .get('/webhdfs/v1/adlsclifolder01%2Fimportfile.txt?op=GETFILESTATUS&api-version=2016-11-01')
   .reply(200, "{\"FileStatus\":{\"length\":22,\"pathSuffix\":\"\",\"type\":\"FILE\",\"blockSize\":268435456,\"accessTime\":1481162213959,\"modificationTime\":1481162214004,\"replication\":1,\"permission\":\"770\",\"owner\":\"2e6c02d2-a364-4530-9137-d17403996cbf\",\"group\":\"2e6c02d2-a364-4530-9137-d17403996cbf\",\"expirationTime\":0,\"msExpirationTime\":0}}", { 'cache-control': 'no-cache, no-cache, no-store, max-age=0',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
@@ -119,7 +119,7 @@ nock('http://xplattestadls3965.azuredatalakestore.net:443')
 function (nock) { 
 var result = 
 nock('https://xplattestadls3965.azuredatalakestore.net:443')
-  .get('/webhdfs/v1/adlsclifolder01%2Fimportfile.txt?op=MSGETFILESTATUS&api-version=2016-11-01')
+  .get('/webhdfs/v1/adlsclifolder01%2Fimportfile.txt?op=GETFILESTATUS&api-version=2016-11-01')
   .reply(200, "{\"FileStatus\":{\"length\":22,\"pathSuffix\":\"\",\"type\":\"FILE\",\"blockSize\":268435456,\"accessTime\":1481162213959,\"modificationTime\":1481162214004,\"replication\":1,\"permission\":\"770\",\"owner\":\"2e6c02d2-a364-4530-9137-d17403996cbf\",\"group\":\"2e6c02d2-a364-4530-9137-d17403996cbf\",\"expirationTime\":0,\"msExpirationTime\":0}}", { 'cache-control': 'no-cache, no-cache, no-store, max-age=0',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
