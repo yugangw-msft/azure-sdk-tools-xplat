@@ -14,7 +14,7 @@
     "Chen, Hao <hach@microsoft.com>",
     "Krishnan, Balaji <balajik@microsoft.com>"
   ],
-  "version": "0.10.12",
+  "version": "0.10.13",
   "description": "Microsoft Azure Cross Platform Command Line tool",
   "tags": [
     "azure",
