@@ -15,6 +15,7 @@ exports.getMockedProfile = function () {
     tenantId: '1273adef-00a3-4086-a51a-dbcce1857d36',
     state: 'Enabled',
     registeredProviders: [],
+    _eventsCount: '1',
     isDefault: true
   }, newProfile.environments['AzureCloud']));
 

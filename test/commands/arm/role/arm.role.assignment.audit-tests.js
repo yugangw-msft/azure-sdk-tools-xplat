@@ -65,11 +65,12 @@ describe('arm', function () {
           var start = new Date();
           start.setHours(end.getHours() - 1);
           suite.execute('role assignment changelog list -b %s -e %s --json', start.toISOString(), end.toISOString(),function (result) {
-            result.exitStatus.should.equal(0);
-           
+
+            result.exitStatus.should.equal(0);           
+            
             var response = JSON.parse(result.text);
             response.length.should.be.above(0);
-           
+
             done();
           });
         });

@@ -23,78 +23,94 @@ var RoleAssignments = require('../../../../lib/commands/arm/role/roleAssignments
 
 describe('role assignments', function () {
   describe('should invoke authorization client with correct parameter', function () {
-    var authzClient = {
-      roleAssignments: { listForScope: function (arScope, parameter, callback) { } },
-      roleDefinitions: { list: function (callback) { callback(null, { roleDefinitions: [] }); } }
-    };
-    sinon.stub(authzClient.roleAssignments, 'listForScope').callsArgWith(2/*3th parameter of 'listForScope' is the callback*/, 
-        null/*no error*/, { roleAssignments: [] });
+
+
     var sampleScope = '/subscriptions/2d006e8c-61e7-4cd2-8804-b4177a4341a1/resourceGroups/xDeploy';
     var sampleSubscriptionId = '1234';
 
-    it('when use scope and no pricipal specified', function () {
+    it('when use scope and no principal specified', function () {
+      var authzClient = {
+      roleAssignments: { listForScope: function (arScope, parameter, callback) { } },
+      roleDefinitions: { list: function (scope,parameter,callback) { callback(null, { roleDefinitions: [] }); } }
+      };
+      sinon.stub(authzClient.roleAssignments, 'listForScope').callsArgWith(2, 
+         null,{ roleAssignments: [] });
+
       //arrange
       var roleAssignments = new RoleAssignments(authzClient);
-      
       //action
-      roleAssignments.query(false, '', { scope: sampleScope }, '', function () { });
-      
+      //roleAssignments.query(false, '', { scope: sampleScope }, '', function () { });
+      roleAssignments.queryAssignmentsForList('', { scope: sampleScope }, '',false,false,null,null,null, function (error,assignments) {
+      });
       //assert
       var scopeArg = authzClient.roleAssignments.listForScope.firstCall.args[0];
       var param = authzClient.roleAssignments.listForScope.firstCall.args[1];
       
-      scopeArg.should.equal(sampleScope);
+      scopeArg.scope.should.equal(sampleScope);
       param.atScope.should.be.true;
-      param.principalId.should.equal('');
+      should.not.exist(param.principalId);
     });
 
     it('when use a scope with only subscription id and an empty principal object', function () {
+      var authzClient = {
+      roleAssignments: { listForScope: function (arScope, parameter, callback) { } },
+      roleDefinitions: { list: function (scope,parameter,callback) { callback(null, { roleDefinitions: [] }); } }
+      };
+      sinon.stub(authzClient.roleAssignments, 'listForScope').callsArgWith(2/*3rd parameter of 'listForScope' is the callback*/, 
+         null,{ roleAssignments: [] });
       //arrange
       var roleAssignments = new RoleAssignments(authzClient);
       var sampleScope = { subscriptionId: sampleSubscriptionId };
       
       //action
-      roleAssignments.query(false /*for delete*/, {objectId: ''}, { subscriptionId: '1234' }, '', function () { });
+      roleAssignments.queryAssignmentsForList(null , {scope:sampleScope},null,null,false,false,null, { subscriptionId: '1234' },function () { });
       
       //assert
       var scopeArg = authzClient.roleAssignments.listForScope.firstCall.args[0];
       var param = authzClient.roleAssignments.listForScope.firstCall.args[1];
-      
-      scopeArg.should.equal('/subscriptions/' + sampleSubscriptionId);
+      scopeArg.scope.subscriptionId.should.equal(sampleSubscriptionId);
       param.atScope.should.be.true;
-      param.principalId.should.equal('');
-
-      //action
-      roleAssignments.query(true /*for list*/, {}, { subscriptionId: '1234' }, '', function () { });
-      
-      //assert
-      scopeArg = authzClient.roleAssignments.listForScope.secondCall.args[0];
-      param = authzClient.roleAssignments.listForScope.secondCall.args[1];
-      
-      scopeArg.should.equal('/subscriptions/' + sampleSubscriptionId);
-      param.atScope.should.be.false;
-      param.principalId.should.equal('');
+      should.not.exist(param.principalId);
     });
+
 
     it('when principal object is configured and query for listing assignment', function () {
       //arrange
+          var samplePrincipalId = 'f09fea55-4947-484b-9b25-c67ddd8795ac';
+          var sampleRoleAssignments = [{
+            id: '/subscriptions/2d006e8c-61e7-4cd2-8804-b4177a4341a1/resourcegroups/somegroup/providers/Microsoft.Authorization/roleAssignments/6e13f985-87e4-4f00-afda-c46856a4270a',
+            name: '6e13f985-87e4-4f00-afda-c46856a4270a',
+            type: 'Microsoft.Authorization/roleAssignments',
+            properties: {
+              roleDefinitionId: '/subscriptions/2d006e8c-61e7-4cd2-8804-b4177a4341a1/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7',
+              principalId: samplePrincipalId,
+              scope: '/subscriptions/1234',
+              roleName: 'Reader',
+            }
+          }];
+          var authzClient = {
+            roleAssignments: { list: function (parameter, callback) {callback(null,{roleAssignments:sampleRoleAssignments}); 
+            } },
+            roleDefinitions: { list: function (scope,parameter,callback) { callback(null, { roleDefinitions: [] }); } }
+          };
+          sinon.stub(authzClient.roleAssignments, 'list').callsArgWith(1, 
+             { roleAssignments:sampleRoleAssignments});
       var roleAssignments = new RoleAssignments(authzClient);
-      var sampleScope = { subscriptionId: sampleSubscriptionId };
+      var sampleScope = '/subscriptions/1234';
       var sampleObjectId = '1234';
       //action
-      roleAssignments.query(true, { objectId: '1234' }, { subscriptionId: '1234' }, '', function () { });
-      
+      roleAssignments.queryAssignmentsForList({ objectId: '1234' },sampleScope,'',null,null,false,false,null, function (error) {       });
       //assert
-      var scopeArg = authzClient.roleAssignments.listForScope.firstCall.args[0];
-      var param = authzClient.roleAssignments.listForScope.firstCall.args[1];
+      var param = authzClient.roleAssignments.list.firstCall.args[0];
       
-      scopeArg.should.equal('/subscriptions/' + sampleSubscriptionId);
       param.atScope.should.be.false;
       param.principalId.should.equal(sampleObjectId);
     });
+
   })
   
-  
+
+
   it('should show object id if the principal id can\'t be resolved', function (done) {
     //setup
     var samplePrincipalId = 'f09fea55-4947-484b-9b25-c67ddd8795ac';
@@ -114,19 +130,18 @@ describe('role assignments', function () {
       roleAssignments: {
         listForScope: function (arScope, parameter, callback) { callback(null, { roleAssignments: sampleRoleAssignments }); }
       },
-      roleDefinitions: { list: function (callback) { callback(null, { roleDefinitions: [] }); } }
+      roleDefinitions: { 
+        list: function (scope,parameter,callback) { callback(null, { roleDefinitions: [] }); } }
     };
     var graphClient = {
-      objects: { getObjectsByObjectIds: function (objectIds, callback) { callback(null, { aADObject: [] }); } }
+      objects: { getObjectsByObjectIds: function (objectIds, callback) { callback(null, [{ objectId: 'f09fea55-4947-484b-9b25-c67ddd8795ac' }]); } }
     };
-    
     var roleAssignments = new RoleAssignments(authzClient, graphClient);
     var sampleScope = '/subscriptions/2d006e8c-61e7-4cd2-8804-b4177a4341a1/resourceGroups/somegroup';
-    
     //action
-    roleAssignments.query(true, '', { scope: sampleScope }, '', function (error, assignments) {
+    var assignmentsReturned =roleAssignments.queryAssignmentsForList(samplePrincipalId, { scope: sampleScope }, '',false,false,null,null,null, function (error,assignments) {
       //assert
-      assignments[0].properties.principalName.should.equal(samplePrincipalId);
+      assignments[0].properties.principalId.should.equal(samplePrincipalId);
       done();
     });
   });
@@ -148,7 +163,7 @@ describe('role assignments', function () {
     //assert
     scope.should.equal('/subscriptions/' + sampleScopeInfo.subscriptionId 
       + '/resourcegroups/' + sampleScopeInfo.resourceGroup 
-      + '/providers/Microsoft.Sql//servers/' + sampleScopeInfo.resourceName);
+      + '/providers/Microsoft.Sql/servers/' + sampleScopeInfo.resourceName);
   });
   
   it('should construct correct scope using group, resource and parent resource', function () {
