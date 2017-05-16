@@ -7,7 +7,7 @@ matrix:
   allow_failures:
 
 install:
-  - npm install -g npm@latest
+  - npm install -g npm@4.1.0
   - npm --version
   - npm install
 
