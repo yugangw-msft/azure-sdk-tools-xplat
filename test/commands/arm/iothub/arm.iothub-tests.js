@@ -29,6 +29,7 @@ var utils = require('../../../../lib/util/utils');
 var testPrefix = 'arm-cli-iothub-tests';
 var iothubPrefix = 'xplattestiothub';
 var ipFilterRulesFile = path.join(__dirname, '/ipfilterrules.txt');
+var routingPropertiesFile = path.join(__dirname, '/routingproperties.txt');
 var knownNames = [];
 
 var requiredEnvironment = [{
@@ -52,6 +53,7 @@ describe('arm', function () {
     var suite;
     var testLocation;
     var testResourceGroup;
+    var subId;
     var testSku = 'S1';
     var testUnits = '1';
 
@@ -61,6 +63,7 @@ describe('arm', function () {
         testLocation = process.env.AZURE_ARM_IOTHUB_TEST_LOCATION;
         testLocation = testLocation.toLowerCase().replace(/ /g, '');
         testResourceGroup = process.env.AZURE_ARM_TEST_RESOURCE_GROUP;
+        subId = process.env.AZURE_SUBSCRIPTION_ID;
         if (!suite.isPlayback()) {
           suite.execute('group create %s --location %s', testResourceGroup, testLocation, function () {
             done();
@@ -99,7 +102,7 @@ describe('arm', function () {
         createIotHubMustSucceed();
 
         function createIotHubMustSucceed() {
-          suite.execute('iothub create --name %s --resource-group %s --location %s --sku-name %s --units %s --json', iothubName, testResourceGroup, testLocation, testSku, testUnits, function (result) {
+          suite.execute('iothub create --name %s --resource-group %s --location %s --sku-name %s --units %s --subscription %s --json', iothubName, testResourceGroup, testLocation, testSku, testUnits, subId, function (result) {
             result.exitStatus.should.be.equal(0);
             showIotHubMustSucceed();
           });
@@ -171,6 +174,42 @@ describe('arm', function () {
               });
           }
       });
+            
+      it('routing properties set and list command using files should work', function (done) {          
+                listAndSetRoutingPropertiesMustSucceed();
+                
+                function listAndSetRoutingPropertiesMustSucceed() {
+                    suite.execute('iothub routing list --name %s --resource-group %s --output-file %s -vv', iothubName, testResourceGroup, routingPropertiesFile, function (result) {
+                        result.exitStatus.should.be.equal(0);
+                        var jsonFile = fs.readFileSync(routingPropertiesFile);
+                        var routingProperties = JSON.parse(utils.stripBOM(jsonFile));
+                        //routingProperties.endpoints.should.be.equal(0);
+                        //routingProperties.routes.should.be.equal(0);
+                      //  setRoutingPropertiesMustSucceed();
+                      done();
+                    });
+                }
+                
+                // TBD: Need to create EH and SB namespaces and queues/topics/EH for this to work
+
+                //function setRoutingPropertiesMustSucceed() {
+                //    suite.execute('iothub routing set --name %s --resource-group %s --input-file %s', iothubName, testResourceGroup, routingPropertiesFile, function (result) {
+                //        result.exitStatus.should.be.equal(0);
+                //        listRoutingPropertiesMustSucceed();
+                //    });
+                //}
+                
+                //function listRoutingPropertiesMustSucceed() {
+                //    suite.execute('iothub routing list --name %s --resource-group %s --output-file %s', iothubName, testResourceGroup, routingPropertiesFile, function (result) {
+                //        result.exitStatus.should.be.equal(0);
+                //        var jsonFile = fs.readFileSync(routingPropertiesFile);
+                //        var routingProperties = JSON.parse(utils.stripBOM(jsonFile));
+                //        routingProperties.length.should.be.equal(2);
+                //        done();
+                //    });
+                //}
+            });
+
     });
 
     describe.skip('All Tests', function () {

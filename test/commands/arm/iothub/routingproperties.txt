@@ -1,0 +1,16 @@
+{
+  "endpoints": {
+    "serviceBusQueues": [],
+    "serviceBusTopics": [],
+    "eventHubs": []
+  },
+  "routes": [],
+  "fallbackRoute": {
+    "source": "DeviceMessages",
+    "condition": "true",
+    "endpointNames": [
+      "events"
+    ],
+    "isEnabled": true
+  }
+}
