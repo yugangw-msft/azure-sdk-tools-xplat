@@ -8,11 +8,13 @@ commands/arm/tag/arm.tag-tests.js
 commands/arm/tag/arm.resourcetag-tests.js
 commands/arm/tag/arm.resourcegrouptag-tests.js
 commands/arm/servermanagement/arm.servermanagement-crud-tests.js
+
 #commands/arm/role/arm.role-tests.js
 #commands/arm/role/arm.role.assignment.audit-tests.js
+#commands/arm/role/roleAssignments-tests.js
 #commands/arm/ad/arm.ad-tests.js
+
 commands/arm/ad/adUtils-test.js
-#commands/arm/ad/role/roleAssignments-tests.js
 commands/arm/storage/arm.storage.account-tests.js
 commands/arm/hdinsight/arm.hdinsight-cluster-crud-tests.js
 commands/arm/insights/arm.insights.alerts-tests.js

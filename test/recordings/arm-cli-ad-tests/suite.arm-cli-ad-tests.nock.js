@@ -23,11 +23,12 @@ exports.getMockedProfile = function () {
 };
 
 exports.setEnvironment = function() {
-  process.env['AZURE_AD_TEST_USER_PRINCIPAL_NAME'] = 'testUserAuto2@rbacCliTest.onmicrosoft.com';
   process.env['AZURE_AD_TEST_PASSWORD'] = 'Pa$$w0rd2';
-  process.env['AZURE_AD_TEST_GROUP_NAME'] = 'testgroupauto';
-  process.env['AZURE_ARM_TEST_LOCATION'] = 'West US';
-  process.env['AZURE_AD_TEST_SP_DISPLAY_NAME'] = 'mytestapprandomauto0012345';
+  process.env['AZURE_AD_TEST_GROUP_NAME'] = 'Randomtestgroup11';
+  process.env['AZURE_AD_TEST_SUBGROUP_NAME'] = 'Randomtestgroup12';
+  process.env['AZURE_AD_TEST_USER_PRINCIPAL_NAME'] = 'RandomtestUser11@rbacclitest.onmicrosoft.com';
+  process.env['AZURE_AD_TEST_USER_PRINCIPAL_NAME2'] = 'RandomtestUser12@rbacclitest.onmicrosoft.com';
+  process.env['AZURE_AD_TEST_SP_DISPLAY_NAME'] = 'Randommytestapp9047';
 };
 
-exports.scopes = [[]];
+exports.scopes = [];
