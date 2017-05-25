@@ -1,0 +1,12 @@
+[
+  {
+    "filterName": "deny",
+    "action": "Accept",
+    "ipMask": "0.0.0.0/0"
+  },
+  {
+    "filterName": "test",
+    "action": "Reject",
+    "ipMask": "0.0.0.0/0"
+  }
+]
