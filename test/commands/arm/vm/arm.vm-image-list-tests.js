@@ -77,12 +77,20 @@ describe('arm', function() {
 
       it('image list-offers ', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
-        var cmd = util.format('vm image list-offers %s %s --json', location, publisher).split(' ');
+        var cmd = util.format('vm image list %s %s --json', location, publisher).split(' ');
         testUtils.executeCommand(suite, retry, cmd, function(result) {
           result.exitStatus.should.equal(0);
           var allResources = JSON.parse(result.text);
-          offer = allResources[0].name;
-          done();
+          offer = allResources[0].offer;
+          var cmd = util.format('vm image list-offers %s %s --json', location, publisher).split(' ');
+          testUtils.executeCommand(suite, retry, cmd, function(result) {
+            result.exitStatus.should.equal(0);
+            var allOfferResources = JSON.parse(result.text);
+            allOfferResources.some(function(res) {
+              return res.name === offer;
+            }).should.be.true;
+            done();
+          });
         });
       });
 

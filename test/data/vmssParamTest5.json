@@ -26,9 +26,9 @@
         "caching": "None",
         "createOption": "fromImage",
         "vhdContainers": [
-          "https://xplatteststorage18649.blob.core.windows.net/xplatteststoragecnt14275",
-          "https://xplatteststorage24310.blob.core.windows.net/xplatteststoragecnt2447",
-          "https://xplatteststorage34386.blob.core.windows.net/xplatteststoragecnt34825"
+          "https://xplatteststorage14099.blob.core.windows.net/xplatteststoragecnt14794",
+          "https://xplatteststorage23628.blob.core.windows.net/xplatteststoragecnt28029",
+          "https://xplatteststorage31548.blob.core.windows.net/xplatteststoragecnt32826"
         ]
       }
     },
@@ -41,7 +41,7 @@
             {
               "name": "test",
               "subnet": {
-                "id": "/subscriptions/ce4a7590-4722-4bcf-a2c6-e473e9f11778/resourceGroups/xplatTstVmssGCreate5906/providers/Microsoft.Network/VirtualNetworks/xplattestvnet7294/subnets/xplattestsubnet2261"
+                "id": "/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstVmssGCreate2331/providers/Microsoft.Network/VirtualNetworks/xplattestvnet3984/subnets/xplattestsubnet7885"
               },
               "id": ""
             }
