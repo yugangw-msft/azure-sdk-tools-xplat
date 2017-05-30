@@ -96,9 +96,6 @@ commands/arm/devtestlabs/arm.devtestlabs-tests.js
 commands/arm/iothub/arm.iothub-tests.js
 #please put the following group tests to the last, as it uses the different subscription
 #and it exposes a test framework bug which failed vm tests randomly
-commands/arm/group/arm.group-tests.js
-commands/arm/group/arm.group.deployment-tests.js
-commands/arm/group/arm.group.deployment.operation-tests.js
 commands/arm/cdnMangement/arm.cdnMangement-tests.js
 commands/arm/policy/arm.policy.definition-tests.js
 commands/arm/policy/arm.policy.assignment-tests.js
