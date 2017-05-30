@@ -12,7 +12,9 @@ install:
   - npm install
 
 script:
-  - npm test
+  - npm -s run-script jshint
+  - npm -s run-script unit-arm
+  - npm -s run-script unit
 
 after_script:
   - echo "========== test log: ============"
