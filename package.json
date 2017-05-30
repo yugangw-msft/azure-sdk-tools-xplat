@@ -133,8 +133,9 @@
   },
   "scripts": {
     "test": "npm -s run-script jshint && npm -s run-script unit-arm && npm -s run-script unit",
-    "unit": "node scripts/unit.js testlist.txt",
-    "unit-arm": "node scripts/unit.js testlist-arm.txt",
+    "unit": "node --max_old_space_size=4096 scripts/unit.js testlist.txt",
+    "unit-arm": "node --max_old_space_size=4096 scripts/unit.js testlist-arm.txt",
+    "unit-arm-deployment": "node --max_old_space_size=4096 scripts/unit.js testlist-arm-deployment.txt",
     "unit-vm": "node scripts/unit.js testlist-vm.txt",
     "unit-vm-live": "node scripts/unit.js testlist-vm-live.txt",
     "unit-arm-vm": "node scripts/unit.js testlist-arm-vm.txt",

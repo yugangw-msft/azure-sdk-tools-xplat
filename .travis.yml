@@ -1,3 +1,6 @@
+dist: trusty
+sudo: required
+
 language: node_js
 
 node_js:
@@ -11,8 +14,18 @@ install:
   - npm --version
   - npm install
 
+# this is purely for debugging purposes. Do not delete, but enable when you need memory diagnostics.
+# before_script:
+#  - echo "======== startup memory info ========"
+#  - free -h -t
+
+# Deliberately splitting the test suite to keep memory pressure low on nodejs process.
+# Combining these as a single job may lead to OOM exceptions.
 script:
-  - npm test
+  - npm -s run-script jshint
+  - npm -s run-script unit-arm
+  - npm -s run-script unit-arm-deployment
+  - npm -s run-script unit
 
 after_script:
   - echo "========== test log: ============"
