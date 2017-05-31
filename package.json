@@ -37,7 +37,7 @@
     "azure-arm-authorization": "2.0.0",
     "azure-arm-cdn": "1.0.3",
     "azure-arm-commerce": "0.2.0",
-    "azure-arm-compute": "2.0.0-preview",
+    "azure-arm-compute": "3.0.0-preview",
     "azure-arm-datalake-analytics": "1.0.2-preview",
     "azure-arm-datalake-store": "1.0.2-preview",
     "azure-arm-hdinsight": "0.2.2",

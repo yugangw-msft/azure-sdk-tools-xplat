@@ -12,7 +12,7 @@
     "osDisk": {
       "name": "test",
       "vhd": {
-        "uri": "https://xplatteststorage17459.blob.core.windows.net/vm15163/xplattestvhd.vhd"
+        "uri": "https://xplatteststorage14322.blob.core.windows.net/vm18384/xplattestvhd.vhd"
       },
       "caching": "None",
       "createOption": "fromImage",
@@ -31,13 +31,13 @@
     "networkInterfaces": [
       {
         "primary": null,
-        "id": "/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstPvmGCreate8904/providers/Microsoft.Network/networkInterfaces/xplattestnic5621"
+        "id": "/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstPvmGCreate9744/providers/Microsoft.Network/networkInterfaces/xplattestnic7941"
       }
     ]
   },
   "availabilitySet": {
-    "id": "/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstPvmGCreate8904/providers/Microsoft.Compute/availabilitySets/xplattestavs87793"
+    "id": "/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstPvmGCreate9744/providers/Microsoft.Compute/availabilitySets/xplattestavs85474"
   },
-  "name": "vm15163",
+  "name": "vm18384",
   "location": "southeastasia"
 }

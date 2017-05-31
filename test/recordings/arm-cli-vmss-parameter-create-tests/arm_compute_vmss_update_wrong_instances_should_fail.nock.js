@@ -30,7 +30,7 @@ exports.scopes = [[function (nock) {
 var result = 
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.post('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstVmssGCreate2331/providers/Microsoft.Compute/virtualMachineScaleSets/xplattestvmss5/manualupgrade?api-version=2017-03-30', '*')
+.post('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstVmssGCreate4795/providers/Microsoft.Compute/virtualMachineScaleSets/xplattestvmss5/manualupgrade?api-version=2017-03-30', '*')
   .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"InvalidParameter\",\r\n    \"target\": \"upgradePolicies.instanceIds\",\r\n    \"message\": \"The provided instanceId 999 is not an active Virtual Machine Scale Set VM instanceId.\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '206',
@@ -38,19 +38,19 @@ nock('http://management.azure.com:443')
   expires: '-1',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   'x-ms-served-by': 'dce02487-9cda-4782-8138-773eb1573792_131340057859683594',
-  'x-ms-request-id': '399c5f28-d57f-4dd9-b1c1-7ae5cbf564c0',
+  'x-ms-request-id': 'f17b034e-c0a7-4e35-ab90-c6b242d17dd6',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-writes': '1199',
-  'x-ms-correlation-request-id': '9043e813-51e9-4400-bf90-d3ea7799d6ac',
-  'x-ms-routing-request-id': 'WESTUS2:20170530T024340Z:9043e813-51e9-4400-bf90-d3ea7799d6ac',
-  date: 'Tue, 30 May 2017 02:43:40 GMT',
+  'x-ms-ratelimit-remaining-subscription-writes': '1196',
+  'x-ms-correlation-request-id': '0ee46729-9645-4643-8aca-08e7f7a8ca8b',
+  'x-ms-routing-request-id': 'WESTUS2:20170602T142404Z:0ee46729-9645-4643-8aca-08e7f7a8ca8b',
+  date: 'Fri, 02 Jun 2017 14:24:04 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.post('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstVmssGCreate2331/providers/Microsoft.Compute/virtualMachineScaleSets/xplattestvmss5/manualupgrade?api-version=2017-03-30', '*')
+.post('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstVmssGCreate4795/providers/Microsoft.Compute/virtualMachineScaleSets/xplattestvmss5/manualupgrade?api-version=2017-03-30', '*')
   .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"InvalidParameter\",\r\n    \"target\": \"upgradePolicies.instanceIds\",\r\n    \"message\": \"The provided instanceId 999 is not an active Virtual Machine Scale Set VM instanceId.\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '206',
@@ -58,11 +58,11 @@ nock('https://management.azure.com:443')
   expires: '-1',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   'x-ms-served-by': 'dce02487-9cda-4782-8138-773eb1573792_131340057859683594',
-  'x-ms-request-id': '399c5f28-d57f-4dd9-b1c1-7ae5cbf564c0',
+  'x-ms-request-id': 'f17b034e-c0a7-4e35-ab90-c6b242d17dd6',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-writes': '1199',
-  'x-ms-correlation-request-id': '9043e813-51e9-4400-bf90-d3ea7799d6ac',
-  'x-ms-routing-request-id': 'WESTUS2:20170530T024340Z:9043e813-51e9-4400-bf90-d3ea7799d6ac',
-  date: 'Tue, 30 May 2017 02:43:40 GMT',
+  'x-ms-ratelimit-remaining-subscription-writes': '1196',
+  'x-ms-correlation-request-id': '0ee46729-9645-4643-8aca-08e7f7a8ca8b',
+  'x-ms-routing-request-id': 'WESTUS2:20170602T142404Z:0ee46729-9645-4643-8aca-08e7f7a8ca8b',
+  date: 'Fri, 02 Jun 2017 14:24:04 GMT',
   connection: 'close' });
  return result; }]];
