@@ -1,4 +1,4 @@
-# Microsoft Azure Xplat-CLI for Windows, Mac and Linux
+﻿# Microsoft Azure Xplat-CLI for Windows, Mac and Linux
 
 [![NPM version](https://badge.fury.io/js/azure-cli.png)](http://badge.fury.io/js/azure-cli) [![Build Status](https://travis-ci.org/Azure/azure-xplat-cli.png?branch=master)](https://travis-ci.org/Azure/azure-xplat-cli)
 
@@ -12,7 +12,6 @@ This project provides a cross-platform command line interface for developers and
   * Websites
   * Virtual machines
   * Network
-  * Mobile Services
   * Service Bus
   * SQL Database
 * Azure Resource Management
