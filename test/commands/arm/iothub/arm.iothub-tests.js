@@ -94,7 +94,7 @@ describe('arm', function () {
       suite.teardownTest(done);
     });
 
-    describe.skip('Connection String Tests', function () {
+    describe('Connection String Tests', function () {
 
       it('create command should work', function (done) {
 
