@@ -7,10 +7,6 @@ exports.getMockedProfile = function () {
 
   newProfile.addSubscription(new profile.Subscription({
     id: 'e33f361b-53c2-4cc7-b829-78906708387b',
-    managementCertificate: {
-      key: 'mockedKey',
-      cert: 'mockedCert'
-    },
     name: 'Microsoft Azure Internal Consumption',
     user: {
       name: 'user@domain.example',
@@ -33,34 +29,34 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xTestDiskCreate465/providers/Microsoft.Compute/disks?api-version=2016-04-30-preview')
+  .get('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xTestDiskCreate526/providers/Microsoft.Compute/disks?api-version=2017-03-30')
   .reply(200, "{\"value\":[]}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-ratelimit-remaining-subscription-reads': '14999',
-  'x-ms-request-id': '5ebbd298-7306-42da-9fc5-3ef5dff25146',
-  'x-ms-correlation-request-id': '5ebbd298-7306-42da-9fc5-3ef5dff25146',
-  'x-ms-routing-request-id': 'CENTRALUS:20170207T082252Z:5ebbd298-7306-42da-9fc5-3ef5dff25146',
+  'x-ms-ratelimit-remaining-subscription-reads': '14997',
+  'x-ms-request-id': 'e0fa0495-c54b-4d13-a11e-ae9554c1462c',
+  'x-ms-correlation-request-id': 'e0fa0495-c54b-4d13-a11e-ae9554c1462c',
+  'x-ms-routing-request-id': 'WESTUS:20170530T052617Z:e0fa0495-c54b-4d13-a11e-ae9554c1462c',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Tue, 07 Feb 2017 08:22:51 GMT',
+  date: 'Tue, 30 May 2017 05:26:17 GMT',
   connection: 'close',
   'content-length': '12' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xTestDiskCreate465/providers/Microsoft.Compute/disks?api-version=2016-04-30-preview')
+  .get('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xTestDiskCreate526/providers/Microsoft.Compute/disks?api-version=2017-03-30')
   .reply(200, "{\"value\":[]}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-ratelimit-remaining-subscription-reads': '14999',
-  'x-ms-request-id': '5ebbd298-7306-42da-9fc5-3ef5dff25146',
-  'x-ms-correlation-request-id': '5ebbd298-7306-42da-9fc5-3ef5dff25146',
-  'x-ms-routing-request-id': 'CENTRALUS:20170207T082252Z:5ebbd298-7306-42da-9fc5-3ef5dff25146',
+  'x-ms-ratelimit-remaining-subscription-reads': '14997',
+  'x-ms-request-id': 'e0fa0495-c54b-4d13-a11e-ae9554c1462c',
+  'x-ms-correlation-request-id': 'e0fa0495-c54b-4d13-a11e-ae9554c1462c',
+  'x-ms-routing-request-id': 'WESTUS:20170530T052617Z:e0fa0495-c54b-4d13-a11e-ae9554c1462c',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Tue, 07 Feb 2017 08:22:51 GMT',
+  date: 'Tue, 30 May 2017 05:26:17 GMT',
   connection: 'close',
   'content-length': '12' });
  return result; }]];

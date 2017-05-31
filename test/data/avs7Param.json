@@ -1,8 +1,8 @@
 {
   "platformUpdateDomainCount": 3,
   "platformFaultDomainCount": 2,
-  "managed": true,
-  "location": "westus",
+  "managed": null,
+  "location": "southeastasia",
   "sku": {
     "name": "Aligned"
   },

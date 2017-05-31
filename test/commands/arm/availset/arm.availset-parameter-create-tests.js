@@ -88,7 +88,7 @@ describe('arm', function() {
             var cmd = makeCommandStr('availability-set', 'delete', paramFileName, '--statuses --tags --type --name --id --virtual-machines --sku').split(' ');
             testUtils.executeCommand(suite, retry, cmd, function(result) {
               result.exitStatus.should.equal(0);
-              var cmd = makeCommandStr('availability-set', 'set', paramFileName, '--parse --platform-update-domain-count 3 --platform-fault-domain-count 2 --managed true').split(' ');
+              var cmd = makeCommandStr('availability-set', 'set', paramFileName, '--parse --platform-update-domain-count 3 --platform-fault-domain-count 2').split(' ');
               testUtils.executeCommand(suite, retry, cmd, function(result) {
                 result.exitStatus.should.equal(0);
                 var cmd = makeCommandStr('sku', 'set', paramFileName, util.format('--name %s', 'Aligned')).split(' ');

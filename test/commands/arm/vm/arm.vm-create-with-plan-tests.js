@@ -112,8 +112,7 @@ describe('arm', function() {
                     vNetPrefix, '10.0.0.0/16', subnetName, '10.0.0.0/24', publicipName, dnsPrefix, sshcert, tags, planParamStr).split(' ');
                   testUtils.executeCommand(suite, retry, cmd, function(result) {
                     result.exitStatus.should.not.equal(0);
-                    result.errorText.should.containEql('User failed validation to purchase resources.');
-                    result.errorText.should.containEql(util.format('Offer with PublisherId: %s and OfferId: %s not found in Azure Data Market.', publisherName, productName));
+                    result.errorText.should.containEql(util.format('Offer with PublisherId: %s and OfferId: %s not found', publisherName, productName));
                     done();
                   });
                 });
@@ -125,8 +124,7 @@ describe('arm', function() {
                 vNetPrefix, '10.0.0.0/16', subnetName, '10.0.0.0/24', publicipName, dnsPrefix, sshcert, tags, planParamStr).split(' ');
               testUtils.executeCommand(suite, retry, cmd, function(result) {
                 result.exitStatus.should.not.equal(0);
-                result.errorText.should.containEql('User failed validation to purchase resources.');
-                result.errorText.should.containEql(util.format('Offer with PublisherId: %s and OfferId: %s not found in Azure Data Market.', publisherName, productName));
+                result.errorText.should.containEql(util.format('Offer with PublisherId: %s and OfferId: %s not found', publisherName, productName));
                 done();
               });
             }

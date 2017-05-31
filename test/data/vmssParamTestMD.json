@@ -43,7 +43,7 @@
             {
               "name": "test",
               "subnet": {
-                "id": "/subscriptions/ce4a7590-4722-4bcf-a2c6-e473e9f11778/resourceGroups/xplatTstVmssGCreate8927/providers/Microsoft.Network/VirtualNetworks/xplattestvnet4168/subnets/xplattestsubnet8387"
+                "id": "/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstVmssGCreate5481/providers/Microsoft.Network/VirtualNetworks/xplattestvnet3238/subnets/xplattestsubnet7150"
               },
               "id": ""
             }

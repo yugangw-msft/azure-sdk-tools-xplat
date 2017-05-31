@@ -29,13 +29,13 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .post('/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/resourceGroups/xTestDiskCreate4761/providers/Microsoft.Compute/disks/xplatDisk7554/endGetAccess?api-version=2016-04-30-preview')
+  .post('/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/resourceGroups/xTestDiskCreate4761/providers/Microsoft.Compute/disks/xplatDisk7554/endGetAccess?api-version=2017-03-30')
   .reply(202, "", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '0',
   expires: '-1',
-  location: 'https://management.azure.com/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/providers/Microsoft.Compute/locations/southeastasia/DiskOperations/23f579d2-ba79-4577-97e2-30666dcb655e?monitor=true&api-version=2016-04-30-preview',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/providers/Microsoft.Compute/locations/southeastasia/DiskOperations/23f579d2-ba79-4577-97e2-30666dcb655e?api-version=2016-04-30-preview',
+  location: 'https://management.azure.com/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/providers/Microsoft.Compute/locations/southeastasia/DiskOperations/23f579d2-ba79-4577-97e2-30666dcb655e?monitor=true&api-version=2017-03-30',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/providers/Microsoft.Compute/locations/southeastasia/DiskOperations/23f579d2-ba79-4577-97e2-30666dcb655e?api-version=2017-03-30',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   'x-ms-served-by': 'e9309273-0eeb-49f7-82ac-4b3f4fa2919e_131292439804223218',
   'x-ms-request-id': '23f579d2-ba79-4577-97e2-30666dcb655e',
@@ -49,13 +49,13 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .post('/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/resourceGroups/xTestDiskCreate4761/providers/Microsoft.Compute/disks/xplatDisk7554/endGetAccess?api-version=2016-04-30-preview')
+  .post('/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/resourceGroups/xTestDiskCreate4761/providers/Microsoft.Compute/disks/xplatDisk7554/endGetAccess?api-version=2017-03-30')
   .reply(202, "", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '0',
   expires: '-1',
-  location: 'https://management.azure.com/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/providers/Microsoft.Compute/locations/southeastasia/DiskOperations/23f579d2-ba79-4577-97e2-30666dcb655e?monitor=true&api-version=2016-04-30-preview',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/providers/Microsoft.Compute/locations/southeastasia/DiskOperations/23f579d2-ba79-4577-97e2-30666dcb655e?api-version=2016-04-30-preview',
+  location: 'https://management.azure.com/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/providers/Microsoft.Compute/locations/southeastasia/DiskOperations/23f579d2-ba79-4577-97e2-30666dcb655e?monitor=true&api-version=2017-03-30',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/providers/Microsoft.Compute/locations/southeastasia/DiskOperations/23f579d2-ba79-4577-97e2-30666dcb655e?api-version=2017-03-30',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   'x-ms-served-by': 'e9309273-0eeb-49f7-82ac-4b3f4fa2919e_131292439804223218',
   'x-ms-request-id': '23f579d2-ba79-4577-97e2-30666dcb655e',
@@ -69,7 +69,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/providers/Microsoft.Compute/locations/southeastasia/DiskOperations/23f579d2-ba79-4577-97e2-30666dcb655e?api-version=2016-04-30-preview')
+  .get('/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/providers/Microsoft.Compute/locations/southeastasia/DiskOperations/23f579d2-ba79-4577-97e2-30666dcb655e?api-version=2017-03-30')
   .reply(200, "{\r\n  \"startTime\": \"2017-02-02T23:17:51.0294227+00:00\",\r\n  \"endTime\": \"2017-02-02T23:17:51.2793864+00:00\",\r\n  \"status\": \"Succeeded\",\r\n  \"name\": \"23f579d2-ba79-4577-97e2-30666dcb655e\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '184',
@@ -88,7 +88,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/providers/Microsoft.Compute/locations/southeastasia/DiskOperations/23f579d2-ba79-4577-97e2-30666dcb655e?api-version=2016-04-30-preview')
+  .get('/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/providers/Microsoft.Compute/locations/southeastasia/DiskOperations/23f579d2-ba79-4577-97e2-30666dcb655e?api-version=2017-03-30')
   .reply(200, "{\r\n  \"startTime\": \"2017-02-02T23:17:51.0294227+00:00\",\r\n  \"endTime\": \"2017-02-02T23:17:51.2793864+00:00\",\r\n  \"status\": \"Succeeded\",\r\n  \"name\": \"23f579d2-ba79-4577-97e2-30666dcb655e\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '184',
@@ -107,13 +107,13 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .delete('/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/resourceGroups/xTestDiskCreate4761/providers/Microsoft.Compute/disks/xplatDisk7554?api-version=2016-04-30-preview')
+  .delete('/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/resourceGroups/xTestDiskCreate4761/providers/Microsoft.Compute/disks/xplatDisk7554?api-version=2017-03-30')
   .reply(202, "", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '0',
   expires: '-1',
-  location: 'https://management.azure.com/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/providers/Microsoft.Compute/locations/southeastasia/DiskOperations/6411be26-1e20-4fb2-9432-67434e2c2ca5?monitor=true&api-version=2016-04-30-preview',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/providers/Microsoft.Compute/locations/southeastasia/DiskOperations/6411be26-1e20-4fb2-9432-67434e2c2ca5?api-version=2016-04-30-preview',
+  location: 'https://management.azure.com/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/providers/Microsoft.Compute/locations/southeastasia/DiskOperations/6411be26-1e20-4fb2-9432-67434e2c2ca5?monitor=true&api-version=2017-03-30',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/providers/Microsoft.Compute/locations/southeastasia/DiskOperations/6411be26-1e20-4fb2-9432-67434e2c2ca5?api-version=2017-03-30',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   'x-ms-served-by': 'e9309273-0eeb-49f7-82ac-4b3f4fa2919e_131292439804223218',
   'x-ms-request-id': '6411be26-1e20-4fb2-9432-67434e2c2ca5',
@@ -127,13 +127,13 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .delete('/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/resourceGroups/xTestDiskCreate4761/providers/Microsoft.Compute/disks/xplatDisk7554?api-version=2016-04-30-preview')
+  .delete('/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/resourceGroups/xTestDiskCreate4761/providers/Microsoft.Compute/disks/xplatDisk7554?api-version=2017-03-30')
   .reply(202, "", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '0',
   expires: '-1',
-  location: 'https://management.azure.com/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/providers/Microsoft.Compute/locations/southeastasia/DiskOperations/6411be26-1e20-4fb2-9432-67434e2c2ca5?monitor=true&api-version=2016-04-30-preview',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/providers/Microsoft.Compute/locations/southeastasia/DiskOperations/6411be26-1e20-4fb2-9432-67434e2c2ca5?api-version=2016-04-30-preview',
+  location: 'https://management.azure.com/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/providers/Microsoft.Compute/locations/southeastasia/DiskOperations/6411be26-1e20-4fb2-9432-67434e2c2ca5?monitor=true&api-version=2017-03-30',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/providers/Microsoft.Compute/locations/southeastasia/DiskOperations/6411be26-1e20-4fb2-9432-67434e2c2ca5?api-version=2017-03-30',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   'x-ms-served-by': 'e9309273-0eeb-49f7-82ac-4b3f4fa2919e_131292439804223218',
   'x-ms-request-id': '6411be26-1e20-4fb2-9432-67434e2c2ca5',
@@ -147,7 +147,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/providers/Microsoft.Compute/locations/southeastasia/DiskOperations/6411be26-1e20-4fb2-9432-67434e2c2ca5?api-version=2016-04-30-preview')
+  .get('/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/providers/Microsoft.Compute/locations/southeastasia/DiskOperations/6411be26-1e20-4fb2-9432-67434e2c2ca5?api-version=2017-03-30')
   .reply(200, "{\r\n  \"startTime\": \"2017-02-02T23:18:24.0812199+00:00\",\r\n  \"endTime\": \"2017-02-02T23:18:24.5499623+00:00\",\r\n  \"status\": \"Succeeded\",\r\n  \"name\": \"6411be26-1e20-4fb2-9432-67434e2c2ca5\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '184',
@@ -166,7 +166,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/providers/Microsoft.Compute/locations/southeastasia/DiskOperations/6411be26-1e20-4fb2-9432-67434e2c2ca5?api-version=2016-04-30-preview')
+  .get('/subscriptions/21466899-20b2-463c-8c30-b8fb28a43248/providers/Microsoft.Compute/locations/southeastasia/DiskOperations/6411be26-1e20-4fb2-9432-67434e2c2ca5?api-version=2017-03-30')
   .reply(200, "{\r\n  \"startTime\": \"2017-02-02T23:18:24.0812199+00:00\",\r\n  \"endTime\": \"2017-02-02T23:18:24.5499623+00:00\",\r\n  \"status\": \"Succeeded\",\r\n  \"name\": \"6411be26-1e20-4fb2-9432-67434e2c2ca5\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '184',
