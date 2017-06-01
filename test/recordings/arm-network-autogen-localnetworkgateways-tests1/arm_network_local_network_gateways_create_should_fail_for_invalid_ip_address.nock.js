@@ -14,7 +14,7 @@ exports.getMockedProfile = function () {
     },
     tenantId: '72f988bf-86f1-41af-91ab-2d7cd011db47',
     state: 'Enabled',
-    registeredProviders: ['mobileservice'],
+    registeredProviders: [],
     _eventsCount: '1',
     isDefault: true
   }, newProfile.environments['AzureCloud']));
@@ -29,34 +29,72 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidIPAddressName?api-version=2016-09-01')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidIPAddressName?api-version=2017-03-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/localNetworkGateways/invalidIPAddressName' under resource group 'xplat-test-local-gateway' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': '8df8da26-9e27-41a9-bf5d-bcd82e88ec56',
-  'x-ms-correlation-request-id': '8df8da26-9e27-41a9-bf5d-bcd82e88ec56',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170426T092940Z:8df8da26-9e27-41a9-bf5d-bcd82e88ec56',
+  'x-ms-request-id': '7b61ed16-d470-42a9-9d95-c46b0da39645',
+  'x-ms-correlation-request-id': '7b61ed16-d470-42a9-9d95-c46b0da39645',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170601T075830Z:7b61ed16-d470-42a9-9d95-c46b0da39645',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Wed, 26 Apr 2017 09:29:40 GMT',
+  date: 'Thu, 01 Jun 2017 07:58:30 GMT',
   connection: 'close',
   'content-length': '187' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidIPAddressName?api-version=2016-09-01')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidIPAddressName?api-version=2017-03-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/localNetworkGateways/invalidIPAddressName' under resource group 'xplat-test-local-gateway' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': '8df8da26-9e27-41a9-bf5d-bcd82e88ec56',
-  'x-ms-correlation-request-id': '8df8da26-9e27-41a9-bf5d-bcd82e88ec56',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170426T092940Z:8df8da26-9e27-41a9-bf5d-bcd82e88ec56',
+  'x-ms-request-id': '7b61ed16-d470-42a9-9d95-c46b0da39645',
+  'x-ms-correlation-request-id': '7b61ed16-d470-42a9-9d95-c46b0da39645',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170601T075830Z:7b61ed16-d470-42a9-9d95-c46b0da39645',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Wed, 26 Apr 2017 09:29:40 GMT',
+  date: 'Thu, 01 Jun 2017 07:58:30 GMT',
   connection: 'close',
   'content-length': '187' });
+ return result; },
+function (nock) { 
+var result = 
+nock('http://management.azure.com:443')
+  .filteringRequestBody(function (path) { return '*';})
+.put('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidIPAddressName?api-version=2017-03-01', '*')
+  .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"InvalidIpAddress\",\r\n    \"message\": \"The IP Address 10.0.0.257 is invalid.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  'content-length': '132',
+  'content-type': 'application/json; charset=utf-8',
+  expires: '-1',
+  'x-ms-request-id': 'fd846c85-9696-484a-a0ed-fcf62c5eeea9',
+  'strict-transport-security': 'max-age=31536000; includeSubDomains',
+  server: 'Microsoft-HTTPAPI/2.0',
+  'x-ms-ratelimit-remaining-subscription-writes': '1198',
+  'x-ms-correlation-request-id': '19da6620-e788-4ea4-81d4-3d03dcb81288',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170601T075834Z:19da6620-e788-4ea4-81d4-3d03dcb81288',
+  date: 'Thu, 01 Jun 2017 07:58:33 GMT',
+  connection: 'close' });
+ return result; },
+function (nock) { 
+var result = 
+nock('https://management.azure.com:443')
+  .filteringRequestBody(function (path) { return '*';})
+.put('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidIPAddressName?api-version=2017-03-01', '*')
+  .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"InvalidIpAddress\",\r\n    \"message\": \"The IP Address 10.0.0.257 is invalid.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  'content-length': '132',
+  'content-type': 'application/json; charset=utf-8',
+  expires: '-1',
+  'x-ms-request-id': 'fd846c85-9696-484a-a0ed-fcf62c5eeea9',
+  'strict-transport-security': 'max-age=31536000; includeSubDomains',
+  server: 'Microsoft-HTTPAPI/2.0',
+  'x-ms-ratelimit-remaining-subscription-writes': '1198',
+  'x-ms-correlation-request-id': '19da6620-e788-4ea4-81d4-3d03dcb81288',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170601T075834Z:19da6620-e788-4ea4-81d4-3d03dcb81288',
+  date: 'Thu, 01 Jun 2017 07:58:33 GMT',
+  connection: 'close' });
  return result; }]];

@@ -104,8 +104,9 @@ var location, groupName = 'xplatTestGroupCreateAppGw3',
     firewallMode: "Prevention",
     firewallEnabled: true,
     ruleSetType: 'OWASP',
-    ruleSetVersion: '2.2.9',
-    newRuleSetVersion: '2.3.0',
+    ruleSetVersion: '3.0',
+    disabledRuleGroupName: 'REQUEST-910-IP-REPUTATION',
+    disabledRuleGroupRules: '910000,910011,910012',
     wafSkuName: constants.appGateway.sku.name[3],
     wafSkuTier: constants.appGateway.sku.tier[1],
     createConfigName: 'config02'
@@ -142,14 +143,15 @@ describe('arm', function () {
         gatewayProp.urlPathMapName = suite.isMocked ? gatewayProp.urlPathMapName : suite.generateId(gatewayProp.urlPathMapName, null);
         gatewayProp.urlMapRuleName = suite.isMocked ? gatewayProp.urlMapRuleName : suite.generateId(gatewayProp.urlMapRuleName, null);
         gatewayProp.sslCertName = suite.isMocked ? gatewayProp.sslCertName : suite.generateId(gatewayProp.sslCertName, null);
+        
         done();
       });
     });
     after(function (done) {
       this.timeout(hour);
-      networkUtil.deleteGroup(groupName, suite, function () {
+      //networkUtil.deleteGroup(groupName, suite, function () {
         suite.teardownSuite(done);
-      });
+      //});
     });
     beforeEach(function (done) {
       suite.setupTest(done);
@@ -673,58 +675,6 @@ describe('arm', function () {
         });
       });
 
-      it('rule create command should create new request routing rule in application gateway', function (done) {
-        var cmd = util.format('network application-gateway rule create {group} {name} {ruleName} -i {httpSettingsName} ' +
-          '-l {httpListenerName} -p {defPoolName} --json').formatArgs(gatewayProp);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
-          result.exitStatus.should.equal(0);
-          var appGateway = JSON.parse(result.text);
-          appGateway.name.should.equal(gatewayProp.name);
-
-          var rule = utils.findFirstCaseIgnore(appGateway.requestRoutingRules, { name: gatewayProp.ruleName });
-          rule.name.should.equal(gatewayProp.ruleName);
-          networkUtil.shouldBeSucceeded(rule);
-          done();
-        });
-      });
-
-      it('rule set command should update request routing rule in application gateway', function (done) {
-        var cmd = util.format('network application-gateway rule set {group} {name} {ruleName} -i {defHttpSettingsName} ' +
-          '-p {defPoolName} --json').formatArgs(gatewayProp);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
-          result.exitStatus.should.equal(0);
-          var appGateway = JSON.parse(result.text);
-          appGateway.name.should.equal(gatewayProp.name);
-
-          var rule = utils.findFirstCaseIgnore(appGateway.requestRoutingRules, { name: gatewayProp.ruleName });
-          rule.name.should.equal(gatewayProp.ruleName);
-          networkUtil.shouldBeSucceeded(rule);
-          done();
-        });
-      });
-
-      it('rule show should display request routing rule from application gateway', function (done) {
-        var cmd = 'network application-gateway rule show {group} {name} {ruleName} --json'.formatArgs(gatewayProp);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
-          result.exitStatus.should.equal(0);
-          var output = JSON.parse(result.text);
-          output.name.should.equal(gatewayProp.ruleName);
-          done();
-        });
-      });
-
-      it('rule list should display all rules in application gateway', function (done) {
-        var cmd = 'network application-gateway rule list -g {group} {name} --json'.formatArgs(gatewayProp);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
-          result.exitStatus.should.equal(0);
-          var outputs = JSON.parse(result.text);
-          _.some(outputs, function (output) {
-            return output.name === gatewayProp.ruleName;
-          }).should.be.true;
-          done();
-        });
-      });
-
       it('probe create should create probe in application gateway', function (done) {
         networkUtil.createPublicIpLegacy(groupName, gatewayProp.probePublicIpName, gatewayProp.location, suite, function () {
           var cmd = util.format('network application-gateway probe create {group} {name} {probeName} -p {httpProtocol} ' +
@@ -936,6 +886,58 @@ describe('arm', function () {
             networkUtil.shouldBeSucceeded(urlPathMap);
             done();
           });
+        });
+      });
+
+      it('rule create command should create new request routing rule in application gateway', function (done) {
+        var cmd = util.format('network application-gateway rule create {group} {name} {ruleName} -i {httpSettingsName} ' +
+          '-l {httpListenerName} -p {defPoolName} --json').formatArgs(gatewayProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var appGateway = JSON.parse(result.text);
+          appGateway.name.should.equal(gatewayProp.name);
+
+          var rule = utils.findFirstCaseIgnore(appGateway.requestRoutingRules, { name: gatewayProp.ruleName });
+          rule.name.should.equal(gatewayProp.ruleName);
+          networkUtil.shouldBeSucceeded(rule);
+          done();
+        });
+      });
+
+      it('rule set command should update request routing rule in application gateway', function (done) {
+        var cmd = util.format('network application-gateway rule set {group} {name} {ruleName} -i {defHttpSettingsName} ' +
+          '-p {defPoolName} -u {urlPathMapName} --json').formatArgs(gatewayProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var appGateway = JSON.parse(result.text);
+          appGateway.name.should.equal(gatewayProp.name);
+
+          var rule = utils.findFirstCaseIgnore(appGateway.requestRoutingRules, { name: gatewayProp.ruleName });
+          rule.name.should.equal(gatewayProp.ruleName);
+          networkUtil.shouldBeSucceeded(rule);
+          done();
+        });
+      });
+
+      it('rule show should display request routing rule from application gateway', function (done) {
+        var cmd = 'network application-gateway rule show {group} {name} {ruleName} --json'.formatArgs(gatewayProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var output = JSON.parse(result.text);
+          output.name.should.equal(gatewayProp.ruleName);
+          done();
+        });
+      });
+
+      it('rule list should display all rules in application gateway', function (done) {
+        var cmd = 'network application-gateway rule list -g {group} {name} --json'.formatArgs(gatewayProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var outputs = JSON.parse(result.text);
+          _.some(outputs, function (output) {
+            return output.name === gatewayProp.ruleName;
+          }).should.be.true;
+          done();
         });
       });
 
@@ -1163,9 +1165,9 @@ describe('arm', function () {
           '--name {name} --json').formatArgs(gatewayProp);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var cmd = util.format('network application-gateway waf-config create -g {group} --waf-mode {firewallMode} '+
-            '--enable {firewallEnabled} --gateway-name {name} --json')
-            .formatArgs(gatewayProp);
+          var cmd = util.format('network application-gateway waf-config create -g {group} --waf-mode {firewallMode} ' +
+            '--enable {firewallEnabled} --gateway-name {name} --rule-set-type {ruleSetType} --rule-set-version {ruleSetVersion} ' +
+            '--json').formatArgs(gatewayProp);
           testUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text);
@@ -1184,6 +1186,123 @@ describe('arm', function () {
           output.firewallMode.should.equal(gatewayProp.firewallMode);
           output.enabled.should.equal(gatewayProp.firewallEnabled);
           done();
+        });
+      });
+
+      it('disabled-rule-group create should create new disabled rule group', function (done) {
+        var cmd = ('network application-gateway waf-config disabled-rule-group create ' +
+          '-n {disabledRuleGroupName} -g {group} --gateway-name {name} --json').formatArgs(gatewayProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var output = JSON.parse(result.text);
+
+          output.disabledRuleGroups.should.not.be.empty;
+
+          _.some(output.disabledRuleGroups, function (group) {
+            return group.ruleGroupName.toLowerCase() === gatewayProp.disabledRuleGroupName.toLowerCase() && !group.rules;
+          }).should.be.true;
+
+          done();
+        });
+      });
+
+      it('disabled-rule-group show should show disabled rule group', function (done) {
+        var cmd = ('network application-gateway waf-config disabled-rule-group show ' +
+          '-n {disabledRuleGroupName} -g {group} --gateway-name {name} --json').formatArgs(gatewayProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var output = JSON.parse(result.text);
+
+          output.ruleGroupName.toLowerCase().should.equal(gatewayProp.disabledRuleGroupName.toLowerCase());
+          should.not.exist(output.rules);
+
+          done();
+        });
+      });
+
+      it('disabled-rule-group list should list all disabled rule groups', function (done) {
+        var cmd = ('network application-gateway waf-config disabled-rule-group list ' +
+          '-g {group} --gateway-name {name} --json').formatArgs(gatewayProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var output = JSON.parse(result.text);
+
+          output.should.not.be.empty;
+
+          _.some(output, function (group) {
+            return group.ruleGroupName.toLowerCase() === gatewayProp.disabledRuleGroupName.toLowerCase() && !group.rules;
+          }).should.be.true;
+
+          done();
+        });
+      });
+
+      it('disabled-rule-group set should modify disabled rule group', function (done) {
+        var cmd = ('network application-gateway waf-config disabled-rule-group set ' +
+          '-n {disabledRuleGroupName} -r {disabledRuleGroupRules} -g {group} --gateway-name {name} --json').formatArgs(gatewayProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var output = JSON.parse(result.text);
+
+          output.should.not.be.empty;
+          output.disabledRuleGroups.should.not.be.empty;
+
+          _.some(output.disabledRuleGroups, function (group) {
+            return group.ruleGroupName.toLowerCase() === gatewayProp.disabledRuleGroupName.toLowerCase() 
+                && group.rules.join(',').toLowerCase() === gatewayProp.disabledRuleGroupRules.toLowerCase();
+          }).should.be.true;
+          
+          done();
+        });
+      });
+
+      it('disabled-rule-group show should show modified disabled rule group', function (done) {
+        var cmd = ('network application-gateway waf-config disabled-rule-group show ' +
+          '-n {disabledRuleGroupName} -g {group} --gateway-name {name} --json').formatArgs(gatewayProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var output = JSON.parse(result.text);
+
+          output.ruleGroupName.toLowerCase().should.equal(gatewayProp.disabledRuleGroupName.toLowerCase());
+          output.rules.join(',').toLowerCase().should.equal(gatewayProp.disabledRuleGroupRules.toLowerCase());
+
+          cmd = 'network application-gateway waf-config show -g {group} --gateway-name {name} --json'.formatArgs(gatewayProp);
+          testUtils.executeCommand(suite, retry, cmd, function (result) {
+            result.exitStatus.should.equal(0);
+            var output = JSON.parse(result.text);
+
+            output.disabledRuleGroups.should.not.be.empty;
+
+            _.some(output.disabledRuleGroups, function (group) {
+              return group.ruleGroupName.toLowerCase() === gatewayProp.disabledRuleGroupName.toLowerCase() 
+                  && group.rules.join(',').toLowerCase() === gatewayProp.disabledRuleGroupRules.toLowerCase();
+            }).should.be.true;
+            
+            done();
+          });
+        });
+      });
+
+      it('disabled-rule-group delete should delete disabled rule group', function (done) {
+        var cmd = ('network application-gateway waf-config disabled-rule-group delete ' +
+          '-n {disabledRuleGroupName} -g {group} --gateway-name {name} --quiet --json').formatArgs(gatewayProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var output = JSON.parse(result.text);
+
+          output.should.not.be.empty;
+          output.disabledRuleGroups.should.be.empty;
+
+          cmd = 'network application-gateway waf-config show -g {group} --gateway-name {name} --json'.formatArgs(gatewayProp);
+          testUtils.executeCommand(suite, retry, cmd, function (result) {
+            result.exitStatus.should.equal(0);
+            var output = JSON.parse(result.text);
+
+            output.should.not.be.empty;
+            output.disabledRuleGroups.should.be.empty;
+            
+            done();
+          });
         });
       });
 
