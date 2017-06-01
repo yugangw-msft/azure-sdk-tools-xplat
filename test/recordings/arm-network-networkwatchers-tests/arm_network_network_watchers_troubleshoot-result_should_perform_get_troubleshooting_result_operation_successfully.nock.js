@@ -29,7 +29,7 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatchersName?api-version=2016-09-01')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatchersName?api-version=2017-03-01')
   .reply(200, "{\r\n  \"name\": \"networkWatchersName\",\r\n  \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatchersName\",\r\n  \"etag\": \"W/\\\"7a20d1ad-7e52-4a6c-8d0b-1c1c192cb236\\\"\",\r\n  \"type\": \"Microsoft.Network/networkWatchers\",\r\n  \"location\": \"westcentralus\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"runningOperationIds\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '431',
@@ -48,7 +48,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatchersName?api-version=2016-09-01')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatchersName?api-version=2017-03-01')
   .reply(200, "{\r\n  \"name\": \"networkWatchersName\",\r\n  \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatchersName\",\r\n  \"etag\": \"W/\\\"7a20d1ad-7e52-4a6c-8d0b-1c1c192cb236\\\"\",\r\n  \"type\": \"Microsoft.Network/networkWatchers\",\r\n  \"location\": \"westcentralus\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"runningOperationIds\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '431',
@@ -68,7 +68,7 @@ function (nock) {
 var result = 
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.post('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatchersName/queryTroubleshootResult?api-version=2016-09-01', '*')
+.post('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatchersName/queryTroubleshootResult?api-version=2017-03-01', '*')
   .reply(200, "{\r\n  \"startTime\": \"2017-02-15T10:41:25.7655722Z\",\r\n  \"endTime\": \"2017-02-15T10:41:33.394Z\",\r\n  \"code\": \"UnHealthy\",\r\n  \"results\": [\r\n    {\r\n      \"id\": \"NoConnectionsFoundForGateway\",\r\n      \"summary\": \"No connections have been created on the gateway\",\r\n      \"detail\": \"A cross-premises or VNet-to-VNet connection needs to be created on the gateway.\",\r\n      \"recommendedActions\": [\r\n        {\r\n          \"actionText\": \"Create a cross premises connection\",\r\n          \"actionUri\": \"https://azure.microsoft.com/en-us/documentation/articles/vpn-gateway-howto-site-to-site-resource-manager-portal/\",\r\n          \"actionUriText\": \"cross premises\"\r\n        },\r\n        {\r\n          \"actionText\": \"Create a VNet-to-VNet connection\",\r\n          \"actionUri\": \"https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-howto-vnet-vnet-resource-manager-portal\",\r\n          \"actionUriText\": \"VNet-to-VNet\"\r\n        },\r\n        {\r\n          \"actionText\": \"If you are experiencing problems you believe are caused by Azure, contact support\",\r\n          \"actionUri\": \"http://azure.microsoft.com/support\",\r\n          \"actionUriText\": \"contact support\"\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '1175',
@@ -87,7 +87,7 @@ function (nock) {
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.post('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatchersName/queryTroubleshootResult?api-version=2016-09-01', '*')
+.post('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatchersName/queryTroubleshootResult?api-version=2017-03-01', '*')
   .reply(200, "{\r\n  \"startTime\": \"2017-02-15T10:41:25.7655722Z\",\r\n  \"endTime\": \"2017-02-15T10:41:33.394Z\",\r\n  \"code\": \"UnHealthy\",\r\n  \"results\": [\r\n    {\r\n      \"id\": \"NoConnectionsFoundForGateway\",\r\n      \"summary\": \"No connections have been created on the gateway\",\r\n      \"detail\": \"A cross-premises or VNet-to-VNet connection needs to be created on the gateway.\",\r\n      \"recommendedActions\": [\r\n        {\r\n          \"actionText\": \"Create a cross premises connection\",\r\n          \"actionUri\": \"https://azure.microsoft.com/en-us/documentation/articles/vpn-gateway-howto-site-to-site-resource-manager-portal/\",\r\n          \"actionUriText\": \"cross premises\"\r\n        },\r\n        {\r\n          \"actionText\": \"Create a VNet-to-VNet connection\",\r\n          \"actionUri\": \"https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-howto-vnet-vnet-resource-manager-portal\",\r\n          \"actionUriText\": \"VNet-to-VNet\"\r\n        },\r\n        {\r\n          \"actionText\": \"If you are experiencing problems you believe are caused by Azure, contact support\",\r\n          \"actionUri\": \"http://azure.microsoft.com/support\",\r\n          \"actionUriText\": \"contact support\"\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '1175',

@@ -29,7 +29,7 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/resourceGroups/xplatTestGroupERPeering/providers/Microsoft.Network/expressRouteCircuits/xplatExpressRouteCircuit/peerings/AzurePublicPeering?api-version=2016-12-01')
+  .get('/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/resourceGroups/xplatTestGroupERPeering/providers/Microsoft.Network/expressRouteCircuits/xplatExpressRouteCircuit/peerings/AzurePublicPeering?api-version=2017-03-01')
   .reply(200, "{\r\n  \"name\": \"AzurePublicPeering\",\r\n  \"id\": \"/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/resourceGroups/xplatTestGroupERPeering/providers/Microsoft.Network/expressRouteCircuits/xplatExpressRouteCircuit/peerings/AzurePublicPeering\",\r\n  \"etag\": \"W/\\\"1ebbae30-6422-4c33-848b-f682a667b920\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"peeringType\": \"AzurePublicPeering\",\r\n    \"azureASN\": 12076,\r\n    \"peerASN\": 110,\r\n    \"primaryPeerAddressPrefix\": \"192.168.1.0/30\",\r\n    \"secondaryPeerAddressPrefix\": \"192.168.2.0/30\",\r\n    \"primaryAzurePort\": \"INX-LON04-06GMR-CIS-3-PRI-A\",\r\n    \"secondaryAzurePort\": \"INX-LON04-06GMR-CIS-4-SEC-A\",\r\n    \"state\": \"Enabled\",\r\n    \"vlanId\": 209,\r\n    \"gatewayManagerEtag\": \"\",\r\n    \"lastModifiedBy\": \"Customer\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '777',
@@ -47,7 +47,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/resourceGroups/xplatTestGroupERPeering/providers/Microsoft.Network/expressRouteCircuits/xplatExpressRouteCircuit/peerings/AzurePublicPeering?api-version=2016-12-01')
+  .get('/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/resourceGroups/xplatTestGroupERPeering/providers/Microsoft.Network/expressRouteCircuits/xplatExpressRouteCircuit/peerings/AzurePublicPeering?api-version=2017-03-01')
   .reply(200, "{\r\n  \"name\": \"AzurePublicPeering\",\r\n  \"id\": \"/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/resourceGroups/xplatTestGroupERPeering/providers/Microsoft.Network/expressRouteCircuits/xplatExpressRouteCircuit/peerings/AzurePublicPeering\",\r\n  \"etag\": \"W/\\\"1ebbae30-6422-4c33-848b-f682a667b920\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"peeringType\": \"AzurePublicPeering\",\r\n    \"azureASN\": 12076,\r\n    \"peerASN\": 110,\r\n    \"primaryPeerAddressPrefix\": \"192.168.1.0/30\",\r\n    \"secondaryPeerAddressPrefix\": \"192.168.2.0/30\",\r\n    \"primaryAzurePort\": \"INX-LON04-06GMR-CIS-3-PRI-A\",\r\n    \"secondaryAzurePort\": \"INX-LON04-06GMR-CIS-4-SEC-A\",\r\n    \"state\": \"Enabled\",\r\n    \"vlanId\": 209,\r\n    \"gatewayManagerEtag\": \"\",\r\n    \"lastModifiedBy\": \"Customer\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '777',
@@ -65,15 +65,15 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .delete('/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/resourceGroups/xplatTestGroupERPeering/providers/Microsoft.Network/expressRouteCircuits/xplatExpressRouteCircuit/peerings/AzurePublicPeering?api-version=2016-12-01')
+  .delete('/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/resourceGroups/xplatTestGroupERPeering/providers/Microsoft.Network/expressRouteCircuits/xplatExpressRouteCircuit/peerings/AzurePublicPeering?api-version=2017-03-01')
   .reply(202, "", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '0',
   expires: '-1',
-  location: 'https://management.azure.com/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/providers/Microsoft.Network/locations/brazilsouth/operationResults/50edce6f-9e40-4dce-b39d-87a3a16f774f?api-version=2016-12-01',
+  location: 'https://management.azure.com/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/providers/Microsoft.Network/locations/brazilsouth/operationResults/50edce6f-9e40-4dce-b39d-87a3a16f774f?api-version=2017-03-01',
   'retry-after': '10',
   'x-ms-request-id': '50edce6f-9e40-4dce-b39d-87a3a16f774f',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/providers/Microsoft.Network/locations/brazilsouth/operations/50edce6f-9e40-4dce-b39d-87a3a16f774f?api-version=2016-12-01',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/providers/Microsoft.Network/locations/brazilsouth/operations/50edce6f-9e40-4dce-b39d-87a3a16f774f?api-version=2017-03-01',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1198',
@@ -85,15 +85,15 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .delete('/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/resourceGroups/xplatTestGroupERPeering/providers/Microsoft.Network/expressRouteCircuits/xplatExpressRouteCircuit/peerings/AzurePublicPeering?api-version=2016-12-01')
+  .delete('/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/resourceGroups/xplatTestGroupERPeering/providers/Microsoft.Network/expressRouteCircuits/xplatExpressRouteCircuit/peerings/AzurePublicPeering?api-version=2017-03-01')
   .reply(202, "", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '0',
   expires: '-1',
-  location: 'https://management.azure.com/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/providers/Microsoft.Network/locations/brazilsouth/operationResults/50edce6f-9e40-4dce-b39d-87a3a16f774f?api-version=2016-12-01',
+  location: 'https://management.azure.com/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/providers/Microsoft.Network/locations/brazilsouth/operationResults/50edce6f-9e40-4dce-b39d-87a3a16f774f?api-version=2017-03-01',
   'retry-after': '10',
   'x-ms-request-id': '50edce6f-9e40-4dce-b39d-87a3a16f774f',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/providers/Microsoft.Network/locations/brazilsouth/operations/50edce6f-9e40-4dce-b39d-87a3a16f774f?api-version=2016-12-01',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/providers/Microsoft.Network/locations/brazilsouth/operations/50edce6f-9e40-4dce-b39d-87a3a16f774f?api-version=2017-03-01',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1198',
@@ -105,7 +105,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/providers/Microsoft.Network/locations/brazilsouth/operations/50edce6f-9e40-4dce-b39d-87a3a16f774f?api-version=2016-12-01')
+  .get('/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/providers/Microsoft.Network/locations/brazilsouth/operations/50edce6f-9e40-4dce-b39d-87a3a16f774f?api-version=2017-03-01')
   .reply(200, "{\r\n  \"status\": \"InProgress\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '30',
@@ -124,7 +124,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/providers/Microsoft.Network/locations/brazilsouth/operations/50edce6f-9e40-4dce-b39d-87a3a16f774f?api-version=2016-12-01')
+  .get('/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/providers/Microsoft.Network/locations/brazilsouth/operations/50edce6f-9e40-4dce-b39d-87a3a16f774f?api-version=2017-03-01')
   .reply(200, "{\r\n  \"status\": \"InProgress\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '30',
@@ -143,7 +143,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/providers/Microsoft.Network/locations/brazilsouth/operations/50edce6f-9e40-4dce-b39d-87a3a16f774f?api-version=2016-12-01')
+  .get('/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/providers/Microsoft.Network/locations/brazilsouth/operations/50edce6f-9e40-4dce-b39d-87a3a16f774f?api-version=2017-03-01')
   .reply(200, "{\r\n  \"status\": \"InProgress\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '30',
@@ -162,7 +162,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/providers/Microsoft.Network/locations/brazilsouth/operations/50edce6f-9e40-4dce-b39d-87a3a16f774f?api-version=2016-12-01')
+  .get('/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/providers/Microsoft.Network/locations/brazilsouth/operations/50edce6f-9e40-4dce-b39d-87a3a16f774f?api-version=2017-03-01')
   .reply(200, "{\r\n  \"status\": \"InProgress\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '30',
@@ -181,7 +181,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/providers/Microsoft.Network/locations/brazilsouth/operations/50edce6f-9e40-4dce-b39d-87a3a16f774f?api-version=2016-12-01')
+  .get('/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/providers/Microsoft.Network/locations/brazilsouth/operations/50edce6f-9e40-4dce-b39d-87a3a16f774f?api-version=2017-03-01')
   .reply(200, "{\r\n  \"status\": \"Succeeded\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '29',
@@ -199,7 +199,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/providers/Microsoft.Network/locations/brazilsouth/operations/50edce6f-9e40-4dce-b39d-87a3a16f774f?api-version=2016-12-01')
+  .get('/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/providers/Microsoft.Network/locations/brazilsouth/operations/50edce6f-9e40-4dce-b39d-87a3a16f774f?api-version=2017-03-01')
   .reply(200, "{\r\n  \"status\": \"Succeeded\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '29',
@@ -217,7 +217,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/resourceGroups/xplatTestGroupERPeering/providers/Microsoft.Network/expressRouteCircuits/xplatExpressRouteCircuit/peerings/AzurePublicPeering?api-version=2016-12-01')
+  .get('/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/resourceGroups/xplatTestGroupERPeering/providers/Microsoft.Network/expressRouteCircuits/xplatExpressRouteCircuit/peerings/AzurePublicPeering?api-version=2017-03-01')
   .reply(404, "{\r\n  \"error\": {\r\n    \"code\": \"NotFound\",\r\n    \"message\": \"Resource /subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/resourceGroups/xplatTestGroupERPeering/providers/Microsoft.Network/expressRouteCircuits/xplatExpressRouteCircuit/peerings/AzurePublicPeering not found.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '299',
@@ -235,7 +235,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/resourceGroups/xplatTestGroupERPeering/providers/Microsoft.Network/expressRouteCircuits/xplatExpressRouteCircuit/peerings/AzurePublicPeering?api-version=2016-12-01')
+  .get('/subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/resourceGroups/xplatTestGroupERPeering/providers/Microsoft.Network/expressRouteCircuits/xplatExpressRouteCircuit/peerings/AzurePublicPeering?api-version=2017-03-01')
   .reply(404, "{\r\n  \"error\": {\r\n    \"code\": \"NotFound\",\r\n    \"message\": \"Resource /subscriptions/52b6b790-9d5f-450c-98d9-97dbd91015d5/resourceGroups/xplatTestGroupERPeering/providers/Microsoft.Network/expressRouteCircuits/xplatExpressRouteCircuit/peerings/AzurePublicPeering not found.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '299',
