@@ -149,9 +149,9 @@ describe('arm', function () {
     });
     after(function (done) {
       this.timeout(hour);
-      //networkUtil.deleteGroup(groupName, suite, function () {
+      networkUtil.deleteGroup(groupName, suite, function () {
         suite.teardownSuite(done);
-      //});
+      });
     });
     beforeEach(function (done) {
       suite.setupTest(done);
