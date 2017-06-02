@@ -43,14 +43,19 @@
             {
               "name": "test",
               "subnet": {
-                "id": "/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstVmssGCreate5481/providers/Microsoft.Network/VirtualNetworks/xplattestvnet3238/subnets/xplattestsubnet7150"
-              },
-              "id": ""
+                "id": "/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstVmssGCreate6150/providers/Microsoft.Network/VirtualNetworks/xplattestvnet3116/subnets/xplattestsubnet7244"
+              }
             }
           ],
           "id": ""
         }
       ]
+    },
+    "diagnosticsProfile": {
+      "bootDiagnostics": {
+        "enabled": null,
+        "storageUri": ""
+      }
     },
     "extensionProfile": {
       "extensions": [

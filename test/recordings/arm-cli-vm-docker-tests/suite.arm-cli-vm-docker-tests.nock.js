@@ -29,4 +29,4 @@ exports.setEnvironment = function() {
 
 exports.scopes = [];
 
- exports.randomTestIdsGenerated = function() { return ['xplatstdocker9137','xplatscntdocker2229'];};
+ exports.randomTestIdsGenerated = function() { return ['xplatstdocker6627','xplatscntdocker6243'];};

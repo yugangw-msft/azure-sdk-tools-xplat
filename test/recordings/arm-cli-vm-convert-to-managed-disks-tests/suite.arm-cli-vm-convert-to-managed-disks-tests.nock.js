@@ -29,4 +29,4 @@ exports.setEnvironment = function() {
 
 exports.scopes = [];
 
- exports.randomTestIdsGenerated = function() { return ['xplatTestGVMConvert1903','xplatvmStSp4872','xplattestnicStSp7558','xplattstoragestsp3972','xplatteststoragecntstsp8216','xplattestvhdstsp5317','xplattestvnetStSp3186','xplattestsubnetStSp1455','xplattestipStSp5032','xplattestipdnsstsp5286'];};
+ exports.randomTestIdsGenerated = function() { return ['xplatTestGVMConvert7943','xplatvmStSp4643','xplattestnicStSp8116','xplattstoragestsp3180','xplatteststoragecntstsp8361','xplattestvhdstsp7699','xplattestvnetStSp5747','xplattestsubnetStSp5693','xplattestipStSp9793','xplattestipdnsstsp7275'];};

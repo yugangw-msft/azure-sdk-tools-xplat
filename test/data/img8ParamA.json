@@ -3,16 +3,18 @@
     "osDisk": {
       "osType": "Linux",
       "osState": "Generalized",
-      "blobUri": "https://xplatteststorage17459.blob.core.windows.net/vm15163/xplattestvhd.vhd",
+      "blobUri": "https://xplatteststorage14322.blob.core.windows.net/vm18384/xplattestvhd.vhd",
       "caching": "None",
-      "diskSizeGB": null
+      "diskSizeGB": null,
+      "storageAccountType": null
     },
     "dataDisks": [
       {
         "lun": 1,
-        "blobUri": "https://xplatteststorage17459.blob.core.windows.net/vm15163/xplattestvhd.vhd",
+        "blobUri": "https://xplatteststorage14322.blob.core.windows.net/vm18384/xplattestvhd.vhd",
         "caching": "None",
-        "diskSizeGB": null
+        "diskSizeGB": null,
+        "storageAccountType": null
       }
     ]
   },

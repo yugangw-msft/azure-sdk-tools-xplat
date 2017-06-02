@@ -166,7 +166,7 @@ describe('arm', function() {
           var cmd = util.format('vm config create --parameter-file %s', pvmParamFileName).split(' ');
           testUtils.executeCommand(suite, retry, cmd, function(result) {
             result.exitStatus.should.equal(0);
-            var cmd = makeCommandStr('vm', 'virtual-machine', 'delete', pvmParamFileName, '--plan --diagnostics-profile --provisioning-state --instance-view --license-type --vm-id --resources --tags --type --id').split(' ');
+            var cmd = makeCommandStr('vm', 'virtual-machine', 'delete', pvmParamFileName, '--plan --diagnostics-profile --provisioning-state --instance-view --license-type --vm-id --resources --tags --type --id --identity').split(' ');
             testUtils.executeCommand(suite, retry, cmd, function(result) {
               result.exitStatus.should.equal(0);
               var cmd = makeCommandStr('vm', 'virtual-machine', 'set', pvmParamFileName, util.format('--location %s --name %s', location, vm1Prefix)).split(' ');
@@ -251,7 +251,7 @@ describe('arm', function() {
           var cmd = util.format('vm config create --parameter-file %s', pvmParamFileName2).split(' ');
           testUtils.executeCommand(suite, retry, cmd, function(result) {
             result.exitStatus.should.equal(0);
-            var cmd = makeCommandStr('vm', 'virtual-machine', 'delete', pvmParamFileName2, '--plan --hardware-profile --storage-profile --os-profile --network-profile --diagnostics-profile --availability-set').split(' ');
+            var cmd = makeCommandStr('vm', 'virtual-machine', 'delete', pvmParamFileName2, '--plan --hardware-profile --storage-profile --os-profile --network-profile --diagnostics-profile --availability-set --identity').split(' ');
             testUtils.executeCommand(suite, retry, cmd, function(result) {
               result.exitStatus.should.equal(0);
               var cmd = makeCommandStr('vm', 'virtual-machine', 'delete', pvmParamFileName2, ' --provisioning-state --instance-view --license-type --vm-id --resources --id --name --type --location --tags').split(' ');
