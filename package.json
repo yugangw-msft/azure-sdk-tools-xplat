@@ -138,6 +138,7 @@
     "unit-arm-deployment": "node --max_old_space_size=4096 scripts/unit.js testlist-arm-deployment.txt",
     "unit-vm": "node scripts/unit.js testlist-vm.txt",
     "unit-vm-live": "node scripts/unit.js testlist-vm-live.txt",
+    "unit-arm-compute-all": "node scripts/unit.js testlist-arm-compute-all.txt",
     "unit-arm-vm": "node scripts/unit.js testlist-arm-vm.txt",
     "unit-arm-vm-live": "node scripts/unit.js testlist-arm-vm-live.txt",
     "unit-arm-vm-ping": "node scripts/unit.js testlist-arm-vm-ping.txt",
