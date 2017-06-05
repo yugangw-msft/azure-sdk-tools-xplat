@@ -144,6 +144,13 @@ describe('arm', function () {
           done();
         });
       });
+      it('usage should perform list usage operation successfully', function (done) {
+        var cmd = 'network vnet usage -g {group} -n {name}  --json'.formatArgs(vnetProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          done();
+        });
+      });
       it('delete should delete vnet', function (done) {
         var cmd = 'network vnet delete -g {group} -n {name} --quiet --json'.formatArgs(vnetProp);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
