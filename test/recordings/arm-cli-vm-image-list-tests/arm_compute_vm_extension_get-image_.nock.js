@@ -23,42 +23,44 @@ exports.getMockedProfile = function () {
 };
 
 exports.setEnvironment = function() {
-  process.env['AZURE_VM_TEST_LOCATION'] = 'eastus';
+  process.env['AZURE_VM_TEST_LOCATION'] = 'southeastasia';
 };
 
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/providers/Microsoft.Compute/locations/eastus/publishers/Microsoft.Compute/artifacttypes/vmextension/types/BGInfo/versions/2.1?api-version=2016-04-30-preview')
-  .reply(200, "{\r\n  \"properties\": {\r\n    \"operatingSystem\": \"Windows\",\r\n    \"computeRole\": \"IaaS\",\r\n    \"vmScaleSetEnabled\": false,\r\n    \"supportsMultipleExtensions\": false\r\n  },\r\n  \"location\": \"eastus\",\r\n  \"name\": \"2.1\",\r\n  \"id\": \"/Subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/Providers/Microsoft.Compute/Locations/eastus/Publishers/Microsoft.Compute/ArtifactTypes/VMExtension/Types/BGInfo/Versions/2.1\"\r\n}", { 'cache-control': 'no-cache',
+  .get('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/providers/Microsoft.Compute/locations/southeastasia/publishers/Microsoft.Compute/artifacttypes/vmextension/types/BGInfo/versions/2.1?api-version=2017-03-30')
+  .reply(200, "{\r\n  \"properties\": {\r\n    \"operatingSystem\": \"Windows\",\r\n    \"computeRole\": \"IaaS\",\r\n    \"vmScaleSetEnabled\": false,\r\n    \"supportsMultipleExtensions\": false\r\n  },\r\n  \"location\": \"southeastasia\",\r\n  \"name\": \"2.1\",\r\n  \"id\": \"/Subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/Providers/Microsoft.Compute/Locations/southeastasia/Publishers/Microsoft.Compute/ArtifactTypes/VMExtension/Types/BGInfo/Versions/2.1\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
-  'content-length': '398',
+  'content-length': '412',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': 'd941e3d5-ce55-4204-91c9-4b58f505559a',
-  server: 'Microsoft-HTTPAPI/2.0, Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14960',
-  'x-ms-correlation-request-id': 'd9cf51ea-0745-499b-b059-b07c2592a275',
-  'x-ms-routing-request-id': 'CENTRALUS:20170129T070747Z:d9cf51ea-0745-499b-b059-b07c2592a275',
-  date: 'Sun, 29 Jan 2017 07:07:47 GMT',
+  'x-ms-served-by': '1f3ad383-bb66-4279-b2a8-fbbcd093a7e3_131330592762137227',
+  'x-ms-request-id': 'f88d26b3-330a-486c-9202-775b0bb39d81',
+  server: 'Microsoft-HTTPAPI/2.0',
+  'x-ms-ratelimit-remaining-subscription-reads': '14840',
+  'x-ms-correlation-request-id': 'd0aa0242-a444-436d-8360-571cd013051b',
+  'x-ms-routing-request-id': 'WESTUS:20170602T151941Z:d0aa0242-a444-436d-8360-571cd013051b',
+  date: 'Fri, 02 Jun 2017 15:19:41 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/providers/Microsoft.Compute/locations/eastus/publishers/Microsoft.Compute/artifacttypes/vmextension/types/BGInfo/versions/2.1?api-version=2016-04-30-preview')
-  .reply(200, "{\r\n  \"properties\": {\r\n    \"operatingSystem\": \"Windows\",\r\n    \"computeRole\": \"IaaS\",\r\n    \"vmScaleSetEnabled\": false,\r\n    \"supportsMultipleExtensions\": false\r\n  },\r\n  \"location\": \"eastus\",\r\n  \"name\": \"2.1\",\r\n  \"id\": \"/Subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/Providers/Microsoft.Compute/Locations/eastus/Publishers/Microsoft.Compute/ArtifactTypes/VMExtension/Types/BGInfo/Versions/2.1\"\r\n}", { 'cache-control': 'no-cache',
+  .get('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/providers/Microsoft.Compute/locations/southeastasia/publishers/Microsoft.Compute/artifacttypes/vmextension/types/BGInfo/versions/2.1?api-version=2017-03-30')
+  .reply(200, "{\r\n  \"properties\": {\r\n    \"operatingSystem\": \"Windows\",\r\n    \"computeRole\": \"IaaS\",\r\n    \"vmScaleSetEnabled\": false,\r\n    \"supportsMultipleExtensions\": false\r\n  },\r\n  \"location\": \"southeastasia\",\r\n  \"name\": \"2.1\",\r\n  \"id\": \"/Subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/Providers/Microsoft.Compute/Locations/southeastasia/Publishers/Microsoft.Compute/ArtifactTypes/VMExtension/Types/BGInfo/Versions/2.1\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
-  'content-length': '398',
+  'content-length': '412',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': 'd941e3d5-ce55-4204-91c9-4b58f505559a',
-  server: 'Microsoft-HTTPAPI/2.0, Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14960',
-  'x-ms-correlation-request-id': 'd9cf51ea-0745-499b-b059-b07c2592a275',
-  'x-ms-routing-request-id': 'CENTRALUS:20170129T070747Z:d9cf51ea-0745-499b-b059-b07c2592a275',
-  date: 'Sun, 29 Jan 2017 07:07:47 GMT',
+  'x-ms-served-by': '1f3ad383-bb66-4279-b2a8-fbbcd093a7e3_131330592762137227',
+  'x-ms-request-id': 'f88d26b3-330a-486c-9202-775b0bb39d81',
+  server: 'Microsoft-HTTPAPI/2.0',
+  'x-ms-ratelimit-remaining-subscription-reads': '14840',
+  'x-ms-correlation-request-id': 'd0aa0242-a444-436d-8360-571cd013051b',
+  'x-ms-routing-request-id': 'WESTUS:20170602T151941Z:d0aa0242-a444-436d-8360-571cd013051b',
+  date: 'Fri, 02 Jun 2017 15:19:41 GMT',
   connection: 'close' });
  return result; }]];

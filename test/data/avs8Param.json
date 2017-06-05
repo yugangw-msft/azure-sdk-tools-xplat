@@ -1,10 +1,9 @@
 {
   "platformUpdateDomainCount": 3,
   "platformFaultDomainCount": 2,
-  "managed": false,
-  "location": "westus",
+  "location": "southeastasia",
   "sku": {
     "name": "Classic"
   },
-  "name": "xplattestavs85436"
+  "name": "xplattestavs85474"
 }

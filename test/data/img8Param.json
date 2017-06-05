@@ -1,7 +1,7 @@
 {
   "sourceVirtualMachine": {
-    "id": "/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstPvmGCreate3540/providers/Microsoft.Compute/virtualmachines/vm13547"
+    "id": "/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstPvmGCreate9744/providers/Microsoft.Compute/virtualmachines/vm18384"
   },
-  "location": "westus",
+  "location": "southeastasia",
   "name": "xplattestimg8"
 }

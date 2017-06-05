@@ -13,6 +13,9 @@
   "upgradePolicy": {
     "mode": null
   },
+  "recoveryPolicy": {
+    "mode": null
+  },
   "virtualMachineProfile": {
     "osProfile": {
       "computerNamePrefix": "",
@@ -106,12 +109,28 @@
         {
           "name": "",
           "primary": null,
+          "networkSecurityGroup": {
+            "id": ""
+          },
+          "dnsSettings": {
+            "dnsServers": [
+              ""
+            ]
+          },
           "ipConfigurations": [
             {
               "name": "",
               "subnet": {
                 "id": ""
               },
+              "publicIPAddressConfiguration": {
+                "name": "",
+                "idleTimeoutInMinutes": null,
+                "dnsSettings": {
+                  "domainNameLabel": ""
+                }
+              },
+              "privateIPAddressVersion": "",
               "applicationGatewayBackendAddressPools": [
                 {
                   "id": ""
@@ -134,6 +153,12 @@
         }
       ]
     },
+    "diagnosticsProfile": {
+      "bootDiagnostics": {
+        "enabled": null,
+        "storageUri": ""
+      }
+    },
     "extensionProfile": {
       "extensions": [
         {
@@ -148,11 +173,18 @@
           "id": null
         }
       ]
-    }
+    },
+    "licenseType": ""
   },
   "provisioningState": "",
   "overprovision": null,
+  "uniqueId": "",
   "singlePlacementGroup": null,
+  "identity": {
+    "principalId": "",
+    "tenantId": "",
+    "type": null
+  },
   "id": null,
   "name": null,
   "type": null,

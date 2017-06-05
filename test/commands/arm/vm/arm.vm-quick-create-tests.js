@@ -96,7 +96,6 @@ describe('arm', function() {
                   testUtils.executeCommand(suite, retry, cmd, function(result) {
                     result.exitStatus.should.equal(0);
                     result.text.should.containEql(vm1Prefix + '-pip.' + location.toLowerCase() + '.cloudapp.azure.com');
-                    result.text.should.containEql('Custom Data (Base64 Encoded)');
                     done();
                   });
                 });
@@ -109,7 +108,6 @@ describe('arm', function() {
               testUtils.executeCommand(suite, retry, cmd, function(result) {
                 result.exitStatus.should.equal(0);
                 result.text.should.containEql(vm1Prefix + '-pip.' + location.toLowerCase() + '.cloudapp.azure.com');
-                result.text.should.containEql('Custom Data (Base64 Encoded)');
                 done();
               });
             }
@@ -161,7 +159,6 @@ describe('arm', function() {
                   testUtils.executeCommand(suite, retry, cmd, function(result) {
                     result.exitStatus.should.equal(0);
                     result.text.should.containEql('-pip.' + location.toLowerCase() + '.cloudapp.azure.com');
-                    result.text.should.not.containEql('Custom Data (Base64 Encoded)');
                     done();
                   });
                 });
@@ -176,7 +173,6 @@ describe('arm', function() {
               testUtils.executeCommand(suite, retry, cmd, function(result) {
                 result.exitStatus.should.equal(0);
                 result.text.should.containEql('-pip.' + location.toLowerCase() + '.cloudapp.azure.com');
-                result.text.should.not.containEql('Custom Data (Base64 Encoded)');
                 done();
               });
             });
@@ -194,7 +190,6 @@ describe('arm', function() {
             testUtils.executeCommand(suite, retry, cmd, function(result) {
               result.exitStatus.should.equal(0);
               result.text.should.containEql(vm3Prefix + '-pip.' + location.toLowerCase() + '.cloudapp.azure.com');
-              result.text.should.containEql('Custom Data (Base64 Encoded)');
               done();
             });
           });

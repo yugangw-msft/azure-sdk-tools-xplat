@@ -1,16 +1,2 @@
 #owner @huangpf 
-# Live + Playback
-include:./testlist-arm-vmss.txt
-include:./testlist-arm-container.txt
-include:./testlist-arm-vm.txt
-commands/arm/vm/arm.vm-premium-create-tests.js
-commands/arm/vm/arm.vm-usage-tests.js
-commands/arm/vm/arm.vm-stop-restart-tests.js
-commands/arm/vm/arm.vm.disk-attachnew-detach-test.js
-commands/arm/vm/arm.vm-create-generate-ssh-tests.js
-commands/arm/vm/arm.vm.extension-tests.js
-commands/arm/vm/arm.vm.size-tests.js
-# Docker
-commands/arm/vm/arm.vm-docker-tests.js
-commands/arm/vm/arm.vm-docker-ssh-tests.js
-# Live Only
+# Live Only Tests -- To be added here

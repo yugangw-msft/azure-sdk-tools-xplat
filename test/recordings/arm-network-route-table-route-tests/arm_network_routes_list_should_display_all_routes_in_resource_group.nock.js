@@ -29,7 +29,7 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes?api-version=2016-09-01')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes?api-version=2017-03-01')
   .reply(200, "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"routeName\",\r\n      \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/routeName\",\r\n      \"etag\": \"W/\\\"9736fbc8-7965-4be9-ade8-356d19908b36\\\"\",\r\n      \"properties\": {\r\n        \"provisioningState\": \"Succeeded\",\r\n        \"addressPrefix\": \"11.0.0.0/8\",\r\n        \"nextHopType\": \"VnetLocal\"\r\n      }\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '449',
@@ -47,7 +47,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes?api-version=2016-09-01')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes?api-version=2017-03-01')
   .reply(200, "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"routeName\",\r\n      \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/routeName\",\r\n      \"etag\": \"W/\\\"9736fbc8-7965-4be9-ade8-356d19908b36\\\"\",\r\n      \"properties\": {\r\n        \"provisioningState\": \"Succeeded\",\r\n        \"addressPrefix\": \"11.0.0.0/8\",\r\n        \"nextHopType\": \"VnetLocal\"\r\n      }\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '449',

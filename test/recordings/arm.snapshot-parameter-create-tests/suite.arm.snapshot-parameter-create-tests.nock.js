@@ -6,8 +6,8 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '21466899-20b2-463c-8c30-b8fb28a43248',
-    name: 'Core-RP Alpha Subscription-11',
+    id: 'e33f361b-53c2-4cc7-b829-78906708387b',
+    name: 'Microsoft Azure Internal Consumption',
     user: {
       name: 'user@domain.example',
       type: 'servicePrincipal'
@@ -28,4 +28,4 @@ exports.setEnvironment = function() {
 
 exports.scopes = [];
 
- exports.randomTestIdsGenerated = function() { return ['xTestDiskCreate8193','xplatSnapshot9903'];};
+ exports.randomTestIdsGenerated = function() { return ['xTestDiskCreate9810','xplatSnapshot2193'];};

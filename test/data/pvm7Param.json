@@ -27,13 +27,13 @@
     "networkInterfaces": [
       {
         "primary": null,
-        "id": "/subscriptions/ce4a7590-4722-4bcf-a2c6-e473e9f11778/resourceGroups/xplatTstPvmGCreate9214/providers/Microsoft.Network/networkInterfaces/xplattestnic2648"
+        "id": "/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstPvmGCreate6512/providers/Microsoft.Network/networkInterfaces/xplattestnic2611"
       }
     ]
   },
   "availabilitySet": {
-    "id": "/subscriptions/ce4a7590-4722-4bcf-a2c6-e473e9f11778/resourceGroups/xplatTstPvmGCreate9214/providers/Microsoft.Compute/availabilitySets/xplattestavs7"
+    "id": "/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstPvmGCreate6512/providers/Microsoft.Compute/availabilitySets/xplattestavs7"
   },
-  "name": "vm12123",
-  "location": "westus"
+  "name": "vm15311",
+  "location": "southeastasia"
 }

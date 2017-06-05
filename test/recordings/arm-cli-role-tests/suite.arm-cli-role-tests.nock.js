@@ -15,6 +15,7 @@ exports.getMockedProfile = function () {
     tenantId: '1273adef-00a3-4086-a51a-dbcce1857d36',
     state: 'Enabled',
     registeredProviders: [],
+    _eventsCount: '1',
     isDefault: true
   }, newProfile.environments['AzureCloud']));
 
@@ -22,8 +23,8 @@ exports.getMockedProfile = function () {
 };
 
 exports.setEnvironment = function() {
-  process.env['AZURE_AD_TEST_USER_PRINCIPAL_NAME'] = 'testUserAuto1@rbacCliTest.onmicrosoft.com';
-  process.env['AZURE_AD_TEST_PASSWORD'] = 'Pa$$w0rd';
+  process.env['AZURE_AD_TEST_USER_PRINCIPAL_NAME'] = 'testUserAuto2@rbacCliTest.onmicrosoft.com';
+  process.env['AZURE_AD_TEST_PASSWORD'] = 'Pa$$w0rd2';
   process.env['AZURE_AD_TEST_GROUP_NAME'] = 'testgroupauto';
   process.env['AZURE_ARM_TEST_LOCATION'] = 'West US';
   process.env['AZURE_AD_TEST_SP_DISPLAY_NAME'] = 'mytestapprandomauto0012345';
@@ -31,4 +32,4 @@ exports.setEnvironment = function() {
 
 exports.scopes = [];
 
- exports.randomTestIdsGenerated = function() { return ['testrg18718','testserver19948','testdb16'];};
+ exports.randomTestIdsGenerated = function() { return ['testrg11687','testserver18465','testdb13636'];};

@@ -1,5 +1,9 @@
 {
-  "accountType": "Standard_LRS",
+  "managedBy": "",
+  "sku": {
+    "name": "Standard_LRS",
+    "tier": ""
+  },
   "timeCreated": null,
   "osType": "Windows",
   "creationData": {
@@ -7,10 +11,9 @@
   },
   "diskSizeGB": 5,
   "encryptionSettings": "null",
-  "ownerId": "",
   "provisioningState": "",
   "id": null,
-  "name": "xplatDisk7872",
+  "name": "xplatDisk2585",
   "type": null,
   "location": "southeastasia",
   "tags": {}

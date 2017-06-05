@@ -1,5 +1,8 @@
 {
-  "accountType": "Standard_LRS",
+  "sku": {
+    "name": "Standard_LRS",
+    "tier": ""
+  },
   "timeCreated": null,
   "osType": "Windows",
   "creationData": {
@@ -7,10 +10,9 @@
   },
   "diskSizeGB": 5,
   "encryptionSettings": "null",
-  "ownerId": "",
   "provisioningState": "",
   "id": null,
-  "name": "xplatSnapshot9903",
+  "name": "xplatSnapshot2193",
   "type": null,
   "location": "southeastasia",
   "tags": {}

@@ -153,7 +153,6 @@
     <Content Include="lib\commands\arm\apiapp\lib\packaging\schemas\uiParameter.schema.json" />
     <Compile Include="lib\commands\asm\iaas\deleteImage.js" />
     <Compile Include="lib\commands\asm\iaas\image.js" />
-    <Compile Include="lib\commands\asm\mobile\pipelineChannel.js" />
     <Compile Include="lib\commands\asm\vm\vmclient.js" />
     <Compile Include="lib\commands\asm\vm\vmUtils.js" />
     <Compile Include="lib\commands\asm\iaas\upload\blobInfo.js" />
@@ -204,23 +203,7 @@
     <Compile Include="test\commands\cli.account.cert-tests.js" />
     <Compile Include="test\commands\cli.account.environment-tests.js" />
     <Compile Include="test\commands\cli.help-tests.js" />
-    <Compile Include="test\commands\cli.mobile-tests.js" />
-    <Compile Include="test\commands\cli.mobile.api-tests.js" />
-    <Compile Include="test\commands\cli.mobile.appsetting-tests.js" />
-    <Compile Include="test\commands\cli.mobile.auth-tests.js" />
-    <Compile Include="test\commands\cli.mobile.config-tests.js" />
-    <Compile Include="test\commands\cli.mobile.domain-tests.js" />
-    <Compile Include="test\commands\cli.mobile.job-tests.js" />
-    <Compile Include="test\commands\cli.mobile.key-tests.js" />
-    <Compile Include="test\commands\cli.mobile.log-tests.js" />
-    <Compile Include="test\commands\cli.mobile.migration-tests.js" />
-    <Compile Include="test\commands\cli.mobile.preview-tests.js" />
-    <Compile Include="test\commands\cli.mobile.push-tests.js" />
-    <Compile Include="test\commands\cli.mobile.scale-tests.js" />
-    <Compile Include="test\commands\cli.mobile.script-tests.js" />
-    <Compile Include="test\commands\cli.mobile.table-tests.js" />
-    <Compile Include="test\commands\cli.mobilerecover-tests.js" />
-    <Compile Include="test\commands\cli.network-nsg-rule-tests.js" />
+        <Compile Include="test\commands\cli.network-nsg-rule-tests.js" />
     <Compile Include="test\commands\cli.network-nsg-tests.js">
       <TestFramework>
       </TestFramework>
@@ -333,7 +316,6 @@
     <Compile Include="test\util\asmNetworkTestUtil.js" />
     <Compile Include="test\util\asmVMTestUtil.js" />
     <Compile Include="test\util\graphUtils.js" />
-    <Compile Include="test\util\mobileTest.js" />
     <Compile Include="test\util\networkTestUtil.js" />
     <Compile Include="test\util\profile\account-tests.js">
       <TestFramework>
@@ -343,14 +325,6 @@
     <Compile Include="test\util\util.js" />
     <Compile Include="test\util\utils-tests.js" />
     <Compile Include="test\util\vmTestUtil.js" />
-    <Content Include="test\commands\mobile\facebookClientId.txt" />
-    <Compile Include="test\commands\mobile\feedback_upload.js" />
-    <Compile Include="test\commands\mobile\foobar.js" />
-    <Compile Include="test\commands\mobile\table1.delete.js" />
-    <Compile Include="test\commands\mobile\table1.insert.js" />
-    <Compile Include="test\commands\mobile\table1.read.js" />
-    <Compile Include="test\commands\mobile\table1.update.js" />
-    <Compile Include="test\commands\mobile\testapi.js" />
     <Compile Include="test\commands\arm\ad\adUtils-test.js" />
     <Compile Include="test\commands\arm\ad\arm.ad-app-tests.js">
       <TestFramework>
@@ -514,7 +488,6 @@
     <Folder Include="lib\commands\asm" />
     <Folder Include="lib\commands\asm\iaas" />
     <Folder Include="lib\commands\asm\iaas\upload" />
-    <Folder Include="lib\commands\asm\mobile" />
     <Folder Include="lib\commands\asm\network" />
     <Folder Include="lib\commands\asm\network\jsontransform" />
     <Folder Include="lib\commands\asm\vm" />
@@ -564,7 +537,6 @@
     <Folder Include="test\commands\arm\usage" />
     <Folder Include="test\commands\arm\vm" />
     <Folder Include="test\commands\arm\webapp" />
-    <Folder Include="test\commands\mobile" />
     <Folder Include="test\data" />
     <Folder Include="test\framework" />
     <Folder Include="test\hdinsight" />

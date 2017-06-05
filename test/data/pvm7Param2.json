@@ -1,6 +1,6 @@
 {
-  "name": "vm27672",
-  "location": "westus",
+  "name": "vm25299",
+  "location": "southeastasia",
   "hardwareProfile": {
     "vmSize": "Standard_DS1"
   },
@@ -27,11 +27,11 @@
   "networkProfile": {
     "networkInterfaces": [
       {
-        "id": "/subscriptions/ce4a7590-4722-4bcf-a2c6-e473e9f11778/resourceGroups/xplatTstPvmGCreate9214/providers/Microsoft.Network/networkInterfaces/xplattestni25735"
+        "id": "/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstPvmGCreate6512/providers/Microsoft.Network/networkInterfaces/xplattestni28538"
       }
     ]
   },
   "availabilitySet": {
-    "id": "/subscriptions/ce4a7590-4722-4bcf-a2c6-e473e9f11778/resourceGroups/xplatTstPvmGCreate9214/providers/Microsoft.Compute/availabilitySets/xplattestavs7"
+    "id": "/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstPvmGCreate6512/providers/Microsoft.Compute/availabilitySets/xplattestavs7"
   }
 }
