@@ -186,5 +186,30 @@ describe('role assignments', function () {
       + '/providers/Microsoft.Sql/servers/myServer/database/' + sampleScopeInfo.resourceName);
   });
 
+  it('validate that scope is well-formatted', function () {
+    //arrange
+    var sampleScopeInfos = [
+      {scope: '/'}, 
+      {scope: '/subscriptions/2d006e8c-61e7-4cd2-8804-b4177a4341a1'}, 
+      {scope: '/subscription', expectedError: 'Scope \'/subscription\' should begin with \'/subscriptions\' or \'/providers\'.'},
+      {scope: '/subscriptions', expectedError: 'Scope \'/subscriptions\' should have even number of parts.'},
+      {scope: '/subscriptions//', expectedError: 'Scope \'/subscriptions//\' should not have any empty part.'},
+      {scope: '/subscriptions/2d006e8c-61e7-4cd2-8804-b4177a4341a1/wrong/groupname', expectedError: 'Scope \'/subscriptions/2d006e8c-61e7-4cd2-8804-b4177a4341a1/wrong/groupname\' should begin with \'/subscriptions/<subid>/resourceGroups\'.'}, 
+      {scope: '/subscriptions/2d006e8c-61e7-4cd2-8804-b4177a4341a1/resourceGroups/groupname/wrong/providername', expectedError: 'Scope \'/subscriptions/2d006e8c-61e7-4cd2-8804-b4177a4341a1/resourceGroups/groupname/wrong/providername\' should begin with \'/subscriptions/<subid>/resourceGroups/<groupname>/providers\'.'}, 
+      {scope: '/subscriptions/2d006e8c-61e7-4cd2-8804-b4177a4341a1/resourceGroups/groupname/providers/providername', expectedError: 'Scope \'/subscriptions/2d006e8c-61e7-4cd2-8804-b4177a4341a1/resourceGroups/groupname/providers/providername\' should have at least one pair of resource type and resource name. e.g. \'/subscriptions/<subid>/resourceGroups/<groupname>/providers/<providername>/<resourcetype>/<resourcename>\'.'} 
+    ];
+    
+    function buildScopeString(element, index, array) {
+      try {
+        var ret = RoleAssignments.buildScopeString(element);
+        ret.should.equal(element.scope);      
+      } catch (err){
+        err.message.should.equal(element.expectedError);
+      }
+    }
+    
+    //action and assert
+    sampleScopeInfos.forEach(buildScopeString);
+  });
 
 });
