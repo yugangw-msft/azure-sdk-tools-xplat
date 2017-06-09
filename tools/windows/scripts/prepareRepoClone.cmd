@@ -111,7 +111,12 @@ popd
 
 echo Running npm install...
 pushd %TEMP_REPO%
-call bin/npm.cmd install --production
+:: Due to an issue with using very old versions of npm, I'm unblocking build
+:: by calling npm thats installed on the build machine. We should fix this script
+:: by making it download npm4.6.0 and invoke that.
+echo Perform npm version check
+call npm -v
+call npm install --production
 echo.
 echo if YOU SEE A FAILURE AT THE BOTTOM OF THE NPM OUTPUT:
 echo If you do not have Node.js installed on this local machine, the Azure
