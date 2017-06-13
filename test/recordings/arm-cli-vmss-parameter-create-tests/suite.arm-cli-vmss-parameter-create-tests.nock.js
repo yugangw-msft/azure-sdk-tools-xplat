@@ -6,15 +6,15 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: 'ce4a7590-4722-4bcf-a2c6-e473e9f11778',
-    name: 'Azure Storage DM Test',
+    id: '2c224e7e-3ef5-431d-a57b-e71f4662e3a6',
+    name: 'Node CLI Test',
     user: {
       name: 'user@domain.example',
       type: 'user'
     },
     tenantId: '72f988bf-86f1-41af-91ab-2d7cd011db47',
     state: 'Enabled',
-    registeredProviders: [],
+    registeredProviders: ['mobileservice'],
     _eventsCount: '1',
     isDefault: true
   }, newProfile.environments['AzureCloud']));
@@ -28,4 +28,4 @@ exports.setEnvironment = function() {
 
 exports.scopes = [];
 
- exports.randomTestIdsGenerated = function() { return ['xplatTstVmssGCreate5906','xplattestnic7536','xplatteststorage18649','xplatteststorage24310','xplatteststorage34386','xplatteststoragecnt14275','xplatteststoragecnt2447','xplatteststoragecnt34825','xplattestvnet7294','xplattestsubnet2261','xplattestipdns2446'];};
+ exports.randomTestIdsGenerated = function() { return ['xplatTstVmssGCreate2715','xplattestnic8687','xplatteststorage18515','xplatteststorage23118','xplatteststorage36434','xplatteststoragecnt14076','xplatteststoragecnt29254','xplatteststoragecnt39422','xplattestvnet2747','xplattestsubnet7262','xplattestnsg9607','xplattestipdns2827'];};

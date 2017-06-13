@@ -1,0 +1,99 @@
+{
+  "sku": {
+    "name": "Standard_DS1",
+    "tier": "Standard",
+    "capacity": 10
+  },
+  "upgradePolicy": {
+    "mode": "Manual"
+  },
+  "virtualMachineProfile": {
+    "osProfile": {
+      "computerNamePrefix": "test",
+      "adminUsername": "azureuser",
+      "adminPassword": "Brillio@2015"
+    },
+    "storageProfile": {
+      "imageReference": {
+        "publisher": "MicrosoftWindowsServer",
+        "offer": "WindowsServer",
+        "sku": "2012-R2-Datacenter",
+        "version": "latest",
+        "id": ""
+      },
+      "osDisk": {
+        "name": "test",
+        "caching": "None",
+        "createOption": "fromImage",
+        "vhdContainers": [
+          "https://xplatteststorage18515.blob.core.windows.net/xplatteststoragecnt14076"
+        ]
+      }
+    },
+    "networkProfile": {
+      "networkInterfaceConfigurations": [
+        {
+          "name": "test",
+          "primary": true,
+          "dnsSettings": {
+            "dnsServers": [
+              "10.11.12.13"
+            ]
+          },
+          "networkSecurityGroup": {
+            "id": "/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplatTstVmssGCreate2715/providers/Microsoft.Network/networkSecurityGroups/xplattestnsg9607"
+          },
+          "ipConfigurations": [
+            {
+              "name": "test",
+              "subnet": {
+                "id": "/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplatTstVmssGCreate2715/providers/Microsoft.Network/VirtualNetworks/xplattestvnet2747/subnets/xplattestsubnet7262"
+              },
+              "publicIPAddressConfiguration": {
+                "name": "xplattestip",
+                "idleTimeoutInMinutes": 30,
+                "dnsSettings": {
+                  "domainNameLabel": "vmssiplabel"
+                }
+              }
+            }
+          ],
+          "id": ""
+        }
+      ]
+    },
+    "diagnosticsProfile": {
+      "bootDiagnostics": {
+        "enabled": null,
+        "storageUri": ""
+      }
+    },
+    "extensionProfile": {
+      "extensions": [
+        {
+          "name": "test",
+          "publisher": "Microsoft.Compute",
+          "type": "VMAccessAgent",
+          "typeHandlerVersion": "2.0",
+          "autoUpgradeMinorVersion": true,
+          "settings": {},
+          "protectedSettings": {},
+          "provisioningState": "",
+          "id": null
+        },
+        {
+          "name": "test1",
+          "publisher": "Microsoft.Compute",
+          "type": "BGInfo",
+          "typeHandlerVersion": "2.1",
+          "autoUpgradeMinorVersion": true
+        }
+      ]
+    }
+  },
+  "overprovision": false,
+  "singlePlacementGroup": null,
+  "id": null,
+  "name": "xplattestvmss5",
+  "location": "southeastasia"
+}

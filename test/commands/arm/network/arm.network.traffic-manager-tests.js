@@ -43,6 +43,12 @@ var profileProp = {
   newMonitorPort: 90,
   monitorPath: '/healthcheck.html',
   newMonitorPath: '/index.aspx',
+  intervalInSeconds: 30,
+  newIntervalInSeconds: 10,
+  toleratedNumberOfFailures: 3,
+  newToleratedNumberOfFailures: 5,
+  timeoutInSeconds: 10,
+  newTimeoutInSeconds: 5,
   tags: networkUtil.tags,
   newTags: networkUtil.newTags
 };
@@ -91,41 +97,58 @@ describe('arm', function () {
           });
         });
       });
+
       it('show should display details of traffic manager profile', function (done) {
         var cmd = 'network traffic-manager profile show -g {group} -n {name} --json'.formatArgs(profileProp);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var profile = JSON.parse(result.text);
+
           profile.name.should.equal(profileProp.name);
           profile.profileStatus.should.equal(profileProp.profileStatus);
           profile.trafficRoutingMethod.should.equal(profileProp.trafficRoutingMethod);
+         
           profile.dnsConfig.relativeName.should.equal(profileProp.relativeDnsName);
           profile.dnsConfig.ttl.should.equal(profileProp.ttl);
+
           profile.monitorConfig.protocol.should.equal(profileProp.monitorProtocol);
           profile.monitorConfig.port.should.equal(profileProp.monitorPort);
           profile.monitorConfig.path.should.equal(profileProp.monitorPath);
+          profile.monitorConfig.intervalInSeconds.should.equal(profileProp.intervalInSeconds);
+          profile.monitorConfig.toleratedNumberOfFailures.should.equal(profileProp.toleratedNumberOfFailures);
+          profile.monitorConfig.timeoutInSeconds.should.equal(profileProp.timeoutInSeconds);
+          
           networkUtil.shouldHaveTags(profile);
           done();
         });
       });
+
       it('set should modify traffic-manager profile', function (done) {
         var cmd = util.format('network traffic-manager profile set -g {group} -n {name} -u {newProfileStatus} -m {newTrafficRoutingMethod} ' +
-          '-l {newTtl} -p {newMonitorProtocol} -o {newMonitorPort} -a {newMonitorPath} -t {newTags} --json').formatArgs(profileProp);
+          '-l {newTtl} -p {newMonitorProtocol} -o {newMonitorPort} -a {newMonitorPath} ' +
+          '-e {newIntervalInSeconds} -f {newToleratedNumberOfFailures} -i {newTimeoutInSeconds} -t {newTags} --json').formatArgs(profileProp);
 
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var profile = JSON.parse(result.text);
+
           profile.name.should.equal(profileProp.name);
           profile.profileStatus.should.equal(profileProp.newProfileStatus);
           profile.trafficRoutingMethod.should.equal(profileProp.newTrafficRoutingMethod);
           profile.dnsConfig.ttl.should.equal(profileProp.newTtl);
+
           profile.monitorConfig.protocol.should.equal(profileProp.newMonitorProtocol);
           profile.monitorConfig.port.should.equal(profileProp.newMonitorPort);
           profile.monitorConfig.path.should.equal(profileProp.newMonitorPath);
+          profile.monitorConfig.intervalInSeconds.should.equal(profileProp.newIntervalInSeconds);
+          profile.monitorConfig.toleratedNumberOfFailures.should.equal(profileProp.newToleratedNumberOfFailures);
+          profile.monitorConfig.timeoutInSeconds.should.equal(profileProp.newTimeoutInSeconds);
+          
           networkUtil.shouldAppendTags(profile);
           done();
         });
       });
+
       it('list should display all traffic manager profiles in resource group', function (done) {
         var cmd = 'network traffic-manager profile list -g {group} --json'.formatArgs(profileProp);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
@@ -137,6 +160,7 @@ describe('arm', function () {
           done();
         });
       });
+
       it('is-dns-available should check DNS prefix availability', function (done) {
         var cmd = 'network traffic-manager profile is-dns-available -r {relativeDnsName} --json'.formatArgs(profileProp);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
@@ -146,6 +170,7 @@ describe('arm', function () {
           done();
         });
       });
+
       it('delete should delete traffic manager profile', function (done) {
         var cmd = 'network traffic-manager profile delete -g {group} -n {name} --quiet --json'.formatArgs(profileProp);
         testUtils.executeCommand(suite, retry, cmd, function (result) {

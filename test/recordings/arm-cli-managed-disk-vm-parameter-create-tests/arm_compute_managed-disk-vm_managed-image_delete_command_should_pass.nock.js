@@ -34,13 +34,13 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .delete('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstPvmGCreate7114/providers/Microsoft.Compute/images/xplattestimg7?api-version=2016-04-30-preview')
+  .delete('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstPvmGCreate7114/providers/Microsoft.Compute/images/xplattestimg7?api-version=2017-03-30')
   .reply(202, "", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '0',
   expires: '-1',
-  location: 'https://management.azure.com/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/providers/Microsoft.Compute/locations/westus/operations/840391d3-fe88-4cfd-8866-da9cf84e5fb8?monitor=true&api-version=2016-04-30-preview',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/providers/Microsoft.Compute/locations/westus/operations/840391d3-fe88-4cfd-8866-da9cf84e5fb8?api-version=2016-04-30-preview',
+  location: 'https://management.azure.com/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/providers/Microsoft.Compute/locations/westus/operations/840391d3-fe88-4cfd-8866-da9cf84e5fb8?monitor=true&api-version=2017-03-30',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/providers/Microsoft.Compute/locations/westus/operations/840391d3-fe88-4cfd-8866-da9cf84e5fb8?api-version=2017-03-30',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   'x-ms-served-by': '21502de0-6f98-4d84-959e-6be54f3bb855_131303808514503714',
   'x-ms-request-id': '840391d3-fe88-4cfd-8866-da9cf84e5fb8',
@@ -54,13 +54,13 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .delete('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstPvmGCreate7114/providers/Microsoft.Compute/images/xplattestimg7?api-version=2016-04-30-preview')
+  .delete('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstPvmGCreate7114/providers/Microsoft.Compute/images/xplattestimg7?api-version=2017-03-30')
   .reply(202, "", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '0',
   expires: '-1',
-  location: 'https://management.azure.com/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/providers/Microsoft.Compute/locations/westus/operations/840391d3-fe88-4cfd-8866-da9cf84e5fb8?monitor=true&api-version=2016-04-30-preview',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/providers/Microsoft.Compute/locations/westus/operations/840391d3-fe88-4cfd-8866-da9cf84e5fb8?api-version=2016-04-30-preview',
+  location: 'https://management.azure.com/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/providers/Microsoft.Compute/locations/westus/operations/840391d3-fe88-4cfd-8866-da9cf84e5fb8?monitor=true&api-version=2017-03-30',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/providers/Microsoft.Compute/locations/westus/operations/840391d3-fe88-4cfd-8866-da9cf84e5fb8?api-version=2017-03-30',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   'x-ms-served-by': '21502de0-6f98-4d84-959e-6be54f3bb855_131303808514503714',
   'x-ms-request-id': '840391d3-fe88-4cfd-8866-da9cf84e5fb8',
@@ -74,7 +74,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/providers/Microsoft.Compute/locations/westus/operations/840391d3-fe88-4cfd-8866-da9cf84e5fb8?api-version=2016-04-30-preview')
+  .get('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/providers/Microsoft.Compute/locations/westus/operations/840391d3-fe88-4cfd-8866-da9cf84e5fb8?api-version=2017-03-30')
   .reply(200, "{\r\n  \"startTime\": \"2017-02-07T19:13:37.6560889+00:00\",\r\n  \"endTime\": \"2017-02-07T19:13:37.8279684+00:00\",\r\n  \"status\": \"Succeeded\",\r\n  \"name\": \"840391d3-fe88-4cfd-8866-da9cf84e5fb8\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '184',
@@ -93,7 +93,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/providers/Microsoft.Compute/locations/westus/operations/840391d3-fe88-4cfd-8866-da9cf84e5fb8?api-version=2016-04-30-preview')
+  .get('/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/providers/Microsoft.Compute/locations/westus/operations/840391d3-fe88-4cfd-8866-da9cf84e5fb8?api-version=2017-03-30')
   .reply(200, "{\r\n  \"startTime\": \"2017-02-07T19:13:37.6560889+00:00\",\r\n  \"endTime\": \"2017-02-07T19:13:37.8279684+00:00\",\r\n  \"status\": \"Succeeded\",\r\n  \"name\": \"840391d3-fe88-4cfd-8866-da9cf84e5fb8\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '184',

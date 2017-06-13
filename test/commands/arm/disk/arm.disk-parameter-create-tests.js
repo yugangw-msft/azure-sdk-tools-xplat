@@ -101,7 +101,7 @@ describe('arm', function() {
             var cmd = makeCommandStr('disk', 'set', paramFileName, util.format('--name %s --location %s', diskPrefix, location)).split(' ');
             testUtils.executeCommand(suite, retry, cmd, function(result) {
               result.exitStatus.should.equal(0);
-              var cmd = makeCommandStr('disk', 'set', paramFileName, util.format('--account-type %s', 'Standard_LRS')).split(' ');
+              var cmd = makeCommandStr('sku', 'set', paramFileName, util.format('--name %s', 'Standard_LRS')).split(' ');
               testUtils.executeCommand(suite, retry, cmd, function(result) {
                 result.exitStatus.should.equal(0);
                 var cmd = makeCommandStr('disk', 'set', paramFileName, util.format('--os-type %s', 'Windows')).split(' ');
@@ -152,57 +152,40 @@ describe('arm', function() {
       it('disk update parameters, disk delete should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
         vmTest.createGroup(groupName, location, suite, function(result) {
-        var cmd = util.format('managed-disk update-parameters create --parameter-file %s --json', updateFileName).split(' ');
-        testUtils.executeCommand(suite, retry, cmd, function(result) {
-          result.exitStatus.should.equal(0);
-          var cmd = makeCommandStr('disk', 'set', updateFileName, util.format('--name %s --location %s', diskPrefix, location)).split(' ');
+          var cmd = util.format('managed-disk update-parameters create --parameter-file %s --json', updateFileName).split(' ');
+          testUtils.executeCommand(suite, retry, cmd, function(result) {
+            result.exitStatus.should.equal(0);
+            var cmd = makeCommandStr('disk', 'set', updateFileName, util.format('--name %s --location %s', diskPrefix, location)).split(' ');
             testUtils.executeCommand(suite, retry, cmd, function(result) {
               result.exitStatus.should.equal(0);
-              var cmd = makeUpdateParametersCommandStr('disk-update', 'set', updateFileName, util.format('--account-type %s --os-type %s --encryption-settings %s --tags %s', 'Premium_LRS', 'Windows', 'null', 'testtag')).split(' ');
+              var cmd = makeUpdateParametersCommandStr('disk-update', 'set', updateFileName, util.format('--os-type %s --encryption-settings %s --tags %s', 'Windows', 'null', 'testtag')).split(' ');
               testUtils.executeCommand(suite, retry, cmd, function(result) {
                 result.exitStatus.should.equal(0);
-                var cmd = makeUpdateParametersCommandStr('disk-update', 'set', updateFileName, util.format('--disk-size-g-b %s --parse', 5)).split(' ');
+                var cmd = makeUpdateParametersCommandStr('sku', 'set', updateFileName, util.format('--name %s', 'Premium_LRS')).split(' ');
                 testUtils.executeCommand(suite, retry, cmd, function(result) {
                   result.exitStatus.should.equal(0);
-                  var cmd = makeUpdateParametersCommandStr('disk-update', 'delete', updateFileName, util.format('--tags')).split(' ');
+                  var cmd = makeUpdateParametersCommandStr('disk-update', 'set', updateFileName, util.format('--disk-size-g-b %s --parse', 5)).split(' ');
                   testUtils.executeCommand(suite, retry, cmd, function(result) {
                     result.exitStatus.should.equal(0);
-                    var cmd = makeUpdateParametersCommandStr('creation-data', 'set', updateFileName, util.format('--create-option %s', 'FromImage')).split(' ');
+                    var cmd = makeUpdateParametersCommandStr('disk-update', 'delete', updateFileName, util.format('--tags')).split(' ');
                     testUtils.executeCommand(suite, retry, cmd, function(result) {
                       result.exitStatus.should.equal(0);
-                      var cmd = makeUpdateParametersCommandStr('creation-data', 'delete', updateFileName, ' --source-uri --storage-account-id --source-resource-id').split(' ');
+                      var cmd = makeUpdateParametersCommandStr('encryption-settings', 'set', updateFileName, util.format('--disk-encryption-key %s --key-encryption-key %s', diskEncryptionKeyVaultId, diskEncryptionKeyVaultId)).split(' ');
                       testUtils.executeCommand(suite, retry, cmd, function(result) {
                         result.exitStatus.should.equal(0);
-                        var cmd = makeUpdateParametersCommandStr('image-reference', 'set', updateFileName, util.format('--id %s', imageId)).split(' ');
+                        var cmd = makeUpdateParametersCommandStr('encryption-settings', 'delete', updateFileName, '--disk-encryption-key --key-encryption-key').split(' ');
                         testUtils.executeCommand(suite, retry, cmd, function(result) {
                           result.exitStatus.should.equal(0);
-                          var cmd = makeUpdateParametersCommandStr('creation-data', 'set', updateFileName, util.format('--create-option %s', 'Empty')).split(' ');
+                          var cmd = util.format('managed-disk create --resource-group %s --name %s --parameter-file %s --json', groupName, diskPrefix, paramFileName).split(' ');
                           testUtils.executeCommand(suite, retry, cmd, function(result) {
                             result.exitStatus.should.equal(0);
-                            var cmd = makeUpdateParametersCommandStr('creation-data', 'delete', updateFileName, '--image-reference').split(' ');
+                            var cmd = util.format('managed-disk update -g %s -n %s --parameter-file %s --json', groupName, diskPrefix, updateFileName).split(' ');
                             testUtils.executeCommand(suite, retry, cmd, function(result) {
                               result.exitStatus.should.equal(0);
-                              var cmd = makeUpdateParametersCommandStr('encryption-settings', 'set', updateFileName, util.format('--disk-encryption-key %s --key-encryption-key %s', diskEncryptionKeyVaultId, diskEncryptionKeyVaultId)).split(' ');
+                              var cmd = util.format('managed-disk delete -g %s -n %s --json', groupName, diskPrefix).split(' ');
                               testUtils.executeCommand(suite, retry, cmd, function(result) {
                                 result.exitStatus.should.equal(0);
-                                var cmd = makeUpdateParametersCommandStr('encryption-settings', 'delete', updateFileName, '--disk-encryption-key --key-encryption-key').split(' ');
-                                testUtils.executeCommand(suite, retry, cmd, function(result) {
-                                  result.exitStatus.should.equal(0);
-                                  var cmd = util.format('managed-disk create --resource-group %s --name %s --parameter-file %s --json', groupName, diskPrefix, paramFileName).split(' ');
-                                  testUtils.executeCommand(suite, retry, cmd, function(result) {
-                                    result.exitStatus.should.equal(0);
-                                      var cmd = util.format('managed-disk update -g %s -n %s --parameter-file %s --json', groupName, diskPrefix, updateFileName).split(' ');
-                                      testUtils.executeCommand(suite, retry, cmd, function(result) {
-                                        result.exitStatus.should.equal(0);
-                                        var cmd = util.format('managed-disk delete -g %s -n %s --json', groupName, diskPrefix).split(' ');
-                                        testUtils.executeCommand(suite, retry, cmd, function(result) {
-                                          result.exitStatus.should.equal(0);
-                                          done();
-                                        });
-                                      });
-                                    });
-                                  });
-                                });
+                                done();
                               });
                             });
                           });
@@ -215,6 +198,7 @@ describe('arm', function() {
             });
           });
         });
+      });
 
       it('disk grant access, disk grant-access-parameters patch should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);

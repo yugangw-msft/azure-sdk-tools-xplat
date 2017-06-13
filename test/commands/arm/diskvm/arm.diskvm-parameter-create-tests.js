@@ -133,7 +133,7 @@ describe('arm', function() {
             var cmd = makeCommandStr('availset', 'availability-set', 'delete', avsParamFileName, '--statuses --tags --type --name --id --virtual-machines --sku').split(' ');
             testUtils.executeCommand(suite, retry, cmd, function(result) {
               result.exitStatus.should.equal(0);
-              var cmd = makeCommandStr('availset', 'availability-set', 'set', avsParamFileName, '--parse --platform-update-domain-count 3 --platform-fault-domain-count 2 --managed false').split(' ');
+              var cmd = makeCommandStr('availset', 'availability-set', 'set', avsParamFileName, '--parse --platform-update-domain-count 3 --platform-fault-domain-count 2').split(' ');
               testUtils.executeCommand(suite, retry, cmd, function(result) {
                 result.exitStatus.should.equal(0);
                 var cmd = makeCommandStr('availset', 'sku', 'set', avsParamFileName, util.format('--name %s', 'Classic')).split(' ');
@@ -167,7 +167,7 @@ describe('arm', function() {
           var cmd = util.format('vm config create --parameter-file %s', pvmParamFileName).split(' ');
           testUtils.executeCommand(suite, retry, cmd, function(result) {
             result.exitStatus.should.equal(0);
-            var cmd = makeCommandStr('vm', 'virtual-machine', 'delete', pvmParamFileName, '--plan --diagnostics-profile --provisioning-state --instance-view --license-type --vm-id --resources --tags --type --id').split(' ');
+            var cmd = makeCommandStr('vm', 'virtual-machine', 'delete', pvmParamFileName, '--plan --diagnostics-profile --provisioning-state --instance-view --license-type --vm-id --resources --tags --type --id --identity').split(' ');
             testUtils.executeCommand(suite, retry, cmd, function(result) {
               result.exitStatus.should.equal(0);
               var cmd = makeCommandStr('vm', 'virtual-machine', 'set', pvmParamFileName, util.format('--location %s --name %s', location, vm1Prefix)).split(' ');
@@ -194,26 +194,30 @@ describe('arm', function() {
                             var cmd = makeCommandStr('vm', 'storage-profile', 'delete', pvmParamFileName, '--data-disks').split(' ');
                             testUtils.executeCommand(suite, retry, cmd, function(result) {
                               result.exitStatus.should.equal(0);
-                              var cmd = makeCommandStr('vm', 'image-reference', 'set', pvmParamFileName, '--publisher CoreOS --offer CoreOS --sku Stable --version latest').split(' ');
+                              var cmd = makeCommandStr('vm', 'image-reference', 'delete', pvmParamFileName, '--id').split(' ');
                               testUtils.executeCommand(suite, retry, cmd, function(result) {
                                 result.exitStatus.should.equal(0);
-                                var cmd = makeCommandStr('vm', 'os-disk', 'set', pvmParamFileName, '--caching None --create-option fromImage --name test').split(' ');
+                                var cmd = makeCommandStr('vm', 'image-reference', 'set', pvmParamFileName, '--publisher CoreOS --offer CoreOS --sku Stable --version latest').split(' ');
                                 testUtils.executeCommand(suite, retry, cmd, function(result) {
                                   result.exitStatus.should.equal(0);
-                                  var cmd = makeCommandStr('vm', 'os-disk', 'delete', pvmParamFileName, '--os-type --image --encryption-settings --managed-disk').split(' ');
+                                  var cmd = makeCommandStr('vm', 'os-disk', 'set', pvmParamFileName, '--caching None --create-option fromImage --name test').split(' ');
                                   testUtils.executeCommand(suite, retry, cmd, function(result) {
                                     result.exitStatus.should.equal(0);
-                                    var cmd = makeCommandStr('vm', 'vhd', 'set', pvmParamFileName, util.format('--uri %s', osVhdUri)).split(' ');
+                                    var cmd = makeCommandStr('vm', 'os-disk', 'delete', pvmParamFileName, '--os-type --image --encryption-settings --managed-disk').split(' ');
                                     testUtils.executeCommand(suite, retry, cmd, function(result) {
                                       result.exitStatus.should.equal(0);
-                                      var cmd = makeCommandStr('vm', 'network-interfaces', 'set', pvmParamFileName, util.format('--index 0 --id %s', nicId)).split(' ');
+                                      var cmd = makeCommandStr('vm', 'vhd', 'set', pvmParamFileName, util.format('--uri %s', osVhdUri)).split(' ');
                                       testUtils.executeCommand(suite, retry, cmd, function(result) {
                                         result.exitStatus.should.equal(0);
-                                        var cmd = util.format('vm create-or-update -g %s -n %s --parameter-file %s --json', groupName, vm1Prefix, pvmParamFileName).split(' ');
+                                        var cmd = makeCommandStr('vm', 'network-interfaces', 'set', pvmParamFileName, util.format('--index 0 --id %s', nicId)).split(' ');
                                         testUtils.executeCommand(suite, retry, cmd, function(result) {
                                           result.exitStatus.should.equal(0);
-                                          result.text.should.containEql('blob');
-                                          done();
+                                          var cmd = util.format('vm create-or-update -g %s -n %s --parameter-file %s --json', groupName, vm1Prefix, pvmParamFileName).split(' ');
+                                          testUtils.executeCommand(suite, retry, cmd, function(result) {
+                                            result.exitStatus.should.equal(0);
+                                            result.text.should.containEql('blob');
+                                            done();
+                                          });
                                         });
                                       });
                                     });

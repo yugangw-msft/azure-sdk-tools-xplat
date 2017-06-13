@@ -1,11 +1,11 @@
 {
-  "accountType": "Premium_LRS",
   "osType": "Windows",
-  "creationData": {
-    "createOption": "Empty"
-  },
   "diskSizeGB": 5,
   "encryptionSettings": "null",
-  "name": "xplatSnapshot9903",
+  "sku": {
+    "name": "Premium_LRS",
+    "tier": ""
+  },
+  "name": "xplatSnapshot2193",
   "location": "southeastasia"
 }

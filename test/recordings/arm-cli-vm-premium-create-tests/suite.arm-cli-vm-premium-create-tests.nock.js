@@ -7,10 +7,6 @@ exports.getMockedProfile = function () {
 
   newProfile.addSubscription(new profile.Subscription({
     id: 'e33f361b-53c2-4cc7-b829-78906708387b',
-    managementCertificate: {
-      key: 'mockedKey',
-      cert: 'mockedCert'
-    },
     name: 'Microsoft Azure Internal Consumption',
     user: {
       name: 'user@domain.example',
@@ -19,6 +15,7 @@ exports.getMockedProfile = function () {
     tenantId: '72f988bf-86f1-41af-91ab-2d7cd011db47',
     state: 'Enabled',
     registeredProviders: [],
+    _eventsCount: '1',
     isDefault: true
   }, newProfile.environments['AzureCloud']));
 
@@ -32,4 +29,4 @@ exports.setEnvironment = function() {
 
 exports.scopes = [];
 
- exports.randomTestIdsGenerated = function() { return ['xplatTestZVMCreate8946','xplatTestZVMAvail1176','xplatteststorage14237','xplatteststoragecnt14135','xplattestipdns5233','xplattestipdns24946'];};
+ exports.randomTestIdsGenerated = function() { return ['xplatTestZVMCreate3752','xplatTestZVMAvail5025','xplatteststorage11328','xplatteststoragecnt13810','xplattestipdns4908','xplattestipdns24526'];};

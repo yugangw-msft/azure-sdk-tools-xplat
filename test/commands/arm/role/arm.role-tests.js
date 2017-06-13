@@ -37,7 +37,7 @@ var createdGroups = [];
 var createdResources = [];
 var calledOnce = false;
 var requiredEnvironment = [
-  { name: 'AZURE_AD_TEST_USER_PRINCIPAL_NAME', defaultValue: 'testUserAuto1@rbacCliTest.onmicrosoft.com' },
+  { name: 'AZURE_AD_TEST_USER_PRINCIPAL_NAME', defaultValue: 'testUserAuto2@rbacCliTest.onmicrosoft.com' },
   { name: 'AZURE_AD_TEST_PASSWORD', defaultValue: 'Pa$$w0rd' },
   { name: 'AZURE_AD_TEST_GROUP_NAME', defaultValue: 'testgroupauto' },
   { name: 'AZURE_ARM_TEST_LOCATION', defaultValue: 'West US' },
@@ -98,7 +98,7 @@ describe('arm', function () {
       //create a sql server and a database
       testLocation = process.env['AZURE_ARM_TEST_LOCATION'];
       var serverParams = "{\"administratorLogin\": \"testadmin\", \"administratorLoginPassword\": \"Pa$$word1234\"}";
-      var dbParams = "{\"maxSizeBytes\": \"1073741824\", \"edition\" : \"Web\", \"collation\": \"SQL_1xcompat_CP850_CI_AS\"}";
+      var dbParams = "{\"maxSizeBytes\": \"1073741824\", \"collation\": \"SQL_1xcompat_CP850_CI_AS\"}";
       suite.execute('group create -n %s -l %s --json', testResourceGroup, testLocation, function (result) {
         result.exitStatus.should.equal(0);
         suite.execute('resource create -g %s -n %s -l %s -r %s -p %s -o %s', testResourceGroup, testSqlServer, 
@@ -572,7 +572,6 @@ describe('arm', function () {
           });
         });
       });
-
 
       it('create and delete role assignment using roleId should work', function (done) {
         var principalId = testUsers[0].objectId;
