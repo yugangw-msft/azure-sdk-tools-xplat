@@ -1,3 +1,33 @@
+##2017-06-08 Version 0.10.14
+* General
+  * Fixed bug #3605 by updating easy table package dependency. This ensures this application works well with npm@5. #3608
+* Compute (ARM)
+  * Updated Compute Package to 2.0.0-preview with new API version. #3599
+  * Updated Compute Package to version 3.0.0-preview & updated commands. #3603
+* Compute (ASM)
+  * Added ASM Compute VM Commands: Delete/Redeploy/Start/Restart/GetRDP/Show. #3607
+* Network
+  * Rewrote implementation for ExpressRoute Circuit Peerings. #3601
+  * Application Gateway. #3604
+    * Added support for Disabled Rule Groups to WAF Config
+    * Added support for Path Based Routing to Request Routing Rules
+  * Traffic Manager. #3589
+    * Rewrote implementation for Traffic Manager
+    * Added support for API version 2017-05-01 (Fast Endpoint Failover)
+  * Network Interfaces. #3609
+    * Added support for EnableAcceleratedNetworking
+  * Added vnet usage feature support #3602
+* Graph-RBAC
+  * upgraded to new package version
+  * Fixed bug in role assignment command (Issue Azure/azure-powershell#3407). #3585
+  * Updated getobjectsbyobjectId call for objectIds > 1000, since the API limits only 1000 objectIds. #3594
+* IotHub
+  * Added Routing Support for IotHub. #3590
+* Mobile Services
+  * Removed "Azure Mobile" commands. #3598
+* Web
+  * Updated kuduscript package. #3581
+
 ##2017-05-10 Version 0.10.13
 * General
   * login: allow accesstokens.json to be configurable through env var #3552
