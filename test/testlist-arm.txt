@@ -49,7 +49,6 @@ commands/arm/batch/arm.batch.application-tests.js
 
 # START - Network Tests
 commands/arm/network/arm.network.local-gateway-tests.js
-commands/arm/network/arm.network.nic-tests.js
 commands/arm/network/arm.network.publicip-tests.js
 commands/arm/network/arm.network.subnet-tests.js
 commands/arm/network/arm.network.usage-tests.js
@@ -91,6 +90,10 @@ commands/arm/network/arm.network.nsg-rule-tests.js
 # Network Watcher
 commands/arm/network/arm.network.watcher-tests.js
 commands/arm/network/arm.network.watcher-packet-capture-tests.js
+# Network Interfaces
+commands/arm/network/arm.network.nic-custom-tests.js
+commands/arm/network/arm.network.nic-tests.js
+commands/arm/network/arm.network.nic-ip-config-tests.js
 # Route Table
 commands/arm/network/arm.network.route-table-tests.js
 commands/arm/network/arm.network.route-table-route-tests.js
