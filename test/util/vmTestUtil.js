@@ -15,7 +15,12 @@
 var should = require('should');
 var async = require('async');
 var path = require('path');
+var util = require('util');
 var fs = require('fs');
+
+var testUtils = require('../util/util');
+var retry = 5;
+
 //Moving to common util file
 //var dockerCerts;
 //var sshKeys;
@@ -195,4 +200,76 @@ VMTestUtil.prototype.checkImagefile = function(callback) {
     }
     callback();
   });
+};
+
+VMTestUtil.prototype.createVMSSWithParamFile = function (dependencyObject, paramObject, groupName, suite, callback) {
+  if (!(paramObject.vmssName && paramObject.paramFile)) {
+    throw new Error('Both VMSS name and parameter file should be specified');
+  }
+
+  var cmds = [];
+
+  if (!dependencyObject.storageAccount && paramObject.storageAccount) {
+    cmds.push(
+      util.format('storage account create -g %s --sku-name GRS --kind Storage --location %s %s --json', groupName, dependencyObject.location, paramObject.storageAccount)
+    );
+    dependencyObject.storageAccount = paramObject.storageAccount;
+  }
+
+  if (dependencyObject.networkSecurityGroupId) {
+    cmds.push(
+      util.format('vmss config network-security-group set --parameter-file %s --id %s --network-interface-configurations-index 0', paramObject.paramFile, dependencyObject.networkSecurityGroupId)
+    );
+  }
+
+  if (dependencyObject.subnetId) {
+    cmds.push(
+      util.format('vmss config subnet set --parameter-file %s --id %s --network-interface-configurations-index 0 --ip-configurations-index 0', paramObject.paramFile, dependencyObject.subnetId)
+    );
+  }
+
+  if (paramObject.nicDnsServer) {
+    cmds.push(
+      util.format('vmss config dns-servers set --parameter-file %s --index 0 --network-interface-configurations-index 0 --value %s', paramObject.paramFile, paramObject.nicDnsServer)
+    );
+  }
+
+  if (paramObject.publicIpName) {
+    cmds.push(
+      util.format('vmss config public-ip-address-configuration set --parameter-file %s --ip-configurations-index 0 --network-interface-configurations-index 0 --name %s', paramObject.paramFile, paramObject.publicIpName)
+    );
+  }
+
+  if (paramObject.idleTimeout) {
+    cmds.push(
+      util.format('vmss config public-ip-address-configuration set --parameter-file %s --ip-configurations-index 0 --network-interface-configurations-index 0 --idle-timeout-in-minutes %s --parse', paramObject.paramFile, paramObject.idleTimeout)
+    );
+  }
+
+  if (paramObject.domainNameLabel) {
+    cmds.push(
+      util.format('vmss config public-ip-address-configuration-dns-settings set --parameter-file %s --ip-configurations-index 0 --network-interface-configurations-index 0 --domain-name-label %s', paramObject.paramFile, paramObject.domainNameLabel)
+    );
+  }
+
+  if (dependencyObject.storageAccount && paramObject.storageCont) {
+    cmds.push(
+      util.format('vmss config vhd-containers set --parameter-file %s --index 0 --value https://%s.blob.core.windows.net/%s', paramObject.paramFile, paramObject.storageAccount, paramObject.storageCont)
+    );
+  }
+
+  cmds.push(util.format('vmss create -g %s -n %s --parameter-file %s --json', groupName, paramObject.vmssName, paramObject.paramFile));
+
+  function chain (cmd, res) {
+    if (cmd) {
+      testUtils.executeCommand(suite, retry, cmd, function (result) {
+        result.exitStatus.should.equal(0);
+        chain(cmds.shift(), result);
+      });
+    } else {
+      callback(res);
+    }
+  }
+
+  chain(cmds.shift())
 };
