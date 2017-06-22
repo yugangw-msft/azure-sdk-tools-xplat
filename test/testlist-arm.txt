@@ -49,7 +49,6 @@ commands/arm/batch/arm.batch.application-tests.js
 
 # START - Network Tests
 commands/arm/network/arm.network.local-gateway-tests.js
-commands/arm/network/arm.network.publicip-tests.js
 commands/arm/network/arm.network.usage-tests.js
 commands/arm/network/arm.network.vpn-connection-tests.js
 commands/arm/network/arm.network.vpn-gateway-tests.js
@@ -93,6 +92,9 @@ commands/arm/network/arm.network.watcher-packet-capture-tests.js
 commands/arm/network/arm.network.nic-custom-tests.js
 commands/arm/network/arm.network.nic-tests.js
 commands/arm/network/arm.network.nic-ip-config-tests.js
+# Public IP Addresses
+commands/arm/network/arm.network.public-ip-custom-tests.js
+commands/arm/network/arm.network.public-ip-tests.js
 # Route Table
 commands/arm/network/arm.network.route-table-tests.js
 commands/arm/network/arm.network.route-table-route-tests.js
