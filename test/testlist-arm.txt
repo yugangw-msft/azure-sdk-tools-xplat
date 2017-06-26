@@ -50,7 +50,6 @@ commands/arm/batch/arm.batch.application-tests.js
 # START - Network Tests
 commands/arm/network/arm.network.local-gateway-tests.js
 commands/arm/network/arm.network.publicip-tests.js
-commands/arm/network/arm.network.subnet-tests.js
 commands/arm/network/arm.network.usage-tests.js
 commands/arm/network/arm.network.vpn-connection-tests.js
 commands/arm/network/arm.network.vpn-gateway-tests.js
@@ -103,6 +102,7 @@ commands/arm/network/arm.network.traffic-manager-endpoint-tests.js
 # Virtual Networks
 commands/arm/network/arm.network.vnet-tests.js
 commands/arm/network/arm.network.vnet-peering-tests.js
+commands/arm/network/arm.network.vnet-subnet-tests.js
 # END - Network Tests
 
 commands/arm/quotas/arm.quotas.feature-tests.js
