@@ -31,6 +31,7 @@ var requiredEnvironment = [{
 
 var groupName,
   vmssPrefix5 = 'xplattestvmss5',
+  vmssPrefixIp = 'xplattestvmssip',
   nicName = 'xplattestnic',
   location,
   imageUrn = 'MicrosoftWindowsServer:WindowsServer:2008-R2-SP1:latest',
@@ -46,6 +47,7 @@ var groupName,
   osdiskvhd = 'xplattestvhd',
   vNetPrefix = 'xplattestvnet',
   subnetName = 'xplattestsubnet',
+  nsgName = 'xplattestnsg',
   publicipName = 'xplattestip',
   dnsPrefix = 'xplattestipdns',
   tags = 'a=b;b=c;d=',
@@ -54,12 +56,16 @@ var groupName,
   IaasDiagVersion,
   datafile = 'test/data/testdata.json',
   paramFileName = 'test/data/vmssParamTest5.json',
+  paramFileNameIp = 'test/data/vmssParamTestPublicIp.json',
   vmssCapacity = 10,
   publisher = 'Microsoft.Compute',
   bgInfoExtName = 'BGInfo',
   bgInfoExtVer = '2.1',
   vmaExtName = 'VMAccessAgent',
-  vmaExtVer = '2.0';
+  vmaExtVer = '2.0',
+  nicDnsServer = '10.11.12.13',
+  idleTimeout = 30,
+  domainNameLabel = 'vmssiplabel';
   
 var makeCommandStr = function(component, verb, file, others) {
   var cmdFormat = 'vmss config %s %s --parameter-file %s %s --json';
@@ -76,6 +82,7 @@ describe('arm', function() {
         location = process.env.AZURE_VM_TEST_LOCATION;
         groupName = suite.generateId(groupPrefix, null);
         vmssPrefix5 = suite.isMocked ? vmssPrefix5 : suite.generateId(vmssPrefix5, null);
+        vmssPrefixIp = suite.isMocked ? vmssPrefixIp : suite.generateId(vmssPrefixIp, null);
         nicName = suite.generateId(nicName, null);
         storageAccount = suite.generateId(storageAccount, null);
         storageAccount2 = suite.generateId(storageAccount2, null);
@@ -86,6 +93,7 @@ describe('arm', function() {
         osdiskvhd = suite.isMocked ? osdiskvhd : suite.generateId(osdiskvhd, null);
         vNetPrefix = suite.generateId(vNetPrefix, null);
         subnetName = suite.generateId(subnetName, null);
+        nsgName = suite.generateId(nsgName, null);
         publicipName = suite.isMocked ? publicipName : suite.generateId(publicipName, null);
         dnsPrefix = suite.generateId(dnsPrefix, null);
         tags = 'a=b;b=c;d=';
@@ -139,7 +147,11 @@ describe('arm', function() {
                       var cmd = util.format('network nic create %s %s %s --subnet-vnet-name %s --subnet-name %s --json', groupName, nicName, location, vNetPrefix, subnetName).split(' ');
                       testUtils.executeCommand(suite, retry, cmd, function(result) {
                         result.exitStatus.should.equal(0);
-                        done();
+                        var cmd = util.format('network nsg create %s %s %s --json', groupName, nsgName, location).split(' ');
+                        testUtils.executeCommand(suite, retry, cmd, function(result) {
+                          result.exitStatus.should.equal(0);
+                          done();
+                        });
                       });
                     });
                   });
@@ -275,6 +287,46 @@ describe('arm', function() {
         });
       });
 
+      it('create-or-update-parameter with public ip should pass', function(done) {
+        this.timeout(vmTest.timeoutLarge * 10);
+
+        var subscription = profile.current.getSubscription();
+        var subnetId = '/subscriptions/' + subscription.id + '/resourceGroups/' + groupName + '/providers/Microsoft.Network/VirtualNetworks/' + vNetPrefix + '/subnets/' + subnetName;
+        var nsgId = '/subscriptions/' + subscription.id + '/resourceGroups/' + groupName + '/providers/Microsoft.Network/networkSecurityGroups/' + nsgName;
+
+        var dependency = {
+          location: location,
+          networkSecurityGroupId: nsgId,
+          subnetId: subnetId,
+          storageAccount: storageAccount
+        };
+
+        var params = {
+          vmssName: vmssPrefixIp,
+          paramFile: paramFileNameIp,
+          storageCont: storageCont,
+          publicIpName: publicipName,
+          domainNameLabel: domainNameLabel,
+          idleTimeout: idleTimeout,
+          nicDnsServer: nicDnsServer
+        };
+
+        vmTest.createVMSSWithParamFile(dependency, params, groupName, suite, function (result) {
+          result.exitStatus.should.equal(0);
+          var vmss = JSON.parse(result.text);
+
+          var nicConfig = vmss.virtualMachineProfile.networkProfile.networkInterfaceConfigurations[0];
+          nicConfig.networkSecurityGroup.id.toLowerCase().should.equal(nsgId.toLowerCase());
+          nicConfig.dnsSettings.dnsServers[0].should.be.equal(nicDnsServer);
+
+          var ipConfig = nicConfig.ipConfigurations[0];
+          ipConfig.publicIPAddressConfiguration.name.should.be.equal(publicipName);
+          ipConfig.publicIPAddressConfiguration.dnsSettings.domainNameLabel.should.be.equal(domainNameLabel);
+          ipConfig.publicIPAddressConfiguration.idleTimeoutInMinutes.should.be.equal(idleTimeout);
+         
+          done();
+        });
+      });
 
       it('create-or-update-parameter set extension should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
@@ -420,7 +472,7 @@ describe('arm', function() {
           done();
         });
       });
-      
+
       it('delete command should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 20);
         var cmd = util.format('vmss delete --resource-group %s --name %s --json', groupName, vmssPrefix5).split(' ');

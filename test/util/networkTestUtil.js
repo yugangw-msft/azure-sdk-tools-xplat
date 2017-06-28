@@ -371,19 +371,27 @@ _.extend(NetworkTestUtil.prototype, {
   },
   createTrafficManagerProfile: function (profileProp, suite, callback) {
     var cmd = util.format('network traffic-manager profile create -g {group} -n {name} -u {profileStatus} -m {trafficRoutingMethod} ' +
-      '-r {relativeDnsName} -l {ttl} -p {monitorProtocol} -o {monitorPort} -a {monitorPath} -t {tags} --json').formatArgs(profileProp);
+      '-r {relativeDnsName} -l {ttl} -p {monitorProtocol} -o {monitorPort} -a {monitorPath} ' +
+      '-e {intervalInSeconds} -f {toleratedNumberOfFailures} -i {timeoutInSeconds} -t {tags} --json').formatArgs(profileProp);
 
     testUtils.executeCommand(suite, retry, cmd, function (result) {
       result.exitStatus.should.equal(0);
       var profile = JSON.parse(result.text);
+
       profile.name.should.equal(profileProp.name);
       profile.profileStatus.should.equal(profileProp.profileStatus);
       profile.trafficRoutingMethod.should.equal(profileProp.trafficRoutingMethod);
+      
       profile.dnsConfig.relativeName.should.equal(profileProp.relativeDnsName);
       profile.dnsConfig.ttl.should.equal(profileProp.ttl);
+
       profile.monitorConfig.protocol.should.equal(profileProp.monitorProtocol);
       profile.monitorConfig.port.should.equal(profileProp.monitorPort);
       profile.monitorConfig.path.should.equal(profileProp.monitorPath);
+      profile.monitorConfig.intervalInSeconds.should.equal(profileProp.intervalInSeconds);
+      profile.monitorConfig.toleratedNumberOfFailures.should.equal(profileProp.toleratedNumberOfFailures);
+      profile.monitorConfig.timeoutInSeconds.should.equal(profileProp.timeoutInSeconds);
+      
       callback(profile);
     });
   },

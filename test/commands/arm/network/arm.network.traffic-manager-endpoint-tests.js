@@ -55,6 +55,12 @@ var profileProp = {
   newMonitorPort: 90,
   monitorPath: '/healthcheck.html',
   newMonitorPath: '/index.aspx',
+  intervalInSeconds: 30,
+  newIntervalInSeconds: 10,
+  toleratedNumberOfFailures: 3,
+  newToleratedNumberOfFailures: 5,
+  timeoutInSeconds: 10,
+  newTimeoutInSeconds: 5,
   tags: networkUtil.tags,
   newTags: networkUtil.newTags,
   geographic: 'Geographic'
@@ -124,8 +130,7 @@ describe('arm', function () {
         });
       });
       it('show should display details of endpoint in traffic manager profile', function (done) {
-        var cmd = 'network traffic-manager endpoint show -g {group} -f {profileName} -n {name} -y {type} --json'
-          .formatArgs(endpointProp);
+        var cmd = 'network traffic-manager endpoint show -g {group} -f {profileName} -n {name} -y {type} --json'.formatArgs(endpointProp);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var endpoint = JSON.parse(result.text);
@@ -149,8 +154,7 @@ describe('arm', function () {
         });
       });
       it('delete should delete endpoint in traffic manager profile', function (done) {
-        var cmd = 'network traffic-manager endpoint delete -g {group} -f {profileName} -n {name} -y {type} --quiet --json'
-          .formatArgs(endpointProp);
+        var cmd = 'network traffic-manager endpoint delete -g {group} -f {profileName} -n {name} -y {type} --quiet --json'.formatArgs(endpointProp);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 

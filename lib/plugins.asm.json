@@ -24985,9 +24985,425 @@
           "options": [],
           "commands": [
             {
+              "name": "delete",
+              "description": "The Delete Role operation deletes the specified virtual machine. (see http://msdn.microsoft.com/en-us/library/windowsazure/jj157184.aspx for more information)",
+              "fullName": "compute virtual-machine delete",
+              "usage": "[options] <service-name> <name> <virtual-machine-name> <delete-from-storage>",
+              "filePath": "commands/asm/compute/virtualMachine._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "--service-name <service-name>",
+                  "required": -16,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--service-name",
+                  "description": "service-name"
+                },
+                {
+                  "flags": "-n, --name <name>",
+                  "required": -12,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-n",
+                  "long": "--name",
+                  "description": "name"
+                },
+                {
+                  "flags": "--virtual-machine-name <virtual-machine-name>",
+                  "required": -24,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--virtual-machine-name",
+                  "description": "virtual-machine-name"
+                },
+                {
+                  "flags": "--delete-from-storage <delete-from-storage>",
+                  "required": -23,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--delete-from-storage",
+                  "description": "delete-from-storage"
+                },
+                {
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-s",
+                  "long": "--subscription",
+                  "description": "The subscription identifier"
+                }
+              ]
+            },
+            {
+              "name": "show",
+              "description": "The Get Role operation retrieves information about the specified virtual machine.  (see http://msdn.microsoft.com/en-us/library/windowsazure/jj157193.aspx for more information)",
+              "fullName": "compute virtual-machine show",
+              "usage": "[options] <service-name> <name> <virtual-machine-name>",
+              "filePath": "commands/asm/compute/virtualMachine._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "--service-name <service-name>",
+                  "required": -16,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--service-name",
+                  "description": "service-name"
+                },
+                {
+                  "flags": "-n, --name <name>",
+                  "required": -12,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-n",
+                  "long": "--name",
+                  "description": "name"
+                },
+                {
+                  "flags": "--virtual-machine-name <virtual-machine-name>",
+                  "required": -24,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--virtual-machine-name",
+                  "description": "virtual-machine-name"
+                },
+                {
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-s",
+                  "long": "--subscription",
+                  "description": "The subscription identifier"
+                }
+              ]
+            },
+            {
+              "name": "get-remote-desktop-file",
+              "description": "The Download RDP file operation retrieves the Remote Desktop Protocol configuration file from the specified virtual machine. (see http://msdn.microsoft.com/en-us/library/windowsazure/jj157183.aspx for more information)",
+              "fullName": "compute virtual-machine get-remote-desktop-file",
+              "usage": "[options] <service-name> <name> <virtual-machine-name>",
+              "filePath": "commands/asm/compute/virtualMachine._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "--service-name <service-name>",
+                  "required": -16,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--service-name",
+                  "description": "service-name"
+                },
+                {
+                  "flags": "-n, --name <name>",
+                  "required": -12,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-n",
+                  "long": "--name",
+                  "description": "name"
+                },
+                {
+                  "flags": "--virtual-machine-name <virtual-machine-name>",
+                  "required": -24,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--virtual-machine-name",
+                  "description": "virtual-machine-name"
+                },
+                {
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-s",
+                  "long": "--subscription",
+                  "description": "The subscription identifier"
+                }
+              ]
+            },
+            {
               "name": "initiate-maintenance",
               "description": "The Initiate Maintenance on role operation initiates maintenance on the specified virtual machine.  (see http://msdn.microsoft.com/en-us/library/windowsazure/jj157197.aspx for more information)",
               "fullName": "compute virtual-machine initiate-maintenance",
+              "usage": "[options] <service-name> <name> <virtual-machine-name>",
+              "filePath": "commands/asm/compute/virtualMachine._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "--service-name <service-name>",
+                  "required": -16,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--service-name",
+                  "description": "service-name"
+                },
+                {
+                  "flags": "-n, --name <name>",
+                  "required": -12,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-n",
+                  "long": "--name",
+                  "description": "name"
+                },
+                {
+                  "flags": "--virtual-machine-name <virtual-machine-name>",
+                  "required": -24,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--virtual-machine-name",
+                  "description": "virtual-machine-name"
+                },
+                {
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-s",
+                  "long": "--subscription",
+                  "description": "The subscription identifier"
+                }
+              ]
+            },
+            {
+              "name": "redeploy",
+              "description": "The Redeploy role operation redeploys the specified virtual machine.  (see http://msdn.microsoft.com/en-us/library/windowsazure/jj157197.aspx for more information)",
+              "fullName": "compute virtual-machine redeploy",
+              "usage": "[options] <service-name> <name> <virtual-machine-name>",
+              "filePath": "commands/asm/compute/virtualMachine._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "--service-name <service-name>",
+                  "required": -16,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--service-name",
+                  "description": "service-name"
+                },
+                {
+                  "flags": "-n, --name <name>",
+                  "required": -12,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-n",
+                  "long": "--name",
+                  "description": "name"
+                },
+                {
+                  "flags": "--virtual-machine-name <virtual-machine-name>",
+                  "required": -24,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--virtual-machine-name",
+                  "description": "virtual-machine-name"
+                },
+                {
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-s",
+                  "long": "--subscription",
+                  "description": "The subscription identifier"
+                }
+              ]
+            },
+            {
+              "name": "restart",
+              "description": "The Restart role operation restarts the specified virtual machine. (see http://msdn.microsoft.com/en-us/library/windowsazure/jj157197.aspx for more information)",
+              "fullName": "compute virtual-machine restart",
+              "usage": "[options] <service-name> <name> <virtual-machine-name>",
+              "filePath": "commands/asm/compute/virtualMachine._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "--service-name <service-name>",
+                  "required": -16,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--service-name",
+                  "description": "service-name"
+                },
+                {
+                  "flags": "-n, --name <name>",
+                  "required": -12,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-n",
+                  "long": "--name",
+                  "description": "name"
+                },
+                {
+                  "flags": "--virtual-machine-name <virtual-machine-name>",
+                  "required": -24,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--virtual-machine-name",
+                  "description": "virtual-machine-name"
+                },
+                {
+                  "flags": "-s, --subscription <subscription>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-s",
+                  "long": "--subscription",
+                  "description": "The subscription identifier"
+                }
+              ]
+            },
+            {
+              "name": "start",
+              "description": "The Start Role operation starts the specified virtual machine. (see http://msdn.microsoft.com/en-us/library/windowsazure/jj157189.aspx for more information)",
+              "fullName": "compute virtual-machine start",
               "usage": "[options] <service-name> <name> <virtual-machine-name>",
               "filePath": "commands/asm/compute/virtualMachine._js",
               "options": [

@@ -93,6 +93,7 @@ describe('cli', function () {
                                 vmName, vmName, vmName).split(' '); 
                             testUtils.executeCommand(suite, retry, cmd, function (result) {
                                 var check = ((result.exitStatus === 0) ||
+                                    (result.text.includes("The server encountered an internal error. Please retry the request.")) ||
                                     (result.text.includes("User initiated maintenance on the Virtual Machine was successfully completed."))); // Depending on if the OS is new or old.
                                 check.should.be.true;
 
@@ -101,7 +102,46 @@ describe('cli', function () {
                                     var vmObj = JSON.parse(result.text);
                                     vmObj.MaintenanceStatus.should.not.be.null;
                                     result.exitStatus.should.equal(0);
-                                    done();
+                                    
+                                    var cmd = util.format('compute virtual-machine get-remote-desktop-file --service-name %s --name %s --virtual-machine-name %s --json -vv',
+                                        vmName, vmName, vmName).split(' '); 
+                                    testUtils.executeCommand(suite, retry, cmd, function (result) {
+                                        var check = ((result.exitStatus !== 0) ||
+                                            (result.text.includes("An external endpoint to the Remote Desktop port (3389) must first be added to the role.")));
+                                        check.should.be.true;
+                                        
+                                        var cmd = util.format('compute virtual-machine redeploy --service-name %s --name %s --virtual-machine-name %s --json -vv',
+                                        vmName, vmName, vmName).split(' '); 
+                                        testUtils.executeCommand(suite, retry, cmd, function (result) {
+                                            result.exitStatus.should.equal(0);
+                                            
+                                            var cmd = util.format('compute virtual-machine restart --service-name %s --name %s --virtual-machine-name %s --json -vv',
+                                                vmName, vmName, vmName).split(' '); 
+                                            testUtils.executeCommand(suite, retry, cmd, function (result) {
+                                                result.exitStatus.should.equal(0);
+                                                
+                                                var cmd = util.format('compute virtual-machine start --service-name %s --name %s --virtual-machine-name %s --json -vv',
+                                                    vmName, vmName, vmName).split(' '); 
+                                                testUtils.executeCommand(suite, retry, cmd, function (result) {
+                                                    result.exitStatus.should.equal(0);
+
+                                                    var cmd = util.format('compute virtual-machine show --service-name %s --name %s --virtual-machine-name %s --json -vv',
+                                                        vmName, vmName, vmName).split(' '); 
+                                                    testUtils.executeCommand(suite, retry, cmd, function (result) {
+                                                        result.exitStatus.should.equal(0);
+                                                        var cmd = util.format('compute virtual-machine delete %s %s %s "" --json -vv',
+                                                            vmName, vmName, vmName).split(' '); 
+                                                        testUtils.executeCommand(suite, retry, cmd, function (result) {
+                                                            var check = ((result.exitStatus !== 0) ||
+                                                                (result.text.includes("Role " + vmName + "is the only role present in the deployment and so cannot be removed.")));
+                                                            check.should.be.true;
+                                                            done();
+                                                        });
+                                                    });
+                                                });
+                                            });
+                                        });
+                                    });
                                 });
                             });
                         });
