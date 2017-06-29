@@ -10,7 +10,7 @@
 chcp 850 
 
 set NODE_VERSION=6.10.0
-set NPM_VERSION=1.3.17
+set NPM_VERSION=4.6.0
 
 :: Add Git to the path as this should be run through a .NET command prompt
 :: and not a Git bash shell... We also need the gnu toolchain (for curl & unzip)
@@ -20,7 +20,8 @@ pushd %~dp0..\
 
 set NODE_X86_DOWNLOAD_URL=http://nodejs.org/dist/v%NODE_VERSION%/win-x86/node.exe
 set NODE_X64_DOWNLOAD_URL=http://nodejs.org/dist/v%NODE_VERSION%/win-x64/node.exe
-set NPM_DOWNLOAD_URL=http://nodejs.org/dist/npm/npm-%NPM_VERSION%.zip
+set NPM_DOWNLOAD_URL=https://codeload.github.com/npm/npm/zip/v%NPM_VERSION%
+:: This is the redirect url for https://github.com/npm/npm/archive/v%NPM_VERSION%.zip
 
 echo Cleaning previous build artifacts...
 
@@ -30,11 +31,12 @@ mkdir %OUTPUT_FOLDER%
 
 set TEMP_REPO_FOLDER=zcli
 set TEMP_AUX_REPO_FOLDER=zNode
+set TEMP_NPM_REPO_FOLDER=zNPM
 set X86=x86
 set X64=x64
 set TEMP_REPO=%HOMEDRIVE%%HOMEPATH%\%TEMP_REPO_FOLDER%
 set TEMP_AUX_REPO=%HOMEDRIVE%%HOMEPATH%\%TEMP_AUX_REPO_FOLDER%
-
+set TEMP_NPM_REPO=%HOMEDRIVE%%HOMEPATH%\%TEMP_NPM_REPO_FOLDER%
 if not exist %TEMP_REPO% goto CLONE_REPO
 
 echo Temporary clone of the repo already exists. Removing it...
@@ -86,11 +88,24 @@ if %errorlevel% neq 0 goto ERROR
 popd
 popd
 
-echo.
-echo Downloading npm...
-pushd %TEMP_REPO%\bin
-curl -o npm.zip %NPM_DOWNLOAD_URL%
+if not exist %TEMP_NPM_REPO% goto NPM_DOWNLOAD_TASK
+
+echo Temporary clone of auxilary npm repo exists. Removing it...
+pushd %TEMP_NPM_REPO%\..\
+if exist %TEMP_NPM_REPO% rmdir /s /q %TEMP_NPM_REPO%
+if exist %TEMP_NPM_REPO% (
+    echo Failed to delete %TEMP_NPM_REPO%.
+    goto ERROR
+)
+popd
+
+:NPM_DOWNLOAD_TASK
+mkdir %TEMP_NPM_REPO%
+echo Downloading npm from %NPM_DOWNLOAD_URL%...
+pushd %TEMP_NPM_REPO%
+curl -k -o npm.zip %NPM_DOWNLOAD_URL%
 if %errorlevel% neq 0 goto ERROR
+echo Unzipping npm from archive...
 unzip -q npm.zip
 if %errorlevel% neq 0 goto ERROR
 del npm.zip
@@ -109,14 +124,14 @@ if %errorlevel% geq 8 (
 )
 popd
 
-echo Running npm install...
+echo Preparing to run npm install...
 pushd %TEMP_REPO%
-:: Due to an issue with using very old versions of npm, I'm unblocking build
-:: by calling npm thats installed on the build machine. We should fix this script
-:: by making it download npm4.6.0 and invoke that.
+set NPM=.\bin\node.exe %TEMP_NPM_REPO%\npm-%NPM_VERSION%\cli.js
+echo.
 echo Perform npm version check
-call npm -v
-call npm install --production
+call NPM -v
+echo Running npm install...
+call NPM install --production
 echo.
 echo if YOU SEE A FAILURE AT THE BOTTOM OF THE NPM OUTPUT:
 echo If you do not have Node.js installed on this local machine, the Azure
