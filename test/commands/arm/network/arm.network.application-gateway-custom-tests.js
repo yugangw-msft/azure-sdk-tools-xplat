@@ -19,11 +19,12 @@ var should = require('should');
 var util = require('util');
 var _ = require('underscore');
 
-var testUtils = require('../../../util/util');
 var CLITest = require('../../../framework/arm-cli-test');
 var utils = require('../../../../lib/util/utils');
-var NetworkTestUtil = require('../../../util/networkTestUtil');
-var networkUtil = new NetworkTestUtil();
+var tagUtils = require('../../../../lib/commands/arm/tag/tagUtils');
+var testUtils = require('../../../util/util');
+
+var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
@@ -39,6 +40,7 @@ var gatewayProp = {
   subnetName: 'xplatTestSubnet',
   vnetAddress: '10.0.0.0/8',
   vnetName: 'xplatTestVnet',
+  publicIpName: 'xplatTestPublicIP',
 
   // Defaults
   defaultSslCertPath: 'test/data/sslCert.pfx',
@@ -64,12 +66,16 @@ var gatewayProp = {
   skuName: 'Standard_Small',
   skuTier: 'Standard',
   sslPassword: 'pswd',
-  tags: networkUtil.tags,
+  tags: networkTestUtil.tags,
 
   // Address Pool
   poolName: 'xplatTestPoolName',
   poolServers: '4.4.4.4,3.3.3.3',
   poolServersNew: '1.2.3.4,3.4.3.3',
+
+  // Frontend Port
+  frontendPortName: 'xplatTestFrontendPort',
+  frontendPort: '4242',
 
   // HTTP Listener
   httpListenerName: 'xplatTestListener',
@@ -83,7 +89,16 @@ var gatewayProp = {
   httpSettingsName: 'xplatTestHttpSettings',
   httpSettingsPort: 234,
   httpSettingsPortNew: 345,
-  
+
+  // Redirect Config
+  targetListenerId: null,
+  redirectConfigName01: 'firstCfg',
+  redirectConfigName02: 'secondCfg',
+  redirectType01: 'Permanent',
+  redirectType02: 'Temporary',
+  redirectTargetUrl: 'http://bing.com',
+  redirectIncludePath: true,
+
   // URL Path Map & UPM Rules
   httpSettingsPort1: 456,
   mapPath: '/test',
@@ -113,9 +128,10 @@ describe('arm', function () {
   describe('network', function () {
     var suite, retry = 5;
     var hour = 60 * 60000;
+    var testTimeout = 2 * hour;
 
     before(function (done) {
-      this.timeout(hour);
+      this.timeout(testTimeout);
       suite = new CLITest(this, testPrefix, requiredEnvironment);
       suite.setupSuite(function () {
         location = process.env.AZURE_VM_TEST_LOCATION;
@@ -138,10 +154,12 @@ describe('arm', function () {
         gatewayProp.sslCertName = suite.isMocked ? gatewayProp.sslCertName : suite.generateId(gatewayProp.sslCertName, null);
 
         if (!suite.isPlayback()) {
-          networkUtil.createGroup(gatewayProp.group, gatewayProp.location, suite, function () {
-            networkUtil.createVnet(gatewayProp.group, gatewayProp.vnetName, gatewayProp.location, gatewayProp.vnetAddress, suite, function () {
-              networkUtil.createSubnet(gatewayProp.group, gatewayProp.vnetName, gatewayProp.subnetName, gatewayProp.subnetAddress, suite, function () {
-                done();
+          networkTestUtil.createGroup(gatewayProp.group, gatewayProp.location, suite, function () {
+            networkTestUtil.createVnet(gatewayProp.group, gatewayProp.vnetName, gatewayProp.location, gatewayProp.vnetAddress, suite, function () {
+              networkTestUtil.createSubnet(gatewayProp.group, gatewayProp.vnetName, gatewayProp.subnetName, gatewayProp.subnetAddress, suite, function () {
+                networkTestUtil.createPublicIpLegacy(gatewayProp.group, gatewayProp.publicIpName, gatewayProp.location, suite, function () {
+                  done();
+                });
               });
             });
           });
@@ -151,8 +169,8 @@ describe('arm', function () {
       });
     });
     after(function (done) {
-      this.timeout(hour);
-      networkUtil.deleteGroup(groupName, suite, function () {
+      this.timeout(testTimeout);
+      networkTestUtil.deleteGroup(groupName, suite, function () {
         suite.teardownSuite(done);
       });
     });
@@ -164,12 +182,13 @@ describe('arm', function () {
     });
 
     describe('application-gateway custom', function () {
-      this.timeout(hour);
+      this.timeout(testTimeout);
 
       it('create should pass', function (done) {
         var cmd = ('network application-gateway create {group} {name} -l {location} -e {vnetName} -m {subnetName} ' +
-          '-r {servers} -y {defaultSslCertPath} -x {sslPassword} -i {httpSettingsProtocol} -o {httpSettingsPortAddress} -f {cookieBasedAffinity} ' +
-          '-j {portValue} -b {httpListenerProtocol} -w {ruleType} -a {skuName} -u {skuTier} -z {capacity} -t {tags} --json').formatArgs(gatewayProp);
+          '-i {httpSettingsProtocol} -o {httpSettingsPortAddress} -b {httpListenerProtocol} -k {publicIpName} ' +
+          '-r {servers} -y {defaultSslCertPath} -x {sslPassword} -f {cookieBasedAffinity} ' +
+          '-j {portValue} -w {ruleType} -a {skuName} -u {skuTier} -z {capacity} -t {tags} --json').formatArgs(gatewayProp);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var appGateway = JSON.parse(result.text);
@@ -210,8 +229,8 @@ describe('arm', function () {
             return listener.protocol.toLowerCase() === gatewayProp.httpListenerProtocol.toLowerCase();
           }).should.be.true;
 
-          networkUtil.shouldHaveTags(appGateway);
-          networkUtil.shouldBeSucceeded(appGateway);
+          networkTestUtil.shouldHaveTags(appGateway);
+          networkTestUtil.shouldBeSucceeded(appGateway);
           done();
         });
       });
@@ -270,7 +289,7 @@ describe('arm', function () {
             index++;
           });
 
-          networkUtil.shouldBeSucceeded(addressPool);
+          networkTestUtil.shouldBeSucceeded(addressPool);
           done();
         });
       });
@@ -311,7 +330,7 @@ describe('arm', function () {
           setting.cookieBasedAffinity.should.equal(gatewayProp.cookieBasedAffinity);
           setting.protocol.should.equal(gatewayProp.httpProtocol);
 
-          networkUtil.shouldBeSucceeded(setting);
+          networkTestUtil.shouldBeSucceeded(setting);
           done();
         });
       });
@@ -334,9 +353,72 @@ describe('arm', function () {
         });
       });
 
+      it('frontend-ip create command should create new frontend ip in application gateway', function (done) {
+        var cmd = ('network application-gateway frontend-ip create {group} {name} {frontendIpName} ' +
+          '--vnet-name {vnetName} --subnet-name {subnetName} --json').formatArgs(gatewayProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var appGateway = JSON.parse(result.text);
+
+          var frontendIp = utils.findFirstCaseIgnore(appGateway.frontendIPConfigurations, { name: gatewayProp.frontendIpName });
+          frontendIp.name.should.equal(gatewayProp.frontendIpName);
+
+          networkTestUtil.shouldBeSucceeded(frontendIp);
+          done();
+        });
+      });
+
+      it('frontend-port create command should create new frontend port in application gateway', function (done) {
+        var cmd = ('network application-gateway frontend-port create {group} {name} {frontendPortName} ' +
+          '--port {frontendPort} --json').formatArgs(gatewayProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var appGateway = JSON.parse(result.text);
+
+          var frontendPort = utils.findFirstCaseIgnore(appGateway.frontendPorts, { name: gatewayProp.frontendPortName });
+          frontendPort.name.should.equal(gatewayProp.frontendPortName);
+
+          networkTestUtil.shouldBeSucceeded(frontendPort);
+          done();
+        });
+      });
+
+      it('http-listener create command should create new http listener in application gateway', function (done) {
+        var cmd = ('network application-gateway http-listener create {group} {name} {httpListenerName} ' +
+          '--frontend-ip-name {frontendIpName} --frontend-port-name {frontendPortName} --json').formatArgs(gatewayProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var appGateway = JSON.parse(result.text);
+
+          var httpListener = utils.findFirstCaseIgnore(appGateway.httpListeners, { name: gatewayProp.httpListenerName });
+          httpListener.name.should.equal(gatewayProp.httpListenerName);
+
+          gatewayProp.targetListenerId = httpListener.id;
+
+          networkTestUtil.shouldBeSucceeded(httpListener);
+          done();
+        });
+      });
+
+      it('redirect-config create command should create new redirect config in application gateway', function (done) {
+        var cmd = ('network application-gateway redirect-config create {group} {name} {redirectConfigName01} ' +
+          '--redirect-type {redirectType01} --include-path {redirectIncludePath} ' +
+          '--target-listener-id {targetListenerId} --json').formatArgs(gatewayProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var appGateway = JSON.parse(result.text);
+
+          var redirectConfig = utils.findFirstCaseIgnore(appGateway.redirectConfigurations, { name: gatewayProp.redirectConfigName01 });
+          redirectConfig.name.should.equal(gatewayProp.redirectConfigName01);
+
+          done();
+        });
+      });
+
       it('url path map create should create map in application gateway', function (done) {
         var cmd = ('network application-gateway url-path-map create {group} {name} {urlPathMapName} ' +
-          '-r {urlMapRuleName} -p {mapPath} -i {defHttpSettingName} -a {defPoolName} --json').formatArgs(gatewayProp);
+          '--http-settings-name {defHttpSettingName} --address-pool-name {defPoolName} ' +
+          '--default-redirect-configuration-name {redirectConfigName01} --rule-name {urlMapRuleName} --path {mapPath} --json').formatArgs(gatewayProp);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var appGateway = JSON.parse(result.text);
@@ -350,14 +432,28 @@ describe('arm', function () {
             return rule.name === gatewayProp.urlMapRuleName;
           }).should.be.true;
 
-          networkUtil.shouldBeSucceeded(urlPathMap);
+          networkTestUtil.shouldBeSucceeded(urlPathMap);
+          done();
+        });
+      });
+
+      it('redirect-config create command should create second redirect config in application gateway', function (done) {
+        var cmd = ('network application-gateway redirect-config create {group} {name} {redirectConfigName02} ' +
+          '--redirect-type {redirectType02} --target-url {redirectTargetUrl} --json').formatArgs(gatewayProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var appGateway = JSON.parse(result.text);
+
+          var redirectConfig = utils.findFirstCaseIgnore(appGateway.redirectConfigurations, { name: gatewayProp.redirectConfigName02 });
+          redirectConfig.name.should.equal(gatewayProp.redirectConfigName02);
+
           done();
         });
       });
 
       it('url path map rule create 2nd should create map rule in application gateway', function (done) {
         var cmd = ('network application-gateway url-path-map rule create {group} {name} {newUrlMapRuleName} ' +
-          '-u {urlPathMapName} -p {newMapPath} -i {defHttpSettingName} -a {defPoolName} --json').formatArgs(gatewayProp);
+          '-u {urlPathMapName} -p {newMapPath} -b {redirectConfigName02} --json').formatArgs(gatewayProp);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var appGateway = JSON.parse(result.text);
@@ -371,7 +467,7 @@ describe('arm', function () {
             return rule.name === gatewayProp.newUrlMapRuleName;
           }).should.be.true;
 
-          networkUtil.shouldBeSucceeded(urlPathMap);
+          networkTestUtil.shouldBeSucceeded(urlPathMap);
           done();
         });
       });
@@ -426,7 +522,7 @@ describe('arm', function () {
                   && rule.backendAddressPool;
             }).should.be.true;
 
-            networkUtil.shouldBeSucceeded(urlPathMap);
+            networkTestUtil.shouldBeSucceeded(urlPathMap);
             done();
           });
         });
@@ -446,7 +542,7 @@ describe('arm', function () {
           urlPathMap.defaultBackendHttpSettings.should.not.be.empty;
           urlPathMap.defaultBackendAddressPool.should.not.be.empty;
 
-          networkUtil.shouldBeSucceeded(urlPathMap);
+          networkTestUtil.shouldBeSucceeded(urlPathMap);
           done();
         });
       });
@@ -467,7 +563,7 @@ describe('arm', function () {
             return rule.name === gatewayProp.newUrlMapRuleName;
           }).should.be.false;
 
-          networkUtil.shouldBeSucceeded(urlPathMap);
+          networkTestUtil.shouldBeSucceeded(urlPathMap);
           done();
         });
       });
@@ -485,7 +581,77 @@ describe('arm', function () {
             return map.name === gatewayProp.urlPathMapName;
           }).should.be.false;
 
-          networkUtil.shouldBeSucceeded(appGateway);
+          networkTestUtil.shouldBeSucceeded(appGateway);
+          done();
+        });
+      });
+
+      it('redirect-config delete command should remove first redirect config from application gateway', function (done) {
+        var cmd = ('network application-gateway redirect-config delete {group} {name} {redirectConfigName01} --quiet --json').formatArgs(gatewayProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var appGateway = JSON.parse(result.text);
+
+          _.some(appGateway.redirectConfigurations, function (config) {
+            return config.name === gatewayProp.redirectConfigName01;
+          }).should.be.false;
+
+          done();
+        });
+      });
+
+      it('redirect-config delete command should remove second redirect config from application gateway', function (done) {
+        var cmd = ('network application-gateway redirect-config delete {group} {name} {redirectConfigName02} --quiet --json').formatArgs(gatewayProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var appGateway = JSON.parse(result.text);
+
+          _.some(appGateway.redirectConfigurations, function (config) {
+            return config.name === gatewayProp.redirectConfigName02;
+          }).should.be.false;
+
+          done();
+        });
+      });
+
+      it('http-listener delete command should remove http listener from application gateway', function (done) {
+        var cmd = ('network application-gateway http-listener delete {group} {name} {httpListenerName} --quiet --json').formatArgs(gatewayProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var appGateway = JSON.parse(result.text);
+
+          _.some(appGateway.httpListeners, function (listener) {
+            return listener.name === gatewayProp.httpListenerName;
+          }).should.be.false;
+
+          done();
+        });
+      });
+
+      it('frontend-port delete command should remove frontend port from application gateway', function (done) {
+        var cmd = ('network application-gateway frontend-port delete {group} {name} {frontendPortName} --quiet --json').formatArgs(gatewayProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var appGateway = JSON.parse(result.text);
+
+          _.some(appGateway.frontendPorts, function (port) {
+            return port.name === gatewayProp.frontendPortName;
+          }).should.be.false;
+
+          done();
+        });
+      });
+
+      it('frontend-ip delete command should remove frontend ip from application gateway', function (done) {
+        var cmd = ('network application-gateway frontend-ip delete {group} {name} {frontendIpName} --quiet --json').formatArgs(gatewayProp);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var appGateway = JSON.parse(result.text);
+
+          _.some(appGateway.frontendIPConfigurations, function (ip) {
+            return ip.name === gatewayProp.frontendIpName;
+          }).should.be.false;
+
           done();
         });
       });
@@ -501,7 +667,7 @@ describe('arm', function () {
             return setting.name === gatewayProp.httpSettingsName;
           }).should.be.false;
 
-          networkUtil.shouldBeSucceeded(appGateway);
+          networkTestUtil.shouldBeSucceeded(appGateway);
           done();
         });
       });
@@ -517,7 +683,7 @@ describe('arm', function () {
             return pool.name === gatewayProp.poolName;
           }).should.be.false;
 
-          networkUtil.shouldBeSucceeded(appGateway);
+          networkTestUtil.shouldBeSucceeded(appGateway);
           done();
         });
       });
@@ -733,8 +899,8 @@ describe('arm', function () {
                 && listener.protocol.toLowerCase() === gatewayProp.httpListenerProtocol.toLowerCase();
           }).should.be.true;
 
-          networkUtil.shouldHaveTags(appGateway);
-          networkUtil.shouldBeSucceeded(appGateway);
+          networkTestUtil.shouldHaveTags(appGateway);
+          networkTestUtil.shouldBeSucceeded(appGateway);
           done();
         });
       });
@@ -749,6 +915,44 @@ describe('arm', function () {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text);
             output.should.be.empty;
+            done();
+          });
+        });
+      });
+
+      it('ssl-policy list-available should list available ssl policies', function (done) {
+        var cmd = 'network application-gateway ssl-policy list-available --json';
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var output = JSON.parse(result.text);
+
+          output.defaultPolicy.should.be.String;
+          output.predefinedPolicies.should.be.Array;
+          output.availableProtocols.should.be.Array;
+          output.availableCipherSuites.should.be.Array;
+
+          done();
+        });
+      });
+
+      it('ssl-policy predefined list and show should list and show predefined policies', function (done) {
+        var cmd = 'network application-gateway ssl-policy predefined list --json';
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var output = JSON.parse(result.text);
+
+          output.should.be.Array;
+          var policyName = output[0].name;
+
+          cmd = 'network application-gateway ssl-policy predefined show ' + policyName + ' --json';
+          testUtils.executeCommand(suite, retry, cmd, function (result) {
+            result.exitStatus.should.equal(0);
+            output = JSON.parse(result.text);
+
+            output.name.should.be.equal(policyName);
+            output.minProtocolVersion.should.be.String;
+            output.cipherSuites.should.be.Array;
+
             done();
           });
         });

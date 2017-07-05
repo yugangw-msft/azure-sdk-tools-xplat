@@ -24,12 +24,12 @@ var should = require('should');
 var util = require('util');
 var _ = require('underscore');
 
-var testUtils = require('../../../util/util');
 var CLITest = require('../../../framework/arm-cli-test');
 var utils = require('../../../../lib/util/utils');
-var NetworkTestUtil = require('../../../util/networkTestUtil');
 var tagUtils = require('../../../../lib/commands/arm/tag/tagUtils');
-var networkUtil = new NetworkTestUtil();
+var testUtils = require('../../../util/util');
+
+var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
@@ -46,6 +46,16 @@ var backendHttpSettingsCollection = {
   protocol: 'Http',
   cookieBasedAffinity: 'Enabled',
   cookieBasedAffinityNew: 'Disabled',
+  hostName: 'header',
+  hostNameNew: '',
+  pickHostNameFromBackendAddress: 'false',
+  pickHostNameFromBackendAddressNew: 'true',
+  affinityCookieName: 'cookie-name',
+  affinityCookieNameNew: 'name-cookie',
+  probeEnabled: 'true',
+  probeEnabledNew: 'false',
+  path: '/test/prefix',
+  pathNew: '',
   name: 'backendHttpSettingsCollectionName'
 };
 
@@ -68,7 +78,7 @@ var applicationGateway = {
 };
 var probe = {
   host: 'create',
-  hostNew: 'set',
+  hostNew: '',
   path: '/createpath',
   pathNew: '/setpath',
   timeout: '86400',
@@ -87,38 +97,34 @@ describe('arm', function () {
   describe('network', function () {
     var suite, retry = 5;
     var hour = 60 * 60000;
+    var testTimeout = 3 * hour;
 
     before(function (done) {
-      this.timeout(2 * hour);
+      this.timeout(testTimeout);
       suite = new CLITest(this, testPrefix, requiredEnvironment);
       suite.setupSuite(function () {
         location = backendHttpSettingsCollection.location || process.env.AZURE_VM_TEST_LOCATION;
         groupName = suite.isMocked ? groupName : suite.generateId(groupName, null);
         backendHttpSettingsCollection.location = location;
-        backendHttpSettingsCollection.group = groupName;
         backendHttpSettingsCollection.name = suite.isMocked ? backendHttpSettingsCollection.name : suite.generateId(backendHttpSettingsCollection.name, null);
+        backendHttpSettingsCollection.group = groupName;
         if (!suite.isPlayback()) {
-          networkUtil.createGroup(groupName, location, suite, function () {
+          networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n virtualNetworkName --location {location} --json'.formatArgs(virtualNetwork, groupName);
             testUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
-              var output = JSON.parse(result.text);
               var cmd = 'network vnet subnet create -g {1} -n subnetName --address-prefix {addressPrefix} --vnet-name virtualNetworkName --json'.formatArgs(subnet, groupName);
               testUtils.executeCommand(suite, retry, cmd, function (result) {
                 result.exitStatus.should.equal(0);
-                var output = JSON.parse(result.text);
                 var cmd = 'network public-ip create -g {1} -n publicIPAddressName --location {location} --json'.formatArgs(publicIPAddress, groupName);
                 testUtils.executeCommand(suite, retry, cmd, function (result) {
                   result.exitStatus.should.equal(0);
-                  var output = JSON.parse(result.text);
                   var cmd = 'network application-gateway create -g {1} -n applicationGatewayName --servers {backendAddresses} --location {location} --vnet-name virtualNetworkName --subnet-name subnetName --public-ip-name publicIPAddressName --json'.formatArgs(applicationGateway, groupName);
                   testUtils.executeCommand(suite, retry, cmd, function (result) {
                     result.exitStatus.should.equal(0);
-                    var output = JSON.parse(result.text);
                     var cmd = 'network application-gateway probe create -g {1} -n probeName --host-name {host} --path {path} --timeout {timeout} --gateway-name applicationGatewayName --json'.formatArgs(probe, groupName);
                     testUtils.executeCommand(suite, retry, cmd, function (result) {
                       result.exitStatus.should.equal(0);
-                      var output = JSON.parse(result.text);
                       done();
                     });
                   });
@@ -133,8 +139,8 @@ describe('arm', function () {
       });
     });
     after(function (done) {
-      this.timeout(2 * hour);
-      networkUtil.deleteGroup(groupName, suite, function () {
+      this.timeout(testTimeout);
+      networkTestUtil.deleteGroup(groupName, suite, function () {
         suite.teardownSuite(done);
       });
     });
@@ -146,9 +152,9 @@ describe('arm', function () {
     });
 
     describe('backend http settings collection', function () {
-      this.timeout(2 * hour);
+      this.timeout(testTimeout);
       it('create should create backend http settings collection', function (done) {
-        var cmd = 'network application-gateway http-settings create -g {group} -n {name} --port {port} --protocol {protocol} --cookie-based-affinity {cookieBasedAffinity} --gateway-name {applicationGatewayName} --probe-name {probeName} --json'.formatArgs(backendHttpSettingsCollection);
+        var cmd = 'network application-gateway http-settings create -g {group} -n {name} --port {port} --protocol {protocol} --cookie-based-affinity {cookieBasedAffinity} --host-name {hostName} --pick-host-name {pickHostNameFromBackendAddress} --affinity-cookie-name {affinityCookieName} --probe-enabled {probeEnabled} --path {path} --gateway-name {applicationGatewayName} --probe-name {probeName} --json'.formatArgs(backendHttpSettingsCollection);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var parentOutput = JSON.parse(result.text);
@@ -158,6 +164,11 @@ describe('arm', function () {
           output.port.should.equal(parseInt(backendHttpSettingsCollection.port, 10));
           output.protocol.toLowerCase().should.equal(backendHttpSettingsCollection.protocol.toLowerCase());
           output.cookieBasedAffinity.toLowerCase().should.equal(backendHttpSettingsCollection.cookieBasedAffinity.toLowerCase());
+          output.hostName.toLowerCase().should.equal(backendHttpSettingsCollection.hostName.toLowerCase());
+          output.pickHostNameFromBackendAddress.should.equal(utils.parseBool(backendHttpSettingsCollection.pickHostNameFromBackendAddress));
+          output.affinityCookieName.toLowerCase().should.equal(backendHttpSettingsCollection.affinityCookieName.toLowerCase());
+          output.probeEnabled.should.equal(utils.parseBool(backendHttpSettingsCollection.probeEnabled));
+          output.path.toLowerCase().should.equal(backendHttpSettingsCollection.path.toLowerCase());
           done();
         });
       });
@@ -170,11 +181,16 @@ describe('arm', function () {
           output.port.should.equal(parseInt(backendHttpSettingsCollection.port, 10));
           output.protocol.toLowerCase().should.equal(backendHttpSettingsCollection.protocol.toLowerCase());
           output.cookieBasedAffinity.toLowerCase().should.equal(backendHttpSettingsCollection.cookieBasedAffinity.toLowerCase());
+          output.hostName.toLowerCase().should.equal(backendHttpSettingsCollection.hostName.toLowerCase());
+          output.pickHostNameFromBackendAddress.should.equal(utils.parseBool(backendHttpSettingsCollection.pickHostNameFromBackendAddress));
+          output.affinityCookieName.toLowerCase().should.equal(backendHttpSettingsCollection.affinityCookieName.toLowerCase());
+          output.probeEnabled.should.equal(utils.parseBool(backendHttpSettingsCollection.probeEnabled));
+          output.path.toLowerCase().should.equal(backendHttpSettingsCollection.path.toLowerCase());
           done();
         });
       });
       it('set should update backend http settings collection', function (done) {
-        var cmd = 'network application-gateway http-settings set -g {group} -n {name} --port {portNew} --cookie-based-affinity {cookieBasedAffinityNew} --gateway-name {applicationGatewayName} --json'.formatArgs(backendHttpSettingsCollection);
+        var cmd = 'network application-gateway http-settings set -g {group} -n {name} --port {portNew} --cookie-based-affinity {cookieBasedAffinityNew} --host-name {hostNameNew} --pick-host-name {pickHostNameFromBackendAddressNew} --affinity-cookie-name {affinityCookieNameNew} --probe-enabled {probeEnabledNew} --path {pathNew} --gateway-name {applicationGatewayName} --json'.formatArgs(backendHttpSettingsCollection);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var parentOutput = JSON.parse(result.text);
@@ -183,6 +199,11 @@ describe('arm', function () {
           output.name.should.equal(backendHttpSettingsCollection.name);
           output.port.should.equal(parseInt(backendHttpSettingsCollection.portNew, 10));
           output.cookieBasedAffinity.toLowerCase().should.equal(backendHttpSettingsCollection.cookieBasedAffinityNew.toLowerCase());
+          should.not.exist(output.hostName);
+          output.pickHostNameFromBackendAddress.should.equal(utils.parseBool(backendHttpSettingsCollection.pickHostNameFromBackendAddressNew));
+          output.affinityCookieName.toLowerCase().should.equal(backendHttpSettingsCollection.affinityCookieNameNew.toLowerCase());
+          output.probeEnabled.should.equal(utils.parseBool(backendHttpSettingsCollection.probeEnabledNew));
+          should.not.exist(output.path);
           done();
         });
       });

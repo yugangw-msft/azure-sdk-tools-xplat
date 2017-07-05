@@ -24,12 +24,12 @@ var should = require('should');
 var util = require('util');
 var _ = require('underscore');
 
-var testUtils = require('../../../util/util');
 var CLITest = require('../../../framework/arm-cli-test');
 var utils = require('../../../../lib/util/utils');
-var NetworkTestUtil = require('../../../util/networkTestUtil');
 var tagUtils = require('../../../../lib/commands/arm/tag/tagUtils');
-var networkUtil = new NetworkTestUtil();
+var testUtils = require('../../../util/util');
+
+var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
@@ -81,38 +81,34 @@ describe('arm', function () {
   describe('network', function () {
     var suite, retry = 5;
     var hour = 60 * 60000;
+    var testTimeout = 2 * hour;
 
     before(function (done) {
-      this.timeout(2 * hour);
+      this.timeout(testTimeout);
       suite = new CLITest(this, testPrefix, requiredEnvironment);
       suite.setupSuite(function () {
         location = urlPathMaps.location || process.env.AZURE_VM_TEST_LOCATION;
         groupName = suite.isMocked ? groupName : suite.generateId(groupName, null);
         urlPathMaps.location = location;
-        urlPathMaps.group = groupName;
         urlPathMaps.name = suite.isMocked ? urlPathMaps.name : suite.generateId(urlPathMaps.name, null);
+        urlPathMaps.group = groupName;
         if (!suite.isPlayback()) {
-          networkUtil.createGroup(groupName, location, suite, function () {
+          networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n virtualNetworkName --location {location} --json'.formatArgs(virtualNetwork, groupName);
             testUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
-              var output = JSON.parse(result.text);
               var cmd = 'network vnet subnet create -g {1} -n subnetName --address-prefix {addressPrefix} --vnet-name virtualNetworkName --json'.formatArgs(subnet, groupName);
               testUtils.executeCommand(suite, retry, cmd, function (result) {
                 result.exitStatus.should.equal(0);
-                var output = JSON.parse(result.text);
                 var cmd = 'network application-gateway create -g {1} -n applicationGatewayName --servers {backendAddresses} --location {location} --vnet-name virtualNetworkName --subnet-name subnetName --sku-name WAF_Medium --sku-tier WAF --json'.formatArgs(applicationGateway, groupName);
                 testUtils.executeCommand(suite, retry, cmd, function (result) {
                   result.exitStatus.should.equal(0);
-                  var output = JSON.parse(result.text);
                   var cmd = 'network application-gateway address-pool create -g {1} -n backendAddressPoolName --servers {backendAddresses} --gateway-name applicationGatewayName --json'.formatArgs(backendAddressPool, groupName);
                   testUtils.executeCommand(suite, retry, cmd, function (result) {
                     result.exitStatus.should.equal(0);
-                    var output = JSON.parse(result.text);
                     var cmd = 'network application-gateway http-settings create -g {1} -n backendHttpSettingsCollectionName --port {port} --gateway-name applicationGatewayName --json'.formatArgs(backendHttpSettingsCollection, groupName);
                     testUtils.executeCommand(suite, retry, cmd, function (result) {
                       result.exitStatus.should.equal(0);
-                      var output = JSON.parse(result.text);
                       done();
                     });
                   });
@@ -127,8 +123,8 @@ describe('arm', function () {
       });
     });
     after(function (done) {
-      this.timeout(2 * hour);
-      networkUtil.deleteGroup(groupName, suite, function () {
+      this.timeout(testTimeout);
+      networkTestUtil.deleteGroup(groupName, suite, function () {
         suite.teardownSuite(done);
       });
     });
@@ -140,7 +136,7 @@ describe('arm', function () {
     });
 
     describe('url path maps', function () {
-      this.timeout(2 * hour);
+      this.timeout(testTimeout);
       it('create should create url path maps', function (done) {
         var cmd = 'network application-gateway url-path-map create -g {group} -n {name} --path {paths} --rule-name {pathRuleName} --gateway-name {applicationGatewayName} --address-pool-name {backendAddressPoolName} --http-settings-name {backendHttpSettingsCollectionName} --json'.formatArgs(urlPathMaps);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
@@ -149,7 +145,7 @@ describe('arm', function () {
           parentOutput.name.should.equal('applicationGatewayName');
           var output = utils.findFirstCaseIgnore(parentOutput.urlPathMaps, {name: 'urlPathMapName'});
           output.name.should.equal(urlPathMaps.name);
-          urlPathMaps.paths.split(',').forEach(function(item) { output.pathRules[index].paths.should.containEql(item) });
+          urlPathMaps.paths.split(',').forEach(function (item) { output.pathRules[index].paths.should.containEql(item) });
           output.pathRules[index].name.toLowerCase().should.equal(urlPathMaps.pathRuleName.toLowerCase());
           done();
         });
@@ -160,7 +156,7 @@ describe('arm', function () {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(urlPathMaps.name);
-          urlPathMaps.paths.split(',').forEach(function(item) { output.pathRules[index].paths.should.containEql(item) });
+          urlPathMaps.paths.split(',').forEach(function (item) { output.pathRules[index].paths.should.containEql(item) });
           output.pathRules[index].name.toLowerCase().should.equal(urlPathMaps.pathRuleName.toLowerCase());
           done();
         });

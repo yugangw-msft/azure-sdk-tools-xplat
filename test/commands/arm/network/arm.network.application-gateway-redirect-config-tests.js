@@ -35,38 +35,34 @@ var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
 var $ = utils.getLocaleString;
 
-var testPrefix = 'arm-network-application-gateway-rule-tests',
-  groupName = 'xplat-test-rule',
+var testPrefix = 'arm-network-application-gateway-redirect-config-tests',
+  // TODO; re-record tests with correct group after failed group is deleted
+  groupName = 'xplat-test-redirect-config-tmp',
   location;
 var index = 0;
 
-var requestRoutingRules = {
-  ruleType: 'Basic',
-  ruleTypeNew: 'PathBasedRouting',
-  name: 'requestRoutingRuleName'
+var redirectConfigurations = {
+  redirectType: 'Permanent',
+  redirectTypeNew: 'Temporary',
+  targetUrlNew: 'http://bing.com',
+  includePath: 'true',
+  includeQueryString: 'true',
+  includeQueryStringNew: 'false',
+  name: 'redirectConfigurationName'
 };
 
-requestRoutingRules.virtualNetworkName = 'virtualNetworkName';
-requestRoutingRules.subnetName = 'subnetName';
-requestRoutingRules.publicIPAddressName = 'publicIPAddressName';
-requestRoutingRules.applicationGatewayName = 'applicationGatewayName';
-requestRoutingRules.frontendIPConfigurationName = 'frontendIPConfigurationName';
-requestRoutingRules.frontendPortName = 'frontendPortName';
-requestRoutingRules.backendHttpSettingsCollectionName = 'backendHttpSettingsCollectionName';
-requestRoutingRules.backendAddressPoolName = 'backendAddressPoolName';
-requestRoutingRules.httpListenerName = 'httpListenerName';
-requestRoutingRules.urlPathMapName = 'urlPathMapName';
-requestRoutingRules.redirectConfigurationName = 'redirectConfigurationName';
+redirectConfigurations.virtualNetworkName = 'virtualNetworkName';
+redirectConfigurations.subnetName = 'subnetName';
+redirectConfigurations.publicIPAddressName = 'publicIPAddressName';
+redirectConfigurations.applicationGatewayName = 'applicationGatewayName';
+redirectConfigurations.frontendIPConfigurationName = 'frontendIPConfigurationName';
+redirectConfigurations.frontendPortName = 'frontendPortName';
+redirectConfigurations.httpListenerName = 'httpListenerName';
 
-var urlPathMap = {
-  paths: '/test',
-  pathRuleName: 'urlMapRuleName01'
-};
 var subnet = {
   addressPrefix: '10.0.0.0/16',
   addressPrefixNew: '10.0.0.0/24'
 };
-var redirectConfiguration = {};
 var publicIPAddress = {
   location: 'westus'
 };
@@ -77,14 +73,6 @@ var applicationGateway = {
 };
 var virtualNetwork = {
   location: 'westus'
-};
-var backendAddressPool = {
-  backendAddresses: '12.13.14.15',
-  backendAddressesNew: '16.17.18.19'
-};
-var backendHttpSettingsCollection = {
-  port: '1313',
-  portNew: '4242'
 };
 var frontendPort = {
   port: '4242',
@@ -101,17 +89,17 @@ describe('arm', function () {
   describe('network', function () {
     var suite, retry = 5;
     var hour = 60 * 60000;
-    var testTimeout = 5 * hour;
+    var testTimeout = 3 * hour;
 
     before(function (done) {
       this.timeout(testTimeout);
       suite = new CLITest(this, testPrefix, requiredEnvironment);
       suite.setupSuite(function () {
-        location = requestRoutingRules.location || process.env.AZURE_VM_TEST_LOCATION;
+        location = redirectConfigurations.location || process.env.AZURE_VM_TEST_LOCATION;
         groupName = suite.isMocked ? groupName : suite.generateId(groupName, null);
-        requestRoutingRules.location = location;
-        requestRoutingRules.name = suite.isMocked ? requestRoutingRules.name : suite.generateId(requestRoutingRules.name, null);
-        requestRoutingRules.group = groupName;
+        redirectConfigurations.location = location;
+        redirectConfigurations.name = suite.isMocked ? redirectConfigurations.name : suite.generateId(redirectConfigurations.name, null);
+        redirectConfigurations.group = groupName;
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n virtualNetworkName --location {location} --json'.formatArgs(virtualNetwork, groupName);
@@ -132,26 +120,12 @@ describe('arm', function () {
                       var cmd = 'network application-gateway frontend-port create -g {1} -n frontendPortName --port {port} --gateway-name applicationGatewayName --json'.formatArgs(frontendPort, groupName);
                       testUtils.executeCommand(suite, retry, cmd, function (result) {
                         result.exitStatus.should.equal(0);
-                        var cmd = 'network application-gateway http-settings create -g {1} -n backendHttpSettingsCollectionName --port {port} --gateway-name applicationGatewayName --json'.formatArgs(backendHttpSettingsCollection, groupName);
+                        var cmd = 'network application-gateway http-listener create -g {1} -n httpListenerName --gateway-name applicationGatewayName --frontend-ip-name frontendIPConfigurationName --frontend-port-name frontendPortName --json'.formatArgs(httpListener, groupName);
                         testUtils.executeCommand(suite, retry, cmd, function (result) {
                           result.exitStatus.should.equal(0);
-                          var cmd = 'network application-gateway address-pool create -g {1} -n backendAddressPoolName --servers {backendAddresses} --gateway-name applicationGatewayName --json'.formatArgs(backendAddressPool, groupName);
-                          testUtils.executeCommand(suite, retry, cmd, function (result) {
-                            result.exitStatus.should.equal(0);
-                            var cmd = 'network application-gateway http-listener create -g {1} -n httpListenerName --gateway-name applicationGatewayName --frontend-ip-name frontendIPConfigurationName --frontend-port-name frontendPortName --json'.formatArgs(httpListener, groupName);
-                            testUtils.executeCommand(suite, retry, cmd, function (result) {
-                              result.exitStatus.should.equal(0);
-                              var cmd = 'network application-gateway url-path-map create -g {1} -n urlPathMapName --path {paths} --rule-name {pathRuleName} --gateway-name applicationGatewayName --http-settings-name backendHttpSettingsCollectionName --address-pool-name backendAddressPoolName --json'.formatArgs(urlPathMap, groupName);
-                              testUtils.executeCommand(suite, retry, cmd, function (result) {
-                                result.exitStatus.should.equal(0);
-                                var cmd = 'network application-gateway redirect-config create -g {1} -n redirectConfigurationName --gateway-name applicationGatewayName --json'.formatArgs(redirectConfiguration, groupName);
-                                testUtils.executeCommand(suite, retry, cmd, function (result) {
-                                  result.exitStatus.should.equal(0);
-                                  done();
-                                });
-                              });
-                            });
-                          });
+                          var output = JSON.parse(result.text);
+                          redirectConfigurations.httpListenerId = utils.findFirstCaseIgnore(output.httpListeners, {name: 'httpListenerName'}).id;
+                          done();
                         });
                       });
                     });
@@ -162,6 +136,7 @@ describe('arm', function () {
           });
         } else {
           var subscriptionId = profile.current.getSubscription().id;
+          redirectConfigurations.httpListenerId = generatorUtils.generateResourceIdCommon(subscriptionId, groupName, 'applicationGateways/applicationGatewayName/httpListeners', redirectConfigurations.httpListenerName);
           done();
         }
       });
@@ -179,59 +154,65 @@ describe('arm', function () {
       suite.teardownTest(done);
     });
 
-    describe('request routing rules', function () {
+    describe('redirect configurations', function () {
       this.timeout(testTimeout);
-      it('create should create request routing rules', function (done) {
-        var cmd = 'network application-gateway rule create -g {group} -n {name} --type {ruleType} --gateway-name {applicationGatewayName} --http-listener-name {httpListenerName} --redirect-configuration-name {redirectConfigurationName} --json'.formatArgs(requestRoutingRules);
+      it('create should create redirect configurations', function (done) {
+        var cmd = 'network application-gateway redirect-config create -g {group} -n {name} --redirect-type {redirectType} --include-path {includePath} --include-query-string {includeQueryString} --gateway-name {applicationGatewayName} --target-listener-id {httpListenerId} --json'.formatArgs(redirectConfigurations);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var parentOutput = JSON.parse(result.text);
           parentOutput.name.should.equal('applicationGatewayName');
-          var output = utils.findFirstCaseIgnore(parentOutput.requestRoutingRules, {name: 'requestRoutingRuleName'});
-          output.name.should.equal(requestRoutingRules.name);
-          output.ruleType.toLowerCase().should.equal(requestRoutingRules.ruleType.toLowerCase());
+          var output = utils.findFirstCaseIgnore(parentOutput.redirectConfigurations, {name: 'redirectConfigurationName'});
+          output.name.should.equal(redirectConfigurations.name);
+          output.redirectType.toLowerCase().should.equal(redirectConfigurations.redirectType.toLowerCase());
+          output.includePath.should.equal(utils.parseBool(redirectConfigurations.includePath));
+          output.includeQueryString.should.equal(utils.parseBool(redirectConfigurations.includeQueryString));
           done();
         });
       });
-      it('show should display request routing rules details', function (done) {
-        var cmd = 'network application-gateway rule show -g {group} -n {name} --gateway-name {applicationGatewayName} --json'.formatArgs(requestRoutingRules);
+      it('show should display redirect configurations details', function (done) {
+        var cmd = 'network application-gateway redirect-config show -g {group} -n {name} --gateway-name {applicationGatewayName} --json'.formatArgs(redirectConfigurations);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
-          output.name.should.equal(requestRoutingRules.name);
-          output.ruleType.toLowerCase().should.equal(requestRoutingRules.ruleType.toLowerCase());
+          output.name.should.equal(redirectConfigurations.name);
+          output.redirectType.toLowerCase().should.equal(redirectConfigurations.redirectType.toLowerCase());
+          output.includePath.should.equal(utils.parseBool(redirectConfigurations.includePath));
+          output.includeQueryString.should.equal(utils.parseBool(redirectConfigurations.includeQueryString));
           done();
         });
       });
-      it('set should update request routing rules', function (done) {
-        var cmd = 'network application-gateway rule set -g {group} -n {name} --type {ruleTypeNew} --gateway-name {applicationGatewayName} --http-settings-name {backendHttpSettingsCollectionName} --address-pool-name {backendAddressPoolName} --url-path-map-name {urlPathMapName} --redirect-configuration-name --json'.formatArgs(requestRoutingRules);
+      it('set should update redirect configurations', function (done) {
+        var cmd = 'network application-gateway redirect-config set -g {group} -n {name} --redirect-type {redirectTypeNew} --target-url {targetUrlNew} --include-query-string {includeQueryStringNew} --gateway-name {applicationGatewayName} --target-listener-id --json'.formatArgs(redirectConfigurations);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var parentOutput = JSON.parse(result.text);
           parentOutput.name.should.equal('applicationGatewayName');
-          var output = utils.findFirstCaseIgnore(parentOutput.requestRoutingRules, {name: 'requestRoutingRuleName'});
-          output.name.should.equal(requestRoutingRules.name);
-          output.ruleType.toLowerCase().should.equal(requestRoutingRules.ruleTypeNew.toLowerCase());
+          var output = utils.findFirstCaseIgnore(parentOutput.redirectConfigurations, {name: 'redirectConfigurationName'});
+          output.name.should.equal(redirectConfigurations.name);
+          output.redirectType.toLowerCase().should.equal(redirectConfigurations.redirectTypeNew.toLowerCase());
+          output.targetUrl.toLowerCase().should.equal(redirectConfigurations.targetUrlNew.toLowerCase());
+          output.includeQueryString.should.equal(utils.parseBool(redirectConfigurations.includeQueryStringNew));
           done();
         });
       });
-      it('list should display all request routing rules in resource group', function (done) {
-        var cmd = 'network application-gateway rule list -g {group} --gateway-name {applicationGatewayName} --json'.formatArgs(requestRoutingRules);
+      it('list should display all redirect configurations in resource group', function (done) {
+        var cmd = 'network application-gateway redirect-config list -g {group} --gateway-name {applicationGatewayName} --json'.formatArgs(redirectConfigurations);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var outputs = JSON.parse(result.text);
           _.some(outputs, function (output) {
-            return output.name === requestRoutingRules.name;
+            return output.name === redirectConfigurations.name;
           }).should.be.true;
           done();
         });
       });
-      it('delete should delete request routing rules', function (done) {
-        var cmd = 'network application-gateway rule delete -g {group} -n {name} --quiet --gateway-name {applicationGatewayName} --json'.formatArgs(requestRoutingRules);
+      it('delete should delete redirect configurations', function (done) {
+        var cmd = 'network application-gateway redirect-config delete -g {group} -n {name} --quiet --gateway-name {applicationGatewayName} --json'.formatArgs(redirectConfigurations);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
-          cmd = 'network application-gateway rule show -g {group} -n {name} --gateway-name {applicationGatewayName} --json'.formatArgs(requestRoutingRules);
+          cmd = 'network application-gateway redirect-config show -g {group} -n {name} --gateway-name {applicationGatewayName} --json'.formatArgs(redirectConfigurations);
           testUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
