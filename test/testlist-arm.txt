@@ -62,6 +62,7 @@ commands/arm/network/arm.network.application-gateway-frontend-port-tests.js
 commands/arm/network/arm.network.application-gateway-http-listener-tests.js
 commands/arm/network/arm.network.application-gateway-http-settings-tests.js
 commands/arm/network/arm.network.application-gateway-probe-tests.js
+commands/arm/network/arm.network.application-gateway-redirect-config-tests.js
 commands/arm/network/arm.network.application-gateway-rule-tests.js
 commands/arm/network/arm.network.application-gateway-ssl-cert-tests.js
 commands/arm/network/arm.network.application-gateway-ssl-policy-tests.js
