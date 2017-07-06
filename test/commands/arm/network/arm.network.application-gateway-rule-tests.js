@@ -24,12 +24,12 @@ var should = require('should');
 var util = require('util');
 var _ = require('underscore');
 
-var testUtils = require('../../../util/util');
 var CLITest = require('../../../framework/arm-cli-test');
 var utils = require('../../../../lib/util/utils');
-var NetworkTestUtil = require('../../../util/networkTestUtil');
 var tagUtils = require('../../../../lib/commands/arm/tag/tagUtils');
-var networkUtil = new NetworkTestUtil();
+var testUtils = require('../../../util/util');
+
+var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
@@ -56,6 +56,7 @@ requestRoutingRules.backendHttpSettingsCollectionName = 'backendHttpSettingsColl
 requestRoutingRules.backendAddressPoolName = 'backendAddressPoolName';
 requestRoutingRules.httpListenerName = 'httpListenerName';
 requestRoutingRules.urlPathMapName = 'urlPathMapName';
+requestRoutingRules.redirectConfigurationName = 'redirectConfigurationName';
 
 var urlPathMap = {
   paths: '/test',
@@ -65,6 +66,7 @@ var subnet = {
   addressPrefix: '10.0.0.0/16',
   addressPrefixNew: '10.0.0.0/24'
 };
+var redirectConfiguration = {};
 var publicIPAddress = {
   location: 'westus'
 };
@@ -99,59 +101,54 @@ describe('arm', function () {
   describe('network', function () {
     var suite, retry = 5;
     var hour = 60 * 60000;
+    var testTimeout = 5 * hour;
 
     before(function (done) {
-      this.timeout(4 * hour);
+      this.timeout(testTimeout);
       suite = new CLITest(this, testPrefix, requiredEnvironment);
       suite.setupSuite(function () {
         location = requestRoutingRules.location || process.env.AZURE_VM_TEST_LOCATION;
         groupName = suite.isMocked ? groupName : suite.generateId(groupName, null);
         requestRoutingRules.location = location;
-        requestRoutingRules.group = groupName;
         requestRoutingRules.name = suite.isMocked ? requestRoutingRules.name : suite.generateId(requestRoutingRules.name, null);
+        requestRoutingRules.group = groupName;
         if (!suite.isPlayback()) {
-          networkUtil.createGroup(groupName, location, suite, function () {
+          networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n virtualNetworkName --location {location} --json'.formatArgs(virtualNetwork, groupName);
             testUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
-              var output = JSON.parse(result.text);
               var cmd = 'network vnet subnet create -g {1} -n subnetName --address-prefix {addressPrefix} --vnet-name virtualNetworkName --json'.formatArgs(subnet, groupName);
               testUtils.executeCommand(suite, retry, cmd, function (result) {
                 result.exitStatus.should.equal(0);
-                var output = JSON.parse(result.text);
                 var cmd = 'network public-ip create -g {1} -n publicIPAddressName --location {location} --json'.formatArgs(publicIPAddress, groupName);
                 testUtils.executeCommand(suite, retry, cmd, function (result) {
                   result.exitStatus.should.equal(0);
-                  var output = JSON.parse(result.text);
                   var cmd = 'network application-gateway create -g {1} -n applicationGatewayName --servers {backendAddresses} --location {location} --vnet-name virtualNetworkName --subnet-name subnetName --public-ip-name publicIPAddressName --json'.formatArgs(applicationGateway, groupName);
                   testUtils.executeCommand(suite, retry, cmd, function (result) {
                     result.exitStatus.should.equal(0);
-                    var output = JSON.parse(result.text);
                     var cmd = 'network application-gateway frontend-ip create -g {1} -n frontendIPConfigurationName --gateway-name applicationGatewayName --vnet-name virtualNetworkName --subnet-name subnetName --json'.formatArgs(frontendIPConfiguration, groupName);
                     testUtils.executeCommand(suite, retry, cmd, function (result) {
                       result.exitStatus.should.equal(0);
-                      var output = JSON.parse(result.text);
                       var cmd = 'network application-gateway frontend-port create -g {1} -n frontendPortName --port {port} --gateway-name applicationGatewayName --json'.formatArgs(frontendPort, groupName);
                       testUtils.executeCommand(suite, retry, cmd, function (result) {
                         result.exitStatus.should.equal(0);
-                        var output = JSON.parse(result.text);
                         var cmd = 'network application-gateway http-settings create -g {1} -n backendHttpSettingsCollectionName --port {port} --gateway-name applicationGatewayName --json'.formatArgs(backendHttpSettingsCollection, groupName);
                         testUtils.executeCommand(suite, retry, cmd, function (result) {
                           result.exitStatus.should.equal(0);
-                          var output = JSON.parse(result.text);
                           var cmd = 'network application-gateway address-pool create -g {1} -n backendAddressPoolName --servers {backendAddresses} --gateway-name applicationGatewayName --json'.formatArgs(backendAddressPool, groupName);
                           testUtils.executeCommand(suite, retry, cmd, function (result) {
                             result.exitStatus.should.equal(0);
-                            var output = JSON.parse(result.text);
                             var cmd = 'network application-gateway http-listener create -g {1} -n httpListenerName --gateway-name applicationGatewayName --frontend-ip-name frontendIPConfigurationName --frontend-port-name frontendPortName --json'.formatArgs(httpListener, groupName);
                             testUtils.executeCommand(suite, retry, cmd, function (result) {
                               result.exitStatus.should.equal(0);
-                              var output = JSON.parse(result.text);
                               var cmd = 'network application-gateway url-path-map create -g {1} -n urlPathMapName --path {paths} --rule-name {pathRuleName} --gateway-name applicationGatewayName --http-settings-name backendHttpSettingsCollectionName --address-pool-name backendAddressPoolName --json'.formatArgs(urlPathMap, groupName);
                               testUtils.executeCommand(suite, retry, cmd, function (result) {
                                 result.exitStatus.should.equal(0);
-                                var output = JSON.parse(result.text);
-                                done();
+                                var cmd = 'network application-gateway redirect-config create -g {1} -n redirectConfigurationName --gateway-name applicationGatewayName --json'.formatArgs(redirectConfiguration, groupName);
+                                testUtils.executeCommand(suite, retry, cmd, function (result) {
+                                  result.exitStatus.should.equal(0);
+                                  done();
+                                });
                               });
                             });
                           });
@@ -170,8 +167,8 @@ describe('arm', function () {
       });
     });
     after(function (done) {
-      this.timeout(4 * hour);
-      networkUtil.deleteGroup(groupName, suite, function () {
+      this.timeout(testTimeout);
+      networkTestUtil.deleteGroup(groupName, suite, function () {
         suite.teardownSuite(done);
       });
     });
@@ -183,9 +180,9 @@ describe('arm', function () {
     });
 
     describe('request routing rules', function () {
-      this.timeout(4 * hour);
+      this.timeout(testTimeout);
       it('create should create request routing rules', function (done) {
-        var cmd = 'network application-gateway rule create -g {group} -n {name} --type {ruleType} --gateway-name {applicationGatewayName} --http-settings-name {backendHttpSettingsCollectionName} --address-pool-name {backendAddressPoolName} --http-listener-name {httpListenerName} --json'.formatArgs(requestRoutingRules);
+        var cmd = 'network application-gateway rule create -g {group} -n {name} --type {ruleType} --gateway-name {applicationGatewayName} --http-listener-name {httpListenerName} --redirect-configuration-name {redirectConfigurationName} --json'.formatArgs(requestRoutingRules);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var parentOutput = JSON.parse(result.text);
@@ -207,7 +204,7 @@ describe('arm', function () {
         });
       });
       it('set should update request routing rules', function (done) {
-        var cmd = 'network application-gateway rule set -g {group} -n {name} --type {ruleTypeNew} --gateway-name {applicationGatewayName} --url-path-map-name {urlPathMapName} --json'.formatArgs(requestRoutingRules);
+        var cmd = 'network application-gateway rule set -g {group} -n {name} --type {ruleTypeNew} --gateway-name {applicationGatewayName} --http-settings-name {backendHttpSettingsCollectionName} --address-pool-name {backendAddressPoolName} --url-path-map-name {urlPathMapName} --redirect-configuration-name --json'.formatArgs(requestRoutingRules);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var parentOutput = JSON.parse(result.text);

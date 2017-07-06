@@ -24,12 +24,12 @@ var should = require('should');
 var util = require('util');
 var _ = require('underscore');
 
-var testUtils = require('../../../util/util');
 var CLITest = require('../../../framework/arm-cli-test');
 var utils = require('../../../../lib/util/utils');
-var NetworkTestUtil = require('../../../util/networkTestUtil');
 var tagUtils = require('../../../../lib/commands/arm/tag/tagUtils');
-var networkUtil = new NetworkTestUtil();
+var testUtils = require('../../../util/util');
+
+var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
@@ -44,7 +44,7 @@ var probes = {
   protocol: 'Http',
   protocolNew: 'Https',
   host: 'create',
-  hostNew: 'set',
+  hostNew: '',
   path: '/createpath',
   pathNew: '/setpath',
   interval: '1',
@@ -53,6 +53,14 @@ var probes = {
   timeoutNew: '1',
   unhealthyThreshold: '20',
   unhealthyThresholdNew: '1',
+  pickHostNameFromBackendHttpSettings: 'false',
+  pickHostNameFromBackendHttpSettingsNew: 'true',
+  minServers: '2',
+  minServersNew: '0',
+  body: 'body',
+  bodyNew: '',
+  statusCodes: '200,202',
+  statusCodesNew: '',
   name: 'probeName'
 };
 
@@ -85,34 +93,31 @@ describe('arm', function () {
   describe('network', function () {
     var suite, retry = 5;
     var hour = 60 * 60000;
+    var testTimeout = hour;
 
     before(function (done) {
-      this.timeout(hour);
+      this.timeout(testTimeout);
       suite = new CLITest(this, testPrefix, requiredEnvironment);
       suite.setupSuite(function () {
         location = probes.location || process.env.AZURE_VM_TEST_LOCATION;
         groupName = suite.isMocked ? groupName : suite.generateId(groupName, null);
         probes.location = location;
-        probes.group = groupName;
         probes.name = suite.isMocked ? probes.name : suite.generateId(probes.name, null);
+        probes.group = groupName;
         if (!suite.isPlayback()) {
-          networkUtil.createGroup(groupName, location, suite, function () {
+          networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n virtualNetworkName --location {location} --json'.formatArgs(virtualNetwork, groupName);
             testUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
-              var output = JSON.parse(result.text);
               var cmd = 'network vnet subnet create -g {1} -n subnetName --address-prefix {addressPrefix} --vnet-name virtualNetworkName --json'.formatArgs(subnet, groupName);
               testUtils.executeCommand(suite, retry, cmd, function (result) {
                 result.exitStatus.should.equal(0);
-                var output = JSON.parse(result.text);
                 var cmd = 'network public-ip create -g {1} -n publicIPAddressName --location {location} --json'.formatArgs(publicIPAddress, groupName);
                 testUtils.executeCommand(suite, retry, cmd, function (result) {
                   result.exitStatus.should.equal(0);
-                  var output = JSON.parse(result.text);
                   var cmd = 'network application-gateway create -g {1} -n applicationGatewayName --servers {backendAddresses} --location {location} --vnet-name virtualNetworkName --subnet-name subnetName --public-ip-name publicIPAddressName --json'.formatArgs(applicationGateway, groupName);
                   testUtils.executeCommand(suite, retry, cmd, function (result) {
                     result.exitStatus.should.equal(0);
-                    var output = JSON.parse(result.text);
                     done();
                   });
                 });
@@ -126,8 +131,8 @@ describe('arm', function () {
       });
     });
     after(function (done) {
-      this.timeout(hour);
-      networkUtil.deleteGroup(groupName, suite, function () {
+      this.timeout(testTimeout);
+      networkTestUtil.deleteGroup(groupName, suite, function () {
         suite.teardownSuite(done);
       });
     });
@@ -139,9 +144,9 @@ describe('arm', function () {
     });
 
     describe('probes', function () {
-      this.timeout(hour);
+      this.timeout(testTimeout);
       it('create should create probes', function (done) {
-        var cmd = 'network application-gateway probe create -g {group} -n {name} --protocol {protocol} --host-name {host} --path {path} --interval {interval} --timeout {timeout} --unhealthy-threshold {unhealthyThreshold} --gateway-name {applicationGatewayName} --json'.formatArgs(probes);
+        var cmd = 'network application-gateway probe create -g {group} -n {name} --protocol {protocol} --host-name {host} --path {path} --interval {interval} --timeout {timeout} --unhealthy-threshold {unhealthyThreshold} --pick-host-name {pickHostNameFromBackendHttpSettings} --min-servers {minServers} --health-response-body {body} --status-codes {statusCodes} --gateway-name {applicationGatewayName} --json'.formatArgs(probes);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var parentOutput = JSON.parse(result.text);
@@ -154,6 +159,10 @@ describe('arm', function () {
           output.interval.should.equal(parseInt(probes.interval, 10));
           output.timeout.should.equal(parseInt(probes.timeout, 10));
           output.unhealthyThreshold.should.equal(parseInt(probes.unhealthyThreshold, 10));
+          output.pickHostNameFromBackendHttpSettings.should.equal(utils.parseBool(probes.pickHostNameFromBackendHttpSettings));
+          output.minServers.should.equal(parseInt(probes.minServers, 10));
+          output.match.body.toLowerCase().should.equal(probes.body.toLowerCase());
+          probes.statusCodes.split(',').forEach(function (item) { output.match.statusCodes.should.containEql(item) });
           done();
         });
       });
@@ -169,11 +178,15 @@ describe('arm', function () {
           output.interval.should.equal(parseInt(probes.interval, 10));
           output.timeout.should.equal(parseInt(probes.timeout, 10));
           output.unhealthyThreshold.should.equal(parseInt(probes.unhealthyThreshold, 10));
+          output.pickHostNameFromBackendHttpSettings.should.equal(utils.parseBool(probes.pickHostNameFromBackendHttpSettings));
+          output.minServers.should.equal(parseInt(probes.minServers, 10));
+          output.match.body.toLowerCase().should.equal(probes.body.toLowerCase());
+          probes.statusCodes.split(',').forEach(function (item) { output.match.statusCodes.should.containEql(item) });
           done();
         });
       });
       it('set should update probes', function (done) {
-        var cmd = 'network application-gateway probe set -g {group} -n {name} --protocol {protocolNew} --host-name {hostNew} --path {pathNew} --interval {intervalNew} --timeout {timeoutNew} --unhealthy-threshold {unhealthyThresholdNew} --gateway-name {applicationGatewayName} --json'.formatArgs(probes);
+        var cmd = 'network application-gateway probe set -g {group} -n {name} --protocol {protocolNew} --host-name {hostNew} --path {pathNew} --interval {intervalNew} --timeout {timeoutNew} --unhealthy-threshold {unhealthyThresholdNew} --pick-host-name {pickHostNameFromBackendHttpSettingsNew} --min-servers {minServersNew} --health-response-body {bodyNew} --status-codes {statusCodesNew} --gateway-name {applicationGatewayName} --json'.formatArgs(probes);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var parentOutput = JSON.parse(result.text);
@@ -181,11 +194,14 @@ describe('arm', function () {
           var output = utils.findFirstCaseIgnore(parentOutput.probes, {name: 'probeName'});
           output.name.should.equal(probes.name);
           output.protocol.toLowerCase().should.equal(probes.protocolNew.toLowerCase());
-          output.host.toLowerCase().should.equal(probes.hostNew.toLowerCase());
           output.path.toLowerCase().should.equal(probes.pathNew.toLowerCase());
           output.interval.should.equal(parseInt(probes.intervalNew, 10));
           output.timeout.should.equal(parseInt(probes.timeoutNew, 10));
           output.unhealthyThreshold.should.equal(parseInt(probes.unhealthyThresholdNew, 10));
+          output.pickHostNameFromBackendHttpSettings.should.equal(utils.parseBool(probes.pickHostNameFromBackendHttpSettingsNew));
+          output.minServers.should.equal(parseInt(probes.minServersNew, 10));
+          should.not.exist(output.match.body);
+          should.not.exist(output.match.statusCodes);
           done();
         });
       });
