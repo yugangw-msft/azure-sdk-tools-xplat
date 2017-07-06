@@ -36,8 +36,7 @@ var profile = require('../../../../lib/util/profile');
 var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-application-gateway-redirect-config-tests',
-  // TODO; re-record tests with correct group after failed group is deleted
-  groupName = 'xplat-test-redirect-config-tmp',
+  groupName = 'xplat-test-redirect-config',
   location;
 var index = 0;
 
