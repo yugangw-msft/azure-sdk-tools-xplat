@@ -100,8 +100,10 @@ commands/arm/network/arm.network.public-ip-tests.js
 commands/arm/network/arm.network.route-table-tests.js
 commands/arm/network/arm.network.route-table-route-tests.js
 # Traffic Manager
-commands/arm/network/arm.network.traffic-manager-tests.js
-commands/arm/network/arm.network.traffic-manager-endpoint-tests.js
+commands/arm/network/generated/arm.network.traffic-manager-endpoint-tests.json-output.js
+commands/arm/network/generated/arm.network.traffic-manager-endpoint-tests.text-output.js
+commands/arm/network/generated/arm.network.traffic-manager-profile-tests.json-output.js
+commands/arm/network/generated/arm.network.traffic-manager-profile-tests.text-output.js
 # Virtual Networks
 commands/arm/network/arm.network.vnet-tests.js
 commands/arm/network/arm.network.vnet-peering-tests.js
