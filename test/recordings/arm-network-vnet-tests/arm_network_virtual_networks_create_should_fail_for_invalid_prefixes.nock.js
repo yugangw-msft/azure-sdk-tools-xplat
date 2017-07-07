@@ -29,34 +29,34 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-vnet/providers/Microsoft.Network/virtualNetworks/invalidPrefixesName?api-version=2017-03-01')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-vnet/providers/Microsoft.Network/virtualNetworks/invalidPrefixesName?api-version=2017-06-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/virtualNetworks/invalidPrefixesName' under resource group 'xplat-test-vnet' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': 'c5d760b6-455f-4a30-bfe8-aa3e3befd1d0',
-  'x-ms-correlation-request-id': 'c5d760b6-455f-4a30-bfe8-aa3e3befd1d0',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170620T124348Z:c5d760b6-455f-4a30-bfe8-aa3e3befd1d0',
+  'x-ms-request-id': '99bc7c7c-f056-439d-b888-c0de9fb71797',
+  'x-ms-correlation-request-id': '99bc7c7c-f056-439d-b888-c0de9fb71797',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170707T123510Z:99bc7c7c-f056-439d-b888-c0de9fb71797',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Tue, 20 Jun 2017 12:43:47 GMT',
+  date: 'Fri, 07 Jul 2017 12:35:10 GMT',
   connection: 'close',
   'content-length': '172' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-vnet/providers/Microsoft.Network/virtualNetworks/invalidPrefixesName?api-version=2017-03-01')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-vnet/providers/Microsoft.Network/virtualNetworks/invalidPrefixesName?api-version=2017-06-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/virtualNetworks/invalidPrefixesName' under resource group 'xplat-test-vnet' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': 'c5d760b6-455f-4a30-bfe8-aa3e3befd1d0',
-  'x-ms-correlation-request-id': 'c5d760b6-455f-4a30-bfe8-aa3e3befd1d0',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170620T124348Z:c5d760b6-455f-4a30-bfe8-aa3e3befd1d0',
+  'x-ms-request-id': '99bc7c7c-f056-439d-b888-c0de9fb71797',
+  'x-ms-correlation-request-id': '99bc7c7c-f056-439d-b888-c0de9fb71797',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170707T123510Z:99bc7c7c-f056-439d-b888-c0de9fb71797',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Tue, 20 Jun 2017 12:43:47 GMT',
+  date: 'Fri, 07 Jul 2017 12:35:10 GMT',
   connection: 'close',
   'content-length': '172' });
  return result; },
@@ -64,37 +64,37 @@ function (nock) {
 var result = 
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-vnet/providers/Microsoft.Network/virtualNetworks/invalidPrefixesName?api-version=2017-03-01', '*')
+.put('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-vnet/providers/Microsoft.Network/virtualNetworks/invalidPrefixesName?api-version=2017-06-01', '*')
   .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"InvalidAddressPrefixFormat\",\r\n    \"message\": \"Address prefix 10.10.10.10 of resource /subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-vnet/providers/Microsoft.Network/virtualNetworks/invalidPrefixesName is not formatted correctly. It should follow CIDR notation, for example 10.0.0.0/24.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '375',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'f638707e-c554-48f7-8bb7-3e071d88eb5d',
+  'x-ms-request-id': '3c6aa10c-5b8f-44f0-97aa-a46bb9614d1c',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-writes': '1196',
-  'x-ms-correlation-request-id': '65595084-fc8d-420e-a774-c1787db9ff89',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170620T124352Z:65595084-fc8d-420e-a774-c1787db9ff89',
-  date: 'Tue, 20 Jun 2017 12:43:51 GMT',
+  'x-ms-ratelimit-remaining-subscription-writes': '1199',
+  'x-ms-correlation-request-id': '1be7e792-98ef-4a6a-b582-bfaa679d2971',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170707T123514Z:1be7e792-98ef-4a6a-b582-bfaa679d2971',
+  date: 'Fri, 07 Jul 2017 12:35:13 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-vnet/providers/Microsoft.Network/virtualNetworks/invalidPrefixesName?api-version=2017-03-01', '*')
+.put('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-vnet/providers/Microsoft.Network/virtualNetworks/invalidPrefixesName?api-version=2017-06-01', '*')
   .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"InvalidAddressPrefixFormat\",\r\n    \"message\": \"Address prefix 10.10.10.10 of resource /subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-vnet/providers/Microsoft.Network/virtualNetworks/invalidPrefixesName is not formatted correctly. It should follow CIDR notation, for example 10.0.0.0/24.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '375',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'f638707e-c554-48f7-8bb7-3e071d88eb5d',
+  'x-ms-request-id': '3c6aa10c-5b8f-44f0-97aa-a46bb9614d1c',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-writes': '1196',
-  'x-ms-correlation-request-id': '65595084-fc8d-420e-a774-c1787db9ff89',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170620T124352Z:65595084-fc8d-420e-a774-c1787db9ff89',
-  date: 'Tue, 20 Jun 2017 12:43:51 GMT',
+  'x-ms-ratelimit-remaining-subscription-writes': '1199',
+  'x-ms-correlation-request-id': '1be7e792-98ef-4a6a-b582-bfaa679d2971',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170707T123514Z:1be7e792-98ef-4a6a-b582-bfaa679d2971',
+  date: 'Fri, 07 Jul 2017 12:35:13 GMT',
   connection: 'close' });
  return result; }]];

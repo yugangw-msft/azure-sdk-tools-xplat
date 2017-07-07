@@ -29,34 +29,34 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-nic/providers/Microsoft.Network/networkInterfaces/IPVersionOutOfRangeName?api-version=2017-03-01')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-nic/providers/Microsoft.Network/networkInterfaces/IPVersionOutOfRangeName?api-version=2017-06-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/networkInterfaces/IPVersionOutOfRangeName' under resource group 'xplat-test-nic' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': '67bc5e2c-e4b4-4328-ab95-e98b9c9ab191',
-  'x-ms-correlation-request-id': '67bc5e2c-e4b4-4328-ab95-e98b9c9ab191',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170616T134927Z:67bc5e2c-e4b4-4328-ab95-e98b9c9ab191',
+  'x-ms-request-id': 'c0841fa7-eadc-4fb5-94b1-85e31085e5cd',
+  'x-ms-correlation-request-id': 'c0841fa7-eadc-4fb5-94b1-85e31085e5cd',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170707T134018Z:c0841fa7-eadc-4fb5-94b1-85e31085e5cd',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Fri, 16 Jun 2017 13:49:27 GMT',
+  date: 'Fri, 07 Jul 2017 13:40:17 GMT',
   connection: 'close',
   'content-length': '177' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-nic/providers/Microsoft.Network/networkInterfaces/IPVersionOutOfRangeName?api-version=2017-03-01')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-nic/providers/Microsoft.Network/networkInterfaces/IPVersionOutOfRangeName?api-version=2017-06-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/networkInterfaces/IPVersionOutOfRangeName' under resource group 'xplat-test-nic' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': '67bc5e2c-e4b4-4328-ab95-e98b9c9ab191',
-  'x-ms-correlation-request-id': '67bc5e2c-e4b4-4328-ab95-e98b9c9ab191',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170616T134927Z:67bc5e2c-e4b4-4328-ab95-e98b9c9ab191',
+  'x-ms-request-id': 'c0841fa7-eadc-4fb5-94b1-85e31085e5cd',
+  'x-ms-correlation-request-id': 'c0841fa7-eadc-4fb5-94b1-85e31085e5cd',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170707T134018Z:c0841fa7-eadc-4fb5-94b1-85e31085e5cd',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Fri, 16 Jun 2017 13:49:27 GMT',
+  date: 'Fri, 07 Jul 2017 13:40:17 GMT',
   connection: 'close',
   'content-length': '177' });
  return result; }]];

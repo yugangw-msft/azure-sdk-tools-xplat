@@ -23,40 +23,40 @@ exports.getMockedProfile = function () {
 };
 
 exports.setEnvironment = function() {
-  process.env['AZURE_VM_TEST_LOCATION'] = 'southeastasia';
+  process.env['AZURE_VM_TEST_LOCATION'] = 'westus';
 };
 
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/idleTimeoutUnderRangeName?api-version=2017-03-01')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/idleTimeoutUnderRangeName?api-version=2017-06-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/publicIPAddresses/idleTimeoutUnderRangeName' under resource group 'xplat-test-public-ip' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': '10ed5980-7e3e-48b3-b358-a8de9ae59f93',
-  'x-ms-correlation-request-id': '10ed5980-7e3e-48b3-b358-a8de9ae59f93',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170622T124829Z:10ed5980-7e3e-48b3-b358-a8de9ae59f93',
+  'x-ms-request-id': 'c8727368-d9f3-458e-a44b-a190fcc0de72',
+  'x-ms-correlation-request-id': 'c8727368-d9f3-458e-a44b-a190fcc0de72',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170707T141901Z:c8727368-d9f3-458e-a44b-a190fcc0de72',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Thu, 22 Jun 2017 12:48:28 GMT',
+  date: 'Fri, 07 Jul 2017 14:19:00 GMT',
   connection: 'close',
   'content-length': '185' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/idleTimeoutUnderRangeName?api-version=2017-03-01')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/idleTimeoutUnderRangeName?api-version=2017-06-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/publicIPAddresses/idleTimeoutUnderRangeName' under resource group 'xplat-test-public-ip' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': '10ed5980-7e3e-48b3-b358-a8de9ae59f93',
-  'x-ms-correlation-request-id': '10ed5980-7e3e-48b3-b358-a8de9ae59f93',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170622T124829Z:10ed5980-7e3e-48b3-b358-a8de9ae59f93',
+  'x-ms-request-id': 'c8727368-d9f3-458e-a44b-a190fcc0de72',
+  'x-ms-correlation-request-id': 'c8727368-d9f3-458e-a44b-a190fcc0de72',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170707T141901Z:c8727368-d9f3-458e-a44b-a190fcc0de72',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Thu, 22 Jun 2017 12:48:28 GMT',
+  date: 'Fri, 07 Jul 2017 14:19:00 GMT',
   connection: 'close',
   'content-length': '185' });
  return result; },
@@ -64,37 +64,37 @@ function (nock) {
 var result = 
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/idleTimeoutUnderRangeName?api-version=2017-03-01', '*')
+.put('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/idleTimeoutUnderRangeName?api-version=2017-06-01', '*')
   .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"PublicIPIdleTimeoutIsOutOfRange\",\r\n    \"message\": \"Public IP address idleTimeoutUnderRangeName has invalid Idle Timeout. The value must be between 4 and 30.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '215',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '7fc061a8-afb3-4570-a0dc-64ece7734c14',
+  'x-ms-request-id': 'cd4cd67d-21b9-42fb-b3c3-87def7f794a7',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1198',
-  'x-ms-correlation-request-id': 'a86ca106-9b66-45b6-98d7-582c391634cb',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170622T124839Z:a86ca106-9b66-45b6-98d7-582c391634cb',
-  date: 'Thu, 22 Jun 2017 12:48:38 GMT',
+  'x-ms-correlation-request-id': '2498967e-f566-4532-b08b-a03a8fe96ca1',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170707T141905Z:2498967e-f566-4532-b08b-a03a8fe96ca1',
+  date: 'Fri, 07 Jul 2017 14:19:05 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/idleTimeoutUnderRangeName?api-version=2017-03-01', '*')
+.put('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/idleTimeoutUnderRangeName?api-version=2017-06-01', '*')
   .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"PublicIPIdleTimeoutIsOutOfRange\",\r\n    \"message\": \"Public IP address idleTimeoutUnderRangeName has invalid Idle Timeout. The value must be between 4 and 30.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '215',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '7fc061a8-afb3-4570-a0dc-64ece7734c14',
+  'x-ms-request-id': 'cd4cd67d-21b9-42fb-b3c3-87def7f794a7',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1198',
-  'x-ms-correlation-request-id': 'a86ca106-9b66-45b6-98d7-582c391634cb',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170622T124839Z:a86ca106-9b66-45b6-98d7-582c391634cb',
-  date: 'Thu, 22 Jun 2017 12:48:38 GMT',
+  'x-ms-correlation-request-id': '2498967e-f566-4532-b08b-a03a8fe96ca1',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170707T141905Z:2498967e-f566-4532-b08b-a03a8fe96ca1',
+  date: 'Fri, 07 Jul 2017 14:19:05 GMT',
   connection: 'close' });
  return result; }]];
