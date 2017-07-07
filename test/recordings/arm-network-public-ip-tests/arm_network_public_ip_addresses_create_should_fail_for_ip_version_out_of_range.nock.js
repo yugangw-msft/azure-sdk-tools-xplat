@@ -23,40 +23,40 @@ exports.getMockedProfile = function () {
 };
 
 exports.setEnvironment = function() {
-  process.env['AZURE_VM_TEST_LOCATION'] = 'southeastasia';
+  process.env['AZURE_VM_TEST_LOCATION'] = 'westus';
 };
 
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/IPVersionOutOfRangeName?api-version=2017-03-01')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/IPVersionOutOfRangeName?api-version=2017-06-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/publicIPAddresses/IPVersionOutOfRangeName' under resource group 'xplat-test-public-ip' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': '28282c03-c173-46e1-8051-acf64e472481',
-  'x-ms-correlation-request-id': '28282c03-c173-46e1-8051-acf64e472481',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170622T124819Z:28282c03-c173-46e1-8051-acf64e472481',
+  'x-ms-request-id': '009ecdd1-ed72-482c-ba3c-42a2c608edc5',
+  'x-ms-correlation-request-id': '009ecdd1-ed72-482c-ba3c-42a2c608edc5',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170707T141853Z:009ecdd1-ed72-482c-ba3c-42a2c608edc5',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Thu, 22 Jun 2017 12:48:19 GMT',
+  date: 'Fri, 07 Jul 2017 14:18:52 GMT',
   connection: 'close',
   'content-length': '183' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/IPVersionOutOfRangeName?api-version=2017-03-01')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/IPVersionOutOfRangeName?api-version=2017-06-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/publicIPAddresses/IPVersionOutOfRangeName' under resource group 'xplat-test-public-ip' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': '28282c03-c173-46e1-8051-acf64e472481',
-  'x-ms-correlation-request-id': '28282c03-c173-46e1-8051-acf64e472481',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170622T124819Z:28282c03-c173-46e1-8051-acf64e472481',
+  'x-ms-request-id': '009ecdd1-ed72-482c-ba3c-42a2c608edc5',
+  'x-ms-correlation-request-id': '009ecdd1-ed72-482c-ba3c-42a2c608edc5',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170707T141853Z:009ecdd1-ed72-482c-ba3c-42a2c608edc5',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Thu, 22 Jun 2017 12:48:19 GMT',
+  date: 'Fri, 07 Jul 2017 14:18:52 GMT',
   connection: 'close',
   'content-length': '183' });
  return result; }]];

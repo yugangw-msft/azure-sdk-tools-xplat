@@ -23,42 +23,42 @@ exports.getMockedProfile = function () {
 };
 
 exports.setEnvironment = function() {
-  process.env['AZURE_VM_TEST_LOCATION'] = 'southeastasia';
+  process.env['AZURE_VM_TEST_LOCATION'] = 'westus';
 };
 
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses?api-version=2017-03-01')
-  .reply(200, "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"publicIPAddressName\",\r\n      \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/publicIPAddressName\",\r\n      \"etag\": \"W/\\\"ba88e718-b79f-4bab-9580-119a7ae1cadf\\\"\",\r\n      \"location\": \"southeastasia\",\r\n      \"properties\": {\r\n        \"provisioningState\": \"Succeeded\",\r\n        \"resourceGuid\": \"59f2eb92-c9da-4471-9b61-b1d5f0890ecd\",\r\n        \"publicIPAddressVersion\": \"IPv4\",\r\n        \"publicIPAllocationMethod\": \"Dynamic\",\r\n        \"idleTimeoutInMinutes\": 14,\r\n        \"dnsSettings\": {\r\n          \"domainNameLabel\": \"labelset\",\r\n          \"fqdn\": \"labelset.southeastasia.cloudapp.azure.com\"\r\n        }\r\n      },\r\n      \"type\": \"Microsoft.Network/publicIPAddresses\"\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses?api-version=2017-06-01')
+  .reply(200, "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"publicIPAddressName\",\r\n      \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/publicIPAddressName\",\r\n      \"etag\": \"W/\\\"b9e1ec9b-a431-4865-954e-116644d2c970\\\"\",\r\n      \"location\": \"southeastasia\",\r\n      \"properties\": {\r\n        \"provisioningState\": \"Succeeded\",\r\n        \"resourceGuid\": \"c581b0fb-e414-49ea-8316-b35bbd38dfde\",\r\n        \"publicIPAddressVersion\": \"IPv4\",\r\n        \"publicIPAllocationMethod\": \"Dynamic\",\r\n        \"idleTimeoutInMinutes\": 14,\r\n        \"dnsSettings\": {\r\n          \"domainNameLabel\": \"labelset\",\r\n          \"fqdn\": \"labelset.southeastasia.cloudapp.azure.com\"\r\n        }\r\n      },\r\n      \"type\": \"Microsoft.Network/publicIPAddresses\"\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '806',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '38d860f8-9795-405d-9383-0e6b4573fad2',
+  'x-ms-request-id': 'd5647e6e-2033-4ed3-82b2-e12149c16dcc',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14992',
-  'x-ms-correlation-request-id': '890ecac0-310d-43a4-89b4-d231e08e6de6',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170622T124627Z:890ecac0-310d-43a4-89b4-d231e08e6de6',
-  date: 'Thu, 22 Jun 2017 12:46:27 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14983',
+  'x-ms-correlation-request-id': 'cdeebdda-6029-4458-97bd-4723a90cfa68',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170707T141655Z:cdeebdda-6029-4458-97bd-4723a90cfa68',
+  date: 'Fri, 07 Jul 2017 14:16:55 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses?api-version=2017-03-01')
-  .reply(200, "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"publicIPAddressName\",\r\n      \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/publicIPAddressName\",\r\n      \"etag\": \"W/\\\"ba88e718-b79f-4bab-9580-119a7ae1cadf\\\"\",\r\n      \"location\": \"southeastasia\",\r\n      \"properties\": {\r\n        \"provisioningState\": \"Succeeded\",\r\n        \"resourceGuid\": \"59f2eb92-c9da-4471-9b61-b1d5f0890ecd\",\r\n        \"publicIPAddressVersion\": \"IPv4\",\r\n        \"publicIPAllocationMethod\": \"Dynamic\",\r\n        \"idleTimeoutInMinutes\": 14,\r\n        \"dnsSettings\": {\r\n          \"domainNameLabel\": \"labelset\",\r\n          \"fqdn\": \"labelset.southeastasia.cloudapp.azure.com\"\r\n        }\r\n      },\r\n      \"type\": \"Microsoft.Network/publicIPAddresses\"\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses?api-version=2017-06-01')
+  .reply(200, "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"publicIPAddressName\",\r\n      \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/publicIPAddressName\",\r\n      \"etag\": \"W/\\\"b9e1ec9b-a431-4865-954e-116644d2c970\\\"\",\r\n      \"location\": \"southeastasia\",\r\n      \"properties\": {\r\n        \"provisioningState\": \"Succeeded\",\r\n        \"resourceGuid\": \"c581b0fb-e414-49ea-8316-b35bbd38dfde\",\r\n        \"publicIPAddressVersion\": \"IPv4\",\r\n        \"publicIPAllocationMethod\": \"Dynamic\",\r\n        \"idleTimeoutInMinutes\": 14,\r\n        \"dnsSettings\": {\r\n          \"domainNameLabel\": \"labelset\",\r\n          \"fqdn\": \"labelset.southeastasia.cloudapp.azure.com\"\r\n        }\r\n      },\r\n      \"type\": \"Microsoft.Network/publicIPAddresses\"\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '806',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '38d860f8-9795-405d-9383-0e6b4573fad2',
+  'x-ms-request-id': 'd5647e6e-2033-4ed3-82b2-e12149c16dcc',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14992',
-  'x-ms-correlation-request-id': '890ecac0-310d-43a4-89b4-d231e08e6de6',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170622T124627Z:890ecac0-310d-43a4-89b4-d231e08e6de6',
-  date: 'Thu, 22 Jun 2017 12:46:27 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14983',
+  'x-ms-correlation-request-id': 'cdeebdda-6029-4458-97bd-4723a90cfa68',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170707T141655Z:cdeebdda-6029-4458-97bd-4723a90cfa68',
+  date: 'Fri, 07 Jul 2017 14:16:55 GMT',
   connection: 'close' });
  return result; }]];
