@@ -91,9 +91,10 @@ describe('arm', function () {
   describe('network', function () {
     var suite, retry = 5;
     var hour = 60 * 60000;
+    var testTimeout = hour;
 
     before(function (done) {
-      this.timeout(hour);
+      this.timeout(testTimeout);
       suite = new CLITest(this, testPrefix, requiredEnvironment);
       suite.setupSuite(function () {
         location = publicIPAddresses.location || process.env.AZURE_VM_TEST_LOCATION;
@@ -103,8 +104,8 @@ describe('arm', function () {
         publicIPAddresses.group = groupName;
         publicIPAddresses.name = suite.isMocked ? publicIPAddresses.name : suite.generateId(publicIPAddresses.name, null);
 
-        vmssParams = JSON.parse(fs.readFileSync('test/data/vmssParamTestPublicIp.json'));
-        
+        vmssParams = JSON.parse(fs.readFileSync(vmTestUtilCreateVMSSWithParamFile.paramFile));
+
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
@@ -124,22 +125,22 @@ describe('arm', function () {
                   result.exitStatus.should.equal(0);
                   var output = JSON.parse(result.text);
                   publicIPAddresses.networkSecurityGroupId = output.id;
-
-                  vmTestUtil.createVMSSWithParamFile(publicIPAddresses, vmTestUtilCreateVMSSWithParamFile, groupName, suite, function (result) {
-                    result.exitStatus.should.equal(0);
-                    done();
-                  });
+                  done();
                 });
               });
             });
           });
         } else {
+          var subscriptionId = profile.current.getSubscription().id;
+          publicIPAddresses.virtualNetworkId = generatorUtils.generateResourceIdCommon(subscriptionId, groupName, 'virtualNetworks', virtualNetwork.name);
+          publicIPAddresses.subnetId = generatorUtils.generateResourceIdCommon(subscriptionId, groupName, 'virtualNetworks/' + virtualNetwork.name + '/subnets', subnet.name);
+          publicIPAddresses.networkSecurityGroupId = generatorUtils.generateResourceIdCommon(subscriptionId, groupName, 'networkSecurityGroups', networkSecurityGroup.name);
           done();
         }
       });
     });
     after(function (done) {
-      this.timeout(hour);
+      this.timeout(testTimeout);
       networkTestUtil.deleteGroup(groupName, suite, function () {
         suite.teardownSuite(done);
       });
@@ -152,7 +153,7 @@ describe('arm', function () {
     });
 
     describe('public ip addresses custom', function () {
-      this.timeout(hour);
+      this.timeout(testTimeout);
 
       it('create should create public ip addresses', function (done) {
         var cmd = ('network public-ip create -g {group} -n {name} --allocation-method {publicIPAllocationMethod} ' +
@@ -188,6 +189,42 @@ describe('arm', function () {
         });
       });
 
+      it('list should display all public ip addresses in resource group', function (done) {
+        var cmd = 'network public-ip list -g {group} --json'.formatArgs(publicIPAddresses);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var outputs = JSON.parse(result.text);
+
+          _.some(outputs, function (output) {
+            return output.name === publicIPAddresses.name;
+          }).should.be.true;
+
+          done();
+        });
+      });
+
+      it('delete should delete public ip addresses', function (done) {
+        var cmd = 'network public-ip delete -g {group} -n {name} --quiet --json'.formatArgs(publicIPAddresses);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+
+          cmd = 'network public-ip show -g {group} -n {name} --json'.formatArgs(publicIPAddresses);
+          testUtils.executeCommand(suite, retry, cmd, function (result) {
+            result.exitStatus.should.equal(0);
+            var output = JSON.parse(result.text || '{}');
+            output.should.be.empty;
+            done();
+          });
+        });
+      });
+
+      it('create vmss should create virtual machine scale set', function (done) {
+        vmTestUtil.createVMSSWithParamFile(publicIPAddresses, vmTestUtilCreateVMSSWithParamFile, groupName, suite, function (result) {
+          result.exitStatus.should.equal(0);
+          done();
+        });
+      });
+
       it('show vmss should display public ip address in vmss', function (done) {
         var cmd = ('network public-ip show -g {group} -n {publicIpAddressName} ' +
           '--vmss-name {name} --vm-index {virtualmachineIndex} --nic-name {networkInterfaceName} ' +
@@ -199,20 +236,6 @@ describe('arm', function () {
           output.name.should.equal(vmTestUtilCreateVMSSWithParamFile.publicIpName);
           output.dnsSettings.should.not.be.empty;
           output.dnsSettings.domainNameLabel.should.containEql(vmTestUtilCreateVMSSWithParamFile.domainNameLabel);
-
-          done();
-        });
-      });
-
-      it('list should display all public ip addresses in resource group', function (done) {
-        var cmd = 'network public-ip list -g {group} --json'.formatArgs(publicIPAddresses);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
-          result.exitStatus.should.equal(0);
-          var outputs = JSON.parse(result.text);
-
-          _.some(outputs, function (output) {
-            return output.name === publicIPAddresses.name;
-          }).should.be.true;
 
           done();
         });
@@ -247,21 +270,6 @@ describe('arm', function () {
           }).should.be.true;
 
           done();
-        });
-      });
-
-      it('delete should delete public ip addresses', function (done) {
-        var cmd = 'network public-ip delete -g {group} -n {name} --quiet --json'.formatArgs(publicIPAddresses);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
-          result.exitStatus.should.equal(0);
-
-          cmd = 'network public-ip show -g {group} -n {name} --json'.formatArgs(publicIPAddresses);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
-            result.exitStatus.should.equal(0);
-            var output = JSON.parse(result.text || '{}');
-            output.should.be.empty;
-            done();
-          });
         });
       });
     });
