@@ -1,3 +1,33 @@
+##2017-07-10 Version 0.10.15
+* General
+  * Fix for cloud console: fill in isMRRT field when being invoked with raw tokens. #3614
+  * Upgraded ms-rest and ms-rest-azure runtime dependencies to their latest version. #3627, #3634
+  * Updated Windows Installer infrastructure code to consume a more recent and stable npm version. #3629
+* Graph-RBAC
+  * Added logic to validate the scope before sending request to ARM. #3628
+* Network
+  * Updated azure-arm-network dependency to its latest version. #3635
+  * Public IP. #3619
+    * Added support for VMSS PublicIP.
+  * Added new features in Application Gateways. #3633 (Issue #3625)
+    * New subcategory `redirect-config`
+    * Http Settings
+      * New parameters `--host-name`, `--pick-host-name`, `--affinity-cookie-name`, `--probe-enabled`, `--path`
+    * Probes
+      * New parameters `--pick-host-name`, `--min-servers`, `--health-response-body`, `--status-codes`
+      * Parameter `--host-name` is now optional
+    * Rules
+      * New parameters `--redirect-configuration-name`, `--redirect-configuration-id`
+    * Ssl Policies
+      * New parameters `--policy-type`, `--policy-name`, `--cipher-suites`, `--min-protocol-version`
+      * New command `list-available`
+      * New subcategory `predefined` with two commands: `list` and `show`
+    * Url Path Maps
+      * New parameters `--default-redirect-configuration-id`, `--default-redirect-configuration-name`
+      * Url Path Maps Rules
+        * New parameter `--redirect-configuration-name`
+        * Parameters `--http-settings-name` and `--address-pool-name` are now optional
+
 ##2017-06-08 Version 0.10.14
 * General
   * Fixed bug #3605 by updating easy table package dependency. This ensures this application works well with npm@5. #3608
