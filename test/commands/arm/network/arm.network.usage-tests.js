@@ -19,35 +19,35 @@ var util = require('util');
 var _ = require('underscore');
 
 var CLITest = require('../../../framework/arm-cli-test');
-var testprefix = 'arm-cli-network-usage-tests';
+var testPrefix = 'arm-network-usage-tests';
 
 describe('arm', function () {
   describe('network', function () {
     var suite;
+
     before(function (done) {
-      suite = new CLITest(this, testprefix);
+      suite = new CLITest(this, testPrefix);
       suite.setupSuite(done);
     });
-    
+
     after(function (done) {
       suite.teardownSuite(done);
     });
-    
+
     beforeEach(function (done) {
       suite.setupTest(done);
     });
-    
+
     afterEach(function (done) {
       suite.teardownTest(done);
     });
-    
+
     describe('network', function () {
-      
       it('should list usage correctly', function (done) {
         suite.execute('network usage list westus --json', function (result) {
           result.exitStatus.should.equal(0);
           var usageInfo = JSON.parse(result.text);
-          usageInfo.some(function (item) {
+          _.some(usageInfo, function (item) {
             if (item.name.value === 'NetworkSecurityGroups') {
               return item.limit >= 100;
             }

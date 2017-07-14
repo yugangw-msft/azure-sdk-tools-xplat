@@ -29,36 +29,36 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/directionOutOfRangeName?api-version=2017-03-01')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/directionOutOfRangeName?api-version=2017-06-01')
   .reply(404, "{\r\n  \"error\": {\r\n    \"code\": \"NotFound\",\r\n    \"message\": \"Resource /subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/directionOutOfRangeName not found.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '302',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'fb60b3c1-ea69-4d82-ae76-e30596e9a09d',
+  'x-ms-request-id': '55e94f3f-c3ab-4a29-8230-c0d1f0611fbe',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  server: 'Microsoft-HTTPAPI/2.0, Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14992',
-  'x-ms-correlation-request-id': '33aea97b-5bfc-4a16-bcba-d058f658dd64',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170313T084044Z:33aea97b-5bfc-4a16-bcba-d058f658dd64',
-  date: 'Mon, 13 Mar 2017 08:40:44 GMT',
+  server: 'Microsoft-HTTPAPI/2.0',
+  'x-ms-ratelimit-remaining-subscription-reads': '14997',
+  'x-ms-correlation-request-id': 'f050b77c-92cb-45ea-9d96-e3c1e672a3dd',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170605T071624Z:f050b77c-92cb-45ea-9d96-e3c1e672a3dd',
+  date: 'Mon, 05 Jun 2017 07:16:24 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/directionOutOfRangeName?api-version=2017-03-01')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/directionOutOfRangeName?api-version=2017-06-01')
   .reply(404, "{\r\n  \"error\": {\r\n    \"code\": \"NotFound\",\r\n    \"message\": \"Resource /subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/directionOutOfRangeName not found.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '302',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'fb60b3c1-ea69-4d82-ae76-e30596e9a09d',
+  'x-ms-request-id': '55e94f3f-c3ab-4a29-8230-c0d1f0611fbe',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  server: 'Microsoft-HTTPAPI/2.0, Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14992',
-  'x-ms-correlation-request-id': '33aea97b-5bfc-4a16-bcba-d058f658dd64',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170313T084044Z:33aea97b-5bfc-4a16-bcba-d058f658dd64',
-  date: 'Mon, 13 Mar 2017 08:40:44 GMT',
+  server: 'Microsoft-HTTPAPI/2.0',
+  'x-ms-ratelimit-remaining-subscription-reads': '14997',
+  'x-ms-correlation-request-id': 'f050b77c-92cb-45ea-9d96-e3c1e672a3dd',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170605T071624Z:f050b77c-92cb-45ea-9d96-e3c1e672a3dd',
+  date: 'Mon, 05 Jun 2017 07:16:24 GMT',
   connection: 'close' });
  return result; }]];

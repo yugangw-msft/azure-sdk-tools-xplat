@@ -405,6 +405,7 @@ describe('account', function () {
     it('should add new token entries into cache', function () {
       tokensToAddIntoCache.should.have.length(1)
       tokensToAddIntoCache[0]._userId.should.equal(expectedUserName);
+      tokensToAddIntoCache[0].isMRRT.should.be.true;
     });
 
     it('should return listed subscriptions', function () {

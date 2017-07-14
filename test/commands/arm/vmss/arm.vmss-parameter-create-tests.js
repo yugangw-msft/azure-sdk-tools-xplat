@@ -289,42 +289,42 @@ describe('arm', function() {
 
       it('create-or-update-parameter with public ip should pass', function(done) {
         this.timeout(vmTest.timeoutLarge * 10);
+
         var subscription = profile.current.getSubscription();
         var subnetId = '/subscriptions/' + subscription.id + '/resourceGroups/' + groupName + '/providers/Microsoft.Network/VirtualNetworks/' + vNetPrefix + '/subnets/' + subnetName;
         var nsgId = '/subscriptions/' + subscription.id + '/resourceGroups/' + groupName + '/providers/Microsoft.Network/networkSecurityGroups/' + nsgName;
-        var cmd = util.format('vmss config network-security-group set --parameter-file %s --id %s --network-interface-configurations-index 0', paramFileNameIp, nsgId);
-        testUtils.executeCommand(suite, retry, cmd, function(result) {
-          var cmd = util.format('vmss config subnet set --parameter-file %s --id %s --network-interface-configurations-index 0 --ip-configurations-index 0', paramFileNameIp, subnetId);
-          testUtils.executeCommand(suite, retry, cmd, function(result) {
-            var cmd = util.format('vmss config dns-servers set --parameter-file %s --index 0 --network-interface-configurations-index 0 --value %s', paramFileNameIp, nicDnsServer);
-            testUtils.executeCommand(suite, retry, cmd, function(result) {
-              var cmd = util.format('vmss config public-ip-address-configuration set --parameter-file %s --ip-configurations-index 0 --network-interface-configurations-index 0 --name %s', paramFileNameIp, publicipName);
-              testUtils.executeCommand(suite, retry, cmd, function(result) {
-                var cmd = util.format('vmss config public-ip-address-configuration set --parameter-file %s --ip-configurations-index 0 --network-interface-configurations-index 0 --idle-timeout-in-minutes %s --parse', paramFileNameIp, idleTimeout);
-                testUtils.executeCommand(suite, retry, cmd, function(result) {
-                  var cmd = util.format('vmss config public-ip-address-configuration-dns-settings set --parameter-file %s --ip-configurations-index 0 --network-interface-configurations-index 0 --domain-name-label %s', paramFileNameIp, domainNameLabel);
-                  testUtils.executeCommand(suite, retry, cmd, function(result) {
-                    var cmd = util.format('vmss config vhd-containers set --parameter-file %s --index 0 --value https://%s.blob.core.windows.net/%s', paramFileNameIp, storageAccount, storageCont);
-                    testUtils.executeCommand(suite, retry, cmd, function(result) {
-                      var cmd = util.format('vmss create -g %s -n %s --parameter-file %s --json', groupName, vmssPrefixIp, paramFileNameIp).split(' ');
-                      testUtils.executeCommand(suite, retry, cmd, function(result) {
-                        result.exitStatus.should.equal(0);
-                        var vmss = JSON.parse(result.text);
-                        var nicConfig = vmss.virtualMachineProfile.networkProfile.networkInterfaceConfigurations[0];
-                        nicConfig.networkSecurityGroup.id.toLowerCase().should.equal(nsgId.toLowerCase());
-                        nicConfig.dnsSettings.dnsServers[0].should.be.equal(nicDnsServer);
-                        var ipConfig = nicConfig.ipConfigurations[0];
-                        ipConfig.publicIPAddressConfiguration.name.should.be.equal(publicipName);
-                        ipConfig.publicIPAddressConfiguration.dnsSettings.domainNameLabel.should.be.equal(domainNameLabel);
-                        ipConfig.publicIPAddressConfiguration.idleTimeoutInMinutes.should.be.equal(idleTimeout);
-                        done();
-                      });
-                    });
-                  });
-                })
-              });
-            });
-          });
+
+        var dependency = {
+          location: location,
+          networkSecurityGroupId: nsgId,
+          subnetId: subnetId,
+          storageAccount: storageAccount
+        };
+
+        var params = {
+          vmssName: vmssPrefixIp,
+          paramFile: paramFileNameIp,
+          storageCont: storageCont,
+          publicIpName: publicipName,
+          domainNameLabel: domainNameLabel,
+          idleTimeout: idleTimeout,
+          nicDnsServer: nicDnsServer
+        };
+
+        vmTest.createVMSSWithParamFile(dependency, params, groupName, suite, function (result) {
+          result.exitStatus.should.equal(0);
+          var vmss = JSON.parse(result.text);
+
+          var nicConfig = vmss.virtualMachineProfile.networkProfile.networkInterfaceConfigurations[0];
+          nicConfig.networkSecurityGroup.id.toLowerCase().should.equal(nsgId.toLowerCase());
+          nicConfig.dnsSettings.dnsServers[0].should.be.equal(nicDnsServer);
+
+          var ipConfig = nicConfig.ipConfigurations[0];
+          ipConfig.publicIPAddressConfiguration.name.should.be.equal(publicipName);
+          ipConfig.publicIPAddressConfiguration.dnsSettings.domainNameLabel.should.be.equal(domainNameLabel);
+          ipConfig.publicIPAddressConfiguration.idleTimeoutInMinutes.should.be.equal(idleTimeout);
+         
+          done();
         });
       });
 
