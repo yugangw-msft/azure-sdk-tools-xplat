@@ -43,6 +43,8 @@ var index = 0;
 var subnets = {
   addressPrefix: '10.0.0.0/16',
   addressPrefixNew: '10.0.0.0/24',
+  privateAccessServices: 'Microsoft.Storage',
+  privateAccessServicesNew: '',
   name: 'subnetName'
 };
 
@@ -107,45 +109,39 @@ describe('arm', function () {
   describe('network', function () {
     var suite, retry = 5;
     var hour = 60 * 60000;
+    var testTimeout = hour;
 
     before(function (done) {
-      this.timeout(hour);
+      this.timeout(testTimeout);
       suite = new CLITest(this, testPrefix, requiredEnvironment);
       suite.setupSuite(function () {
         location = subnets.location || process.env.AZURE_VM_TEST_LOCATION;
         groupName = suite.isMocked ? groupName : suite.generateId(groupName, null);
         subnets.location = location;
-        subnets.group = groupName;
         subnets.name = suite.isMocked ? subnets.name : suite.generateId(subnets.name, null);
+
+        subnets.group = groupName;
+        invalidPrefixes.group = groupName;
+        prefixesOutOfRange.group = groupName;
+        createSubnetWithoutNsgAndRouteTable.group = groupName;
+        createSubnetUsingId.group = groupName;
+        removeNsgAndRouteTableFromSubnet.group = groupName;
+
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n virtualNetworkName --location {location} --json'.formatArgs(virtualNetwork, groupName);
             testUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
-              var output = JSON.parse(result.text);
-              invalidPrefixes.virtualNetworkId = suite.isMocked ? output.id : suite.generateId(invalidPrefixes.virtualNetworkId, null);
-              prefixesOutOfRange.virtualNetworkId = suite.isMocked ? output.id : suite.generateId(prefixesOutOfRange.virtualNetworkId, null);
-              createSubnetWithoutNsgAndRouteTable.virtualNetworkId = suite.isMocked ? output.id : suite.generateId(createSubnetWithoutNsgAndRouteTable.virtualNetworkId, null);
-              createSubnetUsingId.virtualNetworkId = suite.isMocked ? output.id : suite.generateId(createSubnetUsingId.virtualNetworkId, null);
-              removeNsgAndRouteTableFromSubnet.virtualNetworkId = suite.isMocked ? output.id : suite.generateId(removeNsgAndRouteTableFromSubnet.virtualNetworkId, null);
               var cmd = 'network nsg create -g {1} -n networkSecurityGroupName --location {location} --json'.formatArgs(networkSecurityGroup, groupName);
               testUtils.executeCommand(suite, retry, cmd, function (result) {
                 result.exitStatus.should.equal(0);
                 var output = JSON.parse(result.text);
-                invalidPrefixes.networkSecurityGroupId = suite.isMocked ? output.id : suite.generateId(invalidPrefixes.networkSecurityGroupId, null);
-                prefixesOutOfRange.networkSecurityGroupId = suite.isMocked ? output.id : suite.generateId(prefixesOutOfRange.networkSecurityGroupId, null);
-                createSubnetWithoutNsgAndRouteTable.networkSecurityGroupId = suite.isMocked ? output.id : suite.generateId(createSubnetWithoutNsgAndRouteTable.networkSecurityGroupId, null);
-                createSubnetUsingId.networkSecurityGroupId = suite.isMocked ? output.id : suite.generateId(createSubnetUsingId.networkSecurityGroupId, null);
-                removeNsgAndRouteTableFromSubnet.networkSecurityGroupId = suite.isMocked ? output.id : suite.generateId(removeNsgAndRouteTableFromSubnet.networkSecurityGroupId, null);
+                createSubnetUsingId.networkSecurityGroupId = output.id;
                 var cmd = 'network route-table create -g {1} -n routeTableName --location {location} --json'.formatArgs(routeTable, groupName);
                 testUtils.executeCommand(suite, retry, cmd, function (result) {
                   result.exitStatus.should.equal(0);
                   var output = JSON.parse(result.text);
-                  invalidPrefixes.routeTableId = suite.isMocked ? output.id : suite.generateId(invalidPrefixes.routeTableId, null);
-                  prefixesOutOfRange.routeTableId = suite.isMocked ? output.id : suite.generateId(prefixesOutOfRange.routeTableId, null);
-                  createSubnetWithoutNsgAndRouteTable.routeTableId = suite.isMocked ? output.id : suite.generateId(createSubnetWithoutNsgAndRouteTable.routeTableId, null);
-                  createSubnetUsingId.routeTableId = suite.isMocked ? output.id : suite.generateId(createSubnetUsingId.routeTableId, null);
-                  removeNsgAndRouteTableFromSubnet.routeTableId = suite.isMocked ? output.id : suite.generateId(removeNsgAndRouteTableFromSubnet.routeTableId, null);
+                  createSubnetUsingId.routeTableId = output.id;
                   done();
                 });
               });
@@ -153,25 +149,14 @@ describe('arm', function () {
           });
         } else {
           var subscriptionId = profile.current.getSubscription().id;
-          invalidPrefixes.virtualNetworkId = suite.isMocked ? generatorUtils.generateResourceIdCommon(subscriptionId, groupName, 'virtualNetworks', invalidPrefixes.virtualNetworkName) : suite.generateId(invalidPrefixes.virtualNetworkId, null)
-          invalidPrefixes.networkSecurityGroupId = suite.isMocked ? generatorUtils.generateResourceIdCommon(subscriptionId, groupName, 'networkSecurityGroups', invalidPrefixes.networkSecurityGroupName) : suite.generateId(invalidPrefixes.networkSecurityGroupId, null)
-          invalidPrefixes.routeTableId = suite.isMocked ? generatorUtils.generateResourceIdCommon(subscriptionId, groupName, 'routeTables', invalidPrefixes.routeTableName) : suite.generateId(invalidPrefixes.routeTableId, null)
-          prefixesOutOfRange.virtualNetworkId = suite.isMocked ? generatorUtils.generateResourceIdCommon(subscriptionId, groupName, 'virtualNetworks', prefixesOutOfRange.virtualNetworkName) : suite.generateId(prefixesOutOfRange.virtualNetworkId, null)
-          prefixesOutOfRange.networkSecurityGroupId = suite.isMocked ? generatorUtils.generateResourceIdCommon(subscriptionId, groupName, 'networkSecurityGroups', prefixesOutOfRange.networkSecurityGroupName) : suite.generateId(prefixesOutOfRange.networkSecurityGroupId, null)
-          prefixesOutOfRange.routeTableId = suite.isMocked ? generatorUtils.generateResourceIdCommon(subscriptionId, groupName, 'routeTables', prefixesOutOfRange.routeTableName) : suite.generateId(prefixesOutOfRange.routeTableId, null)
-          createSubnetWithoutNsgAndRouteTable.virtualNetworkId = suite.isMocked ? generatorUtils.generateResourceIdCommon(subscriptionId, groupName, 'virtualNetworks', createSubnetWithoutNsgAndRouteTable.virtualNetworkName) : suite.generateId(createSubnetWithoutNsgAndRouteTable.virtualNetworkId, null)
-          createSubnetUsingId.virtualNetworkId = suite.isMocked ? generatorUtils.generateResourceIdCommon(subscriptionId, groupName, 'virtualNetworks', createSubnetUsingId.virtualNetworkName) : suite.generateId(createSubnetUsingId.virtualNetworkId, null)
-          createSubnetUsingId.networkSecurityGroupId = suite.isMocked ? generatorUtils.generateResourceIdCommon(subscriptionId, groupName, 'networkSecurityGroups', createSubnetUsingId.networkSecurityGroupName) : suite.generateId(createSubnetUsingId.networkSecurityGroupId, null)
-          createSubnetUsingId.routeTableId = suite.isMocked ? generatorUtils.generateResourceIdCommon(subscriptionId, groupName, 'routeTables', createSubnetUsingId.routeTableName) : suite.generateId(createSubnetUsingId.routeTableId, null)
-          removeNsgAndRouteTableFromSubnet.virtualNetworkId = suite.isMocked ? generatorUtils.generateResourceIdCommon(subscriptionId, groupName, 'virtualNetworks', removeNsgAndRouteTableFromSubnet.virtualNetworkName) : suite.generateId(removeNsgAndRouteTableFromSubnet.virtualNetworkId, null)
-          removeNsgAndRouteTableFromSubnet.networkSecurityGroupId = suite.isMocked ? generatorUtils.generateResourceIdCommon(subscriptionId, groupName, 'networkSecurityGroups', removeNsgAndRouteTableFromSubnet.networkSecurityGroupName) : suite.generateId(removeNsgAndRouteTableFromSubnet.networkSecurityGroupId, null)
-          removeNsgAndRouteTableFromSubnet.routeTableId = suite.isMocked ? generatorUtils.generateResourceIdCommon(subscriptionId, groupName, 'routeTables', removeNsgAndRouteTableFromSubnet.routeTableName) : suite.generateId(removeNsgAndRouteTableFromSubnet.routeTableId, null)
+          createSubnetUsingId.networkSecurityGroupId = generatorUtils.generateResourceIdCommon(subscriptionId, groupName, 'networkSecurityGroups', createSubnetUsingId.networkSecurityGroupName);
+          createSubnetUsingId.routeTableId = generatorUtils.generateResourceIdCommon(subscriptionId, groupName, 'routeTables', createSubnetUsingId.routeTableName);
           done();
         }
       });
     });
     after(function (done) {
-      this.timeout(hour);
+      this.timeout(testTimeout);
       networkTestUtil.deleteGroup(groupName, suite, function () {
         suite.teardownSuite(done);
       });
@@ -184,14 +169,15 @@ describe('arm', function () {
     });
 
     describe('subnet', function () {
-      this.timeout(hour);
+      this.timeout(testTimeout);
       it('create should create subnet', function (done) {
-        var cmd = 'network vnet subnet create -g {group} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --network-security-group-name {networkSecurityGroupName} --route-table-name {routeTableName} --json'.formatArgs(subnets);
+        var cmd = 'network vnet subnet create -g {group} -n {name} --address-prefix {addressPrefix} --private-access-services {privateAccessServices} --vnet-name {virtualNetworkName} --network-security-group-name {networkSecurityGroupName} --route-table-name {routeTableName} --json'.formatArgs(subnets);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(subnets.name);
           output.addressPrefix.toLowerCase().should.equal(subnets.addressPrefix.toLowerCase());
+          output.privateAccessServices.forEach(function (item) { subnets.privateAccessServices.split(',').should.containEql(item.service) });
           done();
         });
       });
@@ -202,16 +188,18 @@ describe('arm', function () {
           var output = JSON.parse(result.text);
           output.name.should.equal(subnets.name);
           output.addressPrefix.toLowerCase().should.equal(subnets.addressPrefix.toLowerCase());
+          output.privateAccessServices.forEach(function (item) { subnets.privateAccessServices.split(',').should.containEql(item.service) });
           done();
         });
       });
       it('set should update subnet', function (done) {
-        var cmd = 'network vnet subnet set -g {group} -n {name} --address-prefix {addressPrefixNew} --vnet-name {virtualNetworkName} --json'.formatArgs(subnets);
+        var cmd = 'network vnet subnet set -g {group} -n {name} --address-prefix {addressPrefixNew} --private-access-services {privateAccessServicesNew} --vnet-name {virtualNetworkName} --json'.formatArgs(subnets);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(subnets.name);
           output.addressPrefix.toLowerCase().should.equal(subnets.addressPrefixNew.toLowerCase());
+          should.not.exist(output.privateAccessServices);
           done();
         });
       });

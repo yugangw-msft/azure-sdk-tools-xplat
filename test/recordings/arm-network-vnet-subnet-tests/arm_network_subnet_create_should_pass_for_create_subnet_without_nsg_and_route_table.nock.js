@@ -14,7 +14,7 @@ exports.getMockedProfile = function () {
     },
     tenantId: '72f988bf-86f1-41af-91ab-2d7cd011db47',
     state: 'Enabled',
-    registeredProviders: [],
+    registeredProviders: ['mobileservice'],
     _eventsCount: '1',
     isDefault: true
   }, newProfile.environments['AzureCloud']));
@@ -35,13 +35,13 @@ nock('http://management.azure.com:443')
   'content-length': '302',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '6cd78b9e-fb92-4572-8f8e-4204da2c44fe',
+  'x-ms-request-id': '87173b39-eb80-42ca-806d-a6b56d1fcd0d',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14937',
-  'x-ms-correlation-request-id': 'cc7b6311-8c6e-43eb-aa69-13e88e74c8ed',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170620T125821Z:cc7b6311-8c6e-43eb-aa69-13e88e74c8ed',
-  date: 'Tue, 20 Jun 2017 12:58:20 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14994',
+  'x-ms-correlation-request-id': '786d2668-2284-4c45-8f84-df47bee120f5',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170712T072258Z:786d2668-2284-4c45-8f84-df47bee120f5',
+  date: 'Wed, 12 Jul 2017 07:22:57 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
@@ -53,13 +53,13 @@ nock('https://management.azure.com:443')
   'content-length': '302',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '6cd78b9e-fb92-4572-8f8e-4204da2c44fe',
+  'x-ms-request-id': '87173b39-eb80-42ca-806d-a6b56d1fcd0d',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14937',
-  'x-ms-correlation-request-id': 'cc7b6311-8c6e-43eb-aa69-13e88e74c8ed',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170620T125821Z:cc7b6311-8c6e-43eb-aa69-13e88e74c8ed',
-  date: 'Tue, 20 Jun 2017 12:58:20 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14994',
+  'x-ms-correlation-request-id': '786d2668-2284-4c45-8f84-df47bee120f5',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170712T072258Z:786d2668-2284-4c45-8f84-df47bee120f5',
+  date: 'Wed, 12 Jul 2017 07:22:57 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
@@ -67,20 +67,20 @@ var result =
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
 .put('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-subnet/providers/Microsoft.Network/virtualNetworks/virtualNetworkName/subnets/createSubnetWithoutNsgAndRouteTableName?api-version=2017-06-01', '*')
-  .reply(201, "{\r\n  \"name\": \"createSubnetWithoutNsgAndRouteTableName\",\r\n  \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-subnet/providers/Microsoft.Network/virtualNetworks/virtualNetworkName/subnets/createSubnetWithoutNsgAndRouteTableName\",\r\n  \"etag\": \"W/\\\"00a7b656-80b2-4c8e-8287-446d815205ee\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Updating\",\r\n    \"addressPrefix\": \"10.0.0.0/16\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
+  .reply(201, "{\r\n  \"name\": \"createSubnetWithoutNsgAndRouteTableName\",\r\n  \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-subnet/providers/Microsoft.Network/virtualNetworks/virtualNetworkName/subnets/createSubnetWithoutNsgAndRouteTableName\",\r\n  \"etag\": \"W/\\\"82e82673-6b19-4412-98f0-93a19947effd\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Updating\",\r\n    \"addressPrefix\": \"10.0.0.0/16\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '421',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'retry-after': '3',
-  'x-ms-request-id': 'fac2e9ee-f240-4fb4-9559-e454c77fc8f6',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Network/locations/westus.validation/operations/fac2e9ee-f240-4fb4-9559-e454c77fc8f6?api-version=2017-06-01',
+  'x-ms-request-id': 'a9e9684f-04ca-402e-91d7-118732870169',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Network/locations/westus.validation/operations/a9e9684f-04ca-402e-91d7-118732870169?api-version=2017-06-01',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1198',
-  'x-ms-correlation-request-id': '999b0d29-0de0-41ba-81b1-51b5f35e47e7',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170620T125822Z:999b0d29-0de0-41ba-81b1-51b5f35e47e7',
-  date: 'Tue, 20 Jun 2017 12:58:21 GMT',
+  'x-ms-correlation-request-id': '8b0094cd-a5fe-4747-86b7-9c7b011cbe6e',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170712T072259Z:8b0094cd-a5fe-4747-86b7-9c7b011cbe6e',
+  date: 'Wed, 12 Jul 2017 07:22:59 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
@@ -88,132 +88,132 @@ var result =
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
 .put('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-subnet/providers/Microsoft.Network/virtualNetworks/virtualNetworkName/subnets/createSubnetWithoutNsgAndRouteTableName?api-version=2017-06-01', '*')
-  .reply(201, "{\r\n  \"name\": \"createSubnetWithoutNsgAndRouteTableName\",\r\n  \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-subnet/providers/Microsoft.Network/virtualNetworks/virtualNetworkName/subnets/createSubnetWithoutNsgAndRouteTableName\",\r\n  \"etag\": \"W/\\\"00a7b656-80b2-4c8e-8287-446d815205ee\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Updating\",\r\n    \"addressPrefix\": \"10.0.0.0/16\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
+  .reply(201, "{\r\n  \"name\": \"createSubnetWithoutNsgAndRouteTableName\",\r\n  \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-subnet/providers/Microsoft.Network/virtualNetworks/virtualNetworkName/subnets/createSubnetWithoutNsgAndRouteTableName\",\r\n  \"etag\": \"W/\\\"82e82673-6b19-4412-98f0-93a19947effd\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Updating\",\r\n    \"addressPrefix\": \"10.0.0.0/16\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '421',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'retry-after': '3',
-  'x-ms-request-id': 'fac2e9ee-f240-4fb4-9559-e454c77fc8f6',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Network/locations/westus.validation/operations/fac2e9ee-f240-4fb4-9559-e454c77fc8f6?api-version=2017-06-01',
+  'x-ms-request-id': 'a9e9684f-04ca-402e-91d7-118732870169',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Network/locations/westus.validation/operations/a9e9684f-04ca-402e-91d7-118732870169?api-version=2017-06-01',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1198',
-  'x-ms-correlation-request-id': '999b0d29-0de0-41ba-81b1-51b5f35e47e7',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170620T125822Z:999b0d29-0de0-41ba-81b1-51b5f35e47e7',
-  date: 'Tue, 20 Jun 2017 12:58:21 GMT',
+  'x-ms-correlation-request-id': '8b0094cd-a5fe-4747-86b7-9c7b011cbe6e',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170712T072259Z:8b0094cd-a5fe-4747-86b7-9c7b011cbe6e',
+  date: 'Wed, 12 Jul 2017 07:22:59 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Network/locations/westus.validation/operations/fac2e9ee-f240-4fb4-9559-e454c77fc8f6?api-version=2017-06-01')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Network/locations/westus.validation/operations/a9e9684f-04ca-402e-91d7-118732870169?api-version=2017-06-01')
   .reply(200, "{\r\n  \"status\": \"Succeeded\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '29',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'a53df2b6-0271-42a0-af1b-3eaaae7db5e2',
+  'x-ms-request-id': '22a24920-3464-4057-b25c-7474d0102bda',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14981',
-  'x-ms-correlation-request-id': '77af859a-9cac-4822-9dee-eee704e4d155',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170620T125854Z:77af859a-9cac-4822-9dee-eee704e4d155',
-  date: 'Tue, 20 Jun 2017 12:58:53 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14993',
+  'x-ms-correlation-request-id': '3e05824b-177e-444c-b8d4-3b6af3d8d6de',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170712T072330Z:3e05824b-177e-444c-b8d4-3b6af3d8d6de',
+  date: 'Wed, 12 Jul 2017 07:23:30 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Network/locations/westus.validation/operations/fac2e9ee-f240-4fb4-9559-e454c77fc8f6?api-version=2017-06-01')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Network/locations/westus.validation/operations/a9e9684f-04ca-402e-91d7-118732870169?api-version=2017-06-01')
   .reply(200, "{\r\n  \"status\": \"Succeeded\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '29',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'a53df2b6-0271-42a0-af1b-3eaaae7db5e2',
+  'x-ms-request-id': '22a24920-3464-4057-b25c-7474d0102bda',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14981',
-  'x-ms-correlation-request-id': '77af859a-9cac-4822-9dee-eee704e4d155',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170620T125854Z:77af859a-9cac-4822-9dee-eee704e4d155',
-  date: 'Tue, 20 Jun 2017 12:58:53 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14993',
+  'x-ms-correlation-request-id': '3e05824b-177e-444c-b8d4-3b6af3d8d6de',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170712T072330Z:3e05824b-177e-444c-b8d4-3b6af3d8d6de',
+  date: 'Wed, 12 Jul 2017 07:23:30 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
   .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-subnet/providers/Microsoft.Network/virtualNetworks/virtualNetworkName/subnets/createSubnetWithoutNsgAndRouteTableName?api-version=2017-06-01')
-  .reply(200, "{\r\n  \"name\": \"createSubnetWithoutNsgAndRouteTableName\",\r\n  \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-subnet/providers/Microsoft.Network/virtualNetworks/virtualNetworkName/subnets/createSubnetWithoutNsgAndRouteTableName\",\r\n  \"etag\": \"W/\\\"e79ce3de-fd71-445f-9db2-ddcdca184e34\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"addressPrefix\": \"10.0.0.0/16\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
+  .reply(200, "{\r\n  \"name\": \"createSubnetWithoutNsgAndRouteTableName\",\r\n  \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-subnet/providers/Microsoft.Network/virtualNetworks/virtualNetworkName/subnets/createSubnetWithoutNsgAndRouteTableName\",\r\n  \"etag\": \"W/\\\"7ac00a21-7578-4ae7-94ae-66bc7210746a\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"addressPrefix\": \"10.0.0.0/16\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '422',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  etag: 'W/"e79ce3de-fd71-445f-9db2-ddcdca184e34"',
-  'x-ms-request-id': '85217cc5-b995-4ee6-ac07-1499645ad2d4',
+  etag: 'W/"7ac00a21-7578-4ae7-94ae-66bc7210746a"',
+  'x-ms-request-id': '9e0d0cd8-c4e6-4bbf-ac1f-99d576746b97',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14985',
-  'x-ms-correlation-request-id': '7f6ac6be-9f26-4758-b359-333278f084a2',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170620T125855Z:7f6ac6be-9f26-4758-b359-333278f084a2',
-  date: 'Tue, 20 Jun 2017 12:58:54 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14996',
+  'x-ms-correlation-request-id': 'eaa04cea-cd70-47bd-94c5-5f55d7341e5d',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170712T072331Z:eaa04cea-cd70-47bd-94c5-5f55d7341e5d',
+  date: 'Wed, 12 Jul 2017 07:23:31 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
   .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-subnet/providers/Microsoft.Network/virtualNetworks/virtualNetworkName/subnets/createSubnetWithoutNsgAndRouteTableName?api-version=2017-06-01')
-  .reply(200, "{\r\n  \"name\": \"createSubnetWithoutNsgAndRouteTableName\",\r\n  \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-subnet/providers/Microsoft.Network/virtualNetworks/virtualNetworkName/subnets/createSubnetWithoutNsgAndRouteTableName\",\r\n  \"etag\": \"W/\\\"e79ce3de-fd71-445f-9db2-ddcdca184e34\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"addressPrefix\": \"10.0.0.0/16\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
+  .reply(200, "{\r\n  \"name\": \"createSubnetWithoutNsgAndRouteTableName\",\r\n  \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-subnet/providers/Microsoft.Network/virtualNetworks/virtualNetworkName/subnets/createSubnetWithoutNsgAndRouteTableName\",\r\n  \"etag\": \"W/\\\"7ac00a21-7578-4ae7-94ae-66bc7210746a\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"addressPrefix\": \"10.0.0.0/16\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '422',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  etag: 'W/"e79ce3de-fd71-445f-9db2-ddcdca184e34"',
-  'x-ms-request-id': '85217cc5-b995-4ee6-ac07-1499645ad2d4',
+  etag: 'W/"7ac00a21-7578-4ae7-94ae-66bc7210746a"',
+  'x-ms-request-id': '9e0d0cd8-c4e6-4bbf-ac1f-99d576746b97',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14985',
-  'x-ms-correlation-request-id': '7f6ac6be-9f26-4758-b359-333278f084a2',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170620T125855Z:7f6ac6be-9f26-4758-b359-333278f084a2',
-  date: 'Tue, 20 Jun 2017 12:58:54 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14996',
+  'x-ms-correlation-request-id': 'eaa04cea-cd70-47bd-94c5-5f55d7341e5d',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170712T072331Z:eaa04cea-cd70-47bd-94c5-5f55d7341e5d',
+  date: 'Wed, 12 Jul 2017 07:23:31 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
   .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-subnet/providers/Microsoft.Network/virtualNetworks/virtualNetworkName/subnets/createSubnetWithoutNsgAndRouteTableName?api-version=2017-06-01')
-  .reply(200, "{\r\n  \"name\": \"createSubnetWithoutNsgAndRouteTableName\",\r\n  \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-subnet/providers/Microsoft.Network/virtualNetworks/virtualNetworkName/subnets/createSubnetWithoutNsgAndRouteTableName\",\r\n  \"etag\": \"W/\\\"e79ce3de-fd71-445f-9db2-ddcdca184e34\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"addressPrefix\": \"10.0.0.0/16\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
+  .reply(200, "{\r\n  \"name\": \"createSubnetWithoutNsgAndRouteTableName\",\r\n  \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-subnet/providers/Microsoft.Network/virtualNetworks/virtualNetworkName/subnets/createSubnetWithoutNsgAndRouteTableName\",\r\n  \"etag\": \"W/\\\"7ac00a21-7578-4ae7-94ae-66bc7210746a\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"addressPrefix\": \"10.0.0.0/16\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '422',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  etag: 'W/"e79ce3de-fd71-445f-9db2-ddcdca184e34"',
-  'x-ms-request-id': '5ef1caf2-8520-4cd6-a90f-c7dad1f59d91',
+  etag: 'W/"7ac00a21-7578-4ae7-94ae-66bc7210746a"',
+  'x-ms-request-id': '26a7776a-7bd3-4f12-8845-18d2e6a80508',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14976',
-  'x-ms-correlation-request-id': '0614b084-14d0-4d6c-928a-9f6001f32fa8',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170620T125857Z:0614b084-14d0-4d6c-928a-9f6001f32fa8',
-  date: 'Tue, 20 Jun 2017 12:58:57 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14992',
+  'x-ms-correlation-request-id': 'e1fd1243-00f6-4915-aa3c-d851363d5fe5',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170712T072333Z:e1fd1243-00f6-4915-aa3c-d851363d5fe5',
+  date: 'Wed, 12 Jul 2017 07:23:32 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
   .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-subnet/providers/Microsoft.Network/virtualNetworks/virtualNetworkName/subnets/createSubnetWithoutNsgAndRouteTableName?api-version=2017-06-01')
-  .reply(200, "{\r\n  \"name\": \"createSubnetWithoutNsgAndRouteTableName\",\r\n  \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-subnet/providers/Microsoft.Network/virtualNetworks/virtualNetworkName/subnets/createSubnetWithoutNsgAndRouteTableName\",\r\n  \"etag\": \"W/\\\"e79ce3de-fd71-445f-9db2-ddcdca184e34\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"addressPrefix\": \"10.0.0.0/16\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
+  .reply(200, "{\r\n  \"name\": \"createSubnetWithoutNsgAndRouteTableName\",\r\n  \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-subnet/providers/Microsoft.Network/virtualNetworks/virtualNetworkName/subnets/createSubnetWithoutNsgAndRouteTableName\",\r\n  \"etag\": \"W/\\\"7ac00a21-7578-4ae7-94ae-66bc7210746a\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"addressPrefix\": \"10.0.0.0/16\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '422',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  etag: 'W/"e79ce3de-fd71-445f-9db2-ddcdca184e34"',
-  'x-ms-request-id': '5ef1caf2-8520-4cd6-a90f-c7dad1f59d91',
+  etag: 'W/"7ac00a21-7578-4ae7-94ae-66bc7210746a"',
+  'x-ms-request-id': '26a7776a-7bd3-4f12-8845-18d2e6a80508',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14976',
-  'x-ms-correlation-request-id': '0614b084-14d0-4d6c-928a-9f6001f32fa8',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170620T125857Z:0614b084-14d0-4d6c-928a-9f6001f32fa8',
-  date: 'Tue, 20 Jun 2017 12:58:57 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14992',
+  'x-ms-correlation-request-id': 'e1fd1243-00f6-4915-aa3c-d851363d5fe5',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170712T072333Z:e1fd1243-00f6-4915-aa3c-d851363d5fe5',
+  date: 'Wed, 12 Jul 2017 07:23:32 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
@@ -224,16 +224,16 @@ nock('http://management.azure.com:443')
   pragma: 'no-cache',
   'content-length': '0',
   expires: '-1',
-  location: 'https://management.azure.com/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Network/locations/westus.validation/operationResults/caed9561-f9f2-4e7e-8dfe-e5ba541df9bd?api-version=2017-06-01',
+  location: 'https://management.azure.com/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Network/locations/westus.validation/operationResults/d054bf93-32e3-493d-9d8b-4f0108bacae8?api-version=2017-06-01',
   'retry-after': '10',
-  'x-ms-request-id': 'caed9561-f9f2-4e7e-8dfe-e5ba541df9bd',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Network/locations/westus.validation/operations/caed9561-f9f2-4e7e-8dfe-e5ba541df9bd?api-version=2017-06-01',
+  'x-ms-request-id': 'd054bf93-32e3-493d-9d8b-4f0108bacae8',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Network/locations/westus.validation/operations/d054bf93-32e3-493d-9d8b-4f0108bacae8?api-version=2017-06-01',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-writes': '1197',
-  'x-ms-correlation-request-id': 'd9e7c641-cfaf-4fe1-9209-e4ae21821015',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170620T125859Z:d9e7c641-cfaf-4fe1-9209-e4ae21821015',
-  date: 'Tue, 20 Jun 2017 12:58:58 GMT',
+  'x-ms-ratelimit-remaining-subscription-writes': '1199',
+  'x-ms-correlation-request-id': '0ce88399-3c46-4298-8a3b-ab77d8f52b62',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170712T072335Z:0ce88399-3c46-4298-8a3b-ab77d8f52b62',
+  date: 'Wed, 12 Jul 2017 07:23:34 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
@@ -244,51 +244,51 @@ nock('https://management.azure.com:443')
   pragma: 'no-cache',
   'content-length': '0',
   expires: '-1',
-  location: 'https://management.azure.com/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Network/locations/westus.validation/operationResults/caed9561-f9f2-4e7e-8dfe-e5ba541df9bd?api-version=2017-06-01',
+  location: 'https://management.azure.com/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Network/locations/westus.validation/operationResults/d054bf93-32e3-493d-9d8b-4f0108bacae8?api-version=2017-06-01',
   'retry-after': '10',
-  'x-ms-request-id': 'caed9561-f9f2-4e7e-8dfe-e5ba541df9bd',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Network/locations/westus.validation/operations/caed9561-f9f2-4e7e-8dfe-e5ba541df9bd?api-version=2017-06-01',
+  'x-ms-request-id': 'd054bf93-32e3-493d-9d8b-4f0108bacae8',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Network/locations/westus.validation/operations/d054bf93-32e3-493d-9d8b-4f0108bacae8?api-version=2017-06-01',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-writes': '1197',
-  'x-ms-correlation-request-id': 'd9e7c641-cfaf-4fe1-9209-e4ae21821015',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170620T125859Z:d9e7c641-cfaf-4fe1-9209-e4ae21821015',
-  date: 'Tue, 20 Jun 2017 12:58:58 GMT',
+  'x-ms-ratelimit-remaining-subscription-writes': '1199',
+  'x-ms-correlation-request-id': '0ce88399-3c46-4298-8a3b-ab77d8f52b62',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170712T072335Z:0ce88399-3c46-4298-8a3b-ab77d8f52b62',
+  date: 'Wed, 12 Jul 2017 07:23:34 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Network/locations/westus.validation/operations/caed9561-f9f2-4e7e-8dfe-e5ba541df9bd?api-version=2017-06-01')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Network/locations/westus.validation/operations/d054bf93-32e3-493d-9d8b-4f0108bacae8?api-version=2017-06-01')
   .reply(200, "{\r\n  \"status\": \"Succeeded\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '29',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '163ddf9d-75ce-46e7-bf5e-12ac8e55e8e9',
+  'x-ms-request-id': 'b7170991-6f50-4bb0-be9d-50c6f8abbf7c',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14926',
-  'x-ms-correlation-request-id': 'cc556d3b-54cd-4457-a33f-3d622bbb1a81',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170620T125930Z:cc556d3b-54cd-4457-a33f-3d622bbb1a81',
-  date: 'Tue, 20 Jun 2017 12:59:30 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14995',
+  'x-ms-correlation-request-id': '8cf7a357-3d17-4aea-b970-43537cb753c8',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170712T072406Z:8cf7a357-3d17-4aea-b970-43537cb753c8',
+  date: 'Wed, 12 Jul 2017 07:24:06 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Network/locations/westus.validation/operations/caed9561-f9f2-4e7e-8dfe-e5ba541df9bd?api-version=2017-06-01')
+  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/providers/Microsoft.Network/locations/westus.validation/operations/d054bf93-32e3-493d-9d8b-4f0108bacae8?api-version=2017-06-01')
   .reply(200, "{\r\n  \"status\": \"Succeeded\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '29',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '163ddf9d-75ce-46e7-bf5e-12ac8e55e8e9',
+  'x-ms-request-id': 'b7170991-6f50-4bb0-be9d-50c6f8abbf7c',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14926',
-  'x-ms-correlation-request-id': 'cc556d3b-54cd-4457-a33f-3d622bbb1a81',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170620T125930Z:cc556d3b-54cd-4457-a33f-3d622bbb1a81',
-  date: 'Tue, 20 Jun 2017 12:59:30 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14995',
+  'x-ms-correlation-request-id': '8cf7a357-3d17-4aea-b970-43537cb753c8',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170712T072406Z:8cf7a357-3d17-4aea-b970-43537cb753c8',
+  date: 'Wed, 12 Jul 2017 07:24:06 GMT',
   connection: 'close' });
  return result; }]];
