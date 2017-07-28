@@ -50,7 +50,6 @@ commands/arm/batch/arm.batch.application-tests.js
 # START - Network Tests
 commands/arm/network/arm.network.local-gateway-tests.js
 commands/arm/network/arm.network.usage-tests.js
-commands/arm/network/arm.network.private-access-service-tests.js
 commands/arm/network/arm.network.vpn-connection-tests.js
 commands/arm/network/arm.network.vpn-gateway-tests.js
 # Application Gateway
