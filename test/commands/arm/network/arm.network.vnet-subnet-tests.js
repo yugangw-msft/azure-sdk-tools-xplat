@@ -43,8 +43,6 @@ var index = 0;
 var subnets = {
   addressPrefix: '10.0.0.0/16',
   addressPrefixNew: '10.0.0.0/24',
-  privateAccessServices: 'Microsoft.Storage',
-  privateAccessServicesNew: '',
   name: 'subnetName'
 };
 
@@ -53,51 +51,56 @@ subnets.networkSecurityGroupName = 'networkSecurityGroupName';
 subnets.routeTableName = 'routeTableName';
 
 var virtualNetwork = {
-  location: 'westus'
+  location: 'westus',
+  name: 'virtualNetworkName'
 };
+
 var networkSecurityGroup = {
-  location: 'westus'
+  location: 'westus',
+  name: 'networkSecurityGroupName'
 };
+
 var routeTable = {
-  location: 'westus'
+  location: 'westus',
+  name: 'routeTableName'
 };
+
 var invalidPrefixes = {
   addressPrefix: 'InvalidPrefixes',
   virtualNetworkName: 'virtualNetworkName',
   networkSecurityGroupName: 'networkSecurityGroupName',
   routeTableName: 'routeTableName',
-  name: 'invalidPrefixesName',
-  group: groupName
+  name: 'invalidPrefixesName'
 };
+
 var prefixesOutOfRange = {
   addressPrefix: '11.0.0.0/8',
   virtualNetworkName: 'virtualNetworkName',
   networkSecurityGroupName: 'networkSecurityGroupName',
   routeTableName: 'routeTableName',
-  name: 'prefixesOutOfRangeName',
-  group: groupName
+  name: 'prefixesOutOfRangeName'
 };
+
 var createSubnetWithoutNsgAndRouteTable = {
   addressPrefix: '10.0.0.0/16',
   virtualNetworkName: 'virtualNetworkName',
-  name: 'createSubnetWithoutNsgAndRouteTableName',
-  group: groupName
+  name: 'createSubnetWithoutNsgAndRouteTableName'
 };
+
 var createSubnetUsingId = {
   addressPrefix: '10.0.0.0/16',
   virtualNetworkName: 'virtualNetworkName',
   networkSecurityGroupName: 'networkSecurityGroupName',
   routeTableName: 'routeTableName',
-  name: 'createSubnetUsingIdName',
-  group: groupName
+  name: 'createSubnetUsingIdName'
 };
+
 var removeNsgAndRouteTableFromSubnet = {
   addressPrefix: '10.0.0.0/16',
   virtualNetworkName: 'virtualNetworkName',
   networkSecurityGroupName: 'networkSecurityGroupName',
   routeTableName: 'routeTableName',
-  name: 'removeNsgAndRouteTableFromSubnetName',
-  group: groupName
+  name: 'removeNsgAndRouteTableFromSubnetName'
 };
 
 var requiredEnvironment = [{
@@ -129,15 +132,15 @@ describe('arm', function () {
 
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
-            var cmd = 'network vnet create -g {1} -n virtualNetworkName --location {location} --json'.formatArgs(virtualNetwork, groupName);
+            var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
             testUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
-              var cmd = 'network nsg create -g {1} -n networkSecurityGroupName --location {location} --json'.formatArgs(networkSecurityGroup, groupName);
+              var cmd = 'network nsg create -g {1} -n {name} --location {location} --json'.formatArgs(networkSecurityGroup, groupName);
               testUtils.executeCommand(suite, retry, cmd, function (result) {
                 result.exitStatus.should.equal(0);
                 var output = JSON.parse(result.text);
                 createSubnetUsingId.networkSecurityGroupId = output.id;
-                var cmd = 'network route-table create -g {1} -n routeTableName --location {location} --json'.formatArgs(routeTable, groupName);
+                var cmd = 'network route-table create -g {1} -n {name} --location {location} --json'.formatArgs(routeTable, groupName);
                 testUtils.executeCommand(suite, retry, cmd, function (result) {
                   result.exitStatus.should.equal(0);
                   var output = JSON.parse(result.text);
@@ -171,13 +174,12 @@ describe('arm', function () {
     describe('subnet', function () {
       this.timeout(testTimeout);
       it('create should create subnet', function (done) {
-        var cmd = 'network vnet subnet create -g {group} -n {name} --address-prefix {addressPrefix} --private-access-services {privateAccessServices} --vnet-name {virtualNetworkName} --network-security-group-name {networkSecurityGroupName} --route-table-name {routeTableName} --json'.formatArgs(subnets);
+        var cmd = 'network vnet subnet create -g {group} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --network-security-group-name {networkSecurityGroupName} --route-table-name {routeTableName} --json'.formatArgs(subnets);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(subnets.name);
           output.addressPrefix.toLowerCase().should.equal(subnets.addressPrefix.toLowerCase());
-          output.privateAccessServices.forEach(function (item) { subnets.privateAccessServices.split(',').should.containEql(item.service) });
           done();
         });
       });
@@ -188,18 +190,16 @@ describe('arm', function () {
           var output = JSON.parse(result.text);
           output.name.should.equal(subnets.name);
           output.addressPrefix.toLowerCase().should.equal(subnets.addressPrefix.toLowerCase());
-          output.privateAccessServices.forEach(function (item) { subnets.privateAccessServices.split(',').should.containEql(item.service) });
           done();
         });
       });
       it('set should update subnet', function (done) {
-        var cmd = 'network vnet subnet set -g {group} -n {name} --address-prefix {addressPrefixNew} --private-access-services {privateAccessServicesNew} --vnet-name {virtualNetworkName} --json'.formatArgs(subnets);
+        var cmd = 'network vnet subnet set -g {group} -n {name} --address-prefix {addressPrefixNew} --vnet-name {virtualNetworkName} --json'.formatArgs(subnets);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(subnets.name);
           output.addressPrefix.toLowerCase().should.equal(subnets.addressPrefixNew.toLowerCase());
-          should.not.exist(output.privateAccessServices);
           done();
         });
       });
@@ -215,7 +215,7 @@ describe('arm', function () {
         });
       });
       it('delete should delete subnet', function (done) {
-        var cmd = 'network vnet subnet delete -g {group} -n {name} --quiet --vnet-name {virtualNetworkName} --json'.formatArgs(subnets);
+        var cmd = 'network vnet subnet delete -g {group} -n {name} --vnet-name {virtualNetworkName} --quiet --json'.formatArgs(subnets);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
