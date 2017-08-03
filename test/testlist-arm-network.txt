@@ -30,7 +30,8 @@ commands/arm/network/arm.network.lb-inbound-nat-rule-tests.js
 commands/arm/network/arm.network.lb-probe-tests.js
 commands/arm/network/arm.network.lb-rule-tests.js
 # Local Network Gateways
-commands/arm/network/arm.network.local-gateway-tests.js
+commands/arm/network/generated/arm.network.local-gateway-tests.json-output.js
+commands/arm/network/generated/arm.network.local-gateway-tests.text-output.js
 # Network Security Groups
 commands/arm/network/arm.network.nsg-tests.js
 commands/arm/network/arm.network.nsg-rule-tests.js

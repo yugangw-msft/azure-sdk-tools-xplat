@@ -24,18 +24,18 @@ var should = require('should');
 var util = require('util');
 var _ = require('underscore');
 
-var CLITest = require('../../../framework/arm-cli-test');
-var utils = require('../../../../lib/util/utils');
-var tagUtils = require('../../../../lib/commands/arm/tag/tagUtils');
-var testUtils = require('../../../util/util');
+var CLITest = require('../../../../framework/arm-cli-test');
+var utils = require('../../../../../lib/util/utils');
+var tagUtils = require('../../../../../lib/commands/arm/tag/tagUtils');
+var testUtils = require('../../../../util/util');
 
-var networkTestUtil = new (require('../../../util/networkTestUtil'))();
+var networkTestUtil = new (require('../../../../util/networkTestUtil'))();
 
-var generatorUtils = require('../../../../lib/util/generatorUtils');
-var profile = require('../../../../lib/util/profile');
+var generatorUtils = require('../../../../../lib/util/generatorUtils');
+var profile = require('../../../../../lib/util/profile');
 var $ = utils.getLocaleString;
 
-var testPrefix = 'arm-network-local-gateway-tests',
+var testPrefix = 'arm-network-local-gateway-tests-generated',
   groupName = 'xplat-test-local-gateway',
   location;
 var index = 0;
@@ -54,33 +54,33 @@ var localNetworkGateways = {
   location: 'westus',
   name: 'localNetworkGatewayName'
 };
+
 var invalidPrefixes = {
   addressPrefixes: '192.168.0.0',
   gatewayIpAddress: '10.0.0.12',
   location: 'westus',
-  name: 'invalidPrefixesName',
-  group: groupName
+  name: 'invalidPrefixesName'
 };
+
 var invalidIPAddress = {
   gatewayIpAddress: '10.0.0.257',
   location: 'westus',
-  name: 'invalidIPAddressName',
-  group: groupName
+  name: 'invalidIPAddressName'
 };
+
 var invalidBgpPeeringAddress = {
   asn: '1',
   bgpPeeringAddress: '11.0.0.257',
   gatewayIpAddress: '10.0.0.12',
   location: 'westus',
-  name: 'invalidBgpPeeringAddressName',
-  group: groupName
+  name: 'invalidBgpPeeringAddressName'
 };
+
 var zeroAsn = {
   asn: '0',
   gatewayIpAddress: '10.0.0.12',
   location: 'westus',
-  name: 'zeroASNName',
-  group: groupName
+  name: 'zeroASNName'
 };
 
 var requiredEnvironment = [{
@@ -92,28 +92,34 @@ describe('arm', function () {
   describe('network', function () {
     var suite, retry = 5;
     var hour = 60 * 60000;
+    var testTimeout = hour;
 
     before(function (done) {
-      this.timeout(hour);
+      this.timeout(testTimeout);
       suite = new CLITest(this, testPrefix, requiredEnvironment);
       suite.setupSuite(function () {
         location = localNetworkGateways.location || process.env.AZURE_VM_TEST_LOCATION;
         groupName = suite.isMocked ? groupName : suite.generateId(groupName, null);
         localNetworkGateways.location = location;
-        localNetworkGateways.group = groupName;
         localNetworkGateways.name = suite.isMocked ? localNetworkGateways.name : suite.generateId(localNetworkGateways.name, null);
+
+        localNetworkGateways.group = groupName;
+        invalidPrefixes.group = groupName;
+        invalidIPAddress.group = groupName;
+        invalidBgpPeeringAddress.group = groupName;
+        zeroAsn.group = groupName;
+
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             done();
           });
         } else {
-          var subscriptionId = profile.current.getSubscription().id;
           done();
         }
       });
     });
     after(function (done) {
-      this.timeout(hour);
+      this.timeout(testTimeout);
       networkTestUtil.deleteGroup(groupName, suite, function () {
         suite.teardownSuite(done);
       });
@@ -126,14 +132,14 @@ describe('arm', function () {
     });
 
     describe('local network gateways', function () {
-      this.timeout(hour);
+      this.timeout(testTimeout);
       it('create should create local network gateways', function (done) {
         var cmd = 'network local-gateway create -g {group} -n {name} --address-space {addressPrefixes} --ip-address {gatewayIpAddress} --asn {asn} --bgp-peering-address {bgpPeeringAddress} --peer-weight {peerWeight} --location {location} --json'.formatArgs(localNetworkGateways);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(localNetworkGateways.name);
-          localNetworkGateways.addressPrefixes.split(',').forEach(function(item) { output.localNetworkAddressSpace.addressPrefixes.should.containEql(item) });
+          localNetworkGateways.addressPrefixes.split(',').forEach(function (item) { output.localNetworkAddressSpace.addressPrefixes.should.containEql(item) });
           output.gatewayIpAddress.toLowerCase().should.equal(localNetworkGateways.gatewayIpAddress.toLowerCase());
           output.bgpSettings.asn.should.equal(parseInt(localNetworkGateways.asn, 10));
           output.bgpSettings.bgpPeeringAddress.toLowerCase().should.equal(localNetworkGateways.bgpPeeringAddress.toLowerCase());
@@ -147,7 +153,7 @@ describe('arm', function () {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(localNetworkGateways.name);
-          localNetworkGateways.addressPrefixes.split(',').forEach(function(item) { output.localNetworkAddressSpace.addressPrefixes.should.containEql(item) });
+          localNetworkGateways.addressPrefixes.split(',').forEach(function (item) { output.localNetworkAddressSpace.addressPrefixes.should.containEql(item) });
           output.gatewayIpAddress.toLowerCase().should.equal(localNetworkGateways.gatewayIpAddress.toLowerCase());
           output.bgpSettings.asn.should.equal(parseInt(localNetworkGateways.asn, 10));
           output.bgpSettings.bgpPeeringAddress.toLowerCase().should.equal(localNetworkGateways.bgpPeeringAddress.toLowerCase());
@@ -161,8 +167,8 @@ describe('arm', function () {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(localNetworkGateways.name);
-          localNetworkGateways.addressPrefixesNew.split(',').forEach(function(item) { output.localNetworkAddressSpace.addressPrefixes.should.containEql(item) });
-          localNetworkGateways.addressPrefixes.split(',').forEach(function(item) { output.localNetworkAddressSpace.addressPrefixes.should.containEql(item) });
+          localNetworkGateways.addressPrefixesNew.split(',').forEach(function (item) { output.localNetworkAddressSpace.addressPrefixes.should.containEql(item) });
+          localNetworkGateways.addressPrefixes.split(',').forEach(function (item) { output.localNetworkAddressSpace.addressPrefixes.should.containEql(item) });
           output.gatewayIpAddress.toLowerCase().should.equal(localNetworkGateways.gatewayIpAddressNew.toLowerCase());
           output.bgpSettings.asn.should.equal(parseInt(localNetworkGateways.asnNew, 10));
           output.bgpSettings.bgpPeeringAddress.toLowerCase().should.equal(localNetworkGateways.bgpPeeringAddressNew.toLowerCase());
