@@ -19,10 +19,10 @@ var should = require('should');
 var util = require('util');
 var _ = require('underscore');
 
-var testUtils = require('../../../util/util');
 var CLITest = require('../../../framework/arm-cli-test');
-var NetworkTestUtil = require('../../../util/networkTestUtil');
-var networkUtil = new NetworkTestUtil();
+var testUtils = require('../../../util/util');
+
+var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var testPrefix = 'arm-network-vpn-connection-tests',
   location;
@@ -43,7 +43,7 @@ var firstGatewayProp = {
   bgpPeerWeight: 0,
   privateIpAddress: '10.1.0.11',
   enableBgp: false,
-  tags: networkUtil.tags
+  tags: networkTestUtil.tags
 };
 
 var secondGatewayProp = {
@@ -62,7 +62,7 @@ var secondGatewayProp = {
   bgpPeerWeight: 0,
   privateIpAddress: '10.2.0.11',
   enableBgp: false,
-  tags: networkUtil.tags
+  tags: networkTestUtil.tags
 };
 
 var connectionProp = {
@@ -74,8 +74,8 @@ var connectionProp = {
   routingWeight: 22,
   newRoutingWeight: 33,
   enableBgp: true,
-  tags: networkUtil.tags,
-  newTags: networkUtil.newTags
+  tags: networkTestUtil.tags,
+  newTags: networkTestUtil.newTags
 };
 
 var requiredEnvironment = [{
@@ -123,8 +123,8 @@ describe('arm', function () {
       */
       this.timeout(hour);
 
-      networkUtil.deleteGroup(firstGatewayProp.group, suite, function () {
-        networkUtil.deleteGroup(secondGatewayProp.group, suite, function () {
+      networkTestUtil.deleteGroup(firstGatewayProp.group, suite, function () {
+        networkTestUtil.deleteGroup(secondGatewayProp.group, suite, function () {
            suite.teardownSuite(done);
         });
       });
@@ -144,15 +144,15 @@ describe('arm', function () {
       this.timeout(hour);
 
       it('create first gateway should create vpn gateway in resource group', function (done) {
-        networkUtil.createGroup(firstGatewayProp.group, location, suite, function () {
-          networkUtil.createVpnGateway(firstGatewayProp, suite, function() {
+        networkTestUtil.createGroup(firstGatewayProp.group, location, suite, function () {
+          networkTestUtil.createVpnGateway(firstGatewayProp, suite, function() {
             done();
           });
         });
       });
       it('create second gateway should create vpn gateway in another resource group', function (done) {
-        networkUtil.createGroup(secondGatewayProp.group, location, suite, function () {
-          networkUtil.createVpnGateway(secondGatewayProp, suite, function() {
+        networkTestUtil.createGroup(secondGatewayProp.group, location, suite, function () {
+          networkTestUtil.createVpnGateway(secondGatewayProp, suite, function() {
             done();
           });
         });
@@ -168,8 +168,8 @@ describe('arm', function () {
           connection.name.should.equal(connectionProp.name);
           connection.connectionType.should.equal(connectionProp.type);
           connection.routingWeight.should.equal(connectionProp.routingWeight);
-          networkUtil.shouldHaveTags(connection);
-          networkUtil.shouldBeSucceeded(connection);
+          networkTestUtil.shouldHaveTags(connection);
+          networkTestUtil.shouldBeSucceeded(connection);
           done();
         });
       });
@@ -182,8 +182,8 @@ describe('arm', function () {
           var connection = JSON.parse(result.text);
           connection.name.should.equal(connectionProp.name);
           connection.routingWeight.should.equal(connectionProp.newRoutingWeight);
-          networkUtil.shouldAppendTags(connection);
-          networkUtil.shouldBeSucceeded(connection);
+          networkTestUtil.shouldAppendTags(connection);
+          networkTestUtil.shouldBeSucceeded(connection);
           done();
         });
       });
