@@ -58,6 +58,8 @@ commands/arm/network/generated/arm.network.usage-tests.text-output.js
 # Virtual Network Gateways
 commands/arm/network/arm.network.vpn-connection-tests.js
 commands/arm/network/arm.network.vpn-gateway-tests.js
+commands/arm/network/generated/arm.network.vpn-gateway-tests.json-output.js
+commands/arm/network/generated/arm.network.vpn-gateway-tests.text-output.js
 # Virtual Networks
 commands/arm/network/arm.network.vnet-tests.js
 commands/arm/network/arm.network.vnet-peering-tests.js
