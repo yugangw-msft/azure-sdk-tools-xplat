@@ -19,10 +19,10 @@ var should = require('should');
 var util = require('util');
 var _ = require('underscore');
 
-var testUtils = require('../../../util/util');
 var CLITest = require('../../../framework/arm-cli-test');
-var NetworkTestUtil = require('../../../util/networkTestUtil');
-var networkUtil = new NetworkTestUtil();
+var testUtils = require('../../../util/util');
+
+var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var testPrefix = 'arm-network-dns-zone-tests',
   groupName = 'xplat-test-dns-zone',
@@ -32,8 +32,8 @@ var zoneProp = {
   name: 'exampledns.com',
   importPath: 'test/data/zone_file_import.txt',
   exportPath: 'test/data/zone_file_export.txt',
-  tags: networkUtil.tags,
-  newTags: networkUtil.newTags
+  tags: networkTestUtil.tags,
+  newTags: networkTestUtil.newTags
 };
 
 var requiredEnvironment = [{
@@ -58,7 +58,7 @@ describe('arm', function () {
       });
     });
     after(function (done) {
-      networkUtil.deleteGroup(groupName, suite, function () {
+      networkTestUtil.deleteGroup(groupName, suite, function () {
         suite.teardownSuite(done);
       });
     });
@@ -71,9 +71,9 @@ describe('arm', function () {
 
     describe('dns zone', function () {
       it('create should create dns zone', function (done) {
-        networkUtil.createGroup(groupName, location, suite, function () {
-          networkUtil.createDnsZone(zoneProp, suite, function(zone) {
-            networkUtil.shouldHaveTags(zone);
+        networkTestUtil.createGroup(groupName, location, suite, function () {
+          networkTestUtil.createDnsZone(zoneProp, suite, function(zone) {
+            networkTestUtil.shouldHaveTags(zone);
             done();
           });
         });
@@ -84,7 +84,7 @@ describe('arm', function () {
           result.exitStatus.should.equal(0);
           var zone = JSON.parse(result.text);
           zone.name.should.equal(zoneProp.name);
-          networkUtil.shouldAppendTags(zone);
+          networkTestUtil.shouldAppendTags(zone);
           done();
         });
       });
@@ -137,7 +137,7 @@ describe('arm', function () {
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
-          networkUtil.listDnsRecordSets(zoneProp, suite, function (sets) {
+          networkTestUtil.listDnsRecordSets(zoneProp, suite, function (sets) {
             // TODO add more validation
             done();
           });
