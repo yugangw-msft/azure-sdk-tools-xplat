@@ -18,9 +18,13 @@ commands/arm/network/arm.network.application-gateway-waf-config-tests.js
 commands/arm/network/arm.network.dns-zone-tests.js
 commands/arm/network/arm.network.dns-zone-record-set-tests.js
 # Express Route
-commands/arm/network/arm.network.express-route-authorization-tests.js
 commands/arm/network/arm.network.express-route-circuit-tests.js
-commands/arm/network/arm.network.express-route-peering-tests.js
+commands/arm/network/generated/arm.network.express-route-circuit-express-route-circuit-authorization-tests.json-output.js
+commands/arm/network/generated/arm.network.express-route-circuit-express-route-circuit-authorization-tests.text-output.js
+commands/arm/network/generated/arm.network.express-route-circuit-express-route-circuit-peering-tests.json-output.js
+commands/arm/network/generated/arm.network.express-route-circuit-express-route-circuit-peering-tests.text-output.js
+commands/arm/network/generated/arm.network.express-route-circuit-tests.json-output.js
+commands/arm/network/generated/arm.network.express-route-circuit-tests.text-output.js
 # Load Balancers
 commands/arm/network/arm.network.lb-tests.js
 commands/arm/network/arm.network.lb-address-pool-tests.js
