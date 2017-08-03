@@ -36,8 +36,10 @@ commands/arm/network/generated/arm.network.local-gateway-tests.text-output.js
 commands/arm/network/arm.network.nsg-tests.js
 commands/arm/network/arm.network.nsg-rule-tests.js
 # Network Watcher
-commands/arm/network/arm.network.watcher-tests.js
-commands/arm/network/arm.network.watcher-packet-capture-tests.js
+commands/arm/network/generated/arm.network.watcher-packet-capture-tests.json-output.js
+commands/arm/network/generated/arm.network.watcher-packet-capture-tests.text-output.js
+commands/arm/network/generated/arm.network.watcher-tests.json-output.js
+commands/arm/network/generated/arm.network.watcher-tests.text-output.js
 # Network Interfaces
 commands/arm/network/arm.network.nic-custom-tests.js
 commands/arm/network/arm.network.nic-tests.js
