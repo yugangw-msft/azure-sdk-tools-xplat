@@ -47,68 +47,8 @@ commands/arm/batch/arm.batch.account-tests.js
 commands/arm/batch/arm.batch.subscription-tests.js
 commands/arm/batch/arm.batch.application-tests.js
 
-# START - Network Tests
-commands/arm/network/arm.network.local-gateway-tests.js
-commands/arm/network/arm.network.usage-tests.js
-commands/arm/network/arm.network.vpn-connection-tests.js
-commands/arm/network/arm.network.vpn-gateway-tests.js
-# Application Gateway
-commands/arm/network/arm.network.application-gateway-custom-tests.js
-commands/arm/network/arm.network.application-gateway-tests.js
-commands/arm/network/arm.network.application-gateway-address-pool-tests.js
-commands/arm/network/arm.network.application-gateway-auth-cert-tests.js
-commands/arm/network/arm.network.application-gateway-frontend-ip-tests.js
-commands/arm/network/arm.network.application-gateway-frontend-port-tests.js
-commands/arm/network/arm.network.application-gateway-http-listener-tests.js
-commands/arm/network/arm.network.application-gateway-http-settings-tests.js
-commands/arm/network/arm.network.application-gateway-probe-tests.js
-commands/arm/network/arm.network.application-gateway-redirect-config-tests.js
-commands/arm/network/arm.network.application-gateway-rule-tests.js
-commands/arm/network/arm.network.application-gateway-ssl-cert-tests.js
-commands/arm/network/arm.network.application-gateway-ssl-policy-tests.js
-commands/arm/network/arm.network.application-gateway-url-path-map-tests.js
-commands/arm/network/arm.network.application-gateway-waf-config-tests.js
-# DNS Zone
-commands/arm/network/arm.network.dns-zone-tests.js
-commands/arm/network/arm.network.dns-zone-record-set-tests.js
-# Express Route
-commands/arm/network/arm.network.express-route-authorization-tests.js
-commands/arm/network/arm.network.express-route-circuit-tests.js
-commands/arm/network/arm.network.express-route-peering-tests.js
-# Load Balancers
-commands/arm/network/arm.network.lb-tests.js
-commands/arm/network/arm.network.lb-address-pool-tests.js
-commands/arm/network/arm.network.lb-frontend-ip-tests.js
-commands/arm/network/arm.network.lb-inbound-nat-pool-tests.js
-commands/arm/network/arm.network.lb-inbound-nat-rule-tests.js
-commands/arm/network/arm.network.lb-probe-tests.js
-commands/arm/network/arm.network.lb-rule-tests.js
-# Network Security Groups
-commands/arm/network/arm.network.nsg-tests.js
-commands/arm/network/arm.network.nsg-rule-tests.js
-# Network Watcher
-commands/arm/network/arm.network.watcher-tests.js
-commands/arm/network/arm.network.watcher-packet-capture-tests.js
-# Network Interfaces
-commands/arm/network/arm.network.nic-custom-tests.js
-commands/arm/network/arm.network.nic-tests.js
-commands/arm/network/arm.network.nic-ip-config-tests.js
-# Public IP Addresses
-commands/arm/network/arm.network.public-ip-custom-tests.js
-commands/arm/network/arm.network.public-ip-tests.js
-# Route Table
-commands/arm/network/arm.network.route-table-tests.js
-commands/arm/network/arm.network.route-table-route-tests.js
-# Traffic Manager
-commands/arm/network/generated/arm.network.traffic-manager-endpoint-tests.json-output.js
-commands/arm/network/generated/arm.network.traffic-manager-endpoint-tests.text-output.js
-commands/arm/network/generated/arm.network.traffic-manager-profile-tests.json-output.js
-commands/arm/network/generated/arm.network.traffic-manager-profile-tests.text-output.js
-# Virtual Networks
-commands/arm/network/arm.network.vnet-tests.js
-commands/arm/network/arm.network.vnet-peering-tests.js
-commands/arm/network/arm.network.vnet-subnet-tests.js
-# END - Network Tests
+# Network Tests
+include:./testlist-arm-network.txt
 
 commands/arm/quotas/arm.quotas.feature-tests.js
 commands/arm/usage/arm.usage.feature-tests.js
