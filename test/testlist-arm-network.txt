@@ -52,8 +52,10 @@ commands/arm/network/arm.network.nic-ip-config-tests.js
 commands/arm/network/arm.network.public-ip-custom-tests.js
 commands/arm/network/arm.network.public-ip-tests.js
 # Route Table
-commands/arm/network/arm.network.route-table-tests.js
-commands/arm/network/arm.network.route-table-route-tests.js
+commands/arm/network/generated/arm.network.route-table-route-tests.json-output.js
+commands/arm/network/generated/arm.network.route-table-route-tests.text-output.js
+commands/arm/network/generated/arm.network.route-table-tests.json-output.js
+commands/arm/network/generated/arm.network.route-table-tests.text-output.js
 # Traffic Manager
 commands/arm/network/generated/arm.network.traffic-manager-endpoint-tests.json-output.js
 commands/arm/network/generated/arm.network.traffic-manager-endpoint-tests.text-output.js
@@ -68,6 +70,9 @@ commands/arm/network/arm.network.vpn-gateway-tests.js
 commands/arm/network/generated/arm.network.vpn-gateway-tests.json-output.js
 commands/arm/network/generated/arm.network.vpn-gateway-tests.text-output.js
 # Virtual Networks
-commands/arm/network/arm.network.vnet-tests.js
-commands/arm/network/arm.network.vnet-peering-tests.js
-commands/arm/network/arm.network.vnet-subnet-tests.js
+commands/arm/network/generated/arm.network.vnet-peering-tests.json-output.js
+commands/arm/network/generated/arm.network.vnet-peering-tests.text-output.js
+commands/arm/network/generated/arm.network.vnet-subnet-tests.json-output.js
+commands/arm/network/generated/arm.network.vnet-subnet-tests.text-output.js
+commands/arm/network/generated/arm.network.vnet-tests.json-output.js
+commands/arm/network/generated/arm.network.vnet-tests.text-output.js
