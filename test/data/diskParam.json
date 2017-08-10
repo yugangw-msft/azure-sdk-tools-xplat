@@ -4,6 +4,9 @@
     "name": "Standard_LRS",
     "tier": ""
   },
+  "zones": [
+    ""
+  ],
   "timeCreated": null,
   "osType": "Windows",
   "creationData": {

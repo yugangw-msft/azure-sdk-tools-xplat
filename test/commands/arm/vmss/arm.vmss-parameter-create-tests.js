@@ -173,7 +173,7 @@ describe('arm', function() {
             var cmd = makeCommandStr('virtual-machine-scale-set', 'set', paramFileName, util.format('--name %s --location %s --overprovision false', vmssPrefix5, location)).split(' ');
             testUtils.executeCommand(suite, retry, cmd, function(result) {
               result.exitStatus.should.equal(0);
-              var cmd = makeCommandStr('virtual-machine-scale-set', 'delete', paramFileName, '--type --tags --provisioning-state --plan --identity --unique-id --recovery-policy').split(' ');
+              var cmd = makeCommandStr('virtual-machine-scale-set', 'delete', paramFileName, '--type --tags --provisioning-state --plan --identity --unique-id').split(' ');
               testUtils.executeCommand(suite, retry, cmd, function(result) {
                 result.exitStatus.should.equal(0);
                 var cmd = makeCommandStr('sku', 'set', paramFileName, '--capacity ' + vmssCapacity + ' --name ' + VMTestUtil.vmSize + ' --tier Standard').split(' ');

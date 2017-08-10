@@ -13,9 +13,6 @@
   "upgradePolicy": {
     "mode": null
   },
-  "recoveryPolicy": {
-    "mode": null
-  },
   "virtualMachineProfile": {
     "osProfile": {
       "computerNamePrefix": "",
@@ -109,6 +106,7 @@
         {
           "name": "",
           "primary": null,
+          "enableAcceleratedNetworking": null,
           "networkSecurityGroup": {
             "id": ""
           },
@@ -123,6 +121,7 @@
               "subnet": {
                 "id": ""
               },
+              "primary": null,
               "publicIPAddressConfiguration": {
                 "name": "",
                 "idleTimeoutInMinutes": null,
@@ -163,6 +162,7 @@
       "extensions": [
         {
           "name": "",
+          "forceUpdateTag": "",
           "publisher": "",
           "type": "",
           "typeHandlerVersion": "",
@@ -185,6 +185,9 @@
     "tenantId": "",
     "type": null
   },
+  "zones": [
+    ""
+  ],
   "id": null,
   "name": null,
   "type": null,
