@@ -26,7 +26,7 @@
         "caching": "None",
         "createOption": "fromImage",
         "vhdContainers": [
-          "https://undefined.blob.core.windows.net/xplatteststoragecnt14076"
+          "https://xplatteststorage1.blob.core.windows.net/xplatteststoragecnt1"
         ]
       }
     },
@@ -41,13 +41,13 @@
             ]
           },
           "networkSecurityGroup": {
-            "id": "/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplatTstVmssGCreate2715/providers/Microsoft.Network/networkSecurityGroups/xplattestnsg9607"
+            "id": "/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-public-ip-custom/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName"
           },
           "ipConfigurations": [
             {
               "name": "test",
               "subnet": {
-                "id": "/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplatTstVmssGCreate2715/providers/Microsoft.Network/VirtualNetworks/xplattestvnet2747/subnets/xplattestsubnet7262"
+                "id": "/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-public-ip-custom/providers/Microsoft.Network/virtualNetworks/virtualNetworkName/subnets/subnetName"
               },
               "publicIPAddressConfiguration": {
                 "name": "xplattestip",
