@@ -1,4 +1,7 @@
 {
+  "zones": [
+    ""
+  ],
   "name": "vm25299",
   "location": "southeastasia",
   "hardwareProfile": {
