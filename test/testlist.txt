@@ -45,12 +45,12 @@ commands/cli.vm.create_loc_vnet_vm-tests.js
 # The number of tests can be reduced by creating a vm and then doing different disk list and show test.
 commands/cli.vm.disk-tests.js
 commands/cli.vm.endpoint-tests.js
-commands/cli.vm.shutdown_restart-tests.js
+#commands/cli.vm.shutdown_restart-tests.js
 commands/cli.vm.image-tests.js
 commands/cli.vm.create_staticvm_neg-tests.js
 commands/cli.vm.extension-tests.js
 commands/cli.vm.extension_get-tests.js
-commands/cli.vm.extension_get-chef-tests.js
+#commands/cli.vm.extension_get-chef-tests.js
 commands/cli.vm.extension_set-custom_disable.js
 commands/cli.vm.extension_set-chef.js
 commands/cli.vm.loadbalancer-tests.js
@@ -61,7 +61,7 @@ commands/cli.vm.staticvm_docker-tests.js
 commands/cli.vm.create_docker-tests.js
 #commands/cli.servicefabric-tests.js
 commands/cli.sql-tests.js
-commands/cli.storage.account-tests.js
+#commands/cli.storage.account-tests.js
 commands/cli.storage.blob-tests.js
 commands/cli.storage.file-tests.js
 commands/cli.storage.table-tests.js
@@ -85,7 +85,7 @@ util/utils-tests.js
 util/set-tests.js
 util/authentication/adalAuth-tests.js
 util/profile/publishSettings-tests.js
-util/profile/account-tests.js
+#util/profile/account-tests.js
 util/profile/profile-tests.js
 # Testing macos token management stuff
 util/authentication/osx-keychain-parser-tests.js
