@@ -24,15 +24,15 @@ var should = require('should');
 var util = require('util');
 var _ = require('underscore');
 
-var CLITest = require('../../../../framework/arm-cli-test');
-var utils = require('../../../../../lib/util/utils');
-var tagUtils = require('../../../../../lib/commands/arm/tag/tagUtils');
-var testUtils = require('../../../../util/util');
+var CLITest = require('../../../framework/arm-cli-test');
+var utils = require('../../../../lib/util/utils');
+var tagUtils = require('../../../../lib/commands/arm/tag/tagUtils');
+var testUtils = require('../../../util/util');
 
-var networkTestUtil = new (require('../../../../util/networkTestUtil'))();
+var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
-var generatorUtils = require('../../../../../lib/util/generatorUtils');
-var profile = require('../../../../../lib/util/profile');
+var generatorUtils = require('../../../../lib/util/generatorUtils');
+var profile = require('../../../../lib/util/profile');
 var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-vpn-gateway-tests-generated',
@@ -158,7 +158,8 @@ describe('arm', function () {
 
     before(function (done) {
       this.timeout(testTimeout);
-      suite = new CLITest(this, testPrefix, requiredEnvironment);
+      suite = new CLITest(this, testPrefix, requiredEnvironment, true);
+      suite.isRecording = false;
       suite.setupSuite(function () {
         location = virtualNetworkGateways.location || process.env.AZURE_VM_TEST_LOCATION;
         groupName = suite.isMocked ? groupName : suite.generateId(groupName, null);
@@ -222,70 +223,41 @@ describe('arm', function () {
     describe('virtual network gateways', function () {
       this.timeout(testTimeout);
       it('create should create virtual network gateways', function (done) {
-        var cmd = 'network vpn-gateway create -g {group} -n {name} --gateway-type {gatewayType} --vpn-type {vpnType} --enable-bgp {enableBgp} --enable-active-active-feature {activeActive} --sku-name {skuname} --address-prefixes {addressPrefixes} --bgp-asn {asn} --bgp-peering-address {bgpPeeringAddress} --bgp-peer-weight {peerWeight} --location {location} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --json'.formatArgs(virtualNetworkGateways);
+        var cmd = 'network vpn-gateway create -g {group} -n {name} --gateway-type {gatewayType} --vpn-type {vpnType} --enable-bgp {enableBgp} --enable-active-active-feature {activeActive} --sku-name {skuname} --address-prefixes {addressPrefixes} --bgp-asn {asn} --bgp-peering-address {bgpPeeringAddress} --bgp-peer-weight {peerWeight} --location {location} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName}'.formatArgs(virtualNetworkGateways);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var output = JSON.parse(result.text);
-          output.name.should.equal(virtualNetworkGateways.name);
-          output.gatewayType.toLowerCase().should.equal(virtualNetworkGateways.gatewayType.toLowerCase());
-          output.vpnType.toLowerCase().should.equal(virtualNetworkGateways.vpnType.toLowerCase());
-          output.enableBgp.should.equal(utils.parseBool(virtualNetworkGateways.enableBgp));
-          output.activeActive.should.equal(utils.parseBool(virtualNetworkGateways.activeActive));
-          output.sku.name.toLowerCase().should.equal(virtualNetworkGateways.skuname.toLowerCase());
-          virtualNetworkGateways.addressPrefixes.split(',').forEach(function (item) { output.vpnClientConfiguration.vpnClientAddressPool.addressPrefixes.should.containEql(item) });
-          output.bgpSettings.asn.should.equal(parseInt(virtualNetworkGateways.asn, 10));
-          output.bgpSettings.bgpPeeringAddress.toLowerCase().should.equal(virtualNetworkGateways.bgpPeeringAddress.toLowerCase());
           done();
         });
       });
       it('show should display virtual network gateways details', function (done) {
-        var cmd = 'network vpn-gateway show -g {group} -n {name} --json'.formatArgs(virtualNetworkGateways);
+        var cmd = 'network vpn-gateway show -g {group} -n {name}'.formatArgs(virtualNetworkGateways);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var output = JSON.parse(result.text);
-          output.name.should.equal(virtualNetworkGateways.name);
-          output.gatewayType.toLowerCase().should.equal(virtualNetworkGateways.gatewayType.toLowerCase());
-          output.vpnType.toLowerCase().should.equal(virtualNetworkGateways.vpnType.toLowerCase());
-          output.enableBgp.should.equal(utils.parseBool(virtualNetworkGateways.enableBgp));
-          output.activeActive.should.equal(utils.parseBool(virtualNetworkGateways.activeActive));
-          output.sku.name.toLowerCase().should.equal(virtualNetworkGateways.skuname.toLowerCase());
-          virtualNetworkGateways.addressPrefixes.split(',').forEach(function (item) { output.vpnClientConfiguration.vpnClientAddressPool.addressPrefixes.should.containEql(item) });
-          output.bgpSettings.asn.should.equal(parseInt(virtualNetworkGateways.asn, 10));
-          output.bgpSettings.bgpPeeringAddress.toLowerCase().should.equal(virtualNetworkGateways.bgpPeeringAddress.toLowerCase());
           done();
         });
       });
       it('set should update virtual network gateways', function (done) {
-        var cmd = 'network vpn-gateway set -g {group} -n {name} --enable-bgp {enableBgpNew} --json'.formatArgs(virtualNetworkGateways);
+        var cmd = 'network vpn-gateway set -g {group} -n {name} --enable-bgp {enableBgpNew}'.formatArgs(virtualNetworkGateways);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var output = JSON.parse(result.text);
-          output.name.should.equal(virtualNetworkGateways.name);
-          output.enableBgp.should.equal(utils.parseBool(virtualNetworkGateways.enableBgpNew));
           done();
         });
       });
       it('list should display all virtual network gateways in resource group', function (done) {
-        var cmd = 'network vpn-gateway list -g {group} --json'.formatArgs(virtualNetworkGateways);
+        var cmd = 'network vpn-gateway list -g {group}'.formatArgs(virtualNetworkGateways);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var outputs = JSON.parse(result.text);
-          _.some(outputs, function (output) {
-            return output.name === virtualNetworkGateways.name;
-          }).should.be.true;
           done();
         });
       });
       it('delete should delete virtual network gateways', function (done) {
-        var cmd = 'network vpn-gateway delete -g {group} -n {name} --quiet --json'.formatArgs(virtualNetworkGateways);
+        var cmd = 'network vpn-gateway delete -g {group} -n {name} --quiet'.formatArgs(virtualNetworkGateways);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
-          cmd = 'network vpn-gateway show -g {group} -n {name} --json'.formatArgs(virtualNetworkGateways);
+          cmd = 'network vpn-gateway show -g {group} -n {name}'.formatArgs(virtualNetworkGateways);
           testUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-            var output = JSON.parse(result.text || '{}');
-            output.should.be.empty;
             done();
           });
         });

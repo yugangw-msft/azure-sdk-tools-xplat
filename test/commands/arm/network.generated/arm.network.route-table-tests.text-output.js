@@ -24,15 +24,15 @@ var should = require('should');
 var util = require('util');
 var _ = require('underscore');
 
-var CLITest = require('../../../../framework/arm-cli-test');
-var utils = require('../../../../../lib/util/utils');
-var tagUtils = require('../../../../../lib/commands/arm/tag/tagUtils');
-var testUtils = require('../../../../util/util');
+var CLITest = require('../../../framework/arm-cli-test');
+var utils = require('../../../../lib/util/utils');
+var tagUtils = require('../../../../lib/commands/arm/tag/tagUtils');
+var testUtils = require('../../../util/util');
 
-var networkTestUtil = new (require('../../../../util/networkTestUtil'))();
+var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
-var generatorUtils = require('../../../../../lib/util/generatorUtils');
-var profile = require('../../../../../lib/util/profile');
+var generatorUtils = require('../../../../lib/util/generatorUtils');
+var profile = require('../../../../lib/util/profile');
 var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-route-table-tests-generated',
@@ -58,7 +58,8 @@ describe('arm', function () {
 
     before(function (done) {
       this.timeout(testTimeout);
-      suite = new CLITest(this, testPrefix, requiredEnvironment);
+      suite = new CLITest(this, testPrefix, requiredEnvironment, true);
+      suite.isRecording = false;
       suite.setupSuite(function () {
         location = routeTables.location || process.env.AZURE_VM_TEST_LOCATION;
         groupName = suite.isMocked ? groupName : suite.generateId(groupName, null);
@@ -90,53 +91,41 @@ describe('arm', function () {
     describe('route tables', function () {
       this.timeout(testTimeout);
       it('create should create route tables', function (done) {
-        var cmd = 'network route-table create -g {group} -n {name} --location {location} --json'.formatArgs(routeTables);
+        var cmd = 'network route-table create -g {group} -n {name} --location {location}'.formatArgs(routeTables);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var output = JSON.parse(result.text);
-          output.name.should.equal(routeTables.name);
           done();
         });
       });
       it('show should display route tables details', function (done) {
-        var cmd = 'network route-table show -g {group} -n {name} --json'.formatArgs(routeTables);
+        var cmd = 'network route-table show -g {group} -n {name}'.formatArgs(routeTables);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var output = JSON.parse(result.text);
-          output.name.should.equal(routeTables.name);
           done();
         });
       });
       it('set should update route tables', function (done) {
-        var cmd = 'network route-table set -g {group} -n {name} --json'.formatArgs(routeTables);
+        var cmd = 'network route-table set -g {group} -n {name}'.formatArgs(routeTables);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var output = JSON.parse(result.text);
-          output.name.should.equal(routeTables.name);
           done();
         });
       });
       it('list should display all route tables in resource group', function (done) {
-        var cmd = 'network route-table list -g {group} --json'.formatArgs(routeTables);
+        var cmd = 'network route-table list -g {group}'.formatArgs(routeTables);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var outputs = JSON.parse(result.text);
-          _.some(outputs, function (output) {
-            return output.name === routeTables.name;
-          }).should.be.true;
           done();
         });
       });
       it('delete should delete route tables', function (done) {
-        var cmd = 'network route-table delete -g {group} -n {name} --quiet --json'.formatArgs(routeTables);
+        var cmd = 'network route-table delete -g {group} -n {name} --quiet'.formatArgs(routeTables);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
-          cmd = 'network route-table show -g {group} -n {name} --json'.formatArgs(routeTables);
+          cmd = 'network route-table show -g {group} -n {name}'.formatArgs(routeTables);
           testUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-            var output = JSON.parse(result.text || '{}');
-            output.should.be.empty;
             done();
           });
         });

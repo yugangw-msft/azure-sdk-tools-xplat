@@ -24,16 +24,16 @@ var should = require('should');
 var util = require('util');
 var _ = require('underscore');
 
-var CLITest = require('../../../../framework/arm-cli-test');
-var utils = require('../../../../../lib/util/utils');
-var tagUtils = require('../../../../../lib/commands/arm/tag/tagUtils');
-var testUtils = require('../../../../util/util');
+var CLITest = require('../../../framework/arm-cli-test');
+var utils = require('../../../../lib/util/utils');
+var tagUtils = require('../../../../lib/commands/arm/tag/tagUtils');
+var testUtils = require('../../../util/util');
 
-var networkTestUtil = new (require('../../../../util/networkTestUtil'))();
-var preinstalledEnv = new (require('../../../../util/preinstalledEnv'))();
+var networkTestUtil = new (require('../../../util/networkTestUtil'))();
+var preinstalledEnv = new (require('../../../util/preinstalledEnv'))();
 
-var generatorUtils = require('../../../../../lib/util/generatorUtils');
-var profile = require('../../../../../lib/util/profile');
+var generatorUtils = require('../../../../lib/util/generatorUtils');
+var profile = require('../../../../lib/util/profile');
 var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-watcher-packet-capture-tests-generated',
@@ -107,8 +107,7 @@ describe('arm', function () {
 
     before(function (done) {
       this.timeout(testTimeout);
-      suite = new CLITest(this, testPrefix, requiredEnvironment, true);
-      suite.isRecording = false;
+      suite = new CLITest(this, testPrefix, requiredEnvironment);
       suite.setupSuite(function () {
         location = packetCaptures.location || process.env.AZURE_VM_TEST_LOCATION;
         groupName = suite.isMocked ? groupName : suite.generateId(groupName, null);
@@ -165,48 +164,82 @@ describe('arm', function () {
     describe('packet captures', function () {
       this.timeout(testTimeout);
       it('create should create packet captures', function (done) {
-        var cmd = 'network watcher packet-capture create -g {group} -n {name} --target {target} --bytes-per-packet {bytesToCapturePerPacket} --bytes-per-session {totalBytesPerSession} --time-limit {timeLimitInSeconds} --local-file-path {filePath} --filters {filters} --watcher-name {networkWatcherName}'.formatArgs(packetCaptures);
+        var cmd = 'network watcher packet-capture create -g {group} -n {name} --target {target} --bytes-per-packet {bytesToCapturePerPacket} --bytes-per-session {totalBytesPerSession} --time-limit {timeLimitInSeconds} --local-file-path {filePath} --filters {filters} --watcher-name {networkWatcherName} --json'.formatArgs(packetCaptures);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
+          var output = JSON.parse(result.text);
+          output.name.should.equal(packetCaptures.name);
+          output.target.toLowerCase().should.equal(packetCaptures.target.toLowerCase());
+          output.bytesToCapturePerPacket.should.equal(parseInt(packetCaptures.bytesToCapturePerPacket, 10));
+          output.totalBytesPerSession.should.equal(parseInt(packetCaptures.totalBytesPerSession, 10));
+          output.timeLimitInSeconds.should.equal(parseInt(packetCaptures.timeLimitInSeconds, 10));
+          output.storageLocation.filePath.toLowerCase().should.equal(packetCaptures.filePath.toLowerCase());
+          JSON.parse(packetCaptures.filters).forEach(function (item) {
+            _.some(output.filters, function (filter) {
+            return filter.protocol === item.protocol || ''
+                && filter.localIPAddress == item.localIPAddress || ''
+                && filter.localPort == item.localPort || '';
+            }).should.be.true;
+          });
           done();
         });
       });
       it('show should display packet captures details', function (done) {
-        var cmd = 'network watcher packet-capture show -g {group} -n {name} --watcher-name {networkWatcherName}'.formatArgs(packetCaptures);
+        var cmd = 'network watcher packet-capture show -g {group} -n {name} --watcher-name {networkWatcherName} --json'.formatArgs(packetCaptures);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
+          var output = JSON.parse(result.text);
+          output.name.should.equal(packetCaptures.name);
+          output.target.toLowerCase().should.equal(packetCaptures.target.toLowerCase());
+          output.bytesToCapturePerPacket.should.equal(parseInt(packetCaptures.bytesToCapturePerPacket, 10));
+          output.totalBytesPerSession.should.equal(parseInt(packetCaptures.totalBytesPerSession, 10));
+          output.timeLimitInSeconds.should.equal(parseInt(packetCaptures.timeLimitInSeconds, 10));
+          output.storageLocation.filePath.toLowerCase().should.equal(packetCaptures.filePath.toLowerCase());
+          JSON.parse(packetCaptures.filters).forEach(function (item) {
+            _.some(output.filters, function (filter) {
+            return filter.protocol === item.protocol || ''
+                && filter.localIPAddress == item.localIPAddress || ''
+                && filter.localPort == item.localPort || '';
+            }).should.be.true;
+          });
           done();
         });
       });
       it('list should display all packet captures in resource group', function (done) {
-        var cmd = 'network watcher packet-capture list -g {group} --watcher-name {networkWatcherName}'.formatArgs(packetCaptures);
+        var cmd = 'network watcher packet-capture list -g {group} --watcher-name {networkWatcherName} --json'.formatArgs(packetCaptures);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
+          var outputs = JSON.parse(result.text);
+          _.some(outputs, function (output) {
+            return output.name === packetCaptures.name;
+          }).should.be.true;
           done();
         });
       });
       it('status should perform get status operation successfully', function (done) {
-        var cmd = 'network watcher packet-capture status -g {group} -n {name} --watcher-name {networkWatcherName}'.formatArgs(packetCaptures);
+        var cmd = 'network watcher packet-capture status -g {group} -n {name} --watcher-name {networkWatcherName} --json'.formatArgs(packetCaptures);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('stop should perform stop operation successfully', function (done) {
-        var cmd = 'network watcher packet-capture stop -g {group} -n {name} --watcher-name {networkWatcherName}'.formatArgs(packetCaptures);
+        var cmd = 'network watcher packet-capture stop -g {group} -n {name} --watcher-name {networkWatcherName} --json'.formatArgs(packetCaptures);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('delete should delete packet captures', function (done) {
-        var cmd = 'network watcher packet-capture delete -g {group} -n {name} --watcher-name {networkWatcherName} --quiet'.formatArgs(packetCaptures);
+        var cmd = 'network watcher packet-capture delete -g {group} -n {name} --watcher-name {networkWatcherName} --quiet --json'.formatArgs(packetCaptures);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
-          cmd = 'network watcher packet-capture show -g {group} -n {name} --watcher-name {networkWatcherName}'.formatArgs(packetCaptures);
+          cmd = 'network watcher packet-capture show -g {group} -n {name} --watcher-name {networkWatcherName} --json'.formatArgs(packetCaptures);
           testUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
+            var output = JSON.parse(result.text || '{}');
+            output.should.be.empty;
             done();
           });
         });

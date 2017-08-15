@@ -49,35 +49,40 @@ _.extend(PreinstalledEnv.prototype, {
 
         dependencyObject.virtualMachineId = output.id;
 
-        var vpnGateway = _.clone(paramObject);
-        vpnGateway.name = paramObject.vpnGatewayName;
-        vpnGateway.tags = networkTestUtil.tags;
-        vpnGateway.group = groupName;
-        vpnGateway.location = dependencyObject.location;
+        var cmd = util.format('vm extension set %s %s -p Microsoft.Azure.NetworkWatcher -r NWAgent -n NetworkWatcherAgentWindows -o 1.4 --json', groupName, paramObject.vmName);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
 
-        networkTestUtil.createVpnGateway(vpnGateway, suite, function (result) {
-          dependencyObject.vpnGatewayId = result.id;
+          var vpnGateway = _.clone(paramObject);
+          vpnGateway.name = paramObject.vpnGatewayName;
+          vpnGateway.tags = networkTestUtil.tags;
+          vpnGateway.group = groupName;
+          vpnGateway.location = dependencyObject.location;
 
-          var cmd = util.format('storage account create --resource-group %s %s --location %s --sku-name LRS --kind BlobStorage --access-tier Cool --json', groupName, paramObject.storageName, dependencyObject.location);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
-            result.exitStatus.should.equal(0);
+          networkTestUtil.createVpnGateway(vpnGateway, suite, function (result) {
+            dependencyObject.vpnGatewayId = result.id;
 
-            var cmd = util.format('storage account show -g %s %s --json', groupName, paramObject.storageName);
+            var cmd = util.format('storage account create --resource-group %s %s --location %s --sku-name LRS --kind BlobStorage --access-tier Cool --json', groupName, paramObject.storageName, dependencyObject.location);
             testUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
-              var output = JSON.parse(result.text);
 
-              dependencyObject.storageId = output.id;
-
-              var cmd = util.format('storage account connectionstring show -g %s %s --json', groupName, paramObject.storageName);
+              var cmd = util.format('storage account show -g %s %s --json', groupName, paramObject.storageName);
               testUtils.executeCommand(suite, retry, cmd, function (result) {
                 result.exitStatus.should.equal(0);
                 var output = JSON.parse(result.text);
 
-                var cmd = util.format('storage container create --container %s -p Blob -c %s --json', paramObject.blobName, output.string);
+                dependencyObject.storageId = output.id;
+
+                var cmd = util.format('storage account connectionstring show -g %s %s --json', groupName, paramObject.storageName);
                 testUtils.executeCommand(suite, retry, cmd, function (result) {
                   result.exitStatus.should.equal(0);
-                  callbackOrSubId(result);
+                  var output = JSON.parse(result.text);
+
+                  var cmd = util.format('storage container create --container %s -p Blob -c %s --json', paramObject.blobName, output.string);
+                  testUtils.executeCommand(suite, retry, cmd, function (result) {
+                    result.exitStatus.should.equal(0);
+                    callbackOrSubId(result);
+                  });
                 });
               });
             });

@@ -24,16 +24,16 @@ var should = require('should');
 var util = require('util');
 var _ = require('underscore');
 
-var CLITest = require('../../../../framework/arm-cli-test');
-var utils = require('../../../../../lib/util/utils');
-var tagUtils = require('../../../../../lib/commands/arm/tag/tagUtils');
-var testUtils = require('../../../../util/util');
+var CLITest = require('../../../framework/arm-cli-test');
+var utils = require('../../../../lib/util/utils');
+var tagUtils = require('../../../../lib/commands/arm/tag/tagUtils');
+var testUtils = require('../../../util/util');
 
-var networkTestUtil = new (require('../../../../util/networkTestUtil'))();
-var preinstalledEnv = new (require('../../../../util/preinstalledEnv'))();
+var networkTestUtil = new (require('../../../util/networkTestUtil'))();
+var preinstalledEnv = new (require('../../../util/preinstalledEnv'))();
 
-var generatorUtils = require('../../../../../lib/util/generatorUtils');
-var profile = require('../../../../../lib/util/profile');
+var generatorUtils = require('../../../../lib/util/generatorUtils');
+var profile = require('../../../../lib/util/profile');
 var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-watcher-tests-generated',
@@ -55,6 +55,8 @@ var networkWatchers = {
   enabled: 'true',
   retentionPolicyEnabled: 'true',
   days: '123',
+  address: 'bing.com',
+  destinationPort: '80',
   name: 'networkWatcherName'
 };
 
@@ -125,11 +127,12 @@ describe('arm', function () {
   describe('network', function () {
     var suite, retry = 5;
     var hour = 60 * 60000;
-    var testTimeout = hour;
+    var testTimeout = 2 * hour;
 
     before(function (done) {
       this.timeout(testTimeout);
-      suite = new CLITest(this, testPrefix, requiredEnvironment);
+      suite = new CLITest(this, testPrefix, requiredEnvironment, true);
+      suite.isRecording = false;
       suite.setupSuite(function () {
         location = networkWatchers.location || process.env.AZURE_VM_TEST_LOCATION;
         groupName = suite.isMocked ? groupName : suite.generateId(groupName, null);
@@ -196,101 +199,103 @@ describe('arm', function () {
     describe('network watchers', function () {
       this.timeout(testTimeout);
       it('create should create network watchers', function (done) {
-        var cmd = 'network watcher create -g {group} -n {name} --location {location} --json'.formatArgs(networkWatchers);
+        var cmd = 'network watcher create -g {group} -n {name} --location {location}'.formatArgs(networkWatchers);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var output = JSON.parse(result.text);
-          output.name.should.equal(networkWatchers.name);
           done();
         });
       });
       it('show should display network watchers details', function (done) {
-        var cmd = 'network watcher show -g {group} -n {name} --json'.formatArgs(networkWatchers);
+        var cmd = 'network watcher show -g {group} -n {name}'.formatArgs(networkWatchers);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var output = JSON.parse(result.text);
-          output.name.should.equal(networkWatchers.name);
           done();
         });
       });
       it('list should display all network watchers in resource group', function (done) {
-        var cmd = 'network watcher list -g {group} --json'.formatArgs(networkWatchers);
+        var cmd = 'network watcher list -g {group}'.formatArgs(networkWatchers);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var outputs = JSON.parse(result.text);
-          _.some(outputs, function (output) {
-            return output.name === networkWatchers.name;
-          }).should.be.true;
           done();
         });
       });
       it('topology should perform get topology operation successfully', function (done) {
-        var cmd = 'network watcher topology -g {group} -n {name} --topology-resource-group {targetResourceGroupName} --json'.formatArgs(networkWatchers);
+        var cmd = 'network watcher topology -g {group} -n {name} --topology-resource-group {targetResourceGroupName}'.formatArgs(networkWatchers);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('ip-flow-verify should perform verify ip flow operation successfully', function (done) {
-        var cmd = 'network watcher ip-flow-verify -g {group} -n {name} --target {virtualMachineId} --direction {direction} --protocol {protocol} --local-port {localPort} --remote-port {remotePort} --local-ip-address {localIPAddress} --remote-ip-address {remoteIPAddress} --nic-id {networkInterfaceId} --json'.formatArgs(networkWatchers);
+        var cmd = 'network watcher ip-flow-verify -g {group} -n {name} --target {virtualMachineId} --direction {direction} --protocol {protocol} --local-port {localPort} --remote-port {remotePort} --local-ip-address {localIPAddress} --remote-ip-address {remoteIPAddress} --nic-id {networkInterfaceId}'.formatArgs(networkWatchers);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('next-hop should perform get next hop operation successfully', function (done) {
-        var cmd = 'network watcher next-hop -g {group} -n {name} --target {virtualMachineId} --source-ip-address {sourceIPAddress} --destination-ip-address {destinationIPAddress} --nic-id {networkInterfaceId} --json'.formatArgs(networkWatchers);
+        var cmd = 'network watcher next-hop -g {group} -n {name} --target {virtualMachineId} --source-ip-address {sourceIPAddress} --destination-ip-address {destinationIPAddress} --nic-id {networkInterfaceId}'.formatArgs(networkWatchers);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('security-group-view should perform get vm security rules operation successfully', function (done) {
-        var cmd = 'network watcher security-group-view -g {group} -n {name} --target {virtualMachineId} --json'.formatArgs(networkWatchers);
+        var cmd = 'network watcher security-group-view -g {group} -n {name} --target {virtualMachineId}'.formatArgs(networkWatchers);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('troubleshoot should perform get troubleshooting operation successfully', function (done) {
-        var cmd = 'network watcher troubleshoot -g {group} -n {name} --target {vpnGatewayId} --storage-id {storageId} --storage-path {storagePath} --json'.formatArgs(networkWatchers);
+        var cmd = 'network watcher troubleshoot -g {group} -n {name} --target {vpnGatewayId} --storage-id {storageId} --storage-path {storagePath}'.formatArgs(networkWatchers);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('troubleshoot-result should perform get troubleshooting result operation successfully', function (done) {
-        var cmd = 'network watcher troubleshoot-result -g {group} -n {name} --target {vpnGatewayId} --json'.formatArgs(networkWatchers);
+        var cmd = 'network watcher troubleshoot-result -g {group} -n {name} --target {vpnGatewayId}'.formatArgs(networkWatchers);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('configure-flow-log should perform set flow log configuration operation successfully', function (done) {
-        var cmd = 'network watcher configure-flow-log -g {group} -n {name} --target {networkSecurityGroupId} --enable {enabled} --storage-id {storageId} --retention-enable {retentionPolicyEnabled} --retention-days {days} --json'.formatArgs(networkWatchers);
+        var cmd = 'network watcher configure-flow-log -g {group} -n {name} --target {networkSecurityGroupId} --enable {enabled} --storage-id {storageId} --retention-enable {retentionPolicyEnabled} --retention-days {days}'.formatArgs(networkWatchers);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('flow-log-status should perform get flow log status operation successfully', function (done) {
-        var cmd = 'network watcher flow-log-status -g {group} -n {name} --target {networkSecurityGroupId} --json'.formatArgs(networkWatchers);
+        var cmd = 'network watcher flow-log-status -g {group} -n {name} --target {networkSecurityGroupId}'.formatArgs(networkWatchers);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          done();
+        });
+      });
+      it('check-connectivity should perform check connectivity operation successfully', function (done) {
+        var cmd = 'network watcher check-connectivity -g {group} -n {name} --source-id {virtualMachineId} --destination-address {address} --destination-port {destinationPort}'.formatArgs(networkWatchers);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('delete should delete network watchers', function (done) {
-        var cmd = 'network watcher delete -g {group} -n {name} --quiet --json'.formatArgs(networkWatchers);
+        var cmd = 'network watcher delete -g {group} -n {name} --quiet'.formatArgs(networkWatchers);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
-          cmd = 'network watcher show -g {group} -n {name} --json'.formatArgs(networkWatchers);
+          cmd = 'network watcher show -g {group} -n {name}'.formatArgs(networkWatchers);
           testUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-            var output = JSON.parse(result.text || '{}');
-            output.should.be.empty;
-            done();
+
+            cmd = 'network watcher list -g {group}'.formatArgs(networkWatchers);
+            testUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              done();
+            });
           });
         });
       });

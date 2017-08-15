@@ -24,15 +24,15 @@ var should = require('should');
 var util = require('util');
 var _ = require('underscore');
 
-var CLITest = require('../../../../framework/arm-cli-test');
-var utils = require('../../../../../lib/util/utils');
-var tagUtils = require('../../../../../lib/commands/arm/tag/tagUtils');
-var testUtils = require('../../../../util/util');
+var CLITest = require('../../../framework/arm-cli-test');
+var utils = require('../../../../lib/util/utils');
+var tagUtils = require('../../../../lib/commands/arm/tag/tagUtils');
+var testUtils = require('../../../util/util');
 
-var networkTestUtil = new (require('../../../../util/networkTestUtil'))();
+var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
-var generatorUtils = require('../../../../../lib/util/generatorUtils');
-var profile = require('../../../../../lib/util/profile');
+var generatorUtils = require('../../../../lib/util/generatorUtils');
+var profile = require('../../../../lib/util/profile');
 var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-express-route-peering-tests-generated',
@@ -119,7 +119,8 @@ describe('arm', function () {
 
     before(function (done) {
       this.timeout(testTimeout);
-      suite = new CLITest(this, testPrefix, requiredEnvironment);
+      suite = new CLITest(this, testPrefix, requiredEnvironment, true);
+      suite.isRecording = false;
       suite.setupSuite(function () {
         location = expressRouteCircuitPeerings.location || process.env.AZURE_VM_TEST_LOCATION;
         groupName = suite.isMocked ? groupName : suite.generateId(groupName, null);
@@ -161,67 +162,41 @@ describe('arm', function () {
     describe('express route circuit peerings', function () {
       this.timeout(testTimeout);
       it('create should create express route circuit peerings', function (done) {
-        var cmd = 'network express-route peering create -g {group} -n {name} --type {peeringType} --peer-asn {peerAsn} --primary-address-prefix {primaryPeerAddressPrefix} --secondary-address-prefix {secondaryPeerAddressPrefix} --vlan-id {vlanId} --circuit-name {expressRouteCircuitName} --json'.formatArgs(expressRouteCircuitPeerings);
+        var cmd = 'network express-route peering create -g {group} -n {name} --type {peeringType} --peer-asn {peerAsn} --primary-address-prefix {primaryPeerAddressPrefix} --secondary-address-prefix {secondaryPeerAddressPrefix} --vlan-id {vlanId} --circuit-name {expressRouteCircuitName}'.formatArgs(expressRouteCircuitPeerings);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var output = JSON.parse(result.text);
-          output.name.should.equal(expressRouteCircuitPeerings.name);
-          output.peeringType.toLowerCase().should.equal(expressRouteCircuitPeerings.peeringType.toLowerCase());
-          output.peerASN.should.equal(parseInt(expressRouteCircuitPeerings.peerAsn, 10));
-          output.primaryPeerAddressPrefix.toLowerCase().should.equal(expressRouteCircuitPeerings.primaryPeerAddressPrefix.toLowerCase());
-          output.secondaryPeerAddressPrefix.toLowerCase().should.equal(expressRouteCircuitPeerings.secondaryPeerAddressPrefix.toLowerCase());
-          output.vlanId.should.equal(parseInt(expressRouteCircuitPeerings.vlanId, 10));
           done();
         });
       });
       it('show should display express route circuit peerings details', function (done) {
-        var cmd = 'network express-route peering show -g {group} -n {name} --circuit-name {expressRouteCircuitName} --json'.formatArgs(expressRouteCircuitPeerings);
+        var cmd = 'network express-route peering show -g {group} -n {name} --circuit-name {expressRouteCircuitName}'.formatArgs(expressRouteCircuitPeerings);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var output = JSON.parse(result.text);
-          output.name.should.equal(expressRouteCircuitPeerings.name);
-          output.peeringType.toLowerCase().should.equal(expressRouteCircuitPeerings.peeringType.toLowerCase());
-          output.peerASN.should.equal(parseInt(expressRouteCircuitPeerings.peerAsn, 10));
-          output.primaryPeerAddressPrefix.toLowerCase().should.equal(expressRouteCircuitPeerings.primaryPeerAddressPrefix.toLowerCase());
-          output.secondaryPeerAddressPrefix.toLowerCase().should.equal(expressRouteCircuitPeerings.secondaryPeerAddressPrefix.toLowerCase());
-          output.vlanId.should.equal(parseInt(expressRouteCircuitPeerings.vlanId, 10));
           done();
         });
       });
       it('set should update express route circuit peerings', function (done) {
-        var cmd = 'network express-route peering set -g {group} -n {name} --peer-asn {peerAsnNew} --primary-address-prefix {primaryPeerAddressPrefixNew} --secondary-address-prefix {secondaryPeerAddressPrefixNew} --vlan-id {vlanIdNew} --circuit-name {expressRouteCircuitName} --json'.formatArgs(expressRouteCircuitPeerings);
+        var cmd = 'network express-route peering set -g {group} -n {name} --peer-asn {peerAsnNew} --primary-address-prefix {primaryPeerAddressPrefixNew} --secondary-address-prefix {secondaryPeerAddressPrefixNew} --vlan-id {vlanIdNew} --circuit-name {expressRouteCircuitName}'.formatArgs(expressRouteCircuitPeerings);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var output = JSON.parse(result.text);
-          output.name.should.equal(expressRouteCircuitPeerings.name);
-          output.peerASN.should.equal(parseInt(expressRouteCircuitPeerings.peerAsnNew, 10));
-          output.primaryPeerAddressPrefix.toLowerCase().should.equal(expressRouteCircuitPeerings.primaryPeerAddressPrefixNew.toLowerCase());
-          output.secondaryPeerAddressPrefix.toLowerCase().should.equal(expressRouteCircuitPeerings.secondaryPeerAddressPrefixNew.toLowerCase());
-          output.vlanId.should.equal(parseInt(expressRouteCircuitPeerings.vlanIdNew, 10));
           done();
         });
       });
       it('list should display all express route circuit peerings in resource group', function (done) {
-        var cmd = 'network express-route peering list -g {group} --circuit-name {expressRouteCircuitName} --json'.formatArgs(expressRouteCircuitPeerings);
+        var cmd = 'network express-route peering list -g {group} --circuit-name {expressRouteCircuitName}'.formatArgs(expressRouteCircuitPeerings);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var outputs = JSON.parse(result.text);
-          _.some(outputs, function (output) {
-            return output.name === expressRouteCircuitPeerings.name;
-          }).should.be.true;
           done();
         });
       });
       it('delete should delete express route circuit peerings', function (done) {
-        var cmd = 'network express-route peering delete -g {group} -n {name} --circuit-name {expressRouteCircuitName} --quiet --json'.formatArgs(expressRouteCircuitPeerings);
+        var cmd = 'network express-route peering delete -g {group} -n {name} --circuit-name {expressRouteCircuitName} --quiet'.formatArgs(expressRouteCircuitPeerings);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
-          cmd = 'network express-route peering show -g {group} -n {name} --circuit-name {expressRouteCircuitName} --json'.formatArgs(expressRouteCircuitPeerings);
+          cmd = 'network express-route peering show -g {group} -n {name} --circuit-name {expressRouteCircuitName}'.formatArgs(expressRouteCircuitPeerings);
           testUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-            var output = JSON.parse(result.text || '{}');
-            output.should.be.empty;
             done();
           });
         });

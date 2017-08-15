@@ -24,15 +24,15 @@ var should = require('should');
 var util = require('util');
 var _ = require('underscore');
 
-var CLITest = require('../../../../framework/arm-cli-test');
-var utils = require('../../../../../lib/util/utils');
-var tagUtils = require('../../../../../lib/commands/arm/tag/tagUtils');
-var testUtils = require('../../../../util/util');
+var CLITest = require('../../../framework/arm-cli-test');
+var utils = require('../../../../lib/util/utils');
+var tagUtils = require('../../../../lib/commands/arm/tag/tagUtils');
+var testUtils = require('../../../util/util');
 
-var networkTestUtil = new (require('../../../../util/networkTestUtil'))();
+var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
-var generatorUtils = require('../../../../../lib/util/generatorUtils');
-var profile = require('../../../../../lib/util/profile');
+var generatorUtils = require('../../../../lib/util/generatorUtils');
+var profile = require('../../../../lib/util/profile');
 var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-vnet-peering-tests-generated',
@@ -77,7 +77,8 @@ describe('arm', function () {
 
     before(function (done) {
       this.timeout(testTimeout);
-      suite = new CLITest(this, testPrefix, requiredEnvironment);
+      suite = new CLITest(this, testPrefix, requiredEnvironment, true);
+      suite.isRecording = false;
       suite.setupSuite(function () {
         location = virtualNetworkPeerings.location || process.env.AZURE_VM_TEST_LOCATION;
         groupName = suite.isMocked ? groupName : suite.generateId(groupName, null);
@@ -121,64 +122,41 @@ describe('arm', function () {
     describe('virtual network peerings', function () {
       this.timeout(testTimeout);
       it('create should create virtual network peerings', function (done) {
-        var cmd = 'network vnet peering create -g {group} -n {name} --allow-vnet-access {allowVirtualNetworkAccess} --allow-forwarded-traffic {allowForwardedTraffic} --allow-gateway-transit {allowGatewayTransit} --use-remote-gateways {useRemoteGateways} --vnet-name {virtualNetworkName} --remote-vnet-id {remoteNetworkId} --json'.formatArgs(virtualNetworkPeerings);
+        var cmd = 'network vnet peering create -g {group} -n {name} --allow-vnet-access {allowVirtualNetworkAccess} --allow-forwarded-traffic {allowForwardedTraffic} --allow-gateway-transit {allowGatewayTransit} --use-remote-gateways {useRemoteGateways} --vnet-name {virtualNetworkName} --remote-vnet-id {remoteNetworkId}'.formatArgs(virtualNetworkPeerings);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var output = JSON.parse(result.text);
-          output.name.should.equal(virtualNetworkPeerings.name);
-          output.allowVirtualNetworkAccess.should.equal(utils.parseBool(virtualNetworkPeerings.allowVirtualNetworkAccess));
-          output.allowForwardedTraffic.should.equal(utils.parseBool(virtualNetworkPeerings.allowForwardedTraffic));
-          output.allowGatewayTransit.should.equal(utils.parseBool(virtualNetworkPeerings.allowGatewayTransit));
-          output.useRemoteGateways.should.equal(utils.parseBool(virtualNetworkPeerings.useRemoteGateways));
           done();
         });
       });
       it('show should display virtual network peerings details', function (done) {
-        var cmd = 'network vnet peering show -g {group} -n {name} --vnet-name {virtualNetworkName} --json'.formatArgs(virtualNetworkPeerings);
+        var cmd = 'network vnet peering show -g {group} -n {name} --vnet-name {virtualNetworkName}'.formatArgs(virtualNetworkPeerings);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var output = JSON.parse(result.text);
-          output.name.should.equal(virtualNetworkPeerings.name);
-          output.allowVirtualNetworkAccess.should.equal(utils.parseBool(virtualNetworkPeerings.allowVirtualNetworkAccess));
-          output.allowForwardedTraffic.should.equal(utils.parseBool(virtualNetworkPeerings.allowForwardedTraffic));
-          output.allowGatewayTransit.should.equal(utils.parseBool(virtualNetworkPeerings.allowGatewayTransit));
-          output.useRemoteGateways.should.equal(utils.parseBool(virtualNetworkPeerings.useRemoteGateways));
           done();
         });
       });
       it('set should update virtual network peerings', function (done) {
-        var cmd = 'network vnet peering set -g {group} -n {name} --allow-vnet-access {allowVirtualNetworkAccessNew} --allow-forwarded-traffic {allowForwardedTrafficNew} --allow-gateway-transit {allowGatewayTransitNew} --vnet-name {virtualNetworkName} --json'.formatArgs(virtualNetworkPeerings);
+        var cmd = 'network vnet peering set -g {group} -n {name} --allow-vnet-access {allowVirtualNetworkAccessNew} --allow-forwarded-traffic {allowForwardedTrafficNew} --allow-gateway-transit {allowGatewayTransitNew} --vnet-name {virtualNetworkName}'.formatArgs(virtualNetworkPeerings);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var output = JSON.parse(result.text);
-          output.name.should.equal(virtualNetworkPeerings.name);
-          output.allowVirtualNetworkAccess.should.equal(utils.parseBool(virtualNetworkPeerings.allowVirtualNetworkAccessNew));
-          output.allowForwardedTraffic.should.equal(utils.parseBool(virtualNetworkPeerings.allowForwardedTrafficNew));
-          output.allowGatewayTransit.should.equal(utils.parseBool(virtualNetworkPeerings.allowGatewayTransitNew));
           done();
         });
       });
       it('list should display all virtual network peerings in resource group', function (done) {
-        var cmd = 'network vnet peering list -g {group} --vnet-name {virtualNetworkName} --json'.formatArgs(virtualNetworkPeerings);
+        var cmd = 'network vnet peering list -g {group} --vnet-name {virtualNetworkName}'.formatArgs(virtualNetworkPeerings);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var outputs = JSON.parse(result.text);
-          _.some(outputs, function (output) {
-            return output.name === virtualNetworkPeerings.name;
-          }).should.be.true;
           done();
         });
       });
       it('delete should delete virtual network peerings', function (done) {
-        var cmd = 'network vnet peering delete -g {group} -n {name} --vnet-name {virtualNetworkName} --quiet --json'.formatArgs(virtualNetworkPeerings);
+        var cmd = 'network vnet peering delete -g {group} -n {name} --vnet-name {virtualNetworkName} --quiet'.formatArgs(virtualNetworkPeerings);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
-          cmd = 'network vnet peering show -g {group} -n {name} --vnet-name {virtualNetworkName} --json'.formatArgs(virtualNetworkPeerings);
+          cmd = 'network vnet peering show -g {group} -n {name} --vnet-name {virtualNetworkName}'.formatArgs(virtualNetworkPeerings);
           testUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-            var output = JSON.parse(result.text || '{}');
-            output.should.be.empty;
             done();
           });
         });

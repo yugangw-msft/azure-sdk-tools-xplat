@@ -24,15 +24,15 @@ var should = require('should');
 var util = require('util');
 var _ = require('underscore');
 
-var CLITest = require('../../../../framework/arm-cli-test');
-var utils = require('../../../../../lib/util/utils');
-var tagUtils = require('../../../../../lib/commands/arm/tag/tagUtils');
-var testUtils = require('../../../../util/util');
+var CLITest = require('../../../framework/arm-cli-test');
+var utils = require('../../../../lib/util/utils');
+var tagUtils = require('../../../../lib/commands/arm/tag/tagUtils');
+var testUtils = require('../../../util/util');
 
-var networkTestUtil = new (require('../../../../util/networkTestUtil'))();
+var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
-var generatorUtils = require('../../../../../lib/util/generatorUtils');
-var profile = require('../../../../../lib/util/profile');
+var generatorUtils = require('../../../../lib/util/generatorUtils');
+var profile = require('../../../../lib/util/profile');
 var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-vnet-subnet-tests-generated',
@@ -116,7 +116,8 @@ describe('arm', function () {
 
     before(function (done) {
       this.timeout(testTimeout);
-      suite = new CLITest(this, testPrefix, requiredEnvironment);
+      suite = new CLITest(this, testPrefix, requiredEnvironment, true);
+      suite.isRecording = false;
       suite.setupSuite(function () {
         location = subnets.location || process.env.AZURE_VM_TEST_LOCATION;
         groupName = suite.isMocked ? groupName : suite.generateId(groupName, null);
@@ -174,56 +175,41 @@ describe('arm', function () {
     describe('subnet', function () {
       this.timeout(testTimeout);
       it('create should create subnet', function (done) {
-        var cmd = 'network vnet subnet create -g {group} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --network-security-group-name {networkSecurityGroupName} --route-table-name {routeTableName} --json'.formatArgs(subnets);
+        var cmd = 'network vnet subnet create -g {group} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --network-security-group-name {networkSecurityGroupName} --route-table-name {routeTableName}'.formatArgs(subnets);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var output = JSON.parse(result.text);
-          output.name.should.equal(subnets.name);
-          output.addressPrefix.toLowerCase().should.equal(subnets.addressPrefix.toLowerCase());
           done();
         });
       });
       it('show should display subnet details', function (done) {
-        var cmd = 'network vnet subnet show -g {group} -n {name} --vnet-name {virtualNetworkName} --json'.formatArgs(subnets);
+        var cmd = 'network vnet subnet show -g {group} -n {name} --vnet-name {virtualNetworkName}'.formatArgs(subnets);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var output = JSON.parse(result.text);
-          output.name.should.equal(subnets.name);
-          output.addressPrefix.toLowerCase().should.equal(subnets.addressPrefix.toLowerCase());
           done();
         });
       });
       it('set should update subnet', function (done) {
-        var cmd = 'network vnet subnet set -g {group} -n {name} --address-prefix {addressPrefixNew} --vnet-name {virtualNetworkName} --json'.formatArgs(subnets);
+        var cmd = 'network vnet subnet set -g {group} -n {name} --address-prefix {addressPrefixNew} --vnet-name {virtualNetworkName}'.formatArgs(subnets);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var output = JSON.parse(result.text);
-          output.name.should.equal(subnets.name);
-          output.addressPrefix.toLowerCase().should.equal(subnets.addressPrefixNew.toLowerCase());
           done();
         });
       });
       it('list should display all subnet in resource group', function (done) {
-        var cmd = 'network vnet subnet list -g {group} --vnet-name {virtualNetworkName} --json'.formatArgs(subnets);
+        var cmd = 'network vnet subnet list -g {group} --vnet-name {virtualNetworkName}'.formatArgs(subnets);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var outputs = JSON.parse(result.text);
-          _.some(outputs, function (output) {
-            return output.name === subnets.name;
-          }).should.be.true;
           done();
         });
       });
       it('delete should delete subnet', function (done) {
-        var cmd = 'network vnet subnet delete -g {group} -n {name} --vnet-name {virtualNetworkName} --quiet --json'.formatArgs(subnets);
+        var cmd = 'network vnet subnet delete -g {group} -n {name} --vnet-name {virtualNetworkName} --quiet'.formatArgs(subnets);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
-          cmd = 'network vnet subnet show -g {group} -n {name} --vnet-name {virtualNetworkName} --json'.formatArgs(subnets);
+          cmd = 'network vnet subnet show -g {group} -n {name} --vnet-name {virtualNetworkName}'.formatArgs(subnets);
           testUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-            var output = JSON.parse(result.text || '{}');
-            output.should.be.empty;
             done();
           });
         });
