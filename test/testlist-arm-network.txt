@@ -35,7 +35,8 @@ commands/arm/network.generated/arm.network.lb-inbound-nat-pool-tests.js
 commands/arm/network.generated/arm.network.lb-inbound-nat-rule-tests.js
 commands/arm/network.generated/arm.network.lb-probe-tests.js
 commands/arm/network.generated/arm.network.lb-rule-tests.js
-commands/arm/network.generated/arm.network.lb-tests.js
+commands/arm/network.generated/arm.network.lb-tests.json-output.js
+commands/arm/network.generated/arm.network.lb-tests.text-output.js
 # Local Network Gateways
 commands/arm/network.generated/arm.network.local-gateway-tests.json-output.js
 commands/arm/network.generated/arm.network.local-gateway-tests.text-output.js
@@ -52,8 +53,9 @@ commands/arm/network/arm.network.nic-custom-tests.js
 commands/arm/network.generated/arm.network.nic-ip-config-tests.js
 commands/arm/network.generated/arm.network.nic-tests.js
 # Public IP Addresses
-commands/arm/network/arm.network.public-ip-custom-tests.js
-commands/arm/network.generated/arm.network.public-ip-tests.js
+commands/arm/network/arm.network.public-ip-tests.js
+commands/arm/network.generated/arm.network.public-ip-tests.json-output.js
+commands/arm/network.generated/arm.network.public-ip-tests.text-output.js
 # Route Table
 commands/arm/network.generated/arm.network.route-table-route-tests.json-output.js
 commands/arm/network.generated/arm.network.route-table-route-tests.text-output.js
