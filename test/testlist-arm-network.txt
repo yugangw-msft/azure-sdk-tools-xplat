@@ -14,6 +14,9 @@ commands/arm/network.generated/arm.network.application-gateway-ssl-policy-tests.
 commands/arm/network.generated/arm.network.application-gateway-tests.js
 commands/arm/network.generated/arm.network.application-gateway-url-path-map-tests.js
 commands/arm/network.generated/arm.network.application-gateway-waf-config-tests.js
+# Available Endpoint Services
+commands/arm/network.generated/arm.network.endpoint-service-tests.json-output.js
+commands/arm/network.generated/arm.network.endpoint-service-tests.text-output.js
 # DNS Zone
 commands/arm/network/arm.network.dns-zone-tests.js
 commands/arm/network/arm.network.dns-zone-record-set-tests.js
