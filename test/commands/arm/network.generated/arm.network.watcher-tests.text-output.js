@@ -290,12 +290,7 @@ describe('arm', function () {
           cmd = 'network watcher show -g {group} -n {name}'.formatArgs(networkWatchers);
           testUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-
-            cmd = 'network watcher list -g {group}'.formatArgs(networkWatchers);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
-              done();
-            });
+            done();
           });
         });
       });

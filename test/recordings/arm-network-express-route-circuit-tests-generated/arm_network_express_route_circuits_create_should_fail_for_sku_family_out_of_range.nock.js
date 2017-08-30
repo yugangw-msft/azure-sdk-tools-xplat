@@ -6,8 +6,8 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '2c224e7e-3ef5-431d-a57b-e71f4662e3a6',
-    name: 'Node CLI Test',
+    id: '947d47b4-7883-4bb9-9d85-c5e8e2f572ce',
+    name: 'nrptest58.westus.validation.partner',
     user: {
       name: 'user@domain.example',
       type: 'user'
@@ -29,34 +29,34 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-circuit/providers/Microsoft.Network/expressRouteCircuits/skuFamilyOutOfRangeName?api-version=2017-06-01')
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-circuit/providers/Microsoft.Network/expressRouteCircuits/skuFamilyOutOfRangeName?api-version=2017-08-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/expressRouteCircuits/skuFamilyOutOfRangeName' under resource group 'xplat-test-circuit' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': '068bad6e-7f9f-4bf5-a97f-d52e7393814c',
-  'x-ms-correlation-request-id': '068bad6e-7f9f-4bf5-a97f-d52e7393814c',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170712T130227Z:068bad6e-7f9f-4bf5-a97f-d52e7393814c',
+  'x-ms-request-id': '7e432dc0-5d8e-43e3-a24f-58f3e49b7738',
+  'x-ms-correlation-request-id': '7e432dc0-5d8e-43e3-a24f-58f3e49b7738',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170901T114113Z:7e432dc0-5d8e-43e3-a24f-58f3e49b7738',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Wed, 12 Jul 2017 13:02:26 GMT',
+  date: 'Fri, 01 Sep 2017 11:41:13 GMT',
   connection: 'close',
   'content-length': '184' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-circuit/providers/Microsoft.Network/expressRouteCircuits/skuFamilyOutOfRangeName?api-version=2017-06-01')
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-circuit/providers/Microsoft.Network/expressRouteCircuits/skuFamilyOutOfRangeName?api-version=2017-08-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/expressRouteCircuits/skuFamilyOutOfRangeName' under resource group 'xplat-test-circuit' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': '068bad6e-7f9f-4bf5-a97f-d52e7393814c',
-  'x-ms-correlation-request-id': '068bad6e-7f9f-4bf5-a97f-d52e7393814c',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170712T130227Z:068bad6e-7f9f-4bf5-a97f-d52e7393814c',
+  'x-ms-request-id': '7e432dc0-5d8e-43e3-a24f-58f3e49b7738',
+  'x-ms-correlation-request-id': '7e432dc0-5d8e-43e3-a24f-58f3e49b7738',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170901T114113Z:7e432dc0-5d8e-43e3-a24f-58f3e49b7738',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Wed, 12 Jul 2017 13:02:26 GMT',
+  date: 'Fri, 01 Sep 2017 11:41:13 GMT',
   connection: 'close',
   'content-length': '184' });
  return result; }]];

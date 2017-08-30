@@ -1,19 +1,33 @@
 # Application Gateway
-commands/arm/network/arm.network.application-gateway-custom-tests.js
-commands/arm/network.generated/arm.network.application-gateway-address-pool-tests.js
-commands/arm/network.generated/arm.network.application-gateway-auth-cert-tests.js
-commands/arm/network.generated/arm.network.application-gateway-frontend-ip-tests.js
-commands/arm/network.generated/arm.network.application-gateway-frontend-port-tests.js
-commands/arm/network.generated/arm.network.application-gateway-http-listener-tests.js
-commands/arm/network.generated/arm.network.application-gateway-http-settings-tests.js
-commands/arm/network.generated/arm.network.application-gateway-probe-tests.js
-commands/arm/network.generated/arm.network.application-gateway-redirect-config-tests.js
-commands/arm/network.generated/arm.network.application-gateway-rule-tests.js
-commands/arm/network.generated/arm.network.application-gateway-ssl-cert-tests.js
-commands/arm/network.generated/arm.network.application-gateway-ssl-policy-tests.js
-commands/arm/network.generated/arm.network.application-gateway-tests.js
-commands/arm/network.generated/arm.network.application-gateway-url-path-map-tests.js
-commands/arm/network.generated/arm.network.application-gateway-waf-config-tests.js
+commands/arm/network/arm.network.application-gateway-tests.js
+commands/arm/network.generated/arm.network.application-gateway-address-pool-tests.json-output.js
+commands/arm/network.generated/arm.network.application-gateway-address-pool-tests.text-output.js
+commands/arm/network.generated/arm.network.application-gateway-auth-cert-tests.json-output.js
+commands/arm/network.generated/arm.network.application-gateway-auth-cert-tests.text-output.js
+commands/arm/network.generated/arm.network.application-gateway-frontend-ip-tests.json-output.js
+commands/arm/network.generated/arm.network.application-gateway-frontend-ip-tests.text-output.js
+commands/arm/network.generated/arm.network.application-gateway-frontend-port-tests.json-output.js
+commands/arm/network.generated/arm.network.application-gateway-frontend-port-tests.text-output.js
+commands/arm/network.generated/arm.network.application-gateway-http-listener-tests.json-output.js
+commands/arm/network.generated/arm.network.application-gateway-http-listener-tests.text-output.js
+commands/arm/network.generated/arm.network.application-gateway-http-settings-tests.json-output.js
+commands/arm/network.generated/arm.network.application-gateway-http-settings-tests.text-output.js
+commands/arm/network.generated/arm.network.application-gateway-probe-tests.json-output.js
+commands/arm/network.generated/arm.network.application-gateway-probe-tests.text-output.js
+commands/arm/network.generated/arm.network.application-gateway-redirect-config-tests.json-output.js
+commands/arm/network.generated/arm.network.application-gateway-redirect-config-tests.text-output.js
+commands/arm/network.generated/arm.network.application-gateway-rule-tests.json-output.js
+commands/arm/network.generated/arm.network.application-gateway-rule-tests.text-output.js
+commands/arm/network.generated/arm.network.application-gateway-ssl-cert-tests.json-output.js
+commands/arm/network.generated/arm.network.application-gateway-ssl-cert-tests.text-output.js
+commands/arm/network.generated/arm.network.application-gateway-ssl-policy-tests.json-output.js
+commands/arm/network.generated/arm.network.application-gateway-ssl-policy-tests.text-output.js
+commands/arm/network.generated/arm.network.application-gateway-tests.json-output.js
+commands/arm/network.generated/arm.network.application-gateway-tests.text-output.js
+commands/arm/network.generated/arm.network.application-gateway-url-path-map-tests.json-output.js
+commands/arm/network.generated/arm.network.application-gateway-url-path-map-tests.text-output.js
+commands/arm/network.generated/arm.network.application-gateway-waf-config-tests.json-output.js
+commands/arm/network.generated/arm.network.application-gateway-waf-config-tests.text-output.js
 # Available Endpoint Services
 commands/arm/network.generated/arm.network.endpoint-service-tests.json-output.js
 commands/arm/network.generated/arm.network.endpoint-service-tests.text-output.js
@@ -29,29 +43,39 @@ commands/arm/network.generated/arm.network.express-route-circuit-express-route-c
 commands/arm/network.generated/arm.network.express-route-circuit-tests.json-output.js
 commands/arm/network.generated/arm.network.express-route-circuit-tests.text-output.js
 # Load Balancers
-commands/arm/network.generated/arm.network.lb-address-pool-tests.js
-commands/arm/network.generated/arm.network.lb-frontend-ip-tests.js
-commands/arm/network.generated/arm.network.lb-inbound-nat-pool-tests.js
-commands/arm/network.generated/arm.network.lb-inbound-nat-rule-tests.js
-commands/arm/network.generated/arm.network.lb-probe-tests.js
-commands/arm/network.generated/arm.network.lb-rule-tests.js
+commands/arm/network.generated/arm.network.lb-address-pool-tests.json-output.js
+commands/arm/network.generated/arm.network.lb-address-pool-tests.text-output.js
+commands/arm/network.generated/arm.network.lb-frontend-ip-tests.json-output.js
+commands/arm/network.generated/arm.network.lb-frontend-ip-tests.text-output.js
+commands/arm/network.generated/arm.network.lb-inbound-nat-pool-tests.json-output.js
+commands/arm/network.generated/arm.network.lb-inbound-nat-pool-tests.text-output.js
+commands/arm/network.generated/arm.network.lb-inbound-nat-rule-tests.json-output.js
+commands/arm/network.generated/arm.network.lb-inbound-nat-rule-tests.text-output.js
+commands/arm/network.generated/arm.network.lb-probe-tests.json-output.js
+commands/arm/network.generated/arm.network.lb-probe-tests.text-output.js
+commands/arm/network.generated/arm.network.lb-rule-tests.json-output.js
+commands/arm/network.generated/arm.network.lb-rule-tests.text-output.js
 commands/arm/network.generated/arm.network.lb-tests.json-output.js
 commands/arm/network.generated/arm.network.lb-tests.text-output.js
 # Local Network Gateways
 commands/arm/network.generated/arm.network.local-gateway-tests.json-output.js
 commands/arm/network.generated/arm.network.local-gateway-tests.text-output.js
 # Network Security Groups
-commands/arm/network.generated/arm.network.nsg-rule-tests.js
-commands/arm/network.generated/arm.network.nsg-tests.js
+commands/arm/network.generated/arm.network.nsg-rule-tests.json-output.js
+commands/arm/network.generated/arm.network.nsg-rule-tests.text-output.js
+commands/arm/network.generated/arm.network.nsg-tests.json-output.js
+commands/arm/network.generated/arm.network.nsg-tests.text-output.js
 # Network Watcher
 commands/arm/network.generated/arm.network.watcher-packet-capture-tests.json-output.js
 commands/arm/network.generated/arm.network.watcher-packet-capture-tests.text-output.js
 commands/arm/network.generated/arm.network.watcher-tests.json-output.js
 commands/arm/network.generated/arm.network.watcher-tests.text-output.js
 # Network Interfaces
-commands/arm/network/arm.network.nic-custom-tests.js
-commands/arm/network.generated/arm.network.nic-ip-config-tests.js
-commands/arm/network.generated/arm.network.nic-tests.js
+commands/arm/network/arm.network.nic-tests.js
+commands/arm/network.generated/arm.network.nic-ip-config-tests.json-output.js
+commands/arm/network.generated/arm.network.nic-ip-config-tests.text-output.js
+commands/arm/network.generated/arm.network.nic-tests.json-output.js
+commands/arm/network.generated/arm.network.nic-tests.text-output.js
 # Public IP Addresses
 commands/arm/network/arm.network.public-ip-tests.js
 commands/arm/network.generated/arm.network.public-ip-tests.json-output.js

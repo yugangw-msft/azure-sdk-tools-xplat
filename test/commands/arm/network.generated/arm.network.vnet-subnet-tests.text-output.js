@@ -212,12 +212,7 @@ describe('arm', function () {
           cmd = 'network vnet subnet show -g {group} -n {name} --vnet-name {virtualNetworkName}'.formatArgs(subnets);
           testUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-
-            cmd = 'network vnet subnet list -g {group} --vnet-name {virtualNetworkName}'.formatArgs(subnets);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
-              done();
-            });
+            done();
           });
         });
       });

@@ -6,8 +6,8 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '2c224e7e-3ef5-431d-a57b-e71f4662e3a6',
-    name: 'Node CLI Test',
+    id: '947d47b4-7883-4bb9-9d85-c5e8e2f572ce',
+    name: 'nrptest58.westus.validation.partner',
     user: {
       name: 'user@domain.example',
       type: 'user'
@@ -29,36 +29,36 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways?api-version=2017-06-01')
-  .reply(200, "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"localNetworkGatewayName\",\r\n      \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/localNetworkGatewayName\",\r\n      \"etag\": \"W/\\\"bc5bd7ca-fe69-4782-aabf-f09b59198e7b\\\"\",\r\n      \"type\": \"Microsoft.Network/localNetworkGateways\",\r\n      \"location\": \"westus\",\r\n      \"properties\": {\r\n        \"provisioningState\": \"Succeeded\",\r\n        \"resourceGuid\": \"ed99d34e-0a34-4c8b-8e6b-423f495a748a\",\r\n        \"localNetworkAddressSpace\": {\r\n          \"addressPrefixes\": [\r\n            \"10.0.0.0/8\",\r\n            \"192.168.0.0/16\"\r\n          ]\r\n        },\r\n        \"gatewayIpAddress\": \"10.0.0.24\",\r\n        \"bgpSettings\": {\r\n          \"asn\": 142,\r\n          \"bgpPeeringAddress\": \"11.0.0.12\",\r\n          \"peerWeight\": 25\r\n        }\r\n      }\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways?api-version=2017-08-01')
+  .reply(200, "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"localNetworkGatewayName\",\r\n      \"id\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/localNetworkGatewayName\",\r\n      \"etag\": \"W/\\\"5884eced-4092-4581-9174-8e06b414eec6\\\"\",\r\n      \"type\": \"Microsoft.Network/localNetworkGateways\",\r\n      \"location\": \"westus\",\r\n      \"properties\": {\r\n        \"provisioningState\": \"Succeeded\",\r\n        \"resourceGuid\": \"91820956-17db-456a-bdb4-c390d9d25c23\",\r\n        \"localNetworkAddressSpace\": {\r\n          \"addressPrefixes\": [\r\n            \"10.0.0.0/8\",\r\n            \"192.168.0.0/16\"\r\n          ]\r\n        },\r\n        \"gatewayIpAddress\": \"10.0.0.24\",\r\n        \"bgpSettings\": {\r\n          \"asn\": 142,\r\n          \"bgpPeeringAddress\": \"11.0.0.12\",\r\n          \"peerWeight\": 25\r\n        }\r\n      }\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '875',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '58d0de34-6e14-4a31-9178-84ec9a7f489c',
+  'x-ms-request-id': '5b96cab7-582d-4e5f-b89f-d7217171537e',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14984',
-  'x-ms-correlation-request-id': 'd85c4a80-3c28-4fb8-8642-dbb4807bc18e',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170602T144149Z:d85c4a80-3c28-4fb8-8642-dbb4807bc18e',
-  date: 'Fri, 02 Jun 2017 14:41:49 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14999',
+  'x-ms-correlation-request-id': 'e1c983e6-bb83-4187-8387-7a0097772a7f',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170901T094402Z:e1c983e6-bb83-4187-8387-7a0097772a7f',
+  date: 'Fri, 01 Sep 2017 09:44:01 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways?api-version=2017-06-01')
-  .reply(200, "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"localNetworkGatewayName\",\r\n      \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/localNetworkGatewayName\",\r\n      \"etag\": \"W/\\\"bc5bd7ca-fe69-4782-aabf-f09b59198e7b\\\"\",\r\n      \"type\": \"Microsoft.Network/localNetworkGateways\",\r\n      \"location\": \"westus\",\r\n      \"properties\": {\r\n        \"provisioningState\": \"Succeeded\",\r\n        \"resourceGuid\": \"ed99d34e-0a34-4c8b-8e6b-423f495a748a\",\r\n        \"localNetworkAddressSpace\": {\r\n          \"addressPrefixes\": [\r\n            \"10.0.0.0/8\",\r\n            \"192.168.0.0/16\"\r\n          ]\r\n        },\r\n        \"gatewayIpAddress\": \"10.0.0.24\",\r\n        \"bgpSettings\": {\r\n          \"asn\": 142,\r\n          \"bgpPeeringAddress\": \"11.0.0.12\",\r\n          \"peerWeight\": 25\r\n        }\r\n      }\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways?api-version=2017-08-01')
+  .reply(200, "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"localNetworkGatewayName\",\r\n      \"id\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/localNetworkGatewayName\",\r\n      \"etag\": \"W/\\\"5884eced-4092-4581-9174-8e06b414eec6\\\"\",\r\n      \"type\": \"Microsoft.Network/localNetworkGateways\",\r\n      \"location\": \"westus\",\r\n      \"properties\": {\r\n        \"provisioningState\": \"Succeeded\",\r\n        \"resourceGuid\": \"91820956-17db-456a-bdb4-c390d9d25c23\",\r\n        \"localNetworkAddressSpace\": {\r\n          \"addressPrefixes\": [\r\n            \"10.0.0.0/8\",\r\n            \"192.168.0.0/16\"\r\n          ]\r\n        },\r\n        \"gatewayIpAddress\": \"10.0.0.24\",\r\n        \"bgpSettings\": {\r\n          \"asn\": 142,\r\n          \"bgpPeeringAddress\": \"11.0.0.12\",\r\n          \"peerWeight\": 25\r\n        }\r\n      }\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '875',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '58d0de34-6e14-4a31-9178-84ec9a7f489c',
+  'x-ms-request-id': '5b96cab7-582d-4e5f-b89f-d7217171537e',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14984',
-  'x-ms-correlation-request-id': 'd85c4a80-3c28-4fb8-8642-dbb4807bc18e',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170602T144149Z:d85c4a80-3c28-4fb8-8642-dbb4807bc18e',
-  date: 'Fri, 02 Jun 2017 14:41:49 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14999',
+  'x-ms-correlation-request-id': 'e1c983e6-bb83-4187-8387-7a0097772a7f',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170901T094402Z:e1c983e6-bb83-4187-8387-7a0097772a7f',
+  date: 'Fri, 01 Sep 2017 09:44:01 GMT',
   connection: 'close' });
  return result; }]];

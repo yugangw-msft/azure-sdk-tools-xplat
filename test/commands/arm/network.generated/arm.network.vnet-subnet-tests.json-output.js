@@ -229,16 +229,7 @@ describe('arm', function () {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
-
-            cmd = 'network vnet subnet list -g {group} --vnet-name {virtualNetworkName} --json'.formatArgs(subnets);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
-              var outputs = JSON.parse(result.text);
-              _.some(outputs, function (output) {
-                return output.name === subnets.name;
-              }).should.be.false;
-              done();
-            });
+            done();
           });
         });
       });
