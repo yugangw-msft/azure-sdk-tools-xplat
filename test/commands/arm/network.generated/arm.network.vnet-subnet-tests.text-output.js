@@ -43,6 +43,8 @@ var index = 0;
 var subnets = {
   addressPrefix: '10.0.0.0/16',
   addressPrefixNew: '10.0.0.0/24',
+  serviceEndpoints: 'Microsoft.Storage',
+  serviceEndpointsNew: '',
   name: 'subnetName'
 };
 
@@ -175,7 +177,7 @@ describe('arm', function () {
     describe('subnet', function () {
       this.timeout(testTimeout);
       it('create should create subnet', function (done) {
-        var cmd = 'network vnet subnet create -g {group} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --network-security-group-name {networkSecurityGroupName} --route-table-name {routeTableName}'.formatArgs(subnets);
+        var cmd = 'network vnet subnet create -g {group} -n {name} --address-prefix {addressPrefix} --service-endpoints {serviceEndpoints} --vnet-name {virtualNetworkName} --network-security-group-name {networkSecurityGroupName} --route-table-name {routeTableName}'.formatArgs(subnets);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
@@ -189,7 +191,7 @@ describe('arm', function () {
         });
       });
       it('set should update subnet', function (done) {
-        var cmd = 'network vnet subnet set -g {group} -n {name} --address-prefix {addressPrefixNew} --vnet-name {virtualNetworkName}'.formatArgs(subnets);
+        var cmd = 'network vnet subnet set -g {group} -n {name} --address-prefix {addressPrefixNew} --service-endpoints {serviceEndpointsNew} --vnet-name {virtualNetworkName}'.formatArgs(subnets);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();

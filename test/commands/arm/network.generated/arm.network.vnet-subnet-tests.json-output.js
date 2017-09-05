@@ -43,6 +43,8 @@ var index = 0;
 var subnets = {
   addressPrefix: '10.0.0.0/16',
   addressPrefixNew: '10.0.0.0/24',
+  serviceEndpoints: 'Microsoft.Storage',
+  serviceEndpointsNew: '',
   name: 'subnetName'
 };
 
@@ -174,12 +176,13 @@ describe('arm', function () {
     describe('subnet', function () {
       this.timeout(testTimeout);
       it('create should create subnet', function (done) {
-        var cmd = 'network vnet subnet create -g {group} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --network-security-group-name {networkSecurityGroupName} --route-table-name {routeTableName} --json'.formatArgs(subnets);
+        var cmd = 'network vnet subnet create -g {group} -n {name} --address-prefix {addressPrefix} --service-endpoints {serviceEndpoints} --vnet-name {virtualNetworkName} --network-security-group-name {networkSecurityGroupName} --route-table-name {routeTableName} --json'.formatArgs(subnets);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(subnets.name);
           output.addressPrefix.toLowerCase().should.equal(subnets.addressPrefix.toLowerCase());
+          output.serviceEndpoints.forEach(function (item) { subnets.serviceEndpoints.split(',').should.containEql(item.service) });
           done();
         });
       });
@@ -190,16 +193,18 @@ describe('arm', function () {
           var output = JSON.parse(result.text);
           output.name.should.equal(subnets.name);
           output.addressPrefix.toLowerCase().should.equal(subnets.addressPrefix.toLowerCase());
+          output.serviceEndpoints.forEach(function (item) { subnets.serviceEndpoints.split(',').should.containEql(item.service) });
           done();
         });
       });
       it('set should update subnet', function (done) {
-        var cmd = 'network vnet subnet set -g {group} -n {name} --address-prefix {addressPrefixNew} --vnet-name {virtualNetworkName} --json'.formatArgs(subnets);
+        var cmd = 'network vnet subnet set -g {group} -n {name} --address-prefix {addressPrefixNew} --service-endpoints {serviceEndpointsNew} --vnet-name {virtualNetworkName} --json'.formatArgs(subnets);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(subnets.name);
           output.addressPrefix.toLowerCase().should.equal(subnets.addressPrefixNew.toLowerCase());
+          should.not.exist(output.serviceEndpoints);
           done();
         });
       });

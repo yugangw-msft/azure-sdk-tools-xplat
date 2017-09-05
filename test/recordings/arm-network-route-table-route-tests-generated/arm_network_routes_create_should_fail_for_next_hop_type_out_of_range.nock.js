@@ -29,36 +29,36 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/nextHopTypeOutOfRangeName?api-version=2017-06-01')
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/nextHopTypeOutOfRangeName?api-version=2017-08-01')
   .reply(404, "{\r\n  \"error\": {\r\n    \"code\": \"NotFound\",\r\n    \"message\": \"Resource /subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/nextHopTypeOutOfRangeName not found.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '278',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'a0a62fff-bb9c-4559-94a2-614cd139db31',
+  'x-ms-request-id': 'fcbb5a9a-9270-47e9-9466-4dcb5f34bde8',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14995',
-  'x-ms-correlation-request-id': 'd999f7e6-8480-4a70-9547-33720edd61a8',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170807T101610Z:d999f7e6-8480-4a70-9547-33720edd61a8',
-  date: 'Mon, 07 Aug 2017 10:16:10 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14997',
+  'x-ms-correlation-request-id': 'c01a83fe-0a9e-4399-b82c-ebda22c80ea8',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170901T100621Z:c01a83fe-0a9e-4399-b82c-ebda22c80ea8',
+  date: 'Fri, 01 Sep 2017 10:06:20 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/nextHopTypeOutOfRangeName?api-version=2017-06-01')
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/nextHopTypeOutOfRangeName?api-version=2017-08-01')
   .reply(404, "{\r\n  \"error\": {\r\n    \"code\": \"NotFound\",\r\n    \"message\": \"Resource /subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/nextHopTypeOutOfRangeName not found.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '278',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'a0a62fff-bb9c-4559-94a2-614cd139db31',
+  'x-ms-request-id': 'fcbb5a9a-9270-47e9-9466-4dcb5f34bde8',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14995',
-  'x-ms-correlation-request-id': 'd999f7e6-8480-4a70-9547-33720edd61a8',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170807T101610Z:d999f7e6-8480-4a70-9547-33720edd61a8',
-  date: 'Mon, 07 Aug 2017 10:16:10 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14997',
+  'x-ms-correlation-request-id': 'c01a83fe-0a9e-4399-b82c-ebda22c80ea8',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170901T100621Z:c01a83fe-0a9e-4399-b82c-ebda22c80ea8',
+  date: 'Fri, 01 Sep 2017 10:06:20 GMT',
   connection: 'close' });
  return result; }]];

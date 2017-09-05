@@ -299,16 +299,7 @@ describe('arm', function () {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
-
-            cmd = 'network watcher list -g {group} --json'.formatArgs(networkWatchers);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
-              var outputs = JSON.parse(result.text);
-              _.some(outputs, function (output) {
-                return output.name === networkWatchers.name;
-              }).should.be.false;
-              done();
-            });
+            done();
           });
         });
       });

@@ -6,8 +6,8 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '2c224e7e-3ef5-431d-a57b-e71f4662e3a6',
-    name: 'Node CLI Test',
+    id: '947d47b4-7883-4bb9-9d85-c5e8e2f572ce',
+    name: 'nrptest58.westus.validation.partner',
     user: {
       name: 'user@domain.example',
       type: 'user'
@@ -29,36 +29,36 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-peering/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/peerings?api-version=2017-06-01')
-  .reply(200, "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"AzurePublicPeering\",\r\n      \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-peering/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/peerings/AzurePublicPeering\",\r\n      \"etag\": \"W/\\\"b0d042b8-55ce-4f7e-8c18-6b0eae6a0e00\\\"\",\r\n      \"properties\": {\r\n        \"provisioningState\": \"Succeeded\",\r\n        \"peeringType\": \"AzurePublicPeering\",\r\n        \"azureASN\": 12076,\r\n        \"peerASN\": 2,\r\n        \"primaryPeerAddressPrefix\": \"11.0.0.0/30\",\r\n        \"secondaryPeerAddressPrefix\": \"13.0.0.0/30\",\r\n        \"primaryAzurePort\": \"INX-LON04-06GMR-CIS-3-PRI-A\",\r\n        \"secondaryAzurePort\": \"INX-LON04-06GMR-CIS-4-SEC-A\",\r\n        \"state\": \"Enabled\",\r\n        \"vlanId\": 2,\r\n        \"gatewayManagerEtag\": \"\",\r\n        \"lastModifiedBy\": \"Customer\"\r\n      }\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-peering/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/peerings?api-version=2017-08-01')
+  .reply(200, "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"AzurePublicPeering\",\r\n      \"id\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-peering/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/peerings/AzurePublicPeering\",\r\n      \"etag\": \"W/\\\"6ba8c162-780d-42cf-9ba7-49c5fa9528b5\\\"\",\r\n      \"properties\": {\r\n        \"provisioningState\": \"Succeeded\",\r\n        \"peeringType\": \"AzurePublicPeering\",\r\n        \"azureASN\": 12076,\r\n        \"peerASN\": 2,\r\n        \"primaryPeerAddressPrefix\": \"11.0.0.0/30\",\r\n        \"secondaryPeerAddressPrefix\": \"13.0.0.0/30\",\r\n        \"primaryAzurePort\": \"INX-LON04-06GMR-CIS-3-PRI-A\",\r\n        \"secondaryAzurePort\": \"INX-LON04-06GMR-CIS-4-SEC-A\",\r\n        \"state\": \"Enabled\",\r\n        \"vlanId\": 2,\r\n        \"gatewayManagerEtag\": \"\",\r\n        \"lastModifiedBy\": \"Customer\"\r\n      }\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '862',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'f0985054-2985-4733-87ad-149fc75fbb2d',
+  'x-ms-request-id': '5869af8d-d98f-4636-ba20-4781432ab78a',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14988',
-  'x-ms-correlation-request-id': 'd9d25153-9fc9-4885-8385-30e8175461fb',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170712T131308Z:d9d25153-9fc9-4885-8385-30e8175461fb',
-  date: 'Wed, 12 Jul 2017 13:13:07 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14989',
+  'x-ms-correlation-request-id': '74a01282-8f06-439f-8c1d-bdd18172737b',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170901T113108Z:74a01282-8f06-439f-8c1d-bdd18172737b',
+  date: 'Fri, 01 Sep 2017 11:31:07 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-peering/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/peerings?api-version=2017-06-01')
-  .reply(200, "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"AzurePublicPeering\",\r\n      \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-peering/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/peerings/AzurePublicPeering\",\r\n      \"etag\": \"W/\\\"b0d042b8-55ce-4f7e-8c18-6b0eae6a0e00\\\"\",\r\n      \"properties\": {\r\n        \"provisioningState\": \"Succeeded\",\r\n        \"peeringType\": \"AzurePublicPeering\",\r\n        \"azureASN\": 12076,\r\n        \"peerASN\": 2,\r\n        \"primaryPeerAddressPrefix\": \"11.0.0.0/30\",\r\n        \"secondaryPeerAddressPrefix\": \"13.0.0.0/30\",\r\n        \"primaryAzurePort\": \"INX-LON04-06GMR-CIS-3-PRI-A\",\r\n        \"secondaryAzurePort\": \"INX-LON04-06GMR-CIS-4-SEC-A\",\r\n        \"state\": \"Enabled\",\r\n        \"vlanId\": 2,\r\n        \"gatewayManagerEtag\": \"\",\r\n        \"lastModifiedBy\": \"Customer\"\r\n      }\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-peering/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/peerings?api-version=2017-08-01')
+  .reply(200, "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"AzurePublicPeering\",\r\n      \"id\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-peering/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/peerings/AzurePublicPeering\",\r\n      \"etag\": \"W/\\\"6ba8c162-780d-42cf-9ba7-49c5fa9528b5\\\"\",\r\n      \"properties\": {\r\n        \"provisioningState\": \"Succeeded\",\r\n        \"peeringType\": \"AzurePublicPeering\",\r\n        \"azureASN\": 12076,\r\n        \"peerASN\": 2,\r\n        \"primaryPeerAddressPrefix\": \"11.0.0.0/30\",\r\n        \"secondaryPeerAddressPrefix\": \"13.0.0.0/30\",\r\n        \"primaryAzurePort\": \"INX-LON04-06GMR-CIS-3-PRI-A\",\r\n        \"secondaryAzurePort\": \"INX-LON04-06GMR-CIS-4-SEC-A\",\r\n        \"state\": \"Enabled\",\r\n        \"vlanId\": 2,\r\n        \"gatewayManagerEtag\": \"\",\r\n        \"lastModifiedBy\": \"Customer\"\r\n      }\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '862',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'f0985054-2985-4733-87ad-149fc75fbb2d',
+  'x-ms-request-id': '5869af8d-d98f-4636-ba20-4781432ab78a',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14988',
-  'x-ms-correlation-request-id': 'd9d25153-9fc9-4885-8385-30e8175461fb',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170712T131308Z:d9d25153-9fc9-4885-8385-30e8175461fb',
-  date: 'Wed, 12 Jul 2017 13:13:07 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14989',
+  'x-ms-correlation-request-id': '74a01282-8f06-439f-8c1d-bdd18172737b',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170901T113108Z:74a01282-8f06-439f-8c1d-bdd18172737b',
+  date: 'Fri, 01 Sep 2017 11:31:07 GMT',
   connection: 'close' });
  return result; }]];
