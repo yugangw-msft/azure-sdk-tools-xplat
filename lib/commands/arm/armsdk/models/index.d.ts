@@ -55,8 +55,11 @@ export interface SubResource extends BaseResource {
  * Describes a virtual machine scale set sku.
  *
  * @member {string} [name] The sku name.
- * @member {string} [tier] The sku tier.
- * @member {number} [capacity] The sku capacity.
+ * @member {string} [tier] Specifies the tier of virtual machines in a scale
+ * set.<br /><br /> Possible Values:<br /><br /> **Standard**<br /><br />
+ * **Basic**
+ * @member {number} [capacity] Specifies the number of virtual machines in the
+ * scale set.
  */
 export interface Sku {
   name?: string;
@@ -88,7 +91,16 @@ export interface Resource extends BaseResource {
  * @class
  * Initializes a new instance of the AvailabilitySet class.
  * @constructor
- * Create or update availability set parameters.
+ * Specifies information about the availability set that the virtual machine
+ * should be assigned to. Virtual machines specified in the same availability
+ * set are allocated to different nodes to maximize availability. For more
+ * information about availability sets, see [Manage the availability of virtual
+ * machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+ * <br><br> For more information on Azure planned maintainance, see [Planned
+ * maintenance for virtual machines in
+ * Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+ * <br><br> Currently, a VM can only be added to availability set at creation
+ * time. An existing VM cannot be added to an availability set.
  *
  * @member {number} [platformUpdateDomainCount] Update Domain count.
  * @member {number} [platformFaultDomainCount] Fault Domain count.
@@ -97,8 +109,11 @@ export interface Resource extends BaseResource {
  * @member {array} [statuses] The resource status information.
  * @member {object} [sku] Sku of the availability set
  * @member {string} [sku.name] The sku name.
- * @member {string} [sku.tier] The sku tier.
- * @member {number} [sku.capacity] The sku capacity.
+ * @member {string} [sku.tier] Specifies the tier of virtual machines in a
+ * scale set.<br /><br /> Possible Values:<br /><br /> **Standard**<br /><br />
+ * **Basic**
+ * @member {number} [sku.capacity] Specifies the number of virtual machines in
+ * the scale set.
  */
 export interface AvailabilitySet extends Resource {
   platformUpdateDomainCount?: number;
@@ -194,7 +209,10 @@ export interface VirtualMachineExtensionImage extends Resource {
  *
  * @member {string} name The name of the resource.
  * @member {string} location The supported Azure location of the resource.
- * @member {object} [tags] The tags attached to the resource.
+ * @member {object} [tags] Specifies the tags that are assigned to the virtual
+ * machine. For more information about using tags, see [Using tags to organize
+ * your Azure
+ * resources](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags.md).
  */
 export interface VirtualMachineImageResource extends SubResource {
   name: string;
@@ -209,9 +227,9 @@ export interface VirtualMachineImageResource extends SubResource {
  * The instance view of a virtual machine extension.
  *
  * @member {string} [name] The virtual machine extension name.
- * @member {string} [type] The full type of the extension handler which
- * includes both publisher and type.
- * @member {string} [typeHandlerVersion] The type version of the extension
+ * @member {string} [type] Specifies the type of the extension; an example is
+ * "CustomScriptExtension".
+ * @member {string} [typeHandlerVersion] Specifies the version of the script
  * handler.
  * @member {array} [substatuses] The resource status information.
  * @member {array} [statuses] The resource status information.
@@ -233,24 +251,27 @@ export interface VirtualMachineExtensionInstanceView {
  * @member {string} [forceUpdateTag] How the extension handler should be forced
  * to update even if the extension configuration has not changed.
  * @member {string} [publisher] The name of the extension handler publisher.
- * @member {string} [virtualMachineExtensionType] The type of the extension
+ * @member {string} [virtualMachineExtensionType] Specifies the type of the
+ * extension; an example is "CustomScriptExtension".
+ * @member {string} [typeHandlerVersion] Specifies the version of the script
  * handler.
- * @member {string} [typeHandlerVersion] The type version of the extension
- * handler.
- * @member {boolean} [autoUpgradeMinorVersion] Whether the extension handler
- * should be automatically upgraded across minor versions.
+ * @member {boolean} [autoUpgradeMinorVersion] Indicates whether the extension
+ * should use a newer minor version if one is available at deployment time.
+ * Once deployed, however, the extension will not upgrade minor versions unless
+ * redeployed, even with this property set to true.
  * @member {object} [settings] Json formatted public settings for the
  * extension.
- * @member {object} [protectedSettings] Json formatted protected settings for
- * the extension.
+ * @member {object} [protectedSettings] The extension can contain either
+ * protectedSettings or protectedSettingsFromKeyVault or no protected settings
+ * at all.
  * @member {string} [provisioningState] The provisioning state, which only
  * appears in the response.
  * @member {object} [instanceView] The virtual machine extension instance view.
  * @member {string} [instanceView.name] The virtual machine extension name.
- * @member {string} [instanceView.type] The full type of the extension handler
- * which includes both publisher and type.
- * @member {string} [instanceView.typeHandlerVersion] The type version of the
- * extension handler.
+ * @member {string} [instanceView.type] Specifies the type of the extension; an
+ * example is "CustomScriptExtension".
+ * @member {string} [instanceView.typeHandlerVersion] Specifies the version of
+ * the script handler.
  * @member {array} [instanceView.substatuses] The resource status information.
  * @member {array} [instanceView.statuses] The resource status information.
  */
@@ -275,7 +296,9 @@ export interface VirtualMachineExtension extends Resource {
  *
  * @member {string} publisher The publisher ID.
  * @member {string} name The plan ID.
- * @member {string} product The product ID.
+ * @member {string} product Specifies the product of the image from the
+ * marketplace. This is the same value as Offer under the imageReference
+ * element.
  */
 export interface PurchasePlan {
   publisher: string;
@@ -302,9 +325,9 @@ export interface OSDiskImage {
  * @constructor
  * Contains the data disk images information.
  *
- * @member {number} [lun] The LUN number for a data disk. This value is used to
- * identify data disk image inside the VMImage and therefore it must be unique
- * for each data disk.
+ * @member {number} [lun] Specifies the logical unit number of the data disk.
+ * This value is used to identify data disks within the VM and therefore must
+ * be unique for each data disk attached to a VM.
  */
 export interface DataDiskImage {
   readonly lun?: number;
@@ -319,7 +342,9 @@ export interface DataDiskImage {
  * @member {object} [plan]
  * @member {string} [plan.publisher] The publisher ID.
  * @member {string} [plan.name] The plan ID.
- * @member {string} [plan.product] The product ID.
+ * @member {string} [plan.product] Specifies the product of the image from the
+ * marketplace. This is the same value as Offer under the imageReference
+ * element.
  * @member {object} [osDiskImage]
  * @member {string} [osDiskImage.operatingSystem] The operating system of the
  * osDiskImage. Possible values include: 'Windows', 'Linux'
@@ -412,11 +437,18 @@ export interface VirtualMachineCaptureResult extends SubResource {
  * @class
  * Initializes a new instance of the Plan class.
  * @constructor
- * Plan for the resource.
+ * Specifies information about the marketplace image used to create the virtual
+ * machine. This element is only used for marketplace images. Before you can
+ * use a marketplace image from an API, you must enable the image for
+ * programmatic use.  In the Azure portal, find the marketplace image that you
+ * want to use and then click **Want to deploy programmatically, Get Started
+ * ->**. Enter any required information and then click **Save**.
  *
  * @member {string} [name] The plan ID.
  * @member {string} [publisher] The publisher ID.
- * @member {string} [product] The offer ID.
+ * @member {string} [product] Specifies the product of the image from the
+ * marketplace. This is the same value as Offer under the imageReference
+ * element.
  * @member {string} [promotionCode] The promotion code.
  */
 export interface Plan {
@@ -430,9 +462,19 @@ export interface Plan {
  * @class
  * Initializes a new instance of the HardwareProfile class.
  * @constructor
- * Describes a hardware profile.
+ * Specifies the hardware settings for the virtual machine.
  *
- * @member {string} [vmSize] The virtual machine size name. Possible values
+ * @member {string} [vmSize] Specifies the size of the virtual machine. For
+ * more information about virtual machine sizes, see [Sizes for virtual
+ * machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-sizes?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+ * <br><br> The available VM sizes depend on region and availability set. For a
+ * list of available sizes use these APIs:  <br><br> [List all available
+ * virtual machine sizes in an availability
+ * set](virtualmachines-list-sizes-availability-set.md) <br><br> [List all
+ * available virtual machine sizes in a
+ * region](virtualmachines-list-sizes-region.md) <br><br> [List all available
+ * virtual machine sizes for
+ * resizing](virtualmachines-list-sizes-for-resizing.md). Possible values
  * include: 'Basic_A0', 'Basic_A1', 'Basic_A2', 'Basic_A3', 'Basic_A4',
  * 'Standard_A0', 'Standard_A1', 'Standard_A2', 'Standard_A3', 'Standard_A4',
  * 'Standard_A5', 'Standard_A6', 'Standard_A7', 'Standard_A8', 'Standard_A9',
@@ -466,14 +508,22 @@ export interface HardwareProfile {
  * @class
  * Initializes a new instance of the ImageReference class.
  * @constructor
- * The image reference.
+ * Specifies information about the image to use. You can specify information
+ * about platform images, marketplace images, or virtual machine images. This
+ * element is required when you want to use a platform image, marketplace
+ * image, or virtual machine image, but is not used in other creation
+ * operations.
  *
  * @member {string} [publisher] The image publisher.
- * @member {string} [offer] The image offer.
+ * @member {string} [offer] Specifies the offer of the platform image or
+ * marketplace image used to create the virtual machine.
  * @member {string} [sku] The image SKU.
- * @member {string} [version] The image version. The allowed formats are
- * Major.Minor.Build or 'latest'. Major, Minor and Build are decimal numbers.
- * Specify 'latest' to use the latest version of the image.
+ * @member {string} [version] Specifies the version of the platform image or
+ * marketplace image used to create the virtual machine. The allowed formats
+ * are Major.Minor.Build or 'latest'. Major, Minor, and Build are decimal
+ * numbers. Specify 'latest' to use the latest version of an image available at
+ * deploy time. Even if you use 'latest', the VM image will not automatically
+ * update after deploy time even if a new version becomes available.
  */
 export interface ImageReference extends SubResource {
   publisher?: string;
@@ -504,7 +554,8 @@ export interface KeyVaultSecretReference {
  * @constructor
  * Describes a reference to Key Vault Key
  *
- * @member {string} keyUrl The URL referencing a key in a Key Vault.
+ * @member {string} keyUrl The URL referencing a key encryption key in Key
+ * Vault.
  * @member {object} sourceVault The relative URL of the Key Vault containing
  * the key.
  * @member {string} [sourceVault.id] Resource Id
@@ -520,17 +571,17 @@ export interface KeyVaultKeyReference {
  * @constructor
  * Describes a Encryption Settings for a Disk
  *
- * @member {object} [diskEncryptionKey] The disk encryption key which is a Key
- * Vault Secret.
+ * @member {object} [diskEncryptionKey] Specifies the location of the disk
+ * encryption key, which is a Key Vault Secret.
  * @member {string} [diskEncryptionKey.secretUrl] The URL referencing a secret
  * in a Key Vault.
  * @member {object} [diskEncryptionKey.sourceVault] The relative URL of the Key
  * Vault containing the secret.
  * @member {string} [diskEncryptionKey.sourceVault.id] Resource Id
- * @member {object} [keyEncryptionKey] The key encryption key which is Key
- * Vault Key.
- * @member {string} [keyEncryptionKey.keyUrl] The URL referencing a key in a
- * Key Vault.
+ * @member {object} [keyEncryptionKey] Specifies the location of the key
+ * encryption key in Key Vault.
+ * @member {string} [keyEncryptionKey.keyUrl] The URL referencing a key
+ * encryption key in Key Vault.
  * @member {object} [keyEncryptionKey.sourceVault] The relative URL of the Key
  * Vault containing the key.
  * @member {string} [keyEncryptionKey.sourceVault.id] Resource Id
@@ -549,8 +600,7 @@ export interface DiskEncryptionSettings {
  * @constructor
  * Describes the uri of a disk.
  *
- * @member {string} [uri] The virtual hard disk's URI. Must be a valid URI to a
- * virtual hard disk.
+ * @member {string} [uri] Specifies the virtual hard disk's uri.
  */
 export interface VirtualHardDisk {
   uri?: string;
@@ -562,7 +612,8 @@ export interface VirtualHardDisk {
  * @constructor
  * The parameters of a managed disk.
  *
- * @member {string} [storageAccountType] The Storage Account type. Possible
+ * @member {string} [storageAccountType] Specifies the storage account type for
+ * the managed disk. Possible values are: Standard_LRS or Premium_LRS. Possible
  * values include: 'Standard_LRS', 'Premium_LRS'
  */
 export interface ManagedDiskParameters extends SubResource {
@@ -573,23 +624,29 @@ export interface ManagedDiskParameters extends SubResource {
  * @class
  * Initializes a new instance of the OSDisk class.
  * @constructor
- * Describes an Operating System disk.
+ * Specifies information about the operating system disk used by the virtual
+ * machine. <br><br> For more information about disks, see [About disks and
+ * VHDs for Azure virtual
+ * machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
  *
- * @member {string} [osType] The Operating System type. Possible values
- * include: 'Windows', 'Linux'
- * @member {object} [encryptionSettings] The disk encryption settings.
- * @member {object} [encryptionSettings.diskEncryptionKey] The disk encryption
- * key which is a Key Vault Secret.
+ * @member {string} [osType] This property allows you to specify the type of
+ * the OS that is included in the disk if creating a VM from user-image or a
+ * specialized VHD. <br><br> Possible values are: <br><br> **Windows** <br><br>
+ * **Linux**. Possible values include: 'Windows', 'Linux'
+ * @member {object} [encryptionSettings] Specifies the encryption settings for
+ * the OS Disk. <br><br> Minimum api-version: 2015-06-15
+ * @member {object} [encryptionSettings.diskEncryptionKey] Specifies the
+ * location of the disk encryption key, which is a Key Vault Secret.
  * @member {string} [encryptionSettings.diskEncryptionKey.secretUrl] The URL
  * referencing a secret in a Key Vault.
  * @member {object} [encryptionSettings.diskEncryptionKey.sourceVault] The
  * relative URL of the Key Vault containing the secret.
  * @member {string} [encryptionSettings.diskEncryptionKey.sourceVault.id]
  * Resource Id
- * @member {object} [encryptionSettings.keyEncryptionKey] The key encryption
- * key which is Key Vault Key.
+ * @member {object} [encryptionSettings.keyEncryptionKey] Specifies the
+ * location of the key encryption key in Key Vault.
  * @member {string} [encryptionSettings.keyEncryptionKey.keyUrl] The URL
- * referencing a key in a Key Vault.
+ * referencing a key encryption key in Key Vault.
  * @member {object} [encryptionSettings.keyEncryptionKey.sourceVault] The
  * relative URL of the Key Vault containing the key.
  * @member {string} [encryptionSettings.keyEncryptionKey.sourceVault.id]
@@ -598,23 +655,31 @@ export interface ManagedDiskParameters extends SubResource {
  * encryption should be enabled on the virtual machine.
  * @member {string} [name] The disk name.
  * @member {object} [vhd] The virtual hard disk.
- * @member {string} [vhd.uri] The virtual hard disk's URI. Must be a valid URI
- * to a virtual hard disk.
+ * @member {string} [vhd.uri] Specifies the virtual hard disk's uri.
  * @member {object} [image] The source user image virtual hard disk. The
- * virtual hard disk will be copied before using it to attach to the virtual
- * machine. If SourceImage is provided, the destination virtual hard disk must
+ * virtual hard disk will be copied before being attached to the virtual
+ * machine. If SourceImage is provided, the destination virtual hard drive must
  * not exist.
- * @member {string} [image.uri] The virtual hard disk's URI. Must be a valid
- * URI to a virtual hard disk.
- * @member {string} [caching] The caching type. Possible values include:
- * 'None', 'ReadOnly', 'ReadWrite'
- * @member {string} createOption The create option. Possible values include:
- * 'fromImage', 'empty', 'attach'
- * @member {number} [diskSizeGB] The initial disk size, in GB, for blank data
- * disks, and the new desired size for resizing existing OS and data disks.
+ * @member {string} [image.uri] Specifies the virtual hard disk's uri.
+ * @member {string} [caching] Specifies the caching requirements. <br><br>
+ * Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br>
+ * **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for
+ * Premium storage**. Possible values include: 'None', 'ReadOnly', 'ReadWrite'
+ * @member {string} createOption Specifies how the virtual machine should be
+ * created.<br><br> Possible values are:<br><br> **Attach** \u2013 This value
+ * is used when you are using a specialized disk to create the virtual
+ * machine.<br><br> **FromImage** \u2013 This value is used when you are using
+ * an image to create the virtual machine. If you are using a platform image,
+ * you also use the imageReference element described above. If you are using a
+ * marketplace image, you  also use the plan element previously described.
+ * Possible values include: 'fromImage', 'empty', 'attach'
+ * @member {number} [diskSizeGB] Specifies the size of an empty data disk in
+ * gigabytes. This element can be used to overwrite the name of the disk in a
+ * virtual machine image. <br><br> This value cannot be larger than 1023 GB
  * @member {object} [managedDisk] The managed disk parameters.
- * @member {string} [managedDisk.storageAccountType] The Storage Account type.
- * Possible values include: 'Standard_LRS', 'Premium_LRS'
+ * @member {string} [managedDisk.storageAccountType] Specifies the storage
+ * account type for the managed disk. Possible values are: Standard_LRS or
+ * Premium_LRS. Possible values include: 'Standard_LRS', 'Premium_LRS'
  */
 export interface OSDisk {
   osType?: string;
@@ -634,26 +699,36 @@ export interface OSDisk {
  * @constructor
  * Describes a data disk.
  *
- * @member {number} lun The logical unit number.
+ * @member {number} lun Specifies the logical unit number of the data disk.
+ * This value is used to identify data disks within the VM and therefore must
+ * be unique for each data disk attached to a VM.
  * @member {string} [name] The disk name.
  * @member {object} [vhd] The virtual hard disk.
- * @member {string} [vhd.uri] The virtual hard disk's URI. Must be a valid URI
- * to a virtual hard disk.
- * @member {object} [image] The source user image virtual hard disk. This
- * virtual hard disk will be copied before using it to attach to the virtual
- * machine. If SourceImage is provided, the destination virtual hard disk must
+ * @member {string} [vhd.uri] Specifies the virtual hard disk's uri.
+ * @member {object} [image] The source user image virtual hard disk. The
+ * virtual hard disk will be copied before being attached to the virtual
+ * machine. If SourceImage is provided, the destination virtual hard drive must
  * not exist.
- * @member {string} [image.uri] The virtual hard disk's URI. Must be a valid
- * URI to a virtual hard disk.
- * @member {string} [caching] The caching type. Possible values include:
- * 'None', 'ReadOnly', 'ReadWrite'
- * @member {string} createOption The create option. Possible values include:
- * 'fromImage', 'empty', 'attach'
- * @member {number} [diskSizeGB] The initial disk size in GB for blank data
- * disks, and the new desired size for resizing existing OS and data disks.
+ * @member {string} [image.uri] Specifies the virtual hard disk's uri.
+ * @member {string} [caching] Specifies the caching requirements. <br><br>
+ * Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br>
+ * **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for
+ * Premium storage**. Possible values include: 'None', 'ReadOnly', 'ReadWrite'
+ * @member {string} createOption Specifies how the virtual machine should be
+ * created.<br><br> Possible values are:<br><br> **Attach** \u2013 This value
+ * is used when you are using a specialized disk to create the virtual
+ * machine.<br><br> **FromImage** \u2013 This value is used when you are using
+ * an image to create the virtual machine. If you are using a platform image,
+ * you also use the imageReference element described above. If you are using a
+ * marketplace image, you  also use the plan element previously described.
+ * Possible values include: 'fromImage', 'empty', 'attach'
+ * @member {number} [diskSizeGB] Specifies the size of an empty data disk in
+ * gigabytes. This element can be used to overwrite the name of the disk in a
+ * virtual machine image. <br><br> This value cannot be larger than 1023 GB
  * @member {object} [managedDisk] The managed disk parameters.
- * @member {string} [managedDisk.storageAccountType] The Storage Account type.
- * Possible values include: 'Standard_LRS', 'Premium_LRS'
+ * @member {string} [managedDisk.storageAccountType] Specifies the storage
+ * account type for the managed disk. Possible values are: Standard_LRS or
+ * Premium_LRS. Possible values include: 'Standard_LRS', 'Premium_LRS'
  */
 export interface DataDisk {
   lun: number;
@@ -670,31 +745,46 @@ export interface DataDisk {
  * @class
  * Initializes a new instance of the StorageProfile class.
  * @constructor
- * Describes a storage profile.
+ * Specifies the storage settings for the virtual machine disks.
  *
- * @member {object} [imageReference] The image reference.
+ * @member {object} [imageReference] Specifies information about the image to
+ * use. You can specify information about platform images, marketplace images,
+ * or virtual machine images. This element is required when you want to use a
+ * platform image, marketplace image, or virtual machine image, but is not used
+ * in other creation operations.
  * @member {string} [imageReference.publisher] The image publisher.
- * @member {string} [imageReference.offer] The image offer.
+ * @member {string} [imageReference.offer] Specifies the offer of the platform
+ * image or marketplace image used to create the virtual machine.
  * @member {string} [imageReference.sku] The image SKU.
- * @member {string} [imageReference.version] The image version. The allowed
- * formats are Major.Minor.Build or 'latest'. Major, Minor and Build are
- * decimal numbers. Specify 'latest' to use the latest version of the image.
- * @member {object} [osDisk] The OS disk.
- * @member {string} [osDisk.osType] The Operating System type. Possible values
- * include: 'Windows', 'Linux'
- * @member {object} [osDisk.encryptionSettings] The disk encryption settings.
- * @member {object} [osDisk.encryptionSettings.diskEncryptionKey] The disk
- * encryption key which is a Key Vault Secret.
+ * @member {string} [imageReference.version] Specifies the version of the
+ * platform image or marketplace image used to create the virtual machine. The
+ * allowed formats are Major.Minor.Build or 'latest'. Major, Minor, and Build
+ * are decimal numbers. Specify 'latest' to use the latest version of an image
+ * available at deploy time. Even if you use 'latest', the VM image will not
+ * automatically update after deploy time even if a new version becomes
+ * available.
+ * @member {object} [osDisk] Specifies information about the operating system
+ * disk used by the virtual machine. <br><br> For more information about disks,
+ * see [About disks and VHDs for Azure virtual
+ * machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+ * @member {string} [osDisk.osType] This property allows you to specify the
+ * type of the OS that is included in the disk if creating a VM from user-image
+ * or a specialized VHD. <br><br> Possible values are: <br><br> **Windows**
+ * <br><br> **Linux**. Possible values include: 'Windows', 'Linux'
+ * @member {object} [osDisk.encryptionSettings] Specifies the encryption
+ * settings for the OS Disk. <br><br> Minimum api-version: 2015-06-15
+ * @member {object} [osDisk.encryptionSettings.diskEncryptionKey] Specifies the
+ * location of the disk encryption key, which is a Key Vault Secret.
  * @member {string} [osDisk.encryptionSettings.diskEncryptionKey.secretUrl] The
  * URL referencing a secret in a Key Vault.
  * @member {object} [osDisk.encryptionSettings.diskEncryptionKey.sourceVault]
  * The relative URL of the Key Vault containing the secret.
  * @member {string}
  * [osDisk.encryptionSettings.diskEncryptionKey.sourceVault.id] Resource Id
- * @member {object} [osDisk.encryptionSettings.keyEncryptionKey] The key
- * encryption key which is Key Vault Key.
+ * @member {object} [osDisk.encryptionSettings.keyEncryptionKey] Specifies the
+ * location of the key encryption key in Key Vault.
  * @member {string} [osDisk.encryptionSettings.keyEncryptionKey.keyUrl] The URL
- * referencing a key in a Key Vault.
+ * referencing a key encryption key in Key Vault.
  * @member {object} [osDisk.encryptionSettings.keyEncryptionKey.sourceVault]
  * The relative URL of the Key Vault containing the key.
  * @member {string} [osDisk.encryptionSettings.keyEncryptionKey.sourceVault.id]
@@ -703,25 +793,37 @@ export interface DataDisk {
  * encryption should be enabled on the virtual machine.
  * @member {string} [osDisk.name] The disk name.
  * @member {object} [osDisk.vhd] The virtual hard disk.
- * @member {string} [osDisk.vhd.uri] The virtual hard disk's URI. Must be a
- * valid URI to a virtual hard disk.
+ * @member {string} [osDisk.vhd.uri] Specifies the virtual hard disk's uri.
  * @member {object} [osDisk.image] The source user image virtual hard disk. The
- * virtual hard disk will be copied before using it to attach to the virtual
- * machine. If SourceImage is provided, the destination virtual hard disk must
+ * virtual hard disk will be copied before being attached to the virtual
+ * machine. If SourceImage is provided, the destination virtual hard drive must
  * not exist.
- * @member {string} [osDisk.image.uri] The virtual hard disk's URI. Must be a
- * valid URI to a virtual hard disk.
- * @member {string} [osDisk.caching] The caching type. Possible values include:
- * 'None', 'ReadOnly', 'ReadWrite'
- * @member {string} [osDisk.createOption] The create option. Possible values
- * include: 'fromImage', 'empty', 'attach'
- * @member {number} [osDisk.diskSizeGB] The initial disk size, in GB, for blank
- * data disks, and the new desired size for resizing existing OS and data
- * disks.
+ * @member {string} [osDisk.image.uri] Specifies the virtual hard disk's uri.
+ * @member {string} [osDisk.caching] Specifies the caching requirements.
+ * <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly**
+ * <br><br> **ReadWrite** <br><br> Default: **None for Standard storage.
+ * ReadOnly for Premium storage**. Possible values include: 'None', 'ReadOnly',
+ * 'ReadWrite'
+ * @member {string} [osDisk.createOption] Specifies how the virtual machine
+ * should be created.<br><br> Possible values are:<br><br> **Attach** \u2013
+ * This value is used when you are using a specialized disk to create the
+ * virtual machine.<br><br> **FromImage** \u2013 This value is used when you
+ * are using an image to create the virtual machine. If you are using a
+ * platform image, you also use the imageReference element described above. If
+ * you are using a marketplace image, you  also use the plan element previously
+ * described. Possible values include: 'fromImage', 'empty', 'attach'
+ * @member {number} [osDisk.diskSizeGB] Specifies the size of an empty data
+ * disk in gigabytes. This element can be used to overwrite the name of the
+ * disk in a virtual machine image. <br><br> This value cannot be larger than
+ * 1023 GB
  * @member {object} [osDisk.managedDisk] The managed disk parameters.
- * @member {string} [osDisk.managedDisk.storageAccountType] The Storage Account
- * type. Possible values include: 'Standard_LRS', 'Premium_LRS'
- * @member {array} [dataDisks] The data disks.
+ * @member {string} [osDisk.managedDisk.storageAccountType] Specifies the
+ * storage account type for the managed disk. Possible values are: Standard_LRS
+ * or Premium_LRS. Possible values include: 'Standard_LRS', 'Premium_LRS'
+ * @member {array} [dataDisks] Specifies the parameters that are used to add a
+ * data disk to a virtual machine. <br><br> For more information about disks,
+ * see [About disks and VHDs for Azure virtual
+ * machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
  */
 export interface StorageProfile {
   imageReference?: ImageReference;
@@ -733,22 +835,22 @@ export interface StorageProfile {
  * @class
  * Initializes a new instance of the AdditionalUnattendContent class.
  * @constructor
- * Additional XML formatted information that can be included in the
+ * Specifies additional XML formatted information that can be included in the
  * Unattend.xml file, which is used by Windows Setup. Contents are defined by
- * setting name, component name, and the pass in which the content is a
- * applied.
+ * setting name, component name, and the pass in which the content is applied.
  *
  * @member {string} [passName] The pass name. Currently, the only allowable
  * value is oobeSystem. Possible values include: 'oobeSystem'
  * @member {string} [componentName] The component name. Currently, the only
  * allowable value is Microsoft-Windows-Shell-Setup. Possible values include:
  * 'Microsoft-Windows-Shell-Setup'
- * @member {string} [settingName] Setting name (e.g. FirstLogonCommands,
- * AutoLogon ). Possible values include: 'AutoLogon', 'FirstLogonCommands'
- * @member {string} [content] XML formatted content that is added to the
- * unattend.xml file in the specified pass and component. The XML must be less
- * than 4 KB and must include the root element for the setting or feature that
- * is being inserted.
+ * @member {string} [settingName] Specifies the name of the setting to which
+ * the content applies. Possible values are: FirstLogonCommands and AutoLogon.
+ * Possible values include: 'AutoLogon', 'FirstLogonCommands'
+ * @member {string} [content] Specifies the XML formatted content that is added
+ * to the unattend.xml file for the specified path and component. The XML must
+ * be less than 4KB and must include the root element for the setting or
+ * feature that is being inserted.
  */
 export interface AdditionalUnattendContent {
   passName?: string;
@@ -763,10 +865,17 @@ export interface AdditionalUnattendContent {
  * @constructor
  * Describes Protocol and thumbprint of Windows Remote Management listener
  *
- * @member {string} [protocol] The Protocol used by the WinRM listener. Http
- * and Https are supported. Possible values include: 'Http', 'Https'
- * @member {string} [certificateUrl] The Certificate URL in KMS for Https
- * listeners. Should be null for Http listeners.
+ * @member {string} [protocol] Specifies the protocol of listener. <br><br>
+ * Possible values are: <br>**http** <br><br> **https**. Possible values
+ * include: 'Http', 'Https'
+ * @member {string} [certificateUrl] This is the URL of a certificate that has
+ * been uploaded to Key Vault as a secret. For adding a secret to the Key
+ * Vault, see [Add a key or secret to the key
+ * vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add).
+ * In this case, your certificate needs to be It is the Base64 encoding of the
+ * following JSON Object which is encoded in UTF-8: <br><br> {<br>
+ * "data":"<Base64-encoded-certificate>",<br>  "dataType":"pfx",<br>
+ * "password":"<pfx-file-password>"<br>}
  */
 export interface WinRMListener {
   protocol?: string;
@@ -789,18 +898,22 @@ export interface WinRMConfiguration {
  * @class
  * Initializes a new instance of the WindowsConfiguration class.
  * @constructor
- * Describes Windows Configuration of the OS Profile.
+ * Specifies Windows operating system settings on the virtual machine.
  *
- * @member {boolean} [provisionVMAgent] Indicates whether the virtual machine
- * agent should be provisioned on the Virtual Machine. If not specified, then
- * the default behavior is to set it to true.
- * @member {boolean} [enableAutomaticUpdates] Indicates whether Windows updates
- * are automatically installed on the VM.
- * @member {string} [timeZone] The time zone of the VM
- * @member {array} [additionalUnattendContent] Additional base-64 encoded XML
- * formatted information that can be included in the Unattend.xml file.
- * @member {object} [winRM] The Windows Remote Management configuration of the
- * VM
+ * @member {boolean} [provisionVMAgent] Indicates whether virtual machine agent
+ * should be provisioned on the virtual machine. <br><br> When this property is
+ * not specified in the request body, default behavior is to set it to true.
+ * This will ensure that VM Agent is installed on the VM so that extensions can
+ * be added to the VM later.
+ * @member {boolean} [enableAutomaticUpdates] Indicates whether virtual machine
+ * is enabled for automatic updates.
+ * @member {string} [timeZone] Specifies the time zone of the virtual machine.
+ * e.g. "Pacific Standard Time"
+ * @member {array} [additionalUnattendContent] Specifies additional base-64
+ * encoded XML formatted information that can be included in the Unattend.xml
+ * file, which is used by Windows Setup.
+ * @member {object} [winRM] Specifies the Windows Remote Management listeners.
+ * This enables remote Windows PowerShell.
  * @member {array} [winRM.listeners] The list of Windows Remote Management
  * listeners
  */
@@ -819,12 +932,14 @@ export interface WindowsConfiguration {
  * Contains information about SSH certificate public key and the path on the
  * Linux VM where the public key is placed.
  *
- * @member {string} [path] Specifies the full path on the created VM where SSH
+ * @member {string} [path] Specifies the full path on the created VM where ssh
  * public key is stored. If the file already exists, the specified key is
- * appended to the file.
- * @member {string} [keyData] Certificate public key used to authenticate to
- * the VM through SSH. The certificate must be in Pem format with or without
- * headers.
+ * appended to the file. Example: /home/user/.ssh/authorized_keys
+ * @member {string} [keyData] SSH public key certificate used to authenticate
+ * with the VM through ssh. The key needs to be at least 2048-bit and in
+ * ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on
+ * Linux and Mac for Linux VMs in
+ * Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
  */
 export interface SshPublicKey {
   path?: string;
@@ -848,11 +963,17 @@ export interface SshConfiguration {
  * @class
  * Initializes a new instance of the LinuxConfiguration class.
  * @constructor
- * Describes Windows configuration of the OS Profile.
+ * Specifies the Linux operating system settings on the virtual machine.
+ * <br><br>For a list of supported Linux distributions, see [Linux on
+ * Azure-Endorsed
+ * Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-endorsed-distros?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+ * <br><br> For running non-endorsed distributions, see [Information for
+ * Non-Endorsed
+ * Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-create-upload-generic?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
  *
  * @member {boolean} [disablePasswordAuthentication] Specifies whether password
  * authentication should be disabled.
- * @member {object} [ssh] The SSH configuration for linux VMs.
+ * @member {object} [ssh] Specifies the ssh key configuration for a Linux OS.
  * @member {array} [ssh.publicKeys] The list of SSH public keys used to
  * authenticate with linux based VMs.
  */
@@ -868,10 +989,21 @@ export interface LinuxConfiguration {
  * Describes a single certificate reference in a Key Vault, and where the
  * certificate should reside on the VM.
  *
- * @member {string} [certificateUrl] The URL referencing a secret in a Key
- * Vault which contains a properly formatted certificate.
- * @member {string} [certificateStore] The Certificate store in LocalMachine to
- * add the certificate to on Windows, leave empty on Linux.
+ * @member {string} [certificateUrl] This is the URL of a certificate that has
+ * been uploaded to Key Vault as a secret. For adding a secret to the Key
+ * Vault, see [Add a key or secret to the key
+ * vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add).
+ * In this case, your certificate needs to be It is the Base64 encoding of the
+ * following JSON Object which is encoded in UTF-8: <br><br> {<br>
+ * "data":"<Base64-encoded-certificate>",<br>  "dataType":"pfx",<br>
+ * "password":"<pfx-file-password>"<br>}
+ * @member {string} [certificateStore] For Windows VMs, specifies the
+ * certificate store on the Virtual Machine to which the certificate should be
+ * added. The specified certificate store is implicitly in the LocalMachine
+ * account. <br><br>For Linux VMs, the certificate file is placed under the
+ * /var/lib/waagent directory, with the file name <UppercaseThumbprint>.crt for
+ * the X509 certificate file and <UppercaseThumbpring>.prv for private key.
+ * Both of these files are .pem formatted.
  */
 export interface VaultCertificate {
   certificateUrl?: string;
@@ -884,7 +1016,7 @@ export interface VaultCertificate {
  * @constructor
  * Describes a set of certificates which are all in the same Key Vault.
  *
- * @member {object} [sourceVault] The Relative URL of the Key Vault containing
+ * @member {object} [sourceVault] The relative URL of the Key Vault containing
  * all of the certificates in VaultCertificates.
  * @member {string} [sourceVault.id] Resource Id
  * @member {array} [vaultCertificates] The list of key vault references in
@@ -899,42 +1031,81 @@ export interface VaultSecretGroup {
  * @class
  * Initializes a new instance of the OSProfile class.
  * @constructor
- * Describes an OS profile.
+ * Specifies the operating system settings for the virtual machine.
  *
  * @member {string} [computerName] Specifies the host OS name of the virtual
- * machine.
+ * machine. <br><br> **Max-length (Windows):** 15 characters <br><br>
+ * **Max-length (Linux):** 64 characters. <br><br> For naming conventions and
+ * restrictions see [Azure infrastructure services implementation
+ * guidelines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-infrastructure-subscription-accounts-guidelines?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#1-naming-conventions).
  * @member {string} [adminUsername] Specifies the name of the administrator
- * account.
+ * account. <br><br> **Windows-only restriction:** Cannot end in "." <br><br>
+ * **Disallowed values:** "administrator", "admin", "user", "user1", "test",
+ * "user2", "test1", "user3", "admin1", "1", "123", "a", "actuser", "adm",
+ * "admin2", "aspnet", "backup", "console", "david", "guest", "john", "owner",
+ * "root", "server", "sql", "support", "support_388945a0", "sys", "test2",
+ * "test3", "user4", "user5". <br><br> **Minimum-length (Linux):** 1  character
+ * <br><br> **Max-length (Linux):** 64 characters <br><br> **Max-length
+ * (Windows):** 20 characters  <br><br><li> For root access to the Linux VM,
+ * see [Using root privileges on Linux virtual machines in
+ * Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-use-root-privileges?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)<br><li>
+ * For a list of built-in system users on Linux that should not be used in this
+ * field, see [Selecting User Names for Linux on
+ * Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-usernames?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
  * @member {string} [adminPassword] Specifies the password of the administrator
- * account.
+ * account. <br><br> **Minimum-length (Windows):** 8 characters <br><br>
+ * **Minimum-length (Linux):** 6 characters <br><br> **Max-length (Windows):**
+ * 123 characters <br><br> **Max-length (Linux):** 72 characters <br><br>
+ * **Complexity requirements:** 3 out of 4 conditions below need to be
+ * fulfilled <br> Has lower characters <br>Has upper characters <br> Has a
+ * digit <br> Has a special character (Regex match [\W_]) <br><br> **Disallowed
+ * values:** "abc@123", "P@$$w0rd", "P@ssw0rd", "P@ssword123", "Pa$$word",
+ * "pass@word1", "Password!", "Password1", "Password22", "iloveyou!" <br><br>
+ * For resetting the password, see [How to reset the Remote Desktop service or
+ * its login password in a Windows
+ * VM](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-reset-rdp?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+ * <br><br> For resetting root password, see [Manage users, SSH, and check or
+ * repair disks on Azure Linux VMs using the VMAccess
+ * Extension](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-vmaccess-extension?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#reset-root-password)
  * @member {string} [customData] Specifies a base-64 encoded string of custom
  * data. The base-64 encoded string is decoded to a binary array that is saved
  * as a file on the Virtual Machine. The maximum length of the binary array is
- * 65535 bytes
- * @member {object} [windowsConfiguration] The Windows configuration of the OS
- * profile.
+ * 65535 bytes. <br><br> For using cloud-init for your VM, see [Using
+ * cloud-init to customize a Linux VM during
+ * creation](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-cloud-init?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+ * @member {object} [windowsConfiguration] Specifies Windows operating system
+ * settings on the virtual machine.
  * @member {boolean} [windowsConfiguration.provisionVMAgent] Indicates whether
- * the virtual machine agent should be provisioned on the Virtual Machine. If
- * not specified, then the default behavior is to set it to true.
+ * virtual machine agent should be provisioned on the virtual machine. <br><br>
+ * When this property is not specified in the request body, default behavior is
+ * to set it to true.  This will ensure that VM Agent is installed on the VM so
+ * that extensions can be added to the VM later.
  * @member {boolean} [windowsConfiguration.enableAutomaticUpdates] Indicates
- * whether Windows updates are automatically installed on the VM.
- * @member {string} [windowsConfiguration.timeZone] The time zone of the VM
- * @member {array} [windowsConfiguration.additionalUnattendContent] Additional
- * base-64 encoded XML formatted information that can be included in the
- * Unattend.xml file.
- * @member {object} [windowsConfiguration.winRM] The Windows Remote Management
- * configuration of the VM
+ * whether virtual machine is enabled for automatic updates.
+ * @member {string} [windowsConfiguration.timeZone] Specifies the time zone of
+ * the virtual machine. e.g. "Pacific Standard Time"
+ * @member {array} [windowsConfiguration.additionalUnattendContent] Specifies
+ * additional base-64 encoded XML formatted information that can be included in
+ * the Unattend.xml file, which is used by Windows Setup.
+ * @member {object} [windowsConfiguration.winRM] Specifies the Windows Remote
+ * Management listeners. This enables remote Windows PowerShell.
  * @member {array} [windowsConfiguration.winRM.listeners] The list of Windows
  * Remote Management listeners
- * @member {object} [linuxConfiguration] The Linux configuration of the OS
- * profile.
+ * @member {object} [linuxConfiguration] Specifies the Linux operating system
+ * settings on the virtual machine. <br><br>For a list of supported Linux
+ * distributions, see [Linux on Azure-Endorsed
+ * Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-endorsed-distros?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+ * <br><br> For running non-endorsed distributions, see [Information for
+ * Non-Endorsed
+ * Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-create-upload-generic?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
  * @member {boolean} [linuxConfiguration.disablePasswordAuthentication]
  * Specifies whether password authentication should be disabled.
- * @member {object} [linuxConfiguration.ssh] The SSH configuration for linux
- * VMs.
+ * @member {object} [linuxConfiguration.ssh] Specifies the ssh key
+ * configuration for a Linux OS.
  * @member {array} [linuxConfiguration.ssh.publicKeys] The list of SSH public
  * keys used to authenticate with linux based VMs.
- * @member {array} [secrets] The list of certificates for addition to the VM.
+ * @member {array} [secrets] Specifies set of certificates that should be
+ * installed onto the virtual machine.
  */
 export interface OSProfile {
   computerName?: string;
@@ -963,9 +1134,9 @@ export interface NetworkInterfaceReference extends SubResource {
  * @class
  * Initializes a new instance of the NetworkProfile class.
  * @constructor
- * Describes a network profile.
+ * Specifies the network interfaces of the virtual machine.
  *
- * @member {array} [networkInterfaces] Specifies the list of resource IDs for
+ * @member {array} [networkInterfaces] Specifies the list of resource Ids for
  * the network interfaces associated with the virtual machine.
  */
 export interface NetworkProfile {
@@ -976,11 +1147,15 @@ export interface NetworkProfile {
  * @class
  * Initializes a new instance of the BootDiagnostics class.
  * @constructor
- * Describes Boot Diagnostics.
+ * Boot Diagnostics is a debugging feature which allows you to view Console
+ * Output and Screenshot to diagnose VM status. <br><br> For Linux Virtual
+ * Machines, you can easily view the output of your console log. <br><br> For
+ * both Windows and Linux virtual machines, Azure also enables you to see a
+ * screenshot of the VM from the hypervisor.
  *
  * @member {boolean} [enabled] Whether boot diagnostics should be enabled on
  * the Virtual Machine.
- * @member {string} [storageUri] URI of the storage account to use for placing
+ * @member {string} [storageUri] Uri of the storage account to use for placing
  * the console output and screenshot.
  */
 export interface BootDiagnostics {
@@ -992,14 +1167,17 @@ export interface BootDiagnostics {
  * @class
  * Initializes a new instance of the DiagnosticsProfile class.
  * @constructor
- * Describes a diagnostics profile.
+ * Specifies the boot diagnostic settings state. <br><br>Minimum api-version:
+ * 2015-06-15.
  *
  * @member {object} [bootDiagnostics] Boot Diagnostics is a debugging feature
- * which allows the user to view console output and/or a screenshot of the
- * virtual machine from the hypervisor.
+ * which allows you to view Console Output and Screenshot to diagnose VM
+ * status. <br><br> For Linux Virtual Machines, you can easily view the output
+ * of your console log. <br><br> For both Windows and Linux virtual machines,
+ * Azure also enables you to see a screenshot of the VM from the hypervisor.
  * @member {boolean} [bootDiagnostics.enabled] Whether boot diagnostics should
  * be enabled on the Virtual Machine.
- * @member {string} [bootDiagnostics.storageUri] URI of the storage account to
+ * @member {string} [bootDiagnostics.storageUri] Uri of the storage account to
  * use for placing the console output and screenshot.
  */
 export interface DiagnosticsProfile {
@@ -1012,9 +1190,9 @@ export interface DiagnosticsProfile {
  * @constructor
  * The instance view of a virtual machine extension handler.
  *
- * @member {string} [type] Full type of the extension handler which includes
- * both publisher and type.
- * @member {string} [typeHandlerVersion] The type version of the extension
+ * @member {string} [type] Specifies the type of the extension; an example is
+ * "CustomScriptExtension".
+ * @member {string} [typeHandlerVersion] Specifies the version of the script
  * handler.
  * @member {object} [status] The extension handler status.
  * @member {string} [status.code] The status code.
@@ -1056,7 +1234,8 @@ export interface VirtualMachineAgentInstanceView {
  * The instance view of the disk.
  *
  * @member {string} [name] The disk name.
- * @member {array} [encryptionSettings] The encryption settings of the disk.
+ * @member {array} [encryptionSettings] Specifies the encryption settings for
+ * the OS Disk. <br><br> Minimum api-version: 2015-06-15
  * @member {array} [statuses] The resource status information.
  */
 export interface DiskInstanceView {
@@ -1167,7 +1346,11 @@ export interface MaintenanceRedeployStatus {
  * returned for the last Maintenance Operation.
  * @member {array} [disks] The virtual machine disk information.
  * @member {array} [extensions] The extensions information.
- * @member {object} [bootDiagnostics] The boot diagnostics.
+ * @member {object} [bootDiagnostics] Boot Diagnostics is a debugging feature
+ * which allows you to view Console Output and Screenshot to diagnose VM
+ * status. <br><br> For Linux Virtual Machines, you can easily view the output
+ * of your console log. <br><br> For both Windows and Linux virtual machines,
+ * Azure also enables you to see a screenshot of the VM from the hypervisor.
  * @member {string} [bootDiagnostics.consoleScreenshotBlobUri] The console
  * screenshot blob URI.
  * @member {string} [bootDiagnostics.serialConsoleLogBlobUri] The Linux serial
@@ -1192,30 +1375,49 @@ export interface VirtualMachineInstanceView {
  * @constructor
  * Describes a Virtual Machine.
  *
- * @member {object} [plan] The purchase plan when deploying virtual machine
- * from VM Marketplace images.
+ * @member {object} [plan] Specifies information about the marketplace image
+ * used to create the virtual machine. This element is only used for
+ * marketplace images. Before you can use a marketplace image from an API, you
+ * must enable the image for programmatic use.  In the Azure portal, find the
+ * marketplace image that you want to use and then click **Want to deploy
+ * programmatically, Get Started ->**. Enter any required information and then
+ * click **Save**.
  * @member {string} [plan.name] The plan ID.
  * @member {string} [plan.publisher] The publisher ID.
- * @member {string} [plan.product] The offer ID.
+ * @member {string} [plan.product] Specifies the product of the image from the
+ * marketplace. This is the same value as Offer under the imageReference
+ * element.
  * @member {string} [plan.promotionCode] The promotion code.
- * @member {object} [hardwareProfile] The hardware profile.
- * @member {string} [hardwareProfile.vmSize] The virtual machine size name.
- * Possible values include: 'Basic_A0', 'Basic_A1', 'Basic_A2', 'Basic_A3',
- * 'Basic_A4', 'Standard_A0', 'Standard_A1', 'Standard_A2', 'Standard_A3',
- * 'Standard_A4', 'Standard_A5', 'Standard_A6', 'Standard_A7', 'Standard_A8',
- * 'Standard_A9', 'Standard_A10', 'Standard_A11', 'Standard_A1_v2',
- * 'Standard_A2_v2', 'Standard_A4_v2', 'Standard_A8_v2', 'Standard_A2m_v2',
- * 'Standard_A4m_v2', 'Standard_A8m_v2', 'Standard_D1', 'Standard_D2',
- * 'Standard_D3', 'Standard_D4', 'Standard_D11', 'Standard_D12',
- * 'Standard_D13', 'Standard_D14', 'Standard_D1_v2', 'Standard_D2_v2',
- * 'Standard_D3_v2', 'Standard_D4_v2', 'Standard_D5_v2', 'Standard_D11_v2',
- * 'Standard_D12_v2', 'Standard_D13_v2', 'Standard_D14_v2', 'Standard_D15_v2',
- * 'Standard_DS1', 'Standard_DS2', 'Standard_DS3', 'Standard_DS4',
- * 'Standard_DS11', 'Standard_DS12', 'Standard_DS13', 'Standard_DS14',
- * 'Standard_DS1_v2', 'Standard_DS2_v2', 'Standard_DS3_v2', 'Standard_DS4_v2',
- * 'Standard_DS5_v2', 'Standard_DS11_v2', 'Standard_DS12_v2',
- * 'Standard_DS13_v2', 'Standard_DS14_v2', 'Standard_DS15_v2', 'Standard_F1',
- * 'Standard_F2', 'Standard_F4', 'Standard_F8', 'Standard_F16', 'Standard_F1s',
+ * @member {object} [hardwareProfile] Specifies the hardware settings for the
+ * virtual machine.
+ * @member {string} [hardwareProfile.vmSize] Specifies the size of the virtual
+ * machine. For more information about virtual machine sizes, see [Sizes for
+ * virtual
+ * machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-sizes?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+ * <br><br> The available VM sizes depend on region and availability set. For a
+ * list of available sizes use these APIs:  <br><br> [List all available
+ * virtual machine sizes in an availability
+ * set](virtualmachines-list-sizes-availability-set.md) <br><br> [List all
+ * available virtual machine sizes in a
+ * region](virtualmachines-list-sizes-region.md) <br><br> [List all available
+ * virtual machine sizes for
+ * resizing](virtualmachines-list-sizes-for-resizing.md). Possible values
+ * include: 'Basic_A0', 'Basic_A1', 'Basic_A2', 'Basic_A3', 'Basic_A4',
+ * 'Standard_A0', 'Standard_A1', 'Standard_A2', 'Standard_A3', 'Standard_A4',
+ * 'Standard_A5', 'Standard_A6', 'Standard_A7', 'Standard_A8', 'Standard_A9',
+ * 'Standard_A10', 'Standard_A11', 'Standard_A1_v2', 'Standard_A2_v2',
+ * 'Standard_A4_v2', 'Standard_A8_v2', 'Standard_A2m_v2', 'Standard_A4m_v2',
+ * 'Standard_A8m_v2', 'Standard_D1', 'Standard_D2', 'Standard_D3',
+ * 'Standard_D4', 'Standard_D11', 'Standard_D12', 'Standard_D13',
+ * 'Standard_D14', 'Standard_D1_v2', 'Standard_D2_v2', 'Standard_D3_v2',
+ * 'Standard_D4_v2', 'Standard_D5_v2', 'Standard_D11_v2', 'Standard_D12_v2',
+ * 'Standard_D13_v2', 'Standard_D14_v2', 'Standard_D15_v2', 'Standard_DS1',
+ * 'Standard_DS2', 'Standard_DS3', 'Standard_DS4', 'Standard_DS11',
+ * 'Standard_DS12', 'Standard_DS13', 'Standard_DS14', 'Standard_DS1_v2',
+ * 'Standard_DS2_v2', 'Standard_DS3_v2', 'Standard_DS4_v2', 'Standard_DS5_v2',
+ * 'Standard_DS11_v2', 'Standard_DS12_v2', 'Standard_DS13_v2',
+ * 'Standard_DS14_v2', 'Standard_DS15_v2', 'Standard_F1', 'Standard_F2',
+ * 'Standard_F4', 'Standard_F8', 'Standard_F16', 'Standard_F1s',
  * 'Standard_F2s', 'Standard_F4s', 'Standard_F8s', 'Standard_F16s',
  * 'Standard_G1', 'Standard_G2', 'Standard_G3', 'Standard_G4', 'Standard_G5',
  * 'Standard_GS1', 'Standard_GS2', 'Standard_GS3', 'Standard_GS4',
@@ -1224,24 +1426,40 @@ export interface VirtualMachineInstanceView {
  * 'Standard_L8s', 'Standard_L16s', 'Standard_L32s', 'Standard_NC6',
  * 'Standard_NC12', 'Standard_NC24', 'Standard_NC24r', 'Standard_NV6',
  * 'Standard_NV12', 'Standard_NV24'
- * @member {object} [storageProfile] The storage profile.
- * @member {object} [storageProfile.imageReference] The image reference.
+ * @member {object} [storageProfile] Specifies the storage settings for the
+ * virtual machine disks.
+ * @member {object} [storageProfile.imageReference] Specifies information about
+ * the image to use. You can specify information about platform images,
+ * marketplace images, or virtual machine images. This element is required when
+ * you want to use a platform image, marketplace image, or virtual machine
+ * image, but is not used in other creation operations.
  * @member {string} [storageProfile.imageReference.publisher] The image
  * publisher.
- * @member {string} [storageProfile.imageReference.offer] The image offer.
+ * @member {string} [storageProfile.imageReference.offer] Specifies the offer
+ * of the platform image or marketplace image used to create the virtual
+ * machine.
  * @member {string} [storageProfile.imageReference.sku] The image SKU.
- * @member {string} [storageProfile.imageReference.version] The image version.
- * The allowed formats are Major.Minor.Build or 'latest'. Major, Minor and
- * Build are decimal numbers. Specify 'latest' to use the latest version of the
- * image.
- * @member {object} [storageProfile.osDisk] The OS disk.
- * @member {string} [storageProfile.osDisk.osType] The Operating System type.
- * Possible values include: 'Windows', 'Linux'
- * @member {object} [storageProfile.osDisk.encryptionSettings] The disk
- * encryption settings.
+ * @member {string} [storageProfile.imageReference.version] Specifies the
+ * version of the platform image or marketplace image used to create the
+ * virtual machine. The allowed formats are Major.Minor.Build or 'latest'.
+ * Major, Minor, and Build are decimal numbers. Specify 'latest' to use the
+ * latest version of an image available at deploy time. Even if you use
+ * 'latest', the VM image will not automatically update after deploy time even
+ * if a new version becomes available.
+ * @member {object} [storageProfile.osDisk] Specifies information about the
+ * operating system disk used by the virtual machine. <br><br> For more
+ * information about disks, see [About disks and VHDs for Azure virtual
+ * machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+ * @member {string} [storageProfile.osDisk.osType] This property allows you to
+ * specify the type of the OS that is included in the disk if creating a VM
+ * from user-image or a specialized VHD. <br><br> Possible values are: <br><br>
+ * **Windows** <br><br> **Linux**. Possible values include: 'Windows', 'Linux'
+ * @member {object} [storageProfile.osDisk.encryptionSettings] Specifies the
+ * encryption settings for the OS Disk. <br><br> Minimum api-version:
+ * 2015-06-15
  * @member {object}
- * [storageProfile.osDisk.encryptionSettings.diskEncryptionKey] The disk
- * encryption key which is a Key Vault Secret.
+ * [storageProfile.osDisk.encryptionSettings.diskEncryptionKey] Specifies the
+ * location of the disk encryption key, which is a Key Vault Secret.
  * @member {string}
  * [storageProfile.osDisk.encryptionSettings.diskEncryptionKey.secretUrl] The
  * URL referencing a secret in a Key Vault.
@@ -1252,10 +1470,10 @@ export interface VirtualMachineInstanceView {
  * [storageProfile.osDisk.encryptionSettings.diskEncryptionKey.sourceVault.id]
  * Resource Id
  * @member {object} [storageProfile.osDisk.encryptionSettings.keyEncryptionKey]
- * The key encryption key which is Key Vault Key.
+ * Specifies the location of the key encryption key in Key Vault.
  * @member {string}
  * [storageProfile.osDisk.encryptionSettings.keyEncryptionKey.keyUrl] The URL
- * referencing a key in a Key Vault.
+ * referencing a key encryption key in Key Vault.
  * @member {object}
  * [storageProfile.osDisk.encryptionSettings.keyEncryptionKey.sourceVault] The
  * relative URL of the Key Vault containing the key.
@@ -1266,78 +1484,146 @@ export interface VirtualMachineInstanceView {
  * Specifies whether disk encryption should be enabled on the virtual machine.
  * @member {string} [storageProfile.osDisk.name] The disk name.
  * @member {object} [storageProfile.osDisk.vhd] The virtual hard disk.
- * @member {string} [storageProfile.osDisk.vhd.uri] The virtual hard disk's
- * URI. Must be a valid URI to a virtual hard disk.
+ * @member {string} [storageProfile.osDisk.vhd.uri] Specifies the virtual hard
+ * disk's uri.
  * @member {object} [storageProfile.osDisk.image] The source user image virtual
- * hard disk. The virtual hard disk will be copied before using it to attach to
- * the virtual machine. If SourceImage is provided, the destination virtual
- * hard disk must not exist.
- * @member {string} [storageProfile.osDisk.image.uri] The virtual hard disk's
- * URI. Must be a valid URI to a virtual hard disk.
- * @member {string} [storageProfile.osDisk.caching] The caching type. Possible
- * values include: 'None', 'ReadOnly', 'ReadWrite'
- * @member {string} [storageProfile.osDisk.createOption] The create option.
- * Possible values include: 'fromImage', 'empty', 'attach'
- * @member {number} [storageProfile.osDisk.diskSizeGB] The initial disk size,
- * in GB, for blank data disks, and the new desired size for resizing existing
- * OS and data disks.
+ * hard disk. The virtual hard disk will be copied before being attached to the
+ * virtual machine. If SourceImage is provided, the destination virtual hard
+ * drive must not exist.
+ * @member {string} [storageProfile.osDisk.image.uri] Specifies the virtual
+ * hard disk's uri.
+ * @member {string} [storageProfile.osDisk.caching] Specifies the caching
+ * requirements. <br><br> Possible values are: <br><br> **None** <br><br>
+ * **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard
+ * storage. ReadOnly for Premium storage**. Possible values include: 'None',
+ * 'ReadOnly', 'ReadWrite'
+ * @member {string} [storageProfile.osDisk.createOption] Specifies how the
+ * virtual machine should be created.<br><br> Possible values are:<br><br>
+ * **Attach** \u2013 This value is used when you are using a specialized disk
+ * to create the virtual machine.<br><br> **FromImage** \u2013 This value is
+ * used when you are using an image to create the virtual machine. If you are
+ * using a platform image, you also use the imageReference element described
+ * above. If you are using a marketplace image, you  also use the plan element
+ * previously described. Possible values include: 'fromImage', 'empty',
+ * 'attach'
+ * @member {number} [storageProfile.osDisk.diskSizeGB] Specifies the size of an
+ * empty data disk in gigabytes. This element can be used to overwrite the name
+ * of the disk in a virtual machine image. <br><br> This value cannot be larger
+ * than 1023 GB
  * @member {object} [storageProfile.osDisk.managedDisk] The managed disk
  * parameters.
- * @member {string} [storageProfile.osDisk.managedDisk.storageAccountType] The
- * Storage Account type. Possible values include: 'Standard_LRS', 'Premium_LRS'
- * @member {array} [storageProfile.dataDisks] The data disks.
- * @member {object} [osProfile] The OS profile.
- * @member {string} [osProfile.computerName] Specifies the host OS name of the
+ * @member {string} [storageProfile.osDisk.managedDisk.storageAccountType]
+ * Specifies the storage account type for the managed disk. Possible values
+ * are: Standard_LRS or Premium_LRS. Possible values include: 'Standard_LRS',
+ * 'Premium_LRS'
+ * @member {array} [storageProfile.dataDisks] Specifies the parameters that are
+ * used to add a data disk to a virtual machine. <br><br> For more information
+ * about disks, see [About disks and VHDs for Azure virtual
+ * machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+ * @member {object} [osProfile] Specifies the operating system settings for the
  * virtual machine.
+ * @member {string} [osProfile.computerName] Specifies the host OS name of the
+ * virtual machine. <br><br> **Max-length (Windows):** 15 characters <br><br>
+ * **Max-length (Linux):** 64 characters. <br><br> For naming conventions and
+ * restrictions see [Azure infrastructure services implementation
+ * guidelines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-infrastructure-subscription-accounts-guidelines?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#1-naming-conventions).
  * @member {string} [osProfile.adminUsername] Specifies the name of the
- * administrator account.
+ * administrator account. <br><br> **Windows-only restriction:** Cannot end in
+ * "." <br><br> **Disallowed values:** "administrator", "admin", "user",
+ * "user1", "test", "user2", "test1", "user3", "admin1", "1", "123", "a",
+ * "actuser", "adm", "admin2", "aspnet", "backup", "console", "david", "guest",
+ * "john", "owner", "root", "server", "sql", "support", "support_388945a0",
+ * "sys", "test2", "test3", "user4", "user5". <br><br> **Minimum-length
+ * (Linux):** 1  character <br><br> **Max-length (Linux):** 64 characters
+ * <br><br> **Max-length (Windows):** 20 characters  <br><br><li> For root
+ * access to the Linux VM, see [Using root privileges on Linux virtual machines
+ * in
+ * Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-use-root-privileges?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)<br><li>
+ * For a list of built-in system users on Linux that should not be used in this
+ * field, see [Selecting User Names for Linux on
+ * Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-usernames?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
  * @member {string} [osProfile.adminPassword] Specifies the password of the
- * administrator account.
+ * administrator account. <br><br> **Minimum-length (Windows):** 8 characters
+ * <br><br> **Minimum-length (Linux):** 6 characters <br><br> **Max-length
+ * (Windows):** 123 characters <br><br> **Max-length (Linux):** 72 characters
+ * <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be
+ * fulfilled <br> Has lower characters <br>Has upper characters <br> Has a
+ * digit <br> Has a special character (Regex match [\W_]) <br><br> **Disallowed
+ * values:** "abc@123", "P@$$w0rd", "P@ssw0rd", "P@ssword123", "Pa$$word",
+ * "pass@word1", "Password!", "Password1", "Password22", "iloveyou!" <br><br>
+ * For resetting the password, see [How to reset the Remote Desktop service or
+ * its login password in a Windows
+ * VM](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-reset-rdp?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+ * <br><br> For resetting root password, see [Manage users, SSH, and check or
+ * repair disks on Azure Linux VMs using the VMAccess
+ * Extension](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-vmaccess-extension?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#reset-root-password)
  * @member {string} [osProfile.customData] Specifies a base-64 encoded string
  * of custom data. The base-64 encoded string is decoded to a binary array that
  * is saved as a file on the Virtual Machine. The maximum length of the binary
- * array is 65535 bytes
- * @member {object} [osProfile.windowsConfiguration] The Windows configuration
- * of the OS profile.
+ * array is 65535 bytes. <br><br> For using cloud-init for your VM, see [Using
+ * cloud-init to customize a Linux VM during
+ * creation](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-cloud-init?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+ * @member {object} [osProfile.windowsConfiguration] Specifies Windows
+ * operating system settings on the virtual machine.
  * @member {boolean} [osProfile.windowsConfiguration.provisionVMAgent]
- * Indicates whether the virtual machine agent should be provisioned on the
- * Virtual Machine. If not specified, then the default behavior is to set it to
- * true.
+ * Indicates whether virtual machine agent should be provisioned on the virtual
+ * machine. <br><br> When this property is not specified in the request body,
+ * default behavior is to set it to true.  This will ensure that VM Agent is
+ * installed on the VM so that extensions can be added to the VM later.
  * @member {boolean} [osProfile.windowsConfiguration.enableAutomaticUpdates]
- * Indicates whether Windows updates are automatically installed on the VM.
- * @member {string} [osProfile.windowsConfiguration.timeZone] The time zone of
- * the VM
+ * Indicates whether virtual machine is enabled for automatic updates.
+ * @member {string} [osProfile.windowsConfiguration.timeZone] Specifies the
+ * time zone of the virtual machine. e.g. "Pacific Standard Time"
  * @member {array} [osProfile.windowsConfiguration.additionalUnattendContent]
- * Additional base-64 encoded XML formatted information that can be included in
- * the Unattend.xml file.
- * @member {object} [osProfile.windowsConfiguration.winRM] The Windows Remote
- * Management configuration of the VM
+ * Specifies additional base-64 encoded XML formatted information that can be
+ * included in the Unattend.xml file, which is used by Windows Setup.
+ * @member {object} [osProfile.windowsConfiguration.winRM] Specifies the
+ * Windows Remote Management listeners. This enables remote Windows PowerShell.
  * @member {array} [osProfile.windowsConfiguration.winRM.listeners] The list of
  * Windows Remote Management listeners
- * @member {object} [osProfile.linuxConfiguration] The Linux configuration of
- * the OS profile.
+ * @member {object} [osProfile.linuxConfiguration] Specifies the Linux
+ * operating system settings on the virtual machine. <br><br>For a list of
+ * supported Linux distributions, see [Linux on Azure-Endorsed
+ * Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-endorsed-distros?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+ * <br><br> For running non-endorsed distributions, see [Information for
+ * Non-Endorsed
+ * Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-create-upload-generic?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
  * @member {boolean}
  * [osProfile.linuxConfiguration.disablePasswordAuthentication] Specifies
  * whether password authentication should be disabled.
- * @member {object} [osProfile.linuxConfiguration.ssh] The SSH configuration
- * for linux VMs.
+ * @member {object} [osProfile.linuxConfiguration.ssh] Specifies the ssh key
+ * configuration for a Linux OS.
  * @member {array} [osProfile.linuxConfiguration.ssh.publicKeys] The list of
  * SSH public keys used to authenticate with linux based VMs.
- * @member {array} [osProfile.secrets] The list of certificates for addition to
- * the VM.
- * @member {object} [networkProfile] The network profile.
+ * @member {array} [osProfile.secrets] Specifies set of certificates that
+ * should be installed onto the virtual machine.
+ * @member {object} [networkProfile] Specifies the network interfaces of the
+ * virtual machine.
  * @member {array} [networkProfile.networkInterfaces] Specifies the list of
- * resource IDs for the network interfaces associated with the virtual machine.
- * @member {object} [diagnosticsProfile] The diagnostics profile.
+ * resource Ids for the network interfaces associated with the virtual machine.
+ * @member {object} [diagnosticsProfile] Specifies the boot diagnostic settings
+ * state. <br><br>Minimum api-version: 2015-06-15.
  * @member {object} [diagnosticsProfile.bootDiagnostics] Boot Diagnostics is a
- * debugging feature which allows the user to view console output and/or a
- * screenshot of the virtual machine from the hypervisor.
+ * debugging feature which allows you to view Console Output and Screenshot to
+ * diagnose VM status. <br><br> For Linux Virtual Machines, you can easily view
+ * the output of your console log. <br><br> For both Windows and Linux virtual
+ * machines, Azure also enables you to see a screenshot of the VM from the
+ * hypervisor.
  * @member {boolean} [diagnosticsProfile.bootDiagnostics.enabled] Whether boot
  * diagnostics should be enabled on the Virtual Machine.
- * @member {string} [diagnosticsProfile.bootDiagnostics.storageUri] URI of the
+ * @member {string} [diagnosticsProfile.bootDiagnostics.storageUri] Uri of the
  * storage account to use for placing the console output and screenshot.
- * @member {object} [availabilitySet] The reference Id of the availability set
- * to which the virtual machine belongs.
+ * @member {object} [availabilitySet] Specifies information about the
+ * availability set that the virtual machine should be assigned to. Virtual
+ * machines specified in the same availability set are allocated to different
+ * nodes to maximize availability. For more information about availability
+ * sets, see [Manage the availability of virtual
+ * machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+ * <br><br> For more information on Azure planned maintainance, see [Planned
+ * maintenance for virtual machines in
+ * Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+ * <br><br> Currently, a VM can only be added to availability set at creation
+ * time. An existing VM cannot be added to an availability set.
  * @member {string} [availabilitySet.id] Resource Id
  * @member {string} [provisioningState] The provisioning state, which only
  * appears in the response.
@@ -1382,7 +1668,12 @@ export interface VirtualMachineInstanceView {
  * returned for the last Maintenance Operation.
  * @member {array} [instanceView.disks] The virtual machine disk information.
  * @member {array} [instanceView.extensions] The extensions information.
- * @member {object} [instanceView.bootDiagnostics] The boot diagnostics.
+ * @member {object} [instanceView.bootDiagnostics] Boot Diagnostics is a
+ * debugging feature which allows you to view Console Output and Screenshot to
+ * diagnose VM status. <br><br> For Linux Virtual Machines, you can easily view
+ * the output of your console log. <br><br> For both Windows and Linux virtual
+ * machines, Azure also enables you to see a screenshot of the VM from the
+ * hypervisor.
  * @member {string} [instanceView.bootDiagnostics.consoleScreenshotBlobUri] The
  * console screenshot blob URI.
  * @member {string} [instanceView.bootDiagnostics.serialConsoleLogBlobUri] The
@@ -1390,7 +1681,13 @@ export interface VirtualMachineInstanceView {
  * @member {array} [instanceView.statuses] The resource status information.
  * @member {string} [licenseType] Specifies that the image or disk that is
  * being used was licensed on-premises. This element is only used for images
- * that contain the Windows Server operating system.
+ * that contain the Windows Server operating system. <br><br> Possible values
+ * are: <br><br> Windows_Client <br><br> Windows_Server <br><br> If this
+ * element is included in a request for an update, the value must match the
+ * initial value. This value cannot be updated. <br><br> For more information,
+ * see [Azure Hybrid Use Benefit for Windows
+ * Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+ * <br><br> Minimum api-version: 2015-06-15
  * @member {string} [vmId] Specifies the VM unique ID which is a 128-bits
  * identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can
  * be read using platform BIOS commands.
@@ -1440,15 +1737,83 @@ export interface VirtualMachineListResult {
 
 /**
  * @class
+ * Initializes a new instance of the RollingUpgradePolicy class.
+ * @constructor
+ * The configuration parameters used while performing a rolling upgrade.
+ *
+ * @member {number} [maxBatchInstancePercent] The maximum percent of total
+ * virtual machine instances that will be upgraded simultaneously by the
+ * rolling upgrade in one batch. As this is a maximum, unhealthy instances in
+ * previous or future batches can cause the percentage of instances in a batch
+ * to decrease to ensure higher reliability. The default value for this
+ * parameter is 20%.
+ * @member {number} [maxUnhealthyInstancePercent] The maximum percentage of the
+ * total virtual machine instances in the scale set that can be simultaneously
+ * unhealthy, either as a result of being upgraded, or by being found in an
+ * unhealthy state by the virtual machine health checks before the rolling
+ * upgrade aborts. This constraint will be checked prior to starting any batch.
+ * The default value for this parameter is 20%.
+ * @member {number} [maxUnhealthyUpgradedInstancePercent] The maximum
+ * percentage of upgraded virtual machine instances that can be found to be in
+ * an unhealthy state. This check will happen after each batch is upgraded. If
+ * this percentage is ever exceeded, the rolling update aborts. The default
+ * value for this parameter is 20%.
+ * @member {string} [pauseTimeBetweenBatches] The wait time between completing
+ * the update for all virtual machines in one batch and starting the next
+ * batch. The time duration should be specified in ISO 8601 format. The default
+ * value is 0 seconds (PT0S).
+ */
+export interface RollingUpgradePolicy {
+  maxBatchInstancePercent?: number;
+  maxUnhealthyInstancePercent?: number;
+  maxUnhealthyUpgradedInstancePercent?: number;
+  pauseTimeBetweenBatches?: string;
+}
+
+/**
+ * @class
  * Initializes a new instance of the UpgradePolicy class.
  * @constructor
- * Describes an upgrade policy - automatic or manual.
+ * Describes an upgrade policy - automatic, manual, or rolling.
  *
- * @member {string} [mode] The upgrade mode. Possible values include:
- * 'Automatic', 'Manual'
+ * @member {string} [mode] Specifies the mode of an upgrade to virtual machines
+ * in the scale set.<br /><br /> Possible values are:<br /><br /> **Manual** -
+ * You  control the application of updates to virtual machines in the scale
+ * set. You do this by using the manualUpgrade action.<br /><br />
+ * **Automatic** - All virtual machines in the scale set are  automatically
+ * updated at the same time. Possible values include: 'Automatic', 'Manual',
+ * 'Rolling'
+ * @member {object} [rollingUpgradePolicy] The configuration parameters used
+ * while performing a rolling upgrade.
+ * @member {number} [rollingUpgradePolicy.maxBatchInstancePercent] The maximum
+ * percent of total virtual machine instances that will be upgraded
+ * simultaneously by the rolling upgrade in one batch. As this is a maximum,
+ * unhealthy instances in previous or future batches can cause the percentage
+ * of instances in a batch to decrease to ensure higher reliability. The
+ * default value for this parameter is 20%.
+ * @member {number} [rollingUpgradePolicy.maxUnhealthyInstancePercent] The
+ * maximum percentage of the total virtual machine instances in the scale set
+ * that can be simultaneously unhealthy, either as a result of being upgraded,
+ * or by being found in an unhealthy state by the virtual machine health checks
+ * before the rolling upgrade aborts. This constraint will be checked prior to
+ * starting any batch. The default value for this parameter is 20%.
+ * @member {number} [rollingUpgradePolicy.maxUnhealthyUpgradedInstancePercent]
+ * The maximum percentage of upgraded virtual machine instances that can be
+ * found to be in an unhealthy state. This check will happen after each batch
+ * is upgraded. If this percentage is ever exceeded, the rolling update aborts.
+ * The default value for this parameter is 20%.
+ * @member {string} [rollingUpgradePolicy.pauseTimeBetweenBatches] The wait
+ * time between completing the update for all virtual machines in one batch and
+ * starting the next batch. The time duration should be specified in ISO 8601
+ * format. The default value is 0 seconds (PT0S).
+ * @member {boolean} [automaticOSUpgrade] Whether OS upgrades should
+ * automatically be applied to scale set instances in a rolling fashion when a
+ * newer version of the image becomes available.
  */
 export interface UpgradePolicy {
   mode?: string;
+  rollingUpgradePolicy?: RollingUpgradePolicy;
+  automaticOSUpgrade?: boolean;
 }
 
 /**
@@ -1457,8 +1822,10 @@ export interface UpgradePolicy {
  * @constructor
  * Describes an Operating System disk.
  *
- * @member {string} osType The Operating System type. Possible values include:
- * 'Windows', 'Linux'
+ * @member {string} osType This property allows you to specify the type of the
+ * OS that is included in the disk if creating a VM from a custom image.
+ * <br><br> Possible values are: <br><br> **Windows** <br><br> **Linux**.
+ * Possible values include: 'Windows', 'Linux'
  * @member {string} osState The OS State. Possible values include:
  * 'Generalized', 'Specialized'
  * @member {object} [snapshot] The snapshot.
@@ -1466,11 +1833,15 @@ export interface UpgradePolicy {
  * @member {object} [managedDisk] The managedDisk.
  * @member {string} [managedDisk.id] Resource Id
  * @member {string} [blobUri] The Virtual Hard Disk.
- * @member {string} [caching] The caching type. Possible values include:
- * 'None', 'ReadOnly', 'ReadWrite'
- * @member {number} [diskSizeGB] The initial managed disk size in GB for blank
- * data disks, and the new desired size for existing OS and Data disks.
- * @member {string} [storageAccountType] The Storage Account type. Possible
+ * @member {string} [caching] Specifies the caching requirements. <br><br>
+ * Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br>
+ * **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for
+ * Premium storage**. Possible values include: 'None', 'ReadOnly', 'ReadWrite'
+ * @member {number} [diskSizeGB] Specifies the size of empty data disks in
+ * gigabytes. This element can be used to overwrite the name of the disk in a
+ * virtual machine image. <br><br> This value cannot be larger than 1023 GB
+ * @member {string} [storageAccountType] Specifies the storage account type for
+ * the managed disk. Possible values are: Standard_LRS or Premium_LRS. Possible
  * values include: 'Standard_LRS', 'Premium_LRS'
  */
 export interface ImageOSDisk {
@@ -1490,17 +1861,23 @@ export interface ImageOSDisk {
  * @constructor
  * Describes a data disk.
  *
- * @member {number} lun The logical unit number.
+ * @member {number} lun Specifies the logical unit number of the data disk.
+ * This value is used to identify data disks within the VM and therefore must
+ * be unique for each data disk attached to a VM.
  * @member {object} [snapshot] The snapshot.
  * @member {string} [snapshot.id] Resource Id
  * @member {object} [managedDisk] The managedDisk.
  * @member {string} [managedDisk.id] Resource Id
  * @member {string} [blobUri] The Virtual Hard Disk.
- * @member {string} [caching] The caching type. Possible values include:
- * 'None', 'ReadOnly', 'ReadWrite'
- * @member {number} [diskSizeGB] The initial disk size in GB for blank data
- * disks, and the new desired size for existing OS and Data disks.
- * @member {string} [storageAccountType] The Storage Account type. Possible
+ * @member {string} [caching] Specifies the caching requirements. <br><br>
+ * Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br>
+ * **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for
+ * Premium storage**. Possible values include: 'None', 'ReadOnly', 'ReadWrite'
+ * @member {number} [diskSizeGB] Specifies the size of empty data disks in
+ * gigabytes. This element can be used to overwrite the name of the disk in a
+ * virtual machine image. <br><br> This value cannot be larger than 1023 GB
+ * @member {string} [storageAccountType] Specifies the storage account type for
+ * the managed disk. Possible values are: Standard_LRS or Premium_LRS. Possible
  * values include: 'Standard_LRS', 'Premium_LRS'
  */
 export interface ImageDataDisk {
@@ -1519,9 +1896,14 @@ export interface ImageDataDisk {
  * @constructor
  * Describes a storage profile.
  *
- * @member {object} osDisk The OS disk.
- * @member {string} [osDisk.osType] The Operating System type. Possible values
- * include: 'Windows', 'Linux'
+ * @member {object} osDisk Specifies information about the operating system
+ * disk used by the virtual machine. <br><br> For more information about disks,
+ * see [About disks and VHDs for Azure virtual
+ * machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+ * @member {string} [osDisk.osType] This property allows you to specify the
+ * type of the OS that is included in the disk if creating a VM from a custom
+ * image. <br><br> Possible values are: <br><br> **Windows** <br><br>
+ * **Linux**. Possible values include: 'Windows', 'Linux'
  * @member {string} [osDisk.osState] The OS State. Possible values include:
  * 'Generalized', 'Specialized'
  * @member {object} [osDisk.snapshot] The snapshot.
@@ -1529,13 +1911,21 @@ export interface ImageDataDisk {
  * @member {object} [osDisk.managedDisk] The managedDisk.
  * @member {string} [osDisk.managedDisk.id] Resource Id
  * @member {string} [osDisk.blobUri] The Virtual Hard Disk.
- * @member {string} [osDisk.caching] The caching type. Possible values include:
- * 'None', 'ReadOnly', 'ReadWrite'
- * @member {number} [osDisk.diskSizeGB] The initial managed disk size in GB for
- * blank data disks, and the new desired size for existing OS and Data disks.
- * @member {string} [osDisk.storageAccountType] The Storage Account type.
+ * @member {string} [osDisk.caching] Specifies the caching requirements.
+ * <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly**
+ * <br><br> **ReadWrite** <br><br> Default: **None for Standard storage.
+ * ReadOnly for Premium storage**. Possible values include: 'None', 'ReadOnly',
+ * 'ReadWrite'
+ * @member {number} [osDisk.diskSizeGB] Specifies the size of empty data disks
+ * in gigabytes. This element can be used to overwrite the name of the disk in
+ * a virtual machine image. <br><br> This value cannot be larger than 1023 GB
+ * @member {string} [osDisk.storageAccountType] Specifies the storage account
+ * type for the managed disk. Possible values are: Standard_LRS or Premium_LRS.
  * Possible values include: 'Standard_LRS', 'Premium_LRS'
- * @member {array} [dataDisks] The data disks.
+ * @member {array} [dataDisks] Specifies the parameters that are used to add a
+ * data disk to a virtual machine. <br><br> For more information about disks,
+ * see [About disks and VHDs for Azure virtual
+ * machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
  */
 export interface ImageStorageProfile {
   osDisk: ImageOSDisk;
@@ -1546,15 +1936,23 @@ export interface ImageStorageProfile {
  * @class
  * Initializes a new instance of the Image class.
  * @constructor
- * Describes an Image.
+ * The source user image virtual hard disk. The virtual hard disk will be
+ * copied before being attached to the virtual machine. If SourceImage is
+ * provided, the destination virtual hard drive must not exist.
  *
  * @member {object} [sourceVirtualMachine] The source virtual machine from
  * which Image is created.
  * @member {string} [sourceVirtualMachine.id] Resource Id
- * @member {object} [storageProfile] The storage profile.
- * @member {object} [storageProfile.osDisk] The OS disk.
- * @member {string} [storageProfile.osDisk.osType] The Operating System type.
- * Possible values include: 'Windows', 'Linux'
+ * @member {object} [storageProfile] Specifies the storage settings for the
+ * virtual machine disks.
+ * @member {object} [storageProfile.osDisk] Specifies information about the
+ * operating system disk used by the virtual machine. <br><br> For more
+ * information about disks, see [About disks and VHDs for Azure virtual
+ * machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+ * @member {string} [storageProfile.osDisk.osType] This property allows you to
+ * specify the type of the OS that is included in the disk if creating a VM
+ * from a custom image. <br><br> Possible values are: <br><br> **Windows**
+ * <br><br> **Linux**. Possible values include: 'Windows', 'Linux'
  * @member {string} [storageProfile.osDisk.osState] The OS State. Possible
  * values include: 'Generalized', 'Specialized'
  * @member {object} [storageProfile.osDisk.snapshot] The snapshot.
@@ -1562,14 +1960,22 @@ export interface ImageStorageProfile {
  * @member {object} [storageProfile.osDisk.managedDisk] The managedDisk.
  * @member {string} [storageProfile.osDisk.managedDisk.id] Resource Id
  * @member {string} [storageProfile.osDisk.blobUri] The Virtual Hard Disk.
- * @member {string} [storageProfile.osDisk.caching] The caching type. Possible
- * values include: 'None', 'ReadOnly', 'ReadWrite'
- * @member {number} [storageProfile.osDisk.diskSizeGB] The initial managed disk
- * size in GB for blank data disks, and the new desired size for existing OS
- * and Data disks.
- * @member {string} [storageProfile.osDisk.storageAccountType] The Storage
- * Account type. Possible values include: 'Standard_LRS', 'Premium_LRS'
- * @member {array} [storageProfile.dataDisks] The data disks.
+ * @member {string} [storageProfile.osDisk.caching] Specifies the caching
+ * requirements. <br><br> Possible values are: <br><br> **None** <br><br>
+ * **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard
+ * storage. ReadOnly for Premium storage**. Possible values include: 'None',
+ * 'ReadOnly', 'ReadWrite'
+ * @member {number} [storageProfile.osDisk.diskSizeGB] Specifies the size of
+ * empty data disks in gigabytes. This element can be used to overwrite the
+ * name of the disk in a virtual machine image. <br><br> This value cannot be
+ * larger than 1023 GB
+ * @member {string} [storageProfile.osDisk.storageAccountType] Specifies the
+ * storage account type for the managed disk. Possible values are: Standard_LRS
+ * or Premium_LRS. Possible values include: 'Standard_LRS', 'Premium_LRS'
+ * @member {array} [storageProfile.dataDisks] Specifies the parameters that are
+ * used to add a data disk to a virtual machine. <br><br> For more information
+ * about disks, see [About disks and VHDs for Azure virtual
+ * machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
  * @member {string} [provisioningState] The provisioning state.
  */
 export interface Image extends Resource {
@@ -1692,12 +2098,15 @@ export interface ResourceSkuRestrictions {
  *
  * @member {string} [resourceType] The type of resource the SKU applies to.
  * @member {string} [name] The name of SKU.
- * @member {string} [tier] The tier of this particular SKU.
+ * @member {string} [tier] Specifies the tier of virtual machines in a scale
+ * set.<br /><br /> Possible Values:<br /><br /> **Standard**<br /><br />
+ * **Basic**
  * @member {string} [size] The Size of the SKU.
  * @member {string} [family] The Family of this particular SKU.
  * @member {string} [kind] The Kind of resources that are supported in this
  * SKU.
- * @member {object} [capacity] Available scaling information.
+ * @member {object} [capacity] Specifies the number of virtual machines in the
+ * scale set.
  * @member {number} [capacity.minimum] The minimum capacity.
  * @member {number} [capacity.maximum] The maximum capacity that can be set.
  * @member {number} [capacity.default] The default capacity.
@@ -1746,34 +2155,77 @@ export interface ResourceSkusResult {
  * @constructor
  * Describes a virtual machine scale set OS profile.
  *
- * @member {string} [computerNamePrefix] The computer name prefix.
- * @member {string} [adminUsername] The admin user name.
- * @member {string} [adminPassword] The admin user password.
- * @member {string} [customData] A base-64 encoded string of custom data.
- * @member {object} [windowsConfiguration] The Windows Configuration of the OS
- * profile.
+ * @member {string} [computerNamePrefix] Specifies the computer name prefix for
+ * all of the virtual machines in the scale set. Computer name prefixes must be
+ * 1 to 15 characters long.
+ * @member {string} [adminUsername] Specifies the name of the administrator
+ * account. <br><br> **Windows-only restriction:** Cannot end in "." <br><br>
+ * **Disallowed values:** "administrator", "admin", "user", "user1", "test",
+ * "user2", "test1", "user3", "admin1", "1", "123", "a", "actuser", "adm",
+ * "admin2", "aspnet", "backup", "console", "david", "guest", "john", "owner",
+ * "root", "server", "sql", "support", "support_388945a0", "sys", "test2",
+ * "test3", "user4", "user5". <br><br> **Minimum-length (Linux):** 1  character
+ * <br><br> **Max-length (Linux):** 64 characters <br><br> **Max-length
+ * (Windows):** 20 characters  <br><br><li> For root access to the Linux VM,
+ * see [Using root privileges on Linux virtual machines in
+ * Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-use-root-privileges?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)<br><li>
+ * For a list of built-in system users on Linux that should not be used in this
+ * field, see [Selecting User Names for Linux on
+ * Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-usernames?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+ * @member {string} [adminPassword] Specifies the password of the administrator
+ * account. <br><br> **Minimum-length (Windows):** 8 characters <br><br>
+ * **Minimum-length (Linux):** 6 characters <br><br> **Max-length (Windows):**
+ * 123 characters <br><br> **Max-length (Linux):** 72 characters <br><br>
+ * **Complexity requirements:** 3 out of 4 conditions below need to be
+ * fulfilled <br> Has lower characters <br>Has upper characters <br> Has a
+ * digit <br> Has a special character (Regex match [\W_]) <br><br> **Disallowed
+ * values:** "abc@123", "P@$$w0rd", "P@ssw0rd", "P@ssword123", "Pa$$word",
+ * "pass@word1", "Password!", "Password1", "Password22", "iloveyou!" <br><br>
+ * For resetting the password, see [How to reset the Remote Desktop service or
+ * its login password in a Windows
+ * VM](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-reset-rdp?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+ * <br><br> For resetting root password, see [Manage users, SSH, and check or
+ * repair disks on Azure Linux VMs using the VMAccess
+ * Extension](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-vmaccess-extension?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#reset-root-password)
+ * @member {string} [customData] Specifies a base-64 encoded string of custom
+ * data. The base-64 encoded string is decoded to a binary array that is saved
+ * as a file on the Virtual Machine. The maximum length of the binary array is
+ * 65535 bytes. <br><br> For using cloud-init for your VM, see [Using
+ * cloud-init to customize a Linux VM during
+ * creation](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-cloud-init?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+ * @member {object} [windowsConfiguration] Specifies Windows operating system
+ * settings on the virtual machine.
  * @member {boolean} [windowsConfiguration.provisionVMAgent] Indicates whether
- * the virtual machine agent should be provisioned on the Virtual Machine. If
- * not specified, then the default behavior is to set it to true.
+ * virtual machine agent should be provisioned on the virtual machine. <br><br>
+ * When this property is not specified in the request body, default behavior is
+ * to set it to true.  This will ensure that VM Agent is installed on the VM so
+ * that extensions can be added to the VM later.
  * @member {boolean} [windowsConfiguration.enableAutomaticUpdates] Indicates
- * whether Windows updates are automatically installed on the VM.
- * @member {string} [windowsConfiguration.timeZone] The time zone of the VM
- * @member {array} [windowsConfiguration.additionalUnattendContent] Additional
- * base-64 encoded XML formatted information that can be included in the
- * Unattend.xml file.
- * @member {object} [windowsConfiguration.winRM] The Windows Remote Management
- * configuration of the VM
+ * whether virtual machine is enabled for automatic updates.
+ * @member {string} [windowsConfiguration.timeZone] Specifies the time zone of
+ * the virtual machine. e.g. "Pacific Standard Time"
+ * @member {array} [windowsConfiguration.additionalUnattendContent] Specifies
+ * additional base-64 encoded XML formatted information that can be included in
+ * the Unattend.xml file, which is used by Windows Setup.
+ * @member {object} [windowsConfiguration.winRM] Specifies the Windows Remote
+ * Management listeners. This enables remote Windows PowerShell.
  * @member {array} [windowsConfiguration.winRM.listeners] The list of Windows
  * Remote Management listeners
- * @member {object} [linuxConfiguration] The Linux Configuration of the OS
- * profile.
+ * @member {object} [linuxConfiguration] Specifies the Linux operating system
+ * settings on the virtual machine. <br><br>For a list of supported Linux
+ * distributions, see [Linux on Azure-Endorsed
+ * Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-endorsed-distros?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+ * <br><br> For running non-endorsed distributions, see [Information for
+ * Non-Endorsed
+ * Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-create-upload-generic?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
  * @member {boolean} [linuxConfiguration.disablePasswordAuthentication]
  * Specifies whether password authentication should be disabled.
- * @member {object} [linuxConfiguration.ssh] The SSH configuration for linux
- * VMs.
+ * @member {object} [linuxConfiguration.ssh] Specifies the ssh key
+ * configuration for a Linux OS.
  * @member {array} [linuxConfiguration.ssh.publicKeys] The list of SSH public
  * keys used to authenticate with linux based VMs.
- * @member {array} [secrets] The List of certificates for addition to the VM.
+ * @member {array} [secrets] Specifies set of certificates that should be
+ * installed onto the virtual machines in the scale set.
  */
 export interface VirtualMachineScaleSetOSProfile {
   computerNamePrefix?: string;
@@ -1795,24 +2247,27 @@ export interface VirtualMachineScaleSetOSProfile {
  * @member {object} [windowsConfiguration] The Windows Configuration of the OS
  * profile.
  * @member {boolean} [windowsConfiguration.provisionVMAgent] Indicates whether
- * the virtual machine agent should be provisioned on the Virtual Machine. If
- * not specified, then the default behavior is to set it to true.
+ * virtual machine agent should be provisioned on the virtual machine. <br><br>
+ * When this property is not specified in the request body, default behavior is
+ * to set it to true.  This will ensure that VM Agent is installed on the VM so
+ * that extensions can be added to the VM later.
  * @member {boolean} [windowsConfiguration.enableAutomaticUpdates] Indicates
- * whether Windows updates are automatically installed on the VM.
- * @member {string} [windowsConfiguration.timeZone] The time zone of the VM
- * @member {array} [windowsConfiguration.additionalUnattendContent] Additional
- * base-64 encoded XML formatted information that can be included in the
- * Unattend.xml file.
- * @member {object} [windowsConfiguration.winRM] The Windows Remote Management
- * configuration of the VM
+ * whether virtual machine is enabled for automatic updates.
+ * @member {string} [windowsConfiguration.timeZone] Specifies the time zone of
+ * the virtual machine. e.g. "Pacific Standard Time"
+ * @member {array} [windowsConfiguration.additionalUnattendContent] Specifies
+ * additional base-64 encoded XML formatted information that can be included in
+ * the Unattend.xml file, which is used by Windows Setup.
+ * @member {object} [windowsConfiguration.winRM] Specifies the Windows Remote
+ * Management listeners. This enables remote Windows PowerShell.
  * @member {array} [windowsConfiguration.winRM.listeners] The list of Windows
  * Remote Management listeners
  * @member {object} [linuxConfiguration] The Linux Configuration of the OS
  * profile.
  * @member {boolean} [linuxConfiguration.disablePasswordAuthentication]
  * Specifies whether password authentication should be disabled.
- * @member {object} [linuxConfiguration.ssh] The SSH configuration for linux
- * VMs.
+ * @member {object} [linuxConfiguration.ssh] Specifies the ssh key
+ * configuration for a Linux OS.
  * @member {array} [linuxConfiguration.ssh.publicKeys] The list of SSH public
  * keys used to authenticate with linux based VMs.
  * @member {array} [secrets] The List of certificates for addition to the VM.
@@ -1830,7 +2285,8 @@ export interface VirtualMachineScaleSetUpdateOSProfile {
  * @constructor
  * Describes the parameters of a ScaleSet managed disk.
  *
- * @member {string} [storageAccountType] The Storage Account type. Possible
+ * @member {string} [storageAccountType] Specifies the storage account type for
+ * the managed disk. Possible values are: Standard_LRS or Premium_LRS. Possible
  * values include: 'Standard_LRS', 'Premium_LRS'
  */
 export interface VirtualMachineScaleSetManagedDiskParameters {
@@ -1844,23 +2300,30 @@ export interface VirtualMachineScaleSetManagedDiskParameters {
  * Describes a virtual machine scale set operating system disk.
  *
  * @member {string} [name] The disk name.
- * @member {string} [caching] The caching type. Possible values include:
- * 'None', 'ReadOnly', 'ReadWrite'
- * @member {string} createOption The create option. Possible values include:
- * 'fromImage', 'empty', 'attach'
- * @member {string} [osType] The Operating System type. Possible values
- * include: 'Windows', 'Linux'
- * @member {object} [image] The Source User Image VirtualHardDisk. This
- * VirtualHardDisk will be copied before using it to attach to the Virtual
- * Machine. If SourceImage is provided, the destination VirtualHardDisk should
- * not exist.
- * @member {string} [image.uri] The virtual hard disk's URI. Must be a valid
- * URI to a virtual hard disk.
- * @member {array} [vhdContainers] The list of virtual hard disk container
- * uris.
+ * @member {string} [caching] Specifies the caching requirements. <br><br>
+ * Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br>
+ * **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for
+ * Premium storage**. Possible values include: 'None', 'ReadOnly', 'ReadWrite'
+ * @member {string} createOption Specifies how the virtual machines in the
+ * scale set should be created.<br><br> The only allowed value is:
+ * **FromImage** \u2013 This value is used when you are using an image to
+ * create the virtual machine. If you are using a platform image, you also use
+ * the imageReference element described above. If you are using a marketplace
+ * image, you  also use the plan element previously described. Possible values
+ * include: 'fromImage', 'empty', 'attach'
+ * @member {string} [osType] This property allows you to specify the type of
+ * the OS that is included in the disk if creating a VM from user-image or a
+ * specialized VHD. <br><br> Possible values are: <br><br> **Windows** <br><br>
+ * **Linux**. Possible values include: 'Windows', 'Linux'
+ * @member {object} [image] Specifies information about the unmanaged user
+ * image to base the scale set on.
+ * @member {string} [image.uri] Specifies the virtual hard disk's uri.
+ * @member {array} [vhdContainers] Specifies the container urls that are used
+ * to store operating system disks for the scale set.
  * @member {object} [managedDisk] The managed disk parameters.
- * @member {string} [managedDisk.storageAccountType] The Storage Account type.
- * Possible values include: 'Standard_LRS', 'Premium_LRS'
+ * @member {string} [managedDisk.storageAccountType] Specifies the storage
+ * account type for the managed disk. Possible values are: Standard_LRS or
+ * Premium_LRS. Possible values include: 'Standard_LRS', 'Premium_LRS'
  */
 export interface VirtualMachineScaleSetOSDisk {
   name?: string;
@@ -1885,13 +2348,13 @@ export interface VirtualMachineScaleSetOSDisk {
  * VirtualHardDisk will be copied before using it to attach to the Virtual
  * Machine. If SourceImage is provided, the destination VirtualHardDisk should
  * not exist.
- * @member {string} [image.uri] The virtual hard disk's URI. Must be a valid
- * URI to a virtual hard disk.
+ * @member {string} [image.uri] Specifies the virtual hard disk's uri.
  * @member {array} [vhdContainers] The list of virtual hard disk container
  * uris.
  * @member {object} [managedDisk] The managed disk parameters.
- * @member {string} [managedDisk.storageAccountType] The Storage Account type.
- * Possible values include: 'Standard_LRS', 'Premium_LRS'
+ * @member {string} [managedDisk.storageAccountType] Specifies the storage
+ * account type for the managed disk. Possible values are: Standard_LRS or
+ * Premium_LRS. Possible values include: 'Standard_LRS', 'Premium_LRS'
  */
 export interface VirtualMachineScaleSetUpdateOSDisk {
   caching?: string;
@@ -1907,16 +2370,22 @@ export interface VirtualMachineScaleSetUpdateOSDisk {
  * Describes a virtual machine scale set data disk.
  *
  * @member {string} [name] The disk name.
- * @member {number} lun The logical unit number.
- * @member {string} [caching] The caching type. Possible values include:
- * 'None', 'ReadOnly', 'ReadWrite'
+ * @member {number} lun Specifies the logical unit number of the data disk.
+ * This value is used to identify data disks within the VM and therefore must
+ * be unique for each data disk attached to a VM.
+ * @member {string} [caching] Specifies the caching requirements. <br><br>
+ * Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br>
+ * **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for
+ * Premium storage**. Possible values include: 'None', 'ReadOnly', 'ReadWrite'
  * @member {string} createOption The create option. Possible values include:
  * 'fromImage', 'empty', 'attach'
- * @member {number} [diskSizeGB] The initial disk size in GB for blank data
- * disks, and the new desired size for existing OS and Data disks.
+ * @member {number} [diskSizeGB] Specifies the size of an empty data disk in
+ * gigabytes. This element can be used to overwrite the name of the disk in a
+ * virtual machine image. <br><br> This value cannot be larger than 1023 GB
  * @member {object} [managedDisk] The managed disk parameters.
- * @member {string} [managedDisk.storageAccountType] The Storage Account type.
- * Possible values include: 'Standard_LRS', 'Premium_LRS'
+ * @member {string} [managedDisk.storageAccountType] Specifies the storage
+ * account type for the managed disk. Possible values are: Standard_LRS or
+ * Premium_LRS. Possible values include: 'Standard_LRS', 'Premium_LRS'
  */
 export interface VirtualMachineScaleSetDataDisk {
   name?: string;
@@ -1933,33 +2402,56 @@ export interface VirtualMachineScaleSetDataDisk {
  * @constructor
  * Describes a virtual machine scale set storage profile.
  *
- * @member {object} [imageReference] The image reference.
+ * @member {object} [imageReference] Specifies information about the image to
+ * use. You can specify information about platform images, marketplace images,
+ * or virtual machine images. This element is required when you want to use a
+ * platform image, marketplace image, or virtual machine image, but is not used
+ * in other creation operations.
  * @member {string} [imageReference.publisher] The image publisher.
- * @member {string} [imageReference.offer] The image offer.
+ * @member {string} [imageReference.offer] Specifies the offer of the platform
+ * image or marketplace image used to create the virtual machine.
  * @member {string} [imageReference.sku] The image SKU.
- * @member {string} [imageReference.version] The image version. The allowed
- * formats are Major.Minor.Build or 'latest'. Major, Minor and Build are
- * decimal numbers. Specify 'latest' to use the latest version of the image.
- * @member {object} [osDisk] The OS disk.
+ * @member {string} [imageReference.version] Specifies the version of the
+ * platform image or marketplace image used to create the virtual machine. The
+ * allowed formats are Major.Minor.Build or 'latest'. Major, Minor, and Build
+ * are decimal numbers. Specify 'latest' to use the latest version of an image
+ * available at deploy time. Even if you use 'latest', the VM image will not
+ * automatically update after deploy time even if a new version becomes
+ * available.
+ * @member {object} [osDisk] Specifies information about the operating system
+ * disk used by the virtual machines in the scale set. <br><br> For more
+ * information about disks, see [About disks and VHDs for Azure virtual
+ * machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
  * @member {string} [osDisk.name] The disk name.
- * @member {string} [osDisk.caching] The caching type. Possible values include:
- * 'None', 'ReadOnly', 'ReadWrite'
- * @member {string} [osDisk.createOption] The create option. Possible values
+ * @member {string} [osDisk.caching] Specifies the caching requirements.
+ * <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly**
+ * <br><br> **ReadWrite** <br><br> Default: **None for Standard storage.
+ * ReadOnly for Premium storage**. Possible values include: 'None', 'ReadOnly',
+ * 'ReadWrite'
+ * @member {string} [osDisk.createOption] Specifies how the virtual machines in
+ * the scale set should be created.<br><br> The only allowed value is:
+ * **FromImage** \u2013 This value is used when you are using an image to
+ * create the virtual machine. If you are using a platform image, you also use
+ * the imageReference element described above. If you are using a marketplace
+ * image, you  also use the plan element previously described. Possible values
  * include: 'fromImage', 'empty', 'attach'
- * @member {string} [osDisk.osType] The Operating System type. Possible values
- * include: 'Windows', 'Linux'
- * @member {object} [osDisk.image] The Source User Image VirtualHardDisk. This
- * VirtualHardDisk will be copied before using it to attach to the Virtual
- * Machine. If SourceImage is provided, the destination VirtualHardDisk should
- * not exist.
- * @member {string} [osDisk.image.uri] The virtual hard disk's URI. Must be a
- * valid URI to a virtual hard disk.
- * @member {array} [osDisk.vhdContainers] The list of virtual hard disk
- * container uris.
+ * @member {string} [osDisk.osType] This property allows you to specify the
+ * type of the OS that is included in the disk if creating a VM from user-image
+ * or a specialized VHD. <br><br> Possible values are: <br><br> **Windows**
+ * <br><br> **Linux**. Possible values include: 'Windows', 'Linux'
+ * @member {object} [osDisk.image] Specifies information about the unmanaged
+ * user image to base the scale set on.
+ * @member {string} [osDisk.image.uri] Specifies the virtual hard disk's uri.
+ * @member {array} [osDisk.vhdContainers] Specifies the container urls that are
+ * used to store operating system disks for the scale set.
  * @member {object} [osDisk.managedDisk] The managed disk parameters.
- * @member {string} [osDisk.managedDisk.storageAccountType] The Storage Account
- * type. Possible values include: 'Standard_LRS', 'Premium_LRS'
- * @member {array} [dataDisks] The data disks.
+ * @member {string} [osDisk.managedDisk.storageAccountType] Specifies the
+ * storage account type for the managed disk. Possible values are: Standard_LRS
+ * or Premium_LRS. Possible values include: 'Standard_LRS', 'Premium_LRS'
+ * @member {array} [dataDisks] Specifies the parameters that are used to add
+ * data disks to the virtual machines in the scale set. <br><br> For more
+ * information about disks, see [About disks and VHDs for Azure virtual
+ * machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
  */
 export interface VirtualMachineScaleSetStorageProfile {
   imageReference?: ImageReference;
@@ -1975,11 +2467,16 @@ export interface VirtualMachineScaleSetStorageProfile {
  *
  * @member {object} [imageReference] The image reference.
  * @member {string} [imageReference.publisher] The image publisher.
- * @member {string} [imageReference.offer] The image offer.
+ * @member {string} [imageReference.offer] Specifies the offer of the platform
+ * image or marketplace image used to create the virtual machine.
  * @member {string} [imageReference.sku] The image SKU.
- * @member {string} [imageReference.version] The image version. The allowed
- * formats are Major.Minor.Build or 'latest'. Major, Minor and Build are
- * decimal numbers. Specify 'latest' to use the latest version of the image.
+ * @member {string} [imageReference.version] Specifies the version of the
+ * platform image or marketplace image used to create the virtual machine. The
+ * allowed formats are Major.Minor.Build or 'latest'. Major, Minor, and Build
+ * are decimal numbers. Specify 'latest' to use the latest version of an image
+ * available at deploy time. Even if you use 'latest', the VM image will not
+ * automatically update after deploy time even if a new version becomes
+ * available.
  * @member {object} [osDisk] The OS disk.
  * @member {string} [osDisk.caching] The caching type. Possible values include:
  * 'None', 'ReadOnly', 'ReadWrite'
@@ -1987,13 +2484,13 @@ export interface VirtualMachineScaleSetStorageProfile {
  * VirtualHardDisk will be copied before using it to attach to the Virtual
  * Machine. If SourceImage is provided, the destination VirtualHardDisk should
  * not exist.
- * @member {string} [osDisk.image.uri] The virtual hard disk's URI. Must be a
- * valid URI to a virtual hard disk.
+ * @member {string} [osDisk.image.uri] Specifies the virtual hard disk's uri.
  * @member {array} [osDisk.vhdContainers] The list of virtual hard disk
  * container uris.
  * @member {object} [osDisk.managedDisk] The managed disk parameters.
- * @member {string} [osDisk.managedDisk.storageAccountType] The Storage Account
- * type. Possible values include: 'Standard_LRS', 'Premium_LRS'
+ * @member {string} [osDisk.managedDisk.storageAccountType] Specifies the
+ * storage account type for the managed disk. Possible values are: Standard_LRS
+ * or Premium_LRS. Possible values include: 'Standard_LRS', 'Premium_LRS'
  * @member {array} [dataDisks] The data disks.
  */
 export interface VirtualMachineScaleSetUpdateStorageProfile {
@@ -2081,11 +2578,11 @@ export interface VirtualMachineScaleSetUpdatePublicIPAddressConfiguration {
  * Describes a virtual machine scale set network profile's IP configuration.
  *
  * @member {string} name The IP configuration name.
- * @member {object} [subnet] The subnet.
+ * @member {object} [subnet] Specifies the identifier of the subnet.
  * @member {string} [subnet.id] The ARM resource id in the form of
  * /subscriptions/{SubcriptionId}/resourceGroups/{ResourceGroupName}/...
- * @member {boolean} [primary] Specifies the primary IP Configuration in case
- * the network interface has more than one IP Configuration.
+ * @member {boolean} [primary] Specifies the primary network interface in case
+ * the virtual machine has more than 1 network interface.
  * @member {object} [publicIPAddressConfiguration] The
  * publicIPAddressConfiguration.
  * @member {string} [publicIPAddressConfiguration.name] The publicIP address
@@ -2102,12 +2599,18 @@ export interface VirtualMachineScaleSetUpdatePublicIPAddressConfiguration {
  * 2017-03-30 onwards, it represents whether the specific ipconfiguration is
  * IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and
  * 'IPv6'. Possible values include: 'IPv4', 'IPv6'
- * @member {array} [applicationGatewayBackendAddressPools] The application
- * gateway backend address pools.
- * @member {array} [loadBalancerBackendAddressPools] The load balancer backend
- * address pools.
- * @member {array} [loadBalancerInboundNatPools] The load balancer inbound nat
- * pools.
+ * @member {array} [applicationGatewayBackendAddressPools] Specifies an array
+ * of references to backend address pools of application gateways. A scale set
+ * can reference backend address pools of multiple application gateways.
+ * Multiple scale sets cannot use the same application gateway.
+ * @member {array} [loadBalancerBackendAddressPools] Specifies an array of
+ * references to backend address pools of load balancers. A scale set can
+ * reference backend address pools of one public and one internal load
+ * balancer. Multiple scale sets cannot use the same load balancer.
+ * @member {array} [loadBalancerInboundNatPools] Specifies an array of
+ * references to inbound Nat pools of the load balancers. A scale set can
+ * reference inbound nat pools of one public and one internal load balancer.
+ * Multiple scale sets cannot use the same load balancer
  */
 export interface VirtualMachineScaleSetIPConfiguration extends SubResource {
   name: string;
@@ -2187,8 +2690,8 @@ export interface VirtualMachineScaleSetNetworkConfigurationDnsSettings {
  * configurations.
  *
  * @member {string} name The network configuration name.
- * @member {boolean} [primary] Whether this is a primary NIC on a virtual
- * machine.
+ * @member {boolean} [primary] Specifies the primary network interface in case
+ * the virtual machine has more than 1 network interface.
  * @member {boolean} [enableAcceleratedNetworking] Specifies whether the
  * network interface is accelerated networking-enabled.
  * @member {object} [networkSecurityGroup] The network security group.
@@ -2196,8 +2699,8 @@ export interface VirtualMachineScaleSetNetworkConfigurationDnsSettings {
  * @member {object} [dnsSettings] The dns settings to be applied on the network
  * interfaces.
  * @member {array} [dnsSettings.dnsServers] List of DNS servers IP addresses
- * @member {array} ipConfigurations The virtual machine scale set IP
- * Configuration.
+ * @member {array} ipConfigurations Specifies the IP configurations of the
+ * network interface.
  */
 export interface VirtualMachineScaleSetNetworkConfiguration extends SubResource {
   name: string;
@@ -2243,10 +2746,17 @@ export interface VirtualMachineScaleSetUpdateNetworkConfiguration extends SubRes
  * @constructor
  * Describes a virtual machine scale set network profile.
  *
+ * @member {object} [healthProbe] A reference to a load balancer probe used to
+ * determine the health of an instance in the virtual machine scale set. The
+ * reference will be in the form:
+ * '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}'.
+ * @member {string} [healthProbe.id] The ARM resource id in the form of
+ * /subscriptions/{SubcriptionId}/resourceGroups/{ResourceGroupName}/...
  * @member {array} [networkInterfaceConfigurations] The list of network
  * configurations.
  */
 export interface VirtualMachineScaleSetNetworkProfile {
+  healthProbe?: ApiEntityReference;
   networkInterfaceConfigurations?: VirtualMachineScaleSetNetworkConfiguration[];
 }
 
@@ -2284,15 +2794,19 @@ export interface SubResourceReadOnly extends BaseResource {
  * from the previous value, the extension handler will be forced to update even
  * if the extension configuration has not changed.
  * @member {string} [publisher] The name of the extension handler publisher.
- * @member {string} [type] The type of the extension handler.
- * @member {string} [typeHandlerVersion] The type version of the extension
+ * @member {string} [type] Specifies the type of the extension; an example is
+ * "CustomScriptExtension".
+ * @member {string} [typeHandlerVersion] Specifies the version of the script
  * handler.
- * @member {boolean} [autoUpgradeMinorVersion] Whether the extension handler
- * should be automatically upgraded across minor versions.
+ * @member {boolean} [autoUpgradeMinorVersion] Indicates whether the extension
+ * should use a newer minor version if one is available at deployment time.
+ * Once deployed, however, the extension will not upgrade minor versions unless
+ * redeployed, even with this property set to true.
  * @member {object} [settings] Json formatted public settings for the
  * extension.
- * @member {object} [protectedSettings] Json formatted protected settings for
- * the extension.
+ * @member {object} [protectedSettings] The extension can contain either
+ * protectedSettings or protectedSettingsFromKeyVault or no protected settings
+ * at all.
  * @member {string} [provisioningState] The provisioning state, which only
  * appears in the response.
  */
@@ -2343,91 +2857,177 @@ export interface VirtualMachineScaleSetExtensionProfile {
  * @constructor
  * Describes a virtual machine scale set virtual machine profile.
  *
- * @member {object} [osProfile] The virtual machine scale set OS profile.
- * @member {string} [osProfile.computerNamePrefix] The computer name prefix.
- * @member {string} [osProfile.adminUsername] The admin user name.
- * @member {string} [osProfile.adminPassword] The admin user password.
- * @member {string} [osProfile.customData] A base-64 encoded string of custom
- * data.
- * @member {object} [osProfile.windowsConfiguration] The Windows Configuration
- * of the OS profile.
+ * @member {object} [osProfile] Specifies the operating system settings for the
+ * virtual machines in the scale set.
+ * @member {string} [osProfile.computerNamePrefix] Specifies the computer name
+ * prefix for all of the virtual machines in the scale set. Computer name
+ * prefixes must be 1 to 15 characters long.
+ * @member {string} [osProfile.adminUsername] Specifies the name of the
+ * administrator account. <br><br> **Windows-only restriction:** Cannot end in
+ * "." <br><br> **Disallowed values:** "administrator", "admin", "user",
+ * "user1", "test", "user2", "test1", "user3", "admin1", "1", "123", "a",
+ * "actuser", "adm", "admin2", "aspnet", "backup", "console", "david", "guest",
+ * "john", "owner", "root", "server", "sql", "support", "support_388945a0",
+ * "sys", "test2", "test3", "user4", "user5". <br><br> **Minimum-length
+ * (Linux):** 1  character <br><br> **Max-length (Linux):** 64 characters
+ * <br><br> **Max-length (Windows):** 20 characters  <br><br><li> For root
+ * access to the Linux VM, see [Using root privileges on Linux virtual machines
+ * in
+ * Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-use-root-privileges?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)<br><li>
+ * For a list of built-in system users on Linux that should not be used in this
+ * field, see [Selecting User Names for Linux on
+ * Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-usernames?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+ * @member {string} [osProfile.adminPassword] Specifies the password of the
+ * administrator account. <br><br> **Minimum-length (Windows):** 8 characters
+ * <br><br> **Minimum-length (Linux):** 6 characters <br><br> **Max-length
+ * (Windows):** 123 characters <br><br> **Max-length (Linux):** 72 characters
+ * <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be
+ * fulfilled <br> Has lower characters <br>Has upper characters <br> Has a
+ * digit <br> Has a special character (Regex match [\W_]) <br><br> **Disallowed
+ * values:** "abc@123", "P@$$w0rd", "P@ssw0rd", "P@ssword123", "Pa$$word",
+ * "pass@word1", "Password!", "Password1", "Password22", "iloveyou!" <br><br>
+ * For resetting the password, see [How to reset the Remote Desktop service or
+ * its login password in a Windows
+ * VM](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-reset-rdp?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+ * <br><br> For resetting root password, see [Manage users, SSH, and check or
+ * repair disks on Azure Linux VMs using the VMAccess
+ * Extension](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-vmaccess-extension?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#reset-root-password)
+ * @member {string} [osProfile.customData] Specifies a base-64 encoded string
+ * of custom data. The base-64 encoded string is decoded to a binary array that
+ * is saved as a file on the Virtual Machine. The maximum length of the binary
+ * array is 65535 bytes. <br><br> For using cloud-init for your VM, see [Using
+ * cloud-init to customize a Linux VM during
+ * creation](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-cloud-init?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+ * @member {object} [osProfile.windowsConfiguration] Specifies Windows
+ * operating system settings on the virtual machine.
  * @member {boolean} [osProfile.windowsConfiguration.provisionVMAgent]
- * Indicates whether the virtual machine agent should be provisioned on the
- * Virtual Machine. If not specified, then the default behavior is to set it to
- * true.
+ * Indicates whether virtual machine agent should be provisioned on the virtual
+ * machine. <br><br> When this property is not specified in the request body,
+ * default behavior is to set it to true.  This will ensure that VM Agent is
+ * installed on the VM so that extensions can be added to the VM later.
  * @member {boolean} [osProfile.windowsConfiguration.enableAutomaticUpdates]
- * Indicates whether Windows updates are automatically installed on the VM.
- * @member {string} [osProfile.windowsConfiguration.timeZone] The time zone of
- * the VM
+ * Indicates whether virtual machine is enabled for automatic updates.
+ * @member {string} [osProfile.windowsConfiguration.timeZone] Specifies the
+ * time zone of the virtual machine. e.g. "Pacific Standard Time"
  * @member {array} [osProfile.windowsConfiguration.additionalUnattendContent]
- * Additional base-64 encoded XML formatted information that can be included in
- * the Unattend.xml file.
- * @member {object} [osProfile.windowsConfiguration.winRM] The Windows Remote
- * Management configuration of the VM
+ * Specifies additional base-64 encoded XML formatted information that can be
+ * included in the Unattend.xml file, which is used by Windows Setup.
+ * @member {object} [osProfile.windowsConfiguration.winRM] Specifies the
+ * Windows Remote Management listeners. This enables remote Windows PowerShell.
  * @member {array} [osProfile.windowsConfiguration.winRM.listeners] The list of
  * Windows Remote Management listeners
- * @member {object} [osProfile.linuxConfiguration] The Linux Configuration of
- * the OS profile.
+ * @member {object} [osProfile.linuxConfiguration] Specifies the Linux
+ * operating system settings on the virtual machine. <br><br>For a list of
+ * supported Linux distributions, see [Linux on Azure-Endorsed
+ * Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-endorsed-distros?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+ * <br><br> For running non-endorsed distributions, see [Information for
+ * Non-Endorsed
+ * Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-create-upload-generic?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
  * @member {boolean}
  * [osProfile.linuxConfiguration.disablePasswordAuthentication] Specifies
  * whether password authentication should be disabled.
- * @member {object} [osProfile.linuxConfiguration.ssh] The SSH configuration
- * for linux VMs.
+ * @member {object} [osProfile.linuxConfiguration.ssh] Specifies the ssh key
+ * configuration for a Linux OS.
  * @member {array} [osProfile.linuxConfiguration.ssh.publicKeys] The list of
  * SSH public keys used to authenticate with linux based VMs.
- * @member {array} [osProfile.secrets] The List of certificates for addition to
- * the VM.
- * @member {object} [storageProfile] The virtual machine scale set storage
- * profile.
- * @member {object} [storageProfile.imageReference] The image reference.
+ * @member {array} [osProfile.secrets] Specifies set of certificates that
+ * should be installed onto the virtual machines in the scale set.
+ * @member {object} [storageProfile] Specifies the storage settings for the
+ * virtual machine disks.
+ * @member {object} [storageProfile.imageReference] Specifies information about
+ * the image to use. You can specify information about platform images,
+ * marketplace images, or virtual machine images. This element is required when
+ * you want to use a platform image, marketplace image, or virtual machine
+ * image, but is not used in other creation operations.
  * @member {string} [storageProfile.imageReference.publisher] The image
  * publisher.
- * @member {string} [storageProfile.imageReference.offer] The image offer.
+ * @member {string} [storageProfile.imageReference.offer] Specifies the offer
+ * of the platform image or marketplace image used to create the virtual
+ * machine.
  * @member {string} [storageProfile.imageReference.sku] The image SKU.
- * @member {string} [storageProfile.imageReference.version] The image version.
- * The allowed formats are Major.Minor.Build or 'latest'. Major, Minor and
- * Build are decimal numbers. Specify 'latest' to use the latest version of the
- * image.
- * @member {object} [storageProfile.osDisk] The OS disk.
+ * @member {string} [storageProfile.imageReference.version] Specifies the
+ * version of the platform image or marketplace image used to create the
+ * virtual machine. The allowed formats are Major.Minor.Build or 'latest'.
+ * Major, Minor, and Build are decimal numbers. Specify 'latest' to use the
+ * latest version of an image available at deploy time. Even if you use
+ * 'latest', the VM image will not automatically update after deploy time even
+ * if a new version becomes available.
+ * @member {object} [storageProfile.osDisk] Specifies information about the
+ * operating system disk used by the virtual machines in the scale set.
+ * <br><br> For more information about disks, see [About disks and VHDs for
+ * Azure virtual
+ * machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
  * @member {string} [storageProfile.osDisk.name] The disk name.
- * @member {string} [storageProfile.osDisk.caching] The caching type. Possible
- * values include: 'None', 'ReadOnly', 'ReadWrite'
- * @member {string} [storageProfile.osDisk.createOption] The create option.
+ * @member {string} [storageProfile.osDisk.caching] Specifies the caching
+ * requirements. <br><br> Possible values are: <br><br> **None** <br><br>
+ * **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard
+ * storage. ReadOnly for Premium storage**. Possible values include: 'None',
+ * 'ReadOnly', 'ReadWrite'
+ * @member {string} [storageProfile.osDisk.createOption] Specifies how the
+ * virtual machines in the scale set should be created.<br><br> The only
+ * allowed value is: **FromImage** \u2013 This value is used when you are using
+ * an image to create the virtual machine. If you are using a platform image,
+ * you also use the imageReference element described above. If you are using a
+ * marketplace image, you  also use the plan element previously described.
  * Possible values include: 'fromImage', 'empty', 'attach'
- * @member {string} [storageProfile.osDisk.osType] The Operating System type.
- * Possible values include: 'Windows', 'Linux'
- * @member {object} [storageProfile.osDisk.image] The Source User Image
- * VirtualHardDisk. This VirtualHardDisk will be copied before using it to
- * attach to the Virtual Machine. If SourceImage is provided, the destination
- * VirtualHardDisk should not exist.
- * @member {string} [storageProfile.osDisk.image.uri] The virtual hard disk's
- * URI. Must be a valid URI to a virtual hard disk.
- * @member {array} [storageProfile.osDisk.vhdContainers] The list of virtual
- * hard disk container uris.
+ * @member {string} [storageProfile.osDisk.osType] This property allows you to
+ * specify the type of the OS that is included in the disk if creating a VM
+ * from user-image or a specialized VHD. <br><br> Possible values are: <br><br>
+ * **Windows** <br><br> **Linux**. Possible values include: 'Windows', 'Linux'
+ * @member {object} [storageProfile.osDisk.image] Specifies information about
+ * the unmanaged user image to base the scale set on.
+ * @member {string} [storageProfile.osDisk.image.uri] Specifies the virtual
+ * hard disk's uri.
+ * @member {array} [storageProfile.osDisk.vhdContainers] Specifies the
+ * container urls that are used to store operating system disks for the scale
+ * set.
  * @member {object} [storageProfile.osDisk.managedDisk] The managed disk
  * parameters.
- * @member {string} [storageProfile.osDisk.managedDisk.storageAccountType] The
- * Storage Account type. Possible values include: 'Standard_LRS', 'Premium_LRS'
- * @member {array} [storageProfile.dataDisks] The data disks.
- * @member {object} [networkProfile] The virtual machine scale set network
- * profile.
+ * @member {string} [storageProfile.osDisk.managedDisk.storageAccountType]
+ * Specifies the storage account type for the managed disk. Possible values
+ * are: Standard_LRS or Premium_LRS. Possible values include: 'Standard_LRS',
+ * 'Premium_LRS'
+ * @member {array} [storageProfile.dataDisks] Specifies the parameters that are
+ * used to add data disks to the virtual machines in the scale set. <br><br>
+ * For more information about disks, see [About disks and VHDs for Azure
+ * virtual
+ * machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+ * @member {object} [networkProfile] Specifies properties of the network
+ * interfaces of the virtual machines in the scale set.
+ * @member {object} [networkProfile.healthProbe] A reference to a load balancer
+ * probe used to determine the health of an instance in the virtual machine
+ * scale set. The reference will be in the form:
+ * '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}'.
+ * @member {string} [networkProfile.healthProbe.id] The ARM resource id in the
+ * form of
+ * /subscriptions/{SubcriptionId}/resourceGroups/{ResourceGroupName}/...
  * @member {array} [networkProfile.networkInterfaceConfigurations] The list of
  * network configurations.
- * @member {object} [diagnosticsProfile] The virtual machine scale set
- * diagnostics profile.
+ * @member {object} [diagnosticsProfile] Specifies the boot diagnostic settings
+ * state. <br><br>Minimum api-version: 2015-06-15.
  * @member {object} [diagnosticsProfile.bootDiagnostics] Boot Diagnostics is a
- * debugging feature which allows the user to view console output and/or a
- * screenshot of the virtual machine from the hypervisor.
+ * debugging feature which allows you to view Console Output and Screenshot to
+ * diagnose VM status. <br><br> For Linux Virtual Machines, you can easily view
+ * the output of your console log. <br><br> For both Windows and Linux virtual
+ * machines, Azure also enables you to see a screenshot of the VM from the
+ * hypervisor.
  * @member {boolean} [diagnosticsProfile.bootDiagnostics.enabled] Whether boot
  * diagnostics should be enabled on the Virtual Machine.
- * @member {string} [diagnosticsProfile.bootDiagnostics.storageUri] URI of the
+ * @member {string} [diagnosticsProfile.bootDiagnostics.storageUri] Uri of the
  * storage account to use for placing the console output and screenshot.
- * @member {object} [extensionProfile] The virtual machine scale set extension
- * profile.
+ * @member {object} [extensionProfile] Specifies a collection of settings for
+ * extensions installed on virtual machines in the scale set.
  * @member {array} [extensionProfile.extensions] The virtual machine scale set
  * child extension resources.
- * @member {string} [licenseType] The license type, which is for bring your own
- * license scenario.
+ * @member {string} [licenseType] Specifies that the image or disk that is
+ * being used was licensed on-premises. This element is only used for images
+ * that contain the Windows Server operating system. <br><br> Possible values
+ * are: <br><br> Windows_Client <br><br> Windows_Server <br><br> If this
+ * element is included in a request for an update, the value must match the
+ * initial value. This value cannot be updated. <br><br> For more information,
+ * see [Azure Hybrid Use Benefit for Windows
+ * Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+ * <br><br> Minimum api-version: 2015-06-15
  */
 export interface VirtualMachineScaleSetVMProfile {
   osProfile?: VirtualMachineScaleSetOSProfile;
@@ -2450,18 +3050,19 @@ export interface VirtualMachineScaleSetVMProfile {
  * @member {object} [osProfile.windowsConfiguration] The Windows Configuration
  * of the OS profile.
  * @member {boolean} [osProfile.windowsConfiguration.provisionVMAgent]
- * Indicates whether the virtual machine agent should be provisioned on the
- * Virtual Machine. If not specified, then the default behavior is to set it to
- * true.
+ * Indicates whether virtual machine agent should be provisioned on the virtual
+ * machine. <br><br> When this property is not specified in the request body,
+ * default behavior is to set it to true.  This will ensure that VM Agent is
+ * installed on the VM so that extensions can be added to the VM later.
  * @member {boolean} [osProfile.windowsConfiguration.enableAutomaticUpdates]
- * Indicates whether Windows updates are automatically installed on the VM.
- * @member {string} [osProfile.windowsConfiguration.timeZone] The time zone of
- * the VM
+ * Indicates whether virtual machine is enabled for automatic updates.
+ * @member {string} [osProfile.windowsConfiguration.timeZone] Specifies the
+ * time zone of the virtual machine. e.g. "Pacific Standard Time"
  * @member {array} [osProfile.windowsConfiguration.additionalUnattendContent]
- * Additional base-64 encoded XML formatted information that can be included in
- * the Unattend.xml file.
- * @member {object} [osProfile.windowsConfiguration.winRM] The Windows Remote
- * Management configuration of the VM
+ * Specifies additional base-64 encoded XML formatted information that can be
+ * included in the Unattend.xml file, which is used by Windows Setup.
+ * @member {object} [osProfile.windowsConfiguration.winRM] Specifies the
+ * Windows Remote Management listeners. This enables remote Windows PowerShell.
  * @member {array} [osProfile.windowsConfiguration.winRM.listeners] The list of
  * Windows Remote Management listeners
  * @member {object} [osProfile.linuxConfiguration] The Linux Configuration of
@@ -2469,8 +3070,8 @@ export interface VirtualMachineScaleSetVMProfile {
  * @member {boolean}
  * [osProfile.linuxConfiguration.disablePasswordAuthentication] Specifies
  * whether password authentication should be disabled.
- * @member {object} [osProfile.linuxConfiguration.ssh] The SSH configuration
- * for linux VMs.
+ * @member {object} [osProfile.linuxConfiguration.ssh] Specifies the ssh key
+ * configuration for a Linux OS.
  * @member {array} [osProfile.linuxConfiguration.ssh.publicKeys] The list of
  * SSH public keys used to authenticate with linux based VMs.
  * @member {array} [osProfile.secrets] The List of certificates for addition to
@@ -2480,12 +3081,17 @@ export interface VirtualMachineScaleSetVMProfile {
  * @member {object} [storageProfile.imageReference] The image reference.
  * @member {string} [storageProfile.imageReference.publisher] The image
  * publisher.
- * @member {string} [storageProfile.imageReference.offer] The image offer.
+ * @member {string} [storageProfile.imageReference.offer] Specifies the offer
+ * of the platform image or marketplace image used to create the virtual
+ * machine.
  * @member {string} [storageProfile.imageReference.sku] The image SKU.
- * @member {string} [storageProfile.imageReference.version] The image version.
- * The allowed formats are Major.Minor.Build or 'latest'. Major, Minor and
- * Build are decimal numbers. Specify 'latest' to use the latest version of the
- * image.
+ * @member {string} [storageProfile.imageReference.version] Specifies the
+ * version of the platform image or marketplace image used to create the
+ * virtual machine. The allowed formats are Major.Minor.Build or 'latest'.
+ * Major, Minor, and Build are decimal numbers. Specify 'latest' to use the
+ * latest version of an image available at deploy time. Even if you use
+ * 'latest', the VM image will not automatically update after deploy time even
+ * if a new version becomes available.
  * @member {object} [storageProfile.osDisk] The OS disk.
  * @member {string} [storageProfile.osDisk.caching] The caching type. Possible
  * values include: 'None', 'ReadOnly', 'ReadWrite'
@@ -2493,14 +3099,16 @@ export interface VirtualMachineScaleSetVMProfile {
  * VirtualHardDisk. This VirtualHardDisk will be copied before using it to
  * attach to the Virtual Machine. If SourceImage is provided, the destination
  * VirtualHardDisk should not exist.
- * @member {string} [storageProfile.osDisk.image.uri] The virtual hard disk's
- * URI. Must be a valid URI to a virtual hard disk.
+ * @member {string} [storageProfile.osDisk.image.uri] Specifies the virtual
+ * hard disk's uri.
  * @member {array} [storageProfile.osDisk.vhdContainers] The list of virtual
  * hard disk container uris.
  * @member {object} [storageProfile.osDisk.managedDisk] The managed disk
  * parameters.
- * @member {string} [storageProfile.osDisk.managedDisk.storageAccountType] The
- * Storage Account type. Possible values include: 'Standard_LRS', 'Premium_LRS'
+ * @member {string} [storageProfile.osDisk.managedDisk.storageAccountType]
+ * Specifies the storage account type for the managed disk. Possible values
+ * are: Standard_LRS or Premium_LRS. Possible values include: 'Standard_LRS',
+ * 'Premium_LRS'
  * @member {array} [storageProfile.dataDisks] The data disks.
  * @member {object} [networkProfile] The virtual machine scale set network
  * profile.
@@ -2509,11 +3117,14 @@ export interface VirtualMachineScaleSetVMProfile {
  * @member {object} [diagnosticsProfile] The virtual machine scale set
  * diagnostics profile.
  * @member {object} [diagnosticsProfile.bootDiagnostics] Boot Diagnostics is a
- * debugging feature which allows the user to view console output and/or a
- * screenshot of the virtual machine from the hypervisor.
+ * debugging feature which allows you to view Console Output and Screenshot to
+ * diagnose VM status. <br><br> For Linux Virtual Machines, you can easily view
+ * the output of your console log. <br><br> For both Windows and Linux virtual
+ * machines, Azure also enables you to see a screenshot of the VM from the
+ * hypervisor.
  * @member {boolean} [diagnosticsProfile.bootDiagnostics.enabled] Whether boot
  * diagnostics should be enabled on the Virtual Machine.
- * @member {string} [diagnosticsProfile.bootDiagnostics.storageUri] URI of the
+ * @member {string} [diagnosticsProfile.bootDiagnostics.storageUri] Uri of the
  * storage account to use for placing the console output and screenshot.
  * @member {object} [extensionProfile] The virtual machine scale set extension
  * profile.
@@ -2539,127 +3150,258 @@ export interface VirtualMachineScaleSetUpdateVMProfile {
  *
  * @member {object} [sku] The virtual machine scale set sku.
  * @member {string} [sku.name] The sku name.
- * @member {string} [sku.tier] The sku tier.
- * @member {number} [sku.capacity] The sku capacity.
- * @member {object} [plan] The purchase plan when deploying a virtual machine
- * scale set from VM Marketplace images.
+ * @member {string} [sku.tier] Specifies the tier of virtual machines in a
+ * scale set.<br /><br /> Possible Values:<br /><br /> **Standard**<br /><br />
+ * **Basic**
+ * @member {number} [sku.capacity] Specifies the number of virtual machines in
+ * the scale set.
+ * @member {object} [plan] Specifies information about the marketplace image
+ * used to create the virtual machine. This element is only used for
+ * marketplace images. Before you can use a marketplace image from an API, you
+ * must enable the image for programmatic use.  In the Azure portal, find the
+ * marketplace image that you want to use and then click **Want to deploy
+ * programmatically, Get Started ->**. Enter any required information and then
+ * click **Save**.
  * @member {string} [plan.name] The plan ID.
  * @member {string} [plan.publisher] The publisher ID.
- * @member {string} [plan.product] The offer ID.
+ * @member {string} [plan.product] Specifies the product of the image from the
+ * marketplace. This is the same value as Offer under the imageReference
+ * element.
  * @member {string} [plan.promotionCode] The promotion code.
  * @member {object} [upgradePolicy] The upgrade policy.
- * @member {string} [upgradePolicy.mode] The upgrade mode. Possible values
- * include: 'Automatic', 'Manual'
+ * @member {string} [upgradePolicy.mode] Specifies the mode of an upgrade to
+ * virtual machines in the scale set.<br /><br /> Possible values are:<br /><br
+ * /> **Manual** - You  control the application of updates to virtual machines
+ * in the scale set. You do this by using the manualUpgrade action.<br /><br />
+ * **Automatic** - All virtual machines in the scale set are  automatically
+ * updated at the same time. Possible values include: 'Automatic', 'Manual',
+ * 'Rolling'
+ * @member {object} [upgradePolicy.rollingUpgradePolicy] The configuration
+ * parameters used while performing a rolling upgrade.
+ * @member {number}
+ * [upgradePolicy.rollingUpgradePolicy.maxBatchInstancePercent] The maximum
+ * percent of total virtual machine instances that will be upgraded
+ * simultaneously by the rolling upgrade in one batch. As this is a maximum,
+ * unhealthy instances in previous or future batches can cause the percentage
+ * of instances in a batch to decrease to ensure higher reliability. The
+ * default value for this parameter is 20%.
+ * @member {number}
+ * [upgradePolicy.rollingUpgradePolicy.maxUnhealthyInstancePercent] The maximum
+ * percentage of the total virtual machine instances in the scale set that can
+ * be simultaneously unhealthy, either as a result of being upgraded, or by
+ * being found in an unhealthy state by the virtual machine health checks
+ * before the rolling upgrade aborts. This constraint will be checked prior to
+ * starting any batch. The default value for this parameter is 20%.
+ * @member {number}
+ * [upgradePolicy.rollingUpgradePolicy.maxUnhealthyUpgradedInstancePercent] The
+ * maximum percentage of upgraded virtual machine instances that can be found
+ * to be in an unhealthy state. This check will happen after each batch is
+ * upgraded. If this percentage is ever exceeded, the rolling update aborts.
+ * The default value for this parameter is 20%.
+ * @member {string}
+ * [upgradePolicy.rollingUpgradePolicy.pauseTimeBetweenBatches] The wait time
+ * between completing the update for all virtual machines in one batch and
+ * starting the next batch. The time duration should be specified in ISO 8601
+ * format. The default value is 0 seconds (PT0S).
+ * @member {boolean} [upgradePolicy.automaticOSUpgrade] Whether OS upgrades
+ * should automatically be applied to scale set instances in a rolling fashion
+ * when a newer version of the image becomes available.
  * @member {object} [virtualMachineProfile] The virtual machine profile.
- * @member {object} [virtualMachineProfile.osProfile] The virtual machine scale
- * set OS profile.
- * @member {string} [virtualMachineProfile.osProfile.computerNamePrefix] The
- * computer name prefix.
- * @member {string} [virtualMachineProfile.osProfile.adminUsername] The admin
- * user name.
- * @member {string} [virtualMachineProfile.osProfile.adminPassword] The admin
- * user password.
- * @member {string} [virtualMachineProfile.osProfile.customData] A base-64
- * encoded string of custom data.
- * @member {object} [virtualMachineProfile.osProfile.windowsConfiguration] The
- * Windows Configuration of the OS profile.
+ * @member {object} [virtualMachineProfile.osProfile] Specifies the operating
+ * system settings for the virtual machines in the scale set.
+ * @member {string} [virtualMachineProfile.osProfile.computerNamePrefix]
+ * Specifies the computer name prefix for all of the virtual machines in the
+ * scale set. Computer name prefixes must be 1 to 15 characters long.
+ * @member {string} [virtualMachineProfile.osProfile.adminUsername] Specifies
+ * the name of the administrator account. <br><br> **Windows-only
+ * restriction:** Cannot end in "." <br><br> **Disallowed values:**
+ * "administrator", "admin", "user", "user1", "test", "user2", "test1",
+ * "user3", "admin1", "1", "123", "a", "actuser", "adm", "admin2", "aspnet",
+ * "backup", "console", "david", "guest", "john", "owner", "root", "server",
+ * "sql", "support", "support_388945a0", "sys", "test2", "test3", "user4",
+ * "user5". <br><br> **Minimum-length (Linux):** 1  character <br><br>
+ * **Max-length (Linux):** 64 characters <br><br> **Max-length (Windows):** 20
+ * characters  <br><br><li> For root access to the Linux VM, see [Using root
+ * privileges on Linux virtual machines in
+ * Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-use-root-privileges?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)<br><li>
+ * For a list of built-in system users on Linux that should not be used in this
+ * field, see [Selecting User Names for Linux on
+ * Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-usernames?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+ * @member {string} [virtualMachineProfile.osProfile.adminPassword] Specifies
+ * the password of the administrator account. <br><br> **Minimum-length
+ * (Windows):** 8 characters <br><br> **Minimum-length (Linux):** 6 characters
+ * <br><br> **Max-length (Windows):** 123 characters <br><br> **Max-length
+ * (Linux):** 72 characters <br><br> **Complexity requirements:** 3 out of 4
+ * conditions below need to be fulfilled <br> Has lower characters <br>Has
+ * upper characters <br> Has a digit <br> Has a special character (Regex match
+ * [\W_]) <br><br> **Disallowed values:** "abc@123", "P@$$w0rd", "P@ssw0rd",
+ * "P@ssword123", "Pa$$word", "pass@word1", "Password!", "Password1",
+ * "Password22", "iloveyou!" <br><br> For resetting the password, see [How to
+ * reset the Remote Desktop service or its login password in a Windows
+ * VM](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-reset-rdp?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+ * <br><br> For resetting root password, see [Manage users, SSH, and check or
+ * repair disks on Azure Linux VMs using the VMAccess
+ * Extension](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-vmaccess-extension?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#reset-root-password)
+ * @member {string} [virtualMachineProfile.osProfile.customData] Specifies a
+ * base-64 encoded string of custom data. The base-64 encoded string is decoded
+ * to a binary array that is saved as a file on the Virtual Machine. The
+ * maximum length of the binary array is 65535 bytes. <br><br> For using
+ * cloud-init for your VM, see [Using cloud-init to customize a Linux VM during
+ * creation](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-cloud-init?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+ * @member {object} [virtualMachineProfile.osProfile.windowsConfiguration]
+ * Specifies Windows operating system settings on the virtual machine.
  * @member {boolean}
  * [virtualMachineProfile.osProfile.windowsConfiguration.provisionVMAgent]
- * Indicates whether the virtual machine agent should be provisioned on the
- * Virtual Machine. If not specified, then the default behavior is to set it to
- * true.
+ * Indicates whether virtual machine agent should be provisioned on the virtual
+ * machine. <br><br> When this property is not specified in the request body,
+ * default behavior is to set it to true.  This will ensure that VM Agent is
+ * installed on the VM so that extensions can be added to the VM later.
  * @member {boolean}
  * [virtualMachineProfile.osProfile.windowsConfiguration.enableAutomaticUpdates]
- * Indicates whether Windows updates are automatically installed on the VM.
+ * Indicates whether virtual machine is enabled for automatic updates.
  * @member {string}
- * [virtualMachineProfile.osProfile.windowsConfiguration.timeZone] The time
- * zone of the VM
+ * [virtualMachineProfile.osProfile.windowsConfiguration.timeZone] Specifies
+ * the time zone of the virtual machine. e.g. "Pacific Standard Time"
  * @member {array}
  * [virtualMachineProfile.osProfile.windowsConfiguration.additionalUnattendContent]
- * Additional base-64 encoded XML formatted information that can be included in
- * the Unattend.xml file.
+ * Specifies additional base-64 encoded XML formatted information that can be
+ * included in the Unattend.xml file, which is used by Windows Setup.
  * @member {object}
- * [virtualMachineProfile.osProfile.windowsConfiguration.winRM] The Windows
- * Remote Management configuration of the VM
+ * [virtualMachineProfile.osProfile.windowsConfiguration.winRM] Specifies the
+ * Windows Remote Management listeners. This enables remote Windows PowerShell.
  * @member {array}
  * [virtualMachineProfile.osProfile.windowsConfiguration.winRM.listeners] The
  * list of Windows Remote Management listeners
- * @member {object} [virtualMachineProfile.osProfile.linuxConfiguration] The
- * Linux Configuration of the OS profile.
+ * @member {object} [virtualMachineProfile.osProfile.linuxConfiguration]
+ * Specifies the Linux operating system settings on the virtual machine.
+ * <br><br>For a list of supported Linux distributions, see [Linux on
+ * Azure-Endorsed
+ * Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-endorsed-distros?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+ * <br><br> For running non-endorsed distributions, see [Information for
+ * Non-Endorsed
+ * Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-create-upload-generic?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
  * @member {boolean}
  * [virtualMachineProfile.osProfile.linuxConfiguration.disablePasswordAuthentication]
  * Specifies whether password authentication should be disabled.
  * @member {object} [virtualMachineProfile.osProfile.linuxConfiguration.ssh]
- * The SSH configuration for linux VMs.
+ * Specifies the ssh key configuration for a Linux OS.
  * @member {array}
  * [virtualMachineProfile.osProfile.linuxConfiguration.ssh.publicKeys] The list
  * of SSH public keys used to authenticate with linux based VMs.
- * @member {array} [virtualMachineProfile.osProfile.secrets] The List of
- * certificates for addition to the VM.
- * @member {object} [virtualMachineProfile.storageProfile] The virtual machine
- * scale set storage profile.
- * @member {object} [virtualMachineProfile.storageProfile.imageReference] The
- * image reference.
+ * @member {array} [virtualMachineProfile.osProfile.secrets] Specifies set of
+ * certificates that should be installed onto the virtual machines in the scale
+ * set.
+ * @member {object} [virtualMachineProfile.storageProfile] Specifies the
+ * storage settings for the virtual machine disks.
+ * @member {object} [virtualMachineProfile.storageProfile.imageReference]
+ * Specifies information about the image to use. You can specify information
+ * about platform images, marketplace images, or virtual machine images. This
+ * element is required when you want to use a platform image, marketplace
+ * image, or virtual machine image, but is not used in other creation
+ * operations.
  * @member {string}
  * [virtualMachineProfile.storageProfile.imageReference.publisher] The image
  * publisher.
  * @member {string} [virtualMachineProfile.storageProfile.imageReference.offer]
- * The image offer.
+ * Specifies the offer of the platform image or marketplace image used to
+ * create the virtual machine.
  * @member {string} [virtualMachineProfile.storageProfile.imageReference.sku]
  * The image SKU.
  * @member {string}
- * [virtualMachineProfile.storageProfile.imageReference.version] The image
- * version. The allowed formats are Major.Minor.Build or 'latest'. Major, Minor
- * and Build are decimal numbers. Specify 'latest' to use the latest version of
- * the image.
- * @member {object} [virtualMachineProfile.storageProfile.osDisk] The OS disk.
+ * [virtualMachineProfile.storageProfile.imageReference.version] Specifies the
+ * version of the platform image or marketplace image used to create the
+ * virtual machine. The allowed formats are Major.Minor.Build or 'latest'.
+ * Major, Minor, and Build are decimal numbers. Specify 'latest' to use the
+ * latest version of an image available at deploy time. Even if you use
+ * 'latest', the VM image will not automatically update after deploy time even
+ * if a new version becomes available.
+ * @member {object} [virtualMachineProfile.storageProfile.osDisk] Specifies
+ * information about the operating system disk used by the virtual machines in
+ * the scale set. <br><br> For more information about disks, see [About disks
+ * and VHDs for Azure virtual
+ * machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
  * @member {string} [virtualMachineProfile.storageProfile.osDisk.name] The disk
  * name.
- * @member {string} [virtualMachineProfile.storageProfile.osDisk.caching] The
- * caching type. Possible values include: 'None', 'ReadOnly', 'ReadWrite'
+ * @member {string} [virtualMachineProfile.storageProfile.osDisk.caching]
+ * Specifies the caching requirements. <br><br> Possible values are: <br><br>
+ * **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default:
+ * **None for Standard storage. ReadOnly for Premium storage**. Possible values
+ * include: 'None', 'ReadOnly', 'ReadWrite'
  * @member {string} [virtualMachineProfile.storageProfile.osDisk.createOption]
- * The create option. Possible values include: 'fromImage', 'empty', 'attach'
- * @member {string} [virtualMachineProfile.storageProfile.osDisk.osType] The
- * Operating System type. Possible values include: 'Windows', 'Linux'
- * @member {object} [virtualMachineProfile.storageProfile.osDisk.image] The
- * Source User Image VirtualHardDisk. This VirtualHardDisk will be copied
- * before using it to attach to the Virtual Machine. If SourceImage is
- * provided, the destination VirtualHardDisk should not exist.
- * @member {string} [virtualMachineProfile.storageProfile.osDisk.image.uri] The
- * virtual hard disk's URI. Must be a valid URI to a virtual hard disk.
+ * Specifies how the virtual machines in the scale set should be
+ * created.<br><br> The only allowed value is: **FromImage** \u2013 This value
+ * is used when you are using an image to create the virtual machine. If you
+ * are using a platform image, you also use the imageReference element
+ * described above. If you are using a marketplace image, you  also use the
+ * plan element previously described. Possible values include: 'fromImage',
+ * 'empty', 'attach'
+ * @member {string} [virtualMachineProfile.storageProfile.osDisk.osType] This
+ * property allows you to specify the type of the OS that is included in the
+ * disk if creating a VM from user-image or a specialized VHD. <br><br>
+ * Possible values are: <br><br> **Windows** <br><br> **Linux**. Possible
+ * values include: 'Windows', 'Linux'
+ * @member {object} [virtualMachineProfile.storageProfile.osDisk.image]
+ * Specifies information about the unmanaged user image to base the scale set
+ * on.
+ * @member {string} [virtualMachineProfile.storageProfile.osDisk.image.uri]
+ * Specifies the virtual hard disk's uri.
  * @member {array} [virtualMachineProfile.storageProfile.osDisk.vhdContainers]
- * The list of virtual hard disk container uris.
+ * Specifies the container urls that are used to store operating system disks
+ * for the scale set.
  * @member {object} [virtualMachineProfile.storageProfile.osDisk.managedDisk]
  * The managed disk parameters.
  * @member {string}
  * [virtualMachineProfile.storageProfile.osDisk.managedDisk.storageAccountType]
- * The Storage Account type. Possible values include: 'Standard_LRS',
+ * Specifies the storage account type for the managed disk. Possible values
+ * are: Standard_LRS or Premium_LRS. Possible values include: 'Standard_LRS',
  * 'Premium_LRS'
- * @member {array} [virtualMachineProfile.storageProfile.dataDisks] The data
- * disks.
- * @member {object} [virtualMachineProfile.networkProfile] The virtual machine
- * scale set network profile.
+ * @member {array} [virtualMachineProfile.storageProfile.dataDisks] Specifies
+ * the parameters that are used to add data disks to the virtual machines in
+ * the scale set. <br><br> For more information about disks, see [About disks
+ * and VHDs for Azure virtual
+ * machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+ * @member {object} [virtualMachineProfile.networkProfile] Specifies properties
+ * of the network interfaces of the virtual machines in the scale set.
+ * @member {object} [virtualMachineProfile.networkProfile.healthProbe] A
+ * reference to a load balancer probe used to determine the health of an
+ * instance in the virtual machine scale set. The reference will be in the
+ * form:
+ * '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}'.
+ * @member {string} [virtualMachineProfile.networkProfile.healthProbe.id] The
+ * ARM resource id in the form of
+ * /subscriptions/{SubcriptionId}/resourceGroups/{ResourceGroupName}/...
  * @member {array}
  * [virtualMachineProfile.networkProfile.networkInterfaceConfigurations] The
  * list of network configurations.
- * @member {object} [virtualMachineProfile.diagnosticsProfile] The virtual
- * machine scale set diagnostics profile.
+ * @member {object} [virtualMachineProfile.diagnosticsProfile] Specifies the
+ * boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15.
  * @member {object} [virtualMachineProfile.diagnosticsProfile.bootDiagnostics]
- * Boot Diagnostics is a debugging feature which allows the user to view
- * console output and/or a screenshot of the virtual machine from the
- * hypervisor.
+ * Boot Diagnostics is a debugging feature which allows you to view Console
+ * Output and Screenshot to diagnose VM status. <br><br> For Linux Virtual
+ * Machines, you can easily view the output of your console log. <br><br> For
+ * both Windows and Linux virtual machines, Azure also enables you to see a
+ * screenshot of the VM from the hypervisor.
  * @member {boolean}
  * [virtualMachineProfile.diagnosticsProfile.bootDiagnostics.enabled] Whether
  * boot diagnostics should be enabled on the Virtual Machine.
  * @member {string}
- * [virtualMachineProfile.diagnosticsProfile.bootDiagnostics.storageUri] URI of
+ * [virtualMachineProfile.diagnosticsProfile.bootDiagnostics.storageUri] Uri of
  * the storage account to use for placing the console output and screenshot.
- * @member {object} [virtualMachineProfile.extensionProfile] The virtual
- * machine scale set extension profile.
+ * @member {object} [virtualMachineProfile.extensionProfile] Specifies a
+ * collection of settings for extensions installed on virtual machines in the
+ * scale set.
  * @member {array} [virtualMachineProfile.extensionProfile.extensions] The
  * virtual machine scale set child extension resources.
- * @member {string} [virtualMachineProfile.licenseType] The license type, which
- * is for bring your own license scenario.
+ * @member {string} [virtualMachineProfile.licenseType] Specifies that the
+ * image or disk that is being used was licensed on-premises. This element is
+ * only used for images that contain the Windows Server operating system.
+ * <br><br> Possible values are: <br><br> Windows_Client <br><br>
+ * Windows_Server <br><br> If this element is included in a request for an
+ * update, the value must match the initial value. This value cannot be
+ * updated. <br><br> For more information, see [Azure Hybrid Use Benefit for
+ * Windows
+ * Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+ * <br><br> Minimum api-version: 2015-06-15
  * @member {string} [provisioningState] The provisioning state, which only
  * appears in the response.
  * @member {boolean} [overprovision] Specifies whether the Virtual Machine
@@ -2713,17 +3455,57 @@ export interface UpdateResource extends BaseResource {
  *
  * @member {object} [sku] The virtual machine scale set sku.
  * @member {string} [sku.name] The sku name.
- * @member {string} [sku.tier] The sku tier.
- * @member {number} [sku.capacity] The sku capacity.
+ * @member {string} [sku.tier] Specifies the tier of virtual machines in a
+ * scale set.<br /><br /> Possible Values:<br /><br /> **Standard**<br /><br />
+ * **Basic**
+ * @member {number} [sku.capacity] Specifies the number of virtual machines in
+ * the scale set.
  * @member {object} [plan] The purchase plan when deploying a virtual machine
  * scale set from VM Marketplace images.
  * @member {string} [plan.name] The plan ID.
  * @member {string} [plan.publisher] The publisher ID.
- * @member {string} [plan.product] The offer ID.
+ * @member {string} [plan.product] Specifies the product of the image from the
+ * marketplace. This is the same value as Offer under the imageReference
+ * element.
  * @member {string} [plan.promotionCode] The promotion code.
  * @member {object} [upgradePolicy] The upgrade policy.
- * @member {string} [upgradePolicy.mode] The upgrade mode. Possible values
- * include: 'Automatic', 'Manual'
+ * @member {string} [upgradePolicy.mode] Specifies the mode of an upgrade to
+ * virtual machines in the scale set.<br /><br /> Possible values are:<br /><br
+ * /> **Manual** - You  control the application of updates to virtual machines
+ * in the scale set. You do this by using the manualUpgrade action.<br /><br />
+ * **Automatic** - All virtual machines in the scale set are  automatically
+ * updated at the same time. Possible values include: 'Automatic', 'Manual',
+ * 'Rolling'
+ * @member {object} [upgradePolicy.rollingUpgradePolicy] The configuration
+ * parameters used while performing a rolling upgrade.
+ * @member {number}
+ * [upgradePolicy.rollingUpgradePolicy.maxBatchInstancePercent] The maximum
+ * percent of total virtual machine instances that will be upgraded
+ * simultaneously by the rolling upgrade in one batch. As this is a maximum,
+ * unhealthy instances in previous or future batches can cause the percentage
+ * of instances in a batch to decrease to ensure higher reliability. The
+ * default value for this parameter is 20%.
+ * @member {number}
+ * [upgradePolicy.rollingUpgradePolicy.maxUnhealthyInstancePercent] The maximum
+ * percentage of the total virtual machine instances in the scale set that can
+ * be simultaneously unhealthy, either as a result of being upgraded, or by
+ * being found in an unhealthy state by the virtual machine health checks
+ * before the rolling upgrade aborts. This constraint will be checked prior to
+ * starting any batch. The default value for this parameter is 20%.
+ * @member {number}
+ * [upgradePolicy.rollingUpgradePolicy.maxUnhealthyUpgradedInstancePercent] The
+ * maximum percentage of upgraded virtual machine instances that can be found
+ * to be in an unhealthy state. This check will happen after each batch is
+ * upgraded. If this percentage is ever exceeded, the rolling update aborts.
+ * The default value for this parameter is 20%.
+ * @member {string}
+ * [upgradePolicy.rollingUpgradePolicy.pauseTimeBetweenBatches] The wait time
+ * between completing the update for all virtual machines in one batch and
+ * starting the next batch. The time duration should be specified in ISO 8601
+ * format. The default value is 0 seconds (PT0S).
+ * @member {boolean} [upgradePolicy.automaticOSUpgrade] Whether OS upgrades
+ * should automatically be applied to scale set instances in a rolling fashion
+ * when a newer version of the image becomes available.
  * @member {object} [virtualMachineProfile] The virtual machine profile.
  * @member {object} [virtualMachineProfile.osProfile] The virtual machine scale
  * set OS profile.
@@ -2733,22 +3515,23 @@ export interface UpdateResource extends BaseResource {
  * Windows Configuration of the OS profile.
  * @member {boolean}
  * [virtualMachineProfile.osProfile.windowsConfiguration.provisionVMAgent]
- * Indicates whether the virtual machine agent should be provisioned on the
- * Virtual Machine. If not specified, then the default behavior is to set it to
- * true.
+ * Indicates whether virtual machine agent should be provisioned on the virtual
+ * machine. <br><br> When this property is not specified in the request body,
+ * default behavior is to set it to true.  This will ensure that VM Agent is
+ * installed on the VM so that extensions can be added to the VM later.
  * @member {boolean}
  * [virtualMachineProfile.osProfile.windowsConfiguration.enableAutomaticUpdates]
- * Indicates whether Windows updates are automatically installed on the VM.
+ * Indicates whether virtual machine is enabled for automatic updates.
  * @member {string}
- * [virtualMachineProfile.osProfile.windowsConfiguration.timeZone] The time
- * zone of the VM
+ * [virtualMachineProfile.osProfile.windowsConfiguration.timeZone] Specifies
+ * the time zone of the virtual machine. e.g. "Pacific Standard Time"
  * @member {array}
  * [virtualMachineProfile.osProfile.windowsConfiguration.additionalUnattendContent]
- * Additional base-64 encoded XML formatted information that can be included in
- * the Unattend.xml file.
+ * Specifies additional base-64 encoded XML formatted information that can be
+ * included in the Unattend.xml file, which is used by Windows Setup.
  * @member {object}
- * [virtualMachineProfile.osProfile.windowsConfiguration.winRM] The Windows
- * Remote Management configuration of the VM
+ * [virtualMachineProfile.osProfile.windowsConfiguration.winRM] Specifies the
+ * Windows Remote Management listeners. This enables remote Windows PowerShell.
  * @member {array}
  * [virtualMachineProfile.osProfile.windowsConfiguration.winRM.listeners] The
  * list of Windows Remote Management listeners
@@ -2758,7 +3541,7 @@ export interface UpdateResource extends BaseResource {
  * [virtualMachineProfile.osProfile.linuxConfiguration.disablePasswordAuthentication]
  * Specifies whether password authentication should be disabled.
  * @member {object} [virtualMachineProfile.osProfile.linuxConfiguration.ssh]
- * The SSH configuration for linux VMs.
+ * Specifies the ssh key configuration for a Linux OS.
  * @member {array}
  * [virtualMachineProfile.osProfile.linuxConfiguration.ssh.publicKeys] The list
  * of SSH public keys used to authenticate with linux based VMs.
@@ -2772,14 +3555,18 @@ export interface UpdateResource extends BaseResource {
  * [virtualMachineProfile.storageProfile.imageReference.publisher] The image
  * publisher.
  * @member {string} [virtualMachineProfile.storageProfile.imageReference.offer]
- * The image offer.
+ * Specifies the offer of the platform image or marketplace image used to
+ * create the virtual machine.
  * @member {string} [virtualMachineProfile.storageProfile.imageReference.sku]
  * The image SKU.
  * @member {string}
- * [virtualMachineProfile.storageProfile.imageReference.version] The image
- * version. The allowed formats are Major.Minor.Build or 'latest'. Major, Minor
- * and Build are decimal numbers. Specify 'latest' to use the latest version of
- * the image.
+ * [virtualMachineProfile.storageProfile.imageReference.version] Specifies the
+ * version of the platform image or marketplace image used to create the
+ * virtual machine. The allowed formats are Major.Minor.Build or 'latest'.
+ * Major, Minor, and Build are decimal numbers. Specify 'latest' to use the
+ * latest version of an image available at deploy time. Even if you use
+ * 'latest', the VM image will not automatically update after deploy time even
+ * if a new version becomes available.
  * @member {object} [virtualMachineProfile.storageProfile.osDisk] The OS disk.
  * @member {string} [virtualMachineProfile.storageProfile.osDisk.caching] The
  * caching type. Possible values include: 'None', 'ReadOnly', 'ReadWrite'
@@ -2787,15 +3574,16 @@ export interface UpdateResource extends BaseResource {
  * Source User Image VirtualHardDisk. This VirtualHardDisk will be copied
  * before using it to attach to the Virtual Machine. If SourceImage is
  * provided, the destination VirtualHardDisk should not exist.
- * @member {string} [virtualMachineProfile.storageProfile.osDisk.image.uri] The
- * virtual hard disk's URI. Must be a valid URI to a virtual hard disk.
+ * @member {string} [virtualMachineProfile.storageProfile.osDisk.image.uri]
+ * Specifies the virtual hard disk's uri.
  * @member {array} [virtualMachineProfile.storageProfile.osDisk.vhdContainers]
  * The list of virtual hard disk container uris.
  * @member {object} [virtualMachineProfile.storageProfile.osDisk.managedDisk]
  * The managed disk parameters.
  * @member {string}
  * [virtualMachineProfile.storageProfile.osDisk.managedDisk.storageAccountType]
- * The Storage Account type. Possible values include: 'Standard_LRS',
+ * Specifies the storage account type for the managed disk. Possible values
+ * are: Standard_LRS or Premium_LRS. Possible values include: 'Standard_LRS',
  * 'Premium_LRS'
  * @member {array} [virtualMachineProfile.storageProfile.dataDisks] The data
  * disks.
@@ -2807,14 +3595,16 @@ export interface UpdateResource extends BaseResource {
  * @member {object} [virtualMachineProfile.diagnosticsProfile] The virtual
  * machine scale set diagnostics profile.
  * @member {object} [virtualMachineProfile.diagnosticsProfile.bootDiagnostics]
- * Boot Diagnostics is a debugging feature which allows the user to view
- * console output and/or a screenshot of the virtual machine from the
- * hypervisor.
+ * Boot Diagnostics is a debugging feature which allows you to view Console
+ * Output and Screenshot to diagnose VM status. <br><br> For Linux Virtual
+ * Machines, you can easily view the output of your console log. <br><br> For
+ * both Windows and Linux virtual machines, Azure also enables you to see a
+ * screenshot of the VM from the hypervisor.
  * @member {boolean}
  * [virtualMachineProfile.diagnosticsProfile.bootDiagnostics.enabled] Whether
  * boot diagnostics should be enabled on the Virtual Machine.
  * @member {string}
- * [virtualMachineProfile.diagnosticsProfile.bootDiagnostics.storageUri] URI of
+ * [virtualMachineProfile.diagnosticsProfile.bootDiagnostics.storageUri] Uri of
  * the storage account to use for placing the console output and screenshot.
  * @member {object} [virtualMachineProfile.extensionProfile] The virtual
  * machine scale set extension profile.
@@ -2995,9 +3785,13 @@ export interface VirtualMachineScaleSetSkuCapacity {
  * @member {string} [resourceType] The type of resource the sku applies to.
  * @member {object} [sku] The Sku.
  * @member {string} [sku.name] The sku name.
- * @member {string} [sku.tier] The sku tier.
- * @member {number} [sku.capacity] The sku capacity.
- * @member {object} [capacity] Available scaling information.
+ * @member {string} [sku.tier] Specifies the tier of virtual machines in a
+ * scale set.<br /><br /> Possible Values:<br /><br /> **Standard**<br /><br />
+ * **Basic**
+ * @member {number} [sku.capacity] Specifies the number of virtual machines in
+ * the scale set.
+ * @member {object} [capacity] Specifies the number of virtual machines in the
+ * scale set.
  * @member {number} [capacity.minimum] The minimum capacity.
  * @member {number} [capacity.maximum] The maximum capacity that can be set.
  * @member {number} [capacity.defaultCapacity] The default capacity.
@@ -3036,8 +3830,11 @@ export interface VirtualMachineScaleSetListSkusResult {
  * @member {string} [instanceId] The virtual machine instance ID.
  * @member {object} [sku] The virtual machine SKU.
  * @member {string} [sku.name] The sku name.
- * @member {string} [sku.tier] The sku tier.
- * @member {number} [sku.capacity] The sku capacity.
+ * @member {string} [sku.tier] Specifies the tier of virtual machines in a
+ * scale set.<br /><br /> Possible Values:<br /><br /> **Standard**<br /><br />
+ * **Basic**
+ * @member {number} [sku.capacity] Specifies the number of virtual machines in
+ * the scale set.
  * @member {boolean} [latestModelApplied] Specifies whether the latest model
  * has been applied to the virtual machine.
  * @member {string} [vmId] Azure VM unique ID.
@@ -3082,30 +3879,47 @@ export interface VirtualMachineScaleSetListSkusResult {
  * returned for the last Maintenance Operation.
  * @member {array} [instanceView.disks] The virtual machine disk information.
  * @member {array} [instanceView.extensions] The extensions information.
- * @member {object} [instanceView.bootDiagnostics] The boot diagnostics.
+ * @member {object} [instanceView.bootDiagnostics] Boot Diagnostics is a
+ * debugging feature which allows you to view Console Output and Screenshot to
+ * diagnose VM status. <br><br> For Linux Virtual Machines, you can easily view
+ * the output of your console log. <br><br> For both Windows and Linux virtual
+ * machines, Azure also enables you to see a screenshot of the VM from the
+ * hypervisor.
  * @member {string} [instanceView.bootDiagnostics.consoleScreenshotBlobUri] The
  * console screenshot blob URI.
  * @member {string} [instanceView.bootDiagnostics.serialConsoleLogBlobUri] The
  * Linux serial console log blob Uri.
  * @member {array} [instanceView.statuses] The resource status information.
- * @member {object} [hardwareProfile] The hardware profile.
- * @member {string} [hardwareProfile.vmSize] The virtual machine size name.
- * Possible values include: 'Basic_A0', 'Basic_A1', 'Basic_A2', 'Basic_A3',
- * 'Basic_A4', 'Standard_A0', 'Standard_A1', 'Standard_A2', 'Standard_A3',
- * 'Standard_A4', 'Standard_A5', 'Standard_A6', 'Standard_A7', 'Standard_A8',
- * 'Standard_A9', 'Standard_A10', 'Standard_A11', 'Standard_A1_v2',
- * 'Standard_A2_v2', 'Standard_A4_v2', 'Standard_A8_v2', 'Standard_A2m_v2',
- * 'Standard_A4m_v2', 'Standard_A8m_v2', 'Standard_D1', 'Standard_D2',
- * 'Standard_D3', 'Standard_D4', 'Standard_D11', 'Standard_D12',
- * 'Standard_D13', 'Standard_D14', 'Standard_D1_v2', 'Standard_D2_v2',
- * 'Standard_D3_v2', 'Standard_D4_v2', 'Standard_D5_v2', 'Standard_D11_v2',
- * 'Standard_D12_v2', 'Standard_D13_v2', 'Standard_D14_v2', 'Standard_D15_v2',
- * 'Standard_DS1', 'Standard_DS2', 'Standard_DS3', 'Standard_DS4',
- * 'Standard_DS11', 'Standard_DS12', 'Standard_DS13', 'Standard_DS14',
- * 'Standard_DS1_v2', 'Standard_DS2_v2', 'Standard_DS3_v2', 'Standard_DS4_v2',
- * 'Standard_DS5_v2', 'Standard_DS11_v2', 'Standard_DS12_v2',
- * 'Standard_DS13_v2', 'Standard_DS14_v2', 'Standard_DS15_v2', 'Standard_F1',
- * 'Standard_F2', 'Standard_F4', 'Standard_F8', 'Standard_F16', 'Standard_F1s',
+ * @member {object} [hardwareProfile] Specifies the hardware settings for the
+ * virtual machine.
+ * @member {string} [hardwareProfile.vmSize] Specifies the size of the virtual
+ * machine. For more information about virtual machine sizes, see [Sizes for
+ * virtual
+ * machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-sizes?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+ * <br><br> The available VM sizes depend on region and availability set. For a
+ * list of available sizes use these APIs:  <br><br> [List all available
+ * virtual machine sizes in an availability
+ * set](virtualmachines-list-sizes-availability-set.md) <br><br> [List all
+ * available virtual machine sizes in a
+ * region](virtualmachines-list-sizes-region.md) <br><br> [List all available
+ * virtual machine sizes for
+ * resizing](virtualmachines-list-sizes-for-resizing.md). Possible values
+ * include: 'Basic_A0', 'Basic_A1', 'Basic_A2', 'Basic_A3', 'Basic_A4',
+ * 'Standard_A0', 'Standard_A1', 'Standard_A2', 'Standard_A3', 'Standard_A4',
+ * 'Standard_A5', 'Standard_A6', 'Standard_A7', 'Standard_A8', 'Standard_A9',
+ * 'Standard_A10', 'Standard_A11', 'Standard_A1_v2', 'Standard_A2_v2',
+ * 'Standard_A4_v2', 'Standard_A8_v2', 'Standard_A2m_v2', 'Standard_A4m_v2',
+ * 'Standard_A8m_v2', 'Standard_D1', 'Standard_D2', 'Standard_D3',
+ * 'Standard_D4', 'Standard_D11', 'Standard_D12', 'Standard_D13',
+ * 'Standard_D14', 'Standard_D1_v2', 'Standard_D2_v2', 'Standard_D3_v2',
+ * 'Standard_D4_v2', 'Standard_D5_v2', 'Standard_D11_v2', 'Standard_D12_v2',
+ * 'Standard_D13_v2', 'Standard_D14_v2', 'Standard_D15_v2', 'Standard_DS1',
+ * 'Standard_DS2', 'Standard_DS3', 'Standard_DS4', 'Standard_DS11',
+ * 'Standard_DS12', 'Standard_DS13', 'Standard_DS14', 'Standard_DS1_v2',
+ * 'Standard_DS2_v2', 'Standard_DS3_v2', 'Standard_DS4_v2', 'Standard_DS5_v2',
+ * 'Standard_DS11_v2', 'Standard_DS12_v2', 'Standard_DS13_v2',
+ * 'Standard_DS14_v2', 'Standard_DS15_v2', 'Standard_F1', 'Standard_F2',
+ * 'Standard_F4', 'Standard_F8', 'Standard_F16', 'Standard_F1s',
  * 'Standard_F2s', 'Standard_F4s', 'Standard_F8s', 'Standard_F16s',
  * 'Standard_G1', 'Standard_G2', 'Standard_G3', 'Standard_G4', 'Standard_G5',
  * 'Standard_GS1', 'Standard_GS2', 'Standard_GS3', 'Standard_GS4',
@@ -3114,24 +3928,40 @@ export interface VirtualMachineScaleSetListSkusResult {
  * 'Standard_L8s', 'Standard_L16s', 'Standard_L32s', 'Standard_NC6',
  * 'Standard_NC12', 'Standard_NC24', 'Standard_NC24r', 'Standard_NV6',
  * 'Standard_NV12', 'Standard_NV24'
- * @member {object} [storageProfile] The storage profile.
- * @member {object} [storageProfile.imageReference] The image reference.
+ * @member {object} [storageProfile] Specifies the storage settings for the
+ * virtual machine disks.
+ * @member {object} [storageProfile.imageReference] Specifies information about
+ * the image to use. You can specify information about platform images,
+ * marketplace images, or virtual machine images. This element is required when
+ * you want to use a platform image, marketplace image, or virtual machine
+ * image, but is not used in other creation operations.
  * @member {string} [storageProfile.imageReference.publisher] The image
  * publisher.
- * @member {string} [storageProfile.imageReference.offer] The image offer.
+ * @member {string} [storageProfile.imageReference.offer] Specifies the offer
+ * of the platform image or marketplace image used to create the virtual
+ * machine.
  * @member {string} [storageProfile.imageReference.sku] The image SKU.
- * @member {string} [storageProfile.imageReference.version] The image version.
- * The allowed formats are Major.Minor.Build or 'latest'. Major, Minor and
- * Build are decimal numbers. Specify 'latest' to use the latest version of the
- * image.
- * @member {object} [storageProfile.osDisk] The OS disk.
- * @member {string} [storageProfile.osDisk.osType] The Operating System type.
- * Possible values include: 'Windows', 'Linux'
- * @member {object} [storageProfile.osDisk.encryptionSettings] The disk
- * encryption settings.
+ * @member {string} [storageProfile.imageReference.version] Specifies the
+ * version of the platform image or marketplace image used to create the
+ * virtual machine. The allowed formats are Major.Minor.Build or 'latest'.
+ * Major, Minor, and Build are decimal numbers. Specify 'latest' to use the
+ * latest version of an image available at deploy time. Even if you use
+ * 'latest', the VM image will not automatically update after deploy time even
+ * if a new version becomes available.
+ * @member {object} [storageProfile.osDisk] Specifies information about the
+ * operating system disk used by the virtual machine. <br><br> For more
+ * information about disks, see [About disks and VHDs for Azure virtual
+ * machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+ * @member {string} [storageProfile.osDisk.osType] This property allows you to
+ * specify the type of the OS that is included in the disk if creating a VM
+ * from user-image or a specialized VHD. <br><br> Possible values are: <br><br>
+ * **Windows** <br><br> **Linux**. Possible values include: 'Windows', 'Linux'
+ * @member {object} [storageProfile.osDisk.encryptionSettings] Specifies the
+ * encryption settings for the OS Disk. <br><br> Minimum api-version:
+ * 2015-06-15
  * @member {object}
- * [storageProfile.osDisk.encryptionSettings.diskEncryptionKey] The disk
- * encryption key which is a Key Vault Secret.
+ * [storageProfile.osDisk.encryptionSettings.diskEncryptionKey] Specifies the
+ * location of the disk encryption key, which is a Key Vault Secret.
  * @member {string}
  * [storageProfile.osDisk.encryptionSettings.diskEncryptionKey.secretUrl] The
  * URL referencing a secret in a Key Vault.
@@ -3142,10 +3972,10 @@ export interface VirtualMachineScaleSetListSkusResult {
  * [storageProfile.osDisk.encryptionSettings.diskEncryptionKey.sourceVault.id]
  * Resource Id
  * @member {object} [storageProfile.osDisk.encryptionSettings.keyEncryptionKey]
- * The key encryption key which is Key Vault Key.
+ * Specifies the location of the key encryption key in Key Vault.
  * @member {string}
  * [storageProfile.osDisk.encryptionSettings.keyEncryptionKey.keyUrl] The URL
- * referencing a key in a Key Vault.
+ * referencing a key encryption key in Key Vault.
  * @member {object}
  * [storageProfile.osDisk.encryptionSettings.keyEncryptionKey.sourceVault] The
  * relative URL of the Key Vault containing the key.
@@ -3156,88 +3986,170 @@ export interface VirtualMachineScaleSetListSkusResult {
  * Specifies whether disk encryption should be enabled on the virtual machine.
  * @member {string} [storageProfile.osDisk.name] The disk name.
  * @member {object} [storageProfile.osDisk.vhd] The virtual hard disk.
- * @member {string} [storageProfile.osDisk.vhd.uri] The virtual hard disk's
- * URI. Must be a valid URI to a virtual hard disk.
+ * @member {string} [storageProfile.osDisk.vhd.uri] Specifies the virtual hard
+ * disk's uri.
  * @member {object} [storageProfile.osDisk.image] The source user image virtual
- * hard disk. The virtual hard disk will be copied before using it to attach to
- * the virtual machine. If SourceImage is provided, the destination virtual
- * hard disk must not exist.
- * @member {string} [storageProfile.osDisk.image.uri] The virtual hard disk's
- * URI. Must be a valid URI to a virtual hard disk.
- * @member {string} [storageProfile.osDisk.caching] The caching type. Possible
- * values include: 'None', 'ReadOnly', 'ReadWrite'
- * @member {string} [storageProfile.osDisk.createOption] The create option.
- * Possible values include: 'fromImage', 'empty', 'attach'
- * @member {number} [storageProfile.osDisk.diskSizeGB] The initial disk size,
- * in GB, for blank data disks, and the new desired size for resizing existing
- * OS and data disks.
+ * hard disk. The virtual hard disk will be copied before being attached to the
+ * virtual machine. If SourceImage is provided, the destination virtual hard
+ * drive must not exist.
+ * @member {string} [storageProfile.osDisk.image.uri] Specifies the virtual
+ * hard disk's uri.
+ * @member {string} [storageProfile.osDisk.caching] Specifies the caching
+ * requirements. <br><br> Possible values are: <br><br> **None** <br><br>
+ * **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard
+ * storage. ReadOnly for Premium storage**. Possible values include: 'None',
+ * 'ReadOnly', 'ReadWrite'
+ * @member {string} [storageProfile.osDisk.createOption] Specifies how the
+ * virtual machine should be created.<br><br> Possible values are:<br><br>
+ * **Attach** \u2013 This value is used when you are using a specialized disk
+ * to create the virtual machine.<br><br> **FromImage** \u2013 This value is
+ * used when you are using an image to create the virtual machine. If you are
+ * using a platform image, you also use the imageReference element described
+ * above. If you are using a marketplace image, you  also use the plan element
+ * previously described. Possible values include: 'fromImage', 'empty',
+ * 'attach'
+ * @member {number} [storageProfile.osDisk.diskSizeGB] Specifies the size of an
+ * empty data disk in gigabytes. This element can be used to overwrite the name
+ * of the disk in a virtual machine image. <br><br> This value cannot be larger
+ * than 1023 GB
  * @member {object} [storageProfile.osDisk.managedDisk] The managed disk
  * parameters.
- * @member {string} [storageProfile.osDisk.managedDisk.storageAccountType] The
- * Storage Account type. Possible values include: 'Standard_LRS', 'Premium_LRS'
- * @member {array} [storageProfile.dataDisks] The data disks.
- * @member {object} [osProfile] The OS profile.
- * @member {string} [osProfile.computerName] Specifies the host OS name of the
+ * @member {string} [storageProfile.osDisk.managedDisk.storageAccountType]
+ * Specifies the storage account type for the managed disk. Possible values
+ * are: Standard_LRS or Premium_LRS. Possible values include: 'Standard_LRS',
+ * 'Premium_LRS'
+ * @member {array} [storageProfile.dataDisks] Specifies the parameters that are
+ * used to add a data disk to a virtual machine. <br><br> For more information
+ * about disks, see [About disks and VHDs for Azure virtual
+ * machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+ * @member {object} [osProfile] Specifies the operating system settings for the
  * virtual machine.
+ * @member {string} [osProfile.computerName] Specifies the host OS name of the
+ * virtual machine. <br><br> **Max-length (Windows):** 15 characters <br><br>
+ * **Max-length (Linux):** 64 characters. <br><br> For naming conventions and
+ * restrictions see [Azure infrastructure services implementation
+ * guidelines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-infrastructure-subscription-accounts-guidelines?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#1-naming-conventions).
  * @member {string} [osProfile.adminUsername] Specifies the name of the
- * administrator account.
+ * administrator account. <br><br> **Windows-only restriction:** Cannot end in
+ * "." <br><br> **Disallowed values:** "administrator", "admin", "user",
+ * "user1", "test", "user2", "test1", "user3", "admin1", "1", "123", "a",
+ * "actuser", "adm", "admin2", "aspnet", "backup", "console", "david", "guest",
+ * "john", "owner", "root", "server", "sql", "support", "support_388945a0",
+ * "sys", "test2", "test3", "user4", "user5". <br><br> **Minimum-length
+ * (Linux):** 1  character <br><br> **Max-length (Linux):** 64 characters
+ * <br><br> **Max-length (Windows):** 20 characters  <br><br><li> For root
+ * access to the Linux VM, see [Using root privileges on Linux virtual machines
+ * in
+ * Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-use-root-privileges?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)<br><li>
+ * For a list of built-in system users on Linux that should not be used in this
+ * field, see [Selecting User Names for Linux on
+ * Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-usernames?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
  * @member {string} [osProfile.adminPassword] Specifies the password of the
- * administrator account.
+ * administrator account. <br><br> **Minimum-length (Windows):** 8 characters
+ * <br><br> **Minimum-length (Linux):** 6 characters <br><br> **Max-length
+ * (Windows):** 123 characters <br><br> **Max-length (Linux):** 72 characters
+ * <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be
+ * fulfilled <br> Has lower characters <br>Has upper characters <br> Has a
+ * digit <br> Has a special character (Regex match [\W_]) <br><br> **Disallowed
+ * values:** "abc@123", "P@$$w0rd", "P@ssw0rd", "P@ssword123", "Pa$$word",
+ * "pass@word1", "Password!", "Password1", "Password22", "iloveyou!" <br><br>
+ * For resetting the password, see [How to reset the Remote Desktop service or
+ * its login password in a Windows
+ * VM](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-reset-rdp?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+ * <br><br> For resetting root password, see [Manage users, SSH, and check or
+ * repair disks on Azure Linux VMs using the VMAccess
+ * Extension](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-vmaccess-extension?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#reset-root-password)
  * @member {string} [osProfile.customData] Specifies a base-64 encoded string
  * of custom data. The base-64 encoded string is decoded to a binary array that
  * is saved as a file on the Virtual Machine. The maximum length of the binary
- * array is 65535 bytes
- * @member {object} [osProfile.windowsConfiguration] The Windows configuration
- * of the OS profile.
+ * array is 65535 bytes. <br><br> For using cloud-init for your VM, see [Using
+ * cloud-init to customize a Linux VM during
+ * creation](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-cloud-init?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+ * @member {object} [osProfile.windowsConfiguration] Specifies Windows
+ * operating system settings on the virtual machine.
  * @member {boolean} [osProfile.windowsConfiguration.provisionVMAgent]
- * Indicates whether the virtual machine agent should be provisioned on the
- * Virtual Machine. If not specified, then the default behavior is to set it to
- * true.
+ * Indicates whether virtual machine agent should be provisioned on the virtual
+ * machine. <br><br> When this property is not specified in the request body,
+ * default behavior is to set it to true.  This will ensure that VM Agent is
+ * installed on the VM so that extensions can be added to the VM later.
  * @member {boolean} [osProfile.windowsConfiguration.enableAutomaticUpdates]
- * Indicates whether Windows updates are automatically installed on the VM.
- * @member {string} [osProfile.windowsConfiguration.timeZone] The time zone of
- * the VM
+ * Indicates whether virtual machine is enabled for automatic updates.
+ * @member {string} [osProfile.windowsConfiguration.timeZone] Specifies the
+ * time zone of the virtual machine. e.g. "Pacific Standard Time"
  * @member {array} [osProfile.windowsConfiguration.additionalUnattendContent]
- * Additional base-64 encoded XML formatted information that can be included in
- * the Unattend.xml file.
- * @member {object} [osProfile.windowsConfiguration.winRM] The Windows Remote
- * Management configuration of the VM
+ * Specifies additional base-64 encoded XML formatted information that can be
+ * included in the Unattend.xml file, which is used by Windows Setup.
+ * @member {object} [osProfile.windowsConfiguration.winRM] Specifies the
+ * Windows Remote Management listeners. This enables remote Windows PowerShell.
  * @member {array} [osProfile.windowsConfiguration.winRM.listeners] The list of
  * Windows Remote Management listeners
- * @member {object} [osProfile.linuxConfiguration] The Linux configuration of
- * the OS profile.
+ * @member {object} [osProfile.linuxConfiguration] Specifies the Linux
+ * operating system settings on the virtual machine. <br><br>For a list of
+ * supported Linux distributions, see [Linux on Azure-Endorsed
+ * Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-endorsed-distros?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+ * <br><br> For running non-endorsed distributions, see [Information for
+ * Non-Endorsed
+ * Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-create-upload-generic?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
  * @member {boolean}
  * [osProfile.linuxConfiguration.disablePasswordAuthentication] Specifies
  * whether password authentication should be disabled.
- * @member {object} [osProfile.linuxConfiguration.ssh] The SSH configuration
- * for linux VMs.
+ * @member {object} [osProfile.linuxConfiguration.ssh] Specifies the ssh key
+ * configuration for a Linux OS.
  * @member {array} [osProfile.linuxConfiguration.ssh.publicKeys] The list of
  * SSH public keys used to authenticate with linux based VMs.
- * @member {array} [osProfile.secrets] The list of certificates for addition to
- * the VM.
- * @member {object} [networkProfile] The network profile.
+ * @member {array} [osProfile.secrets] Specifies set of certificates that
+ * should be installed onto the virtual machine.
+ * @member {object} [networkProfile] Specifies the network interfaces of the
+ * virtual machine.
  * @member {array} [networkProfile.networkInterfaces] Specifies the list of
- * resource IDs for the network interfaces associated with the virtual machine.
- * @member {object} [diagnosticsProfile] The diagnostics profile.
+ * resource Ids for the network interfaces associated with the virtual machine.
+ * @member {object} [diagnosticsProfile] Specifies the boot diagnostic settings
+ * state. <br><br>Minimum api-version: 2015-06-15.
  * @member {object} [diagnosticsProfile.bootDiagnostics] Boot Diagnostics is a
- * debugging feature which allows the user to view console output and/or a
- * screenshot of the virtual machine from the hypervisor.
+ * debugging feature which allows you to view Console Output and Screenshot to
+ * diagnose VM status. <br><br> For Linux Virtual Machines, you can easily view
+ * the output of your console log. <br><br> For both Windows and Linux virtual
+ * machines, Azure also enables you to see a screenshot of the VM from the
+ * hypervisor.
  * @member {boolean} [diagnosticsProfile.bootDiagnostics.enabled] Whether boot
  * diagnostics should be enabled on the Virtual Machine.
- * @member {string} [diagnosticsProfile.bootDiagnostics.storageUri] URI of the
+ * @member {string} [diagnosticsProfile.bootDiagnostics.storageUri] Uri of the
  * storage account to use for placing the console output and screenshot.
- * @member {object} [availabilitySet] The reference Id of the availability set
- * to which this virtual machine belongs.
+ * @member {object} [availabilitySet] Specifies information about the
+ * availability set that the virtual machine should be assigned to. Virtual
+ * machines specified in the same availability set are allocated to different
+ * nodes to maximize availability. For more information about availability
+ * sets, see [Manage the availability of virtual
+ * machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+ * <br><br> For more information on Azure planned maintainance, see [Planned
+ * maintenance for virtual machines in
+ * Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+ * <br><br> Currently, a VM can only be added to availability set at creation
+ * time. An existing VM cannot be added to an availability set.
  * @member {string} [availabilitySet.id] Resource Id
  * @member {string} [provisioningState] The provisioning state, which only
  * appears in the response.
- * @member {string} [licenseType] The license type, which is for bring your own
- * license scenario.
- * @member {object} [plan] The purchase plan when deploying virtual machine
- * from VM Marketplace images.
+ * @member {string} [licenseType] Specifies that the image or disk that is
+ * being used was licensed on-premises. This element is only used for images
+ * that contain the Windows Server operating system. <br><br> Possible values
+ * are: <br><br> Windows_Client <br><br> Windows_Server <br><br> If this
+ * element is included in a request for an update, the value must match the
+ * initial value. This value cannot be updated. <br><br> For more information,
+ * see [Azure Hybrid Use Benefit for Windows
+ * Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+ * <br><br> Minimum api-version: 2015-06-15
+ * @member {object} [plan] Specifies information about the marketplace image
+ * used to create the virtual machine. This element is only used for
+ * marketplace images. Before you can use a marketplace image from an API, you
+ * must enable the image for programmatic use.  In the Azure portal, find the
+ * marketplace image that you want to use and then click **Want to deploy
+ * programmatically, Get Started ->**. Enter any required information and then
+ * click **Save**.
  * @member {string} [plan.name] The plan ID.
  * @member {string} [plan.publisher] The publisher ID.
- * @member {string} [plan.product] The offer ID.
+ * @member {string} [plan.product] Specifies the product of the image from the
+ * marketplace. This is the same value as Offer under the imageReference
+ * element.
  * @member {string} [plan.promotionCode] The promotion code.
  * @member {array} [resources] The virtual machine child extension resources.
  */
@@ -3261,6 +4173,26 @@ export interface VirtualMachineScaleSetVM extends Resource {
 
 /**
  * @class
+ * Initializes a new instance of the VirtualMachineHealthStatus class.
+ * @constructor
+ * The health status of the VM.
+ *
+ * @member {object} [status] The health status information for the VM.
+ * @member {string} [status.code] The status code.
+ * @member {string} [status.level] The level code. Possible values include:
+ * 'Info', 'Warning', 'Error'
+ * @member {string} [status.displayStatus] The short localizable label for the
+ * status.
+ * @member {string} [status.message] The detailed status message, including for
+ * alerts and error messages.
+ * @member {date} [status.time] The time of the status.
+ */
+export interface VirtualMachineHealthStatus {
+  readonly status?: InstanceViewStatus;
+}
+
+/**
+ * @class
  * Initializes a new instance of the VirtualMachineScaleSetVMInstanceView class.
  * @constructor
  * The instance view of a virtual machine scale set VM.
@@ -3275,7 +4207,21 @@ export interface VirtualMachineScaleSetVM extends Resource {
  * @member {array} [vmAgent.statuses] The resource status information.
  * @member {array} [disks] The disks information.
  * @member {array} [extensions] The extensions information.
- * @member {object} [bootDiagnostics] The boot diagnostics.
+ * @member {object} [vmHealth] The health status for the VM.
+ * @member {object} [vmHealth.status] The health status information for the VM.
+ * @member {string} [vmHealth.status.code] The status code.
+ * @member {string} [vmHealth.status.level] The level code. Possible values
+ * include: 'Info', 'Warning', 'Error'
+ * @member {string} [vmHealth.status.displayStatus] The short localizable label
+ * for the status.
+ * @member {string} [vmHealth.status.message] The detailed status message,
+ * including for alerts and error messages.
+ * @member {date} [vmHealth.status.time] The time of the status.
+ * @member {object} [bootDiagnostics] Boot Diagnostics is a debugging feature
+ * which allows you to view Console Output and Screenshot to diagnose VM
+ * status. <br><br> For Linux Virtual Machines, you can easily view the output
+ * of your console log. <br><br> For both Windows and Linux virtual machines,
+ * Azure also enables you to see a screenshot of the VM from the hypervisor.
  * @member {string} [bootDiagnostics.consoleScreenshotBlobUri] The console
  * screenshot blob URI.
  * @member {string} [bootDiagnostics.serialConsoleLogBlobUri] The Linux serial
@@ -3291,6 +4237,7 @@ export interface VirtualMachineScaleSetVMInstanceView {
   vmAgent?: VirtualMachineAgentInstanceView;
   disks?: DiskInstanceView[];
   extensions?: VirtualMachineExtensionInstanceView[];
+  readonly vmHealth?: VirtualMachineHealthStatus;
   bootDiagnostics?: BootDiagnosticsInstanceView;
   statuses?: InstanceViewStatus[];
   placementGroupId?: string;
@@ -3310,6 +4257,50 @@ export interface VirtualMachineScaleSetVMInstanceView {
 export interface VirtualMachineScaleSetVMListResult {
   value: VirtualMachineScaleSetVM[];
   nextLink?: string;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the RollingUpgradeRunningStatus class.
+ * @constructor
+ * Information about the current running state of the overall upgrade.
+ *
+ * @member {string} [code] Code indicating the current status of the upgrade.
+ * Possible values include: 'RollingForward', 'Cancelled', 'Completed',
+ * 'Faulted'
+ * @member {date} [startTime] Start time of the upgrade.
+ * @member {string} [lastAction] The last action performed on the rolling
+ * upgrade. Possible values include: 'Start', 'Cancel'
+ * @member {date} [lastActionTime] Last action time of the upgrade.
+ */
+export interface RollingUpgradeRunningStatus {
+  readonly code?: string;
+  readonly startTime?: Date;
+  readonly lastAction?: string;
+  readonly lastActionTime?: Date;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the RollingUpgradeProgressInfo class.
+ * @constructor
+ * Information about the number of virtual machine instances in each upgrade
+ * state.
+ *
+ * @member {number} [successfulInstanceCount] The number of instances that have
+ * been successfully upgraded.
+ * @member {number} [failedInstanceCount] The number of instances that have
+ * failed to be upgraded successfully.
+ * @member {number} [inProgressInstanceCount] The number of instances that are
+ * currently being upgraded.
+ * @member {number} [pendingInstanceCount] The number of instances that have
+ * not yet begun to be upgraded.
+ */
+export interface RollingUpgradeProgressInfo {
+  readonly successfulInstanceCount?: number;
+  readonly failedInstanceCount?: number;
+  readonly inProgressInstanceCount?: number;
+  readonly pendingInstanceCount?: number;
 }
 
 /**
@@ -3363,6 +4354,72 @@ export interface ApiError {
   code?: string;
   target?: string;
   message?: string;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the RollingUpgradeStatusInfo class.
+ * @constructor
+ * The status of the latest virtual machine scale set rolling upgrade.
+ *
+ * @member {object} [policy] The rolling upgrade policies applied for this
+ * upgrade.
+ * @member {number} [policy.maxBatchInstancePercent] The maximum percent of
+ * total virtual machine instances that will be upgraded simultaneously by the
+ * rolling upgrade in one batch. As this is a maximum, unhealthy instances in
+ * previous or future batches can cause the percentage of instances in a batch
+ * to decrease to ensure higher reliability. The default value for this
+ * parameter is 20%.
+ * @member {number} [policy.maxUnhealthyInstancePercent] The maximum percentage
+ * of the total virtual machine instances in the scale set that can be
+ * simultaneously unhealthy, either as a result of being upgraded, or by being
+ * found in an unhealthy state by the virtual machine health checks before the
+ * rolling upgrade aborts. This constraint will be checked prior to starting
+ * any batch. The default value for this parameter is 20%.
+ * @member {number} [policy.maxUnhealthyUpgradedInstancePercent] The maximum
+ * percentage of upgraded virtual machine instances that can be found to be in
+ * an unhealthy state. This check will happen after each batch is upgraded. If
+ * this percentage is ever exceeded, the rolling update aborts. The default
+ * value for this parameter is 20%.
+ * @member {string} [policy.pauseTimeBetweenBatches] The wait time between
+ * completing the update for all virtual machines in one batch and starting the
+ * next batch. The time duration should be specified in ISO 8601 format. The
+ * default value is 0 seconds (PT0S).
+ * @member {object} [runningStatus] Information about the current running state
+ * of the overall upgrade.
+ * @member {string} [runningStatus.code] Code indicating the current status of
+ * the upgrade. Possible values include: 'RollingForward', 'Cancelled',
+ * 'Completed', 'Faulted'
+ * @member {date} [runningStatus.startTime] Start time of the upgrade.
+ * @member {string} [runningStatus.lastAction] The last action performed on the
+ * rolling upgrade. Possible values include: 'Start', 'Cancel'
+ * @member {date} [runningStatus.lastActionTime] Last action time of the
+ * upgrade.
+ * @member {object} [progress] Information about the number of virtual machine
+ * instances in each upgrade state.
+ * @member {number} [progress.successfulInstanceCount] The number of instances
+ * that have been successfully upgraded.
+ * @member {number} [progress.failedInstanceCount] The number of instances that
+ * have failed to be upgraded successfully.
+ * @member {number} [progress.inProgressInstanceCount] The number of instances
+ * that are currently being upgraded.
+ * @member {number} [progress.pendingInstanceCount] The number of instances
+ * that have not yet begun to be upgraded.
+ * @member {object} [error] Error details for this upgrade, if there are any.
+ * @member {array} [error.details] The Api error details
+ * @member {object} [error.innererror] The Api inner error
+ * @member {string} [error.innererror.exceptiontype] The exception type.
+ * @member {string} [error.innererror.errordetail] The internal error message
+ * or exception dump.
+ * @member {string} [error.code] The error code.
+ * @member {string} [error.target] The target of the particular error.
+ * @member {string} [error.message] The error message.
+ */
+export interface RollingUpgradeStatusInfo extends Resource {
+  readonly policy?: RollingUpgradePolicy;
+  readonly runningStatus?: RollingUpgradeRunningStatus;
+  readonly progress?: RollingUpgradeProgressInfo;
+  readonly error?: ApiError;
 }
 
 /**
@@ -3731,6 +4788,7 @@ export interface AccessUri {
  * @constructor
  * Snapshot resource.
  *
+ * @member {string} [managedBy] Unused. Always Null.
  * @member {object} [sku]
  * @member {string} [sku.name] The sku name. Possible values include:
  * 'Standard_LRS', 'Premium_LRS'
@@ -3788,6 +4846,7 @@ export interface AccessUri {
  * @member {string} [provisioningState] The disk provisioning state.
  */
 export interface Snapshot extends Resource {
+  readonly managedBy?: string;
   sku?: DiskSku;
   readonly timeCreated?: Date;
   osType?: string;

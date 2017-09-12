@@ -64,6 +64,7 @@ declare class ComputeManagementClient extends AzureServiceClient {
   virtualMachines: operations.VirtualMachines;
   virtualMachineScaleSets: operations.VirtualMachineScaleSets;
   virtualMachineScaleSetExtensions: operations.VirtualMachineScaleSetExtensions;
+  virtualMachineScaleSetRollingUpgrades: operations.VirtualMachineScaleSetRollingUpgrades;
   virtualMachineScaleSetVMs: operations.VirtualMachineScaleSetVMs;
   disks: operations.Disks;
   snapshots: operations.Snapshots;
