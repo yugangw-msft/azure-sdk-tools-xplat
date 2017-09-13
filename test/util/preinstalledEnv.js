@@ -17,84 +17,71 @@
 
 var should = require('should');
 var util = require('util');
+var _ = require('underscore');
 
 var testUtils = require('./util');
-var CLITest = require('../framework/arm-cli-test');
 var utils = require('../../lib/util/utils');
-var NetworkTestUtil = require('./networkTestUtil');
-var networkUtil = new NetworkTestUtil();
-var VMTestUtil = require('./vmTestUtil');
-var vmUtil = new VMTestUtil();
-
 var retry = 5;
 
-exports.getPacketCaptureEnv = function(groupName, location,
-  vnetName, vnetPrefixes, subnetName, subnetPrefix, pipName, nicName, vmName, vmStorageAccount, vmScriptCfgPath,
-  suite, callback) {
-  var cmd = util.format('network vnet create -g %s -n %s -l %s --address-prefixes %s --json', groupName, vnetName, location, vnetPrefixes);
-  testUtils.executeCommand(suite, retry, cmd, function (result) {
-    result.exitStatus.should.equal(0);
-    var cmd = util.format('network vnet subnet create -g %s --vnet-name %s -n %s --address-prefix %s --json',
-      groupName, vnetName, subnetName, subnetPrefix);
-    testUtils.executeCommand(suite, retry, cmd, function (result) {
-      result.exitStatus.should.equal(0);
-      var cmd = util.format('network public-ip create -g %s -n %s -l %s --json', groupName, pipName, location);
-      testUtils.executeCommand(suite, retry, cmd, function (result) {
-        var cmd = util.format('network nic create -g %s -n %s --subnet-vnet-name %s --subnet-name %s --public-ip-name %s -l %s --json',
-          groupName, nicName, vnetName, subnetName, pipName, location);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
-          vmUtil.CreateVmWithNic(groupName, vmName, location, 'Windows', 'Win2012R2Datacenter', nicName, 'xplatuser', 'Pa$$word1', vmStorageAccount, suite, function(result) {
-            var cmd = util.format('vm extension set %s %s -p Microsoft.Azure.NetworkWatcher -r NWAgent -n NetworkWatcherAgentWindows -o 1.4 --json', groupName, vmName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
-              callback();
-            });
-          });
-        });
-      });
-    });
-  });
-}
+var networkTestUtil = new (require('./networkTestUtil'))();
+var vmTestUtil = new (require('./vmTestUtil'))();
 
-exports.getNetworkWatcherEnv = function(groupName, location,
-  vnetName, vnetPrefixes, subnetName, subnetPrefix, pipName, nsgName, nicName, vmName, vmStorageAccount,
-  vpnGateway, rgTopology, storageName, blobName, suite, callback) {
-  var cmd = util.format('network vnet create -g %s -n %s -l %s --address-prefixes %s --json', groupName, vnetName, location, vnetPrefixes);
-  testUtils.executeCommand(suite, retry, cmd, function (result) {
-    result.exitStatus.should.equal(0);
-    var cmd = util.format('network vnet subnet create -g %s --vnet-name %s -n %s --address-prefix %s --json',
-      groupName, vnetName, subnetName, subnetPrefix);
-    testUtils.executeCommand(suite, retry, cmd, function (result) {
-      result.exitStatus.should.equal(0);
-      var cmd = util.format('network public-ip create -g %s -n %s -l %s --json', groupName, pipName, location);
+var generatorUtils = require('../../lib/util/generatorUtils');
+
+function PreinstalledEnv () {}
+
+_.extend(PreinstalledEnv.prototype, {
+  getNetworkWatcherEnv: function (dependencyObject, paramObject, groupName, suite, callbackOrSubId) {
+    dependencyObject.storagePath = "https://{storageName}.blob.core.windows.net/{blobName}".formatArgs(paramObject);
+    
+    if (suite.isPlayback()) {
+      dependencyObject.virtualMachineId = generatorUtils.generateResourceIdCommon(callbackOrSubId, groupName, 'virtualMachines', paramObject.vmName);
+      dependencyObject.vpnGatewayId = generatorUtils.generateResourceIdCommon(callbackOrSubId, groupName, 'virtualNetworkGateways', paramObject.vpnGatewayName);
+      dependencyObject.storageId = generatorUtils.generateResourceIdCommon(callbackOrSubId, groupName, 'storageAccounts', paramObject.storageName, 'Storage');
+      return;
+    }
+
+    vmTestUtil.CreateVmWithNic(groupName, paramObject.vmName, dependencyObject.location, paramObject.osType, paramObject.imageUrn, dependencyObject.networkInterfaceName, 'xplatuser', 'Pa$$word1', paramObject.vmStorageAccount, suite, function () {
+      var cmd = util.format('vm show %s %s --json', groupName, paramObject.vmName);
       testUtils.executeCommand(suite, retry, cmd, function (result) {
         result.exitStatus.should.equal(0);
-        var cmd = util.format('network nsg create -g %s -n %s -l %s --json', groupName, nsgName, location);
+        var output = JSON.parse(result.text);
+
+        dependencyObject.virtualMachineId = output.id;
+
+        var cmd = util.format('vm extension set %s %s -p Microsoft.Azure.NetworkWatcher -r NWAgent -n NetworkWatcherAgentWindows -o 1.4 --json', groupName, paramObject.vmName);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
-          var cmd = util.format('network nic create -g %s -n %s --subnet-vnet-name %s --subnet-name %s --public-ip-name %s -l %s --network-security-group-name %s --json',
-            groupName, nicName, vnetName, subnetName, pipName, location, nsgName);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
-            result.exitStatus.should.equal(0);
-            var output = JSON.parse(result.text);
-            vmUtil.CreateVmWithNic(groupName, vmName, location, 'Windows', 'Win2012R2Datacenter', nicName, 'xplatuser', 'Pa$$word1', vmStorageAccount, suite, function(result) {
-              var cmd = util.format('group create %s westcentralus --json', rgTopology);
+
+          var vpnGateway = _.clone(paramObject);
+          vpnGateway.name = paramObject.vpnGatewayName;
+          vpnGateway.tags = networkTestUtil.tags;
+          vpnGateway.group = groupName;
+          vpnGateway.location = dependencyObject.location;
+
+          networkTestUtil.createVpnGateway(vpnGateway, suite, function (result) {
+            dependencyObject.vpnGatewayId = result.id;
+
+            var cmd = util.format('storage account create --resource-group %s %s --location %s --sku-name LRS --kind BlobStorage --access-tier Cool --json', groupName, paramObject.storageName, dependencyObject.location);
+            testUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+
+              var cmd = util.format('storage account show -g %s %s --json', groupName, paramObject.storageName);
               testUtils.executeCommand(suite, retry, cmd, function (result) {
-                networkUtil.createVpnGateway(vpnGateway, suite, function(result) {
-                  var cmd = util.format('storage account create --resource-group %s %s --location %s --sku-name LRS --kind BlobStorage --access-tier Cool --json', groupName, storageName, location);
+                result.exitStatus.should.equal(0);
+                var output = JSON.parse(result.text);
+
+                dependencyObject.storageId = output.id;
+
+                var cmd = util.format('storage account connectionstring show -g %s %s --json', groupName, paramObject.storageName);
+                testUtils.executeCommand(suite, retry, cmd, function (result) {
+                  result.exitStatus.should.equal(0);
+                  var output = JSON.parse(result.text);
+
+                  var cmd = util.format('storage container create --container %s -p Blob -c %s --json', paramObject.blobName, output.string);
                   testUtils.executeCommand(suite, retry, cmd, function (result) {
                     result.exitStatus.should.equal(0);
-                    var cmd = util.format('storage account connectionstring show -g %s %s --json', groupName, storageName);
-                    testUtils.executeCommand(suite, retry, cmd, function (result) {
-                      result.exitStatus.should.equal(0);
-                      var output = JSON.parse(result.text);
-                      var connectionString = output.string;
-                      var cmd = util.format('storage container create --container %s -p Blob -c %s --json', blobName, connectionString);
-                      testUtils.executeCommand(suite, retry, cmd, function (result) {
-                        result.exitStatus.should.equal(0);
-                        callback();
-                      });
-                    });
+                    callbackOrSubId(result);
                   });
                 });
               });
@@ -103,5 +90,30 @@ exports.getNetworkWatcherEnv = function(groupName, location,
         });
       });
     });
-  });
-}
+  },
+
+  getPacketCaptureEnv: function (dependencyObject, paramObject, groupName, suite, callbackOrSubId) {
+    if (suite.isPlayback()) {
+      dependencyObject.target = generatorUtils.generateResourceIdCommon(callbackOrSubId, groupName, 'virtualMachines', paramObject.vmName, 'Compute');
+      return;
+    }
+
+    vmTestUtil.CreateVmWithNic(groupName, paramObject.vmName, dependencyObject.location, paramObject.osType, paramObject.imageUrn, dependencyObject.networkInterfaceName, 'xplatuser', 'Pa$$word1', paramObject.vmStorageAccount, suite, function () {
+      var cmd = util.format('vm show %s %s --json', groupName, paramObject.vmName);
+      testUtils.executeCommand(suite, retry, cmd, function (result) {
+        result.exitStatus.should.equal(0);
+        var output = JSON.parse(result.text);
+
+        dependencyObject.target = output.id;
+
+        var cmd = util.format('vm extension set %s %s -p Microsoft.Azure.NetworkWatcher -r NWAgent -n NetworkWatcherAgentWindows -o 1.4 --json', groupName, paramObject.vmName);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          callbackOrSubId(result);
+        });
+      });
+    });
+  }
+});
+
+module.exports = PreinstalledEnv;

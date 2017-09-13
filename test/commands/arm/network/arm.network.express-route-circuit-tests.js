@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright (c) Microsoft.  All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,53 +19,115 @@ var should = require('should');
 var util = require('util');
 var _ = require('underscore');
 
-var testUtils = require('../../../util/util');
 var CLITest = require('../../../framework/arm-cli-test');
-var NetworkTestUtil = require('../../../util/networkTestUtil');
-var networkUtil = new NetworkTestUtil();
+var utils = require('../../../../lib/util/utils');
+var tagUtils = require('../../../../lib/commands/arm/tag/tagUtils');
+var testUtils = require('../../../util/util');
 
-var testPrefix = 'arm-network-express-route-tests',
-  groupName = 'xplat-test-express-route-circuit',
+var networkTestUtil = new (require('../../../util/networkTestUtil'))();
+
+var generatorUtils = require('../../../../lib/util/generatorUtils');
+var profile = require('../../../../lib/util/profile');
+var $ = utils.getLocaleString;
+
+var testPrefix = 'arm-network-express-route-circuit-tests',
+  groupName = 'xplat-test-circuit-custom',
   location;
 
-var circuitProp = {
-  name: 'test-circuit',
-  serviceProviderName: 'InterCloud',
+var circuitProps = {
+  name: 'xplatExpressRouteCircuit',
+  serviceProviderName: 'Interxion',
   peeringLocation: 'London',
-  bandwidthInMbps: 100,
-  newBandwidthInMbps: 500,
-  skuTier: 'Standard',
+  skuTier: "Standard",
   skuFamily: 'MeteredData',
-  newSkuTier: 'Premium',
-  newSkuFamily: 'UnlimitedData',
-  tags: networkUtil.tags,
-  newTags: networkUtil.newTags
+  bandwidthInMbps: 50
 };
+var privatePeeringProps = {
+  name: 'AzurePrivatePeering',
+  type: 'AzurePrivatePeering',
+  primaryAddress: "192.168.1.0/30",
+  secondaryAddress: "192.168.2.0/30",
+  peerAsn: 100,
+  newPeerAsn: 101,
+  vlanId: 200,
+  newVlanId: 199
+};
+var publicPeeringProps = {
+  name: 'AzurePublicPeering',
+  type: 'AzurePublicPeering',
+  primaryAddress: "192.168.1.0/30",
+  secondaryAddress: "192.168.2.0/30",
+  peerAsn: 110,
+  newPeerAsn: 111,
+  vlanId: 210,
+  newVlanId: 209
+};
+var microsoftPeeringProps = {
+  name: 'MicrosoftPeering',
+  type: 'MicrosoftPeering',
+  primaryAddress: "123.0.0.0/30",
+  secondaryAddress: "123.0.0.4/30",
+  peerAsn: 120,
+  newPeerAsn: 121,
+  vlanId: 220,
+  newVlanId: 219,
+  msAdvertisedPublicPrefixes: "123.1.0.0/24",
+  newMsAdvertisedPublicPrefixes: "123.2.0.0/24",
+  msCustomerAsn: 23,
+  newMsCustomerAsn: 32,
+  msRoutingRegistryName: "ARIN",
+  newMsRoutingRegistryName: "LACNIC"
+};
+var premiumTier = 'Premium';
 
 var requiredEnvironment = [{
   name: 'AZURE_VM_TEST_LOCATION',
-  defaultValue: 'eastus'
+  defaultValue: 'brazilsouth'
 }];
 
 describe('arm', function () {
   describe('network', function () {
     var suite, retry = 5;
+    var hour = 60 * 60000;
 
     before(function (done) {
+      this.timeout(hour);
       suite = new CLITest(this, testPrefix, requiredEnvironment);
       suite.setupSuite(function () {
         location = process.env.AZURE_VM_TEST_LOCATION;
         groupName = suite.isMocked ? groupName : suite.generateId(groupName, null);
 
-        circuitProp.group = groupName;
-        circuitProp.location = location;
-        circuitProp.name = suite.isMocked ? circuitProp.name : suite.generateId(circuitProp.name, null);
+        circuitProps.location = location;
+        circuitProps.group = groupName;
+        circuitProps.name = suite.isMocked ? circuitProps.name : suite.generateId(circuitProps.name, null);
 
-        done();
+        privatePeeringProps.location = location;
+        privatePeeringProps.group = groupName;
+        privatePeeringProps.name = suite.isMocked ? privatePeeringProps.name : suite.generateId(privatePeeringProps.name, null);
+        privatePeeringProps.expressRCName = circuitProps.name;
+        
+        publicPeeringProps.location = location;
+        publicPeeringProps.group = groupName;
+        publicPeeringProps.name = suite.isMocked ? publicPeeringProps.name : suite.generateId(publicPeeringProps.name, null);
+        publicPeeringProps.expressRCName = circuitProps.name;
+
+        microsoftPeeringProps.location = location;
+        microsoftPeeringProps.group = groupName;
+        microsoftPeeringProps.name = suite.isMocked ? microsoftPeeringProps.name : suite.generateId(microsoftPeeringProps.name, null);
+        microsoftPeeringProps.expressRCName = circuitProps.name;
+
+        if (!suite.isPlayback()) {
+          networkTestUtil.createGroup(groupName, location, suite, function () {
+            done();
+          });
+        } else {
+          done();
+        }
       });
     });
     after(function (done) {
-      networkUtil.deleteGroup(groupName, suite, function () {
+      this.timeout(hour);
+      networkTestUtil.deleteGroup(groupName, suite, function () {
         suite.teardownSuite(done);
       });
     });
@@ -76,32 +138,29 @@ describe('arm', function () {
       suite.teardownTest(done);
     });
 
-    describe('express-route', function () {
-      it('create should create express route circuit', function (done) {
-        networkUtil.createGroup(groupName, location, suite, function () {
-          networkUtil.createExpressRouteCircuit(circuitProp, suite, function (circuit) {
-            networkUtil.shouldBeSucceeded(circuit);
-            done();
-          });
-        });
-      });
-      it('show should display details of express route circuit', function (done) {
-        var cmd = 'network express-route circuit show -g {group} -n {name} --json'.formatArgs(circuitProp);
+    describe('express route circuits custom', function () {
+      this.timeout(hour);
+
+      it('create express route circuit should pass', function (done) {
+        var cmd = ('network express-route circuit create -g {group} -n {name} -l {location} ' +
+          '-p {serviceProviderName} -i {peeringLocation} -b {bandwidthInMbps} -e {skuTier} -f {skuFamily} --json').formatArgs(circuitProps);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var circuit = JSON.parse(result.text);
-          circuit.name.should.equal(circuitProp.name);
+
+          circuit.name.should.equal(circuitProps.name);
+          circuit.sku.tier.should.equal(circuitProps.skuTier);
+          circuit.sku.family.should.equal(circuitProps.skuFamily);
+
           var provider = circuit.serviceProviderProperties;
-          provider.serviceProviderName.should.equal(circuitProp.serviceProviderName);
-          provider.peeringLocation.should.equal(circuitProp.peeringLocation);
-          provider.bandwidthInMbps.should.equal(circuitProp.bandwidthInMbps);
-          var sku = circuit.sku;
-          sku.tier.should.equal(circuitProp.skuTier);
-          sku.family.should.equal(circuitProp.skuFamily);
-          networkUtil.shouldHaveTags(circuit);
+          provider.serviceProviderName.should.equal(circuitProps.serviceProviderName);
+          provider.peeringLocation.should.equal(circuitProps.peeringLocation);
+          provider.bandwidthInMbps.should.equal(circuitProps.bandwidthInMbps);
+
           done();
         });
       });
+
       it('provider list should list available providers', function (done) {
         var cmd = 'network express-route provider list --json';
         testUtils.executeCommand(suite, retry, cmd, function (result) {
@@ -111,41 +170,227 @@ describe('arm', function () {
           done();
         });
       });
-      it('set should modify express route circuit', function (done) {
-        var cmd = 'network express-route circuit set -g {group} -n {name} -b {newBandwidthInMbps} -e {newSkuTier} -f {newSkuFamily} -t {newTags} --json'.formatArgs(circuitProp);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
-          result.exitStatus.should.equal(0);
-          var circuit = JSON.parse(result.text);
-          circuit.name.should.equal(circuitProp.name);
-          circuit.serviceProviderProperties.bandwidthInMbps.should.equal(circuitProp.newBandwidthInMbps);
-          circuit.sku.tier.should.equal(circuitProp.newSkuTier);
-          circuit.sku.family.should.equal(circuitProp.newSkuFamily);
-          networkUtil.shouldBeSucceeded(circuit);
-          networkUtil.shouldAppendTags(circuit);
-          done();
-        });
-      });
-      it('list should display express route circuits in resource group', function (done) {
-        var cmd = 'network express-route circuit list -g {group} --json'.formatArgs(circuitProp);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
-          result.exitStatus.should.equal(0);
-          var circuits = JSON.parse(result.text);
-          _.some(circuits, function (circuit) {
-            return circuit.name === circuitProp.name;
-          }).should.be.true;
-          done();
-        });
-      });
-      it('delete should delete express route circuit', function (done) {
-        var cmd = 'network express-route circuit delete -g {group} -n {name} --quiet --json'.formatArgs(circuitProp);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
-          result.exitStatus.should.equal(0);
 
-          cmd = 'network express-route circuit show -g {group} -n {name} --json'.formatArgs(circuitProp);
+      it('create private peering should pass', function (done) {
+        var cmd = ('network express-route peering create {group} {expressRCName} {name} ' +
+          '-y {type} -p {peerAsn} -r {primaryAddress} -o {secondaryAddress} -i {vlanId} --json').formatArgs(privatePeeringProps);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var peering = JSON.parse(result.text);
+
+          peering.name.should.equal(privatePeeringProps.name);
+          peering.peeringType.should.equal(privatePeeringProps.type);
+          peering.peerASN.should.equal(privatePeeringProps.peerAsn);
+          peering.primaryPeerAddressPrefix.should.equal(privatePeeringProps.primaryAddress);
+          peering.secondaryPeerAddressPrefix.should.equal(privatePeeringProps.secondaryAddress);
+          peering.vlanId.should.equal(privatePeeringProps.vlanId);
+
+          networkTestUtil.shouldBeSucceeded(peering);
+          done();
+        });
+      });
+
+      it('create public peering should pass', function (done) {
+        var cmd = ('network express-route peering create {group} {expressRCName} {name} ' +
+          '-y {type} -p {peerAsn} -r {primaryAddress} -o {secondaryAddress} -i {vlanId} --json').formatArgs(publicPeeringProps);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var peering = JSON.parse(result.text);
+
+          peering.name.should.equal(publicPeeringProps.name);
+          peering.peeringType.should.equal(publicPeeringProps.type);
+          peering.peerASN.should.equal(publicPeeringProps.peerAsn);
+          peering.primaryPeerAddressPrefix.should.equal(publicPeeringProps.primaryAddress);
+          peering.secondaryPeerAddressPrefix.should.equal(publicPeeringProps.secondaryAddress);
+          peering.vlanId.should.equal(publicPeeringProps.vlanId);
+
+          networkTestUtil.shouldBeSucceeded(peering);
+          done();
+        });
+      });
+
+      it('create microsoft peering should not pass', false, function (done) {
+        var cmd = ('network express-route peering create {group} {expressRCName} {name} ' +
+          '-y {type} -p {peerAsn} -r {primaryAddress} -o {secondaryAddress} -i {vlanId} -l {msCustomerAsn} ' +
+          '-f {msAdvertisedPublicPrefixes} -u {msRoutingRegistryName} --json').formatArgs(microsoftPeeringProps);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.not.equal(0);
+          done();
+        });
+      });
+
+      it('create microsoft peering should pass', false, function (done) {
+        // Removes failed peering.
+        var cmd = 'network express-route peering delete {group} {expressRCName} {name} -q --json'.formatArgs(microsoftPeeringProps);
+        testUtils.executeCommand(suite, retry, cmd, function () {
+          circuitProps.skuTier = premiumTier;
+          networkTestUtil.setExpressRoute(circuitProps, suite, function () {
+            cmd = ('network express-route peering create {group} {expressRCName} {name} ' +
+              '-y {type} -p {peerAsn} -r {primaryAddress} -o {secondaryAddress} -i {vlanId} -l {msCustomerAsn} ' +
+              '-f {msAdvertisedPublicPrefixes} -u {msRoutingRegistryName} --json').formatArgs(microsoftPeeringProps);
+            testUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              var peering = JSON.parse(result.text);
+
+              peering.name.should.equal(microsoftPeeringProps.name);
+              peering.peeringType.should.equal(microsoftPeeringProps.type);
+              peering.peerASN.should.equal(microsoftPeeringProps.peerAsn);
+              peering.primaryPeerAddressPrefix.should.equal(microsoftPeeringProps.primaryAddress);
+              peering.secondaryPeerAddressPrefix.should.equal(microsoftPeeringProps.secondaryAddress);
+              peering.vlanId.should.equal(microsoftPeeringProps.vlanId);
+              peering.microsoftPeeringConfig.customerASN.should.equal(microsoftPeeringProps.msCustomerAsn);
+              peering.microsoftPeeringConfig.routingRegistryName.should.equal(microsoftPeeringProps.msRoutingRegistryName);
+
+              networkTestUtil.shouldBeSucceeded(peering);
+              done();
+            });
+          });
+        });
+      });
+
+      it('set should modify express-route private peering', function (done) {
+        var cmd = ('network express-route peering set {group} {expressRCName} {name} ' +
+          '-i {newVlanId} -p {newPeerAsn} --json').formatArgs(privatePeeringProps);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var peering = JSON.parse(result.text);
+
+          peering.name.should.equal(privatePeeringProps.name);
+          peering.peeringType.should.equal(privatePeeringProps.type);
+          peering.peerASN.should.equal(privatePeeringProps.newPeerAsn);
+          peering.primaryPeerAddressPrefix.should.equal(privatePeeringProps.primaryAddress);
+          peering.secondaryPeerAddressPrefix.should.equal(privatePeeringProps.secondaryAddress);
+          peering.vlanId.should.equal(privatePeeringProps.newVlanId);
+
+          done();
+        });
+      });
+
+      it('set should modify express-route public peering', function (done) {
+        var cmd = ('network express-route peering set {group} {expressRCName} {name} ' +
+          '-i {newVlanId} -p {newPeerAsn} --json').formatArgs(publicPeeringProps);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var peering = JSON.parse(result.text);
+
+          peering.name.should.equal(publicPeeringProps.name);
+          peering.peeringType.should.equal(publicPeeringProps.type);
+          peering.peerASN.should.equal(publicPeeringProps.newPeerAsn);
+          peering.primaryPeerAddressPrefix.should.equal(publicPeeringProps.primaryAddress);
+          peering.secondaryPeerAddressPrefix.should.equal(publicPeeringProps.secondaryAddress);
+          peering.vlanId.should.equal(publicPeeringProps.newVlanId);
+
+          done();
+        });
+      });
+
+      it('set should modify express-route microsoft peering', false, function (done) {
+        var cmd = ('network express-route peering set {group} {expressRCName} {name} ' +
+          '-i {newVlanId} -p {newPeerAsn} -l {newMsCustomerAsn} -u {newMsRoutingRegistryName} --json').formatArgs(microsoftPeeringProps);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var peering = JSON.parse(result.text);
+
+          peering.name.should.equal(microsoftPeeringProps.name);
+          peering.peeringType.should.equal(microsoftPeeringProps.type);
+          peering.peerASN.should.equal(microsoftPeeringProps.newPeerAsn);
+          peering.primaryPeerAddressPrefix.should.equal(microsoftPeeringProps.primaryAddress);
+          peering.secondaryPeerAddressPrefix.should.equal(microsoftPeeringProps.secondaryAddress);
+          peering.vlanId.should.equal(microsoftPeeringProps.newVlanId);
+          peering.microsoftPeeringConfig.customerASN.should.equal(microsoftPeeringProps.newMsCustomerAsn);
+          peering.microsoftPeeringConfig.routingRegistryName.should.equal(microsoftPeeringProps.newMsRoutingRegistryName);
+
+          done();
+        });
+      });
+
+      it('show should display details of private express-route peering', function (done) {
+        var cmd = 'network express-route peering show {group} {expressRCName} {name} --json'.formatArgs(privatePeeringProps);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var peering = JSON.parse(result.text);
+          peering.name.should.equal(privatePeeringProps.name);
+          networkTestUtil.shouldBeSucceeded(peering);
+          done();
+        });
+      });
+
+      it('show should display details of public express-route peering', function (done) {
+        var cmd = 'network express-route peering show {group} {expressRCName} {name} --json'.formatArgs(publicPeeringProps);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var peering = JSON.parse(result.text);
+          peering.name.should.equal(publicPeeringProps.name);
+          networkTestUtil.shouldBeSucceeded(peering);
+          done();
+        });
+      });
+
+      it('show should display details of microsoft express-route peering', false, function (done) {
+        var cmd = 'network express-route peering show {group} {expressRCName} {name} --json'.formatArgs(microsoftPeeringProps);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var peering = JSON.parse(result.text);
+          peering.name.should.equal(microsoftPeeringProps.name);
+          networkTestUtil.shouldBeSucceeded(peering);
+          done();
+        });
+      });
+
+      it('list should display all express-routes peerings from resource group', function (done) {
+        var cmd = 'network express-route peering list {group} {name} --json'.formatArgs(circuitProps);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var allPeerings = JSON.parse(result.text);
+
+          _.some(allPeerings, function (peering) {
+            return peering.name === privatePeeringProps.name;
+          }).should.be.true;
+          _.some(allPeerings, function (peering) {
+            return peering.name === publicPeeringProps.name;
+          }).should.be.true;
+          _.some(allPeerings, function (peering) {
+            return peering.name === microsoftPeeringProps.name;
+          }).should.be.false;
+
+          done();
+        });
+      });
+
+      it('delete should delete private express-route peering', function (done) {
+        var cmd = 'network express-route peering delete {group} {expressRCName} {name} -q --json'.formatArgs(privatePeeringProps);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          
+          cmd = 'network express-route peering show {group} {expressRCName} {name} --json'.formatArgs(privatePeeringProps);
           testUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-            var circuit = JSON.parse(result.text);
-            circuit.should.be.empty;
+            done();
+          });
+        });
+      });
+
+      it('delete should delete public express-route peering', function (done) {
+        var cmd = 'network express-route peering delete {group} {expressRCName} {name} -q --json'.formatArgs(publicPeeringProps);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          
+          cmd = 'network express-route peering show {group} {expressRCName} {name} --json'.formatArgs(publicPeeringProps);
+          testUtils.executeCommand(suite, retry, cmd, function (result) {
+            result.exitStatus.should.equal(0);
+            done();
+          });
+        });
+      });
+
+      it('delete should delete microsoft express-route peering', false, function (done) {
+        var cmd = 'network express-route peering delete {group} {expressRCName} {name} -q --json'.formatArgs(microsoftPeeringProps);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          
+          cmd = 'network express-route peering show {group} {expressRCName} {name} --json'.formatArgs(microsoftPeeringProps);
+          testUtils.executeCommand(suite, retry, cmd, function (result) {
+            result.exitStatus.should.equal(0);
             done();
           });
         });
