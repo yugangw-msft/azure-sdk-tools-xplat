@@ -6,8 +6,8 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '947d47b4-7883-4bb9-9d85-c5e8e2f572ce',
-    name: 'nrptest58.westus.validation.partner',
+    id: '9532a63e-f2eb-4649-bb23-5ed01077ce80',
+    name: 'franks-official-test-sub',
     user: {
       name: 'user@domain.example',
       type: 'user'
@@ -23,40 +23,40 @@ exports.getMockedProfile = function () {
 };
 
 exports.setEnvironment = function() {
-  process.env['AZURE_VM_TEST_LOCATION'] = 'southeastasia';
+  process.env['AZURE_VM_TEST_LOCATION'] = 'eastus2';
 };
 
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/idleTimeoutUnderRangeName?api-version=2017-08-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/idleTimeoutUnderRangeName?api-version=2017-09-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/publicIPAddresses/idleTimeoutUnderRangeName' under resource group 'xplat-test-public-ip' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': 'dc96e3d2-f5fa-4c9f-a545-0ee6e2b85c8c',
-  'x-ms-correlation-request-id': 'dc96e3d2-f5fa-4c9f-a545-0ee6e2b85c8c',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T083846Z:dc96e3d2-f5fa-4c9f-a545-0ee6e2b85c8c',
+  'x-ms-request-id': '99725171-aa1d-4fc4-a2e8-1cd662a04f46',
+  'x-ms-correlation-request-id': '99725171-aa1d-4fc4-a2e8-1cd662a04f46',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170918T122657Z:99725171-aa1d-4fc4-a2e8-1cd662a04f46',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Fri, 01 Sep 2017 08:38:46 GMT',
+  date: 'Mon, 18 Sep 2017 12:26:56 GMT',
   connection: 'close',
   'content-length': '185' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/idleTimeoutUnderRangeName?api-version=2017-08-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/idleTimeoutUnderRangeName?api-version=2017-09-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/publicIPAddresses/idleTimeoutUnderRangeName' under resource group 'xplat-test-public-ip' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': 'dc96e3d2-f5fa-4c9f-a545-0ee6e2b85c8c',
-  'x-ms-correlation-request-id': 'dc96e3d2-f5fa-4c9f-a545-0ee6e2b85c8c',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T083846Z:dc96e3d2-f5fa-4c9f-a545-0ee6e2b85c8c',
+  'x-ms-request-id': '99725171-aa1d-4fc4-a2e8-1cd662a04f46',
+  'x-ms-correlation-request-id': '99725171-aa1d-4fc4-a2e8-1cd662a04f46',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170918T122657Z:99725171-aa1d-4fc4-a2e8-1cd662a04f46',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Fri, 01 Sep 2017 08:38:46 GMT',
+  date: 'Mon, 18 Sep 2017 12:26:56 GMT',
   connection: 'close',
   'content-length': '185' });
  return result; },
@@ -64,37 +64,37 @@ function (nock) {
 var result = 
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/idleTimeoutUnderRangeName?api-version=2017-08-01', '*')
+.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/idleTimeoutUnderRangeName?api-version=2017-09-01', '*')
   .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"PublicIPIdleTimeoutIsOutOfRange\",\r\n    \"message\": \"Public IP address idleTimeoutUnderRangeName has invalid Idle Timeout. The value must be between 4 and 30.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '215',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '67fee803-c84c-4f0b-9751-3d5d0618110f',
+  'x-ms-request-id': 'cd6171f6-539f-4b7c-b094-667c2710a561',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-writes': '1192',
-  'x-ms-correlation-request-id': 'b21714e1-620c-406e-a8e6-f928a45ead10',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T083850Z:b21714e1-620c-406e-a8e6-f928a45ead10',
-  date: 'Fri, 01 Sep 2017 08:38:49 GMT',
+  'x-ms-ratelimit-remaining-subscription-writes': '1198',
+  'x-ms-correlation-request-id': 'e0805929-69fc-4477-9785-f6f369213880',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170918T122659Z:e0805929-69fc-4477-9785-f6f369213880',
+  date: 'Mon, 18 Sep 2017 12:26:59 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/idleTimeoutUnderRangeName?api-version=2017-08-01', '*')
+.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/idleTimeoutUnderRangeName?api-version=2017-09-01', '*')
   .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"PublicIPIdleTimeoutIsOutOfRange\",\r\n    \"message\": \"Public IP address idleTimeoutUnderRangeName has invalid Idle Timeout. The value must be between 4 and 30.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '215',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '67fee803-c84c-4f0b-9751-3d5d0618110f',
+  'x-ms-request-id': 'cd6171f6-539f-4b7c-b094-667c2710a561',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-writes': '1192',
-  'x-ms-correlation-request-id': 'b21714e1-620c-406e-a8e6-f928a45ead10',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T083850Z:b21714e1-620c-406e-a8e6-f928a45ead10',
-  date: 'Fri, 01 Sep 2017 08:38:49 GMT',
+  'x-ms-ratelimit-remaining-subscription-writes': '1198',
+  'x-ms-correlation-request-id': 'e0805929-69fc-4477-9785-f6f369213880',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170918T122659Z:e0805929-69fc-4477-9785-f6f369213880',
+  date: 'Mon, 18 Sep 2017 12:26:59 GMT',
   connection: 'close' });
  return result; }]];

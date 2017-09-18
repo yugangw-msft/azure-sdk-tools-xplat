@@ -6,8 +6,8 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '947d47b4-7883-4bb9-9d85-c5e8e2f572ce',
-    name: 'nrptest58.westus.validation.partner',
+    id: '9532a63e-f2eb-4649-bb23-5ed01077ce80',
+    name: 'franks-official-test-sub',
     user: {
       name: 'user@domain.example',
       type: 'user'
@@ -23,40 +23,40 @@ exports.getMockedProfile = function () {
 };
 
 exports.setEnvironment = function() {
-  process.env['AZURE_VM_TEST_LOCATION'] = 'southeastasia';
+  process.env['AZURE_VM_TEST_LOCATION'] = 'eastus2';
 };
 
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/IPAllocationMethodOutOfRangeName?api-version=2017-08-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/IPAllocationMethodOutOfRangeName?api-version=2017-09-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/publicIPAddresses/IPAllocationMethodOutOfRangeName' under resource group 'xplat-test-public-ip' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': 'a047fb58-5aa6-43c1-98d1-9fb2ed51b121',
-  'x-ms-correlation-request-id': 'a047fb58-5aa6-43c1-98d1-9fb2ed51b121',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T083838Z:a047fb58-5aa6-43c1-98d1-9fb2ed51b121',
+  'x-ms-request-id': 'fdbbcc63-994d-4dcd-9f49-cb84254575fc',
+  'x-ms-correlation-request-id': 'fdbbcc63-994d-4dcd-9f49-cb84254575fc',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170918T122650Z:fdbbcc63-994d-4dcd-9f49-cb84254575fc',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Fri, 01 Sep 2017 08:38:38 GMT',
+  date: 'Mon, 18 Sep 2017 12:26:49 GMT',
   connection: 'close',
   'content-length': '192' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/IPAllocationMethodOutOfRangeName?api-version=2017-08-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/IPAllocationMethodOutOfRangeName?api-version=2017-09-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/publicIPAddresses/IPAllocationMethodOutOfRangeName' under resource group 'xplat-test-public-ip' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': 'a047fb58-5aa6-43c1-98d1-9fb2ed51b121',
-  'x-ms-correlation-request-id': 'a047fb58-5aa6-43c1-98d1-9fb2ed51b121',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T083838Z:a047fb58-5aa6-43c1-98d1-9fb2ed51b121',
+  'x-ms-request-id': 'fdbbcc63-994d-4dcd-9f49-cb84254575fc',
+  'x-ms-correlation-request-id': 'fdbbcc63-994d-4dcd-9f49-cb84254575fc',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170918T122650Z:fdbbcc63-994d-4dcd-9f49-cb84254575fc',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Fri, 01 Sep 2017 08:38:38 GMT',
+  date: 'Mon, 18 Sep 2017 12:26:49 GMT',
   connection: 'close',
   'content-length': '192' });
  return result; }]];
