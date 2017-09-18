@@ -29,7 +29,7 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidPrefixesName?api-version=2017-08-01')
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidPrefixesName?api-version=2017-09-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/localNetworkGateways/invalidPrefixesName' under resource group 'xplat-test-local-gateway' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
@@ -46,7 +46,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidPrefixesName?api-version=2017-08-01')
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidPrefixesName?api-version=2017-09-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/localNetworkGateways/invalidPrefixesName' under resource group 'xplat-test-local-gateway' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
@@ -64,7 +64,7 @@ function (nock) {
 var result = 
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidPrefixesName?api-version=2017-08-01', '*')
+.put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidPrefixesName?api-version=2017-09-01', '*')
   .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"InvalidAddressPrefixFormat\",\r\n    \"message\": \"Address prefix 192.168.0.0 of resource /subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidPrefixesName is not formatted correctly. It should follow CIDR notation, for example 10.0.0.0/24.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '389',
@@ -83,7 +83,7 @@ function (nock) {
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidPrefixesName?api-version=2017-08-01', '*')
+.put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidPrefixesName?api-version=2017-09-01', '*')
   .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"InvalidAddressPrefixFormat\",\r\n    \"message\": \"Address prefix 192.168.0.0 of resource /subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidPrefixesName is not formatted correctly. It should follow CIDR notation, for example 10.0.0.0/24.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '389',
