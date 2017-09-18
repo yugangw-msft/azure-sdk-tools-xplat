@@ -41,6 +41,7 @@ var testPrefix = 'arm-network-lb-frontend-ip-tests-generated',
 var index = 0;
 
 var frontendIPConfigurations = {
+  zones: '2',
   name: 'frontendIPConfigurationName'
 };
 
@@ -58,17 +59,17 @@ var subnet = {
 };
 
 var virtualNetwork = {
-  location: 'westus',
+  location: 'eastus2',
   name: 'virtualNetworkName'
 };
 
 var loadBalancer = {
-  location: 'westus',
+  location: 'eastus2',
   name: 'loadBalancerName'
 };
 
 var publicIPAddress = {
-  location: 'westus',
+  location: 'eastus2',
   name: 'publicIPAddressName'
 };
 
@@ -83,7 +84,7 @@ var removePrivateIp = {
 
 var requiredEnvironment = [{
   name: 'AZURE_VM_TEST_LOCATION',
-  defaultValue: 'westus'
+  defaultValue: 'eastus2'
 }];
 
 describe('arm', function () {
@@ -146,7 +147,7 @@ describe('arm', function () {
     describe('frontend ip configurations', function () {
       this.timeout(testTimeout);
       it('create should create frontend ip configurations', function (done) {
-        var cmd = 'network lb frontend-ip create -g {group} -n {name} --lb-name {loadBalancerName} --subnet-vnet-name {virtualNetworkName} --subnet-name {subnetName}'.formatArgs(frontendIPConfigurations);
+        var cmd = 'network lb frontend-ip create -g {group} -n {name} --zones {zones} --lb-name {loadBalancerName} --subnet-vnet-name {virtualNetworkName} --subnet-name {subnetName}'.formatArgs(frontendIPConfigurations);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
