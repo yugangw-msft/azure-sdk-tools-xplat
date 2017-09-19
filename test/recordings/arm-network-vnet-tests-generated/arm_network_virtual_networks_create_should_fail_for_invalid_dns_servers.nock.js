@@ -6,8 +6,8 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '947d47b4-7883-4bb9-9d85-c5e8e2f572ce',
-    name: 'nrptest58.westus.validation.partner',
+    id: 'e05dbbce-79c2-45a2-a7ef-f1058856feb3',
+    name: 'RNMTEST5',
     user: {
       name: 'user@domain.example',
       type: 'user'
@@ -29,34 +29,34 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-vnet/providers/Microsoft.Network/virtualNetworks/invalidDnsServersName?api-version=2017-09-01')
+  .get('/subscriptions/e05dbbce-79c2-45a2-a7ef-f1058856feb3/resourceGroups/xplat-test-vnet/providers/Microsoft.Network/virtualNetworks/invalidDnsServersName?api-version=2017-09-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/virtualNetworks/invalidDnsServersName' under resource group 'xplat-test-vnet' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': '35bb0f48-168a-4cbf-9c6d-db09c3236ec5',
-  'x-ms-correlation-request-id': '35bb0f48-168a-4cbf-9c6d-db09c3236ec5',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T131639Z:35bb0f48-168a-4cbf-9c6d-db09c3236ec5',
+  'x-ms-request-id': '2d3e9290-3b26-4655-8074-383e274c156b',
+  'x-ms-correlation-request-id': '2d3e9290-3b26-4655-8074-383e274c156b',
+  'x-ms-routing-request-id': 'WESTUS2:20170919T183705Z:2d3e9290-3b26-4655-8074-383e274c156b',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Fri, 01 Sep 2017 13:16:39 GMT',
+  date: 'Tue, 19 Sep 2017 18:37:04 GMT',
   connection: 'close',
   'content-length': '174' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-vnet/providers/Microsoft.Network/virtualNetworks/invalidDnsServersName?api-version=2017-09-01')
+  .get('/subscriptions/e05dbbce-79c2-45a2-a7ef-f1058856feb3/resourceGroups/xplat-test-vnet/providers/Microsoft.Network/virtualNetworks/invalidDnsServersName?api-version=2017-09-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/virtualNetworks/invalidDnsServersName' under resource group 'xplat-test-vnet' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': '35bb0f48-168a-4cbf-9c6d-db09c3236ec5',
-  'x-ms-correlation-request-id': '35bb0f48-168a-4cbf-9c6d-db09c3236ec5',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T131639Z:35bb0f48-168a-4cbf-9c6d-db09c3236ec5',
+  'x-ms-request-id': '2d3e9290-3b26-4655-8074-383e274c156b',
+  'x-ms-correlation-request-id': '2d3e9290-3b26-4655-8074-383e274c156b',
+  'x-ms-routing-request-id': 'WESTUS2:20170919T183705Z:2d3e9290-3b26-4655-8074-383e274c156b',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Fri, 01 Sep 2017 13:16:39 GMT',
+  date: 'Tue, 19 Sep 2017 18:37:04 GMT',
   connection: 'close',
   'content-length': '174' });
  return result; },
@@ -64,37 +64,37 @@ function (nock) {
 var result = 
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-vnet/providers/Microsoft.Network/virtualNetworks/invalidDnsServersName?api-version=2017-09-01', '*')
+.put('/subscriptions/e05dbbce-79c2-45a2-a7ef-f1058856feb3/resourceGroups/xplat-test-vnet/providers/Microsoft.Network/virtualNetworks/invalidDnsServersName?api-version=2017-09-01', '*')
   .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"NetcfgInvalidDnsServer\",\r\n    \"message\": \"DNS server is not valid as specified with the name '0'.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '156',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'c896162d-8d93-4f7a-8a3d-cc3854e3dd87',
+  'x-ms-request-id': '48eedfca-c770-41b8-88fe-73a8b20ea3e7',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1199',
-  'x-ms-correlation-request-id': '17690a0b-115c-400d-88e1-2f5d766b74de',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T131644Z:17690a0b-115c-400d-88e1-2f5d766b74de',
-  date: 'Fri, 01 Sep 2017 13:16:44 GMT',
+  'x-ms-correlation-request-id': '3ec85085-05d1-4ea4-b3a5-1213e94416cc',
+  'x-ms-routing-request-id': 'WESTUS2:20170919T183706Z:3ec85085-05d1-4ea4-b3a5-1213e94416cc',
+  date: 'Tue, 19 Sep 2017 18:37:05 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-vnet/providers/Microsoft.Network/virtualNetworks/invalidDnsServersName?api-version=2017-09-01', '*')
+.put('/subscriptions/e05dbbce-79c2-45a2-a7ef-f1058856feb3/resourceGroups/xplat-test-vnet/providers/Microsoft.Network/virtualNetworks/invalidDnsServersName?api-version=2017-09-01', '*')
   .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"NetcfgInvalidDnsServer\",\r\n    \"message\": \"DNS server is not valid as specified with the name '0'.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '156',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'c896162d-8d93-4f7a-8a3d-cc3854e3dd87',
+  'x-ms-request-id': '48eedfca-c770-41b8-88fe-73a8b20ea3e7',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1199',
-  'x-ms-correlation-request-id': '17690a0b-115c-400d-88e1-2f5d766b74de',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T131644Z:17690a0b-115c-400d-88e1-2f5d766b74de',
-  date: 'Fri, 01 Sep 2017 13:16:44 GMT',
+  'x-ms-correlation-request-id': '3ec85085-05d1-4ea4-b3a5-1213e94416cc',
+  'x-ms-routing-request-id': 'WESTUS2:20170919T183706Z:3ec85085-05d1-4ea4-b3a5-1213e94416cc',
+  date: 'Tue, 19 Sep 2017 18:37:05 GMT',
   connection: 'close' });
  return result; }]];
