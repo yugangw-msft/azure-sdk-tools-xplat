@@ -45,6 +45,10 @@ var virtualNetworks = {
   addressPrefixesNew: '11.0.0.0/16',
   dnsServers: '10.0.0.42',
   dnsServersNew: '10.0.0.32',
+  enableVmProtection: 'false',
+  enableVmProtectionNew: 'true',
+  enableDdosProtection: 'false',
+  enableDdosProtectionNew: 'true',
   location: 'westus',
   name: 'virtualNetworkName'
 };
@@ -141,13 +145,15 @@ describe('arm', function () {
     describe('virtual networks', function () {
       this.timeout(testTimeout);
       it('create should create virtual networks', function (done) {
-        var cmd = 'network vnet create -g {group} -n {name} --address-prefixes {addressPrefixes} --dns-servers {dnsServers} --location {location} --json'.formatArgs(virtualNetworks);
+        var cmd = 'network vnet create -g {group} -n {name} --address-prefixes {addressPrefixes} --dns-servers {dnsServers} --enable-vm-protection {enableVmProtection} --enable-ddos-protection {enableDdosProtection} --location {location} --json'.formatArgs(virtualNetworks);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(virtualNetworks.name);
           virtualNetworks.addressPrefixes.split(',').forEach(function (item) { output.addressSpace.addressPrefixes.should.containEql(item) });
           virtualNetworks.dnsServers.split(',').forEach(function (item) { output.dhcpOptions.dnsServers.should.containEql(item) });
+          output.enableVmProtection.should.equal(utils.parseBool(virtualNetworks.enableVmProtection));
+          output.enableDdosProtection.should.equal(utils.parseBool(virtualNetworks.enableDdosProtection));
           done();
         });
       });
@@ -159,11 +165,13 @@ describe('arm', function () {
           output.name.should.equal(virtualNetworks.name);
           virtualNetworks.addressPrefixes.split(',').forEach(function (item) { output.addressSpace.addressPrefixes.should.containEql(item) });
           virtualNetworks.dnsServers.split(',').forEach(function (item) { output.dhcpOptions.dnsServers.should.containEql(item) });
+          output.enableVmProtection.should.equal(utils.parseBool(virtualNetworks.enableVmProtection));
+          output.enableDdosProtection.should.equal(utils.parseBool(virtualNetworks.enableDdosProtection));
           done();
         });
       });
       it('set should update virtual networks', function (done) {
-        var cmd = 'network vnet set -g {group} -n {name} --address-prefixes {addressPrefixesNew} --dns-servers {dnsServersNew} --json'.formatArgs(virtualNetworks);
+        var cmd = 'network vnet set -g {group} -n {name} --address-prefixes {addressPrefixesNew} --dns-servers {dnsServersNew} --enable-vm-protection {enableVmProtectionNew} --enable-ddos-protection {enableDdosProtectionNew} --json'.formatArgs(virtualNetworks);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
@@ -172,6 +180,8 @@ describe('arm', function () {
           virtualNetworks.addressPrefixes.split(',').forEach(function (item) { output.addressSpace.addressPrefixes.should.containEql(item) });
           virtualNetworks.dnsServersNew.split(',').forEach(function (item) { output.dhcpOptions.dnsServers.should.containEql(item) });
           virtualNetworks.dnsServers.split(',').forEach(function (item) { output.dhcpOptions.dnsServers.should.containEql(item) });
+          output.enableVmProtection.should.equal(utils.parseBool(virtualNetworks.enableVmProtectionNew));
+          output.enableDdosProtection.should.equal(utils.parseBool(virtualNetworks.enableDdosProtectionNew));
           done();
         });
       });
@@ -203,7 +213,16 @@ describe('arm', function () {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
-            done();
+
+            cmd = 'network vnet list -g {group} --json'.formatArgs(virtualNetworks);
+            testUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              var outputs = JSON.parse(result.text);
+              _.some(outputs, function (output) {
+                return output.name === virtualNetworks.name;
+              }).should.be.false;
+              done();
+            });
           });
         });
       });

@@ -6,8 +6,8 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '947d47b4-7883-4bb9-9d85-c5e8e2f572ce',
-    name: 'nrptest58.westus.validation.partner',
+    id: 'e05dbbce-79c2-45a2-a7ef-f1058856feb3',
+    name: 'RNMTEST5',
     user: {
       name: 'user@domain.example',
       type: 'user'
