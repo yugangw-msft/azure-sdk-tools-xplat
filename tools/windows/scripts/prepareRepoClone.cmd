@@ -9,7 +9,7 @@
 :: to avoid https://github.com/npm/npm/issues/6438
 chcp 850 
 
-set NODE_VERSION=6.11.1
+set NODE_VERSION=6.11.3
 set NPM_VERSION=4.6.0
 
 :: Add Git to the path as this should be run through a .NET command prompt
