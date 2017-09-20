@@ -283,6 +283,9 @@ _.extend(CLITest.prototype, {
     }
     if (this.isPlayback()) {
       adalAuth.createAuthenticationContext = this.originalCreateAuthenticationContext;
+      // unload suite recording file
+      var suiteRecording = require.resolve(this.getSuiteRecordingsFile());
+      delete require.cache[suiteRecording];
     }
     callback();
   },
@@ -396,6 +399,9 @@ _.extend(CLITest.prototype, {
         nockHelper.nock.recorder.clear();
       } else {
         //playback mode
+        // unload test recording file
+        var testRecording = require.resolve(this.getTestRecordingsFile());
+        delete require.cache[testRecording];
         adalAuth.tokenCache = this.originalTokenCache;
         nockHelper.nock.cleanAll();
       }
