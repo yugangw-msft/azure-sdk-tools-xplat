@@ -49,12 +49,13 @@ var publicIPAddresses = {
   idleTimeoutInMinutes: '15',
   idleTimeoutInMinutesNew: '14',
   skuname: 'Basic',
-  location: 'southeastasia',
+  zones: '1',
+  location: 'eastus2',
   name: 'publicIPAddressName'
 };
 
 var publicIPAddressesDefault = {
-  location: 'southeastasia',
+  location: 'eastus2',
   publicIPAllocationMethod: 'Dynamic',
   publicIPAddressVersion: 'IPv4',
   idleTimeoutInMinutes: '4',
@@ -64,43 +65,43 @@ var publicIPAddressesDefault = {
 
 var ipAllocationMethodOutOfRange = {
   publicIPAllocationMethod: 'Any',
-  location: 'southeastasia',
+  location: 'eastus2',
   name: 'IPAllocationMethodOutOfRangeName'
 };
 
 var ipVersionOutOfRange = {
   publicIPAddressVersion: 'IPv8',
-  location: 'southeastasia',
+  location: 'eastus2',
   name: 'IPVersionOutOfRangeName'
 };
 
 var invalidSymbolsInLable = {
   domainNameLabel: 'l-a_b-1-e',
-  location: 'southeastasia',
+  location: 'eastus2',
   name: 'invalidSymbolsInLableName'
 };
 
 var idleTimeoutUnderRange = {
   idleTimeoutInMinutes: '3',
-  location: 'southeastasia',
+  location: 'eastus2',
   name: 'idleTimeoutUnderRangeName'
 };
 
 var idleTimeoutOverRange = {
   idleTimeoutInMinutes: '31',
-  location: 'southeastasia',
+  location: 'eastus2',
   name: 'idleTimeoutOverRangeName'
 };
 
 var deleteOfDomainNameLabel = {
   domainNameLabel: 'xplattestlbl',
-  location: 'southeastasia',
+  location: 'eastus2',
   name: 'deleteOfDomainNameLabelName'
 };
 
 var requiredEnvironment = [{
   name: 'AZURE_VM_TEST_LOCATION',
-  defaultValue: 'southeastasia'
+  defaultValue: 'eastus2'
 }];
 
 describe('arm', function () {
@@ -152,7 +153,7 @@ describe('arm', function () {
     describe('public ip addresses', function () {
       this.timeout(testTimeout);
       it('create should create public ip addresses', function (done) {
-        var cmd = 'network public-ip create -g {group} -n {name} --allocation-method {publicIPAllocationMethod} --ip-version {publicIPAddressVersion} --domain-name-label {domainNameLabel} --idle-timeout {idleTimeoutInMinutes} --sku-name {skuname} --location {location}'.formatArgs(publicIPAddresses);
+        var cmd = 'network public-ip create -g {group} -n {name} --allocation-method {publicIPAllocationMethod} --ip-version {publicIPAddressVersion} --domain-name-label {domainNameLabel} --idle-timeout {idleTimeoutInMinutes} --sku-name {skuname} --zones {zones} --location {location}'.formatArgs(publicIPAddresses);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();

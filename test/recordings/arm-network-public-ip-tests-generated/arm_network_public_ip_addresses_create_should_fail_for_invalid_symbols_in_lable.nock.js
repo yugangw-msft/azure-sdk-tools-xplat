@@ -6,8 +6,8 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '947d47b4-7883-4bb9-9d85-c5e8e2f572ce',
-    name: 'nrptest58.westus.validation.partner',
+    id: '9532a63e-f2eb-4649-bb23-5ed01077ce80',
+    name: 'franks-official-test-sub',
     user: {
       name: 'user@domain.example',
       type: 'user'
@@ -23,40 +23,40 @@ exports.getMockedProfile = function () {
 };
 
 exports.setEnvironment = function() {
-  process.env['AZURE_VM_TEST_LOCATION'] = 'southeastasia';
+  process.env['AZURE_VM_TEST_LOCATION'] = 'eastus2';
 };
 
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/invalidSymbolsInLableName?api-version=2017-08-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/invalidSymbolsInLableName?api-version=2017-09-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/publicIPAddresses/invalidSymbolsInLableName' under resource group 'xplat-test-public-ip' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': '034b4436-46c8-4312-9dfb-9284d49d7d07',
-  'x-ms-correlation-request-id': '034b4436-46c8-4312-9dfb-9284d49d7d07',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T083841Z:034b4436-46c8-4312-9dfb-9284d49d7d07',
+  'x-ms-request-id': '5c59cf1e-9fa2-4aee-a351-2c3bd599f8c2',
+  'x-ms-correlation-request-id': '5c59cf1e-9fa2-4aee-a351-2c3bd599f8c2',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170918T122652Z:5c59cf1e-9fa2-4aee-a351-2c3bd599f8c2',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Fri, 01 Sep 2017 08:38:41 GMT',
+  date: 'Mon, 18 Sep 2017 12:26:52 GMT',
   connection: 'close',
   'content-length': '185' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/invalidSymbolsInLableName?api-version=2017-08-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/invalidSymbolsInLableName?api-version=2017-09-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/publicIPAddresses/invalidSymbolsInLableName' under resource group 'xplat-test-public-ip' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': '034b4436-46c8-4312-9dfb-9284d49d7d07',
-  'x-ms-correlation-request-id': '034b4436-46c8-4312-9dfb-9284d49d7d07',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T083841Z:034b4436-46c8-4312-9dfb-9284d49d7d07',
+  'x-ms-request-id': '5c59cf1e-9fa2-4aee-a351-2c3bd599f8c2',
+  'x-ms-correlation-request-id': '5c59cf1e-9fa2-4aee-a351-2c3bd599f8c2',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170918T122652Z:5c59cf1e-9fa2-4aee-a351-2c3bd599f8c2',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Fri, 01 Sep 2017 08:38:41 GMT',
+  date: 'Mon, 18 Sep 2017 12:26:52 GMT',
   connection: 'close',
   'content-length': '185' });
  return result; },
@@ -64,37 +64,37 @@ function (nock) {
 var result = 
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/invalidSymbolsInLableName?api-version=2017-08-01', '*')
+.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/invalidSymbolsInLableName?api-version=2017-09-01', '*')
   .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"InvalidDomainNameLabel\",\r\n    \"message\": \"The domain name label l-a_b-1-e is invalid. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '229',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'd977d141-0ada-4c95-933b-d3b7a479574e',
+  'x-ms-request-id': '84d2c8a8-5777-448f-9c19-37e91c7cabed',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-writes': '1199',
-  'x-ms-correlation-request-id': '722217d7-4d07-4bbe-a964-6c813147ed32',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T083846Z:722217d7-4d07-4bbe-a964-6c813147ed32',
-  date: 'Fri, 01 Sep 2017 08:38:45 GMT',
+  'x-ms-ratelimit-remaining-subscription-writes': '1197',
+  'x-ms-correlation-request-id': '4f4134ba-f0d4-424b-850d-5f9469644c4d',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170918T122655Z:4f4134ba-f0d4-424b-850d-5f9469644c4d',
+  date: 'Mon, 18 Sep 2017 12:26:54 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/invalidSymbolsInLableName?api-version=2017-08-01', '*')
+.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-public-ip/providers/Microsoft.Network/publicIPAddresses/invalidSymbolsInLableName?api-version=2017-09-01', '*')
   .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"InvalidDomainNameLabel\",\r\n    \"message\": \"The domain name label l-a_b-1-e is invalid. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '229',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'd977d141-0ada-4c95-933b-d3b7a479574e',
+  'x-ms-request-id': '84d2c8a8-5777-448f-9c19-37e91c7cabed',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-writes': '1199',
-  'x-ms-correlation-request-id': '722217d7-4d07-4bbe-a964-6c813147ed32',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T083846Z:722217d7-4d07-4bbe-a964-6c813147ed32',
-  date: 'Fri, 01 Sep 2017 08:38:45 GMT',
+  'x-ms-ratelimit-remaining-subscription-writes': '1197',
+  'x-ms-correlation-request-id': '4f4134ba-f0d4-424b-850d-5f9469644c4d',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170918T122655Z:4f4134ba-f0d4-424b-850d-5f9469644c4d',
+  date: 'Mon, 18 Sep 2017 12:26:54 GMT',
   connection: 'close' });
  return result; }]];

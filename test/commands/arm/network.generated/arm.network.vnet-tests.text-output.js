@@ -45,6 +45,10 @@ var virtualNetworks = {
   addressPrefixesNew: '11.0.0.0/16',
   dnsServers: '10.0.0.42',
   dnsServersNew: '10.0.0.32',
+  enableVmProtection: 'false',
+  enableVmProtectionNew: 'true',
+  enableDdosProtection: 'false',
+  enableDdosProtectionNew: 'true',
   location: 'westus',
   name: 'virtualNetworkName'
 };
@@ -142,7 +146,7 @@ describe('arm', function () {
     describe('virtual networks', function () {
       this.timeout(testTimeout);
       it('create should create virtual networks', function (done) {
-        var cmd = 'network vnet create -g {group} -n {name} --address-prefixes {addressPrefixes} --dns-servers {dnsServers} --location {location}'.formatArgs(virtualNetworks);
+        var cmd = 'network vnet create -g {group} -n {name} --address-prefixes {addressPrefixes} --dns-servers {dnsServers} --enable-vm-protection {enableVmProtection} --enable-ddos-protection {enableDdosProtection} --location {location}'.formatArgs(virtualNetworks);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
@@ -156,7 +160,7 @@ describe('arm', function () {
         });
       });
       it('set should update virtual networks', function (done) {
-        var cmd = 'network vnet set -g {group} -n {name} --address-prefixes {addressPrefixesNew} --dns-servers {dnsServersNew}'.formatArgs(virtualNetworks);
+        var cmd = 'network vnet set -g {group} -n {name} --address-prefixes {addressPrefixesNew} --dns-servers {dnsServersNew} --enable-vm-protection {enableVmProtectionNew} --enable-ddos-protection {enableDdosProtectionNew}'.formatArgs(virtualNetworks);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
@@ -184,7 +188,12 @@ describe('arm', function () {
           cmd = 'network vnet show -g {group} -n {name}'.formatArgs(virtualNetworks);
           testUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-            done();
+
+            cmd = 'network vnet list -g {group}'.formatArgs(virtualNetworks);
+            testUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              done();
+            });
           });
         });
       });
