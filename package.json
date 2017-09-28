@@ -14,7 +14,7 @@
     "Chen, Hao <hach@microsoft.com>",
     "Krishnan, Balaji <balajik@microsoft.com>"
   ],
-  "version": "0.10.15",
+  "version": "0.10.16",
   "description": "Microsoft Azure Cross Platform Command Line tool",
   "tags": [
     "azure",
@@ -45,7 +45,7 @@
     "azure-arm-insights": "0.11.3",
     "azure-arm-iothub": "1.0.1-preview",
     "azure-arm-servermanagement": "0.1.2",
-    "azure-arm-network": "2.0.0",
+    "azure-arm-network": "3.0.0",
     "azure-arm-powerbiembedded": "0.1.0",
     "azure-arm-trafficmanager": "1.1.0-preview",
     "azure-arm-dns": "0.11.1",
@@ -133,8 +133,8 @@
   },
   "scripts": {
     "test": "npm -s run-script jshint && npm -s run-script unit-arm && npm -s run-script unit",
-    "unit": "node --max_old_space_size=4096 scripts/unit.js testlist.txt",
-    "unit-arm": "node --max_old_space_size=4096 scripts/unit.js testlist-arm.txt",
+    "unit": "node --max_old_space_size=16384 scripts/unit.js testlist.txt",
+    "unit-arm": "node --max_old_space_size=16384 scripts/unit.js testlist-arm.txt",
     "unit-arm-deployment": "node --max_old_space_size=4096 scripts/unit.js testlist-arm-deployment.txt",
     "unit-vm": "node scripts/unit.js testlist-vm.txt",
     "unit-vm-live": "node scripts/unit.js testlist-vm-live.txt",

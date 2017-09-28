@@ -26,9 +26,9 @@
         "caching": "None",
         "createOption": "fromImage",
         "vhdContainers": [
-          "https://xplatteststorage16623.blob.core.windows.net/xplatteststoragecnt16706",
-          "https://xplatteststorage27943.blob.core.windows.net/xplatteststoragecnt29075",
-          "https://xplatteststorage38039.blob.core.windows.net/xplatteststoragecnt35357"
+          "https://xplatteststorage18515.blob.core.windows.net/xplatteststoragecnt14076",
+          "https://xplatteststorage23118.blob.core.windows.net/xplatteststoragecnt29254",
+          "https://xplatteststorage36434.blob.core.windows.net/xplatteststoragecnt39422"
         ]
       }
     },
@@ -37,11 +37,12 @@
         {
           "name": "test",
           "primary": true,
+          "enableAcceleratedNetworking": null,
           "ipConfigurations": [
             {
               "name": "test",
               "subnet": {
-                "id": "/subscriptions/e33f361b-53c2-4cc7-b829-78906708387b/resourceGroups/xplatTstVmssGCreate4795/providers/Microsoft.Network/VirtualNetworks/xplattestvnet6991/subnets/xplattestsubnet9287"
+                "id": "/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplatTstVmssGCreate2715/providers/Microsoft.Network/VirtualNetworks/xplattestvnet2747/subnets/xplattestsubnet7262"
               }
             }
           ],
@@ -59,6 +60,7 @@
       "extensions": [
         {
           "name": "test",
+          "forceUpdateTag": "",
           "publisher": "Microsoft.Compute",
           "type": "VMAccessAgent",
           "typeHandlerVersion": "2.0",
@@ -80,6 +82,9 @@
   },
   "overprovision": false,
   "singlePlacementGroup": null,
+  "zones": [
+    ""
+  ],
   "id": null,
   "name": "xplattestvmss5",
   "location": "southeastasia"

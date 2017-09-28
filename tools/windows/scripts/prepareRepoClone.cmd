@@ -9,7 +9,7 @@
 :: to avoid https://github.com/npm/npm/issues/6438
 chcp 850 
 
-set NODE_VERSION=6.11.1
+set NODE_VERSION=6.11.3
 set NPM_VERSION=4.6.0
 
 :: Add Git to the path as this should be run through a .NET command prompt
@@ -126,12 +126,15 @@ popd
 
 echo Preparing to run npm install...
 pushd %TEMP_REPO%
-set NPM=.\bin\node.exe %TEMP_NPM_REPO%\npm-%NPM_VERSION%\cli.js
+set NPMLOCAL=.\bin\node.exe %TEMP_NPM_REPO%\npm-%NPM_VERSION%\cli.js
 echo.
+:: Notice we're not using the locally downloaded npm anymore. 
+:: This is because we've made the build machine have the version we need.
+:: If ever needed, just switch to use "NPMLOCAL" instead of "npm" and we'll be good.
 echo Perform npm version check
-call NPM -v
+call npm -v
 echo Running npm install...
-call NPM install --production
+call npm install --production
 echo.
 echo if YOU SEE A FAILURE AT THE BOTTOM OF THE NPM OUTPUT:
 echo If you do not have Node.js installed on this local machine, the Azure
