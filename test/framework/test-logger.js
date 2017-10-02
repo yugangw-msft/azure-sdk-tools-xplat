@@ -61,7 +61,7 @@ function getTimeStamp() {
       return '0' + number;
     }
 
-    return number;
+    return String(number);
   }
 
   var now = new Date();
