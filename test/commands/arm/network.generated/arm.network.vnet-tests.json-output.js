@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-vnet-tests-generated',
   groupName = 'xplat-test-vnet',
@@ -49,12 +48,12 @@ var virtualNetworks = {
   enableVmProtectionNew: 'true',
   enableDdosProtection: 'false',
   enableDdosProtectionNew: 'true',
-  location: 'westus',
+  location: 'westcentralus',
   name: 'virtualNetworkName'
 };
 
 var virtualNetworksDefault = {
-  location: 'westus',
+  location: 'westcentralus',
   addressPrefixes: '10.0.0.0/8',
   name: 'virtualNetworksDefaultName',
   group: groupName
@@ -63,39 +62,39 @@ var virtualNetworksDefault = {
 var invalidPrefixes = {
   addressPrefixes: '10.10.10.10',
   dnsServers: '10.0.0.42',
-  location: 'westus',
+  location: 'westcentralus',
   name: 'invalidPrefixesName'
 };
 
 var invalidDnsServers = {
   addressPrefixes: '10.0.0.0/8',
   dnsServers: '0',
-  location: 'westus',
+  location: 'westcentralus',
   name: 'invalidDnsServersName'
 };
 
 var arrayOfPrefixes = {
   addressPrefixes: '10.0.0.0/8,11.0.0.0/16',
-  location: 'westus',
+  location: 'westcentralus',
   name: 'arrayOfPrefixesName'
 };
 
 var noDnsServers = {
   addressPrefixes: '10.0.0.0/8',
-  location: 'westus',
+  location: 'westcentralus',
   name: 'noDnsServersName'
 };
 
 var changeDnsServers = {
   addressPrefixes: '10.0.0.0/8',
   dnsServersNew: '10.20.30.40',
-  location: 'westus',
+  location: 'westcentralus',
   name: 'changeDnsServersName'
 };
 
 var requiredEnvironment = [{
   name: 'AZURE_VM_TEST_LOCATION',
-  defaultValue: 'westus'
+  defaultValue: 'westcentralus'
 }];
 
 describe('arm', function () {

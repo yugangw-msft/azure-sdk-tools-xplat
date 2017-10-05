@@ -34,7 +34,6 @@ var preinstalledEnv = new (require('../../../util/preinstalledEnv'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-watcher-tests-generated',
   groupName = 'xplat-test-watcher',
@@ -144,21 +143,21 @@ describe('arm', function () {
             networkTestUtil.createGroup(networkWatchers.targetResourceGroupName, location, suite, function () {
               var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
               testUtils.executeCommand(suite, retry, cmd, function (result) {
-                result.exitStatus.should.equal(0);
+                if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
                 testUtils.executeCommand(suite, retry, cmd, function (result) {
-                  result.exitStatus.should.equal(0);
+                  if (!testUtils.assertExitStatus(result, done)) return;
                   var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
                   testUtils.executeCommand(suite, retry, cmd, function (result) {
-                    result.exitStatus.should.equal(0);
+                    if (!testUtils.assertExitStatus(result, done)) return;
                     var cmd = 'network nsg create -g {1} -n {name} --location {location} --json'.formatArgs(networkSecurityGroup, groupName);
                     testUtils.executeCommand(suite, retry, cmd, function (result) {
-                      result.exitStatus.should.equal(0);
+                      if (!testUtils.assertExitStatus(result, done)) return;
                       var output = JSON.parse(result.text);
                       networkWatchers.networkSecurityGroupId = output.id;
                       var cmd = 'network nic create -g {1} -n {name} --location {location} --subnet-vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --network-security-group-name {networkSecurityGroupName} --json'.formatArgs(networkInterface, groupName);
                       testUtils.executeCommand(suite, retry, cmd, function (result) {
-                        result.exitStatus.should.equal(0);
+                        if (!testUtils.assertExitStatus(result, done)) return;
                         var output = JSON.parse(result.text);
                         networkWatchers.networkInterfaceId = output.id;
                         preinstalledEnv.getNetworkWatcherEnv(networkWatchers, preinstalledEnvGetNetworkWatcherEnv, groupName, suite, function (result) {
@@ -290,7 +289,12 @@ describe('arm', function () {
           cmd = 'network watcher show -g {group} -n {name}'.formatArgs(networkWatchers);
           testUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-            done();
+
+            cmd = 'network watcher list -g {group}'.formatArgs(networkWatchers);
+            testUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              done();
+            });
           });
         });
       });

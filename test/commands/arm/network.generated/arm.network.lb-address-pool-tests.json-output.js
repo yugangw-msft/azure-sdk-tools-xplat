@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-lb-address-pool-tests-generated',
   groupName = 'xplat-test-address-pool',
@@ -88,13 +87,13 @@ describe('arm', function () {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network lb create -g {1} -n {name} --location {location} --json'.formatArgs(loadBalancer, groupName);
             testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
+              if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
               testUtils.executeCommand(suite, retry, cmd, function (result) {
-                result.exitStatus.should.equal(0);
+                if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network lb frontend-ip create -g {1} -n {name} --lb-name {loadBalancerName} --public-ip-name {publicIPAddressName} --json'.formatArgs(frontendIPConfiguration, groupName);
                 testUtils.executeCommand(suite, retry, cmd, function (result) {
-                  result.exitStatus.should.equal(0);
+                  if (!testUtils.assertExitStatus(result, done)) return;
                   done();
                 });
               });
@@ -159,7 +158,16 @@ describe('arm', function () {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
-            done();
+
+            cmd = 'network lb address-pool list -g {group} --lb-name {loadBalancerName} --json'.formatArgs(backendAddressPools);
+            testUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              var outputs = JSON.parse(result.text);
+              _.some(outputs, function (output) {
+                return output.name === backendAddressPools.name;
+              }).should.be.false;
+              done();
+            });
           });
         });
       });

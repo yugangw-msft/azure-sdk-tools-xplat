@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-nsg-tests-generated',
   groupName = 'xplat-test-nsg',
@@ -126,7 +125,12 @@ describe('arm', function () {
           cmd = 'network nsg show -g {group} -n {name}'.formatArgs(networkSecurityGroups);
           testUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-            done();
+
+            cmd = 'network nsg list -g {group}'.formatArgs(networkSecurityGroups);
+            testUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              done();
+            });
           });
         });
       });

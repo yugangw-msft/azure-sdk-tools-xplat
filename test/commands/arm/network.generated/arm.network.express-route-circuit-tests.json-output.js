@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-express-route-circuit-tests-generated',
   groupName = 'xplat-test-circuit',
@@ -206,7 +205,16 @@ describe('arm', function () {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
-            done();
+
+            cmd = 'network express-route circuit list -g {group} --json'.formatArgs(expressRouteCircuits);
+            testUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              var outputs = JSON.parse(result.text);
+              _.some(outputs, function (output) {
+                return output.name === expressRouteCircuits.name;
+              }).should.be.false;
+              done();
+            });
           });
         });
       });

@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-nsg-rule-tests-generated',
   groupName = 'xplat-test-rule',
@@ -45,14 +44,10 @@ var securityRules = {
   descriptionNew: 'setdesc',
   protocol: 'Tcp',
   protocolNew: 'Udp',
-  sourcePortRange: '1025',
-  sourcePortRangeNew: '65535',
-  destinationPortRange: '4242',
-  destinationPortRangeNew: '65042',
-  sourceAddressPrefix: '10.0.0.0/16',
-  sourceAddressPrefixNew: '10.0.0.0/8',
-  destinationAddressPrefix: '11.0.0.0/24',
-  destinationAddressPrefixNew: '11.0.0.0/8',
+  sourcePortRanges: '1024,1026',
+  destinationPortRanges: '4242,65042',
+  sourceAddressPrefixes: '10.0.0.0/16',
+  destinationAddressPrefixes: '11.0.0.0/24',
   access: 'Allow',
   accessNew: 'Deny',
   priority: '1500',
@@ -63,10 +58,22 @@ var securityRules = {
 };
 
 securityRules.networkSecurityGroupName = 'networkSecurityGroupName';
+securityRules.sourceASGName = 'sourceASGName';
+securityRules.destinationASGName = 'destinationASGName';
 
 var networkSecurityGroup = {
-  location: 'westus',
+  location: 'westcentralus',
   name: 'networkSecurityGroupName'
+};
+
+var sourceASG = {
+  location: 'westcentralus',
+  name: 'sourceASGName'
+};
+
+var destinationASG = {
+  location: 'westcentralus',
+  name: 'destinationASGName'
 };
 
 var securityRulesDefault = {
@@ -79,6 +86,8 @@ var securityRulesDefault = {
   access: 'Allow',
   direction: 'Inbound',
   networkSecurityGroupName: 'networkSecurityGroupName',
+  applicationSecurityGroupName: 'applicationSecurityGroupName',
+  applicationSecurityGroupName: 'applicationSecurityGroupName',
   name: 'securityRulesDefaultName',
   group: groupName
 };
@@ -153,7 +162,7 @@ var directionOutOfRange = {
 
 var requiredEnvironment = [{
   name: 'AZURE_VM_TEST_LOCATION',
-  defaultValue: 'westus'
+  defaultValue: 'westcentralus'
 }];
 
 describe('arm', function () {
@@ -188,11 +197,26 @@ describe('arm', function () {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network nsg create -g {1} -n {name} --location {location} --json'.formatArgs(networkSecurityGroup, groupName);
             testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
-              done();
+              if (!testUtils.assertExitStatus(result, done)) return;
+              var cmd = 'network application-security-group create -g {1} -n {name} --location {location} --json'.formatArgs(sourceASG, groupName);
+              testUtils.executeCommand(suite, retry, cmd, function (result) {
+                if (!testUtils.assertExitStatus(result, done)) return;
+                var output = JSON.parse(result.text);
+                securityRules.sourceASGId = output.id;
+                var cmd = 'network application-security-group create -g {1} -n {name} --location {location} --json'.formatArgs(destinationASG, groupName);
+                testUtils.executeCommand(suite, retry, cmd, function (result) {
+                  if (!testUtils.assertExitStatus(result, done)) return;
+                  var output = JSON.parse(result.text);
+                  securityRules.destinationASGId = output.id;
+                  done();
+                });
+              });
             });
           });
         } else {
+          var subscriptionId = profile.current.getSubscription().id;
+          securityRules.sourceASGId = generatorUtils.generateResourceIdCommon(subscriptionId, groupName, 'sourceASGs', securityRules.sourceASGName);
+          securityRules.destinationASGId = generatorUtils.generateResourceIdCommon(subscriptionId, groupName, 'destinationASGs', securityRules.destinationASGName);
           done();
         }
       });
@@ -213,7 +237,7 @@ describe('arm', function () {
     describe('security rules', function () {
       this.timeout(testTimeout);
       it('create should create security rules', function (done) {
-        var cmd = 'network nsg rule create -g {group} -n {name} --description {description} --protocol {protocol} --source-port-range {sourcePortRange} --destination-port-range {destinationPortRange} --source-address-prefix {sourceAddressPrefix} --destination-address-prefix {destinationAddressPrefix} --access {access} --priority {priority} --direction {direction} --nsg-name {networkSecurityGroupName}'.formatArgs(securityRules);
+        var cmd = 'network nsg rule create -g {group} -n {name} --description {description} --protocol {protocol} --source-port-ranges {sourcePortRanges} --destination-port-ranges {destinationPortRanges} --source-address-prefixes {sourceAddressPrefixes} --destination-address-prefixes {destinationAddressPrefixes} --access {access} --priority {priority} --direction {direction} --nsg-name {networkSecurityGroupName}'.formatArgs(securityRules);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
@@ -227,7 +251,7 @@ describe('arm', function () {
         });
       });
       it('set should update security rules', function (done) {
-        var cmd = 'network nsg rule set -g {group} -n {name} --description {descriptionNew} --protocol {protocolNew} --source-port-range {sourcePortRangeNew} --destination-port-range {destinationPortRangeNew} --source-address-prefix {sourceAddressPrefixNew} --destination-address-prefix {destinationAddressPrefixNew} --access {accessNew} --priority {priorityNew} --direction {directionNew} --nsg-name {networkSecurityGroupName}'.formatArgs(securityRules);
+        var cmd = 'network nsg rule set -g {group} -n {name} --description {descriptionNew} --protocol {protocolNew} --access {accessNew} --priority {priorityNew} --direction {directionNew} --nsg-name {networkSecurityGroupName} --source-application-security-groups {sourceASGId} --destination-application-security-groups {destinationASGId}'.formatArgs(securityRules);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
@@ -248,7 +272,12 @@ describe('arm', function () {
           cmd = 'network nsg rule show -g {group} -n {name} --nsg-name {networkSecurityGroupName}'.formatArgs(securityRules);
           testUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-            done();
+
+            cmd = 'network nsg rule list -g {group} --nsg-name {networkSecurityGroupName}'.formatArgs(securityRules);
+            testUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              done();
+            });
           });
         });
       });

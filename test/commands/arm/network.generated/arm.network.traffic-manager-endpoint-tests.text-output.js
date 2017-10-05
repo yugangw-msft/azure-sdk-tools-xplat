@@ -33,15 +33,37 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
+var $ = utils.getLocaleString;
 
-var testPrefix = 'arm-network-route-table-tests-generated',
-  groupName = 'xplat-test-route-table',
+var testPrefix = 'arm-network-traffic-manager-endpoint-tests-generated',
+  groupName = 'xplat-test-endpoint',
   location;
 var index = 0;
 
-var routeTables = {
+var endpoints = {
+  endpointType: 'ExternalEndpoints',
+  endpointTypeShow: 'ExternalEndpoints',
+  endpointTypeNew: 'ExternalEndpoints',
+  endpointTypeDelete: 'ExternalEndpoints',
+  target: 'test-profile-dns.azure.com',
+  endpointStatus: 'Enabled',
+  endpointStatusNew: 'Disabled',
+  weight: '100',
+  weightNew: '101',
+  priority: '200',
+  priorityNew: '202',
+  geoMapping: 'RE,GEO-NA',
+  geoMappingNew: 'RU,GEO-AP',
   location: 'westus',
-  name: 'routeTableName'
+  name: 'endpointName'
+};
+
+endpoints.profileName = 'profileName';
+
+var profile = {
+  relativeName: 'test-profile-dns',
+  path: '/healthcheck.html',
+  name: 'profileName'
 };
 
 var requiredEnvironment = [{
@@ -60,14 +82,18 @@ describe('arm', function () {
       suite = new CLITest(this, testPrefix, requiredEnvironment, true);
       suite.isRecording = false;
       suite.setupSuite(function () {
-        location = routeTables.location || process.env.AZURE_VM_TEST_LOCATION;
+        location = endpoints.location || process.env.AZURE_VM_TEST_LOCATION;
         groupName = suite.isMocked ? groupName : suite.generateId(groupName, null);
-        routeTables.location = location;
-        routeTables.name = suite.isMocked ? routeTables.name : suite.generateId(routeTables.name, null);
-        routeTables.group = groupName;
+        endpoints.location = location;
+        endpoints.name = suite.isMocked ? endpoints.name : suite.generateId(endpoints.name, null);
+        endpoints.group = groupName;
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
-            done();
+            var cmd = 'network traffic-manager profile create -g {1} -n {name} --relative-dns-name {relativeName} --monitor-path {path} --json'.formatArgs(profile, groupName);
+            testUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              done();
+            });
           });
         } else {
           done();
@@ -87,50 +113,38 @@ describe('arm', function () {
       suite.teardownTest(done);
     });
 
-    describe('route tables', function () {
+    describe('endpoints', function () {
       this.timeout(testTimeout);
-      it('create should create route tables', function (done) {
-        var cmd = 'network route-table create -g {group} -n {name} --location {location}'.formatArgs(routeTables);
+      it('create should create endpoints', function (done) {
+        var cmd = 'network traffic-manager endpoint create -g {group} -n {name} --type {endpointType} --target {target} --status {endpointStatus} --weight {weight} --priority {priority} --geo-mapping {geoMapping} --location {location} --profile-name {profileName}'.formatArgs(endpoints);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
-      it('show should display route tables details', function (done) {
-        var cmd = 'network route-table show -g {group} -n {name}'.formatArgs(routeTables);
+      it('show should display endpoints details', function (done) {
+        var cmd = 'network traffic-manager endpoint show -g {group} -n {name} --type {endpointTypeShow} --profile-name {profileName}'.formatArgs(endpoints);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
-      it('set should update route tables', function (done) {
-        var cmd = 'network route-table set -g {group} -n {name}'.formatArgs(routeTables);
+      it('set should update endpoints', function (done) {
+        var cmd = 'network traffic-manager endpoint set -g {group} -n {name} --type {endpointTypeNew} --status {endpointStatusNew} --weight {weightNew} --priority {priorityNew} --geo-mapping {geoMappingNew} --profile-name {profileName}'.formatArgs(endpoints);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
-      it('list should display all route tables in resource group', function (done) {
-        var cmd = 'network route-table list -g {group}'.formatArgs(routeTables);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
-          result.exitStatus.should.equal(0);
-          done();
-        });
-      });
-      it('delete should delete route tables', function (done) {
-        var cmd = 'network route-table delete -g {group} -n {name} --quiet'.formatArgs(routeTables);
+      it('delete should delete endpoints', function (done) {
+        var cmd = 'network traffic-manager endpoint delete -g {group} -n {name} --type {endpointTypeDelete} --profile-name {profileName} --quiet'.formatArgs(endpoints);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
-          cmd = 'network route-table show -g {group} -n {name}'.formatArgs(routeTables);
+          cmd = 'network traffic-manager endpoint show -g {group} -n {name} --type {endpointTypeShow} --profile-name {profileName}'.formatArgs(endpoints);
           testUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-
-            cmd = 'network route-table list -g {group}'.formatArgs(routeTables);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
-              done();
-            });
+            done();
           });
         });
       });

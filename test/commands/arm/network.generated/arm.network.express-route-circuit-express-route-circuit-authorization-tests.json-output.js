@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-express-route-authorization-tests-generated',
   groupName = 'xplat-test-authorization',
@@ -79,7 +78,7 @@ describe('arm', function () {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network express-route circuit create -g {1} -n {name} --service-provider-name {serviceProviderName} --peering-location {peeringLocation} --location {location} --json'.formatArgs(expressRouteCircuit, groupName);
             testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
+              if (!testUtils.assertExitStatus(result, done)) return;
               done();
             });
           });
@@ -154,7 +153,16 @@ describe('arm', function () {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
-            done();
+
+            cmd = 'network express-route authorization list -g {group} --circuit-name {expressRouteCircuitName} --json'.formatArgs(expressRouteCircuitAuthorizations);
+            testUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              var outputs = JSON.parse(result.text);
+              _.some(outputs, function (output) {
+                return output.name === expressRouteCircuitAuthorizations.name;
+              }).should.be.false;
+              done();
+            });
           });
         });
       });

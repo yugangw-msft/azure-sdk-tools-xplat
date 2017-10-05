@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-application-gateway-http-settings-tests-generated',
   groupName = 'xplat-test-http-settings',
@@ -122,19 +121,19 @@ describe('arm', function () {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
             testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
+              if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
               testUtils.executeCommand(suite, retry, cmd, function (result) {
-                result.exitStatus.should.equal(0);
+                if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
                 testUtils.executeCommand(suite, retry, cmd, function (result) {
-                  result.exitStatus.should.equal(0);
+                  if (!testUtils.assertExitStatus(result, done)) return;
                   var cmd = 'network application-gateway create -g {1} -n {name} --servers {backendAddresses} --location {location} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --json'.formatArgs(applicationGateway, groupName);
                   testUtils.executeCommand(suite, retry, cmd, function (result) {
-                    result.exitStatus.should.equal(0);
+                    if (!testUtils.assertExitStatus(result, done)) return;
                     var cmd = 'network application-gateway probe create -g {1} -n {name} --host-name {host} --path {path} --timeout {timeout} --gateway-name {applicationGatewayName} --json'.formatArgs(probe, groupName);
                     testUtils.executeCommand(suite, retry, cmd, function (result) {
-                      result.exitStatus.should.equal(0);
+                      if (!testUtils.assertExitStatus(result, done)) return;
                       done();
                     });
                   });
@@ -176,7 +175,6 @@ describe('arm', function () {
           output.hostName.toLowerCase().should.equal(backendHttpSettingsCollection.hostName.toLowerCase());
           output.pickHostNameFromBackendAddress.should.equal(utils.parseBool(backendHttpSettingsCollection.pickHostNameFromBackendAddress));
           output.affinityCookieName.toLowerCase().should.equal(backendHttpSettingsCollection.affinityCookieName.toLowerCase());
-          output.probeEnabled.should.equal(utils.parseBool(backendHttpSettingsCollection.probeEnabled));
           output.path.toLowerCase().should.equal(backendHttpSettingsCollection.path.toLowerCase());
           done();
         });
@@ -193,7 +191,6 @@ describe('arm', function () {
           output.hostName.toLowerCase().should.equal(backendHttpSettingsCollection.hostName.toLowerCase());
           output.pickHostNameFromBackendAddress.should.equal(utils.parseBool(backendHttpSettingsCollection.pickHostNameFromBackendAddress));
           output.affinityCookieName.toLowerCase().should.equal(backendHttpSettingsCollection.affinityCookieName.toLowerCase());
-          output.probeEnabled.should.equal(utils.parseBool(backendHttpSettingsCollection.probeEnabled));
           output.path.toLowerCase().should.equal(backendHttpSettingsCollection.path.toLowerCase());
           done();
         });
@@ -211,7 +208,6 @@ describe('arm', function () {
           should.not.exist(output.hostName);
           output.pickHostNameFromBackendAddress.should.equal(utils.parseBool(backendHttpSettingsCollection.pickHostNameFromBackendAddressNew));
           output.affinityCookieName.toLowerCase().should.equal(backendHttpSettingsCollection.affinityCookieNameNew.toLowerCase());
-          output.probeEnabled.should.equal(utils.parseBool(backendHttpSettingsCollection.probeEnabledNew));
           should.not.exist(output.path);
           done();
         });
@@ -237,7 +233,16 @@ describe('arm', function () {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
-            done();
+
+            cmd = 'network application-gateway http-settings list -g {group} --gateway-name {applicationGatewayName} --json'.formatArgs(backendHttpSettingsCollection);
+            testUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              var outputs = JSON.parse(result.text);
+              _.some(outputs, function (output) {
+                return output.name === backendHttpSettingsCollection.name;
+              }).should.be.false;
+              done();
+            });
           });
         });
       });

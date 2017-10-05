@@ -34,19 +34,19 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
 
-var testPrefix = 'arm-network-route-table-tests-generated',
-  groupName = 'xplat-test-route-table',
+var testPrefix = 'arm-network-application-security-group-tests-generated',
+  groupName = 'xplat-test-application-security-group',
   location;
 var index = 0;
 
-var routeTables = {
-  location: 'westus',
-  name: 'routeTableName'
+var applicationSecurityGroups = {
+  location: 'westcentralus',
+  name: 'applicationSecurityGroupName'
 };
 
 var requiredEnvironment = [{
   name: 'AZURE_VM_TEST_LOCATION',
-  defaultValue: 'westus'
+  defaultValue: 'westcentralus'
 }];
 
 describe('arm', function () {
@@ -57,14 +57,13 @@ describe('arm', function () {
 
     before(function (done) {
       this.timeout(testTimeout);
-      suite = new CLITest(this, testPrefix, requiredEnvironment, true);
-      suite.isRecording = false;
+      suite = new CLITest(this, testPrefix, requiredEnvironment);
       suite.setupSuite(function () {
-        location = routeTables.location || process.env.AZURE_VM_TEST_LOCATION;
+        location = applicationSecurityGroups.location || process.env.AZURE_VM_TEST_LOCATION;
         groupName = suite.isMocked ? groupName : suite.generateId(groupName, null);
-        routeTables.location = location;
-        routeTables.name = suite.isMocked ? routeTables.name : suite.generateId(routeTables.name, null);
-        routeTables.group = groupName;
+        applicationSecurityGroups.location = location;
+        applicationSecurityGroups.name = suite.isMocked ? applicationSecurityGroups.name : suite.generateId(applicationSecurityGroups.name, null);
+        applicationSecurityGroups.group = groupName;
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             done();
@@ -87,48 +86,64 @@ describe('arm', function () {
       suite.teardownTest(done);
     });
 
-    describe('route tables', function () {
+    describe('application security groups', function () {
       this.timeout(testTimeout);
-      it('create should create route tables', function (done) {
-        var cmd = 'network route-table create -g {group} -n {name} --location {location}'.formatArgs(routeTables);
+      it('create should create application security groups', function (done) {
+        var cmd = 'network application-security-group create -g {group} -n {name} --location {location} --json'.formatArgs(applicationSecurityGroups);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
+          var output = JSON.parse(result.text);
+          output.name.should.equal(applicationSecurityGroups.name);
           done();
         });
       });
-      it('show should display route tables details', function (done) {
-        var cmd = 'network route-table show -g {group} -n {name}'.formatArgs(routeTables);
+      it('show should display application security groups details', function (done) {
+        var cmd = 'network application-security-group show -g {group} -n {name} --json'.formatArgs(applicationSecurityGroups);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
+          var output = JSON.parse(result.text);
+          output.name.should.equal(applicationSecurityGroups.name);
           done();
         });
       });
-      it('set should update route tables', function (done) {
-        var cmd = 'network route-table set -g {group} -n {name}'.formatArgs(routeTables);
+      it('set should update application security groups', function (done) {
+        var cmd = 'network application-security-group set -g {group} -n {name} --json'.formatArgs(applicationSecurityGroups);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
+          var output = JSON.parse(result.text);
+          output.name.should.equal(applicationSecurityGroups.name);
           done();
         });
       });
-      it('list should display all route tables in resource group', function (done) {
-        var cmd = 'network route-table list -g {group}'.formatArgs(routeTables);
+      it('list should display all application security groups in resource group', function (done) {
+        var cmd = 'network application-security-group list -g {group} --json'.formatArgs(applicationSecurityGroups);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
+          var outputs = JSON.parse(result.text);
+          _.some(outputs, function (output) {
+            return output.name === applicationSecurityGroups.name;
+          }).should.be.true;
           done();
         });
       });
-      it('delete should delete route tables', function (done) {
-        var cmd = 'network route-table delete -g {group} -n {name} --quiet'.formatArgs(routeTables);
+      it('delete should delete application security groups', function (done) {
+        var cmd = 'network application-security-group delete -g {group} -n {name} --quiet --json'.formatArgs(applicationSecurityGroups);
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
-          cmd = 'network route-table show -g {group} -n {name}'.formatArgs(routeTables);
+          cmd = 'network application-security-group show -g {group} -n {name} --json'.formatArgs(applicationSecurityGroups);
           testUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
+            var output = JSON.parse(result.text || '{}');
+            output.should.be.empty;
 
-            cmd = 'network route-table list -g {group}'.formatArgs(routeTables);
+            cmd = 'network application-security-group list -g {group} --json'.formatArgs(applicationSecurityGroups);
             testUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
+              var outputs = JSON.parse(result.text);
+              _.some(outputs, function (output) {
+                return output.name === applicationSecurityGroups.name;
+              }).should.be.false;
               done();
             });
           });

@@ -317,6 +317,16 @@ exports.stripBOM = function (content) {
   return content;
 };
 
+exports.assertExitStatus = function (result, done) {
+  try {
+    result.exitStatus.should.equal(0);
+  } catch (ignore) {
+    done(new Error(result.errorText));
+    return false;
+  }
+  return true;
+}
+
 /**
  * format
  *
