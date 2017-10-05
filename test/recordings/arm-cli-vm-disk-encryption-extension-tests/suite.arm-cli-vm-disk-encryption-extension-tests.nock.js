@@ -6,14 +6,14 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '00000000-0000-0000-0000-000000000000',
-    name: 'disk encryption',
+    id: '9135e259-1f76-4dbd-a5c8-bc4fcdf3cf1c',
+    name: 'Azure Security Customer Engagements',
+    state: 'Enabled',
     user: {
       name: 'user@domain.example',
       type: 'user'
     },
-    tenantId: '00000000-0000-0000-0000-000000000000',
-    state: 'Enabled',
+    tenantId: '72f988bf-86f1-41af-91ab-2d7cd011db47',
     registeredProviders: [],
     _eventsCount: '1',
     isDefault: true
@@ -29,4 +29,4 @@ exports.setEnvironment = function() {
 
 exports.scopes = [];
 
- exports.randomTestIdsGenerated = function() { return ['xplatTestADE8597','xplatteststorage14570','xplatteststoragecnt15099','xplattestipdns7764'];};
+ exports.randomTestIdsGenerated = function() { return ['xplatTestADEOneOff5555','xplatteststorage17365','xplatteststoragecnt11744','xplattestipdns6606'];};
