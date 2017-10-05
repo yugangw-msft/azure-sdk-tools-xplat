@@ -210,7 +210,7 @@ describe('arm', function() {
           var allResources = JSON.parse(result.text);
           allResources.osVolumeEncrypted.should.equal('Encrypted');
           allResources.dataVolumesEncrypted.should.equal('Encrypted');
-          allResources.osVolumeEncryptionSettings.diskEncryptionKey.sourceVault.id.should.equal(diskEncryptionKeyVaultId);
+          allResources.osVolumeEncryptionSettings.diskEncryptionKey.sourceVault.id.should.endWith(vaultName);
           done();
         });
       });
@@ -230,7 +230,7 @@ describe('arm', function() {
           var allResources = JSON.parse(result.text);
           allResources.osVolumeEncrypted.should.equal('Encrypted');
           allResources.dataVolumesEncrypted.should.equal('Encrypted');
-          allResources.osVolumeEncryptionSettings.diskEncryptionKey.sourceVault.id.should.equal(diskEncryptionKeyVaultId2);
+          allResources.osVolumeEncryptionSettings.diskEncryptionKey.sourceVault.id.should.endWith(vaultName2);
           done();
         });
       });
