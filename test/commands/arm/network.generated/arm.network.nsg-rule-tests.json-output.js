@@ -160,6 +160,21 @@ var directionOutOfRange = {
   name: 'directionOutOfRangeName'
 };
 
+var singularPrefixes = {
+  sourcePortRange: '1025-1030',
+  sourcePortRangeNew: '64000',
+  sourceAddressPrefix: '10.0.0.0/16',
+  sourceAddressPrefixNew: '10.0.0.0/24',
+  destinationPortRange: '4242',
+  destinationPortRangeNew: '1200-1202',
+  destinationAddressPrefix: '11.0.0.0/24',
+  destinationAddressPrefixNew: '11.0.0.0/16',
+  description: 'testDesc',
+  priority: '1470',
+  networkSecurityGroupName: 'networkSecurityGroupName',
+  name: 'singularPrefixesName'
+};
+
 var requiredEnvironment = [{
   name: 'AZURE_VM_TEST_LOCATION',
   defaultValue: 'westcentralus'
@@ -191,6 +206,7 @@ describe('arm', function () {
         rulePriorityUnderRange.group = groupName;
         rulePriorityOverRange.group = groupName;
         directionOutOfRange.group = groupName;
+        singularPrefixes.group = groupName;
 
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
@@ -408,6 +424,37 @@ describe('arm', function () {
         testUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
+        });
+      });
+      it('create should pass for singular prefixes', function (done) {
+        var cmd = 'network nsg rule create -g {group} -n {name} --source-port-range {sourcePortRange} --source-address-prefix {sourceAddressPrefix} --destination-port-range {destinationPortRange} --destination-address-prefix {destinationAddressPrefix} --description {description} --priority {priority} --nsg-name {networkSecurityGroupName} --json'.formatArgs(singularPrefixes);
+        testUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          var output = JSON.parse(result.text);
+          output.name.should.equal(singularPrefixes.name);
+          output.sourcePortRange.toLowerCase().should.equal(singularPrefixes.sourcePortRange.toLowerCase());
+          output.sourceAddressPrefix.toLowerCase().should.equal(singularPrefixes.sourceAddressPrefix.toLowerCase());
+          output.destinationPortRange.toLowerCase().should.equal(singularPrefixes.destinationPortRange.toLowerCase());
+          output.destinationAddressPrefix.toLowerCase().should.equal(singularPrefixes.destinationAddressPrefix.toLowerCase());
+          output.description.toLowerCase().should.equal(singularPrefixes.description.toLowerCase());
+          output.priority.should.equal(parseInt(singularPrefixes.priority, 10));
+
+          cmd = 'network nsg rule set -g {group} -n {name} --source-port-range {sourcePortRangeNew} --source-address-prefix {sourceAddressPrefixNew} --destination-port-range {destinationPortRangeNew} --destination-address-prefix {destinationAddressPrefixNew} --nsg-name {networkSecurityGroupName} --json'.formatArgs(singularPrefixes);
+          testUtils.executeCommand(suite, retry, cmd, function (result) {
+            result.exitStatus.should.equal(0);
+            var output = JSON.parse(result.text);
+            output.name.should.equal(singularPrefixes.name);
+            output.sourcePortRange.toLowerCase().should.equal(singularPrefixes.sourcePortRangeNew.toLowerCase());
+            output.sourceAddressPrefix.toLowerCase().should.equal(singularPrefixes.sourceAddressPrefixNew.toLowerCase());
+            output.destinationPortRange.toLowerCase().should.equal(singularPrefixes.destinationPortRangeNew.toLowerCase());
+            output.destinationAddressPrefix.toLowerCase().should.equal(singularPrefixes.destinationAddressPrefixNew.toLowerCase());
+
+            cmd = 'network nsg rule delete -g {group} -n {name} --nsg-name {networkSecurityGroupName} --quiet --json'.formatArgs(singularPrefixes);
+            testUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              done();
+            });
+          });
         });
       });
     });

@@ -30,37 +30,37 @@ exports.scopes = [[function (nock) {
 var result = 
 nock('http://management.azure.com:443')
   .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/securityRuleName?api-version=2017-09-01')
-  .reply(200, "{\r\n  \"name\": \"securityRuleName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/securityRuleName\",\r\n  \"etag\": \"W/\\\"25d30662-022e-4619-a3e8-3de18bd32613\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"description\": \"createdesc\",\r\n    \"protocol\": \"Tcp\",\r\n    \"sourceAddressPrefix\": \"\",\r\n    \"destinationAddressPrefix\": \"\",\r\n    \"access\": \"Allow\",\r\n    \"priority\": 1500,\r\n    \"direction\": \"Inbound\",\r\n    \"sourcePortRanges\": [\r\n      \"1024\",\r\n      \"1026\"\r\n    ],\r\n    \"destinationPortRanges\": [\r\n      \"4242\",\r\n      \"65042\"\r\n    ],\r\n    \"sourceAddressPrefixes\": [\r\n      \"10.0.0.0/16\"\r\n    ],\r\n    \"destinationAddressPrefixes\": [\r\n      \"11.0.0.0/24\"\r\n    ]\r\n  }\r\n}", { 'cache-control': 'no-cache',
+  .reply(200, "{\r\n  \"name\": \"securityRuleName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/securityRuleName\",\r\n  \"etag\": \"W/\\\"0c07fc74-2ebe-4399-9026-d4ce5b80f9b6\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"description\": \"createdesc\",\r\n    \"protocol\": \"Tcp\",\r\n    \"access\": \"Allow\",\r\n    \"priority\": 1500,\r\n    \"direction\": \"Inbound\",\r\n    \"sourcePortRanges\": [\r\n      \"1024\",\r\n      \"1026\"\r\n    ],\r\n    \"destinationPortRanges\": [\r\n      \"4242\",\r\n      \"65042\"\r\n    ],\r\n    \"sourceAddressPrefixes\": [\r\n      \"10.0.0.0/16\"\r\n    ],\r\n    \"destinationAddressPrefixes\": [\r\n      \"11.0.0.0/24\"\r\n    ]\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
-  'content-length': '819',
+  'content-length': '750',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  etag: 'W/"25d30662-022e-4619-a3e8-3de18bd32613"',
-  'x-ms-request-id': '5b4aeb19-b22a-4c7a-9b4c-9ac77c694d4d',
+  etag: 'W/"0c07fc74-2ebe-4399-9026-d4ce5b80f9b6"',
+  'x-ms-request-id': 'b8ab67b9-d182-4026-b429-f96cecd4a69c',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14998',
-  'x-ms-correlation-request-id': 'e6556f2a-8c48-4a47-8611-5265827d2333',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170927T101704Z:e6556f2a-8c48-4a47-8611-5265827d2333',
-  date: 'Wed, 27 Sep 2017 10:17:04 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14997',
+  'x-ms-correlation-request-id': '57acfc78-8d63-4ebc-8e56-a49f8d97e34a',
+  'x-ms-routing-request-id': 'WESTEUROPE:20171005T115835Z:57acfc78-8d63-4ebc-8e56-a49f8d97e34a',
+  date: 'Thu, 05 Oct 2017 11:58:34 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
   .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/securityRuleName?api-version=2017-09-01')
-  .reply(200, "{\r\n  \"name\": \"securityRuleName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/securityRuleName\",\r\n  \"etag\": \"W/\\\"25d30662-022e-4619-a3e8-3de18bd32613\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"description\": \"createdesc\",\r\n    \"protocol\": \"Tcp\",\r\n    \"sourceAddressPrefix\": \"\",\r\n    \"destinationAddressPrefix\": \"\",\r\n    \"access\": \"Allow\",\r\n    \"priority\": 1500,\r\n    \"direction\": \"Inbound\",\r\n    \"sourcePortRanges\": [\r\n      \"1024\",\r\n      \"1026\"\r\n    ],\r\n    \"destinationPortRanges\": [\r\n      \"4242\",\r\n      \"65042\"\r\n    ],\r\n    \"sourceAddressPrefixes\": [\r\n      \"10.0.0.0/16\"\r\n    ],\r\n    \"destinationAddressPrefixes\": [\r\n      \"11.0.0.0/24\"\r\n    ]\r\n  }\r\n}", { 'cache-control': 'no-cache',
+  .reply(200, "{\r\n  \"name\": \"securityRuleName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/securityRuleName\",\r\n  \"etag\": \"W/\\\"0c07fc74-2ebe-4399-9026-d4ce5b80f9b6\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"description\": \"createdesc\",\r\n    \"protocol\": \"Tcp\",\r\n    \"access\": \"Allow\",\r\n    \"priority\": 1500,\r\n    \"direction\": \"Inbound\",\r\n    \"sourcePortRanges\": [\r\n      \"1024\",\r\n      \"1026\"\r\n    ],\r\n    \"destinationPortRanges\": [\r\n      \"4242\",\r\n      \"65042\"\r\n    ],\r\n    \"sourceAddressPrefixes\": [\r\n      \"10.0.0.0/16\"\r\n    ],\r\n    \"destinationAddressPrefixes\": [\r\n      \"11.0.0.0/24\"\r\n    ]\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
-  'content-length': '819',
+  'content-length': '750',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  etag: 'W/"25d30662-022e-4619-a3e8-3de18bd32613"',
-  'x-ms-request-id': '5b4aeb19-b22a-4c7a-9b4c-9ac77c694d4d',
+  etag: 'W/"0c07fc74-2ebe-4399-9026-d4ce5b80f9b6"',
+  'x-ms-request-id': 'b8ab67b9-d182-4026-b429-f96cecd4a69c',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14998',
-  'x-ms-correlation-request-id': 'e6556f2a-8c48-4a47-8611-5265827d2333',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170927T101704Z:e6556f2a-8c48-4a47-8611-5265827d2333',
-  date: 'Wed, 27 Sep 2017 10:17:04 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14997',
+  'x-ms-correlation-request-id': '57acfc78-8d63-4ebc-8e56-a49f8d97e34a',
+  'x-ms-routing-request-id': 'WESTEUROPE:20171005T115835Z:57acfc78-8d63-4ebc-8e56-a49f8d97e34a',
+  date: 'Thu, 05 Oct 2017 11:58:34 GMT',
   connection: 'close' });
  return result; }]];
