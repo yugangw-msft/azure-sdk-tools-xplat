@@ -6,8 +6,8 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '947d47b4-7883-4bb9-9d85-c5e8e2f572ce',
-    name: 'nrptest58.westus.validation.partner',
+    id: '9532a63e-f2eb-4649-bb23-5ed01077ce80',
+    name: 'franks-official-test-sub',
     user: {
       name: 'user@domain.example',
       type: 'user'
@@ -29,34 +29,34 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/zeroASNName?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/zeroASNName?api-version=2017-09-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/localNetworkGateways/zeroASNName' under resource group 'xplat-test-local-gateway' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': 'fb0c6002-5e44-4ea2-8082-b547210e515b',
-  'x-ms-correlation-request-id': 'fb0c6002-5e44-4ea2-8082-b547210e515b',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T094533Z:fb0c6002-5e44-4ea2-8082-b547210e515b',
+  'x-ms-request-id': '7f395d72-6956-4af0-bc2b-fd5eb23c1ba5',
+  'x-ms-correlation-request-id': '7f395d72-6956-4af0-bc2b-fd5eb23c1ba5',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170927T105301Z:7f395d72-6956-4af0-bc2b-fd5eb23c1ba5',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Fri, 01 Sep 2017 09:45:33 GMT',
+  date: 'Wed, 27 Sep 2017 10:53:00 GMT',
   connection: 'close',
   'content-length': '178' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/zeroASNName?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/zeroASNName?api-version=2017-09-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/localNetworkGateways/zeroASNName' under resource group 'xplat-test-local-gateway' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': 'fb0c6002-5e44-4ea2-8082-b547210e515b',
-  'x-ms-correlation-request-id': 'fb0c6002-5e44-4ea2-8082-b547210e515b',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T094533Z:fb0c6002-5e44-4ea2-8082-b547210e515b',
+  'x-ms-request-id': '7f395d72-6956-4af0-bc2b-fd5eb23c1ba5',
+  'x-ms-correlation-request-id': '7f395d72-6956-4af0-bc2b-fd5eb23c1ba5',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170927T105301Z:7f395d72-6956-4af0-bc2b-fd5eb23c1ba5',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Fri, 01 Sep 2017 09:45:33 GMT',
+  date: 'Wed, 27 Sep 2017 10:53:00 GMT',
   connection: 'close',
   'content-length': '178' });
  return result; },
@@ -64,37 +64,37 @@ function (nock) {
 var result = 
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/zeroASNName?api-version=2017-09-01', '*')
-  .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"LocalNetworkGatewayCannotHaveZeroAsn\",\r\n    \"message\": \"The local network gateway /subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/zeroASNName cannot have an ASN of zero\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
+.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/zeroASNName?api-version=2017-09-01', '*')
+  .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"LocalNetworkGatewayCannotHaveZeroAsn\",\r\n    \"message\": \"The local network gateway /subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/zeroASNName cannot have an ASN of zero\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '320',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '4e62c21b-ba05-4434-9e9f-8f4ff373a316',
+  'x-ms-request-id': '79df4398-4cbe-4f9c-bd64-becf0ba9fa9d',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-writes': '1198',
-  'x-ms-correlation-request-id': '0d283fa0-e544-46d2-876a-bf5799f6d43a',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T094537Z:0d283fa0-e544-46d2-876a-bf5799f6d43a',
-  date: 'Fri, 01 Sep 2017 09:45:37 GMT',
+  'x-ms-ratelimit-remaining-subscription-writes': '1197',
+  'x-ms-correlation-request-id': '2e335889-8da5-46fc-8d20-80a7d7f61677',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170927T105304Z:2e335889-8da5-46fc-8d20-80a7d7f61677',
+  date: 'Wed, 27 Sep 2017 10:53:04 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/zeroASNName?api-version=2017-09-01', '*')
-  .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"LocalNetworkGatewayCannotHaveZeroAsn\",\r\n    \"message\": \"The local network gateway /subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/zeroASNName cannot have an ASN of zero\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
+.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/zeroASNName?api-version=2017-09-01', '*')
+  .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"LocalNetworkGatewayCannotHaveZeroAsn\",\r\n    \"message\": \"The local network gateway /subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/zeroASNName cannot have an ASN of zero\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '320',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '4e62c21b-ba05-4434-9e9f-8f4ff373a316',
+  'x-ms-request-id': '79df4398-4cbe-4f9c-bd64-becf0ba9fa9d',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-writes': '1198',
-  'x-ms-correlation-request-id': '0d283fa0-e544-46d2-876a-bf5799f6d43a',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T094537Z:0d283fa0-e544-46d2-876a-bf5799f6d43a',
-  date: 'Fri, 01 Sep 2017 09:45:37 GMT',
+  'x-ms-ratelimit-remaining-subscription-writes': '1197',
+  'x-ms-correlation-request-id': '2e335889-8da5-46fc-8d20-80a7d7f61677',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170927T105304Z:2e335889-8da5-46fc-8d20-80a7d7f61677',
+  date: 'Wed, 27 Sep 2017 10:53:04 GMT',
   connection: 'close' });
  return result; }]];

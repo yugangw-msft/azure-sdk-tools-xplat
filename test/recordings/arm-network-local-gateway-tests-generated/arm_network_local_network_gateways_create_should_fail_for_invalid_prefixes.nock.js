@@ -6,8 +6,8 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '947d47b4-7883-4bb9-9d85-c5e8e2f572ce',
-    name: 'nrptest58.westus.validation.partner',
+    id: '9532a63e-f2eb-4649-bb23-5ed01077ce80',
+    name: 'franks-official-test-sub',
     user: {
       name: 'user@domain.example',
       type: 'user'
@@ -29,34 +29,34 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidPrefixesName?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidPrefixesName?api-version=2017-09-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/localNetworkGateways/invalidPrefixesName' under resource group 'xplat-test-local-gateway' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': '985240b7-1960-4486-b422-f3a73987c09a',
-  'x-ms-correlation-request-id': '985240b7-1960-4486-b422-f3a73987c09a',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T094442Z:985240b7-1960-4486-b422-f3a73987c09a',
+  'x-ms-request-id': '200c509c-cb20-4f74-b8ed-2acc01e52154',
+  'x-ms-correlation-request-id': '200c509c-cb20-4f74-b8ed-2acc01e52154',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170927T105213Z:200c509c-cb20-4f74-b8ed-2acc01e52154',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Fri, 01 Sep 2017 09:44:41 GMT',
+  date: 'Wed, 27 Sep 2017 10:52:13 GMT',
   connection: 'close',
   'content-length': '186' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidPrefixesName?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidPrefixesName?api-version=2017-09-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/localNetworkGateways/invalidPrefixesName' under resource group 'xplat-test-local-gateway' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': '985240b7-1960-4486-b422-f3a73987c09a',
-  'x-ms-correlation-request-id': '985240b7-1960-4486-b422-f3a73987c09a',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T094442Z:985240b7-1960-4486-b422-f3a73987c09a',
+  'x-ms-request-id': '200c509c-cb20-4f74-b8ed-2acc01e52154',
+  'x-ms-correlation-request-id': '200c509c-cb20-4f74-b8ed-2acc01e52154',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170927T105213Z:200c509c-cb20-4f74-b8ed-2acc01e52154',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Fri, 01 Sep 2017 09:44:41 GMT',
+  date: 'Wed, 27 Sep 2017 10:52:13 GMT',
   connection: 'close',
   'content-length': '186' });
  return result; },
@@ -64,37 +64,37 @@ function (nock) {
 var result = 
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidPrefixesName?api-version=2017-09-01', '*')
-  .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"InvalidAddressPrefixFormat\",\r\n    \"message\": \"Address prefix 192.168.0.0 of resource /subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidPrefixesName is not formatted correctly. It should follow CIDR notation, for example 10.0.0.0/24.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
+.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidPrefixesName?api-version=2017-09-01', '*')
+  .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"InvalidAddressPrefixFormat\",\r\n    \"message\": \"Address prefix 192.168.0.0 of resource /subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidPrefixesName is not formatted correctly. It should follow CIDR notation, for example 10.0.0.0/24.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '389',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'ee890df4-246e-4397-880b-942b14366c14',
+  'x-ms-request-id': '76e1a992-4b83-40fb-9bf7-dd7f17b2ce80',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1199',
-  'x-ms-correlation-request-id': 'ed935036-7a1b-453d-a081-c79c151424dd',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T094446Z:ed935036-7a1b-453d-a081-c79c151424dd',
-  date: 'Fri, 01 Sep 2017 09:44:45 GMT',
+  'x-ms-correlation-request-id': 'b75b37d5-c031-4cf6-b1a8-bd4ba3b17b51',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170927T105217Z:b75b37d5-c031-4cf6-b1a8-bd4ba3b17b51',
+  date: 'Wed, 27 Sep 2017 10:52:16 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidPrefixesName?api-version=2017-09-01', '*')
-  .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"InvalidAddressPrefixFormat\",\r\n    \"message\": \"Address prefix 192.168.0.0 of resource /subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidPrefixesName is not formatted correctly. It should follow CIDR notation, for example 10.0.0.0/24.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
+.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidPrefixesName?api-version=2017-09-01', '*')
+  .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"InvalidAddressPrefixFormat\",\r\n    \"message\": \"Address prefix 192.168.0.0 of resource /subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidPrefixesName is not formatted correctly. It should follow CIDR notation, for example 10.0.0.0/24.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '389',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'ee890df4-246e-4397-880b-942b14366c14',
+  'x-ms-request-id': '76e1a992-4b83-40fb-9bf7-dd7f17b2ce80',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1199',
-  'x-ms-correlation-request-id': 'ed935036-7a1b-453d-a081-c79c151424dd',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T094446Z:ed935036-7a1b-453d-a081-c79c151424dd',
-  date: 'Fri, 01 Sep 2017 09:44:45 GMT',
+  'x-ms-correlation-request-id': 'b75b37d5-c031-4cf6-b1a8-bd4ba3b17b51',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170927T105217Z:b75b37d5-c031-4cf6-b1a8-bd4ba3b17b51',
+  date: 'Wed, 27 Sep 2017 10:52:16 GMT',
   connection: 'close' });
  return result; }]];
