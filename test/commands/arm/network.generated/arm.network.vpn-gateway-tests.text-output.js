@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-vpn-gateway-tests-generated',
   groupName = 'xplat-test-vpn-gateway',
@@ -180,16 +179,16 @@ describe('arm', function () {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
             testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
+              if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
               testUtils.executeCommand(suite, retry, cmd, function (result) {
-                result.exitStatus.should.equal(0);
+                if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
                 testUtils.executeCommand(suite, retry, cmd, function (result) {
-                  result.exitStatus.should.equal(0);
+                  if (!testUtils.assertExitStatus(result, done)) return;
                   var cmd = 'network local-gateway create -g {1} -n {name} --ip-address {gatewayIpAddress} --location {location} --json'.formatArgs(localNetworkGateway, groupName);
                   testUtils.executeCommand(suite, retry, cmd, function (result) {
-                    result.exitStatus.should.equal(0);
+                    if (!testUtils.assertExitStatus(result, done)) return;
                     var output = JSON.parse(result.text);
                     attachSiteUsingId.localNetworkGatewayId = output.id;
                     detachSiteUsingId.localNetworkGatewayId = output.id;
@@ -258,7 +257,12 @@ describe('arm', function () {
           cmd = 'network vpn-gateway show -g {group} -n {name}'.formatArgs(virtualNetworkGateways);
           testUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-            done();
+
+            cmd = 'network vpn-gateway list -g {group}'.formatArgs(virtualNetworkGateways);
+            testUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              done();
+            });
           });
         });
       });

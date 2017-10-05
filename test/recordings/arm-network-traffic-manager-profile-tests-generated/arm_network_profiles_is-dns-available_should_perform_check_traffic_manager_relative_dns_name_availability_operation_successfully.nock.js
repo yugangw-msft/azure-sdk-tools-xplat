@@ -6,8 +6,8 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '2c224e7e-3ef5-431d-a57b-e71f4662e3a6',
-    name: 'Node CLI Test',
+    id: '947d47b4-7883-4bb9-9d85-c5e8e2f572ce',
+    name: 'nrptest58.westus.validation.partner',
     user: {
       name: 'user@domain.example',
       type: 'user'
@@ -36,14 +36,14 @@ nock('http://management.azure.com:443')
   'content-type': 'application/json; charset=utf-8',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': 'feeb7f0c-b685-4d0c-b272-a6160028fe1e',
+  'x-ms-request-id': '3cf0689a-01ca-420c-9a87-97a6b27330a1',
   server: 'Microsoft-IIS/8.5',
   'x-aspnet-version': '4.0.30319',
   'x-powered-by': 'ASP.NET',
   'x-ms-ratelimit-remaining-tenant-writes': '1199',
-  'x-ms-correlation-request-id': '8261368a-cdd3-478d-9349-3bbd2bb5623f',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170717T133734Z:8261368a-cdd3-478d-9349-3bbd2bb5623f',
-  date: 'Mon, 17 Jul 2017 13:37:34 GMT',
+  'x-ms-correlation-request-id': '22d04c2b-3faa-4c19-bd03-741674f95060',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170927T115747Z:22d04c2b-3faa-4c19-bd03-741674f95060',
+  date: 'Wed, 27 Sep 2017 11:57:46 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
@@ -56,13 +56,13 @@ nock('https://management.azure.com:443')
   'content-type': 'application/json; charset=utf-8',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': 'feeb7f0c-b685-4d0c-b272-a6160028fe1e',
+  'x-ms-request-id': '3cf0689a-01ca-420c-9a87-97a6b27330a1',
   server: 'Microsoft-IIS/8.5',
   'x-aspnet-version': '4.0.30319',
   'x-powered-by': 'ASP.NET',
   'x-ms-ratelimit-remaining-tenant-writes': '1199',
-  'x-ms-correlation-request-id': '8261368a-cdd3-478d-9349-3bbd2bb5623f',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170717T133734Z:8261368a-cdd3-478d-9349-3bbd2bb5623f',
-  date: 'Mon, 17 Jul 2017 13:37:34 GMT',
+  'x-ms-correlation-request-id': '22d04c2b-3faa-4c19-bd03-741674f95060',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170927T115747Z:22d04c2b-3faa-4c19-bd03-741674f95060',
+  date: 'Wed, 27 Sep 2017 11:57:46 GMT',
   connection: 'close' });
  return result; }]];

@@ -6,8 +6,8 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '947d47b4-7883-4bb9-9d85-c5e8e2f572ce',
-    name: 'nrptest58.westus.validation.partner',
+    id: '9532a63e-f2eb-4649-bb23-5ed01077ce80',
+    name: 'franks-official-test-sub',
     user: {
       name: 'user@domain.example',
       type: 'user'
@@ -23,80 +23,80 @@ exports.getMockedProfile = function () {
 };
 
 exports.setEnvironment = function() {
-  process.env['AZURE_VM_TEST_LOCATION'] = 'westus';
+  process.env['AZURE_VM_TEST_LOCATION'] = 'westcentralus';
 };
 
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/invalidDestinationAddressPrefixName?api-version=2017-09-01')
-  .reply(404, "{\r\n  \"error\": {\r\n    \"code\": \"NotFound\",\r\n    \"message\": \"Resource /subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/invalidDestinationAddressPrefixName not found.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/invalidDestinationAddressPrefixName?api-version=2017-09-01')
+  .reply(404, "{\r\n  \"error\": {\r\n    \"code\": \"NotFound\",\r\n    \"message\": \"Resource /subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/invalidDestinationAddressPrefixName not found.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '314',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '48fd2aae-092d-4ea6-bb1d-957f1c377958',
+  'x-ms-request-id': '101a780b-6ee5-4f5d-bab6-2e09d82f3fc3',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14990',
-  'x-ms-correlation-request-id': '98555113-4a69-4d9d-ac84-bcb684b5b4de',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T114823Z:98555113-4a69-4d9d-ac84-bcb684b5b4de',
-  date: 'Fri, 01 Sep 2017 11:48:22 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14999',
+  'x-ms-correlation-request-id': '688ad207-3bca-4139-9fc1-30f81db500dc',
+  'x-ms-routing-request-id': 'WESTEUROPE:20171005T120105Z:688ad207-3bca-4139-9fc1-30f81db500dc',
+  date: 'Thu, 05 Oct 2017 12:01:05 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/invalidDestinationAddressPrefixName?api-version=2017-09-01')
-  .reply(404, "{\r\n  \"error\": {\r\n    \"code\": \"NotFound\",\r\n    \"message\": \"Resource /subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/invalidDestinationAddressPrefixName not found.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/invalidDestinationAddressPrefixName?api-version=2017-09-01')
+  .reply(404, "{\r\n  \"error\": {\r\n    \"code\": \"NotFound\",\r\n    \"message\": \"Resource /subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/invalidDestinationAddressPrefixName not found.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '314',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '48fd2aae-092d-4ea6-bb1d-957f1c377958',
+  'x-ms-request-id': '101a780b-6ee5-4f5d-bab6-2e09d82f3fc3',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14990',
-  'x-ms-correlation-request-id': '98555113-4a69-4d9d-ac84-bcb684b5b4de',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T114823Z:98555113-4a69-4d9d-ac84-bcb684b5b4de',
-  date: 'Fri, 01 Sep 2017 11:48:22 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14999',
+  'x-ms-correlation-request-id': '688ad207-3bca-4139-9fc1-30f81db500dc',
+  'x-ms-routing-request-id': 'WESTEUROPE:20171005T120105Z:688ad207-3bca-4139-9fc1-30f81db500dc',
+  date: 'Thu, 05 Oct 2017 12:01:05 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/invalidDestinationAddressPrefixName?api-version=2017-09-01', '*')
-  .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"SecurityRuleInvalidAddressPrefix\",\r\n    \"message\": \"Security rule /subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/invalidDestinationAddressPrefixName has invalid Address prefix. Value provided: 10.0.0.0/42\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
+.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/invalidDestinationAddressPrefixName?api-version=2017-09-01', '*')
+  .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"SecurityRuleInvalidAddressPrefix\",\r\n    \"message\": \"Security rule /subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/invalidDestinationAddressPrefixName has invalid Address prefix. Value provided: 10.0.0.0/42\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '388',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '80116cca-217a-4a26-907e-8d1664d6d2d1',
+  'x-ms-request-id': '5bba6001-af73-42e8-b7f8-15ca5a4b350c',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-writes': '1197',
-  'x-ms-correlation-request-id': '88a0c757-14cf-4c11-a7ca-9d1d972339b8',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T114824Z:88a0c757-14cf-4c11-a7ca-9d1d972339b8',
-  date: 'Fri, 01 Sep 2017 11:48:23 GMT',
+  'x-ms-ratelimit-remaining-subscription-writes': '1198',
+  'x-ms-correlation-request-id': 'a5464b2c-4ff9-44e0-8182-62a9fc25a352',
+  'x-ms-routing-request-id': 'WESTEUROPE:20171005T120107Z:a5464b2c-4ff9-44e0-8182-62a9fc25a352',
+  date: 'Thu, 05 Oct 2017 12:01:06 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/invalidDestinationAddressPrefixName?api-version=2017-09-01', '*')
-  .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"SecurityRuleInvalidAddressPrefix\",\r\n    \"message\": \"Security rule /subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/invalidDestinationAddressPrefixName has invalid Address prefix. Value provided: 10.0.0.0/42\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
+.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/invalidDestinationAddressPrefixName?api-version=2017-09-01', '*')
+  .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"SecurityRuleInvalidAddressPrefix\",\r\n    \"message\": \"Security rule /subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/invalidDestinationAddressPrefixName has invalid Address prefix. Value provided: 10.0.0.0/42\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '388',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '80116cca-217a-4a26-907e-8d1664d6d2d1',
+  'x-ms-request-id': '5bba6001-af73-42e8-b7f8-15ca5a4b350c',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-writes': '1197',
-  'x-ms-correlation-request-id': '88a0c757-14cf-4c11-a7ca-9d1d972339b8',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T114824Z:88a0c757-14cf-4c11-a7ca-9d1d972339b8',
-  date: 'Fri, 01 Sep 2017 11:48:23 GMT',
+  'x-ms-ratelimit-remaining-subscription-writes': '1198',
+  'x-ms-correlation-request-id': 'a5464b2c-4ff9-44e0-8182-62a9fc25a352',
+  'x-ms-routing-request-id': 'WESTEUROPE:20171005T120107Z:a5464b2c-4ff9-44e0-8182-62a9fc25a352',
+  date: 'Thu, 05 Oct 2017 12:01:06 GMT',
   connection: 'close' });
  return result; }]];

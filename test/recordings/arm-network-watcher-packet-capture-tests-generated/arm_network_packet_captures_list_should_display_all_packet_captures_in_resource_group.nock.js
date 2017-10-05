@@ -6,8 +6,8 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '2c224e7e-3ef5-431d-a57b-e71f4662e3a6',
-    name: 'Node CLI Test',
+    id: '947d47b4-7883-4bb9-9d85-c5e8e2f572ce',
+    name: 'nrptest58.westus.validation.partner',
     user: {
       name: 'user@domain.example',
       type: 'user'
@@ -29,36 +29,36 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-packet-capture/providers/Microsoft.Network/networkWatchers/networkWatcherName/packetCaptures?api-version=2017-09-01')
-  .reply(200, "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"packetCaptureName\",\r\n      \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-packet-capture/providers/Microsoft.Network/networkWatchers/networkWatcherName/packetCaptures/packetCaptureName\",\r\n      \"etag\": \"W/\\\"4517e053-9e1e-42f5-b466-40896879d5de\\\"\",\r\n      \"properties\": {\r\n        \"provisioningState\": \"Succeeded\",\r\n        \"target\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-packet-capture/providers/Microsoft.Compute/virtualMachines/TestVMForCap\",\r\n        \"bytesToCapturePerPacket\": 123456,\r\n        \"totalBytesPerSession\": 1234567,\r\n        \"timeLimitInSeconds\": 17000,\r\n        \"storageLocation\": {\r\n          \"storagePath\": \"\",\r\n          \"filePath\": \"D:\\\\test.cap\"\r\n        },\r\n        \"filters\": [\r\n          {\r\n            \"protocol\": \"TCP\",\r\n            \"localIPAddress\": \"10.0.0.11\",\r\n            \"localPort\": \"8080\",\r\n            \"remoteIPAddress\": \"\",\r\n            \"remotePort\": \"\"\r\n          },\r\n          {\r\n            \"protocol\": \"UDP\",\r\n            \"localIPAddress\": \"\",\r\n            \"localPort\": \"\",\r\n            \"remoteIPAddress\": \"\",\r\n            \"remotePort\": \"\"\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-packet-capture/providers/Microsoft.Network/networkWatchers/networkWatcherName/packetCaptures?api-version=2017-09-01')
+  .reply(200, "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"packetCaptureName\",\r\n      \"id\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-packet-capture/providers/Microsoft.Network/networkWatchers/networkWatcherName/packetCaptures/packetCaptureName\",\r\n      \"etag\": \"W/\\\"30679091-89a1-4e0f-8fcc-3125eed50b82\\\"\",\r\n      \"properties\": {\r\n        \"provisioningState\": \"Succeeded\",\r\n        \"target\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-packet-capture/providers/Microsoft.Compute/virtualMachines/TestVMForCap\",\r\n        \"bytesToCapturePerPacket\": 123456,\r\n        \"totalBytesPerSession\": 1234567,\r\n        \"timeLimitInSeconds\": 17000,\r\n        \"storageLocation\": {\r\n          \"storagePath\": \"\",\r\n          \"filePath\": \"D:\\\\test.cap\"\r\n        },\r\n        \"filters\": [\r\n          {\r\n            \"protocol\": \"TCP\",\r\n            \"localIPAddress\": \"10.0.0.11\",\r\n            \"localPort\": \"8080\",\r\n            \"remoteIPAddress\": \"\",\r\n            \"remotePort\": \"\"\r\n          },\r\n          {\r\n            \"protocol\": \"UDP\",\r\n            \"localIPAddress\": \"\",\r\n            \"localPort\": \"\",\r\n            \"remoteIPAddress\": \"\",\r\n            \"remotePort\": \"\"\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '1245',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'a3bc542d-62df-4130-a846-4e2d102ab4e5',
+  'x-ms-request-id': 'b8e68e31-80b8-4842-ba3a-e7706d5dc5fd',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14993',
-  'x-ms-correlation-request-id': '99b6671a-a2f9-4db4-903a-cc8078d60bdb',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170714T075335Z:99b6671a-a2f9-4db4-903a-cc8078d60bdb',
-  date: 'Fri, 14 Jul 2017 07:53:35 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14994',
+  'x-ms-correlation-request-id': '93d29c55-0087-4714-befc-5c10796a16a7',
+  'x-ms-routing-request-id': 'WESTEUROPE:20171002T085552Z:93d29c55-0087-4714-befc-5c10796a16a7',
+  date: 'Mon, 02 Oct 2017 08:55:52 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-packet-capture/providers/Microsoft.Network/networkWatchers/networkWatcherName/packetCaptures?api-version=2017-09-01')
-  .reply(200, "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"packetCaptureName\",\r\n      \"id\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-packet-capture/providers/Microsoft.Network/networkWatchers/networkWatcherName/packetCaptures/packetCaptureName\",\r\n      \"etag\": \"W/\\\"4517e053-9e1e-42f5-b466-40896879d5de\\\"\",\r\n      \"properties\": {\r\n        \"provisioningState\": \"Succeeded\",\r\n        \"target\": \"/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-packet-capture/providers/Microsoft.Compute/virtualMachines/TestVMForCap\",\r\n        \"bytesToCapturePerPacket\": 123456,\r\n        \"totalBytesPerSession\": 1234567,\r\n        \"timeLimitInSeconds\": 17000,\r\n        \"storageLocation\": {\r\n          \"storagePath\": \"\",\r\n          \"filePath\": \"D:\\\\test.cap\"\r\n        },\r\n        \"filters\": [\r\n          {\r\n            \"protocol\": \"TCP\",\r\n            \"localIPAddress\": \"10.0.0.11\",\r\n            \"localPort\": \"8080\",\r\n            \"remoteIPAddress\": \"\",\r\n            \"remotePort\": \"\"\r\n          },\r\n          {\r\n            \"protocol\": \"UDP\",\r\n            \"localIPAddress\": \"\",\r\n            \"localPort\": \"\",\r\n            \"remoteIPAddress\": \"\",\r\n            \"remotePort\": \"\"\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-packet-capture/providers/Microsoft.Network/networkWatchers/networkWatcherName/packetCaptures?api-version=2017-09-01')
+  .reply(200, "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"packetCaptureName\",\r\n      \"id\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-packet-capture/providers/Microsoft.Network/networkWatchers/networkWatcherName/packetCaptures/packetCaptureName\",\r\n      \"etag\": \"W/\\\"30679091-89a1-4e0f-8fcc-3125eed50b82\\\"\",\r\n      \"properties\": {\r\n        \"provisioningState\": \"Succeeded\",\r\n        \"target\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-packet-capture/providers/Microsoft.Compute/virtualMachines/TestVMForCap\",\r\n        \"bytesToCapturePerPacket\": 123456,\r\n        \"totalBytesPerSession\": 1234567,\r\n        \"timeLimitInSeconds\": 17000,\r\n        \"storageLocation\": {\r\n          \"storagePath\": \"\",\r\n          \"filePath\": \"D:\\\\test.cap\"\r\n        },\r\n        \"filters\": [\r\n          {\r\n            \"protocol\": \"TCP\",\r\n            \"localIPAddress\": \"10.0.0.11\",\r\n            \"localPort\": \"8080\",\r\n            \"remoteIPAddress\": \"\",\r\n            \"remotePort\": \"\"\r\n          },\r\n          {\r\n            \"protocol\": \"UDP\",\r\n            \"localIPAddress\": \"\",\r\n            \"localPort\": \"\",\r\n            \"remoteIPAddress\": \"\",\r\n            \"remotePort\": \"\"\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '1245',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'a3bc542d-62df-4130-a846-4e2d102ab4e5',
+  'x-ms-request-id': 'b8e68e31-80b8-4842-ba3a-e7706d5dc5fd',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14993',
-  'x-ms-correlation-request-id': '99b6671a-a2f9-4db4-903a-cc8078d60bdb',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170714T075335Z:99b6671a-a2f9-4db4-903a-cc8078d60bdb',
-  date: 'Fri, 14 Jul 2017 07:53:35 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14994',
+  'x-ms-correlation-request-id': '93d29c55-0087-4714-befc-5c10796a16a7',
+  'x-ms-routing-request-id': 'WESTEUROPE:20171002T085552Z:93d29c55-0087-4714-befc-5c10796a16a7',
+  date: 'Mon, 02 Oct 2017 08:55:52 GMT',
   connection: 'close' });
  return result; }]];

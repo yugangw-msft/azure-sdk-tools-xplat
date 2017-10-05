@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-nic-ip-config-tests-generated',
   groupName = 'xplat-test-ip-config',
@@ -59,25 +58,25 @@ var subnet = {
 };
 
 var virtualNetwork = {
-  location: 'westus',
+  location: 'westcentralus',
   name: 'virtualNetworkName'
 };
 
 var networkInterface = {
-  location: 'westus',
+  location: 'westcentralus',
   virtualNetworkName: 'virtualNetworkName',
   subnetName: 'subnetName',
   name: 'networkInterfaceName'
 };
 
 var publicIPAddress = {
-  location: 'westus',
+  location: 'westcentralus',
   name: 'publicIPAddressName'
 };
 
 var requiredEnvironment = [{
   name: 'AZURE_VM_TEST_LOCATION',
-  defaultValue: 'westus'
+  defaultValue: 'westcentralus'
 }];
 
 describe('arm', function () {
@@ -99,16 +98,16 @@ describe('arm', function () {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
             testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
+              if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
               testUtils.executeCommand(suite, retry, cmd, function (result) {
-                result.exitStatus.should.equal(0);
+                if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
                 testUtils.executeCommand(suite, retry, cmd, function (result) {
-                  result.exitStatus.should.equal(0);
+                  if (!testUtils.assertExitStatus(result, done)) return;
                   var cmd = 'network nic create -g {1} -n {name} --location {location} --subnet-vnet-name {virtualNetworkName} --subnet-name {subnetName} --ip-config-name defaultConfig --json'.formatArgs(networkInterface, groupName);
                   testUtils.executeCommand(suite, retry, cmd, function (result) {
-                    result.exitStatus.should.equal(0);
+                    if (!testUtils.assertExitStatus(result, done)) return;
                     done();
                   });
                 });
@@ -192,7 +191,16 @@ describe('arm', function () {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
-            done();
+
+            cmd = 'network nic ip-config list -g {group} --nic-name {networkInterfaceName} --json'.formatArgs(ipConfigurations);
+            testUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              var outputs = JSON.parse(result.text);
+              _.some(outputs, function (output) {
+                return output.name === ipConfigurations.name;
+              }).should.be.false;
+              done();
+            });
           });
         });
       });

@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-route-table-tests-generated',
   groupName = 'xplat-test-route-table',
@@ -126,7 +125,12 @@ describe('arm', function () {
           cmd = 'network route-table show -g {group} -n {name}'.formatArgs(routeTables);
           testUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-            done();
+
+            cmd = 'network route-table list -g {group}'.formatArgs(routeTables);
+            testUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              done();
+            });
           });
         });
       });

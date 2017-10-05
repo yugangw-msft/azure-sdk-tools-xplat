@@ -6,8 +6,8 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '947d47b4-7883-4bb9-9d85-c5e8e2f572ce',
-    name: 'nrptest58.westus.validation.partner',
+    id: '9532a63e-f2eb-4649-bb23-5ed01077ce80',
+    name: 'franks-official-test-sub',
     user: {
       name: 'user@domain.example',
       type: 'user'
@@ -29,74 +29,74 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/invalidPrefixesName?api-version=2017-09-01')
-  .reply(404, "{\r\n  \"error\": {\r\n    \"code\": \"NotFound\",\r\n    \"message\": \"Resource /subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/invalidPrefixesName not found.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/invalidPrefixesName?api-version=2017-09-01')
+  .reply(404, "{\r\n  \"error\": {\r\n    \"code\": \"NotFound\",\r\n    \"message\": \"Resource /subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/invalidPrefixesName not found.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '272',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'd697924c-12e8-4a05-baec-da8fd3236020',
+  'x-ms-request-id': '5132bd28-702f-42d4-a0d9-b25a25808c2b',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14995',
-  'x-ms-correlation-request-id': '080d82ad-be62-4d0b-96dd-e8d7a7f8fb64',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T100618Z:080d82ad-be62-4d0b-96dd-e8d7a7f8fb64',
-  date: 'Fri, 01 Sep 2017 10:06:17 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14999',
+  'x-ms-correlation-request-id': '39e2f2ff-a9c9-4c17-a521-df9521fcfd4f',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170927T103640Z:39e2f2ff-a9c9-4c17-a521-df9521fcfd4f',
+  date: 'Wed, 27 Sep 2017 10:36:40 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/invalidPrefixesName?api-version=2017-09-01')
-  .reply(404, "{\r\n  \"error\": {\r\n    \"code\": \"NotFound\",\r\n    \"message\": \"Resource /subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/invalidPrefixesName not found.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/invalidPrefixesName?api-version=2017-09-01')
+  .reply(404, "{\r\n  \"error\": {\r\n    \"code\": \"NotFound\",\r\n    \"message\": \"Resource /subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/invalidPrefixesName not found.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '272',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'd697924c-12e8-4a05-baec-da8fd3236020',
+  'x-ms-request-id': '5132bd28-702f-42d4-a0d9-b25a25808c2b',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14995',
-  'x-ms-correlation-request-id': '080d82ad-be62-4d0b-96dd-e8d7a7f8fb64',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T100618Z:080d82ad-be62-4d0b-96dd-e8d7a7f8fb64',
-  date: 'Fri, 01 Sep 2017 10:06:17 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14999',
+  'x-ms-correlation-request-id': '39e2f2ff-a9c9-4c17-a521-df9521fcfd4f',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170927T103640Z:39e2f2ff-a9c9-4c17-a521-df9521fcfd4f',
+  date: 'Wed, 27 Sep 2017 10:36:40 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/invalidPrefixesName?api-version=2017-09-01', '*')
-  .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"InvalidCIDRNotation\",\r\n    \"message\": \"The address prefix 10.11.12.13/8 in resource /subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/invalidPrefixesName has an invalid CIDR notation. For the given prefix length, the address prefix should be 10.0.0.0/8.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
+.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/invalidPrefixesName?api-version=2017-09-01', '*')
+  .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"InvalidCIDRNotation\",\r\n    \"message\": \"The address prefix 10.11.12.13/8 in resource /subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/invalidPrefixesName has an invalid CIDR notation. For the given prefix length, the address prefix should be 10.0.0.0/8.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '408',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '6d87fe32-01dc-4bb4-890c-f36a80da88af',
+  'x-ms-request-id': '6abea500-9623-4f9d-a27c-2c159dac7eb9',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-writes': '1197',
-  'x-ms-correlation-request-id': '0c9380ea-7ad1-4608-b98a-b37968b479d5',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T100619Z:0c9380ea-7ad1-4608-b98a-b37968b479d5',
-  date: 'Fri, 01 Sep 2017 10:06:18 GMT',
+  'x-ms-ratelimit-remaining-subscription-writes': '1198',
+  'x-ms-correlation-request-id': 'a0feeb5b-c381-43f7-98be-0c430f150ac2',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170927T103642Z:a0feeb5b-c381-43f7-98be-0c430f150ac2',
+  date: 'Wed, 27 Sep 2017 10:36:41 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/invalidPrefixesName?api-version=2017-09-01', '*')
-  .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"InvalidCIDRNotation\",\r\n    \"message\": \"The address prefix 10.11.12.13/8 in resource /subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/invalidPrefixesName has an invalid CIDR notation. For the given prefix length, the address prefix should be 10.0.0.0/8.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
+.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/invalidPrefixesName?api-version=2017-09-01', '*')
+  .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"InvalidCIDRNotation\",\r\n    \"message\": \"The address prefix 10.11.12.13/8 in resource /subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/invalidPrefixesName has an invalid CIDR notation. For the given prefix length, the address prefix should be 10.0.0.0/8.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '408',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '6d87fe32-01dc-4bb4-890c-f36a80da88af',
+  'x-ms-request-id': '6abea500-9623-4f9d-a27c-2c159dac7eb9',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-writes': '1197',
-  'x-ms-correlation-request-id': '0c9380ea-7ad1-4608-b98a-b37968b479d5',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T100619Z:0c9380ea-7ad1-4608-b98a-b37968b479d5',
-  date: 'Fri, 01 Sep 2017 10:06:18 GMT',
+  'x-ms-ratelimit-remaining-subscription-writes': '1198',
+  'x-ms-correlation-request-id': 'a0feeb5b-c381-43f7-98be-0c430f150ac2',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170927T103642Z:a0feeb5b-c381-43f7-98be-0c430f150ac2',
+  date: 'Wed, 27 Sep 2017 10:36:41 GMT',
   connection: 'close' });
  return result; }]];

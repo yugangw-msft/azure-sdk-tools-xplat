@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-vnet-peering-tests-generated',
   groupName = 'xplat-test-peering',
@@ -89,10 +88,10 @@ describe('arm', function () {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
             testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
+              if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet create -g {1} -n {name} --location {location} --address-prefixes 11.0.0.0/8 --json'.formatArgs(remoteNetwork, groupName);
               testUtils.executeCommand(suite, retry, cmd, function (result) {
-                result.exitStatus.should.equal(0);
+                if (!testUtils.assertExitStatus(result, done)) return;
                 var output = JSON.parse(result.text);
                 virtualNetworkPeerings.remoteNetworkId = output.id;
                 done();
@@ -157,7 +156,12 @@ describe('arm', function () {
           cmd = 'network vnet peering show -g {group} -n {name} --vnet-name {virtualNetworkName}'.formatArgs(virtualNetworkPeerings);
           testUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-            done();
+
+            cmd = 'network vnet peering list -g {group} --vnet-name {virtualNetworkName}'.formatArgs(virtualNetworkPeerings);
+            testUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              done();
+            });
           });
         });
       });

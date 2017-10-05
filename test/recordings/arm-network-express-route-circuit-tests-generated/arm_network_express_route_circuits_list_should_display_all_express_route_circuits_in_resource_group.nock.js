@@ -23,42 +23,42 @@ exports.getMockedProfile = function () {
 };
 
 exports.setEnvironment = function() {
-  process.env['AZURE_VM_TEST_LOCATION'] = 'brazilsouth';
+  process.env['AZURE_VM_TEST_LOCATION'] = 'westus';
 };
 
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
   .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-circuit/providers/Microsoft.Network/expressRouteCircuits?api-version=2017-09-01')
-  .reply(200, "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"expressRouteCircuitName\",\r\n      \"id\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-circuit/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName\",\r\n      \"etag\": \"W/\\\"28e07734-60d0-45a2-9106-3bde436ec7e5\\\"\",\r\n      \"type\": \"Microsoft.Network/expressRouteCircuits\",\r\n      \"location\": \"brazilsouth\",\r\n      \"properties\": {\r\n        \"provisioningState\": \"Succeeded\",\r\n        \"resourceGuid\": \"c0ed0d37-3655-44e2-acfc-547a4aee55f1\",\r\n        \"peerings\": [],\r\n        \"authorizations\": [],\r\n        \"serviceProviderProperties\": {\r\n          \"serviceProviderName\": \"Interxion\",\r\n          \"peeringLocation\": \"London\",\r\n          \"bandwidthInMbps\": 200\r\n        },\r\n        \"circuitProvisioningState\": \"Enabled\",\r\n        \"allowClassicOperations\": false,\r\n        \"serviceKey\": \"20c0ace7-c223-49f0-a492-e6cf42ff16ff\",\r\n        \"serviceProviderProvisioningState\": \"NotProvisioned\"\r\n      },\r\n      \"sku\": {\r\n        \"name\": \"Standard_MeteredData\",\r\n        \"tier\": \"Premium\",\r\n        \"family\": \"UnlimitedData\"\r\n      }\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
+  .reply(200, "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"expressRouteCircuitName\",\r\n      \"id\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-circuit/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName\",\r\n      \"etag\": \"W/\\\"0f6ddfbc-b621-4629-bf1f-e55c872d321c\\\"\",\r\n      \"type\": \"Microsoft.Network/expressRouteCircuits\",\r\n      \"location\": \"brazilsouth\",\r\n      \"properties\": {\r\n        \"provisioningState\": \"Succeeded\",\r\n        \"resourceGuid\": \"b9476be9-efda-4a85-af45-de48b3655d7d\",\r\n        \"peerings\": [],\r\n        \"authorizations\": [],\r\n        \"serviceProviderProperties\": {\r\n          \"serviceProviderName\": \"Interxion\",\r\n          \"peeringLocation\": \"London\",\r\n          \"bandwidthInMbps\": 200\r\n        },\r\n        \"circuitProvisioningState\": \"Enabled\",\r\n        \"allowClassicOperations\": false,\r\n        \"serviceKey\": \"2181422a-8d08-45c2-942e-15f8658d1d09\",\r\n        \"serviceProviderProvisioningState\": \"NotProvisioned\"\r\n      },\r\n      \"sku\": {\r\n        \"name\": \"Standard_MeteredData\",\r\n        \"tier\": \"Premium\",\r\n        \"family\": \"UnlimitedData\"\r\n      }\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '1120',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '56784ac7-499a-4a2d-8b67-1b34e2957f83',
+  'x-ms-request-id': 'd473bf36-689c-41e1-b52a-20dc276aa0de',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14982',
-  'x-ms-correlation-request-id': '14039671-d99b-4af3-a54a-1e1480171185',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T113740Z:14039671-d99b-4af3-a54a-1e1480171185',
-  date: 'Fri, 01 Sep 2017 11:37:40 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14996',
+  'x-ms-correlation-request-id': 'ba8ec94c-1195-408b-aabd-0d194e2985ca',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170927T113811Z:ba8ec94c-1195-408b-aabd-0d194e2985ca',
+  date: 'Wed, 27 Sep 2017 11:38:10 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
   .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-circuit/providers/Microsoft.Network/expressRouteCircuits?api-version=2017-09-01')
-  .reply(200, "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"expressRouteCircuitName\",\r\n      \"id\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-circuit/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName\",\r\n      \"etag\": \"W/\\\"28e07734-60d0-45a2-9106-3bde436ec7e5\\\"\",\r\n      \"type\": \"Microsoft.Network/expressRouteCircuits\",\r\n      \"location\": \"brazilsouth\",\r\n      \"properties\": {\r\n        \"provisioningState\": \"Succeeded\",\r\n        \"resourceGuid\": \"c0ed0d37-3655-44e2-acfc-547a4aee55f1\",\r\n        \"peerings\": [],\r\n        \"authorizations\": [],\r\n        \"serviceProviderProperties\": {\r\n          \"serviceProviderName\": \"Interxion\",\r\n          \"peeringLocation\": \"London\",\r\n          \"bandwidthInMbps\": 200\r\n        },\r\n        \"circuitProvisioningState\": \"Enabled\",\r\n        \"allowClassicOperations\": false,\r\n        \"serviceKey\": \"20c0ace7-c223-49f0-a492-e6cf42ff16ff\",\r\n        \"serviceProviderProvisioningState\": \"NotProvisioned\"\r\n      },\r\n      \"sku\": {\r\n        \"name\": \"Standard_MeteredData\",\r\n        \"tier\": \"Premium\",\r\n        \"family\": \"UnlimitedData\"\r\n      }\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
+  .reply(200, "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"expressRouteCircuitName\",\r\n      \"id\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-circuit/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName\",\r\n      \"etag\": \"W/\\\"0f6ddfbc-b621-4629-bf1f-e55c872d321c\\\"\",\r\n      \"type\": \"Microsoft.Network/expressRouteCircuits\",\r\n      \"location\": \"brazilsouth\",\r\n      \"properties\": {\r\n        \"provisioningState\": \"Succeeded\",\r\n        \"resourceGuid\": \"b9476be9-efda-4a85-af45-de48b3655d7d\",\r\n        \"peerings\": [],\r\n        \"authorizations\": [],\r\n        \"serviceProviderProperties\": {\r\n          \"serviceProviderName\": \"Interxion\",\r\n          \"peeringLocation\": \"London\",\r\n          \"bandwidthInMbps\": 200\r\n        },\r\n        \"circuitProvisioningState\": \"Enabled\",\r\n        \"allowClassicOperations\": false,\r\n        \"serviceKey\": \"2181422a-8d08-45c2-942e-15f8658d1d09\",\r\n        \"serviceProviderProvisioningState\": \"NotProvisioned\"\r\n      },\r\n      \"sku\": {\r\n        \"name\": \"Standard_MeteredData\",\r\n        \"tier\": \"Premium\",\r\n        \"family\": \"UnlimitedData\"\r\n      }\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '1120',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '56784ac7-499a-4a2d-8b67-1b34e2957f83',
+  'x-ms-request-id': 'd473bf36-689c-41e1-b52a-20dc276aa0de',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14982',
-  'x-ms-correlation-request-id': '14039671-d99b-4af3-a54a-1e1480171185',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T113740Z:14039671-d99b-4af3-a54a-1e1480171185',
-  date: 'Fri, 01 Sep 2017 11:37:40 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14996',
+  'x-ms-correlation-request-id': 'ba8ec94c-1195-408b-aabd-0d194e2985ca',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170927T113811Z:ba8ec94c-1195-408b-aabd-0d194e2985ca',
+  date: 'Wed, 27 Sep 2017 11:38:10 GMT',
   connection: 'close' });
  return result; }]];

@@ -31,7 +31,6 @@ var testUtils = require('../../../util/util');
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-usage-tests-generated',
   groupName,

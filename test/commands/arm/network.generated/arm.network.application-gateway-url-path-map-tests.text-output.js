@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-application-gateway-url-path-map-tests-generated',
   groupName = 'xplat-test-url-path-map',
@@ -108,19 +107,19 @@ describe('arm', function () {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
             testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
+              if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
               testUtils.executeCommand(suite, retry, cmd, function (result) {
-                result.exitStatus.should.equal(0);
+                if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network application-gateway create -g {1} -n {name} --servers {backendAddresses} --location {location} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --sku-name WAF_Medium --sku-tier WAF --json'.formatArgs(applicationGateway, groupName);
                 testUtils.executeCommand(suite, retry, cmd, function (result) {
-                  result.exitStatus.should.equal(0);
+                  if (!testUtils.assertExitStatus(result, done)) return;
                   var cmd = 'network application-gateway address-pool create -g {1} -n {name} --servers {backendAddresses} --gateway-name {applicationGatewayName} --json'.formatArgs(backendAddressPool, groupName);
                   testUtils.executeCommand(suite, retry, cmd, function (result) {
-                    result.exitStatus.should.equal(0);
+                    if (!testUtils.assertExitStatus(result, done)) return;
                     var cmd = 'network application-gateway http-settings create -g {1} -n {name} --port {port} --gateway-name {applicationGatewayName} --json'.formatArgs(backendHttpSettingsCollection, groupName);
                     testUtils.executeCommand(suite, retry, cmd, function (result) {
-                      result.exitStatus.should.equal(0);
+                      if (!testUtils.assertExitStatus(result, done)) return;
                       done();
                     });
                   });
@@ -177,7 +176,12 @@ describe('arm', function () {
           cmd = 'network application-gateway url-path-map show -g {group} -n {name} --gateway-name {applicationGatewayName}'.formatArgs(urlPathMaps);
           testUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-            done();
+
+            cmd = 'network application-gateway url-path-map list -g {group} --gateway-name {applicationGatewayName}'.formatArgs(urlPathMaps);
+            testUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              done();
+            });
           });
         });
       });

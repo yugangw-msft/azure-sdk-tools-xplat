@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-application-gateway-waf-config-tests-generated',
   groupName = 'xplat-test-waf-config',
@@ -99,13 +98,13 @@ describe('arm', function () {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
             testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
+              if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
               testUtils.executeCommand(suite, retry, cmd, function (result) {
-                result.exitStatus.should.equal(0);
+                if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network application-gateway create -g {1} -n {name} --servers {backendAddresses} --location {location} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --sku-name WAF_Medium --sku-tier WAF --json'.formatArgs(applicationGateway, groupName);
                 testUtils.executeCommand(suite, retry, cmd, function (result) {
-                  result.exitStatus.should.equal(0);
+                  if (!testUtils.assertExitStatus(result, done)) return;
                   done();
                 });
               });

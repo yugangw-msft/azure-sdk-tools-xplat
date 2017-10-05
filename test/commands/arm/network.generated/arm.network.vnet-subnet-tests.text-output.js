@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-vnet-subnet-tests-generated',
   groupName = 'xplat-test-subnet',
@@ -137,15 +136,15 @@ describe('arm', function () {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
             testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
+              if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network nsg create -g {1} -n {name} --location {location} --json'.formatArgs(networkSecurityGroup, groupName);
               testUtils.executeCommand(suite, retry, cmd, function (result) {
-                result.exitStatus.should.equal(0);
+                if (!testUtils.assertExitStatus(result, done)) return;
                 var output = JSON.parse(result.text);
                 createSubnetUsingId.networkSecurityGroupId = output.id;
                 var cmd = 'network route-table create -g {1} -n {name} --location {location} --json'.formatArgs(routeTable, groupName);
                 testUtils.executeCommand(suite, retry, cmd, function (result) {
-                  result.exitStatus.should.equal(0);
+                  if (!testUtils.assertExitStatus(result, done)) return;
                   var output = JSON.parse(result.text);
                   createSubnetUsingId.routeTableId = output.id;
                   done();
@@ -212,7 +211,12 @@ describe('arm', function () {
           cmd = 'network vnet subnet show -g {group} -n {name} --vnet-name {virtualNetworkName}'.formatArgs(subnets);
           testUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-            done();
+
+            cmd = 'network vnet subnet list -g {group} --vnet-name {virtualNetworkName}'.formatArgs(subnets);
+            testUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              done();
+            });
           });
         });
       });

@@ -30,38 +30,38 @@ exports.scopes = [[function (nock) {
 var result = 
 nock('http://management.azure.com:443')
   .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatcherName?api-version=2017-09-01')
-  .reply(200, "{\r\n  \"name\": \"networkWatcherName\",\r\n  \"id\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatcherName\",\r\n  \"etag\": \"W/\\\"0cecca63-24ee-4aa2-aaf7-113eeca85df1\\\"\",\r\n  \"type\": \"Microsoft.Network/networkWatchers\",\r\n  \"location\": \"westcentralus\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"runningOperationIds\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
+  .reply(200, "{\r\n  \"name\": \"networkWatcherName\",\r\n  \"id\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatcherName\",\r\n  \"etag\": \"W/\\\"cc1f12f5-c86d-453e-9156-1bc330c08a16\\\"\",\r\n  \"type\": \"Microsoft.Network/networkWatchers\",\r\n  \"location\": \"westcentralus\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"runningOperationIds\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '429',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  etag: 'W/"0cecca63-24ee-4aa2-aaf7-113eeca85df1"',
-  'x-ms-request-id': 'a8e7f40c-8977-46a1-a59f-8b50a0106103',
+  etag: 'W/"cc1f12f5-c86d-453e-9156-1bc330c08a16"',
+  'x-ms-request-id': 'b7e3cccc-0bff-416f-8aa9-5a9a3b9dfff0',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14992',
-  'x-ms-correlation-request-id': '6d8ed20f-1616-4fc3-a030-f7c1e07eeaff',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170815T111300Z:6d8ed20f-1616-4fc3-a030-f7c1e07eeaff',
-  date: 'Tue, 15 Aug 2017 11:12:59 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14994',
+  'x-ms-correlation-request-id': '8692cdae-e7b0-4430-900c-934a5616391c',
+  'x-ms-routing-request-id': 'WESTEUROPE:20171002T082556Z:8692cdae-e7b0-4430-900c-934a5616391c',
+  date: 'Mon, 02 Oct 2017 08:25:55 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
   .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatcherName?api-version=2017-09-01')
-  .reply(200, "{\r\n  \"name\": \"networkWatcherName\",\r\n  \"id\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatcherName\",\r\n  \"etag\": \"W/\\\"0cecca63-24ee-4aa2-aaf7-113eeca85df1\\\"\",\r\n  \"type\": \"Microsoft.Network/networkWatchers\",\r\n  \"location\": \"westcentralus\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"runningOperationIds\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
+  .reply(200, "{\r\n  \"name\": \"networkWatcherName\",\r\n  \"id\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatcherName\",\r\n  \"etag\": \"W/\\\"cc1f12f5-c86d-453e-9156-1bc330c08a16\\\"\",\r\n  \"type\": \"Microsoft.Network/networkWatchers\",\r\n  \"location\": \"westcentralus\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"runningOperationIds\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '429',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  etag: 'W/"0cecca63-24ee-4aa2-aaf7-113eeca85df1"',
-  'x-ms-request-id': 'a8e7f40c-8977-46a1-a59f-8b50a0106103',
+  etag: 'W/"cc1f12f5-c86d-453e-9156-1bc330c08a16"',
+  'x-ms-request-id': 'b7e3cccc-0bff-416f-8aa9-5a9a3b9dfff0',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14992',
-  'x-ms-correlation-request-id': '6d8ed20f-1616-4fc3-a030-f7c1e07eeaff',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170815T111300Z:6d8ed20f-1616-4fc3-a030-f7c1e07eeaff',
-  date: 'Tue, 15 Aug 2017 11:12:59 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14994',
+  'x-ms-correlation-request-id': '8692cdae-e7b0-4430-900c-934a5616391c',
+  'x-ms-routing-request-id': 'WESTEUROPE:20171002T082556Z:8692cdae-e7b0-4430-900c-934a5616391c',
+  date: 'Mon, 02 Oct 2017 08:25:55 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
@@ -69,18 +69,18 @@ var result =
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
 .post('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatcherName/queryTroubleshootResult?api-version=2017-09-01', '*')
-  .reply(200, "{\r\n  \"startTime\": \"2017-08-15T11:10:02.1183663Z\",\r\n  \"endTime\": \"2017-08-15T11:10:09.385Z\",\r\n  \"code\": \"UnHealthy\",\r\n  \"results\": [\r\n    {\r\n      \"id\": \"NoConnectionsFoundForGateway\",\r\n      \"summary\": \"No connections have been created on the gateway\",\r\n      \"detail\": \"A cross-premises or VNet-to-VNet connection needs to be created on the gateway.\",\r\n      \"recommendedActions\": [\r\n        {\r\n          \"actionText\": \"Create a cross premises connection\",\r\n          \"actionUri\": \"https://azure.microsoft.com/en-us/documentation/articles/vpn-gateway-howto-site-to-site-resource-manager-portal/\",\r\n          \"actionUriText\": \"cross premises\"\r\n        },\r\n        {\r\n          \"actionText\": \"Create a VNet-to-VNet connection\",\r\n          \"actionUri\": \"https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-howto-vnet-vnet-resource-manager-portal\",\r\n          \"actionUriText\": \"VNet-to-VNet\"\r\n        },\r\n        {\r\n          \"actionText\": \"If you are experiencing problems you believe are caused by Azure, contact support\",\r\n          \"actionUri\": \"http://azure.microsoft.com/support\",\r\n          \"actionUriText\": \"contact support\"\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
+  .reply(200, "{\r\n  \"startTime\": \"2017-10-02T08:23:29.2950389Z\",\r\n  \"endTime\": \"2017-10-02T08:23:37.842Z\",\r\n  \"code\": \"UnHealthy\",\r\n  \"results\": [\r\n    {\r\n      \"id\": \"UnKnown\",\r\n      \"summary\": \"The health status for this VPN gateway is unknown\",\r\n      \"detail\": \"We are currently unable to determine the health of this VPN gateway\",\r\n      \"recommendedActions\": [\r\n        {\r\n          \"actionText\": \"If you are having problems with the VPN gateway, try resetting the VPN gateway\",\r\n          \"actionUri\": \"https://azure.microsoft.com/en-us/documentation/articles/vpn-gateway-resetgw-classic/\",\r\n          \"actionUriText\": \"resetting the VPN gateway\"\r\n        },\r\n        {\r\n          \"actionText\": \"If you are experiencing problems you believe are caused by Azure, contact support\",\r\n          \"actionUri\": \"http://azure.microsoft.com/support\",\r\n          \"actionUriText\": \"contact support\"\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
-  'content-length': '1175',
+  'content-length': '915',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'aeda040a-7c75-4edb-a528-db77ce46d01f',
+  'x-ms-request-id': '769cdc74-28ad-45ed-928e-a10bf8073b2f',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-writes': '1199',
-  'x-ms-correlation-request-id': '716d0f95-3ef7-48ef-8078-fe000bb508d0',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170815T111301Z:716d0f95-3ef7-48ef-8078-fe000bb508d0',
-  date: 'Tue, 15 Aug 2017 11:13:01 GMT',
+  'x-ms-ratelimit-remaining-subscription-writes': '1198',
+  'x-ms-correlation-request-id': 'f390b72d-8e34-4362-83b4-277777ca516d',
+  'x-ms-routing-request-id': 'WESTEUROPE:20171002T082556Z:f390b72d-8e34-4362-83b4-277777ca516d',
+  date: 'Mon, 02 Oct 2017 08:25:56 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
@@ -88,17 +88,17 @@ var result =
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
 .post('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatcherName/queryTroubleshootResult?api-version=2017-09-01', '*')
-  .reply(200, "{\r\n  \"startTime\": \"2017-08-15T11:10:02.1183663Z\",\r\n  \"endTime\": \"2017-08-15T11:10:09.385Z\",\r\n  \"code\": \"UnHealthy\",\r\n  \"results\": [\r\n    {\r\n      \"id\": \"NoConnectionsFoundForGateway\",\r\n      \"summary\": \"No connections have been created on the gateway\",\r\n      \"detail\": \"A cross-premises or VNet-to-VNet connection needs to be created on the gateway.\",\r\n      \"recommendedActions\": [\r\n        {\r\n          \"actionText\": \"Create a cross premises connection\",\r\n          \"actionUri\": \"https://azure.microsoft.com/en-us/documentation/articles/vpn-gateway-howto-site-to-site-resource-manager-portal/\",\r\n          \"actionUriText\": \"cross premises\"\r\n        },\r\n        {\r\n          \"actionText\": \"Create a VNet-to-VNet connection\",\r\n          \"actionUri\": \"https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-howto-vnet-vnet-resource-manager-portal\",\r\n          \"actionUriText\": \"VNet-to-VNet\"\r\n        },\r\n        {\r\n          \"actionText\": \"If you are experiencing problems you believe are caused by Azure, contact support\",\r\n          \"actionUri\": \"http://azure.microsoft.com/support\",\r\n          \"actionUriText\": \"contact support\"\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
+  .reply(200, "{\r\n  \"startTime\": \"2017-10-02T08:23:29.2950389Z\",\r\n  \"endTime\": \"2017-10-02T08:23:37.842Z\",\r\n  \"code\": \"UnHealthy\",\r\n  \"results\": [\r\n    {\r\n      \"id\": \"UnKnown\",\r\n      \"summary\": \"The health status for this VPN gateway is unknown\",\r\n      \"detail\": \"We are currently unable to determine the health of this VPN gateway\",\r\n      \"recommendedActions\": [\r\n        {\r\n          \"actionText\": \"If you are having problems with the VPN gateway, try resetting the VPN gateway\",\r\n          \"actionUri\": \"https://azure.microsoft.com/en-us/documentation/articles/vpn-gateway-resetgw-classic/\",\r\n          \"actionUriText\": \"resetting the VPN gateway\"\r\n        },\r\n        {\r\n          \"actionText\": \"If you are experiencing problems you believe are caused by Azure, contact support\",\r\n          \"actionUri\": \"http://azure.microsoft.com/support\",\r\n          \"actionUriText\": \"contact support\"\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
-  'content-length': '1175',
+  'content-length': '915',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': 'aeda040a-7c75-4edb-a528-db77ce46d01f',
+  'x-ms-request-id': '769cdc74-28ad-45ed-928e-a10bf8073b2f',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-writes': '1199',
-  'x-ms-correlation-request-id': '716d0f95-3ef7-48ef-8078-fe000bb508d0',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170815T111301Z:716d0f95-3ef7-48ef-8078-fe000bb508d0',
-  date: 'Tue, 15 Aug 2017 11:13:01 GMT',
+  'x-ms-ratelimit-remaining-subscription-writes': '1198',
+  'x-ms-correlation-request-id': 'f390b72d-8e34-4362-83b4-277777ca516d',
+  'x-ms-routing-request-id': 'WESTEUROPE:20171002T082556Z:f390b72d-8e34-4362-83b4-277777ca516d',
+  date: 'Mon, 02 Oct 2017 08:25:56 GMT',
   connection: 'close' });
  return result; }]];

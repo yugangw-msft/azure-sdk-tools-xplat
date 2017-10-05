@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-application-gateway-http-listener-tests-generated',
   groupName = 'xplat-test-http-listener',
@@ -118,22 +117,22 @@ describe('arm', function () {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
             testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
+              if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
               testUtils.executeCommand(suite, retry, cmd, function (result) {
-                result.exitStatus.should.equal(0);
+                if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
                 testUtils.executeCommand(suite, retry, cmd, function (result) {
-                  result.exitStatus.should.equal(0);
+                  if (!testUtils.assertExitStatus(result, done)) return;
                   var cmd = 'network application-gateway create -g {1} -n {name} --servers {backendAddresses} --location {location} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --cert-file test/data/sslCert.pfx --cert-password pswd --json'.formatArgs(applicationGateway, groupName);
                   testUtils.executeCommand(suite, retry, cmd, function (result) {
-                    result.exitStatus.should.equal(0);
+                    if (!testUtils.assertExitStatus(result, done)) return;
                     var cmd = 'network application-gateway frontend-ip create -g {1} -n {name} --gateway-name {applicationGatewayName} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --json'.formatArgs(frontendIPConfiguration, groupName);
                     testUtils.executeCommand(suite, retry, cmd, function (result) {
-                      result.exitStatus.should.equal(0);
+                      if (!testUtils.assertExitStatus(result, done)) return;
                       var cmd = 'network application-gateway frontend-port create -g {1} -n {name} --port {port} --gateway-name {applicationGatewayName} --json'.formatArgs(frontendPort, groupName);
                       testUtils.executeCommand(suite, retry, cmd, function (result) {
-                        result.exitStatus.should.equal(0);
+                        if (!testUtils.assertExitStatus(result, done)) return;
                         done();
                       });
                     });
@@ -221,7 +220,16 @@ describe('arm', function () {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
-            done();
+
+            cmd = 'network application-gateway http-listener list -g {group} --gateway-name {applicationGatewayName} --json'.formatArgs(httpListeners);
+            testUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              var outputs = JSON.parse(result.text);
+              _.some(outputs, function (output) {
+                return output.name === httpListeners.name;
+              }).should.be.false;
+              done();
+            });
           });
         });
       });

@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-local-gateway-tests-generated',
   groupName = 'xplat-test-local-gateway',
@@ -170,7 +169,12 @@ describe('arm', function () {
           cmd = 'network local-gateway show -g {group} -n {name}'.formatArgs(localNetworkGateways);
           testUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-            done();
+
+            cmd = 'network local-gateway list -g {group}'.formatArgs(localNetworkGateways);
+            testUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              done();
+            });
           });
         });
       });
