@@ -117,16 +117,16 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
+              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                 if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
-                testUtils.executeCommand(suite, retry, cmd, function (result) {
+                generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                   if (!testUtils.assertExitStatus(result, done)) return;
                   var cmd = 'network application-gateway create -g {1} -n {name} --servers {backendAddresses} --location {location} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --json'.formatArgs(applicationGateway, groupName);
-                  testUtils.executeCommand(suite, retry, cmd, function (result) {
+                  generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                     if (!testUtils.assertExitStatus(result, done)) return;
                     done();
                   });
@@ -156,43 +156,43 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create probes', function (done) {
         var cmd = 'network application-gateway probe create -g {group} -n {name} --protocol {protocol} --host-name {host} --path {path} --interval {interval} --timeout {timeout} --unhealthy-threshold {unhealthyThreshold} --pick-host-name {pickHostNameFromBackendHttpSettings} --min-servers {minServers} --health-response-body {body} --status-codes {statusCodes} --gateway-name {applicationGatewayName}'.formatArgs(probes);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('show should display probes details', function (done) {
         var cmd = 'network application-gateway probe show -g {group} -n {name} --gateway-name {applicationGatewayName}'.formatArgs(probes);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('set should update probes', function (done) {
         var cmd = 'network application-gateway probe set -g {group} -n {name} --protocol {protocolNew} --host-name {hostNew} --path {pathNew} --interval {intervalNew} --timeout {timeoutNew} --unhealthy-threshold {unhealthyThresholdNew} --pick-host-name {pickHostNameFromBackendHttpSettingsNew} --min-servers {minServersNew} --health-response-body {bodyNew} --status-codes {statusCodesNew} --gateway-name {applicationGatewayName}'.formatArgs(probes);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('list should display all probes in resource group', function (done) {
         var cmd = 'network application-gateway probe list -g {group} --gateway-name {applicationGatewayName}'.formatArgs(probes);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('delete should delete probes', function (done) {
         var cmd = 'network application-gateway probe delete -g {group} -n {name} --gateway-name {applicationGatewayName} --quiet'.formatArgs(probes);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network application-gateway probe show -g {group} -n {name} --gateway-name {applicationGatewayName}'.formatArgs(probes);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
 
             cmd = 'network application-gateway probe list -g {group} --gateway-name {applicationGatewayName}'.formatArgs(probes);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               done();
             });

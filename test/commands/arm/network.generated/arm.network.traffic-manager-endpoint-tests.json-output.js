@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-traffic-manager-endpoint-tests-generated',
   groupName = 'xplat-test-endpoint',
@@ -89,8 +88,8 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network traffic-manager profile create -g {1} -n {name} --relative-dns-name {relativeName} --monitor-path {path} --json'.formatArgs(profile, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+              if (!testUtils.assertExitStatus(result, done)) return;
               done();
             });
           });
@@ -116,7 +115,7 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create endpoints', function (done) {
         var cmd = 'network traffic-manager endpoint create -g {group} -n {name} --type {endpointType} --target {target} --status {endpointStatus} --weight {weight} --priority {priority} --geo-mapping {geoMapping} --location {location} --profile-name {profileName} --json'.formatArgs(endpoints);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(endpoints.name);
@@ -124,13 +123,13 @@ describe('arm', function () {
           output.endpointStatus.toLowerCase().should.equal(endpoints.endpointStatus.toLowerCase());
           output.weight.should.equal(parseInt(endpoints.weight, 10));
           output.priority.should.equal(parseInt(endpoints.priority, 10));
-          endpoints.geoMapping.split(',').forEach(function (item) { output.geoMapping.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(endpoints.geoMapping, ',').forEach(function (item) { output.geoMapping.should.containEql(item) });
           done();
         });
       });
       it('show should display endpoints details', function (done) {
         var cmd = 'network traffic-manager endpoint show -g {group} -n {name} --type {endpointTypeShow} --profile-name {profileName} --json'.formatArgs(endpoints);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(endpoints.name);
@@ -138,30 +137,30 @@ describe('arm', function () {
           output.endpointStatus.toLowerCase().should.equal(endpoints.endpointStatus.toLowerCase());
           output.weight.should.equal(parseInt(endpoints.weight, 10));
           output.priority.should.equal(parseInt(endpoints.priority, 10));
-          endpoints.geoMapping.split(',').forEach(function (item) { output.geoMapping.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(endpoints.geoMapping, ',').forEach(function (item) { output.geoMapping.should.containEql(item) });
           done();
         });
       });
       it('set should update endpoints', function (done) {
         var cmd = 'network traffic-manager endpoint set -g {group} -n {name} --type {endpointTypeNew} --status {endpointStatusNew} --weight {weightNew} --priority {priorityNew} --geo-mapping {geoMappingNew} --profile-name {profileName} --json'.formatArgs(endpoints);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(endpoints.name);
           output.endpointStatus.toLowerCase().should.equal(endpoints.endpointStatusNew.toLowerCase());
           output.weight.should.equal(parseInt(endpoints.weightNew, 10));
           output.priority.should.equal(parseInt(endpoints.priorityNew, 10));
-          endpoints.geoMappingNew.split(',').forEach(function (item) { output.geoMapping.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(endpoints.geoMappingNew, ',').forEach(function (item) { output.geoMapping.should.containEql(item) });
           done();
         });
       });
       it('delete should delete endpoints', function (done) {
         var cmd = 'network traffic-manager endpoint delete -g {group} -n {name} --type {endpointTypeDelete} --profile-name {profileName} --quiet --json'.formatArgs(endpoints);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network traffic-manager endpoint show -g {group} -n {name} --type {endpointTypeShow} --profile-name {profileName} --json'.formatArgs(endpoints);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;

@@ -146,7 +146,7 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create express route circuits', function (done) {
         var cmd = 'network express-route circuit create -g {group} -n {name} --sku-tier {skutier} --sku-family {skufamily} --service-provider-name {serviceProviderName} --peering-location {peeringLocation} --bandwidth-in-mbps {bandwidthInMbps} --location {location} --json'.formatArgs(expressRouteCircuits);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(expressRouteCircuits.name);
@@ -160,7 +160,7 @@ describe('arm', function () {
       });
       it('show should display express route circuits details', function (done) {
         var cmd = 'network express-route circuit show -g {group} -n {name} --json'.formatArgs(expressRouteCircuits);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(expressRouteCircuits.name);
@@ -174,7 +174,7 @@ describe('arm', function () {
       });
       it('set should update express route circuits', function (done) {
         var cmd = 'network express-route circuit set -g {group} -n {name} --sku-tier {skutierNew} --sku-family {skufamilyNew} --bandwidth-in-mbps {bandwidthInMbpsNew} --json'.formatArgs(expressRouteCircuits);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(expressRouteCircuits.name);
@@ -186,7 +186,7 @@ describe('arm', function () {
       });
       it('list should display all express route circuits in resource group', function (done) {
         var cmd = 'network express-route circuit list -g {group} --json'.formatArgs(expressRouteCircuits);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var outputs = JSON.parse(result.text);
           _.some(outputs, function (output) {
@@ -197,17 +197,17 @@ describe('arm', function () {
       });
       it('delete should delete express route circuits', function (done) {
         var cmd = 'network express-route circuit delete -g {group} -n {name} --quiet --json'.formatArgs(expressRouteCircuits);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network express-route circuit show -g {group} -n {name} --json'.formatArgs(expressRouteCircuits);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
 
             cmd = 'network express-route circuit list -g {group} --json'.formatArgs(expressRouteCircuits);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               var outputs = JSON.parse(result.text);
               _.some(outputs, function (output) {
@@ -220,7 +220,7 @@ describe('arm', function () {
       });
       it('create with defaults should create express route circuits with default values', function (done) {
         var cmd = 'network express-route circuit create -g {group} -n {name} --service-provider-name {serviceProviderName} --peering-location {peeringLocation} --location {location} --json'.formatArgs(expressRouteCircuitsDefault);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(expressRouteCircuitsDefault.name);
@@ -229,7 +229,7 @@ describe('arm', function () {
           output.serviceProviderProperties.bandwidthInMbps.should.equal(parseInt(expressRouteCircuitsDefault.bandwidthInMbps, 10))
 
           cmd = 'network express-route circuit delete -g {group} -n {name} --quiet --json'.formatArgs(expressRouteCircuitsDefault);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             done();
           });
@@ -237,28 +237,28 @@ describe('arm', function () {
       });
       it('create should fail for sku tier out of range', function (done) {
         var cmd = 'network express-route circuit create -g {group} -n {name} --sku-tier {skutier} --service-provider-name {serviceProviderName} --peering-location {peeringLocation} --location {location} --json'.formatArgs(skuTierOutOfRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for sku family out of range', function (done) {
         var cmd = 'network express-route circuit create -g {group} -n {name} --sku-family {skufamily} --service-provider-name {serviceProviderName} --peering-location {peeringLocation} --location {location} --json'.formatArgs(skuFamilyOutOfRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for invalid bandwidth', function (done) {
         var cmd = 'network express-route circuit create -g {group} -n {name} --bandwidth-in-mbps {bandwidthInMbps} --service-provider-name {serviceProviderName} --peering-location {peeringLocation} --location {location} --json'.formatArgs(invalidBandwidth);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for invalid service provider', function (done) {
         var cmd = 'network express-route circuit create -g {group} -n {name} --service-provider-name {serviceProviderName} --peering-location {peeringLocation} --location {location} --json'.formatArgs(invalidServiceProvider);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });

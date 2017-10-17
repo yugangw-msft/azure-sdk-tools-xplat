@@ -116,21 +116,21 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
+              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                 if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
-                testUtils.executeCommand(suite, retry, cmd, function (result) {
+                generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                   if (!testUtils.assertExitStatus(result, done)) return;
                   var cmd = 'network nic create -g {1} -n {name} --location {location} --subnet-vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --json'.formatArgs(networkInterface, groupName);
-                  testUtils.executeCommand(suite, retry, cmd, function (result) {
+                  generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                     if (!testUtils.assertExitStatus(result, done)) return;
                     preinstalledEnv.getPacketCaptureEnv(packetCaptures, preinstalledEnvGetPacketCaptureEnv, groupName, suite, function (result) {
                       result.exitStatus.should.equal(0);
                       var cmd = 'network watcher create -g {1} -n {name} --location {location} --json'.formatArgs(networkWatcher, groupName);
-                      testUtils.executeCommand(suite, retry, cmd, function (result) {
+                      generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                         if (!testUtils.assertExitStatus(result, done)) return;
                         done();
                       });
@@ -164,7 +164,7 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create packet captures', function (done) {
         var cmd = 'network watcher packet-capture create -g {group} -n {name} --target {target} --bytes-per-packet {bytesToCapturePerPacket} --bytes-per-session {totalBytesPerSession} --time-limit {timeLimitInSeconds} --local-file-path {filePath} --filters {filters} --watcher-name {networkWatcherName} --json'.formatArgs(packetCaptures);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(packetCaptures.name);
@@ -185,7 +185,7 @@ describe('arm', function () {
       });
       it('show should display packet captures details', function (done) {
         var cmd = 'network watcher packet-capture show -g {group} -n {name} --watcher-name {networkWatcherName} --json'.formatArgs(packetCaptures);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(packetCaptures.name);
@@ -206,7 +206,7 @@ describe('arm', function () {
       });
       it('list should display all packet captures in resource group', function (done) {
         var cmd = 'network watcher packet-capture list -g {group} --watcher-name {networkWatcherName} --json'.formatArgs(packetCaptures);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var outputs = JSON.parse(result.text);
           _.some(outputs, function (output) {
@@ -217,31 +217,31 @@ describe('arm', function () {
       });
       it('status should perform get status operation successfully', function (done) {
         var cmd = 'network watcher packet-capture status -g {group} -n {name} --watcher-name {networkWatcherName} --json'.formatArgs(packetCaptures);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('stop should perform stop operation successfully', function (done) {
         var cmd = 'network watcher packet-capture stop -g {group} -n {name} --watcher-name {networkWatcherName} --json'.formatArgs(packetCaptures);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('delete should delete packet captures', function (done) {
         var cmd = 'network watcher packet-capture delete -g {group} -n {name} --watcher-name {networkWatcherName} --quiet --json'.formatArgs(packetCaptures);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network watcher packet-capture show -g {group} -n {name} --watcher-name {networkWatcherName} --json'.formatArgs(packetCaptures);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
 
             cmd = 'network watcher packet-capture list -g {group} --watcher-name {networkWatcherName} --json'.formatArgs(packetCaptures);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               var outputs = JSON.parse(result.text);
               _.some(outputs, function (output) {

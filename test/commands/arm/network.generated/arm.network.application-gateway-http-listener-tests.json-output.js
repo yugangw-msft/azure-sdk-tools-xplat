@@ -116,22 +116,22 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
+              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                 if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
-                testUtils.executeCommand(suite, retry, cmd, function (result) {
+                generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                   if (!testUtils.assertExitStatus(result, done)) return;
                   var cmd = 'network application-gateway create -g {1} -n {name} --servers {backendAddresses} --location {location} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --cert-file test/data/sslCert.pfx --cert-password pswd --json'.formatArgs(applicationGateway, groupName);
-                  testUtils.executeCommand(suite, retry, cmd, function (result) {
+                  generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                     if (!testUtils.assertExitStatus(result, done)) return;
                     var cmd = 'network application-gateway frontend-ip create -g {1} -n {name} --gateway-name {applicationGatewayName} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --json'.formatArgs(frontendIPConfiguration, groupName);
-                    testUtils.executeCommand(suite, retry, cmd, function (result) {
+                    generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                       if (!testUtils.assertExitStatus(result, done)) return;
                       var cmd = 'network application-gateway frontend-port create -g {1} -n {name} --port {port} --gateway-name {applicationGatewayName} --json'.formatArgs(frontendPort, groupName);
-                      testUtils.executeCommand(suite, retry, cmd, function (result) {
+                      generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                         if (!testUtils.assertExitStatus(result, done)) return;
                         done();
                       });
@@ -163,7 +163,7 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create http listeners', function (done) {
         var cmd = 'network application-gateway http-listener create -g {group} -n {name} --protocol {protocol} --host-name {hostName} --gateway-name {applicationGatewayName} --frontend-ip-name {frontendIPConfigurationName} --frontend-port-name {frontendPortName} --json'.formatArgs(httpListeners);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var parentOutput = JSON.parse(result.text);
           parentOutput.name.should.equal('applicationGatewayName');
@@ -176,7 +176,7 @@ describe('arm', function () {
       });
       it('show should display http listeners details', function (done) {
         var cmd = 'network application-gateway http-listener show -g {group} -n {name} --gateway-name {applicationGatewayName} --json'.formatArgs(httpListeners);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(httpListeners.name);
@@ -187,7 +187,7 @@ describe('arm', function () {
       });
       it('set should update http listeners', function (done) {
         var cmd = 'network application-gateway http-listener set -g {group} -n {name} --protocol {protocolNew} --host-name {hostNameNew} --ssl-cert {sslCertificateNameNew} --gateway-name {applicationGatewayName} --json'.formatArgs(httpListeners);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var parentOutput = JSON.parse(result.text);
           parentOutput.name.should.equal('applicationGatewayName');
@@ -201,7 +201,7 @@ describe('arm', function () {
       });
       it('list should display all http listeners in resource group', function (done) {
         var cmd = 'network application-gateway http-listener list -g {group} --gateway-name {applicationGatewayName} --json'.formatArgs(httpListeners);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var outputs = JSON.parse(result.text);
           _.some(outputs, function (output) {
@@ -212,17 +212,17 @@ describe('arm', function () {
       });
       it('delete should delete http listeners', function (done) {
         var cmd = 'network application-gateway http-listener delete -g {group} -n {name} --gateway-name {applicationGatewayName} --quiet --json'.formatArgs(httpListeners);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network application-gateway http-listener show -g {group} -n {name} --gateway-name {applicationGatewayName} --json'.formatArgs(httpListeners);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
 
             cmd = 'network application-gateway http-listener list -g {group} --gateway-name {applicationGatewayName} --json'.formatArgs(httpListeners);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               var outputs = JSON.parse(result.text);
               _.some(outputs, function (output) {

@@ -79,7 +79,7 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('list should display all available endpoint services in resource group', function (done) {
         var cmd = 'network endpoint-service list --location {locationList} --json'.formatArgs(availableEndpointServices);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var outputs = JSON.parse(result.text);
           _.some(outputs, function (output) {

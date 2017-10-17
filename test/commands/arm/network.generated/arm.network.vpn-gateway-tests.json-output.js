@@ -177,16 +177,16 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
+              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                 if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
-                testUtils.executeCommand(suite, retry, cmd, function (result) {
+                generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                   if (!testUtils.assertExitStatus(result, done)) return;
                   var cmd = 'network local-gateway create -g {1} -n {name} --ip-address {gatewayIpAddress} --location {location} --json'.formatArgs(localNetworkGateway, groupName);
-                  testUtils.executeCommand(suite, retry, cmd, function (result) {
+                  generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                     if (!testUtils.assertExitStatus(result, done)) return;
                     var output = JSON.parse(result.text);
                     attachSiteUsingId.localNetworkGatewayId = output.id;
@@ -222,7 +222,7 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create virtual network gateways', function (done) {
         var cmd = 'network vpn-gateway create -g {group} -n {name} --gateway-type {gatewayType} --vpn-type {vpnType} --enable-bgp {enableBgp} --enable-active-active-feature {activeActive} --sku-name {skuname} --address-prefixes {addressPrefixes} --bgp-asn {asn} --bgp-peering-address {bgpPeeringAddress} --bgp-peer-weight {peerWeight} --location {location} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --json'.formatArgs(virtualNetworkGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(virtualNetworkGateways.name);
@@ -231,7 +231,7 @@ describe('arm', function () {
           output.enableBgp.should.equal(utils.parseBool(virtualNetworkGateways.enableBgp));
           output.activeActive.should.equal(utils.parseBool(virtualNetworkGateways.activeActive));
           output.sku.name.toLowerCase().should.equal(virtualNetworkGateways.skuname.toLowerCase());
-          virtualNetworkGateways.addressPrefixes.split(',').forEach(function (item) { output.vpnClientConfiguration.vpnClientAddressPool.addressPrefixes.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(virtualNetworkGateways.addressPrefixes, ',').forEach(function (item) { output.vpnClientConfiguration.vpnClientAddressPool.addressPrefixes.should.containEql(item) });
           output.bgpSettings.asn.should.equal(parseInt(virtualNetworkGateways.asn, 10));
           output.bgpSettings.bgpPeeringAddress.toLowerCase().should.equal(virtualNetworkGateways.bgpPeeringAddress.toLowerCase());
           done();
@@ -239,7 +239,7 @@ describe('arm', function () {
       });
       it('show should display virtual network gateways details', function (done) {
         var cmd = 'network vpn-gateway show -g {group} -n {name} --json'.formatArgs(virtualNetworkGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(virtualNetworkGateways.name);
@@ -248,7 +248,7 @@ describe('arm', function () {
           output.enableBgp.should.equal(utils.parseBool(virtualNetworkGateways.enableBgp));
           output.activeActive.should.equal(utils.parseBool(virtualNetworkGateways.activeActive));
           output.sku.name.toLowerCase().should.equal(virtualNetworkGateways.skuname.toLowerCase());
-          virtualNetworkGateways.addressPrefixes.split(',').forEach(function (item) { output.vpnClientConfiguration.vpnClientAddressPool.addressPrefixes.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(virtualNetworkGateways.addressPrefixes, ',').forEach(function (item) { output.vpnClientConfiguration.vpnClientAddressPool.addressPrefixes.should.containEql(item) });
           output.bgpSettings.asn.should.equal(parseInt(virtualNetworkGateways.asn, 10));
           output.bgpSettings.bgpPeeringAddress.toLowerCase().should.equal(virtualNetworkGateways.bgpPeeringAddress.toLowerCase());
           done();
@@ -256,7 +256,7 @@ describe('arm', function () {
       });
       it('set should update virtual network gateways', function (done) {
         var cmd = 'network vpn-gateway set -g {group} -n {name} --enable-bgp {enableBgpNew} --json'.formatArgs(virtualNetworkGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(virtualNetworkGateways.name);
@@ -266,7 +266,7 @@ describe('arm', function () {
       });
       it('list should display all virtual network gateways in resource group', function (done) {
         var cmd = 'network vpn-gateway list -g {group} --json'.formatArgs(virtualNetworkGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var outputs = JSON.parse(result.text);
           _.some(outputs, function (output) {
@@ -277,17 +277,17 @@ describe('arm', function () {
       });
       it('delete should delete virtual network gateways', function (done) {
         var cmd = 'network vpn-gateway delete -g {group} -n {name} --quiet --json'.formatArgs(virtualNetworkGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network vpn-gateway show -g {group} -n {name} --json'.formatArgs(virtualNetworkGateways);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
 
             cmd = 'network vpn-gateway list -g {group} --json'.formatArgs(virtualNetworkGateways);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               var outputs = JSON.parse(result.text);
               _.some(outputs, function (output) {
@@ -300,7 +300,7 @@ describe('arm', function () {
       });
       it('create should pass for attach site using id', function (done) {
         var cmd = 'network vpn-gateway create -g {group} -n {name} --location {location} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --json'.formatArgs(attachSiteUsingId);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(attachSiteUsingId.name);
@@ -308,7 +308,7 @@ describe('arm', function () {
           output.ipConfigurations[index].publicIPAddress.id.should.containEql(attachSiteUsingId.publicIPAddressName);
 
           cmd = 'network vpn-gateway set -g {group} -n {name} --default-site-id {localNetworkGatewayId} --json'.formatArgs(attachSiteUsingId);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text);
             output.name.should.equal(attachSiteUsingId.name);
@@ -319,7 +319,7 @@ describe('arm', function () {
       });
       it('operation detach site using id should pass', function (done) {
         var cmd = 'network vpn-gateway set -g {group} -n {name} --default-site-id --json'.formatArgs(detachSiteUsingId);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(detachSiteUsingId.name);
@@ -329,7 +329,7 @@ describe('arm', function () {
       });
       it('operation attach site using name should pass', function (done) {
         var cmd = 'network vpn-gateway set -g {group} -n {name} --default-site-name {localNetworkGatewayName} --json'.formatArgs(attachSiteUsingName);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(attachSiteUsingName.name);
@@ -339,14 +339,14 @@ describe('arm', function () {
       });
       it('operation detach site using name should pass', function (done) {
         var cmd = 'network vpn-gateway set -g {group} -n {name} --default-site-name --json'.formatArgs(detachSiteUsingName);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(detachSiteUsingName.name);
           should.not.exist(output.gatewayDefaultSite);
 
           cmd = 'network vpn-gateway delete -g {group} -n {name} --quiet --json'.formatArgs(detachSiteUsingName);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             done();
           });
@@ -354,28 +354,28 @@ describe('arm', function () {
       });
       it('create should fail for gateway type out of range', function (done) {
         var cmd = 'network vpn-gateway create -g {group} -n {name} --gateway-type {gatewayType} --location {location} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --json'.formatArgs(gatewayTypeOutOfRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for vpn type out of range', function (done) {
         var cmd = 'network vpn-gateway create -g {group} -n {name} --vpn-type {vpnType} --location {location} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --json'.formatArgs(vpnTypeOutOfRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for sku name out of range', function (done) {
         var cmd = 'network vpn-gateway create -g {group} -n {name} --sku-name {skuname} --location {location} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --json'.formatArgs(skuNameOutOfRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for invalid prefixes', function (done) {
         var cmd = 'network vpn-gateway create -g {group} -n {name} --address-prefixes {addressPrefixes} --location {location} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --json'.formatArgs(invalidPrefixes);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });

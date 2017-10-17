@@ -135,7 +135,7 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network express-route circuit create -g {1} -n {name} --service-provider-name {serviceProviderName} --peering-location {peeringLocation} --location {location} --json'.formatArgs(expressRouteCircuit, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               if (!testUtils.assertExitStatus(result, done)) return;
               done();
             });
@@ -162,43 +162,43 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create express route circuit peerings', function (done) {
         var cmd = 'network express-route peering create -g {group} -n {name} --type {peeringType} --peer-asn {peerAsn} --primary-address-prefix {primaryPeerAddressPrefix} --secondary-address-prefix {secondaryPeerAddressPrefix} --vlan-id {vlanId} --circuit-name {expressRouteCircuitName}'.formatArgs(expressRouteCircuitPeerings);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('show should display express route circuit peerings details', function (done) {
         var cmd = 'network express-route peering show -g {group} -n {name} --circuit-name {expressRouteCircuitName}'.formatArgs(expressRouteCircuitPeerings);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('set should update express route circuit peerings', function (done) {
         var cmd = 'network express-route peering set -g {group} -n {name} --peer-asn {peerAsnNew} --primary-address-prefix {primaryPeerAddressPrefixNew} --secondary-address-prefix {secondaryPeerAddressPrefixNew} --vlan-id {vlanIdNew} --circuit-name {expressRouteCircuitName}'.formatArgs(expressRouteCircuitPeerings);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('list should display all express route circuit peerings in resource group', function (done) {
         var cmd = 'network express-route peering list -g {group} --circuit-name {expressRouteCircuitName}'.formatArgs(expressRouteCircuitPeerings);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('delete should delete express route circuit peerings', function (done) {
         var cmd = 'network express-route peering delete -g {group} -n {name} --circuit-name {expressRouteCircuitName} --quiet'.formatArgs(expressRouteCircuitPeerings);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network express-route peering show -g {group} -n {name} --circuit-name {expressRouteCircuitName}'.formatArgs(expressRouteCircuitPeerings);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
 
             cmd = 'network express-route peering list -g {group} --circuit-name {expressRouteCircuitName}'.formatArgs(expressRouteCircuitPeerings);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               done();
             });
@@ -207,28 +207,28 @@ describe('arm', function () {
       });
       it('create should fail for ms peering', function (done) {
         var cmd = 'network express-route peering create -g {group} -n {name} --type {peeringType} --peer-asn {peerAsn} --vlan-id {vlanId} --primary-address-prefix {primaryPeerAddressPrefix} --secondary-address-prefix {secondaryPeerAddressPrefix} --ms-advertised-public-prefixes {advertisedPublicPrefixes} --ms-advertised-public-prefix-state {advertisedPublicPrefixesState} --ms-customer-asn {customerAsn} --ms-routing-registry-name {routingRegistryName} --circuit-name {expressRouteCircuitName} --json'.formatArgs(msPeering);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for peering type out of range', function (done) {
         var cmd = 'network express-route peering create -g {group} -n {name} --type {peeringType} --peer-asn {peerAsn} --vlan-id {vlanId} --primary-address-prefix {primaryPeerAddressPrefix} --secondary-address-prefix {secondaryPeerAddressPrefix} --circuit-name {expressRouteCircuitName} --json'.formatArgs(peeringTypeOutOfRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for invalid primary prefix', function (done) {
         var cmd = 'network express-route peering create -g {group} -n {name} --peer-asn {peerAsn} --vlan-id {vlanId} --primary-address-prefix {primaryPeerAddressPrefix} --secondary-address-prefix {secondaryPeerAddressPrefix} --circuit-name {expressRouteCircuitName} --json'.formatArgs(invalidPrimaryPrefix);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for invalid secondary prefix', function (done) {
         var cmd = 'network express-route peering create -g {group} -n {name} --peer-asn {peerAsn} --vlan-id {vlanId} --primary-address-prefix {primaryPeerAddressPrefix} --secondary-address-prefix {secondaryPeerAddressPrefix} --circuit-name {expressRouteCircuitName} --json'.formatArgs(invalidSecondaryPrefix);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });

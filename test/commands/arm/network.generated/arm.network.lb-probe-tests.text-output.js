@@ -157,13 +157,13 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network lb create -g {1} -n {name} --location {location} --json'.formatArgs(loadBalancer, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
+              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                 if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network lb frontend-ip create -g {1} -n {name} --lb-name {loadBalancerName} --public-ip-name {publicIPAddressName} --json'.formatArgs(frontendIPConfiguration, groupName);
-                testUtils.executeCommand(suite, retry, cmd, function (result) {
+                generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                   if (!testUtils.assertExitStatus(result, done)) return;
                   done();
                 });
@@ -192,43 +192,43 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create probes', function (done) {
         var cmd = 'network lb probe create -g {group} -n {name} --protocol {protocol} --port {port} --interval {intervalInSeconds} --count {numberOfProbes} --path {requestPath} --lb-name {loadBalancerName}'.formatArgs(probes);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('show should display probes details', function (done) {
         var cmd = 'network lb probe show -g {group} -n {name} --lb-name {loadBalancerName}'.formatArgs(probes);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('set should update probes', function (done) {
         var cmd = 'network lb probe set -g {group} -n {name} --protocol {protocolNew} --port {portNew} --interval {intervalInSecondsNew} --count {numberOfProbesNew} --lb-name {loadBalancerName}'.formatArgs(probes);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('list should display all probes in resource group', function (done) {
         var cmd = 'network lb probe list -g {group} --lb-name {loadBalancerName}'.formatArgs(probes);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('delete should delete probes', function (done) {
         var cmd = 'network lb probe delete -g {group} -n {name} --lb-name {loadBalancerName} --quiet'.formatArgs(probes);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network lb probe show -g {group} -n {name} --lb-name {loadBalancerName}'.formatArgs(probes);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
 
             cmd = 'network lb probe list -g {group} --lb-name {loadBalancerName}'.formatArgs(probes);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               done();
             });
@@ -237,11 +237,11 @@ describe('arm', function () {
       });
       it('create with defaults should create probes with default values', function (done) {
         var cmd = 'network lb probe create -g {group} -n {name} --lb-name {loadBalancerName}'.formatArgs(probesDefault);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network lb probe delete -g {group} -n {name} --lb-name {loadBalancerName} --quiet'.formatArgs(probesDefault);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             done();
           });
@@ -249,49 +249,49 @@ describe('arm', function () {
       });
       it('create should fail for protocol out of range', function (done) {
         var cmd = 'network lb probe create -g {group} -n {name} --protocol {protocol} --lb-name {loadBalancerName} --json'.formatArgs(protocolOutOfRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for port out of range', function (done) {
         var cmd = 'network lb probe create -g {group} -n {name} --port {port} --lb-name {loadBalancerName} --json'.formatArgs(portOutOfRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for invalid request path', function (done) {
         var cmd = 'network lb probe create -g {group} -n {name} --path {requestPath} --lb-name {loadBalancerName} --json'.formatArgs(invalidRequestPath);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for interval in seconds over allowed value', function (done) {
         var cmd = 'network lb probe create -g {group} -n {name} --interval {intervalInSeconds} --lb-name {loadBalancerName} --json'.formatArgs(intervalInSecondsOverAllowedValue);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for interval in seconds under allowed value', function (done) {
         var cmd = 'network lb probe create -g {group} -n {name} --interval {intervalInSeconds} --lb-name {loadBalancerName} --json'.formatArgs(intervalInSecondsUnderAllowedValue);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for number of probes under allowed value', function (done) {
         var cmd = 'network lb probe create -g {group} -n {name} --count {numberOfProbes} --lb-name {loadBalancerName} --json'.formatArgs(numberOfProbesUnderAllowedValue);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for number of probes over allowed value', function (done) {
         var cmd = 'network lb probe create -g {group} -n {name} --count {numberOfProbes} --lb-name {loadBalancerName} --json'.formatArgs(numberOfProbesOverAllowedValue);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
