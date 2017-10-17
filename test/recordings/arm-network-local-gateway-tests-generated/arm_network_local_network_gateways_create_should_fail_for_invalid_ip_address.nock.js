@@ -6,8 +6,8 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '9532a63e-f2eb-4649-bb23-5ed01077ce80',
-    name: 'franks-official-test-sub',
+    id: '947d47b4-7883-4bb9-9d85-c5e8e2f572ce',
+    name: 'nrptest58.westus.validation.partner',
     user: {
       name: 'user@domain.example',
       type: 'user'
@@ -29,34 +29,34 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidIPAddressName?api-version=2017-09-01')
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidIPAddressName?api-version=2017-09-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/localNetworkGateways/invalidIPAddressName' under resource group 'xplat-test-local-gateway' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': 'dfc5c596-b653-4af2-8421-4ccc7cfbb7b0',
-  'x-ms-correlation-request-id': 'dfc5c596-b653-4af2-8421-4ccc7cfbb7b0',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170927T105218Z:dfc5c596-b653-4af2-8421-4ccc7cfbb7b0',
+  'x-ms-request-id': '2e398b57-81cc-4c6c-86a8-8f454f18f307',
+  'x-ms-correlation-request-id': '2e398b57-81cc-4c6c-86a8-8f454f18f307',
+  'x-ms-routing-request-id': 'WESTEUROPE:20171016T145157Z:2e398b57-81cc-4c6c-86a8-8f454f18f307',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Wed, 27 Sep 2017 10:52:18 GMT',
+  date: 'Mon, 16 Oct 2017 14:51:56 GMT',
   connection: 'close',
   'content-length': '187' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidIPAddressName?api-version=2017-09-01')
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidIPAddressName?api-version=2017-09-01')
   .reply(404, "{\"error\":{\"code\":\"ResourceNotFound\",\"message\":\"The Resource 'Microsoft.Network/localNetworkGateways/invalidIPAddressName' under resource group 'xplat-test-local-gateway' was not found.\"}}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': 'dfc5c596-b653-4af2-8421-4ccc7cfbb7b0',
-  'x-ms-correlation-request-id': 'dfc5c596-b653-4af2-8421-4ccc7cfbb7b0',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170927T105218Z:dfc5c596-b653-4af2-8421-4ccc7cfbb7b0',
+  'x-ms-request-id': '2e398b57-81cc-4c6c-86a8-8f454f18f307',
+  'x-ms-correlation-request-id': '2e398b57-81cc-4c6c-86a8-8f454f18f307',
+  'x-ms-routing-request-id': 'WESTEUROPE:20171016T145157Z:2e398b57-81cc-4c6c-86a8-8f454f18f307',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Wed, 27 Sep 2017 10:52:18 GMT',
+  date: 'Mon, 16 Oct 2017 14:51:56 GMT',
   connection: 'close',
   'content-length': '187' });
  return result; },
@@ -64,37 +64,37 @@ function (nock) {
 var result = 
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidIPAddressName?api-version=2017-09-01', '*')
+.put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidIPAddressName?api-version=2017-09-01', '*')
   .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"InvalidIpAddress\",\r\n    \"message\": \"The IP Address 10.0.0.257 is invalid.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '132',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '10875bbc-1ca4-4b37-86e5-36ed3a91ccf9',
+  'x-ms-request-id': '9d6bbf0a-1647-49ea-8c84-bb16a48fd4f4',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-writes': '1197',
-  'x-ms-correlation-request-id': '6d4dac6f-aa0e-4af0-afa5-0df40fc368e4',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170927T105224Z:6d4dac6f-aa0e-4af0-afa5-0df40fc368e4',
-  date: 'Wed, 27 Sep 2017 10:52:23 GMT',
+  'x-ms-ratelimit-remaining-subscription-writes': '1198',
+  'x-ms-correlation-request-id': '0ae7103a-f6ac-4428-92fc-585854444faf',
+  'x-ms-routing-request-id': 'WESTEUROPE:20171016T145201Z:0ae7103a-f6ac-4428-92fc-585854444faf',
+  date: 'Mon, 16 Oct 2017 14:52:00 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidIPAddressName?api-version=2017-09-01', '*')
+.put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-local-gateway/providers/Microsoft.Network/localNetworkGateways/invalidIPAddressName?api-version=2017-09-01', '*')
   .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"InvalidIpAddress\",\r\n    \"message\": \"The IP Address 10.0.0.257 is invalid.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '132',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '10875bbc-1ca4-4b37-86e5-36ed3a91ccf9',
+  'x-ms-request-id': '9d6bbf0a-1647-49ea-8c84-bb16a48fd4f4',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-writes': '1197',
-  'x-ms-correlation-request-id': '6d4dac6f-aa0e-4af0-afa5-0df40fc368e4',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170927T105224Z:6d4dac6f-aa0e-4af0-afa5-0df40fc368e4',
-  date: 'Wed, 27 Sep 2017 10:52:23 GMT',
+  'x-ms-ratelimit-remaining-subscription-writes': '1198',
+  'x-ms-correlation-request-id': '0ae7103a-f6ac-4428-92fc-585854444faf',
+  'x-ms-routing-request-id': 'WESTEUROPE:20171016T145201Z:0ae7103a-f6ac-4428-92fc-585854444faf',
+  date: 'Mon, 16 Oct 2017 14:52:00 GMT',
   connection: 'close' });
  return result; }]];
