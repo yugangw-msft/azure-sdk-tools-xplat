@@ -99,16 +99,16 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
+              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                 if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
-                testUtils.executeCommand(suite, retry, cmd, function (result) {
+                generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                   if (!testUtils.assertExitStatus(result, done)) return;
                   var cmd = 'network application-gateway create -g {1} -n {name} --servers {backendAddresses} --location {location} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --json'.formatArgs(applicationGateway, groupName);
-                  testUtils.executeCommand(suite, retry, cmd, function (result) {
+                  generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                     if (!testUtils.assertExitStatus(result, done)) return;
                     done();
                   });
@@ -138,43 +138,43 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create frontend ports', function (done) {
         var cmd = 'network application-gateway frontend-port create -g {group} -n {name} --port {port} --gateway-name {applicationGatewayName}'.formatArgs(frontendPorts);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('show should display frontend ports details', function (done) {
         var cmd = 'network application-gateway frontend-port show -g {group} -n {name} --gateway-name {applicationGatewayName}'.formatArgs(frontendPorts);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('set should update frontend ports', function (done) {
         var cmd = 'network application-gateway frontend-port set -g {group} -n {name} --port {portNew} --gateway-name {applicationGatewayName}'.formatArgs(frontendPorts);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('list should display all frontend ports in resource group', function (done) {
         var cmd = 'network application-gateway frontend-port list -g {group} --gateway-name {applicationGatewayName}'.formatArgs(frontendPorts);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('delete should delete frontend ports', function (done) {
         var cmd = 'network application-gateway frontend-port delete -g {group} -n {name} --gateway-name {applicationGatewayName} --quiet'.formatArgs(frontendPorts);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network application-gateway frontend-port show -g {group} -n {name} --gateway-name {applicationGatewayName}'.formatArgs(frontendPorts);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
 
             cmd = 'network application-gateway frontend-port list -g {group} --gateway-name {applicationGatewayName}'.formatArgs(frontendPorts);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               done();
             });

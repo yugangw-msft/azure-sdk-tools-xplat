@@ -91,43 +91,43 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create application security groups', function (done) {
         var cmd = 'network application-security-group create -g {group} -n {name} --location {location}'.formatArgs(applicationSecurityGroups);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('show should display application security groups details', function (done) {
         var cmd = 'network application-security-group show -g {group} -n {name}'.formatArgs(applicationSecurityGroups);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('set should update application security groups', function (done) {
         var cmd = 'network application-security-group set -g {group} -n {name}'.formatArgs(applicationSecurityGroups);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('list should display all application security groups in resource group', function (done) {
         var cmd = 'network application-security-group list -g {group}'.formatArgs(applicationSecurityGroups);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('delete should delete application security groups', function (done) {
         var cmd = 'network application-security-group delete -g {group} -n {name} --quiet'.formatArgs(applicationSecurityGroups);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network application-security-group show -g {group} -n {name}'.formatArgs(applicationSecurityGroups);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
 
             cmd = 'network application-security-group list -g {group}'.formatArgs(applicationSecurityGroups);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               done();
             });

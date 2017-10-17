@@ -120,19 +120,19 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
+              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                 if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
-                testUtils.executeCommand(suite, retry, cmd, function (result) {
+                generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                   if (!testUtils.assertExitStatus(result, done)) return;
                   var cmd = 'network application-gateway create -g {1} -n {name} --servers {backendAddresses} --location {location} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --json'.formatArgs(applicationGateway, groupName);
-                  testUtils.executeCommand(suite, retry, cmd, function (result) {
+                  generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                     if (!testUtils.assertExitStatus(result, done)) return;
                     var cmd = 'network application-gateway probe create -g {1} -n {name} --host-name {host} --path {path} --timeout {timeout} --gateway-name {applicationGatewayName} --json'.formatArgs(probe, groupName);
-                    testUtils.executeCommand(suite, retry, cmd, function (result) {
+                    generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                       if (!testUtils.assertExitStatus(result, done)) return;
                       done();
                     });
@@ -163,7 +163,7 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create backend http settings collection', function (done) {
         var cmd = 'network application-gateway http-settings create -g {group} -n {name} --port {port} --protocol {protocol} --cookie-based-affinity {cookieBasedAffinity} --host-name {hostName} --pick-host-name {pickHostNameFromBackendAddress} --affinity-cookie-name {affinityCookieName} --probe-enabled {probeEnabled} --path {path} --gateway-name {applicationGatewayName} --probe-name {probeName} --json'.formatArgs(backendHttpSettingsCollection);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var parentOutput = JSON.parse(result.text);
           parentOutput.name.should.equal('applicationGatewayName');
@@ -181,7 +181,7 @@ describe('arm', function () {
       });
       it('show should display backend http settings collection details', function (done) {
         var cmd = 'network application-gateway http-settings show -g {group} -n {name} --gateway-name {applicationGatewayName} --json'.formatArgs(backendHttpSettingsCollection);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(backendHttpSettingsCollection.name);
@@ -197,7 +197,7 @@ describe('arm', function () {
       });
       it('set should update backend http settings collection', function (done) {
         var cmd = 'network application-gateway http-settings set -g {group} -n {name} --port {portNew} --cookie-based-affinity {cookieBasedAffinityNew} --host-name {hostNameNew} --pick-host-name {pickHostNameFromBackendAddressNew} --affinity-cookie-name {affinityCookieNameNew} --probe-enabled {probeEnabledNew} --path {pathNew} --gateway-name {applicationGatewayName} --json'.formatArgs(backendHttpSettingsCollection);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var parentOutput = JSON.parse(result.text);
           parentOutput.name.should.equal('applicationGatewayName');
@@ -214,7 +214,7 @@ describe('arm', function () {
       });
       it('list should display all backend http settings collection in resource group', function (done) {
         var cmd = 'network application-gateway http-settings list -g {group} --gateway-name {applicationGatewayName} --json'.formatArgs(backendHttpSettingsCollection);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var outputs = JSON.parse(result.text);
           _.some(outputs, function (output) {
@@ -225,17 +225,17 @@ describe('arm', function () {
       });
       it('delete should delete backend http settings collection', function (done) {
         var cmd = 'network application-gateway http-settings delete -g {group} -n {name} --gateway-name {applicationGatewayName} --quiet --json'.formatArgs(backendHttpSettingsCollection);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network application-gateway http-settings show -g {group} -n {name} --gateway-name {applicationGatewayName} --json'.formatArgs(backendHttpSettingsCollection);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
 
             cmd = 'network application-gateway http-settings list -g {group} --gateway-name {applicationGatewayName} --json'.formatArgs(backendHttpSettingsCollection);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               var outputs = JSON.parse(result.text);
               _.some(outputs, function (output) {

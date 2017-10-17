@@ -90,7 +90,7 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create application security groups', function (done) {
         var cmd = 'network application-security-group create -g {group} -n {name} --location {location} --json'.formatArgs(applicationSecurityGroups);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(applicationSecurityGroups.name);
@@ -99,7 +99,7 @@ describe('arm', function () {
       });
       it('show should display application security groups details', function (done) {
         var cmd = 'network application-security-group show -g {group} -n {name} --json'.formatArgs(applicationSecurityGroups);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(applicationSecurityGroups.name);
@@ -108,7 +108,7 @@ describe('arm', function () {
       });
       it('set should update application security groups', function (done) {
         var cmd = 'network application-security-group set -g {group} -n {name} --json'.formatArgs(applicationSecurityGroups);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(applicationSecurityGroups.name);
@@ -117,7 +117,7 @@ describe('arm', function () {
       });
       it('list should display all application security groups in resource group', function (done) {
         var cmd = 'network application-security-group list -g {group} --json'.formatArgs(applicationSecurityGroups);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var outputs = JSON.parse(result.text);
           _.some(outputs, function (output) {
@@ -128,17 +128,17 @@ describe('arm', function () {
       });
       it('delete should delete application security groups', function (done) {
         var cmd = 'network application-security-group delete -g {group} -n {name} --quiet --json'.formatArgs(applicationSecurityGroups);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network application-security-group show -g {group} -n {name} --json'.formatArgs(applicationSecurityGroups);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
 
             cmd = 'network application-security-group list -g {group} --json'.formatArgs(applicationSecurityGroups);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               var outputs = JSON.parse(result.text);
               _.some(outputs, function (output) {

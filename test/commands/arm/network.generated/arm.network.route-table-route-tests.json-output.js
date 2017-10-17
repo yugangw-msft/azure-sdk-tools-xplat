@@ -105,7 +105,7 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network route-table create -g {1} -n {name} --location {location} --json'.formatArgs(routeTable, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               if (!testUtils.assertExitStatus(result, done)) return;
               done();
             });
@@ -132,7 +132,7 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create routes', function (done) {
         var cmd = 'network route-table route create -g {group} -n {name} --address-prefix {addressPrefix} --next-hop-type {nextHopType} --route-table-name {routeTableName} --json'.formatArgs(routes);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(routes.name);
@@ -143,7 +143,7 @@ describe('arm', function () {
       });
       it('show should display routes details', function (done) {
         var cmd = 'network route-table route show -g {group} -n {name} --route-table-name {routeTableName} --json'.formatArgs(routes);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(routes.name);
@@ -154,7 +154,7 @@ describe('arm', function () {
       });
       it('set should update routes', function (done) {
         var cmd = 'network route-table route set -g {group} -n {name} --address-prefix {addressPrefixNew} --next-hop-type {nextHopTypeNew} --route-table-name {routeTableName} --json'.formatArgs(routes);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(routes.name);
@@ -165,7 +165,7 @@ describe('arm', function () {
       });
       it('list should display all routes in resource group', function (done) {
         var cmd = 'network route-table route list -g {group} --route-table-name {routeTableName} --json'.formatArgs(routes);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var outputs = JSON.parse(result.text);
           _.some(outputs, function (output) {
@@ -176,17 +176,17 @@ describe('arm', function () {
       });
       it('delete should delete routes', function (done) {
         var cmd = 'network route-table route delete -g {group} -n {name} --route-table-name {routeTableName} --quiet --json'.formatArgs(routes);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network route-table route show -g {group} -n {name} --route-table-name {routeTableName} --json'.formatArgs(routes);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
 
             cmd = 'network route-table route list -g {group} --route-table-name {routeTableName} --json'.formatArgs(routes);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               var outputs = JSON.parse(result.text);
               _.some(outputs, function (output) {
@@ -199,21 +199,21 @@ describe('arm', function () {
       });
       it('create should fail for invalid prefixes', function (done) {
         var cmd = 'network route-table route create -g {group} -n {name} --address-prefix {addressPrefix} --next-hop-type {nextHopType} --route-table-name {routeTableName} --json'.formatArgs(invalidPrefixes);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for next hop type out of range', function (done) {
         var cmd = 'network route-table route create -g {group} -n {name} --next-hop-type {nextHopType} --address-prefix {addressPrefix} --route-table-name {routeTableName} --json'.formatArgs(nextHopTypeOutOfRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should pass for update next hop type from virtual appliance to any', function (done) {
         var cmd = 'network route-table route create -g {group} -n {name} --next-hop-type {nextHopType} --address-prefix {addressPrefix} --next-hop-ip-address {nextHopIpAddress} --route-table-name {routeTableName} --json'.formatArgs(updateNextHopTypeFromVirtualApplianceToAny);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(updateNextHopTypeFromVirtualApplianceToAny.name);
@@ -222,14 +222,14 @@ describe('arm', function () {
           output.nextHopIpAddress.toLowerCase().should.equal(updateNextHopTypeFromVirtualApplianceToAny.nextHopIpAddress.toLowerCase());
 
           cmd = 'network route-table route set -g {group} -n {name} --next-hop-type {nextHopTypeNew} --route-table-name {routeTableName} --json'.formatArgs(updateNextHopTypeFromVirtualApplianceToAny);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text);
             output.name.should.equal(updateNextHopTypeFromVirtualApplianceToAny.name);
             output.nextHopType.toLowerCase().should.equal(updateNextHopTypeFromVirtualApplianceToAny.nextHopTypeNew.toLowerCase());
 
             cmd = 'network route-table route delete -g {group} -n {name} --route-table-name {routeTableName} --quiet --json'.formatArgs(updateNextHopTypeFromVirtualApplianceToAny);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               done();
             });

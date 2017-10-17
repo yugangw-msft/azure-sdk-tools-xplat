@@ -211,15 +211,15 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network nsg create -g {1} -n {name} --location {location} --json'.formatArgs(networkSecurityGroup, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network application-security-group create -g {1} -n {name} --location {location} --json'.formatArgs(sourceASG, groupName);
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
+              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                 if (!testUtils.assertExitStatus(result, done)) return;
                 var output = JSON.parse(result.text);
                 securityRules.sourceASGId = output.id;
                 var cmd = 'network application-security-group create -g {1} -n {name} --location {location} --json'.formatArgs(destinationASG, groupName);
-                testUtils.executeCommand(suite, retry, cmd, function (result) {
+                generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                   if (!testUtils.assertExitStatus(result, done)) return;
                   var output = JSON.parse(result.text);
                   securityRules.destinationASGId = output.id;
@@ -253,16 +253,16 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create security rules', function (done) {
         var cmd = 'network nsg rule create -g {group} -n {name} --description {description} --protocol {protocol} --source-port-ranges {sourcePortRanges} --destination-port-ranges {destinationPortRanges} --source-address-prefixes {sourceAddressPrefixes} --destination-address-prefixes {destinationAddressPrefixes} --access {access} --priority {priority} --direction {direction} --nsg-name {networkSecurityGroupName} --json'.formatArgs(securityRules);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(securityRules.name);
           output.description.toLowerCase().should.equal(securityRules.description.toLowerCase());
           output.protocol.toLowerCase().should.equal(securityRules.protocol.toLowerCase());
-          securityRules.sourcePortRanges.split(',').forEach(function (item) { output.sourcePortRanges.should.containEql(item) });
-          securityRules.destinationPortRanges.split(',').forEach(function (item) { output.destinationPortRanges.should.containEql(item) });
-          securityRules.sourceAddressPrefixes.split(',').forEach(function (item) { output.sourceAddressPrefixes.should.containEql(item) });
-          securityRules.destinationAddressPrefixes.split(',').forEach(function (item) { output.destinationAddressPrefixes.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(securityRules.sourcePortRanges, ',').forEach(function (item) { output.sourcePortRanges.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(securityRules.destinationPortRanges, ',').forEach(function (item) { output.destinationPortRanges.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(securityRules.sourceAddressPrefixes, ',').forEach(function (item) { output.sourceAddressPrefixes.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(securityRules.destinationAddressPrefixes, ',').forEach(function (item) { output.destinationAddressPrefixes.should.containEql(item) });
           output.access.toLowerCase().should.equal(securityRules.access.toLowerCase());
           output.priority.should.equal(parseInt(securityRules.priority, 10));
           output.direction.toLowerCase().should.equal(securityRules.direction.toLowerCase());
@@ -271,16 +271,16 @@ describe('arm', function () {
       });
       it('show should display security rules details', function (done) {
         var cmd = 'network nsg rule show -g {group} -n {name} --nsg-name {networkSecurityGroupName} --json'.formatArgs(securityRules);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(securityRules.name);
           output.description.toLowerCase().should.equal(securityRules.description.toLowerCase());
           output.protocol.toLowerCase().should.equal(securityRules.protocol.toLowerCase());
-          securityRules.sourcePortRanges.split(',').forEach(function (item) { output.sourcePortRanges.should.containEql(item) });
-          securityRules.destinationPortRanges.split(',').forEach(function (item) { output.destinationPortRanges.should.containEql(item) });
-          securityRules.sourceAddressPrefixes.split(',').forEach(function (item) { output.sourceAddressPrefixes.should.containEql(item) });
-          securityRules.destinationAddressPrefixes.split(',').forEach(function (item) { output.destinationAddressPrefixes.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(securityRules.sourcePortRanges, ',').forEach(function (item) { output.sourcePortRanges.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(securityRules.destinationPortRanges, ',').forEach(function (item) { output.destinationPortRanges.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(securityRules.sourceAddressPrefixes, ',').forEach(function (item) { output.sourceAddressPrefixes.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(securityRules.destinationAddressPrefixes, ',').forEach(function (item) { output.destinationAddressPrefixes.should.containEql(item) });
           output.access.toLowerCase().should.equal(securityRules.access.toLowerCase());
           output.priority.should.equal(parseInt(securityRules.priority, 10));
           output.direction.toLowerCase().should.equal(securityRules.direction.toLowerCase());
@@ -289,7 +289,7 @@ describe('arm', function () {
       });
       it('set should update security rules', function (done) {
         var cmd = 'network nsg rule set -g {group} -n {name} --description {descriptionNew} --protocol {protocolNew} --access {accessNew} --priority {priorityNew} --direction {directionNew} --nsg-name {networkSecurityGroupName} --source-application-security-groups {sourceASGId} --destination-application-security-groups {destinationASGId} --json'.formatArgs(securityRules);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(securityRules.name);
@@ -303,7 +303,7 @@ describe('arm', function () {
       });
       it('list should display all security rules in resource group', function (done) {
         var cmd = 'network nsg rule list -g {group} --nsg-name {networkSecurityGroupName} --json'.formatArgs(securityRules);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var outputs = JSON.parse(result.text);
           _.some(outputs, function (output) {
@@ -314,17 +314,17 @@ describe('arm', function () {
       });
       it('delete should delete security rules', function (done) {
         var cmd = 'network nsg rule delete -g {group} -n {name} --nsg-name {networkSecurityGroupName} --quiet --json'.formatArgs(securityRules);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network nsg rule show -g {group} -n {name} --nsg-name {networkSecurityGroupName} --json'.formatArgs(securityRules);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
 
             cmd = 'network nsg rule list -g {group} --nsg-name {networkSecurityGroupName} --json'.formatArgs(securityRules);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               var outputs = JSON.parse(result.text);
               _.some(outputs, function (output) {
@@ -337,7 +337,7 @@ describe('arm', function () {
       });
       it('create with defaults should create security rules with default values', function (done) {
         var cmd = 'network nsg rule create -g {group} -n {name} --priority {priority} --nsg-name {networkSecurityGroupName} --json'.formatArgs(securityRulesDefault);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(securityRulesDefault.name);
@@ -350,7 +350,7 @@ describe('arm', function () {
           output.direction.toLowerCase().should.equal(securityRulesDefault.direction.toLowerCase())
 
           cmd = 'network nsg rule delete -g {group} -n {name} --nsg-name {networkSecurityGroupName} --quiet --json'.formatArgs(securityRulesDefault);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             done();
           });
@@ -358,77 +358,77 @@ describe('arm', function () {
       });
       it('create should fail for too long description', function (done) {
         var cmd = 'network nsg rule create -g {group} -n {name} --description {description} --priority {priority} --nsg-name {networkSecurityGroupName} --json'.formatArgs(tooLongDescription);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for protocol out of range', function (done) {
         var cmd = 'network nsg rule create -g {group} -n {name} --protocol {protocol} --priority {priority} --nsg-name {networkSecurityGroupName} --json'.formatArgs(protocolOutOfRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for source port out of range', function (done) {
         var cmd = 'network nsg rule create -g {group} -n {name} --source-port-range {sourcePortRange} --priority {priority} --nsg-name {networkSecurityGroupName} --json'.formatArgs(sourcePortOutOfRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for destination port out of range', function (done) {
         var cmd = 'network nsg rule create -g {group} -n {name} --destination-port-range {destinationPortRange} --priority {priority} --nsg-name {networkSecurityGroupName} --json'.formatArgs(destinationPortOutOfRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for invalid source address prefix', function (done) {
         var cmd = 'network nsg rule create -g {group} -n {name} --source-address-prefix {sourceAddressPrefix} --priority {priority} --nsg-name {networkSecurityGroupName} --json'.formatArgs(invalidSourceAddressPrefix);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for invalid destination address prefix', function (done) {
         var cmd = 'network nsg rule create -g {group} -n {name} --destination-address-prefix {destinationAddressPrefix} --priority {priority} --nsg-name {networkSecurityGroupName} --json'.formatArgs(invalidDestinationAddressPrefix);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for access out of range', function (done) {
         var cmd = 'network nsg rule create -g {group} -n {name} --access {access} --priority {priority} --nsg-name {networkSecurityGroupName} --json'.formatArgs(accessOutOfRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for rule priority under range', function (done) {
         var cmd = 'network nsg rule create -g {group} -n {name} --priority {priority} --nsg-name {networkSecurityGroupName} --json'.formatArgs(rulePriorityUnderRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for rule priority over range', function (done) {
         var cmd = 'network nsg rule create -g {group} -n {name} --priority {priority} --nsg-name {networkSecurityGroupName} --json'.formatArgs(rulePriorityOverRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for direction out of range', function (done) {
         var cmd = 'network nsg rule create -g {group} -n {name} --direction {direction} --priority {priority} --nsg-name {networkSecurityGroupName} --json'.formatArgs(directionOutOfRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should pass for singular prefixes', function (done) {
         var cmd = 'network nsg rule create -g {group} -n {name} --source-port-range {sourcePortRange} --source-address-prefix {sourceAddressPrefix} --destination-port-range {destinationPortRange} --destination-address-prefix {destinationAddressPrefix} --description {description} --priority {priority} --nsg-name {networkSecurityGroupName} --json'.formatArgs(singularPrefixes);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(singularPrefixes.name);
@@ -440,7 +440,7 @@ describe('arm', function () {
           output.priority.should.equal(parseInt(singularPrefixes.priority, 10));
 
           cmd = 'network nsg rule set -g {group} -n {name} --source-port-range {sourcePortRangeNew} --source-address-prefix {sourceAddressPrefixNew} --destination-port-range {destinationPortRangeNew} --destination-address-prefix {destinationAddressPrefixNew} --nsg-name {networkSecurityGroupName} --json'.formatArgs(singularPrefixes);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text);
             output.name.should.equal(singularPrefixes.name);
@@ -450,7 +450,7 @@ describe('arm', function () {
             output.destinationAddressPrefix.toLowerCase().should.equal(singularPrefixes.destinationAddressPrefixNew.toLowerCase());
 
             cmd = 'network nsg rule delete -g {group} -n {name} --nsg-name {networkSecurityGroupName} --quiet --json'.formatArgs(singularPrefixes);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               done();
             });

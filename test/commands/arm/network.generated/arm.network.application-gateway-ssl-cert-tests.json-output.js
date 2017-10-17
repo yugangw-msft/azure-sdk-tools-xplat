@@ -93,13 +93,13 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
+              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                 if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network application-gateway create -g {1} -n {name} --servers {backendAddresses} --location {location} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --json'.formatArgs(applicationGateway, groupName);
-                testUtils.executeCommand(suite, retry, cmd, function (result) {
+                generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                   if (!testUtils.assertExitStatus(result, done)) return;
                   done();
                 });
@@ -128,7 +128,7 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create ssl certificates', function (done) {
         var cmd = 'network application-gateway ssl-cert create -g {group} -n {name} --cert-password {password} --cert-file {certFile} --gateway-name {applicationGatewayName} --json'.formatArgs(sslCertificates);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var parentOutput = JSON.parse(result.text);
           parentOutput.name.should.equal('applicationGatewayName');
@@ -139,7 +139,7 @@ describe('arm', function () {
       });
       it('show should display ssl certificates details', function (done) {
         var cmd = 'network application-gateway ssl-cert show -g {group} -n {name} --gateway-name {applicationGatewayName} --json'.formatArgs(sslCertificates);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(sslCertificates.name);
@@ -148,7 +148,7 @@ describe('arm', function () {
       });
       it('set should update ssl certificates', function (done) {
         var cmd = 'network application-gateway ssl-cert set -g {group} -n {name} --cert-password {passwordNew} --cert-file {certFileNew} --gateway-name {applicationGatewayName} --json'.formatArgs(sslCertificates);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var parentOutput = JSON.parse(result.text);
           parentOutput.name.should.equal('applicationGatewayName');
@@ -159,7 +159,7 @@ describe('arm', function () {
       });
       it('list should display all ssl certificates in resource group', function (done) {
         var cmd = 'network application-gateway ssl-cert list -g {group} --gateway-name {applicationGatewayName} --json'.formatArgs(sslCertificates);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var outputs = JSON.parse(result.text);
           _.some(outputs, function (output) {
@@ -170,17 +170,17 @@ describe('arm', function () {
       });
       it('delete should delete ssl certificates', function (done) {
         var cmd = 'network application-gateway ssl-cert delete -g {group} -n {name} --gateway-name {applicationGatewayName} --quiet --json'.formatArgs(sslCertificates);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network application-gateway ssl-cert show -g {group} -n {name} --gateway-name {applicationGatewayName} --json'.formatArgs(sslCertificates);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
 
             cmd = 'network application-gateway ssl-cert list -g {group} --gateway-name {applicationGatewayName} --json'.formatArgs(sslCertificates);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               var outputs = JSON.parse(result.text);
               _.some(outputs, function (output) {

@@ -152,7 +152,7 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create public ip addresses', function (done) {
         var cmd = 'network public-ip create -g {group} -n {name} --allocation-method {publicIPAllocationMethod} --ip-version {publicIPAddressVersion} --domain-name-label {domainNameLabel} --idle-timeout {idleTimeoutInMinutes} --sku-name {skuname} --zones {zones} --location {location} --json'.formatArgs(publicIPAddresses);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(publicIPAddresses.name);
@@ -161,13 +161,13 @@ describe('arm', function () {
           output.dnsSettings.domainNameLabel.toLowerCase().should.equal(publicIPAddresses.domainNameLabel.toLowerCase());
           output.idleTimeoutInMinutes.should.equal(parseInt(publicIPAddresses.idleTimeoutInMinutes, 10));
           output.sku.name.toLowerCase().should.equal(publicIPAddresses.skuname.toLowerCase());
-          publicIPAddresses.zones.split(',').forEach(function (item) { output.zones.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(publicIPAddresses.zones, ',').forEach(function (item) { output.zones.should.containEql(item) });
           done();
         });
       });
       it('show should display public ip addresses details', function (done) {
         var cmd = 'network public-ip show -g {group} -n {name} --json'.formatArgs(publicIPAddresses);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(publicIPAddresses.name);
@@ -176,13 +176,13 @@ describe('arm', function () {
           output.dnsSettings.domainNameLabel.toLowerCase().should.equal(publicIPAddresses.domainNameLabel.toLowerCase());
           output.idleTimeoutInMinutes.should.equal(parseInt(publicIPAddresses.idleTimeoutInMinutes, 10));
           output.sku.name.toLowerCase().should.equal(publicIPAddresses.skuname.toLowerCase());
-          publicIPAddresses.zones.split(',').forEach(function (item) { output.zones.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(publicIPAddresses.zones, ',').forEach(function (item) { output.zones.should.containEql(item) });
           done();
         });
       });
       it('set should update public ip addresses', function (done) {
         var cmd = 'network public-ip set -g {group} -n {name} --allocation-method {publicIPAllocationMethodNew} --domain-name-label {domainNameLabelNew} --idle-timeout {idleTimeoutInMinutesNew} --json'.formatArgs(publicIPAddresses);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(publicIPAddresses.name);
@@ -194,7 +194,7 @@ describe('arm', function () {
       });
       it('list should display all public ip addresses in resource group', function (done) {
         var cmd = 'network public-ip list -g {group} --json'.formatArgs(publicIPAddresses);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var outputs = JSON.parse(result.text);
           _.some(outputs, function (output) {
@@ -205,17 +205,17 @@ describe('arm', function () {
       });
       it('delete should delete public ip addresses', function (done) {
         var cmd = 'network public-ip delete -g {group} -n {name} --quiet --json'.formatArgs(publicIPAddresses);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network public-ip show -g {group} -n {name} --json'.formatArgs(publicIPAddresses);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
 
             cmd = 'network public-ip list -g {group} --json'.formatArgs(publicIPAddresses);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               var outputs = JSON.parse(result.text);
               _.some(outputs, function (output) {
@@ -228,7 +228,7 @@ describe('arm', function () {
       });
       it('create with defaults should create public ip addresses with default values', function (done) {
         var cmd = 'network public-ip create -g {group} -n {name} --location {location} --json'.formatArgs(publicIPAddressesDefault);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(publicIPAddressesDefault.name);
@@ -237,7 +237,7 @@ describe('arm', function () {
           output.idleTimeoutInMinutes.should.equal(parseInt(publicIPAddressesDefault.idleTimeoutInMinutes, 10))
 
           cmd = 'network public-ip delete -g {group} -n {name} --quiet --json'.formatArgs(publicIPAddressesDefault);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             done();
           });
@@ -245,55 +245,55 @@ describe('arm', function () {
       });
       it('create should fail for ip allocation method out of range', function (done) {
         var cmd = 'network public-ip create -g {group} -n {name} --allocation-method {publicIPAllocationMethod} --location {location} --json'.formatArgs(ipAllocationMethodOutOfRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for ip version out of range', function (done) {
         var cmd = 'network public-ip create -g {group} -n {name} --ip-version {publicIPAddressVersion} --location {location} --json'.formatArgs(ipVersionOutOfRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for invalid symbols in lable', function (done) {
         var cmd = 'network public-ip create -g {group} -n {name} --domain-name-label {domainNameLabel} --location {location} --json'.formatArgs(invalidSymbolsInLable);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for idle timeout under range', function (done) {
         var cmd = 'network public-ip create -g {group} -n {name} --idle-timeout {idleTimeoutInMinutes} --location {location} --json'.formatArgs(idleTimeoutUnderRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for idle timeout over range', function (done) {
         var cmd = 'network public-ip create -g {group} -n {name} --idle-timeout {idleTimeoutInMinutes} --location {location} --json'.formatArgs(idleTimeoutOverRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should pass for delete of domain name label', function (done) {
         var cmd = 'network public-ip create -g {group} -n {name} --domain-name-label {domainNameLabel} --location {location} --json'.formatArgs(deleteOfDomainNameLabel);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(deleteOfDomainNameLabel.name);
           output.dnsSettings.domainNameLabel.toLowerCase().should.equal(deleteOfDomainNameLabel.domainNameLabel.toLowerCase());
 
           cmd = 'network public-ip set -g {group} -n {name} --json'.formatArgs(deleteOfDomainNameLabel);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text);
             output.name.should.equal(deleteOfDomainNameLabel.name);
 
             cmd = 'network public-ip delete -g {group} -n {name} --quiet --json'.formatArgs(deleteOfDomainNameLabel);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               done();
             });

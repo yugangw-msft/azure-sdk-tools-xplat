@@ -175,19 +175,19 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network lb create -g {1} -n {name} --location {location} --json'.formatArgs(loadBalancer, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
+              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                 if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network lb frontend-ip create -g {1} -n {name} --lb-name {loadBalancerName} --public-ip-name {publicIPAddressName} --json'.formatArgs(frontendIPConfiguration, groupName);
-                testUtils.executeCommand(suite, retry, cmd, function (result) {
+                generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                   if (!testUtils.assertExitStatus(result, done)) return;
                   var cmd = 'network lb address-pool create -g {1} -n {name} --lb-name {loadBalancerName} --json'.formatArgs(backendAddressPool, groupName);
-                  testUtils.executeCommand(suite, retry, cmd, function (result) {
+                  generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                     if (!testUtils.assertExitStatus(result, done)) return;
                     var cmd = 'network lb probe create -g {1} -n {name} --lb-name {loadBalancerName} --json'.formatArgs(probe, groupName);
-                    testUtils.executeCommand(suite, retry, cmd, function (result) {
+                    generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                       if (!testUtils.assertExitStatus(result, done)) return;
                       done();
                     });
@@ -218,7 +218,7 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create load balancing rules', function (done) {
         var cmd = 'network lb rule create -g {group} -n {name} --protocol {protocol} --load-distribution {loadDistribution} --frontend-port {frontendPort} --backend-port {backendPort} --idle-timeout {idleTimeoutInMinutes} --enable-floating-ip {enableFloatingIP} --lb-name {loadBalancerName} --frontend-ip-name {frontendIPConfigurationName} --backend-address-pool-name {backendAddressPoolName} --probe-name {probeName} --json'.formatArgs(loadBalancingRules);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(loadBalancingRules.name);
@@ -233,7 +233,7 @@ describe('arm', function () {
       });
       it('show should display load balancing rules details', function (done) {
         var cmd = 'network lb rule show -g {group} -n {name} --lb-name {loadBalancerName} --json'.formatArgs(loadBalancingRules);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(loadBalancingRules.name);
@@ -248,7 +248,7 @@ describe('arm', function () {
       });
       it('set should update load balancing rules', function (done) {
         var cmd = 'network lb rule set -g {group} -n {name} --protocol {protocolNew} --load-distribution {loadDistributionNew} --frontend-port {frontendPortNew} --backend-port {backendPortNew} --idle-timeout {idleTimeoutInMinutesNew} --enable-floating-ip {enableFloatingIPNew} --lb-name {loadBalancerName} --json'.formatArgs(loadBalancingRules);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(loadBalancingRules.name);
@@ -263,7 +263,7 @@ describe('arm', function () {
       });
       it('list should display all load balancing rules in resource group', function (done) {
         var cmd = 'network lb rule list -g {group} --lb-name {loadBalancerName} --json'.formatArgs(loadBalancingRules);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var outputs = JSON.parse(result.text);
           _.some(outputs, function (output) {
@@ -274,17 +274,17 @@ describe('arm', function () {
       });
       it('delete should delete load balancing rules', function (done) {
         var cmd = 'network lb rule delete -g {group} -n {name} --lb-name {loadBalancerName} --quiet --json'.formatArgs(loadBalancingRules);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network lb rule show -g {group} -n {name} --lb-name {loadBalancerName} --json'.formatArgs(loadBalancingRules);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
 
             cmd = 'network lb rule list -g {group} --lb-name {loadBalancerName} --json'.formatArgs(loadBalancingRules);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               var outputs = JSON.parse(result.text);
               _.some(outputs, function (output) {
@@ -297,7 +297,7 @@ describe('arm', function () {
       });
       it('create with defaults should create load balancing rules with default values', function (done) {
         var cmd = 'network lb rule create -g {group} -n {name} --lb-name {loadBalancerName} --json'.formatArgs(loadBalancingRulesDefault);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(loadBalancingRulesDefault.name);
@@ -309,7 +309,7 @@ describe('arm', function () {
           output.enableFloatingIP.should.equal(utils.parseBool(loadBalancingRulesDefault.enableFloatingIP))
 
           cmd = 'network lb rule delete -g {group} -n {name} --lb-name {loadBalancerName} --quiet --json'.formatArgs(loadBalancingRulesDefault);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             done();
           });
@@ -317,49 +317,49 @@ describe('arm', function () {
       });
       it('create should fail for protocol out of range', function (done) {
         var cmd = 'network lb rule create -g {group} -n {name} --protocol {protocol} --lb-name {loadBalancerName} --json'.formatArgs(protocolOutOfRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for frontend port under allowed value', function (done) {
         var cmd = 'network lb rule create -g {group} -n {name} --frontend-port {frontendPort} --lb-name {loadBalancerName} --json'.formatArgs(frontendPortUnderAllowedValue);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for frontend port over allowed value', function (done) {
         var cmd = 'network lb rule create -g {group} -n {name} --frontend-port {frontendPort} --lb-name {loadBalancerName} --json'.formatArgs(frontendPortOverAllowedValue);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for backend port out of range', function (done) {
         var cmd = 'network lb rule create -g {group} -n {name} --backend-port {backendPort} --lb-name {loadBalancerName} --json'.formatArgs(backendPortOutOfRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for load distribution out of range', function (done) {
         var cmd = 'network lb rule create -g {group} -n {name} --load-distribution {loadDistribution} --lb-name {loadBalancerName} --json'.formatArgs(loadDistributionOutOfRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for idle timeout in minutes over allowed value', function (done) {
         var cmd = 'network lb rule create -g {group} -n {name} --idle-timeout {idleTimeoutInMinutes} --lb-name {loadBalancerName} --json'.formatArgs(idleTimeoutInMinutesOverAllowedValue);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for idle timeout in minutes under allowed value', function (done) {
         var cmd = 'network lb rule create -g {group} -n {name} --idle-timeout {idleTimeoutInMinutes} --lb-name {loadBalancerName} --json'.formatArgs(idleTimeoutInMinutesUnderAllowedValue);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });

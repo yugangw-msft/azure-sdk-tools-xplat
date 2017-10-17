@@ -100,13 +100,13 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
+              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                 if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
-                testUtils.executeCommand(suite, retry, cmd, function (result) {
+                generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                   if (!testUtils.assertExitStatus(result, done)) return;
                   done();
                 });
@@ -135,64 +135,64 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create application gateways', function (done) {
         var cmd = 'network application-gateway create -g {group} -n {name} --sku-name {skuname} --sku-tier {skutier} --capacity {skucapacity} --cert-password {password} --cert-file {sslCertificateName} --servers {backendAddresses} --http-settings-cookie-based-affinity {cookieBasedAffinity} --routing-rule-type {ruleType} --location {location} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName}'.formatArgs(applicationGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('show should display application gateways details', function (done) {
         var cmd = 'network application-gateway show -g {group} -n {name}'.formatArgs(applicationGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('set should update application gateways', function (done) {
         var cmd = 'network application-gateway set -g {group} -n {name} --sku-name {skunameNew} --sku-tier {skutierNew} --capacity {skucapacityNew}'.formatArgs(applicationGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('list should display all application gateways in resource group', function (done) {
         var cmd = 'network application-gateway list -g {group}'.formatArgs(applicationGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('backend-health should perform backend health operation successfully', function (done) {
         var cmd = 'network application-gateway backend-health show -g {group} --gateway-name {applicationGatewayName}'.formatArgs(applicationGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('start should perform start operation successfully', function (done) {
         var cmd = 'network application-gateway start -g {group} -n {name}'.formatArgs(applicationGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('stop should perform stop operation successfully', function (done) {
         var cmd = 'network application-gateway stop -g {group} -n {name}'.formatArgs(applicationGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('delete should delete application gateways', function (done) {
         var cmd = 'network application-gateway delete -g {group} -n {name} --quiet'.formatArgs(applicationGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network application-gateway show -g {group} -n {name}'.formatArgs(applicationGateways);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
 
             cmd = 'network application-gateway list -g {group}'.formatArgs(applicationGateways);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               done();
             });

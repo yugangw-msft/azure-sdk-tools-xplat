@@ -91,43 +91,43 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create network security groups', function (done) {
         var cmd = 'network nsg create -g {group} -n {name} --location {location}'.formatArgs(networkSecurityGroups);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('show should display network security groups details', function (done) {
         var cmd = 'network nsg show -g {group} -n {name}'.formatArgs(networkSecurityGroups);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('set should update network security groups', function (done) {
         var cmd = 'network nsg set -g {group} -n {name}'.formatArgs(networkSecurityGroups);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('list should display all network security groups in resource group', function (done) {
         var cmd = 'network nsg list -g {group}'.formatArgs(networkSecurityGroups);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('delete should delete network security groups', function (done) {
         var cmd = 'network nsg delete -g {group} -n {name} --quiet'.formatArgs(networkSecurityGroups);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network nsg show -g {group} -n {name}'.formatArgs(networkSecurityGroups);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
 
             cmd = 'network nsg list -g {group}'.formatArgs(networkSecurityGroups);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               done();
             });

@@ -135,15 +135,15 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network nsg create -g {1} -n {name} --location {location} --json'.formatArgs(networkSecurityGroup, groupName);
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
+              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                 if (!testUtils.assertExitStatus(result, done)) return;
                 var output = JSON.parse(result.text);
                 createSubnetUsingId.networkSecurityGroupId = output.id;
                 var cmd = 'network route-table create -g {1} -n {name} --location {location} --json'.formatArgs(routeTable, groupName);
-                testUtils.executeCommand(suite, retry, cmd, function (result) {
+                generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                   if (!testUtils.assertExitStatus(result, done)) return;
                   var output = JSON.parse(result.text);
                   createSubnetUsingId.routeTableId = output.id;
@@ -177,43 +177,43 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create subnet', function (done) {
         var cmd = 'network vnet subnet create -g {group} -n {name} --address-prefix {addressPrefix} --service-endpoints {serviceEndpoints} --vnet-name {virtualNetworkName} --network-security-group-name {networkSecurityGroupName} --route-table-name {routeTableName}'.formatArgs(subnets);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('show should display subnet details', function (done) {
         var cmd = 'network vnet subnet show -g {group} -n {name} --vnet-name {virtualNetworkName}'.formatArgs(subnets);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('set should update subnet', function (done) {
         var cmd = 'network vnet subnet set -g {group} -n {name} --address-prefix {addressPrefixNew} --service-endpoints {serviceEndpointsNew} --vnet-name {virtualNetworkName}'.formatArgs(subnets);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('list should display all subnet in resource group', function (done) {
         var cmd = 'network vnet subnet list -g {group} --vnet-name {virtualNetworkName}'.formatArgs(subnets);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('delete should delete subnet', function (done) {
         var cmd = 'network vnet subnet delete -g {group} -n {name} --vnet-name {virtualNetworkName} --quiet'.formatArgs(subnets);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network vnet subnet show -g {group} -n {name} --vnet-name {virtualNetworkName}'.formatArgs(subnets);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
 
             cmd = 'network vnet subnet list -g {group} --vnet-name {virtualNetworkName}'.formatArgs(subnets);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               done();
             });
@@ -222,28 +222,28 @@ describe('arm', function () {
       });
       it('create should fail for invalid prefixes', function (done) {
         var cmd = 'network vnet subnet create -g {group} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --network-security-group-name {networkSecurityGroupName} --route-table-name {routeTableName} --json'.formatArgs(invalidPrefixes);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for prefixes out of range', function (done) {
         var cmd = 'network vnet subnet create -g {group} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --network-security-group-name {networkSecurityGroupName} --route-table-name {routeTableName} --json'.formatArgs(prefixesOutOfRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should pass for create subnet without nsg and route table', function (done) {
         var cmd = 'network vnet subnet create -g {group} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(createSubnetWithoutNsgAndRouteTable);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(createSubnetWithoutNsgAndRouteTable.name);
           output.addressPrefix.toLowerCase().should.equal(createSubnetWithoutNsgAndRouteTable.addressPrefix.toLowerCase());
 
           cmd = 'network vnet subnet delete -g {group} -n {name} --vnet-name {virtualNetworkName} --quiet --json'.formatArgs(createSubnetWithoutNsgAndRouteTable);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             done();
           });
@@ -251,7 +251,7 @@ describe('arm', function () {
       });
       it('create should pass for create subnet using id', function (done) {
         var cmd = 'network vnet subnet create -g {group} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --network-security-group-id {networkSecurityGroupId} --route-table-id {routeTableId} --json'.formatArgs(createSubnetUsingId);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(createSubnetUsingId.name);
@@ -260,7 +260,7 @@ describe('arm', function () {
           output.routeTable.id.should.equal(createSubnetUsingId.routeTableId);
 
           cmd = 'network vnet subnet delete -g {group} -n {name} --vnet-name {virtualNetworkName} --quiet --json'.formatArgs(createSubnetUsingId);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             done();
           });
@@ -268,7 +268,7 @@ describe('arm', function () {
       });
       it('create should pass for remove nsg and route table from subnet', function (done) {
         var cmd = 'network vnet subnet create -g {group} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --network-security-group-name {networkSecurityGroupName} --route-table-name {routeTableName} --json'.formatArgs(removeNsgAndRouteTableFromSubnet);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(removeNsgAndRouteTableFromSubnet.name);
@@ -277,7 +277,7 @@ describe('arm', function () {
           output.routeTable.id.should.containEql(removeNsgAndRouteTableFromSubnet.routeTableName);
 
           cmd = 'network vnet subnet set -g {group} -n {name} --vnet-name {virtualNetworkName} --network-security-group-name --route-table-name --json'.formatArgs(removeNsgAndRouteTableFromSubnet);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text);
             output.name.should.equal(removeNsgAndRouteTableFromSubnet.name);
@@ -285,7 +285,7 @@ describe('arm', function () {
             should.not.exist(output.routeTable);
 
             cmd = 'network vnet subnet delete -g {group} -n {name} --vnet-name {virtualNetworkName} --quiet --json'.formatArgs(removeNsgAndRouteTableFromSubnet);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               done();
             });

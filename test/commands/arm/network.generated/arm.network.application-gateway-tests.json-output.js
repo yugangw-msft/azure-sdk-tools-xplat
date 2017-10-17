@@ -99,13 +99,13 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
+              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                 if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
-                testUtils.executeCommand(suite, retry, cmd, function (result) {
+                generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                   if (!testUtils.assertExitStatus(result, done)) return;
                   done();
                 });
@@ -134,7 +134,7 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create application gateways', function (done) {
         var cmd = 'network application-gateway create -g {group} -n {name} --sku-name {skuname} --sku-tier {skutier} --capacity {skucapacity} --cert-password {password} --cert-file {sslCertificateName} --servers {backendAddresses} --http-settings-cookie-based-affinity {cookieBasedAffinity} --routing-rule-type {ruleType} --location {location} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --json'.formatArgs(applicationGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(applicationGateways.name);
@@ -142,7 +142,7 @@ describe('arm', function () {
           output.sku.tier.toLowerCase().should.equal(applicationGateways.skutier.toLowerCase());
           output.sku.capacity.should.equal(parseInt(applicationGateways.skucapacity, 10));
           output.sslCertificates[index].name.toLowerCase().should.equal('cert01'.toLowerCase());
-          applicationGateways.backendAddresses.split(',').forEach(function (item) { output.backendAddressPools[index].backendAddresses.should.containEql({ ipAddress : item }) });
+          generatorUtils.splitStringByCharacter(applicationGateways.backendAddresses, ',').forEach(function (item) { output.backendAddressPools[index].backendAddresses.should.containEql({ ipAddress : item }) });
           output.backendHttpSettingsCollection[index].cookieBasedAffinity.toLowerCase().should.equal(applicationGateways.cookieBasedAffinity.toLowerCase());
           output.requestRoutingRules[index].ruleType.toLowerCase().should.equal(applicationGateways.ruleType.toLowerCase());
           done();
@@ -150,7 +150,7 @@ describe('arm', function () {
       });
       it('show should display application gateways details', function (done) {
         var cmd = 'network application-gateway show -g {group} -n {name} --json'.formatArgs(applicationGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(applicationGateways.name);
@@ -158,7 +158,7 @@ describe('arm', function () {
           output.sku.tier.toLowerCase().should.equal(applicationGateways.skutier.toLowerCase());
           output.sku.capacity.should.equal(parseInt(applicationGateways.skucapacity, 10));
           output.sslCertificates[index].name.toLowerCase().should.equal('cert01'.toLowerCase());
-          applicationGateways.backendAddresses.split(',').forEach(function (item) { output.backendAddressPools[index].backendAddresses.should.containEql({ ipAddress : item }) });
+          generatorUtils.splitStringByCharacter(applicationGateways.backendAddresses, ',').forEach(function (item) { output.backendAddressPools[index].backendAddresses.should.containEql({ ipAddress : item }) });
           output.backendHttpSettingsCollection[index].cookieBasedAffinity.toLowerCase().should.equal(applicationGateways.cookieBasedAffinity.toLowerCase());
           output.requestRoutingRules[index].ruleType.toLowerCase().should.equal(applicationGateways.ruleType.toLowerCase());
           done();
@@ -166,7 +166,7 @@ describe('arm', function () {
       });
       it('set should update application gateways', function (done) {
         var cmd = 'network application-gateway set -g {group} -n {name} --sku-name {skunameNew} --sku-tier {skutierNew} --capacity {skucapacityNew} --json'.formatArgs(applicationGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(applicationGateways.name);
@@ -178,7 +178,7 @@ describe('arm', function () {
       });
       it('list should display all application gateways in resource group', function (done) {
         var cmd = 'network application-gateway list -g {group} --json'.formatArgs(applicationGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var outputs = JSON.parse(result.text);
           _.some(outputs, function (output) {
@@ -189,38 +189,38 @@ describe('arm', function () {
       });
       it('backend-health should perform backend health operation successfully', function (done) {
         var cmd = 'network application-gateway backend-health show -g {group} --gateway-name {applicationGatewayName} --json'.formatArgs(applicationGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('start should perform start operation successfully', function (done) {
         var cmd = 'network application-gateway start -g {group} -n {name} --json'.formatArgs(applicationGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('stop should perform stop operation successfully', function (done) {
         var cmd = 'network application-gateway stop -g {group} -n {name} --json'.formatArgs(applicationGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('delete should delete application gateways', function (done) {
         var cmd = 'network application-gateway delete -g {group} -n {name} --quiet --json'.formatArgs(applicationGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network application-gateway show -g {group} -n {name} --json'.formatArgs(applicationGateways);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
 
             cmd = 'network application-gateway list -g {group} --json'.formatArgs(applicationGateways);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               var outputs = JSON.parse(result.text);
               _.some(outputs, function (output) {

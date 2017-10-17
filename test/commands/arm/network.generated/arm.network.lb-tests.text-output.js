@@ -92,43 +92,43 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create load balancers', function (done) {
         var cmd = 'network lb create -g {group} -n {name} --sku-name {skuname} --location {location}'.formatArgs(loadBalancers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('show should display load balancers details', function (done) {
         var cmd = 'network lb show -g {group} -n {name}'.formatArgs(loadBalancers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('set should update load balancers', function (done) {
         var cmd = 'network lb set -g {group} -n {name}'.formatArgs(loadBalancers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('list should display all load balancers in resource group', function (done) {
         var cmd = 'network lb list -g {group}'.formatArgs(loadBalancers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('delete should delete load balancers', function (done) {
         var cmd = 'network lb delete -g {group} -n {name} --quiet'.formatArgs(loadBalancers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network lb show -g {group} -n {name}'.formatArgs(loadBalancers);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
 
             cmd = 'network lb list -g {group}'.formatArgs(loadBalancers);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               done();
             });

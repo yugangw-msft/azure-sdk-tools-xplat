@@ -96,16 +96,16 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
+              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                 if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network application-gateway create -g {1} -n {name} --servers {backendAddresses} --location {location} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --json'.formatArgs(applicationGateway, groupName);
-                testUtils.executeCommand(suite, retry, cmd, function (result) {
+                generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                   if (!testUtils.assertExitStatus(result, done)) return;
                   var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
-                  testUtils.executeCommand(suite, retry, cmd, function (result) {
+                  generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                     if (!testUtils.assertExitStatus(result, done)) return;
                     done();
                   });
@@ -135,28 +135,28 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create frontend ip configurations', function (done) {
         var cmd = 'network application-gateway frontend-ip create -g {group} -n {name} --gateway-name {applicationGatewayName} --public-ip-name {publicIPAddressName}'.formatArgs(frontendIPConfigurations);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('show should display frontend ip configurations details', function (done) {
         var cmd = 'network application-gateway frontend-ip show -g {group} -n {name} --gateway-name {applicationGatewayName}'.formatArgs(frontendIPConfigurations);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('set should update frontend ip configurations', function (done) {
         var cmd = 'network application-gateway frontend-ip set -g {group} -n {name} --gateway-name {applicationGatewayName}'.formatArgs(frontendIPConfigurations);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('list should display all frontend ip configurations in resource group', function (done) {
         var cmd = 'network application-gateway frontend-ip list -g {group} --gateway-name {applicationGatewayName}'.formatArgs(frontendIPConfigurations);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });

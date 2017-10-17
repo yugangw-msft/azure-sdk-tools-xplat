@@ -87,10 +87,10 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet create -g {1} -n {name} --location {location} --address-prefixes 11.0.0.0/8 --json'.formatArgs(remoteNetwork, groupName);
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
+              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                 if (!testUtils.assertExitStatus(result, done)) return;
                 var output = JSON.parse(result.text);
                 virtualNetworkPeerings.remoteNetworkId = output.id;
@@ -122,43 +122,43 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create virtual network peerings', function (done) {
         var cmd = 'network vnet peering create -g {group} -n {name} --allow-vnet-access {allowVirtualNetworkAccess} --allow-forwarded-traffic {allowForwardedTraffic} --allow-gateway-transit {allowGatewayTransit} --use-remote-gateways {useRemoteGateways} --vnet-name {virtualNetworkName} --remote-vnet-id {remoteNetworkId}'.formatArgs(virtualNetworkPeerings);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('show should display virtual network peerings details', function (done) {
         var cmd = 'network vnet peering show -g {group} -n {name} --vnet-name {virtualNetworkName}'.formatArgs(virtualNetworkPeerings);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('set should update virtual network peerings', function (done) {
         var cmd = 'network vnet peering set -g {group} -n {name} --allow-vnet-access {allowVirtualNetworkAccessNew} --allow-forwarded-traffic {allowForwardedTrafficNew} --allow-gateway-transit {allowGatewayTransitNew} --vnet-name {virtualNetworkName}'.formatArgs(virtualNetworkPeerings);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('list should display all virtual network peerings in resource group', function (done) {
         var cmd = 'network vnet peering list -g {group} --vnet-name {virtualNetworkName}'.formatArgs(virtualNetworkPeerings);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('delete should delete virtual network peerings', function (done) {
         var cmd = 'network vnet peering delete -g {group} -n {name} --vnet-name {virtualNetworkName} --quiet'.formatArgs(virtualNetworkPeerings);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network vnet peering show -g {group} -n {name} --vnet-name {virtualNetworkName}'.formatArgs(virtualNetworkPeerings);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
 
             cmd = 'network vnet peering list -g {group} --vnet-name {virtualNetworkName}'.formatArgs(virtualNetworkPeerings);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               done();
             });

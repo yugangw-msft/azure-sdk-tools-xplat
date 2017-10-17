@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-traffic-manager-profile-tests-generated',
   groupName = 'xplat-test-profile',
@@ -60,7 +59,7 @@ var profiles = {
   timeoutInSecondsNew: '5',
   toleratedNumberOfFailures: '3',
   toleratedNumberOfFailuresNew: '5',
-  relativeName: 'test-profile-dns',
+  isDnsAvailable_relativeName: 'test-profile-dns',
   name: 'profileName'
 };
 
@@ -125,7 +124,7 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create profiles', function (done) {
         var cmd = 'network traffic-manager profile create -g {group} -n {name} --profile-status {profileStatus} --traffic-routing-method {trafficRoutingMethod} --relative-dns-name {relativeName} --ttl {ttl} --monitor-protocol {protocol} --monitor-port {port} --monitor-path {path} --interval-in-seconds {intervalInSeconds} --timeout-in-seconds {timeoutInSeconds} --tolerated-number-of-failures {toleratedNumberOfFailures} --json'.formatArgs(profiles);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(profiles.name);
@@ -144,7 +143,7 @@ describe('arm', function () {
       });
       it('show should display profiles details', function (done) {
         var cmd = 'network traffic-manager profile show -g {group} -n {name} --json'.formatArgs(profiles);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(profiles.name);
@@ -163,7 +162,7 @@ describe('arm', function () {
       });
       it('set should update profiles', function (done) {
         var cmd = 'network traffic-manager profile set -g {group} -n {name} --profile-status {profileStatusNew} --traffic-routing-method {trafficRoutingMethodNew} --ttl {ttlNew} --monitor-protocol {protocolNew} --monitor-port {portNew} --monitor-path {pathNew} --interval-in-seconds {intervalInSecondsNew} --timeout-in-seconds {timeoutInSecondsNew} --tolerated-number-of-failures {toleratedNumberOfFailuresNew} --json'.formatArgs(profiles);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(profiles.name);
@@ -181,7 +180,7 @@ describe('arm', function () {
       });
       it('list should display all profiles in resource group', function (done) {
         var cmd = 'network traffic-manager profile list -g {group} --json'.formatArgs(profiles);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var outputs = JSON.parse(result.text);
           _.some(outputs, function (output) {
@@ -191,25 +190,25 @@ describe('arm', function () {
         });
       });
       it('is-dns-available should perform check traffic manager relative dns name availability operation successfully', function (done) {
-        var cmd = 'network traffic-manager profile is-dns-available --relative-dns-name {relativeName} --json'.formatArgs(profiles);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        var cmd = 'network traffic-manager profile is-dns-available --relative-dns-name {isDnsAvailable_relativeName} --json'.formatArgs(profiles);
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('delete should delete profiles', function (done) {
         var cmd = 'network traffic-manager profile delete -g {group} -n {name} --quiet --json'.formatArgs(profiles);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network traffic-manager profile show -g {group} -n {name} --json'.formatArgs(profiles);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
 
             cmd = 'network traffic-manager profile list -g {group} --json'.formatArgs(profiles);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               var outputs = JSON.parse(result.text);
               _.some(outputs, function (output) {
@@ -222,7 +221,7 @@ describe('arm', function () {
       });
       it('create with defaults should create profiles with default values', function (done) {
         var cmd = 'network traffic-manager profile create -g {group} -n {name} --relative-dns-name {relativeName} --monitor-path {path} --json'.formatArgs(profilesDefault);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(profilesDefault.name);
@@ -236,7 +235,7 @@ describe('arm', function () {
           output.monitorConfig.toleratedNumberOfFailures.should.equal(parseInt(profilesDefault.toleratedNumberOfFailures, 10))
 
           cmd = 'network traffic-manager profile delete -g {group} -n {name} --quiet --json'.formatArgs(profilesDefault);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             done();
           });

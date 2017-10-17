@@ -152,37 +152,37 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
+              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                 if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
-                testUtils.executeCommand(suite, retry, cmd, function (result) {
+                generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                   if (!testUtils.assertExitStatus(result, done)) return;
                   var cmd = 'network application-gateway create -g {1} -n {name} --servers {backendAddresses} --location {location} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --json'.formatArgs(applicationGateway, groupName);
-                  testUtils.executeCommand(suite, retry, cmd, function (result) {
+                  generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                     if (!testUtils.assertExitStatus(result, done)) return;
                     var cmd = 'network application-gateway frontend-ip create -g {1} -n {name} --gateway-name {applicationGatewayName} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --json'.formatArgs(frontendIPConfiguration, groupName);
-                    testUtils.executeCommand(suite, retry, cmd, function (result) {
+                    generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                       if (!testUtils.assertExitStatus(result, done)) return;
                       var cmd = 'network application-gateway frontend-port create -g {1} -n {name} --port {port} --gateway-name {applicationGatewayName} --json'.formatArgs(frontendPort, groupName);
-                      testUtils.executeCommand(suite, retry, cmd, function (result) {
+                      generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                         if (!testUtils.assertExitStatus(result, done)) return;
                         var cmd = 'network application-gateway http-settings create -g {1} -n {name} --port {port} --gateway-name {applicationGatewayName} --json'.formatArgs(backendHttpSettingsCollection, groupName);
-                        testUtils.executeCommand(suite, retry, cmd, function (result) {
+                        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                           if (!testUtils.assertExitStatus(result, done)) return;
                           var cmd = 'network application-gateway address-pool create -g {1} -n {name} --servers {backendAddresses} --gateway-name {applicationGatewayName} --json'.formatArgs(backendAddressPool, groupName);
-                          testUtils.executeCommand(suite, retry, cmd, function (result) {
+                          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                             if (!testUtils.assertExitStatus(result, done)) return;
                             var cmd = 'network application-gateway http-listener create -g {1} -n {name} --gateway-name {applicationGatewayName} --frontend-ip-name {frontendIPConfigurationName} --frontend-port-name {frontendPortName} --json'.formatArgs(httpListener, groupName);
-                            testUtils.executeCommand(suite, retry, cmd, function (result) {
+                            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                               if (!testUtils.assertExitStatus(result, done)) return;
                               var cmd = 'network application-gateway url-path-map create -g {1} -n {name} --path {paths} --rule-name {pathRuleName} --gateway-name {applicationGatewayName} --http-settings-name {backendHttpSettingsCollectionName} --address-pool-name {backendAddressPoolName} --json'.formatArgs(urlPathMap, groupName);
-                              testUtils.executeCommand(suite, retry, cmd, function (result) {
+                              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                                 if (!testUtils.assertExitStatus(result, done)) return;
                                 var cmd = 'network application-gateway redirect-config create -g {1} -n {name} --redirect-type {redirectType} --gateway-name {applicationGatewayName} --target-url http://bing.com --json'.formatArgs(redirectConfiguration, groupName);
-                                testUtils.executeCommand(suite, retry, cmd, function (result) {
+                                generatorUtils.executeCommand(suite, retry, cmd, function (result) {
                                   if (!testUtils.assertExitStatus(result, done)) return;
                                   done();
                                 });
@@ -219,7 +219,7 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create request routing rules', function (done) {
         var cmd = 'network application-gateway rule create -g {group} -n {name} --type {ruleType} --gateway-name {applicationGatewayName} --http-listener-name {httpListenerName} --redirect-configuration-name {redirectConfigurationName} --json'.formatArgs(requestRoutingRules);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var parentOutput = JSON.parse(result.text);
           parentOutput.name.should.equal('applicationGatewayName');
@@ -231,7 +231,7 @@ describe('arm', function () {
       });
       it('show should display request routing rules details', function (done) {
         var cmd = 'network application-gateway rule show -g {group} -n {name} --gateway-name {applicationGatewayName} --json'.formatArgs(requestRoutingRules);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(requestRoutingRules.name);
@@ -241,7 +241,7 @@ describe('arm', function () {
       });
       it('set should update request routing rules', function (done) {
         var cmd = 'network application-gateway rule set -g {group} -n {name} --type {ruleTypeNew} --gateway-name {applicationGatewayName} --http-settings-name {backendHttpSettingsCollectionName} --address-pool-name {backendAddressPoolName} --url-path-map-name {urlPathMapName} --redirect-configuration-name --json'.formatArgs(requestRoutingRules);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var parentOutput = JSON.parse(result.text);
           parentOutput.name.should.equal('applicationGatewayName');
@@ -253,7 +253,7 @@ describe('arm', function () {
       });
       it('list should display all request routing rules in resource group', function (done) {
         var cmd = 'network application-gateway rule list -g {group} --gateway-name {applicationGatewayName} --json'.formatArgs(requestRoutingRules);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var outputs = JSON.parse(result.text);
           _.some(outputs, function (output) {
@@ -264,17 +264,17 @@ describe('arm', function () {
       });
       it('delete should delete request routing rules', function (done) {
         var cmd = 'network application-gateway rule delete -g {group} -n {name} --gateway-name {applicationGatewayName} --quiet --json'.formatArgs(requestRoutingRules);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network application-gateway rule show -g {group} -n {name} --gateway-name {applicationGatewayName} --json'.formatArgs(requestRoutingRules);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
 
             cmd = 'network application-gateway rule list -g {group} --gateway-name {applicationGatewayName} --json'.formatArgs(requestRoutingRules);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               var outputs = JSON.parse(result.text);
               _.some(outputs, function (output) {

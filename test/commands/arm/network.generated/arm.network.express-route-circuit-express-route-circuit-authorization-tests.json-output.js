@@ -77,7 +77,7 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network express-route circuit create -g {1} -n {name} --service-provider-name {serviceProviderName} --peering-location {peeringLocation} --location {location} --json'.formatArgs(expressRouteCircuit, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               if (!testUtils.assertExitStatus(result, done)) return;
               done();
             });
@@ -104,7 +104,7 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create express route circuit authorizations', function (done) {
         var cmd = 'network express-route authorization create -g {group} -n {name} --key {authorizationKey} --circuit-name {expressRouteCircuitName} --json'.formatArgs(expressRouteCircuitAuthorizations);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(expressRouteCircuitAuthorizations.name);
@@ -114,7 +114,7 @@ describe('arm', function () {
       });
       it('show should display express route circuit authorizations details', function (done) {
         var cmd = 'network express-route authorization show -g {group} -n {name} --circuit-name {expressRouteCircuitName} --json'.formatArgs(expressRouteCircuitAuthorizations);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(expressRouteCircuitAuthorizations.name);
@@ -124,7 +124,7 @@ describe('arm', function () {
       });
       it('set should update express route circuit authorizations', function (done) {
         var cmd = 'network express-route authorization set -g {group} -n {name} --key {authorizationKeyNew} --circuit-name {expressRouteCircuitName} --json'.formatArgs(expressRouteCircuitAuthorizations);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(expressRouteCircuitAuthorizations.name);
@@ -134,7 +134,7 @@ describe('arm', function () {
       });
       it('list should display all express route circuit authorizations in resource group', function (done) {
         var cmd = 'network express-route authorization list -g {group} --circuit-name {expressRouteCircuitName} --json'.formatArgs(expressRouteCircuitAuthorizations);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var outputs = JSON.parse(result.text);
           _.some(outputs, function (output) {
@@ -145,17 +145,17 @@ describe('arm', function () {
       });
       it('delete should delete express route circuit authorizations', function (done) {
         var cmd = 'network express-route authorization delete -g {group} -n {name} --circuit-name {expressRouteCircuitName} --quiet --json'.formatArgs(expressRouteCircuitAuthorizations);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network express-route authorization show -g {group} -n {name} --circuit-name {expressRouteCircuitName} --json'.formatArgs(expressRouteCircuitAuthorizations);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
 
             cmd = 'network express-route authorization list -g {group} --circuit-name {expressRouteCircuitName} --json'.formatArgs(expressRouteCircuitAuthorizations);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               var outputs = JSON.parse(result.text);
               _.some(outputs, function (output) {
