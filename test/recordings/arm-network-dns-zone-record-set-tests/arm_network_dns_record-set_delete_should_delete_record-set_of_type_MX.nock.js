@@ -29,114 +29,114 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-dns-zone-record-set6623/providers/Microsoft.Network/dnszones/exampledns.com/MX/set-mx?api-version=2016-04-01')
-  .reply(200, "{\"id\":\"\\/subscriptions\\/947d47b4-7883-4bb9-9d85-c5e8e2f572ce\\/resourceGroups\\/xplat-test-dns-zone-record-set6623\\/providers\\/Microsoft.Network\\/dnszones\\/exampledns.com\\/MX\\/set-mx\",\"name\":\"set-mx\",\"type\":\"Microsoft.Network\\/dnszones\\/MX\",\"etag\":\"7ca416d0-d404-4237-b0f9-aee9ca4284c7\",\"properties\":{\"metadata\":{\"tag1\":\"aaa\",\"tag2\":\"bbb\"},\"fqdn\":\"set-mx.exampledns.com.\",\"TTL\":3600,\"MXRecords\":[]}}", { 'cache-control': 'private',
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-dns-zone-record-set5135/providers/Microsoft.Network/dnsZones/exampledns.com/MX/set-mx?api-version=2017-09-01')
+  .reply(200, "{\"id\":\"\\/subscriptions\\/947d47b4-7883-4bb9-9d85-c5e8e2f572ce\\/resourceGroups\\/xplat-test-dns-zone-record-set5135\\/providers\\/Microsoft.Network\\/dnszones\\/exampledns.com\\/MX\\/set-mx\",\"name\":\"set-mx\",\"type\":\"Microsoft.Network\\/dnszones\\/MX\",\"etag\":\"bf3d38a1-550c-492a-9fd3-e632e274d4d6\",\"properties\":{\"metadata\":{\"tag1\":\"aaa\",\"tag2\":\"bbb\"},\"fqdn\":\"set-mx.exampledns.com.\",\"TTL\":3600,\"MXRecords\":[]}}", { 'cache-control': 'private',
   'content-length': '397',
   'content-type': 'application/json; charset=utf-8',
-  etag: '7ca416d0-d404-4237-b0f9-aee9ca4284c7',
+  etag: 'bf3d38a1-550c-492a-9fd3-e632e274d4d6',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': '95c3030e-d856-48c7-b5f4-b77ec43885fa',
+  'x-ms-request-id': '611ad05b-daad-40b6-a4a8-c910dc9ffebd',
   server: 'Microsoft-IIS/8.5',
   'x-aspnet-version': '4.0.30319',
   'x-powered-by': 'ASP.NET',
   'x-ms-ratelimit-remaining-subscription-resource-requests': '11999',
-  'x-ms-correlation-request-id': 'b7cc68bb-2624-4022-bd85-ed4f373f1d93',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170728T143030Z:b7cc68bb-2624-4022-bd85-ed4f373f1d93',
-  date: 'Fri, 28 Jul 2017 14:30:29 GMT',
+  'x-ms-correlation-request-id': 'e1dba2b8-4402-46eb-8173-1387e1893098',
+  'x-ms-routing-request-id': 'WESTEUROPE:20171031T084621Z:e1dba2b8-4402-46eb-8173-1387e1893098',
+  date: 'Tue, 31 Oct 2017 08:46:20 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-dns-zone-record-set6623/providers/Microsoft.Network/dnszones/exampledns.com/MX/set-mx?api-version=2016-04-01')
-  .reply(200, "{\"id\":\"\\/subscriptions\\/947d47b4-7883-4bb9-9d85-c5e8e2f572ce\\/resourceGroups\\/xplat-test-dns-zone-record-set6623\\/providers\\/Microsoft.Network\\/dnszones\\/exampledns.com\\/MX\\/set-mx\",\"name\":\"set-mx\",\"type\":\"Microsoft.Network\\/dnszones\\/MX\",\"etag\":\"7ca416d0-d404-4237-b0f9-aee9ca4284c7\",\"properties\":{\"metadata\":{\"tag1\":\"aaa\",\"tag2\":\"bbb\"},\"fqdn\":\"set-mx.exampledns.com.\",\"TTL\":3600,\"MXRecords\":[]}}", { 'cache-control': 'private',
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-dns-zone-record-set5135/providers/Microsoft.Network/dnsZones/exampledns.com/MX/set-mx?api-version=2017-09-01')
+  .reply(200, "{\"id\":\"\\/subscriptions\\/947d47b4-7883-4bb9-9d85-c5e8e2f572ce\\/resourceGroups\\/xplat-test-dns-zone-record-set5135\\/providers\\/Microsoft.Network\\/dnszones\\/exampledns.com\\/MX\\/set-mx\",\"name\":\"set-mx\",\"type\":\"Microsoft.Network\\/dnszones\\/MX\",\"etag\":\"bf3d38a1-550c-492a-9fd3-e632e274d4d6\",\"properties\":{\"metadata\":{\"tag1\":\"aaa\",\"tag2\":\"bbb\"},\"fqdn\":\"set-mx.exampledns.com.\",\"TTL\":3600,\"MXRecords\":[]}}", { 'cache-control': 'private',
   'content-length': '397',
   'content-type': 'application/json; charset=utf-8',
-  etag: '7ca416d0-d404-4237-b0f9-aee9ca4284c7',
+  etag: 'bf3d38a1-550c-492a-9fd3-e632e274d4d6',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': '95c3030e-d856-48c7-b5f4-b77ec43885fa',
+  'x-ms-request-id': '611ad05b-daad-40b6-a4a8-c910dc9ffebd',
   server: 'Microsoft-IIS/8.5',
   'x-aspnet-version': '4.0.30319',
   'x-powered-by': 'ASP.NET',
   'x-ms-ratelimit-remaining-subscription-resource-requests': '11999',
-  'x-ms-correlation-request-id': 'b7cc68bb-2624-4022-bd85-ed4f373f1d93',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170728T143030Z:b7cc68bb-2624-4022-bd85-ed4f373f1d93',
-  date: 'Fri, 28 Jul 2017 14:30:29 GMT',
+  'x-ms-correlation-request-id': 'e1dba2b8-4402-46eb-8173-1387e1893098',
+  'x-ms-routing-request-id': 'WESTEUROPE:20171031T084621Z:e1dba2b8-4402-46eb-8173-1387e1893098',
+  date: 'Tue, 31 Oct 2017 08:46:20 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .delete('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-dns-zone-record-set6623/providers/Microsoft.Network/dnszones/exampledns.com/MX/set-mx?api-version=2016-04-01')
+  .delete('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-dns-zone-record-set5135/providers/Microsoft.Network/dnsZones/exampledns.com/MX/set-mx?api-version=2017-09-01')
   .reply(200, "", { 'cache-control': 'private',
-  'content-length': '0',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': '6a7713f6-be1d-4b02-9d88-72ae71d5bbcc',
+  'x-ms-request-id': 'cd9f6d97-662b-4c64-9257-825cc09e2b23',
   server: 'Microsoft-IIS/8.5',
   'x-aspnet-version': '4.0.30319',
   'x-powered-by': 'ASP.NET',
   'x-ms-ratelimit-remaining-subscription-resource-requests': '11999',
-  'x-ms-correlation-request-id': '5766f44c-9fa4-4489-9606-744a3a72b9d5',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170728T143031Z:5766f44c-9fa4-4489-9606-744a3a72b9d5',
-  date: 'Fri, 28 Jul 2017 14:30:31 GMT',
-  connection: 'close' });
+  'x-ms-correlation-request-id': 'b3b22b9d-d55b-404b-9ff2-2cda8bc9fb20',
+  'x-ms-routing-request-id': 'WESTEUROPE:20171031T084622Z:b3b22b9d-d55b-404b-9ff2-2cda8bc9fb20',
+  date: 'Tue, 31 Oct 2017 08:46:21 GMT',
+  connection: 'close',
+  'content-length': '0' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .delete('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-dns-zone-record-set6623/providers/Microsoft.Network/dnszones/exampledns.com/MX/set-mx?api-version=2016-04-01')
+  .delete('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-dns-zone-record-set5135/providers/Microsoft.Network/dnsZones/exampledns.com/MX/set-mx?api-version=2017-09-01')
   .reply(200, "", { 'cache-control': 'private',
-  'content-length': '0',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': '6a7713f6-be1d-4b02-9d88-72ae71d5bbcc',
+  'x-ms-request-id': 'cd9f6d97-662b-4c64-9257-825cc09e2b23',
   server: 'Microsoft-IIS/8.5',
   'x-aspnet-version': '4.0.30319',
   'x-powered-by': 'ASP.NET',
   'x-ms-ratelimit-remaining-subscription-resource-requests': '11999',
-  'x-ms-correlation-request-id': '5766f44c-9fa4-4489-9606-744a3a72b9d5',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170728T143031Z:5766f44c-9fa4-4489-9606-744a3a72b9d5',
-  date: 'Fri, 28 Jul 2017 14:30:31 GMT',
-  connection: 'close' });
+  'x-ms-correlation-request-id': 'b3b22b9d-d55b-404b-9ff2-2cda8bc9fb20',
+  'x-ms-routing-request-id': 'WESTEUROPE:20171031T084622Z:b3b22b9d-d55b-404b-9ff2-2cda8bc9fb20',
+  date: 'Tue, 31 Oct 2017 08:46:21 GMT',
+  connection: 'close',
+  'content-length': '0' });
  return result; },
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-dns-zone-record-set6623/providers/Microsoft.Network/dnszones/exampledns.com/MX/set-mx?api-version=2016-04-01')
-  .reply(404, "{\"code\":\"NotFound\",\"message\":\"The resource record 'set-mx' does not exist in resource group 'xplat-test-dns-zone-record-set6623' of subscription '947d47b4-7883-4bb9-9d85-c5e8e2f572ce'.\"}", { 'cache-control': 'private',
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-dns-zone-record-set5135/providers/Microsoft.Network/dnsZones/exampledns.com/MX/set-mx?api-version=2017-09-01')
+  .reply(404, "{\"code\":\"NotFound\",\"message\":\"The resource record 'set-mx' does not exist in resource group 'xplat-test-dns-zone-record-set5135' of subscription '947d47b4-7883-4bb9-9d85-c5e8e2f572ce'.\"}", { 'cache-control': 'private',
   'content-length': '186',
   'content-type': 'application/json; charset=utf-8',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': '7270e90a-30c0-463b-bfb3-475a72226201',
+  'x-ms-request-id': '539b15d1-58d4-4607-b364-1e8623a48088',
   server: 'Microsoft-IIS/8.5',
   'x-aspnet-version': '4.0.30319',
   'x-powered-by': 'ASP.NET',
   'x-ms-ratelimit-remaining-subscription-resource-requests': '11999',
-  'x-ms-correlation-request-id': '1484a02b-fea9-4a0d-a07a-9245e0526918',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170728T143033Z:1484a02b-fea9-4a0d-a07a-9245e0526918',
-  date: 'Fri, 28 Jul 2017 14:30:32 GMT',
+  'x-ms-correlation-request-id': 'ae684fec-925f-4abb-b1d5-c5cf2831ad50',
+  'x-ms-routing-request-id': 'WESTEUROPE:20171031T084623Z:ae684fec-925f-4abb-b1d5-c5cf2831ad50',
+  date: 'Tue, 31 Oct 2017 08:46:22 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-dns-zone-record-set6623/providers/Microsoft.Network/dnszones/exampledns.com/MX/set-mx?api-version=2016-04-01')
-  .reply(404, "{\"code\":\"NotFound\",\"message\":\"The resource record 'set-mx' does not exist in resource group 'xplat-test-dns-zone-record-set6623' of subscription '947d47b4-7883-4bb9-9d85-c5e8e2f572ce'.\"}", { 'cache-control': 'private',
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-dns-zone-record-set5135/providers/Microsoft.Network/dnsZones/exampledns.com/MX/set-mx?api-version=2017-09-01')
+  .reply(404, "{\"code\":\"NotFound\",\"message\":\"The resource record 'set-mx' does not exist in resource group 'xplat-test-dns-zone-record-set5135' of subscription '947d47b4-7883-4bb9-9d85-c5e8e2f572ce'.\"}", { 'cache-control': 'private',
   'content-length': '186',
   'content-type': 'application/json; charset=utf-8',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': '7270e90a-30c0-463b-bfb3-475a72226201',
+  'x-ms-request-id': '539b15d1-58d4-4607-b364-1e8623a48088',
   server: 'Microsoft-IIS/8.5',
   'x-aspnet-version': '4.0.30319',
   'x-powered-by': 'ASP.NET',
   'x-ms-ratelimit-remaining-subscription-resource-requests': '11999',
-  'x-ms-correlation-request-id': '1484a02b-fea9-4a0d-a07a-9245e0526918',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170728T143033Z:1484a02b-fea9-4a0d-a07a-9245e0526918',
-  date: 'Fri, 28 Jul 2017 14:30:32 GMT',
+  'x-ms-correlation-request-id': 'ae684fec-925f-4abb-b1d5-c5cf2831ad50',
+  'x-ms-routing-request-id': 'WESTEUROPE:20171031T084623Z:ae684fec-925f-4abb-b1d5-c5cf2831ad50',
+  date: 'Tue, 31 Oct 2017 08:46:22 GMT',
   connection: 'close' });
  return result; }]];
