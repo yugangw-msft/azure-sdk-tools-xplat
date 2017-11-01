@@ -95,7 +95,7 @@ var caaProp = {
   name: 'set-caa',
   type: 'CAA',
   ttl: 3600,
-  params: '--caa-flags 1 --caa-tag tag1 --caa-value val1',
+  params: '--caaflags 1 --caatag tag1 --caavalue val1',
   zoneName: zoneProp.name,
   metadata: networkTestUtil.tags
 };

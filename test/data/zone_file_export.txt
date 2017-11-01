@@ -1,7 +1,7 @@
 ; Exported zone file from Azure DNS
 ; Resource Group Name: xplat-test-dns-zone
 ; Zone name: exampledns.com
-; Date and time (UTC): Tue Oct 31 2017 08:43:48 GMT+0000
+; Date and time (UTC): Wed Nov 01 2017 09:18:41 GMT+0000
 
 $TTL 172800
 $ORIGIN exampledns.com.
