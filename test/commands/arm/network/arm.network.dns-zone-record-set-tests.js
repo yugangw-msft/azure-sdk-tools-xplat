@@ -225,6 +225,25 @@ describe('arm', function () {
       });
 
       /**
+       * CAA
+       */
+      it('create should create a record-set of type CAA', function (done) {
+        networkTestUtil.createDnsRecordSet(caaProp, suite, done);
+      });
+      it('add-record should add a record of type CAA', function (done) {
+        networkTestUtil.addDnsRecord(caaProp, suite, function (caaSet) {
+          caaSet.caaRecords.should.containEql({flags: 1, tag: 'tag1', value: '"val1"'});
+          done();
+        });
+      });
+      it('delete-record should delete a record of type CAA', function (done) {
+        networkTestUtil.deleteDnsRecord(caaProp, suite, done);
+      });
+      it('delete should delete record-set of type CAA', function (done) {
+        networkTestUtil.deleteDnsRecordSet(caaProp, suite, done);
+      });
+
+      /**
        * CNAME
        */
       it('add-record should add a record of type CNAME', function (done) {
@@ -304,25 +323,6 @@ describe('arm', function () {
       });
       it('delete should delete record-set of type SRV', function (done) {
         networkTestUtil.deleteDnsRecordSet(srvProp, suite, done);
-      });
-
-      /**
-       * CAA
-       */
-      it('create should create a record-set of type CAA', function (done) {
-        networkTestUtil.createDnsRecordSet(caaProp, suite, done);
-      });
-      it('add-record should add a record of type CAA', function (done) {
-        networkTestUtil.addDnsRecord(caaProp, suite, function (caaSet) {
-          caaSet.caaRecords.should.containEql({flags: 1, tag: 'tag1', value: 'val1'});
-          done();
-        });
-      });
-      it('delete-record should delete a record of type CAA', function (done) {
-        networkTestUtil.deleteDnsRecord(caaProp, suite, done);
-      });
-      it('delete should delete record-set of type CAA', function (done) {
-        networkTestUtil.deleteDnsRecordSet(caaProp, suite, done);
       });
 
       /**
