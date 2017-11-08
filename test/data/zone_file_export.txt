@@ -1,7 +1,7 @@
 ; Exported zone file from Azure DNS
 ; Resource Group Name: xplat-test-dns-zone
 ; Zone name: exampledns.com
-; Date and time (UTC): Tue Nov 07 2017 14:47:48 GMT+0000
+; Date and time (UTC): Wed Nov 08 2017 09:22:10 GMT+0000
 
 $TTL 172800
 $ORIGIN exampledns.com.
@@ -21,7 +21,7 @@ $ORIGIN exampledns.com.
 
 @ 600 IN CAA 1 issue "hi contoso.com"
   600 IN CAA 2 iodef foobar
-  600 IN CAA 2 issue "foo\\bar2"
+  600 IN CAA 2 issue foo\\bar2
   600 IN CAA 3 test1 "foo \" \" bar 3"
   600 IN CAA 5 fubar ca1.contoso.com
 
