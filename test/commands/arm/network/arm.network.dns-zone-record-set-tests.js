@@ -232,7 +232,7 @@ describe('arm', function () {
       });
       it('add-record should add a record of type CAA', function (done) {
         networkTestUtil.addDnsRecord(caaProp, suite, function (caaSet) {
-          caaSet.caaRecords.should.containEql({flags: 1, tag: 'tag1', value: '"val1"'});
+          caaSet.caaRecords.should.containEql({flags: 1, tag: 'tag1', value: 'val1'});
           done();
         });
       });
