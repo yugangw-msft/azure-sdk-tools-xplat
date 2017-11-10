@@ -120,7 +120,6 @@
     "jshint": "<= 2.6.0",
     "sinon": "^2.1.0",
     "should": "3.3.2",
-    "type-detect": "4.0.3",
     "winston-memory": "*",
     "nock": "0.16"
   },
