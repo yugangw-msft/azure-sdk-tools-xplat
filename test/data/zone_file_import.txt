@@ -50,3 +50,10 @@ $ORIGIN foo.com.
 
 ; But a fully-qualified name that is within the zone should work OK
 test.example1.com. IN A 7.8.9.0	; Should work OK
+
+; CAA
+exampledns.com.     600   IN CAA    1    issue    "hi contoso.com"
+exampledns.com.           IN CAA    2    iodef    foobar
+exampledns.com.      0    IN CAA    2    issue    "foo\\bar2"
+exampledns.com.           IN CAA    3    test1    "foo \" \" bar 3"
+exampledns.com.           IN CAA    5    fubar    ca1.contoso.com
