@@ -1,3 +1,7 @@
+**If you are having an issue with an ARM based service, then please consider using [Azure CLI 2.0](https://github.com/Azure/azure-cli), the preferred choice for ARM (Azure Resource Manager) commands, rather than filing an issue in this repo.**
+
+CLI 2.0 migration guide can be found [here](https://aka.ms/move2cli2).
+
 CLI Version: **0.9.X**
 OS Type: Mac / Win / Linux (Ubuntu, RedHat, etc.)
 Installation via:  npm / brew / win-or-mac installer / docker / github repo
