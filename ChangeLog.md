@@ -1,3 +1,20 @@
+## 2017-11-16 Version 0.10.17
+* General
+  * Updated AzureUSGovernment environment portalUrl from manage.windowsazure.us to portal.azure.us #3669
+  * Updated AzureUSGovernment environment activeDirectoryEndpointUrl to login.microsoftonline.us #3669
+  * Fixed incorrect timestamp generation #3661
+* Network
+  * Added support for DNS CAA records #3668
+  * Added new methods for Network Watcher #3666
+    * reachability-report
+    * reachability-report-provider-list
+  * Removed local Network SDK & bumped azure-arm-network version to 4.0.1 #3664
+  * Replaced handwritten logic in NSG's SecurityRule with generated one
+  * Added generated tests for ApplicationSecurityGroups
+  * Added additional checks in dependency creation in before hook in generated tests
+* Compute
+  * azure vm enable-disk-encryption can now be used to update encryption settings #3665
+
 ## 2017-09-22 Version 0.10.16
 * General
   * cloud-shell: set 'expiresIn' with an integer value #3657
