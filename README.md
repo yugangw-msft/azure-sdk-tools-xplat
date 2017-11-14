@@ -4,6 +4,9 @@
 
 This project provides a cross-platform command line interface for developers and IT administrators to develop, deploy and manage Microsoft Azure applications.
 
+## Please consider using [Azure CLI 2.0](https://github.com/Azure/azure-cli), the preferred choice for ARM (Azure Resource Manager) commands.
+CLI 2.0 migration guide can be found [here](https://aka.ms/move2cli2).
+
 ## Features
 
 * Accounts Management
