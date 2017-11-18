@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-application-gateway-ssl-policy-tests-generated',
   groupName = 'xplat-test-ssl-policy',
@@ -104,17 +103,17 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+              if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
-                result.exitStatus.should.equal(0);
+              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
-                testUtils.executeCommand(suite, retry, cmd, function (result) {
-                  result.exitStatus.should.equal(0);
+                generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                  if (!testUtils.assertExitStatus(result, done)) return;
                   var cmd = 'network application-gateway create -g {1} -n {name} --servers {backendAddresses} --location {location} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --json'.formatArgs(applicationGateway, groupName);
-                  testUtils.executeCommand(suite, retry, cmd, function (result) {
-                    result.exitStatus.should.equal(0);
+                  generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                    if (!testUtils.assertExitStatus(result, done)) return;
                     done();
                   });
                 });
@@ -143,32 +142,32 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create ssl policy', function (done) {
         var cmd = 'network application-gateway ssl-policy create -g {group} --policy-type {policyType} --cipher-suites {cipherSuites} --min-protocol-version {minProtocolVersion} --gateway-name {applicationGatewayName} --json'.formatArgs(sslPolicy);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.policyType.toLowerCase().should.equal(sslPolicy.policyType.toLowerCase());
-          sslPolicy.cipherSuites.split(',').forEach(function (item) { output.cipherSuites.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(sslPolicy.cipherSuites, ',').forEach(function (item) { output.cipherSuites.should.containEql(item) });
           output.minProtocolVersion.toLowerCase().should.equal(sslPolicy.minProtocolVersion.toLowerCase());
           done();
         });
       });
       it('show should display ssl policy details', function (done) {
         var cmd = 'network application-gateway ssl-policy show -g {group} --gateway-name {applicationGatewayName} --json'.formatArgs(sslPolicy);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.policyType.toLowerCase().should.equal(sslPolicy.policyType.toLowerCase());
-          sslPolicy.cipherSuites.split(',').forEach(function (item) { output.cipherSuites.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(sslPolicy.cipherSuites, ',').forEach(function (item) { output.cipherSuites.should.containEql(item) });
           output.minProtocolVersion.toLowerCase().should.equal(sslPolicy.minProtocolVersion.toLowerCase());
           done();
         });
       });
       it('set should update ssl policy', function (done) {
         var cmd = 'network application-gateway ssl-policy set -g {group} --disable-ssl-protocols {disabledSslProtocolsNew} --policy-type {policyTypeNew} --cipher-suites {cipherSuitesNew} --min-protocol-version {minProtocolVersionNew} --gateway-name {applicationGatewayName} --json'.formatArgs(sslPolicy);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
-          sslPolicy.disabledSslProtocolsNew.split(',').forEach(function (item) { output.disabledSslProtocols.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(sslPolicy.disabledSslProtocolsNew, ',').forEach(function (item) { output.disabledSslProtocols.should.containEql(item) });
           should.not.exist(output.policyType);
           should.not.exist(output.cipherSuites);
           should.not.exist(output.minProtocolVersion);
@@ -177,11 +176,11 @@ describe('arm', function () {
       });
       it('delete should delete ssl policy', function (done) {
         var cmd = 'network application-gateway ssl-policy delete -g {group} --gateway-name {applicationGatewayName} --quiet --json'.formatArgs(sslPolicy);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network application-gateway ssl-policy show -g {group} --gateway-name {applicationGatewayName} --json'.formatArgs(sslPolicy);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;

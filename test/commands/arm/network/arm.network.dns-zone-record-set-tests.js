@@ -91,6 +91,14 @@ var srvProp = {
   zoneName: zoneProp.name,
   metadata: networkTestUtil.tags
 };
+var caaProp = {
+  name: 'set-caa',
+  type: 'CAA',
+  ttl: 3600,
+  params: '--caaflags 1 --caatag tag1 --caavalue val1',
+  zoneName: zoneProp.name,
+  metadata: networkTestUtil.tags
+};
 var txtProp = {
   name: 'set-txt',
   type: 'TXT',
@@ -124,6 +132,7 @@ describe('arm', function () {
         nsProp.group = zoneProp.group;
         txtProp.group = zoneProp.group;
         srvProp.group = zoneProp.group;
+        caaProp.group = zoneProp.group;
         cnameProp.group = zoneProp.group;
         soaProp.group = zoneProp.group;
 
@@ -213,6 +222,25 @@ describe('arm', function () {
       });
       it('delete should delete record-set of type AAAA', function (done) {
         networkTestUtil.deleteDnsRecordSet(aaaaProp, suite, done);
+      });
+
+      /**
+       * CAA
+       */
+      it('create should create a record-set of type CAA', function (done) {
+        networkTestUtil.createDnsRecordSet(caaProp, suite, done);
+      });
+      it('add-record should add a record of type CAA', function (done) {
+        networkTestUtil.addDnsRecord(caaProp, suite, function (caaSet) {
+          caaSet.caaRecords.should.containEql({flags: 1, tag: 'tag1', value: 'val1'});
+          done();
+        });
+      });
+      it('delete-record should delete a record of type CAA', function (done) {
+        networkTestUtil.deleteDnsRecord(caaProp, suite, done);
+      });
+      it('delete should delete record-set of type CAA', function (done) {
+        networkTestUtil.deleteDnsRecordSet(caaProp, suite, done);
       });
 
       /**

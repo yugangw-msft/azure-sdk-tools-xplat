@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-application-gateway-waf-config-tests-generated',
   groupName = 'xplat-test-waf-config',
@@ -98,14 +97,14 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+              if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
-                result.exitStatus.should.equal(0);
+              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network application-gateway create -g {1} -n {name} --servers {backendAddresses} --location {location} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --sku-name WAF_Medium --sku-tier WAF --json'.formatArgs(applicationGateway, groupName);
-                testUtils.executeCommand(suite, retry, cmd, function (result) {
-                  result.exitStatus.should.equal(0);
+                generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                  if (!testUtils.assertExitStatus(result, done)) return;
                   done();
                 });
               });
@@ -133,32 +132,32 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create web application firewall configuration', function (done) {
         var cmd = 'network application-gateway waf-config create -g {group} --enable {enabled} --waf-mode {firewallMode} --rule-set-type {ruleSetType} --rule-set-version {ruleSetVersion} --gateway-name {applicationGatewayName}'.formatArgs(webApplicationFirewallConfiguration);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('show should display web application firewall configuration details', function (done) {
         var cmd = 'network application-gateway waf-config show -g {group} --gateway-name {applicationGatewayName}'.formatArgs(webApplicationFirewallConfiguration);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('set should update web application firewall configuration', function (done) {
         var cmd = 'network application-gateway waf-config set -g {group} --enable {enabledNew} --waf-mode {firewallModeNew} --rule-set-version {ruleSetVersionNew} --gateway-name {applicationGatewayName}'.formatArgs(webApplicationFirewallConfiguration);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('delete should delete web application firewall configuration', function (done) {
         var cmd = 'network application-gateway waf-config delete -g {group} --gateway-name {applicationGatewayName} --quiet'.formatArgs(webApplicationFirewallConfiguration);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network application-gateway waf-config show -g {group} --gateway-name {applicationGatewayName}'.formatArgs(webApplicationFirewallConfiguration);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             done();
           });

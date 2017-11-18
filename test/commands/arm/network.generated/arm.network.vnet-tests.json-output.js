@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-vnet-tests-generated',
   groupName = 'xplat-test-vnet',
@@ -49,12 +48,12 @@ var virtualNetworks = {
   enableVmProtectionNew: 'true',
   enableDdosProtection: 'false',
   enableDdosProtectionNew: 'true',
-  location: 'westus',
+  location: 'westcentralus',
   name: 'virtualNetworkName'
 };
 
 var virtualNetworksDefault = {
-  location: 'westus',
+  location: 'westcentralus',
   addressPrefixes: '10.0.0.0/8',
   name: 'virtualNetworksDefaultName',
   group: groupName
@@ -63,39 +62,39 @@ var virtualNetworksDefault = {
 var invalidPrefixes = {
   addressPrefixes: '10.10.10.10',
   dnsServers: '10.0.0.42',
-  location: 'westus',
+  location: 'westcentralus',
   name: 'invalidPrefixesName'
 };
 
 var invalidDnsServers = {
   addressPrefixes: '10.0.0.0/8',
   dnsServers: '0',
-  location: 'westus',
+  location: 'westcentralus',
   name: 'invalidDnsServersName'
 };
 
 var arrayOfPrefixes = {
   addressPrefixes: '10.0.0.0/8,11.0.0.0/16',
-  location: 'westus',
+  location: 'westcentralus',
   name: 'arrayOfPrefixesName'
 };
 
 var noDnsServers = {
   addressPrefixes: '10.0.0.0/8',
-  location: 'westus',
+  location: 'westcentralus',
   name: 'noDnsServersName'
 };
 
 var changeDnsServers = {
   addressPrefixes: '10.0.0.0/8',
   dnsServersNew: '10.20.30.40',
-  location: 'westus',
+  location: 'westcentralus',
   name: 'changeDnsServersName'
 };
 
 var requiredEnvironment = [{
   name: 'AZURE_VM_TEST_LOCATION',
-  defaultValue: 'westus'
+  defaultValue: 'westcentralus'
 }];
 
 describe('arm', function () {
@@ -146,12 +145,12 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create virtual networks', function (done) {
         var cmd = 'network vnet create -g {group} -n {name} --address-prefixes {addressPrefixes} --dns-servers {dnsServers} --enable-vm-protection {enableVmProtection} --enable-ddos-protection {enableDdosProtection} --location {location} --json'.formatArgs(virtualNetworks);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(virtualNetworks.name);
-          virtualNetworks.addressPrefixes.split(',').forEach(function (item) { output.addressSpace.addressPrefixes.should.containEql(item) });
-          virtualNetworks.dnsServers.split(',').forEach(function (item) { output.dhcpOptions.dnsServers.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(virtualNetworks.addressPrefixes, ',').forEach(function (item) { output.addressSpace.addressPrefixes.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(virtualNetworks.dnsServers, ',').forEach(function (item) { output.dhcpOptions.dnsServers.should.containEql(item) });
           output.enableVmProtection.should.equal(utils.parseBool(virtualNetworks.enableVmProtection));
           output.enableDdosProtection.should.equal(utils.parseBool(virtualNetworks.enableDdosProtection));
           done();
@@ -159,12 +158,12 @@ describe('arm', function () {
       });
       it('show should display virtual networks details', function (done) {
         var cmd = 'network vnet show -g {group} -n {name} --json'.formatArgs(virtualNetworks);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(virtualNetworks.name);
-          virtualNetworks.addressPrefixes.split(',').forEach(function (item) { output.addressSpace.addressPrefixes.should.containEql(item) });
-          virtualNetworks.dnsServers.split(',').forEach(function (item) { output.dhcpOptions.dnsServers.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(virtualNetworks.addressPrefixes, ',').forEach(function (item) { output.addressSpace.addressPrefixes.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(virtualNetworks.dnsServers, ',').forEach(function (item) { output.dhcpOptions.dnsServers.should.containEql(item) });
           output.enableVmProtection.should.equal(utils.parseBool(virtualNetworks.enableVmProtection));
           output.enableDdosProtection.should.equal(utils.parseBool(virtualNetworks.enableDdosProtection));
           done();
@@ -172,14 +171,14 @@ describe('arm', function () {
       });
       it('set should update virtual networks', function (done) {
         var cmd = 'network vnet set -g {group} -n {name} --address-prefixes {addressPrefixesNew} --dns-servers {dnsServersNew} --enable-vm-protection {enableVmProtectionNew} --enable-ddos-protection {enableDdosProtectionNew} --json'.formatArgs(virtualNetworks);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(virtualNetworks.name);
-          virtualNetworks.addressPrefixesNew.split(',').forEach(function (item) { output.addressSpace.addressPrefixes.should.containEql(item) });
-          virtualNetworks.addressPrefixes.split(',').forEach(function (item) { output.addressSpace.addressPrefixes.should.containEql(item) });
-          virtualNetworks.dnsServersNew.split(',').forEach(function (item) { output.dhcpOptions.dnsServers.should.containEql(item) });
-          virtualNetworks.dnsServers.split(',').forEach(function (item) { output.dhcpOptions.dnsServers.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(virtualNetworks.addressPrefixesNew, ',').forEach(function (item) { output.addressSpace.addressPrefixes.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(virtualNetworks.addressPrefixes, ',').forEach(function (item) { output.addressSpace.addressPrefixes.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(virtualNetworks.dnsServersNew, ',').forEach(function (item) { output.dhcpOptions.dnsServers.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(virtualNetworks.dnsServers, ',').forEach(function (item) { output.dhcpOptions.dnsServers.should.containEql(item) });
           output.enableVmProtection.should.equal(utils.parseBool(virtualNetworks.enableVmProtectionNew));
           output.enableDdosProtection.should.equal(utils.parseBool(virtualNetworks.enableDdosProtectionNew));
           done();
@@ -187,7 +186,7 @@ describe('arm', function () {
       });
       it('list should display all virtual networks in resource group', function (done) {
         var cmd = 'network vnet list -g {group} --json'.formatArgs(virtualNetworks);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var outputs = JSON.parse(result.text);
           _.some(outputs, function (output) {
@@ -198,24 +197,24 @@ describe('arm', function () {
       });
       it('usage should perform list usage operation successfully', function (done) {
         var cmd = 'network vnet usage -g {group} -n {name} --json'.formatArgs(virtualNetworks);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('delete should delete virtual networks', function (done) {
         var cmd = 'network vnet delete -g {group} -n {name} --quiet --json'.formatArgs(virtualNetworks);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network vnet show -g {group} -n {name} --json'.formatArgs(virtualNetworks);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
 
             cmd = 'network vnet list -g {group} --json'.formatArgs(virtualNetworks);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               var outputs = JSON.parse(result.text);
               _.some(outputs, function (output) {
@@ -228,14 +227,14 @@ describe('arm', function () {
       });
       it('create with defaults should create virtual networks with default values', function (done) {
         var cmd = 'network vnet create -g {group} -n {name} --location {location} --json'.formatArgs(virtualNetworksDefault);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(virtualNetworksDefault.name);
-          virtualNetworksDefault.addressPrefixes.split(',').forEach(function (item) { output.addressSpace.addressPrefixes.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(virtualNetworksDefault.addressPrefixes, ',').forEach(function (item) { output.addressSpace.addressPrefixes.should.containEql(item) });
 
           cmd = 'network vnet delete -g {group} -n {name} --quiet --json'.formatArgs(virtualNetworksDefault);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             done();
           });
@@ -243,55 +242,55 @@ describe('arm', function () {
       });
       it('create should fail for invalid prefixes', function (done) {
         var cmd = 'network vnet create -g {group} -n {name} --address-prefixes {addressPrefixes} --dns-servers {dnsServers} --location {location} --json'.formatArgs(invalidPrefixes);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for invalid dns servers', function (done) {
         var cmd = 'network vnet create -g {group} -n {name} --address-prefixes {addressPrefixes} --dns-servers {dnsServers} --location {location} --json'.formatArgs(invalidDnsServers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should pass for array of prefixes', function (done) {
         var cmd = 'network vnet create -g {group} -n {name} --address-prefixes {addressPrefixes} --location {location} --json'.formatArgs(arrayOfPrefixes);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(arrayOfPrefixes.name);
-          arrayOfPrefixes.addressPrefixes.split(',').forEach(function (item) { output.addressSpace.addressPrefixes.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(arrayOfPrefixes.addressPrefixes, ',').forEach(function (item) { output.addressSpace.addressPrefixes.should.containEql(item) });
           done();
         });
       });
       it('create should pass for no dns servers', function (done) {
         var cmd = 'network vnet create -g {group} -n {name} --address-prefixes {addressPrefixes} --location {location} --json'.formatArgs(noDnsServers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(noDnsServers.name);
-          noDnsServers.addressPrefixes.split(',').forEach(function (item) { output.addressSpace.addressPrefixes.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(noDnsServers.addressPrefixes, ',').forEach(function (item) { output.addressSpace.addressPrefixes.should.containEql(item) });
           done();
         });
       });
       it('create should pass for change dns servers', function (done) {
         var cmd = 'network vnet create -g {group} -n {name} --address-prefixes {addressPrefixes} --location {location} --json'.formatArgs(changeDnsServers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(changeDnsServers.name);
-          changeDnsServers.addressPrefixes.split(',').forEach(function (item) { output.addressSpace.addressPrefixes.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(changeDnsServers.addressPrefixes, ',').forEach(function (item) { output.addressSpace.addressPrefixes.should.containEql(item) });
 
           cmd = 'network vnet set -g {group} -n {name} --dns-servers {dnsServersNew} --json'.formatArgs(changeDnsServers);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text);
             output.name.should.equal(changeDnsServers.name);
-            changeDnsServers.dnsServersNew.split(',').forEach(function (item) { output.dhcpOptions.dnsServers.should.containEql(item) });
+            generatorUtils.splitStringByCharacter(changeDnsServers.dnsServersNew, ',').forEach(function (item) { output.dhcpOptions.dnsServers.should.containEql(item) });
 
             cmd = 'network vnet delete -g {group} -n {name} --quiet --json'.formatArgs(changeDnsServers);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               done();
             });

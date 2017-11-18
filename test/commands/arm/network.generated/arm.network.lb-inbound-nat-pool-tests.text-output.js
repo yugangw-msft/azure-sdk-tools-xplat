@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-lb-inbound-nat-pool-tests-generated',
   groupName = 'xplat-test-inbound-nat-pool',
@@ -144,14 +143,14 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network lb create -g {1} -n {name} --location {location} --json'.formatArgs(loadBalancer, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+              if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
-                result.exitStatus.should.equal(0);
+              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network lb frontend-ip create -g {1} -n {name} --lb-name {loadBalancerName} --public-ip-name {publicIPAddressName} --json'.formatArgs(frontendIPConfiguration, groupName);
-                testUtils.executeCommand(suite, retry, cmd, function (result) {
-                  result.exitStatus.should.equal(0);
+                generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                  if (!testUtils.assertExitStatus(result, done)) return;
                   done();
                 });
               });
@@ -179,51 +178,56 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create inbound nat pools', function (done) {
         var cmd = 'network lb inbound-nat-pool create -g {group} -n {name} --protocol {protocol} --frontend-port-range-start {frontendPortRangeStart} --frontend-port-range-end {frontendPortRangeEnd} --backend-port {backendPort} --lb-name {loadBalancerName} --frontend-ip-name {frontendIPConfigurationName}'.formatArgs(inboundNatPools);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('show should display inbound nat pools details', function (done) {
         var cmd = 'network lb inbound-nat-pool show -g {group} -n {name} --lb-name {loadBalancerName}'.formatArgs(inboundNatPools);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('set should update inbound nat pools', function (done) {
         var cmd = 'network lb inbound-nat-pool set -g {group} -n {name} --protocol {protocolNew} --frontend-port-range-start {frontendPortRangeStartNew} --frontend-port-range-end {frontendPortRangeEndNew} --backend-port {backendPortNew} --lb-name {loadBalancerName}'.formatArgs(inboundNatPools);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('list should display all inbound nat pools in resource group', function (done) {
         var cmd = 'network lb inbound-nat-pool list -g {group} --lb-name {loadBalancerName}'.formatArgs(inboundNatPools);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('delete should delete inbound nat pools', function (done) {
         var cmd = 'network lb inbound-nat-pool delete -g {group} -n {name} --lb-name {loadBalancerName} --quiet'.formatArgs(inboundNatPools);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network lb inbound-nat-pool show -g {group} -n {name} --lb-name {loadBalancerName}'.formatArgs(inboundNatPools);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-            done();
+
+            cmd = 'network lb inbound-nat-pool list -g {group} --lb-name {loadBalancerName}'.formatArgs(inboundNatPools);
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              done();
+            });
           });
         });
       });
       it('create with defaults should create inbound nat pools with default values', function (done) {
         var cmd = 'network lb inbound-nat-pool create -g {group} -n {name} --lb-name {loadBalancerName}'.formatArgs(inboundNatPoolsDefault);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network lb inbound-nat-pool delete -g {group} -n {name} --lb-name {loadBalancerName} --quiet'.formatArgs(inboundNatPoolsDefault);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             done();
           });
@@ -231,35 +235,35 @@ describe('arm', function () {
       });
       it('create should fail for frontend port range start under allowed value', function (done) {
         var cmd = 'network lb inbound-nat-pool create -g {group} -n {name} --frontend-port-range-start {frontendPortRangeStart} --lb-name {loadBalancerName} --json'.formatArgs(frontendPortRangeStartUnderAllowedValue);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for frontend port range start over allowed value', function (done) {
         var cmd = 'network lb inbound-nat-pool create -g {group} -n {name} --frontend-port-range-start {frontendPortRangeStart} --lb-name {loadBalancerName} --json'.formatArgs(frontendPortRangeStartOverAllowedValue);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for frontend port range end under allowed value', function (done) {
         var cmd = 'network lb inbound-nat-pool create -g {group} -n {name} --frontend-port-range-end {frontendPortRangeEnd} --lb-name {loadBalancerName} --json'.formatArgs(frontendPortRangeEndUnderAllowedValue);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for frontend port range end over allowed value', function (done) {
         var cmd = 'network lb inbound-nat-pool create -g {group} -n {name} --frontend-port-range-end {frontendPortRangeEnd} --lb-name {loadBalancerName} --json'.formatArgs(frontendPortRangeEndOverAllowedValue);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for backend port out of range', function (done) {
         var cmd = 'network lb inbound-nat-pool create -g {group} -n {name} --backend-port {backendPort} --lb-name {loadBalancerName} --json'.formatArgs(backendPortOutOfRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });

@@ -31,7 +31,6 @@ var testUtils = require('../../../util/util');
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-usage-tests-generated',
   groupName,
@@ -80,7 +79,7 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('list should display all usages in resource group', function (done) {
         var cmd = 'network usage list --location {locationList} --json'.formatArgs(usages);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var outputs = JSON.parse(result.text);
           _.some(outputs, function (output) {

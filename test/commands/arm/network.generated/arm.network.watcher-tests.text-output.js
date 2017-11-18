@@ -34,7 +34,6 @@ var preinstalledEnv = new (require('../../../util/preinstalledEnv'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-watcher-tests-generated',
   groupName = 'xplat-test-watcher',
@@ -43,20 +42,30 @@ var index = 0;
 
 var networkWatchers = {
   location: 'westcentralus',
-  targetResourceGroupName: 'xplat-rg-topology',
-  direction: 'Inbound',
-  protocol: 'TCP',
-  localPort: '80',
-  remotePort: '80',
-  localIPAddress: '10.0.0.4',
-  remoteIPAddress: '10.0.0.13',
-  sourceIPAddress: '10.0.0.4',
-  destinationIPAddress: '192.168.10.11',
-  enabled: 'true',
-  retentionPolicyEnabled: 'true',
-  days: '123',
-  address: 'bing.com',
-  destinationPort: '80',
+  topology_targetResourceGroupName: 'xplat-rg-topology',
+  iPFlowVerify_direction: 'Inbound',
+  iPFlowVerify_protocol: 'TCP',
+  iPFlowVerify_localPort: '80',
+  iPFlowVerify_remotePort: '80',
+  iPFlowVerify_localIPAddress: '10.0.0.4',
+  iPFlowVerify_remoteIPAddress: '10.0.0.13',
+  nextHop_sourceIPAddress: '10.0.0.4',
+  nextHop_destinationIPAddress: '192.168.10.11',
+  configureFlowLog_enabled: 'true',
+  configureFlowLog_retentionPolicyEnabled: 'true',
+  configureFlowLog_days: '123',
+  checkConnectivity_address: 'bing.com',
+  checkConnectivity_destinationPort: '80',
+  reachabilityReport_country: '\'United States\'',
+  reachabilityReport_state: 'Washington',
+  reachabilityReport_providers: `'"Frontier  Communications of  America,  Inc. -  ASN  5650","Amazon.com,  Inc. -  ASN  16509"'`,
+  reachabilityReport_azureLocations: '\'West US\'',
+  reachabilityReport_startTime: generatorUtils.getISODate(1),
+  reachabilityReport_endTime: generatorUtils.getISODate(2),
+  reachabilityReportProviderList_azureLocations: '\'West US,East US\'',
+  reachabilityReportProviderList_country: '\'Unites States\'',
+  reachabilityReportProviderList_state: 'Washington',
+  reachabilityReportProviderList_city: 'Seattle',
   name: 'networkWatcherName'
 };
 
@@ -141,24 +150,24 @@ describe('arm', function () {
         networkWatchers.group = groupName;
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
-            networkTestUtil.createGroup(networkWatchers.targetResourceGroupName, location, suite, function () {
+            networkTestUtil.createGroup(networkWatchers.topology_targetResourceGroupName, location, suite, function () {
               var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
-                result.exitStatus.should.equal(0);
+              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
-                testUtils.executeCommand(suite, retry, cmd, function (result) {
-                  result.exitStatus.should.equal(0);
+                generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                  if (!testUtils.assertExitStatus(result, done)) return;
                   var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
-                  testUtils.executeCommand(suite, retry, cmd, function (result) {
-                    result.exitStatus.should.equal(0);
+                  generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                    if (!testUtils.assertExitStatus(result, done)) return;
                     var cmd = 'network nsg create -g {1} -n {name} --location {location} --json'.formatArgs(networkSecurityGroup, groupName);
-                    testUtils.executeCommand(suite, retry, cmd, function (result) {
-                      result.exitStatus.should.equal(0);
+                    generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                      if (!testUtils.assertExitStatus(result, done)) return;
                       var output = JSON.parse(result.text);
                       networkWatchers.networkSecurityGroupId = output.id;
                       var cmd = 'network nic create -g {1} -n {name} --location {location} --subnet-vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --network-security-group-name {networkSecurityGroupName} --json'.formatArgs(networkInterface, groupName);
-                      testUtils.executeCommand(suite, retry, cmd, function (result) {
-                        result.exitStatus.should.equal(0);
+                      generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                        if (!testUtils.assertExitStatus(result, done)) return;
                         var output = JSON.parse(result.text);
                         networkWatchers.networkInterfaceId = output.id;
                         preinstalledEnv.getNetworkWatcherEnv(networkWatchers, preinstalledEnvGetNetworkWatcherEnv, groupName, suite, function (result) {
@@ -184,7 +193,7 @@ describe('arm', function () {
     after(function (done) {
       this.timeout(testTimeout);
       networkTestUtil.deleteGroup(groupName, suite, function () {
-        networkTestUtil.deleteGroup(networkWatchers.targetResourceGroupName, suite, function () {
+        networkTestUtil.deleteGroup(networkWatchers.topology_targetResourceGroupName, suite, function () {
           suite.teardownSuite(done);
         });
       });
@@ -200,97 +209,116 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create network watchers', function (done) {
         var cmd = 'network watcher create -g {group} -n {name} --location {location}'.formatArgs(networkWatchers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('show should display network watchers details', function (done) {
         var cmd = 'network watcher show -g {group} -n {name}'.formatArgs(networkWatchers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('list should display all network watchers in resource group', function (done) {
         var cmd = 'network watcher list -g {group}'.formatArgs(networkWatchers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('topology should perform get topology operation successfully', function (done) {
-        var cmd = 'network watcher topology -g {group} -n {name} --topology-resource-group {targetResourceGroupName}'.formatArgs(networkWatchers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        var cmd = 'network watcher topology -g {group} -n {name} --topology-resource-group {topology_targetResourceGroupName}'.formatArgs(networkWatchers);
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('ip-flow-verify should perform verify ip flow operation successfully', function (done) {
-        var cmd = 'network watcher ip-flow-verify -g {group} -n {name} --target {virtualMachineId} --direction {direction} --protocol {protocol} --local-port {localPort} --remote-port {remotePort} --local-ip-address {localIPAddress} --remote-ip-address {remoteIPAddress} --nic-id {networkInterfaceId}'.formatArgs(networkWatchers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        var cmd = 'network watcher ip-flow-verify -g {group} -n {name} --target {virtualMachineId} --direction {iPFlowVerify_direction} --protocol {iPFlowVerify_protocol} --local-port {iPFlowVerify_localPort} --remote-port {iPFlowVerify_remotePort} --local-ip-address {iPFlowVerify_localIPAddress} --remote-ip-address {iPFlowVerify_remoteIPAddress} --nic-id {networkInterfaceId}'.formatArgs(networkWatchers);
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('next-hop should perform get next hop operation successfully', function (done) {
-        var cmd = 'network watcher next-hop -g {group} -n {name} --target {virtualMachineId} --source-ip-address {sourceIPAddress} --destination-ip-address {destinationIPAddress} --nic-id {networkInterfaceId}'.formatArgs(networkWatchers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        var cmd = 'network watcher next-hop -g {group} -n {name} --target {virtualMachineId} --source-ip-address {nextHop_sourceIPAddress} --destination-ip-address {nextHop_destinationIPAddress} --nic-id {networkInterfaceId}'.formatArgs(networkWatchers);
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('security-group-view should perform get vm security rules operation successfully', function (done) {
         var cmd = 'network watcher security-group-view -g {group} -n {name} --target {virtualMachineId}'.formatArgs(networkWatchers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('troubleshoot should perform get troubleshooting operation successfully', function (done) {
         var cmd = 'network watcher troubleshoot -g {group} -n {name} --target {vpnGatewayId} --storage-id {storageId} --storage-path {storagePath}'.formatArgs(networkWatchers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('troubleshoot-result should perform get troubleshooting result operation successfully', function (done) {
         var cmd = 'network watcher troubleshoot-result -g {group} -n {name} --target {vpnGatewayId}'.formatArgs(networkWatchers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('configure-flow-log should perform set flow log configuration operation successfully', function (done) {
-        var cmd = 'network watcher configure-flow-log -g {group} -n {name} --target {networkSecurityGroupId} --enable {enabled} --storage-id {storageId} --retention-enable {retentionPolicyEnabled} --retention-days {days}'.formatArgs(networkWatchers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        var cmd = 'network watcher configure-flow-log -g {group} -n {name} --target {networkSecurityGroupId} --enable {configureFlowLog_enabled} --storage-id {storageId} --retention-enable {configureFlowLog_retentionPolicyEnabled} --retention-days {configureFlowLog_days}'.formatArgs(networkWatchers);
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('flow-log-status should perform get flow log status operation successfully', function (done) {
         var cmd = 'network watcher flow-log-status -g {group} -n {name} --target {networkSecurityGroupId}'.formatArgs(networkWatchers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('check-connectivity should perform check connectivity operation successfully', function (done) {
-        var cmd = 'network watcher check-connectivity -g {group} -n {name} --source-id {virtualMachineId} --destination-address {address} --destination-port {destinationPort}'.formatArgs(networkWatchers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        var cmd = 'network watcher check-connectivity -g {group} -n {name} --source-id {virtualMachineId} --destination-address {checkConnectivity_address} --destination-port {checkConnectivity_destinationPort}'.formatArgs(networkWatchers);
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          done();
+        });
+      });
+      it('reachability-report should perform get azure reachability report operation successfully', function (done) {
+        var cmd = 'network watcher reachability-report -g {group} -n {name} --country {reachabilityReport_country} --state {reachabilityReport_state} --providers {reachabilityReport_providers} --azure-locations {reachabilityReport_azureLocations} --start-time {reachabilityReport_startTime} --end-time {reachabilityReport_endTime}'.formatArgs(networkWatchers);
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+          result.exitStatus.should.equal(0);
+          done();
+        });
+      });
+      it('reachability-report-provider-list should perform list available providers operation successfully', function (done) {
+        var cmd = 'network watcher reachability-report-provider-list -g {group} -n {name} --azure-locations {reachabilityReportProviderList_azureLocations} --country {reachabilityReportProviderList_country} --state {reachabilityReportProviderList_state} --city {reachabilityReportProviderList_city}'.formatArgs(networkWatchers);
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('delete should delete network watchers', function (done) {
         var cmd = 'network watcher delete -g {group} -n {name} --quiet'.formatArgs(networkWatchers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network watcher show -g {group} -n {name}'.formatArgs(networkWatchers);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-            done();
+
+            cmd = 'network watcher list -g {group}'.formatArgs(networkWatchers);
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              done();
+            });
           });
         });
       });

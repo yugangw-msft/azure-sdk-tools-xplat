@@ -31,7 +31,6 @@ var testUtils = require('../../../util/util');
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-endpoint-service-tests-generated',
   groupName,
@@ -81,7 +80,7 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('list should display all available endpoint services in resource group', function (done) {
         var cmd = 'network endpoint-service list --location {locationList}'.formatArgs(availableEndpointServices);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });

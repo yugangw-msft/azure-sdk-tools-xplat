@@ -28,6 +28,9 @@ commands/arm/network.generated/arm.network.application-gateway-url-path-map-test
 commands/arm/network.generated/arm.network.application-gateway-url-path-map-tests.text-output.js
 commands/arm/network.generated/arm.network.application-gateway-waf-config-tests.json-output.js
 commands/arm/network.generated/arm.network.application-gateway-waf-config-tests.text-output.js
+# Application Security Groups
+commands/arm/network.generated/arm.network.application-security-group-tests.json-output.js
+commands/arm/network.generated/arm.network.application-security-group-tests.text-output.js
 # Available Endpoint Services
 commands/arm/network.generated/arm.network.endpoint-service-tests.json-output.js
 commands/arm/network.generated/arm.network.endpoint-service-tests.text-output.js

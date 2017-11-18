@@ -23,7 +23,7 @@ exports.getMockedProfile = function () {
 };
 
 exports.setEnvironment = function() {
-  process.env['AZURE_VM_TEST_LOCATION'] = 'brazilsouth';
+  process.env['AZURE_VM_TEST_LOCATION'] = 'westus';
 };
 
 exports.scopes = [[function (nock) { 
@@ -35,11 +35,11 @@ nock('http://management.azure.com:443')
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': '7e432dc0-5d8e-43e3-a24f-58f3e49b7738',
-  'x-ms-correlation-request-id': '7e432dc0-5d8e-43e3-a24f-58f3e49b7738',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T114113Z:7e432dc0-5d8e-43e3-a24f-58f3e49b7738',
+  'x-ms-request-id': '81a7f6d4-9cfb-424f-a1ce-4ea67f8a931e',
+  'x-ms-correlation-request-id': '81a7f6d4-9cfb-424f-a1ce-4ea67f8a931e',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170927T114108Z:81a7f6d4-9cfb-424f-a1ce-4ea67f8a931e',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Fri, 01 Sep 2017 11:41:13 GMT',
+  date: 'Wed, 27 Sep 2017 11:41:07 GMT',
   connection: 'close',
   'content-length': '184' });
  return result; },
@@ -52,11 +52,11 @@ nock('https://management.azure.com:443')
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-failure-cause': 'gateway',
-  'x-ms-request-id': '7e432dc0-5d8e-43e3-a24f-58f3e49b7738',
-  'x-ms-correlation-request-id': '7e432dc0-5d8e-43e3-a24f-58f3e49b7738',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T114113Z:7e432dc0-5d8e-43e3-a24f-58f3e49b7738',
+  'x-ms-request-id': '81a7f6d4-9cfb-424f-a1ce-4ea67f8a931e',
+  'x-ms-correlation-request-id': '81a7f6d4-9cfb-424f-a1ce-4ea67f8a931e',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170927T114108Z:81a7f6d4-9cfb-424f-a1ce-4ea67f8a931e',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  date: 'Fri, 01 Sep 2017 11:41:13 GMT',
+  date: 'Wed, 27 Sep 2017 11:41:07 GMT',
   connection: 'close',
   'content-length': '184' });
  return result; }]];

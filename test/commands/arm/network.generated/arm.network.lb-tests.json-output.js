@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-lb-tests-generated',
   groupName = 'xplat-test-lb',
@@ -92,7 +91,7 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create load balancers', function (done) {
         var cmd = 'network lb create -g {group} -n {name} --sku-name {skuname} --location {location} --json'.formatArgs(loadBalancers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(loadBalancers.name);
@@ -102,7 +101,7 @@ describe('arm', function () {
       });
       it('show should display load balancers details', function (done) {
         var cmd = 'network lb show -g {group} -n {name} --json'.formatArgs(loadBalancers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(loadBalancers.name);
@@ -112,7 +111,7 @@ describe('arm', function () {
       });
       it('set should update load balancers', function (done) {
         var cmd = 'network lb set -g {group} -n {name} --json'.formatArgs(loadBalancers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(loadBalancers.name);
@@ -121,7 +120,7 @@ describe('arm', function () {
       });
       it('list should display all load balancers in resource group', function (done) {
         var cmd = 'network lb list -g {group} --json'.formatArgs(loadBalancers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var outputs = JSON.parse(result.text);
           _.some(outputs, function (output) {
@@ -132,17 +131,17 @@ describe('arm', function () {
       });
       it('delete should delete load balancers', function (done) {
         var cmd = 'network lb delete -g {group} -n {name} --quiet --json'.formatArgs(loadBalancers);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network lb show -g {group} -n {name} --json'.formatArgs(loadBalancers);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
 
             cmd = 'network lb list -g {group} --json'.formatArgs(loadBalancers);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
               result.exitStatus.should.equal(0);
               var outputs = JSON.parse(result.text);
               _.some(outputs, function (output) {

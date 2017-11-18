@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-nic-ip-config-tests-generated',
   groupName = 'xplat-test-ip-config',
@@ -59,25 +58,25 @@ var subnet = {
 };
 
 var virtualNetwork = {
-  location: 'westus',
+  location: 'westcentralus',
   name: 'virtualNetworkName'
 };
 
 var networkInterface = {
-  location: 'westus',
+  location: 'westcentralus',
   virtualNetworkName: 'virtualNetworkName',
   subnetName: 'subnetName',
   name: 'networkInterfaceName'
 };
 
 var publicIPAddress = {
-  location: 'westus',
+  location: 'westcentralus',
   name: 'publicIPAddressName'
 };
 
 var requiredEnvironment = [{
   name: 'AZURE_VM_TEST_LOCATION',
-  defaultValue: 'westus'
+  defaultValue: 'westcentralus'
 }];
 
 describe('arm', function () {
@@ -99,17 +98,17 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+              if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
-                result.exitStatus.should.equal(0);
+              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
-                testUtils.executeCommand(suite, retry, cmd, function (result) {
-                  result.exitStatus.should.equal(0);
+                generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                  if (!testUtils.assertExitStatus(result, done)) return;
                   var cmd = 'network nic create -g {1} -n {name} --location {location} --subnet-vnet-name {virtualNetworkName} --subnet-name {subnetName} --ip-config-name defaultConfig --json'.formatArgs(networkInterface, groupName);
-                  testUtils.executeCommand(suite, retry, cmd, function (result) {
-                    result.exitStatus.should.equal(0);
+                  generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                    if (!testUtils.assertExitStatus(result, done)) return;
                     done();
                   });
                 });
@@ -138,41 +137,46 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create ip configurations', function (done) {
         var cmd = 'network nic ip-config create -g {group} -n {name} --private-ip-address {privateIPAddress} --private-ip-version {privateIPAddressVersion} --nic-name {networkInterfaceName}'.formatArgs(ipConfigurations);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('show should display ip configurations details', function (done) {
         var cmd = 'network nic ip-config show -g {group} -n {name} --nic-name {networkInterfaceName}'.formatArgs(ipConfigurations);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('set should update ip configurations', function (done) {
         var cmd = 'network nic ip-config set -g {group} -n {name} --private-ip-address {privateIPAddressNew} --nic-name {networkInterfaceName} --public-ip-name {publicIPAddressName}'.formatArgs(ipConfigurations);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('list should display all ip configurations in resource group', function (done) {
         var cmd = 'network nic ip-config list -g {group} --nic-name {networkInterfaceName}'.formatArgs(ipConfigurations);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('delete should delete ip configurations', function (done) {
         var cmd = 'network nic ip-config delete -g {group} -n {name} --nic-name {networkInterfaceName} --quiet'.formatArgs(ipConfigurations);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network nic ip-config show -g {group} -n {name} --nic-name {networkInterfaceName}'.formatArgs(ipConfigurations);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-            done();
+
+            cmd = 'network nic ip-config list -g {group} --nic-name {networkInterfaceName}'.formatArgs(ipConfigurations);
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              done();
+            });
           });
         });
       });

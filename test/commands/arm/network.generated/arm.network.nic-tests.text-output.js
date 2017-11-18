@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-nic-tests-generated',
   groupName = 'xplat-test-nic',
@@ -50,7 +49,7 @@ var networkInterfaces = {
   enableAcceleratedNetworkingNew: 'true',
   enableIPForwarding: 'false',
   enableIPForwardingNew: 'true',
-  location: 'westus',
+  location: 'westcentralus',
   name: 'networkInterfaceName'
 };
 
@@ -58,7 +57,28 @@ networkInterfaces.virtualNetworkName = 'virtualNetworkName';
 networkInterfaces.subnetName = 'subnetName';
 networkInterfaces.publicIPAddressName = 'publicIPAddressName';
 networkInterfaces.networkSecurityGroupName = 'networkSecurityGroupName';
+networkInterfaces.applicationSecurityGroupName = 'applicationSecurityGroupName';
 networkInterfaces.networkInterfaceName = 'networkInterfaceName';
+
+var networkSecurityGroup = {
+  location: 'westcentralus',
+  name: 'networkSecurityGroupName'
+};
+
+var applicationSecurityGroup = {
+  location: 'westcentralus',
+  name: 'applicationSecurityGroupName'
+};
+
+var publicIPAddress = {
+  location: 'westcentralus',
+  name: 'publicIPAddressName'
+};
+
+var virtualNetwork = {
+  location: 'westcentralus',
+  name: 'virtualNetworkName'
+};
 
 var subnet = {
   addressPrefix: '10.0.0.0/16',
@@ -66,24 +86,9 @@ var subnet = {
   name: 'subnetName'
 };
 
-var virtualNetwork = {
-  location: 'westus',
-  name: 'virtualNetworkName'
-};
-
-var networkSecurityGroup = {
-  location: 'westus',
-  name: 'networkSecurityGroupName'
-};
-
-var publicIPAddress = {
-  location: 'westus',
-  name: 'publicIPAddressName'
-};
-
 var invalidPrivateIPAddress = {
   privateIPAddress: '10.11.12.13.14',
-  location: 'westus',
+  location: 'westcentralus',
   virtualNetworkName: 'virtualNetworkName',
   subnetName: 'subnetName',
   publicIPAddressName: 'publicIPAddressName',
@@ -92,7 +97,7 @@ var invalidPrivateIPAddress = {
 
 var ipVersionOutOfRange = {
   privateIPAddressVersion: 'IP',
-  location: 'westus',
+  location: 'westcentralus',
   virtualNetworkName: 'virtualNetworkName',
   subnetName: 'subnetName',
   publicIPAddressName: 'publicIPAddressName',
@@ -101,7 +106,7 @@ var ipVersionOutOfRange = {
 
 var invalidIPForwarding = {
   enableIPForwarding: 'Disable',
-  location: 'westus',
+  location: 'westcentralus',
   virtualNetworkName: 'virtualNetworkName',
   subnetName: 'subnetName',
   publicIPAddressName: 'publicIPAddressName',
@@ -109,7 +114,7 @@ var invalidIPForwarding = {
 };
 
 var attachNsgToNic = {
-  location: 'westus',
+  location: 'westcentralus',
   virtualNetworkName: 'virtualNetworkName',
   subnetName: 'subnetName',
   publicIPAddressName: 'publicIPAddressName',
@@ -118,14 +123,14 @@ var attachNsgToNic = {
 };
 
 var detachNsgFromNic = {
-  location: 'westus',
+  location: 'westcentralus',
   networkSecurityGroupName: 'networkSecurityGroupName',
   name: 'AttachNsgToNicName'
 };
 
 var requiredEnvironment = [{
   name: 'AZURE_VM_TEST_LOCATION',
-  defaultValue: 'westus'
+  defaultValue: 'westcentralus'
 }];
 
 describe('arm', function () {
@@ -154,24 +159,32 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+              if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
-                result.exitStatus.should.equal(0);
+              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
-                testUtils.executeCommand(suite, retry, cmd, function (result) {
-                  result.exitStatus.should.equal(0);
+                generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                  if (!testUtils.assertExitStatus(result, done)) return;
                   var cmd = 'network nsg create -g {1} -n {name} --location {location} --json'.formatArgs(networkSecurityGroup, groupName);
-                  testUtils.executeCommand(suite, retry, cmd, function (result) {
-                    result.exitStatus.should.equal(0);
-                    done();
+                  generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                    if (!testUtils.assertExitStatus(result, done)) return;
+                    var cmd = 'network application-security-group create -g {1} -n {name} --location {location} --json'.formatArgs(applicationSecurityGroup, groupName);
+                    generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                      if (!testUtils.assertExitStatus(result, done)) return;
+                      var output = JSON.parse(result.text);
+                      networkInterfaces.applicationSecurityGroupId = output.id;
+                      done();
+                    });
                   });
                 });
               });
             });
           });
         } else {
+          var subscriptionId = profile.current.getSubscription().id;
+          networkInterfaces.applicationSecurityGroupId = generatorUtils.generateResourceIdCommon(subscriptionId, groupName, 'applicationSecurityGroups', networkInterfaces.applicationSecurityGroupName);
           done();
         }
       });
@@ -192,83 +205,88 @@ describe('arm', function () {
     describe('network interfaces', function () {
       this.timeout(testTimeout);
       it('create should create network interfaces', function (done) {
-        var cmd = 'network nic create -g {group} -n {name} --private-ip-address {privateIPAddress} --private-ip-version {privateIPAddressVersion} --ip-config-name {ipConfigurationName} --internal-dns-name-label {internalDnsNameLabel} --enable-accelerated-networking {enableAcceleratedNetworking} --enable-ip-forwarding {enableIPForwarding} --location {location} --subnet-vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName}'.formatArgs(networkInterfaces);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        var cmd = 'network nic create -g {group} -n {name} --private-ip-address {privateIPAddress} --private-ip-version {privateIPAddressVersion} --ip-config-name {ipConfigurationName} --internal-dns-name-label {internalDnsNameLabel} --enable-accelerated-networking {enableAcceleratedNetworking} --enable-ip-forwarding {enableIPForwarding} --location {location} --subnet-vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --application-security-groups {applicationSecurityGroupId}'.formatArgs(networkInterfaces);
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('show should display network interfaces details', function (done) {
         var cmd = 'network nic show -g {group} -n {name}'.formatArgs(networkInterfaces);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('set should update network interfaces', function (done) {
         var cmd = 'network nic set -g {group} -n {name} --internal-dns-name-label {internalDnsNameLabelNew} --enable-accelerated-networking {enableAcceleratedNetworkingNew} --enable-ip-forwarding {enableIPForwardingNew}'.formatArgs(networkInterfaces);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('list should display all network interfaces in resource group', function (done) {
         var cmd = 'network nic list -g {group}'.formatArgs(networkInterfaces);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('effective-route-table should fail to perform get effective route table operation successfully', function (done) {
         var cmd = 'network nic effective-route-table show -g {group} --nic-name {networkInterfaceName}'.formatArgs(networkInterfaces);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('effective-nsg should fail to perform list effective network security groups operation successfully', function (done) {
         var cmd = 'network nic effective-nsg list -g {group} --nic-name {networkInterfaceName}'.formatArgs(networkInterfaces);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('delete should delete network interfaces', function (done) {
         var cmd = 'network nic delete -g {group} -n {name} --quiet'.formatArgs(networkInterfaces);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network nic show -g {group} -n {name}'.formatArgs(networkInterfaces);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-            done();
+
+            cmd = 'network nic list -g {group}'.formatArgs(networkInterfaces);
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              done();
+            });
           });
         });
       });
       it('create should fail for invalid private ip address', function (done) {
         var cmd = 'network nic create -g {group} -n {name} --private-ip-address {privateIPAddress} --location {location} --subnet-vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --json'.formatArgs(invalidPrivateIPAddress);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for ip version out of range', function (done) {
         var cmd = 'network nic create -g {group} -n {name} --private-ip-version {privateIPAddressVersion} --location {location} --subnet-vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --json'.formatArgs(ipVersionOutOfRange);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for invalid ip forwarding', function (done) {
         var cmd = 'network nic create -g {group} -n {name} --enable-ip-forwarding {enableIPForwarding} --location {location} --subnet-vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --json'.formatArgs(invalidIPForwarding);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('attach nsg to nic should pass', function (done) {
         var cmd = 'network nic create -g {group} -n {name} --location {location} --subnet-vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --json'.formatArgs(attachNsgToNic);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(attachNsgToNic.name);
@@ -276,7 +294,7 @@ describe('arm', function () {
           output.ipConfigurations[index].publicIPAddress.id.should.containEql(attachNsgToNic.publicIPAddressName);
 
           cmd = 'network nic set -g {group} -n {name} --network-security-group-name {networkSecurityGroupName} --json'.formatArgs(attachNsgToNic);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text);
             output.name.should.equal(attachNsgToNic.name);
@@ -287,14 +305,14 @@ describe('arm', function () {
       });
       it('detach nsg from nic should pass', function (done) {
         var cmd = 'network nic set -g {group} -n {name} --network-security-group-name --json'.formatArgs(detachNsgFromNic);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(detachNsgFromNic.name);
           should.not.exist(output.networkSecurityGroup);
 
           cmd = 'network nic delete -g {group} -n {name} --quiet --json'.formatArgs(detachNsgFromNic);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             done();
           });

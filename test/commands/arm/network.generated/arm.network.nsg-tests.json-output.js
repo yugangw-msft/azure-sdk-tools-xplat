@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-nsg-tests-generated',
   groupName = 'xplat-test-nsg',
@@ -91,7 +90,7 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create network security groups', function (done) {
         var cmd = 'network nsg create -g {group} -n {name} --location {location} --json'.formatArgs(networkSecurityGroups);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(networkSecurityGroups.name);
@@ -100,7 +99,7 @@ describe('arm', function () {
       });
       it('show should display network security groups details', function (done) {
         var cmd = 'network nsg show -g {group} -n {name} --json'.formatArgs(networkSecurityGroups);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(networkSecurityGroups.name);
@@ -109,7 +108,7 @@ describe('arm', function () {
       });
       it('set should update network security groups', function (done) {
         var cmd = 'network nsg set -g {group} -n {name} --json'.formatArgs(networkSecurityGroups);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(networkSecurityGroups.name);
@@ -118,7 +117,7 @@ describe('arm', function () {
       });
       it('list should display all network security groups in resource group', function (done) {
         var cmd = 'network nsg list -g {group} --json'.formatArgs(networkSecurityGroups);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var outputs = JSON.parse(result.text);
           _.some(outputs, function (output) {
@@ -129,15 +128,24 @@ describe('arm', function () {
       });
       it('delete should delete network security groups', function (done) {
         var cmd = 'network nsg delete -g {group} -n {name} --quiet --json'.formatArgs(networkSecurityGroups);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network nsg show -g {group} -n {name} --json'.formatArgs(networkSecurityGroups);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
-            done();
+
+            cmd = 'network nsg list -g {group} --json'.formatArgs(networkSecurityGroups);
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              var outputs = JSON.parse(result.text);
+              _.some(outputs, function (output) {
+                return output.name === networkSecurityGroups.name;
+              }).should.be.false;
+              done();
+            });
           });
         });
       });

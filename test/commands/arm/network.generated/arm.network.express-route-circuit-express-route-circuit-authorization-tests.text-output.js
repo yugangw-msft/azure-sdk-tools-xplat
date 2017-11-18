@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-express-route-authorization-tests-generated',
   groupName = 'xplat-test-authorization',
@@ -79,8 +78,8 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network express-route circuit create -g {1} -n {name} --service-provider-name {serviceProviderName} --peering-location {peeringLocation} --location {location} --json'.formatArgs(expressRouteCircuit, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+              if (!testUtils.assertExitStatus(result, done)) return;
               done();
             });
           });
@@ -106,41 +105,46 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create express route circuit authorizations', function (done) {
         var cmd = 'network express-route authorization create -g {group} -n {name} --key {authorizationKey} --circuit-name {expressRouteCircuitName}'.formatArgs(expressRouteCircuitAuthorizations);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('show should display express route circuit authorizations details', function (done) {
         var cmd = 'network express-route authorization show -g {group} -n {name} --circuit-name {expressRouteCircuitName}'.formatArgs(expressRouteCircuitAuthorizations);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('set should update express route circuit authorizations', function (done) {
         var cmd = 'network express-route authorization set -g {group} -n {name} --key {authorizationKeyNew} --circuit-name {expressRouteCircuitName}'.formatArgs(expressRouteCircuitAuthorizations);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('list should display all express route circuit authorizations in resource group', function (done) {
         var cmd = 'network express-route authorization list -g {group} --circuit-name {expressRouteCircuitName}'.formatArgs(expressRouteCircuitAuthorizations);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('delete should delete express route circuit authorizations', function (done) {
         var cmd = 'network express-route authorization delete -g {group} -n {name} --circuit-name {expressRouteCircuitName} --quiet'.formatArgs(expressRouteCircuitAuthorizations);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network express-route authorization show -g {group} -n {name} --circuit-name {expressRouteCircuitName}'.formatArgs(expressRouteCircuitAuthorizations);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-            done();
+
+            cmd = 'network express-route authorization list -g {group} --circuit-name {expressRouteCircuitName}'.formatArgs(expressRouteCircuitAuthorizations);
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              done();
+            });
           });
         });
       });

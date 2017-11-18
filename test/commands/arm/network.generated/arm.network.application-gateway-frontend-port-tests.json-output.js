@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-application-gateway-frontend-port-tests-generated',
   groupName = 'xplat-test-frontend-port',
@@ -99,17 +98,17 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+              if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
-                result.exitStatus.should.equal(0);
+              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
-                testUtils.executeCommand(suite, retry, cmd, function (result) {
-                  result.exitStatus.should.equal(0);
+                generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                  if (!testUtils.assertExitStatus(result, done)) return;
                   var cmd = 'network application-gateway create -g {1} -n {name} --servers {backendAddresses} --location {location} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --json'.formatArgs(applicationGateway, groupName);
-                  testUtils.executeCommand(suite, retry, cmd, function (result) {
-                    result.exitStatus.should.equal(0);
+                  generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                    if (!testUtils.assertExitStatus(result, done)) return;
                     done();
                   });
                 });
@@ -138,7 +137,7 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create frontend ports', function (done) {
         var cmd = 'network application-gateway frontend-port create -g {group} -n {name} --port {port} --gateway-name {applicationGatewayName} --json'.formatArgs(frontendPorts);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var parentOutput = JSON.parse(result.text);
           parentOutput.name.should.equal('applicationGatewayName');
@@ -150,7 +149,7 @@ describe('arm', function () {
       });
       it('show should display frontend ports details', function (done) {
         var cmd = 'network application-gateway frontend-port show -g {group} -n {name} --gateway-name {applicationGatewayName} --json'.formatArgs(frontendPorts);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(frontendPorts.name);
@@ -160,7 +159,7 @@ describe('arm', function () {
       });
       it('set should update frontend ports', function (done) {
         var cmd = 'network application-gateway frontend-port set -g {group} -n {name} --port {portNew} --gateway-name {applicationGatewayName} --json'.formatArgs(frontendPorts);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var parentOutput = JSON.parse(result.text);
           parentOutput.name.should.equal('applicationGatewayName');
@@ -172,7 +171,7 @@ describe('arm', function () {
       });
       it('list should display all frontend ports in resource group', function (done) {
         var cmd = 'network application-gateway frontend-port list -g {group} --gateway-name {applicationGatewayName} --json'.formatArgs(frontendPorts);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var outputs = JSON.parse(result.text);
           _.some(outputs, function (output) {
@@ -183,15 +182,24 @@ describe('arm', function () {
       });
       it('delete should delete frontend ports', function (done) {
         var cmd = 'network application-gateway frontend-port delete -g {group} -n {name} --gateway-name {applicationGatewayName} --quiet --json'.formatArgs(frontendPorts);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network application-gateway frontend-port show -g {group} -n {name} --gateway-name {applicationGatewayName} --json'.formatArgs(frontendPorts);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
-            done();
+
+            cmd = 'network application-gateway frontend-port list -g {group} --gateway-name {applicationGatewayName} --json'.formatArgs(frontendPorts);
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              var outputs = JSON.parse(result.text);
+              _.some(outputs, function (output) {
+                return output.name === frontendPorts.name;
+              }).should.be.false;
+              done();
+            });
           });
         });
       });

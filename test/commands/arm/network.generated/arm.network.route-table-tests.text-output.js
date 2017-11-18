@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-route-table-tests-generated',
   groupName = 'xplat-test-route-table',
@@ -92,41 +91,46 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create route tables', function (done) {
         var cmd = 'network route-table create -g {group} -n {name} --location {location}'.formatArgs(routeTables);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('show should display route tables details', function (done) {
         var cmd = 'network route-table show -g {group} -n {name}'.formatArgs(routeTables);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('set should update route tables', function (done) {
         var cmd = 'network route-table set -g {group} -n {name}'.formatArgs(routeTables);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('list should display all route tables in resource group', function (done) {
         var cmd = 'network route-table list -g {group}'.formatArgs(routeTables);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('delete should delete route tables', function (done) {
         var cmd = 'network route-table delete -g {group} -n {name} --quiet'.formatArgs(routeTables);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network route-table show -g {group} -n {name}'.formatArgs(routeTables);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
-            done();
+
+            cmd = 'network route-table list -g {group}'.formatArgs(routeTables);
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              done();
+            });
           });
         });
       });

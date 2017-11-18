@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-lb-frontend-ip-tests-generated',
   groupName = 'xplat-test-frontend-ip',
@@ -109,17 +108,17 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network lb create -g {1} -n {name} --location {location} --json'.formatArgs(loadBalancer, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+              if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
-                result.exitStatus.should.equal(0);
+              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
-                testUtils.executeCommand(suite, retry, cmd, function (result) {
-                  result.exitStatus.should.equal(0);
+                generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                  if (!testUtils.assertExitStatus(result, done)) return;
                   var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
-                  testUtils.executeCommand(suite, retry, cmd, function (result) {
-                    result.exitStatus.should.equal(0);
+                  generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                    if (!testUtils.assertExitStatus(result, done)) return;
                     done();
                   });
                 });
@@ -148,35 +147,35 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create frontend ip configurations', function (done) {
         var cmd = 'network lb frontend-ip create -g {group} -n {name} --zones {zones} --lb-name {loadBalancerName} --subnet-vnet-name {virtualNetworkName} --subnet-name {subnetName}'.formatArgs(frontendIPConfigurations);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('show should display frontend ip configurations details', function (done) {
         var cmd = 'network lb frontend-ip show -g {group} -n {name} --lb-name {loadBalancerName}'.formatArgs(frontendIPConfigurations);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('set should update frontend ip configurations', function (done) {
         var cmd = 'network lb frontend-ip set -g {group} -n {name} --lb-name {loadBalancerName}'.formatArgs(frontendIPConfigurations);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('list should display all frontend ip configurations in resource group', function (done) {
         var cmd = 'network lb frontend-ip list -g {group} --lb-name {loadBalancerName}'.formatArgs(frontendIPConfigurations);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           done();
         });
       });
       it('create should pass for remove private ip', function (done) {
         var cmd = 'network lb frontend-ip create -g {group} -n {name} --private-ip-address {privateIPAddress} --lb-name {loadBalancerName} --subnet-vnet-name {virtualNetworkName} --subnet-name {subnetName} --json'.formatArgs(removePrivateIp);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(removePrivateIp.name);
@@ -184,7 +183,7 @@ describe('arm', function () {
           output.subnet.id.should.containEql(removePrivateIp.subnetName);
 
           cmd = 'network lb frontend-ip set -g {group} -n {name} --private-ip-address {privateIPAddressNew} --lb-name {loadBalancerName} --json'.formatArgs(removePrivateIp);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text);
             output.name.should.equal(removePrivateIp.name);

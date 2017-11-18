@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-local-gateway-tests-generated',
   groupName = 'xplat-test-local-gateway',
@@ -135,11 +134,11 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create local network gateways', function (done) {
         var cmd = 'network local-gateway create -g {group} -n {name} --address-space {addressPrefixes} --ip-address {gatewayIpAddress} --asn {asn} --bgp-peering-address {bgpPeeringAddress} --peer-weight {peerWeight} --location {location} --json'.formatArgs(localNetworkGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(localNetworkGateways.name);
-          localNetworkGateways.addressPrefixes.split(',').forEach(function (item) { output.localNetworkAddressSpace.addressPrefixes.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(localNetworkGateways.addressPrefixes, ',').forEach(function (item) { output.localNetworkAddressSpace.addressPrefixes.should.containEql(item) });
           output.gatewayIpAddress.toLowerCase().should.equal(localNetworkGateways.gatewayIpAddress.toLowerCase());
           output.bgpSettings.asn.should.equal(parseInt(localNetworkGateways.asn, 10));
           output.bgpSettings.bgpPeeringAddress.toLowerCase().should.equal(localNetworkGateways.bgpPeeringAddress.toLowerCase());
@@ -149,11 +148,11 @@ describe('arm', function () {
       });
       it('show should display local network gateways details', function (done) {
         var cmd = 'network local-gateway show -g {group} -n {name} --json'.formatArgs(localNetworkGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(localNetworkGateways.name);
-          localNetworkGateways.addressPrefixes.split(',').forEach(function (item) { output.localNetworkAddressSpace.addressPrefixes.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(localNetworkGateways.addressPrefixes, ',').forEach(function (item) { output.localNetworkAddressSpace.addressPrefixes.should.containEql(item) });
           output.gatewayIpAddress.toLowerCase().should.equal(localNetworkGateways.gatewayIpAddress.toLowerCase());
           output.bgpSettings.asn.should.equal(parseInt(localNetworkGateways.asn, 10));
           output.bgpSettings.bgpPeeringAddress.toLowerCase().should.equal(localNetworkGateways.bgpPeeringAddress.toLowerCase());
@@ -163,12 +162,12 @@ describe('arm', function () {
       });
       it('set should update local network gateways', function (done) {
         var cmd = 'network local-gateway set -g {group} -n {name} --address-space {addressPrefixesNew} --ip-address {gatewayIpAddressNew} --asn {asnNew} --bgp-peering-address {bgpPeeringAddressNew} --peer-weight {peerWeightNew} --json'.formatArgs(localNetworkGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(localNetworkGateways.name);
-          localNetworkGateways.addressPrefixesNew.split(',').forEach(function (item) { output.localNetworkAddressSpace.addressPrefixes.should.containEql(item) });
-          localNetworkGateways.addressPrefixes.split(',').forEach(function (item) { output.localNetworkAddressSpace.addressPrefixes.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(localNetworkGateways.addressPrefixesNew, ',').forEach(function (item) { output.localNetworkAddressSpace.addressPrefixes.should.containEql(item) });
+          generatorUtils.splitStringByCharacter(localNetworkGateways.addressPrefixes, ',').forEach(function (item) { output.localNetworkAddressSpace.addressPrefixes.should.containEql(item) });
           output.gatewayIpAddress.toLowerCase().should.equal(localNetworkGateways.gatewayIpAddressNew.toLowerCase());
           output.bgpSettings.asn.should.equal(parseInt(localNetworkGateways.asnNew, 10));
           output.bgpSettings.bgpPeeringAddress.toLowerCase().should.equal(localNetworkGateways.bgpPeeringAddressNew.toLowerCase());
@@ -178,7 +177,7 @@ describe('arm', function () {
       });
       it('list should display all local network gateways in resource group', function (done) {
         var cmd = 'network local-gateway list -g {group} --json'.formatArgs(localNetworkGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var outputs = JSON.parse(result.text);
           _.some(outputs, function (output) {
@@ -189,42 +188,51 @@ describe('arm', function () {
       });
       it('delete should delete local network gateways', function (done) {
         var cmd = 'network local-gateway delete -g {group} -n {name} --quiet --json'.formatArgs(localNetworkGateways);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network local-gateway show -g {group} -n {name} --json'.formatArgs(localNetworkGateways);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
-            done();
+
+            cmd = 'network local-gateway list -g {group} --json'.formatArgs(localNetworkGateways);
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              var outputs = JSON.parse(result.text);
+              _.some(outputs, function (output) {
+                return output.name === localNetworkGateways.name;
+              }).should.be.false;
+              done();
+            });
           });
         });
       });
       it('create should fail for invalid prefixes', function (done) {
         var cmd = 'network local-gateway create -g {group} -n {name} --address-space {addressPrefixes} --ip-address {gatewayIpAddress} --location {location} --json'.formatArgs(invalidPrefixes);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for invalid ip address', function (done) {
         var cmd = 'network local-gateway create -g {group} -n {name} --ip-address {gatewayIpAddress} --location {location} --json'.formatArgs(invalidIPAddress);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for invalid bgp peering address', function (done) {
         var cmd = 'network local-gateway create -g {group} -n {name} --asn {asn} --bgp-peering-address {bgpPeeringAddress} --ip-address {gatewayIpAddress} --location {location} --json'.formatArgs(invalidBgpPeeringAddress);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });
       });
       it('create should fail for zero asn', function (done) {
         var cmd = 'network local-gateway create -g {group} -n {name} --asn {asn} --ip-address {gatewayIpAddress} --location {location} --json'.formatArgs(zeroAsn);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.not.equal(0);
           done();
         });

@@ -33,7 +33,6 @@ var networkTestUtil = new (require('../../../util/networkTestUtil'))();
 
 var generatorUtils = require('../../../../lib/util/generatorUtils');
 var profile = require('../../../../lib/util/profile');
-var $ = utils.getLocaleString;
 
 var testPrefix = 'arm-network-application-gateway-address-pool-tests-generated',
   groupName = 'xplat-test-address-pool',
@@ -98,17 +97,17 @@ describe('arm', function () {
         if (!suite.isPlayback()) {
           networkTestUtil.createGroup(groupName, location, suite, function () {
             var cmd = 'network vnet create -g {1} -n {name} --location {location} --json'.formatArgs(virtualNetwork, groupName);
-            testUtils.executeCommand(suite, retry, cmd, function (result) {
-              result.exitStatus.should.equal(0);
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+              if (!testUtils.assertExitStatus(result, done)) return;
               var cmd = 'network vnet subnet create -g {1} -n {name} --address-prefix {addressPrefix} --vnet-name {virtualNetworkName} --json'.formatArgs(subnet, groupName);
-              testUtils.executeCommand(suite, retry, cmd, function (result) {
-                result.exitStatus.should.equal(0);
+              generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                if (!testUtils.assertExitStatus(result, done)) return;
                 var cmd = 'network public-ip create -g {1} -n {name} --location {location} --json'.formatArgs(publicIPAddress, groupName);
-                testUtils.executeCommand(suite, retry, cmd, function (result) {
-                  result.exitStatus.should.equal(0);
+                generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                  if (!testUtils.assertExitStatus(result, done)) return;
                   var cmd = 'network application-gateway create -g {1} -n {name} --servers {backendAddresses} --location {location} --vnet-name {virtualNetworkName} --subnet-name {subnetName} --public-ip-name {publicIPAddressName} --json'.formatArgs(applicationGateway, groupName);
-                  testUtils.executeCommand(suite, retry, cmd, function (result) {
-                    result.exitStatus.should.equal(0);
+                  generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+                    if (!testUtils.assertExitStatus(result, done)) return;
                     done();
                   });
                 });
@@ -137,29 +136,29 @@ describe('arm', function () {
       this.timeout(testTimeout);
       it('create should create backend address pools', function (done) {
         var cmd = 'network application-gateway address-pool create -g {group} -n {name} --servers {backendAddresses} --gateway-name {applicationGatewayName} --json'.formatArgs(backendAddressPools);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var parentOutput = JSON.parse(result.text);
           parentOutput.name.should.equal('applicationGatewayName');
           var output = utils.findFirstCaseIgnore(parentOutput.backendAddressPools, {name: 'backendAddressPoolName'});
           output.name.should.equal(backendAddressPools.name);
-          backendAddressPools.backendAddresses.split(',').forEach(function (item) { output.backendAddresses.should.containEql({ ipAddress : item }) });
+          generatorUtils.splitStringByCharacter(backendAddressPools.backendAddresses, ',').forEach(function (item) { output.backendAddresses.should.containEql({ ipAddress : item }) });
           done();
         });
       });
       it('show should display backend address pools details', function (done) {
         var cmd = 'network application-gateway address-pool show -g {group} -n {name} --gateway-name {applicationGatewayName} --json'.formatArgs(backendAddressPools);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var output = JSON.parse(result.text);
           output.name.should.equal(backendAddressPools.name);
-          backendAddressPools.backendAddresses.split(',').forEach(function (item) { output.backendAddresses.should.containEql({ ipAddress : item }) });
+          generatorUtils.splitStringByCharacter(backendAddressPools.backendAddresses, ',').forEach(function (item) { output.backendAddresses.should.containEql({ ipAddress : item }) });
           done();
         });
       });
       it('list should display all backend address pools in resource group', function (done) {
         var cmd = 'network application-gateway address-pool list -g {group} --gateway-name {applicationGatewayName} --json'.formatArgs(backendAddressPools);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
           var outputs = JSON.parse(result.text);
           _.some(outputs, function (output) {
@@ -170,15 +169,24 @@ describe('arm', function () {
       });
       it('delete should delete backend address pools', function (done) {
         var cmd = 'network application-gateway address-pool delete -g {group} -n {name} --gateway-name {applicationGatewayName} --quiet --json'.formatArgs(backendAddressPools);
-        testUtils.executeCommand(suite, retry, cmd, function (result) {
+        generatorUtils.executeCommand(suite, retry, cmd, function (result) {
           result.exitStatus.should.equal(0);
 
           cmd = 'network application-gateway address-pool show -g {group} -n {name} --gateway-name {applicationGatewayName} --json'.formatArgs(backendAddressPools);
-          testUtils.executeCommand(suite, retry, cmd, function (result) {
+          generatorUtils.executeCommand(suite, retry, cmd, function (result) {
             result.exitStatus.should.equal(0);
             var output = JSON.parse(result.text || '{}');
             output.should.be.empty;
-            done();
+
+            cmd = 'network application-gateway address-pool list -g {group} --gateway-name {applicationGatewayName} --json'.formatArgs(backendAddressPools);
+            generatorUtils.executeCommand(suite, retry, cmd, function (result) {
+              result.exitStatus.should.equal(0);
+              var outputs = JSON.parse(result.text);
+              _.some(outputs, function (output) {
+                return output.name === backendAddressPools.name;
+              }).should.be.false;
+              done();
+            });
           });
         });
       });

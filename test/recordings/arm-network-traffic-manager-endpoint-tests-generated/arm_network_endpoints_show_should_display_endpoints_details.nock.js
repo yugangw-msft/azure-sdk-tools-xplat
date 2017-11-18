@@ -6,8 +6,8 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
-    id: '2c224e7e-3ef5-431d-a57b-e71f4662e3a6',
-    name: 'Node CLI Test',
+    id: '947d47b4-7883-4bb9-9d85-c5e8e2f572ce',
+    name: 'nrptest58.westus.validation.partner',
     user: {
       name: 'user@domain.example',
       type: 'user'
@@ -29,38 +29,38 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-endpoint/providers/Microsoft.Network/trafficmanagerprofiles/profileName/ExternalEndpoints/endpointName?api-version=2017-05-01')
-  .reply(200, "{\"id\":\"\\/subscriptions\\/2c224e7e-3ef5-431d-a57b-e71f4662e3a6\\/resourceGroups\\/xplat-test-endpoint\\/providers\\/Microsoft.Network\\/trafficManagerProfiles\\/profileName\\/externalEndpoints\\/endpointName\",\"name\":\"endpointName\",\"type\":\"Microsoft.Network\\/trafficManagerProfiles\\/externalEndpoints\",\"properties\":{\"endpointStatus\":\"Enabled\",\"endpointMonitorStatus\":\"CheckingEndpoint\",\"target\":\"test-profile-dns.azure.com\",\"weight\":100,\"priority\":200,\"endpointLocation\":\"West US\",\"geoMapping\":[\"RE\",\"GEO-NA\"]}}", { 'cache-control': 'private',
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-endpoint/providers/Microsoft.Network/trafficmanagerprofiles/profileName/ExternalEndpoints/endpointName?api-version=2017-05-01')
+  .reply(200, "{\"id\":\"\\/subscriptions\\/947d47b4-7883-4bb9-9d85-c5e8e2f572ce\\/resourceGroups\\/xplat-test-endpoint\\/providers\\/Microsoft.Network\\/trafficManagerProfiles\\/profileName\\/externalEndpoints\\/endpointName\",\"name\":\"endpointName\",\"type\":\"Microsoft.Network\\/trafficManagerProfiles\\/externalEndpoints\",\"properties\":{\"endpointStatus\":\"Enabled\",\"endpointMonitorStatus\":\"CheckingEndpoint\",\"target\":\"test-profile-dns.azure.com\",\"weight\":100,\"priority\":200,\"endpointLocation\":\"West US\",\"geoMapping\":[\"RE\",\"GEO-NA\"]}}", { 'cache-control': 'private',
   'content-length': '500',
   'content-type': 'application/json; charset=utf-8',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': 'df72dd8e-28ba-4f21-9ca3-51991b190dcf',
+  'x-ms-request-id': 'eee20e1a-3b6d-4ce4-8a24-7725472a8111',
   server: 'Microsoft-IIS/8.5',
   'x-aspnet-version': '4.0.30319',
   'x-powered-by': 'ASP.NET',
-  'x-ms-ratelimit-remaining-subscription-reads': '14999',
-  'x-ms-correlation-request-id': '8c1fbe17-bb86-4157-a54f-67f8ea73ffa1',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170717T133501Z:8c1fbe17-bb86-4157-a54f-67f8ea73ffa1',
-  date: 'Mon, 17 Jul 2017 13:35:00 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14997',
+  'x-ms-correlation-request-id': 'fd4dd988-b5c1-4a9d-b046-c623c05e7c28',
+  'x-ms-routing-request-id': 'WESTEUROPE:20171017T085521Z:fd4dd988-b5c1-4a9d-b046-c623c05e7c28',
+  date: 'Tue, 17 Oct 2017 08:55:21 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/2c224e7e-3ef5-431d-a57b-e71f4662e3a6/resourceGroups/xplat-test-endpoint/providers/Microsoft.Network/trafficmanagerprofiles/profileName/ExternalEndpoints/endpointName?api-version=2017-05-01')
-  .reply(200, "{\"id\":\"\\/subscriptions\\/2c224e7e-3ef5-431d-a57b-e71f4662e3a6\\/resourceGroups\\/xplat-test-endpoint\\/providers\\/Microsoft.Network\\/trafficManagerProfiles\\/profileName\\/externalEndpoints\\/endpointName\",\"name\":\"endpointName\",\"type\":\"Microsoft.Network\\/trafficManagerProfiles\\/externalEndpoints\",\"properties\":{\"endpointStatus\":\"Enabled\",\"endpointMonitorStatus\":\"CheckingEndpoint\",\"target\":\"test-profile-dns.azure.com\",\"weight\":100,\"priority\":200,\"endpointLocation\":\"West US\",\"geoMapping\":[\"RE\",\"GEO-NA\"]}}", { 'cache-control': 'private',
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-endpoint/providers/Microsoft.Network/trafficmanagerprofiles/profileName/ExternalEndpoints/endpointName?api-version=2017-05-01')
+  .reply(200, "{\"id\":\"\\/subscriptions\\/947d47b4-7883-4bb9-9d85-c5e8e2f572ce\\/resourceGroups\\/xplat-test-endpoint\\/providers\\/Microsoft.Network\\/trafficManagerProfiles\\/profileName\\/externalEndpoints\\/endpointName\",\"name\":\"endpointName\",\"type\":\"Microsoft.Network\\/trafficManagerProfiles\\/externalEndpoints\",\"properties\":{\"endpointStatus\":\"Enabled\",\"endpointMonitorStatus\":\"CheckingEndpoint\",\"target\":\"test-profile-dns.azure.com\",\"weight\":100,\"priority\":200,\"endpointLocation\":\"West US\",\"geoMapping\":[\"RE\",\"GEO-NA\"]}}", { 'cache-control': 'private',
   'content-length': '500',
   'content-type': 'application/json; charset=utf-8',
   'x-content-type-options': 'nosniff',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
-  'x-ms-request-id': 'df72dd8e-28ba-4f21-9ca3-51991b190dcf',
+  'x-ms-request-id': 'eee20e1a-3b6d-4ce4-8a24-7725472a8111',
   server: 'Microsoft-IIS/8.5',
   'x-aspnet-version': '4.0.30319',
   'x-powered-by': 'ASP.NET',
-  'x-ms-ratelimit-remaining-subscription-reads': '14999',
-  'x-ms-correlation-request-id': '8c1fbe17-bb86-4157-a54f-67f8ea73ffa1',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170717T133501Z:8c1fbe17-bb86-4157-a54f-67f8ea73ffa1',
-  date: 'Mon, 17 Jul 2017 13:35:00 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14997',
+  'x-ms-correlation-request-id': 'fd4dd988-b5c1-4a9d-b046-c623c05e7c28',
+  'x-ms-routing-request-id': 'WESTEUROPE:20171017T085521Z:fd4dd988-b5c1-4a9d-b046-c623c05e7c28',
+  date: 'Tue, 17 Oct 2017 08:55:21 GMT',
   connection: 'close' });
  return result; }]];

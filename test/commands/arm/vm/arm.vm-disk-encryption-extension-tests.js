@@ -22,7 +22,7 @@ var profile = require('../../../../lib/util/profile');
 var testUtils = require('../../../util/util');
 var CLITest = require('../../../framework/arm-cli-test');
 var testprefix = 'arm-cli-vm-disk-encryption-extension-tests';
-var groupPrefix = 'xplatTestADE';
+var groupPrefix = 'xplatTestADEOneOff';
 var VMTestUtil = require('../../../util/vmTestUtil');
 var requiredEnvironment = [{
   name: 'AZURE_VM_TEST_LOCATION',
@@ -35,8 +35,9 @@ var requiredEnvironment = [{
 var groupName,
   vmPrefix = 'xplattestvm',
   nicName = 'xplattestnic',
-  vaultName = 'xplattestkv',
-  aadAppName = 'xplattestapp',
+  vaultName = 'xplattestkvoneoff',
+  vaultName2 = 'xplattestkv2oneoff',
+  aadAppName = 'xplattestapponeoff',
   aadClientSecret = 'xPL4t',
   aadClientId,
   identifierUri,
@@ -55,6 +56,8 @@ var groupName,
   subscriptionId,
   diskEncryptionKeyVaultId,
   diskEncryptionKeySecretUrl,
+  diskEncryptionKeyVaultId2,
+  diskEncryptionKeySecretUrl2,
   sshcert,
   winImageUrn = 'MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:latest';
 
@@ -72,6 +75,7 @@ describe('arm', function() {
         vmPrefix = suite.isMocked ? vmPrefix : suite.generateId(vmPrefix, null);
         nicName = suite.isMocked ? nicName : suite.generateId(nicName, null);
         vaultName = suite.isMocked ? vaultName : suite.generateId(vaultName, null);
+        vaultName2 = suite.isMocked ? vaultName2 : suite.generateId(vaultName2, null);
         aadAppName = suite.isMocked ? aadAppName : suite.generateId(aadAppName, null);
         identifierUri = util.format('http://localhost:8080/%s', aadAppName);
         aadClientSecret = suite.isMocked ? aadClientSecret : suite.generateId(aadClientSecret, null);
@@ -137,7 +141,16 @@ describe('arm', function() {
                 // Prepare the vault for encryption
                 suite.execute('keyvault set-policy -u %s --spn %s --perms-to-keys ["all"] --perms-to-secrets ["all"] --enabled-for-disk-encryption true --json', vaultName, spn, function (result) {
                   result.exitStatus.should.equal(0);
-                  done();
+                  suite.execute('keyvault create %s --resource-group %s --location %s --json', vaultName2, groupName, location, function (result) {
+                    result.exitStatus.should.equal(0);
+                    var kvResources2 = JSON.parse(result.text);
+                    diskEncryptionKeyVaultId2 = kvResources2.id;
+                    diskEncryptionKeySecretUrl2 = kvResources2.properties.vaultUri;
+                    suite.execute('keyvault set-policy -u %s --spn %s --perms-to-keys ["all"] --perms-to-secrets ["all"] --enabled-for-disk-encryption true --json', vaultName2, spn, function (result) {
+                      result.exitStatus.should.equal(0);
+                      done();
+                    });
+                  });
                 });
               });
             });
@@ -197,6 +210,27 @@ describe('arm', function() {
           var allResources = JSON.parse(result.text);
           allResources.osVolumeEncrypted.should.equal('Encrypted');
           allResources.dataVolumesEncrypted.should.equal('Encrypted');
+          allResources.osVolumeEncryptionSettings.diskEncryptionKey.sourceVault.id.should.endWith(vaultName);
+          done();
+        });
+      });
+
+      it('should update encryption settings on the Windows VM', function(done) {
+        var cmd = util.format('vm enable-disk-encryption -g %s -n %s -a %s -p %s -k %s -r %s --quiet --json', groupName, vmPrefix, spn, aadClientSecret, diskEncryptionKeySecretUrl2, diskEncryptionKeyVaultId2).split(' ');
+        testUtils.executeCommand(suite, retry, cmd, function(result) {
+          result.exitStatus.should.equal(0);
+          done();
+        });
+      });
+
+      it('should show the updated encrypted settings for the VM', function(done) {
+        var cmd = util.format('vm show-disk-encryption-status %s %s --json', groupName, vmPrefix).split(' ');
+        testUtils.executeCommand(suite, retry, cmd, function(result) {
+          result.exitStatus.should.equal(0);
+          var allResources = JSON.parse(result.text);
+          allResources.osVolumeEncrypted.should.equal('Encrypted');
+          allResources.dataVolumesEncrypted.should.equal('Encrypted');
+          allResources.osVolumeEncryptionSettings.diskEncryptionKey.sourceVault.id.should.endWith(vaultName2);
           done();
         });
       });

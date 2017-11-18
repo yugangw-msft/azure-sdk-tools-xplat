@@ -23,7 +23,7 @@ exports.getMockedProfile = function () {
 };
 
 exports.setEnvironment = function() {
-  process.env['AZURE_VM_TEST_LOCATION'] = 'brazilsouth';
+  process.env['AZURE_VM_TEST_LOCATION'] = 'westus';
 };
 
 exports.scopes = [[function (nock) { 
@@ -35,13 +35,13 @@ nock('http://management.azure.com:443')
   'content-length': '282',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '295ed5f4-edde-4786-9fc5-23ceb7a4a8ec',
+  'x-ms-request-id': '6101eb8e-d6eb-4f46-8164-ddb2665b31e1',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14989',
-  'x-ms-correlation-request-id': 'b100ba76-763e-4471-95f8-d0bdc43e55b0',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T113250Z:b100ba76-763e-4471-95f8-d0bdc43e55b0',
-  date: 'Fri, 01 Sep 2017 11:32:50 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14998',
+  'x-ms-correlation-request-id': '2bfd588b-0147-4ea6-a2b6-a9ba477c50a0',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170927T113330Z:2bfd588b-0147-4ea6-a2b6-a9ba477c50a0',
+  date: 'Wed, 27 Sep 2017 11:33:30 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
@@ -53,12 +53,12 @@ nock('https://management.azure.com:443')
   'content-length': '282',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '295ed5f4-edde-4786-9fc5-23ceb7a4a8ec',
+  'x-ms-request-id': '6101eb8e-d6eb-4f46-8164-ddb2665b31e1',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14989',
-  'x-ms-correlation-request-id': 'b100ba76-763e-4471-95f8-d0bdc43e55b0',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T113250Z:b100ba76-763e-4471-95f8-d0bdc43e55b0',
-  date: 'Fri, 01 Sep 2017 11:32:50 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14998',
+  'x-ms-correlation-request-id': '2bfd588b-0147-4ea6-a2b6-a9ba477c50a0',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170927T113330Z:2bfd588b-0147-4ea6-a2b6-a9ba477c50a0',
+  date: 'Wed, 27 Sep 2017 11:33:30 GMT',
   connection: 'close' });
  return result; }]];

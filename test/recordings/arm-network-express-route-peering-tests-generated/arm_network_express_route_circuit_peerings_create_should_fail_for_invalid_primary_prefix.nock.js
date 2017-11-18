@@ -23,7 +23,7 @@ exports.getMockedProfile = function () {
 };
 
 exports.setEnvironment = function() {
-  process.env['AZURE_VM_TEST_LOCATION'] = 'brazilsouth';
+  process.env['AZURE_VM_TEST_LOCATION'] = 'westus';
 };
 
 exports.scopes = [[function (nock) { 
@@ -35,13 +35,13 @@ nock('http://management.azure.com:443')
   'content-length': '294',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '373c65be-9550-4e11-b4f6-090a1aa95cec',
+  'x-ms-request-id': '80239e15-8a5f-4c2c-a109-3e9b5e9caf57',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14987',
-  'x-ms-correlation-request-id': 'bcc9797d-13e4-476b-9564-ecfe85640a2b',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T113252Z:bcc9797d-13e4-476b-9564-ecfe85640a2b',
-  date: 'Fri, 01 Sep 2017 11:32:52 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14997',
+  'x-ms-correlation-request-id': '077aa306-3161-4959-954b-4f6f266df7cf',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170927T113331Z:077aa306-3161-4959-954b-4f6f266df7cf',
+  date: 'Wed, 27 Sep 2017 11:33:30 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
@@ -53,13 +53,13 @@ nock('https://management.azure.com:443')
   'content-length': '294',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '373c65be-9550-4e11-b4f6-090a1aa95cec',
+  'x-ms-request-id': '80239e15-8a5f-4c2c-a109-3e9b5e9caf57',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-reads': '14987',
-  'x-ms-correlation-request-id': 'bcc9797d-13e4-476b-9564-ecfe85640a2b',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T113252Z:bcc9797d-13e4-476b-9564-ecfe85640a2b',
-  date: 'Fri, 01 Sep 2017 11:32:52 GMT',
+  'x-ms-ratelimit-remaining-subscription-reads': '14997',
+  'x-ms-correlation-request-id': '077aa306-3161-4959-954b-4f6f266df7cf',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170927T113331Z:077aa306-3161-4959-954b-4f6f266df7cf',
+  date: 'Wed, 27 Sep 2017 11:33:30 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
@@ -67,18 +67,18 @@ var result =
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
 .put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-peering/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/peerings/AzurePrivatePeering?api-version=2017-09-01', '*')
-  .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"ParentResourceIsInFailedState\",\r\n    \"message\": \"PUT operation on child resource /subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-peering/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/peerings/AzurePrivatePeering is blocked because last operation (7546806f-f9ab-43d1-9f78-53dc5a4bf14d) on parent resource failed leaving it in failed state. Run PUT operation on the parent, then retry operation on the child.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
+  .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"ParentResourceIsInFailedState\",\r\n    \"message\": \"PUT operation on child resource /subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-peering/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/peerings/AzurePrivatePeering is blocked because last operation (0bea16f1-6b63-478e-aa27-ce5987e81210) on parent resource failed leaving it in failed state. Run PUT operation on the parent, then retry operation on the child.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '522',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '18cd4d62-9d4b-4e46-9861-df344f2c9248',
+  'x-ms-request-id': '014c4e1f-861a-45df-a6f9-bdd14fd4985b',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-writes': '1196',
-  'x-ms-correlation-request-id': '530079c4-d2bd-4c22-8270-6df5d41f2a90',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T113253Z:530079c4-d2bd-4c22-8270-6df5d41f2a90',
-  date: 'Fri, 01 Sep 2017 11:32:53 GMT',
+  'x-ms-ratelimit-remaining-subscription-writes': '1198',
+  'x-ms-correlation-request-id': 'f34b7a73-1b9f-4ade-a2df-501a13ab9e61',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170927T113333Z:f34b7a73-1b9f-4ade-a2df-501a13ab9e61',
+  date: 'Wed, 27 Sep 2017 11:33:32 GMT',
   connection: 'close' });
  return result; },
 function (nock) { 
@@ -86,17 +86,17 @@ var result =
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
 .put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-peering/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/peerings/AzurePrivatePeering?api-version=2017-09-01', '*')
-  .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"ParentResourceIsInFailedState\",\r\n    \"message\": \"PUT operation on child resource /subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-peering/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/peerings/AzurePrivatePeering is blocked because last operation (7546806f-f9ab-43d1-9f78-53dc5a4bf14d) on parent resource failed leaving it in failed state. Run PUT operation on the parent, then retry operation on the child.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
+  .reply(400, "{\r\n  \"error\": {\r\n    \"code\": \"ParentResourceIsInFailedState\",\r\n    \"message\": \"PUT operation on child resource /subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-peering/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/peerings/AzurePrivatePeering is blocked because last operation (0bea16f1-6b63-478e-aa27-ce5987e81210) on parent resource failed leaving it in failed state. Run PUT operation on the parent, then retry operation on the child.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '522',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  'x-ms-request-id': '18cd4d62-9d4b-4e46-9861-df344f2c9248',
+  'x-ms-request-id': '014c4e1f-861a-45df-a6f9-bdd14fd4985b',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
-  'x-ms-ratelimit-remaining-subscription-writes': '1196',
-  'x-ms-correlation-request-id': '530079c4-d2bd-4c22-8270-6df5d41f2a90',
-  'x-ms-routing-request-id': 'WESTEUROPE:20170901T113253Z:530079c4-d2bd-4c22-8270-6df5d41f2a90',
-  date: 'Fri, 01 Sep 2017 11:32:53 GMT',
+  'x-ms-ratelimit-remaining-subscription-writes': '1198',
+  'x-ms-correlation-request-id': 'f34b7a73-1b9f-4ade-a2df-501a13ab9e61',
+  'x-ms-routing-request-id': 'WESTEUROPE:20170927T113333Z:f34b7a73-1b9f-4ade-a2df-501a13ab9e61',
+  date: 'Wed, 27 Sep 2017 11:33:32 GMT',
   connection: 'close' });
  return result; }]];
