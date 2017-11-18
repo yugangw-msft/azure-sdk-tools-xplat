@@ -1,19 +1,24 @@
-CLI Version: **0.9.X**
-OS Type: Mac / Win / Linux (Ubuntu, RedHat, etc.)
-Installation via:  npm / brew / win-or-mac installer / docker / github repo
+**If you are having an issue with commands related to an ARM based service, then please consider using [Azure CLI 2.0](https://github.com/Azure/azure-cli), the preferred choice for ARM (Azure Resource Manager) commands, rather than filing an issue in this repo.**
 
-Mode: **ARM / ASM**
+CLI 2.0 migration guide can be found [here](https://aka.ms/move2cli2).
 
-Environment: **AzureCloud/Azure China Cloud/US Government/Blackforest/Azure Stack**
 
-Description:
+- CLI Version: **0.10.X**
+- OS Type: Mac / Win / Linux (Ubuntu, RedHat, etc.)
+- Installation via:  npm / brew / win-or-mac installer / docker / github repo
+
+- Mode: **ARM / ASM**
+
+- Environment: **AzureCloud/Azure China Cloud/US Government/Blackforest/Azure Stack**
+
+- Description:
 `azure vm show` command doesn't output VM name.
 
-Steps to reproduce:
+- Steps to reproduce:
 1) Run `azure vm create ...`
 2) Then run `azure vm show ...`
 
-Error stack trace:
+- Error stack trace:
 
 **Please paste the content of ~/.azure/azure.err or C:\Users\username\\.azure\azure.err over here**
 
