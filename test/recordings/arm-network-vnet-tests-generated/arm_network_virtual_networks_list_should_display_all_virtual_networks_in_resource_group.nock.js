@@ -29,7 +29,7 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-vnet/providers/Microsoft.Network/virtualNetworks?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-vnet/providers/Microsoft.Network/virtualNetworks?api-version=2017-10-01')
   .reply(200, "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"virtualNetworkName\",\r\n      \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-vnet/providers/Microsoft.Network/virtualNetworks/virtualNetworkName\",\r\n      \"etag\": \"W/\\\"bc498c39-9cd6-4ec4-8b0f-ecf2b6c710f7\\\"\",\r\n      \"type\": \"Microsoft.Network/virtualNetworks\",\r\n      \"location\": \"westcentralus\",\r\n      \"properties\": {\r\n        \"provisioningState\": \"Succeeded\",\r\n        \"resourceGuid\": \"ecde1d8d-b8b3-49f5-9fda-3139885f730d\",\r\n        \"addressSpace\": {\r\n          \"addressPrefixes\": [\r\n            \"10.0.0.0/8\",\r\n            \"11.0.0.0/16\"\r\n          ]\r\n        },\r\n        \"dhcpOptions\": {\r\n          \"dnsServers\": [\r\n            \"10.0.0.42\",\r\n            \"10.0.0.32\"\r\n          ]\r\n        },\r\n        \"subnets\": [],\r\n        \"virtualNetworkPeerings\": [],\r\n        \"enableDdosProtection\": true,\r\n        \"enableVmProtection\": true\r\n      }\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '930',
@@ -47,7 +47,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-vnet/providers/Microsoft.Network/virtualNetworks?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-vnet/providers/Microsoft.Network/virtualNetworks?api-version=2017-10-01')
   .reply(200, "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"virtualNetworkName\",\r\n      \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-vnet/providers/Microsoft.Network/virtualNetworks/virtualNetworkName\",\r\n      \"etag\": \"W/\\\"bc498c39-9cd6-4ec4-8b0f-ecf2b6c710f7\\\"\",\r\n      \"type\": \"Microsoft.Network/virtualNetworks\",\r\n      \"location\": \"westcentralus\",\r\n      \"properties\": {\r\n        \"provisioningState\": \"Succeeded\",\r\n        \"resourceGuid\": \"ecde1d8d-b8b3-49f5-9fda-3139885f730d\",\r\n        \"addressSpace\": {\r\n          \"addressPrefixes\": [\r\n            \"10.0.0.0/8\",\r\n            \"11.0.0.0/16\"\r\n          ]\r\n        },\r\n        \"dhcpOptions\": {\r\n          \"dnsServers\": [\r\n            \"10.0.0.42\",\r\n            \"10.0.0.32\"\r\n          ]\r\n        },\r\n        \"subnets\": [],\r\n        \"virtualNetworkPeerings\": [],\r\n        \"enableDdosProtection\": true,\r\n        \"enableVmProtection\": true\r\n      }\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '930',

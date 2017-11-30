@@ -29,7 +29,7 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-10-01')
   .reply(404, "{\r\n  \"error\": {\r\n    \"code\": \"NotFound\",\r\n    \"message\": \"Resource /subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName not found.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '299',
@@ -47,7 +47,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-10-01')
   .reply(404, "{\r\n  \"error\": {\r\n    \"code\": \"NotFound\",\r\n    \"message\": \"Resource /subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName not found.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '299',
@@ -66,7 +66,7 @@ function (nock) {
 var result = 
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-09-01', '*')
+.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-10-01', '*')
   .reply(201, "{\r\n  \"name\": \"singularPrefixesName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName\",\r\n  \"etag\": \"W/\\\"15348ade-8dd9-48eb-973c-6ceb106c9091\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Updating\",\r\n    \"description\": \"testDesc\",\r\n    \"protocol\": \"*\",\r\n    \"sourcePortRange\": \"1025-1030\",\r\n    \"destinationPortRange\": \"4242\",\r\n    \"sourceAddressPrefix\": \"10.0.0.0/16\",\r\n    \"destinationAddressPrefix\": \"11.0.0.0/24\",\r\n    \"access\": \"Allow\",\r\n    \"priority\": 1470,\r\n    \"direction\": \"Inbound\",\r\n    \"sourcePortRanges\": [],\r\n    \"destinationPortRanges\": [],\r\n    \"sourceAddressPrefixes\": [],\r\n    \"destinationAddressPrefixes\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '793',
@@ -74,7 +74,7 @@ nock('http://management.azure.com:443')
   expires: '-1',
   'retry-after': '10',
   'x-ms-request-id': '1bb6b4d4-6f1d-4136-b8ce-069c4bd29678',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operations/1bb6b4d4-6f1d-4136-b8ce-069c4bd29678?api-version=2017-09-01',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operations/1bb6b4d4-6f1d-4136-b8ce-069c4bd29678?api-version=2017-10-01',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1197',
@@ -87,7 +87,7 @@ function (nock) {
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-09-01', '*')
+.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-10-01', '*')
   .reply(201, "{\r\n  \"name\": \"singularPrefixesName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName\",\r\n  \"etag\": \"W/\\\"15348ade-8dd9-48eb-973c-6ceb106c9091\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Updating\",\r\n    \"description\": \"testDesc\",\r\n    \"protocol\": \"*\",\r\n    \"sourcePortRange\": \"1025-1030\",\r\n    \"destinationPortRange\": \"4242\",\r\n    \"sourceAddressPrefix\": \"10.0.0.0/16\",\r\n    \"destinationAddressPrefix\": \"11.0.0.0/24\",\r\n    \"access\": \"Allow\",\r\n    \"priority\": 1470,\r\n    \"direction\": \"Inbound\",\r\n    \"sourcePortRanges\": [],\r\n    \"destinationPortRanges\": [],\r\n    \"sourceAddressPrefixes\": [],\r\n    \"destinationAddressPrefixes\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '793',
@@ -95,7 +95,7 @@ nock('https://management.azure.com:443')
   expires: '-1',
   'retry-after': '10',
   'x-ms-request-id': '1bb6b4d4-6f1d-4136-b8ce-069c4bd29678',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operations/1bb6b4d4-6f1d-4136-b8ce-069c4bd29678?api-version=2017-09-01',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operations/1bb6b4d4-6f1d-4136-b8ce-069c4bd29678?api-version=2017-10-01',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1197',
@@ -107,7 +107,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operations/1bb6b4d4-6f1d-4136-b8ce-069c4bd29678?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operations/1bb6b4d4-6f1d-4136-b8ce-069c4bd29678?api-version=2017-10-01')
   .reply(200, "{\r\n  \"status\": \"Succeeded\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '29',
@@ -125,7 +125,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operations/1bb6b4d4-6f1d-4136-b8ce-069c4bd29678?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operations/1bb6b4d4-6f1d-4136-b8ce-069c4bd29678?api-version=2017-10-01')
   .reply(200, "{\r\n  \"status\": \"Succeeded\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '29',
@@ -143,7 +143,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-10-01')
   .reply(200, "{\r\n  \"name\": \"singularPrefixesName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName\",\r\n  \"etag\": \"W/\\\"7cfd505c-4f76-48f8-8059-8bb183aa850d\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"description\": \"testDesc\",\r\n    \"protocol\": \"*\",\r\n    \"sourcePortRange\": \"1025-1030\",\r\n    \"destinationPortRange\": \"4242\",\r\n    \"sourceAddressPrefix\": \"10.0.0.0/16\",\r\n    \"destinationAddressPrefix\": \"11.0.0.0/24\",\r\n    \"access\": \"Allow\",\r\n    \"priority\": 1470,\r\n    \"direction\": \"Inbound\",\r\n    \"sourcePortRanges\": [],\r\n    \"destinationPortRanges\": [],\r\n    \"sourceAddressPrefixes\": [],\r\n    \"destinationAddressPrefixes\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '794',
@@ -162,7 +162,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-10-01')
   .reply(200, "{\r\n  \"name\": \"singularPrefixesName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName\",\r\n  \"etag\": \"W/\\\"7cfd505c-4f76-48f8-8059-8bb183aa850d\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"description\": \"testDesc\",\r\n    \"protocol\": \"*\",\r\n    \"sourcePortRange\": \"1025-1030\",\r\n    \"destinationPortRange\": \"4242\",\r\n    \"sourceAddressPrefix\": \"10.0.0.0/16\",\r\n    \"destinationAddressPrefix\": \"11.0.0.0/24\",\r\n    \"access\": \"Allow\",\r\n    \"priority\": 1470,\r\n    \"direction\": \"Inbound\",\r\n    \"sourcePortRanges\": [],\r\n    \"destinationPortRanges\": [],\r\n    \"sourceAddressPrefixes\": [],\r\n    \"destinationAddressPrefixes\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '794',
@@ -181,7 +181,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-10-01')
   .reply(200, "{\r\n  \"name\": \"singularPrefixesName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName\",\r\n  \"etag\": \"W/\\\"7cfd505c-4f76-48f8-8059-8bb183aa850d\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"description\": \"testDesc\",\r\n    \"protocol\": \"*\",\r\n    \"sourcePortRange\": \"1025-1030\",\r\n    \"destinationPortRange\": \"4242\",\r\n    \"sourceAddressPrefix\": \"10.0.0.0/16\",\r\n    \"destinationAddressPrefix\": \"11.0.0.0/24\",\r\n    \"access\": \"Allow\",\r\n    \"priority\": 1470,\r\n    \"direction\": \"Inbound\",\r\n    \"sourcePortRanges\": [],\r\n    \"destinationPortRanges\": [],\r\n    \"sourceAddressPrefixes\": [],\r\n    \"destinationAddressPrefixes\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '794',
@@ -200,7 +200,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-10-01')
   .reply(200, "{\r\n  \"name\": \"singularPrefixesName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName\",\r\n  \"etag\": \"W/\\\"7cfd505c-4f76-48f8-8059-8bb183aa850d\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"description\": \"testDesc\",\r\n    \"protocol\": \"*\",\r\n    \"sourcePortRange\": \"1025-1030\",\r\n    \"destinationPortRange\": \"4242\",\r\n    \"sourceAddressPrefix\": \"10.0.0.0/16\",\r\n    \"destinationAddressPrefix\": \"11.0.0.0/24\",\r\n    \"access\": \"Allow\",\r\n    \"priority\": 1470,\r\n    \"direction\": \"Inbound\",\r\n    \"sourcePortRanges\": [],\r\n    \"destinationPortRanges\": [],\r\n    \"sourceAddressPrefixes\": [],\r\n    \"destinationAddressPrefixes\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '794',
@@ -220,7 +220,7 @@ function (nock) {
 var result = 
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-09-01', '*')
+.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-10-01', '*')
   .reply(200, "{\r\n  \"name\": \"singularPrefixesName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName\",\r\n  \"etag\": \"W/\\\"27add74e-3668-4444-a1a7-8a1b50009c70\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Updating\",\r\n    \"description\": \"testDesc\",\r\n    \"protocol\": \"*\",\r\n    \"sourcePortRange\": \"64000\",\r\n    \"destinationPortRange\": \"1200-1202\",\r\n    \"sourceAddressPrefix\": \"10.0.0.0/24\",\r\n    \"destinationAddressPrefix\": \"11.0.0.0/16\",\r\n    \"access\": \"Allow\",\r\n    \"priority\": 1470,\r\n    \"direction\": \"Inbound\",\r\n    \"sourcePortRanges\": [],\r\n    \"destinationPortRanges\": [],\r\n    \"sourceAddressPrefixes\": [],\r\n    \"destinationAddressPrefixes\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '794',
@@ -228,7 +228,7 @@ nock('http://management.azure.com:443')
   expires: '-1',
   'retry-after': '10',
   'x-ms-request-id': 'd282a588-5a98-4538-b0c5-aad51367009e',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operations/d282a588-5a98-4538-b0c5-aad51367009e?api-version=2017-09-01',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operations/d282a588-5a98-4538-b0c5-aad51367009e?api-version=2017-10-01',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1198',
@@ -241,7 +241,7 @@ function (nock) {
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-09-01', '*')
+.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-10-01', '*')
   .reply(200, "{\r\n  \"name\": \"singularPrefixesName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName\",\r\n  \"etag\": \"W/\\\"27add74e-3668-4444-a1a7-8a1b50009c70\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Updating\",\r\n    \"description\": \"testDesc\",\r\n    \"protocol\": \"*\",\r\n    \"sourcePortRange\": \"64000\",\r\n    \"destinationPortRange\": \"1200-1202\",\r\n    \"sourceAddressPrefix\": \"10.0.0.0/24\",\r\n    \"destinationAddressPrefix\": \"11.0.0.0/16\",\r\n    \"access\": \"Allow\",\r\n    \"priority\": 1470,\r\n    \"direction\": \"Inbound\",\r\n    \"sourcePortRanges\": [],\r\n    \"destinationPortRanges\": [],\r\n    \"sourceAddressPrefixes\": [],\r\n    \"destinationAddressPrefixes\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '794',
@@ -249,7 +249,7 @@ nock('https://management.azure.com:443')
   expires: '-1',
   'retry-after': '10',
   'x-ms-request-id': 'd282a588-5a98-4538-b0c5-aad51367009e',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operations/d282a588-5a98-4538-b0c5-aad51367009e?api-version=2017-09-01',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operations/d282a588-5a98-4538-b0c5-aad51367009e?api-version=2017-10-01',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1198',
@@ -261,7 +261,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operations/d282a588-5a98-4538-b0c5-aad51367009e?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operations/d282a588-5a98-4538-b0c5-aad51367009e?api-version=2017-10-01')
   .reply(200, "{\r\n  \"status\": \"Succeeded\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '29',
@@ -279,7 +279,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operations/d282a588-5a98-4538-b0c5-aad51367009e?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operations/d282a588-5a98-4538-b0c5-aad51367009e?api-version=2017-10-01')
   .reply(200, "{\r\n  \"status\": \"Succeeded\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '29',
@@ -297,7 +297,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-10-01')
   .reply(200, "{\r\n  \"name\": \"singularPrefixesName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName\",\r\n  \"etag\": \"W/\\\"75bd5319-9ab4-468e-a6c8-01e9a59fe8dc\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"description\": \"testDesc\",\r\n    \"protocol\": \"*\",\r\n    \"sourcePortRange\": \"64000\",\r\n    \"destinationPortRange\": \"1200-1202\",\r\n    \"sourceAddressPrefix\": \"10.0.0.0/24\",\r\n    \"destinationAddressPrefix\": \"11.0.0.0/16\",\r\n    \"access\": \"Allow\",\r\n    \"priority\": 1470,\r\n    \"direction\": \"Inbound\",\r\n    \"sourcePortRanges\": [],\r\n    \"destinationPortRanges\": [],\r\n    \"sourceAddressPrefixes\": [],\r\n    \"destinationAddressPrefixes\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '795',
@@ -316,7 +316,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-10-01')
   .reply(200, "{\r\n  \"name\": \"singularPrefixesName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName\",\r\n  \"etag\": \"W/\\\"75bd5319-9ab4-468e-a6c8-01e9a59fe8dc\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"description\": \"testDesc\",\r\n    \"protocol\": \"*\",\r\n    \"sourcePortRange\": \"64000\",\r\n    \"destinationPortRange\": \"1200-1202\",\r\n    \"sourceAddressPrefix\": \"10.0.0.0/24\",\r\n    \"destinationAddressPrefix\": \"11.0.0.0/16\",\r\n    \"access\": \"Allow\",\r\n    \"priority\": 1470,\r\n    \"direction\": \"Inbound\",\r\n    \"sourcePortRanges\": [],\r\n    \"destinationPortRanges\": [],\r\n    \"sourceAddressPrefixes\": [],\r\n    \"destinationAddressPrefixes\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '795',
@@ -335,7 +335,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-10-01')
   .reply(200, "{\r\n  \"name\": \"singularPrefixesName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName\",\r\n  \"etag\": \"W/\\\"75bd5319-9ab4-468e-a6c8-01e9a59fe8dc\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"description\": \"testDesc\",\r\n    \"protocol\": \"*\",\r\n    \"sourcePortRange\": \"64000\",\r\n    \"destinationPortRange\": \"1200-1202\",\r\n    \"sourceAddressPrefix\": \"10.0.0.0/24\",\r\n    \"destinationAddressPrefix\": \"11.0.0.0/16\",\r\n    \"access\": \"Allow\",\r\n    \"priority\": 1470,\r\n    \"direction\": \"Inbound\",\r\n    \"sourcePortRanges\": [],\r\n    \"destinationPortRanges\": [],\r\n    \"sourceAddressPrefixes\": [],\r\n    \"destinationAddressPrefixes\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '795',
@@ -354,7 +354,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-10-01')
   .reply(200, "{\r\n  \"name\": \"singularPrefixesName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName\",\r\n  \"etag\": \"W/\\\"75bd5319-9ab4-468e-a6c8-01e9a59fe8dc\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"description\": \"testDesc\",\r\n    \"protocol\": \"*\",\r\n    \"sourcePortRange\": \"64000\",\r\n    \"destinationPortRange\": \"1200-1202\",\r\n    \"sourceAddressPrefix\": \"10.0.0.0/24\",\r\n    \"destinationAddressPrefix\": \"11.0.0.0/16\",\r\n    \"access\": \"Allow\",\r\n    \"priority\": 1470,\r\n    \"direction\": \"Inbound\",\r\n    \"sourcePortRanges\": [],\r\n    \"destinationPortRanges\": [],\r\n    \"sourceAddressPrefixes\": [],\r\n    \"destinationAddressPrefixes\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '795',
@@ -373,15 +373,15 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .delete('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-09-01')
+  .delete('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-10-01')
   .reply(202, "", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '0',
   expires: '-1',
-  location: 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operationResults/a57e2da7-8605-472e-835d-6cb2f28fc8ab?api-version=2017-09-01',
+  location: 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operationResults/a57e2da7-8605-472e-835d-6cb2f28fc8ab?api-version=2017-10-01',
   'retry-after': '10',
   'x-ms-request-id': 'a57e2da7-8605-472e-835d-6cb2f28fc8ab',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operations/a57e2da7-8605-472e-835d-6cb2f28fc8ab?api-version=2017-09-01',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operations/a57e2da7-8605-472e-835d-6cb2f28fc8ab?api-version=2017-10-01',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1196',
@@ -393,15 +393,15 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .delete('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-09-01')
+  .delete('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-rule/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroupName/securityRules/singularPrefixesName?api-version=2017-10-01')
   .reply(202, "", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '0',
   expires: '-1',
-  location: 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operationResults/a57e2da7-8605-472e-835d-6cb2f28fc8ab?api-version=2017-09-01',
+  location: 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operationResults/a57e2da7-8605-472e-835d-6cb2f28fc8ab?api-version=2017-10-01',
   'retry-after': '10',
   'x-ms-request-id': 'a57e2da7-8605-472e-835d-6cb2f28fc8ab',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operations/a57e2da7-8605-472e-835d-6cb2f28fc8ab?api-version=2017-09-01',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operations/a57e2da7-8605-472e-835d-6cb2f28fc8ab?api-version=2017-10-01',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1196',
@@ -413,7 +413,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operations/a57e2da7-8605-472e-835d-6cb2f28fc8ab?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operations/a57e2da7-8605-472e-835d-6cb2f28fc8ab?api-version=2017-10-01')
   .reply(200, "{\r\n  \"status\": \"Succeeded\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '29',
@@ -431,7 +431,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operations/a57e2da7-8605-472e-835d-6cb2f28fc8ab?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westcentralus/operations/a57e2da7-8605-472e-835d-6cb2f28fc8ab?api-version=2017-10-01')
   .reply(200, "{\r\n  \"status\": \"Succeeded\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '29',

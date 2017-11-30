@@ -29,7 +29,7 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-authorization/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/authorizations/expressRouteCircuitAuthorizationName?api-version=2017-09-01')
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-authorization/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/authorizations/expressRouteCircuitAuthorizationName?api-version=2017-10-01')
   .reply(200, "{\r\n  \"name\": \"expressRouteCircuitAuthorizationName\",\r\n  \"id\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-authorization/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/authorizations/expressRouteCircuitAuthorizationName\",\r\n  \"etag\": \"W/\\\"f0a9fdc4-7fc3-445c-b388-2d579853d07f\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"authorizationKey\": \"91c636a4-13cc-4db3-b362-6441f82b76d9\",\r\n    \"authorizationUseStatus\": \"Available\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '512',
@@ -47,7 +47,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-authorization/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/authorizations/expressRouteCircuitAuthorizationName?api-version=2017-09-01')
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-authorization/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/authorizations/expressRouteCircuitAuthorizationName?api-version=2017-10-01')
   .reply(200, "{\r\n  \"name\": \"expressRouteCircuitAuthorizationName\",\r\n  \"id\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-authorization/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/authorizations/expressRouteCircuitAuthorizationName\",\r\n  \"etag\": \"W/\\\"f0a9fdc4-7fc3-445c-b388-2d579853d07f\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"authorizationKey\": \"91c636a4-13cc-4db3-b362-6441f82b76d9\",\r\n    \"authorizationUseStatus\": \"Available\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '512',
@@ -66,14 +66,14 @@ function (nock) {
 var result = 
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-authorization/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/authorizations/expressRouteCircuitAuthorizationName?api-version=2017-09-01', '*')
+.put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-authorization/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/authorizations/expressRouteCircuitAuthorizationName?api-version=2017-10-01', '*')
   .reply(200, "{\r\n  \"name\": \"expressRouteCircuitAuthorizationName\",\r\n  \"id\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-authorization/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/authorizations/expressRouteCircuitAuthorizationName\",\r\n  \"etag\": \"W/\\\"bd6d79b9-499e-4f16-99a8-9bb4816e5b3e\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"authorizationKey\": \"308201B006092A864886F70D010703A08201A13082019D0201003182014930820145020100302D3019311730150603550403130E6E72702D656E6372797074696F6E02105E356E1A090F168F42EDCF14480CA654300D06092A864886F70D010101050004820100A67086B86DD62F95AF1D838D8401EEB11330044D9836462C4F955D08D7867E408566D9BE043AB8AB00CDF95C8911064980C0AE4F60CBDFBE2D183E597AD2DECA11B446AC0DED9916AB7D91568105FFD83E6A5F9CF7546B9DA83B489B1F2A5723FA9D4641EF046A04EABEF4180297A2DD5208620D823A336D19FA61C8E848E9AB5B292E68CE13E73D6B1493A0F1F025FD7F6FC955AEDA1E1F808FC1223EF4A1A026A6C8312D97C2B87AE6978CE4BC3829C87B8A2642A5E995B52FFC7BF2698FDF2969BB8C570C055A582C82B0CB12596FAAC4F952D9FBD1C932EBE0D12702195F3B01F94067C8824B2ABD18C07447CA4D7B55DD54E31A6CFC6B4F454F2BAB3A99304B06092A864886F70D010701301406082A864886F70D030704084B89097BAA40D2B58028378D6FB1A67F3CF56D0A0A70E9994CBA20D39BE428CDE2C92F854F296F17D8FA3DCA483C0D3E2DD7\",\r\n    \"authorizationUseStatus\": \"Available\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '1348',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-request-id': '65e7f58b-7981-4e1e-adfb-218018e63f8d',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/providers/Microsoft.Network/locations/brazilsouth/operations/65e7f58b-7981-4e1e-adfb-218018e63f8d?api-version=2017-09-01',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/providers/Microsoft.Network/locations/brazilsouth/operations/65e7f58b-7981-4e1e-adfb-218018e63f8d?api-version=2017-10-01',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1199',
@@ -86,14 +86,14 @@ function (nock) {
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-authorization/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/authorizations/expressRouteCircuitAuthorizationName?api-version=2017-09-01', '*')
+.put('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-authorization/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/authorizations/expressRouteCircuitAuthorizationName?api-version=2017-10-01', '*')
   .reply(200, "{\r\n  \"name\": \"expressRouteCircuitAuthorizationName\",\r\n  \"id\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-authorization/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/authorizations/expressRouteCircuitAuthorizationName\",\r\n  \"etag\": \"W/\\\"bd6d79b9-499e-4f16-99a8-9bb4816e5b3e\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"authorizationKey\": \"308201B006092A864886F70D010703A08201A13082019D0201003182014930820145020100302D3019311730150603550403130E6E72702D656E6372797074696F6E02105E356E1A090F168F42EDCF14480CA654300D06092A864886F70D010101050004820100A67086B86DD62F95AF1D838D8401EEB11330044D9836462C4F955D08D7867E408566D9BE043AB8AB00CDF95C8911064980C0AE4F60CBDFBE2D183E597AD2DECA11B446AC0DED9916AB7D91568105FFD83E6A5F9CF7546B9DA83B489B1F2A5723FA9D4641EF046A04EABEF4180297A2DD5208620D823A336D19FA61C8E848E9AB5B292E68CE13E73D6B1493A0F1F025FD7F6FC955AEDA1E1F808FC1223EF4A1A026A6C8312D97C2B87AE6978CE4BC3829C87B8A2642A5E995B52FFC7BF2698FDF2969BB8C570C055A582C82B0CB12596FAAC4F952D9FBD1C932EBE0D12702195F3B01F94067C8824B2ABD18C07447CA4D7B55DD54E31A6CFC6B4F454F2BAB3A99304B06092A864886F70D010701301406082A864886F70D030704084B89097BAA40D2B58028378D6FB1A67F3CF56D0A0A70E9994CBA20D39BE428CDE2C92F854F296F17D8FA3DCA483C0D3E2DD7\",\r\n    \"authorizationUseStatus\": \"Available\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '1348',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
   'x-ms-request-id': '65e7f58b-7981-4e1e-adfb-218018e63f8d',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/providers/Microsoft.Network/locations/brazilsouth/operations/65e7f58b-7981-4e1e-adfb-218018e63f8d?api-version=2017-09-01',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/providers/Microsoft.Network/locations/brazilsouth/operations/65e7f58b-7981-4e1e-adfb-218018e63f8d?api-version=2017-10-01',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1199',
@@ -105,7 +105,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-authorization/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/authorizations/expressRouteCircuitAuthorizationName?api-version=2017-09-01')
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-authorization/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/authorizations/expressRouteCircuitAuthorizationName?api-version=2017-10-01')
   .reply(200, "{\r\n  \"name\": \"expressRouteCircuitAuthorizationName\",\r\n  \"id\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-authorization/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/authorizations/expressRouteCircuitAuthorizationName\",\r\n  \"etag\": \"W/\\\"bd6d79b9-499e-4f16-99a8-9bb4816e5b3e\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"authorizationKey\": \"91c636a4-13cc-4db3-b362-6441f82b76d9\",\r\n    \"authorizationUseStatus\": \"Available\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '512',
@@ -123,7 +123,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-authorization/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/authorizations/expressRouteCircuitAuthorizationName?api-version=2017-09-01')
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-authorization/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/authorizations/expressRouteCircuitAuthorizationName?api-version=2017-10-01')
   .reply(200, "{\r\n  \"name\": \"expressRouteCircuitAuthorizationName\",\r\n  \"id\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-authorization/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/authorizations/expressRouteCircuitAuthorizationName\",\r\n  \"etag\": \"W/\\\"bd6d79b9-499e-4f16-99a8-9bb4816e5b3e\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"authorizationKey\": \"91c636a4-13cc-4db3-b362-6441f82b76d9\",\r\n    \"authorizationUseStatus\": \"Available\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '512',

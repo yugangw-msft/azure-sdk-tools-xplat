@@ -29,7 +29,7 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-10-01')
   .reply(404, "{\r\n  \"error\": {\r\n    \"code\": \"NotFound\",\r\n    \"message\": \"Resource /subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName not found.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '299',
@@ -47,7 +47,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-10-01')
   .reply(404, "{\r\n  \"error\": {\r\n    \"code\": \"NotFound\",\r\n    \"message\": \"Resource /subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName not found.\",\r\n    \"details\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '299',
@@ -66,7 +66,7 @@ function (nock) {
 var result = 
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-09-01', '*')
+.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-10-01', '*')
   .reply(201, "{\r\n  \"name\": \"updateNextHopTypeFromVirtualApplianceToAnyName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName\",\r\n  \"etag\": \"W/\\\"3845b7a3-6bce-4f49-95a4-a8ef09240745\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Updating\",\r\n    \"addressPrefix\": \"10.0.0.0/16\",\r\n    \"nextHopType\": \"VirtualAppliance\",\r\n    \"nextHopIpAddress\": \"10.0.0.42\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '503',
@@ -74,7 +74,7 @@ nock('http://management.azure.com:443')
   expires: '-1',
   'retry-after': '10',
   'x-ms-request-id': 'a68fa45b-47e6-45cb-ad42-20d5954cb2ad',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operations/a68fa45b-47e6-45cb-ad42-20d5954cb2ad?api-version=2017-09-01',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operations/a68fa45b-47e6-45cb-ad42-20d5954cb2ad?api-version=2017-10-01',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1199',
@@ -87,7 +87,7 @@ function (nock) {
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-09-01', '*')
+.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-10-01', '*')
   .reply(201, "{\r\n  \"name\": \"updateNextHopTypeFromVirtualApplianceToAnyName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName\",\r\n  \"etag\": \"W/\\\"3845b7a3-6bce-4f49-95a4-a8ef09240745\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Updating\",\r\n    \"addressPrefix\": \"10.0.0.0/16\",\r\n    \"nextHopType\": \"VirtualAppliance\",\r\n    \"nextHopIpAddress\": \"10.0.0.42\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '503',
@@ -95,7 +95,7 @@ nock('https://management.azure.com:443')
   expires: '-1',
   'retry-after': '10',
   'x-ms-request-id': 'a68fa45b-47e6-45cb-ad42-20d5954cb2ad',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operations/a68fa45b-47e6-45cb-ad42-20d5954cb2ad?api-version=2017-09-01',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operations/a68fa45b-47e6-45cb-ad42-20d5954cb2ad?api-version=2017-10-01',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1199',
@@ -107,7 +107,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operations/a68fa45b-47e6-45cb-ad42-20d5954cb2ad?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operations/a68fa45b-47e6-45cb-ad42-20d5954cb2ad?api-version=2017-10-01')
   .reply(200, "{\r\n  \"status\": \"Succeeded\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '29',
@@ -125,7 +125,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operations/a68fa45b-47e6-45cb-ad42-20d5954cb2ad?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operations/a68fa45b-47e6-45cb-ad42-20d5954cb2ad?api-version=2017-10-01')
   .reply(200, "{\r\n  \"status\": \"Succeeded\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '29',
@@ -143,7 +143,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-10-01')
   .reply(200, "{\r\n  \"name\": \"updateNextHopTypeFromVirtualApplianceToAnyName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName\",\r\n  \"etag\": \"W/\\\"bd7d6a74-e6dc-4942-b62e-2e3c8115eb64\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"addressPrefix\": \"10.0.0.0/16\",\r\n    \"nextHopType\": \"VirtualAppliance\",\r\n    \"nextHopIpAddress\": \"10.0.0.42\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '504',
@@ -162,7 +162,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-10-01')
   .reply(200, "{\r\n  \"name\": \"updateNextHopTypeFromVirtualApplianceToAnyName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName\",\r\n  \"etag\": \"W/\\\"bd7d6a74-e6dc-4942-b62e-2e3c8115eb64\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"addressPrefix\": \"10.0.0.0/16\",\r\n    \"nextHopType\": \"VirtualAppliance\",\r\n    \"nextHopIpAddress\": \"10.0.0.42\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '504',
@@ -181,7 +181,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-10-01')
   .reply(200, "{\r\n  \"name\": \"updateNextHopTypeFromVirtualApplianceToAnyName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName\",\r\n  \"etag\": \"W/\\\"bd7d6a74-e6dc-4942-b62e-2e3c8115eb64\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"addressPrefix\": \"10.0.0.0/16\",\r\n    \"nextHopType\": \"VirtualAppliance\",\r\n    \"nextHopIpAddress\": \"10.0.0.42\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '504',
@@ -200,7 +200,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-10-01')
   .reply(200, "{\r\n  \"name\": \"updateNextHopTypeFromVirtualApplianceToAnyName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName\",\r\n  \"etag\": \"W/\\\"bd7d6a74-e6dc-4942-b62e-2e3c8115eb64\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"addressPrefix\": \"10.0.0.0/16\",\r\n    \"nextHopType\": \"VirtualAppliance\",\r\n    \"nextHopIpAddress\": \"10.0.0.42\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '504',
@@ -220,7 +220,7 @@ function (nock) {
 var result = 
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-09-01', '*')
+.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-10-01', '*')
   .reply(200, "{\r\n  \"name\": \"updateNextHopTypeFromVirtualApplianceToAnyName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName\",\r\n  \"etag\": \"W/\\\"d958fbae-0eeb-44a2-a531-a43f7d43e3da\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Updating\",\r\n    \"addressPrefix\": \"10.0.0.0/16\",\r\n    \"nextHopType\": \"VnetLocal\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '458',
@@ -228,7 +228,7 @@ nock('http://management.azure.com:443')
   expires: '-1',
   'retry-after': '10',
   'x-ms-request-id': '38a656c7-bd92-417d-847b-d1a791554c7b',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operations/38a656c7-bd92-417d-847b-d1a791554c7b?api-version=2017-09-01',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operations/38a656c7-bd92-417d-847b-d1a791554c7b?api-version=2017-10-01',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1196',
@@ -241,7 +241,7 @@ function (nock) {
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-09-01', '*')
+.put('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-10-01', '*')
   .reply(200, "{\r\n  \"name\": \"updateNextHopTypeFromVirtualApplianceToAnyName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName\",\r\n  \"etag\": \"W/\\\"d958fbae-0eeb-44a2-a531-a43f7d43e3da\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Updating\",\r\n    \"addressPrefix\": \"10.0.0.0/16\",\r\n    \"nextHopType\": \"VnetLocal\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '458',
@@ -249,7 +249,7 @@ nock('https://management.azure.com:443')
   expires: '-1',
   'retry-after': '10',
   'x-ms-request-id': '38a656c7-bd92-417d-847b-d1a791554c7b',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operations/38a656c7-bd92-417d-847b-d1a791554c7b?api-version=2017-09-01',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operations/38a656c7-bd92-417d-847b-d1a791554c7b?api-version=2017-10-01',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1196',
@@ -261,7 +261,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operations/38a656c7-bd92-417d-847b-d1a791554c7b?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operations/38a656c7-bd92-417d-847b-d1a791554c7b?api-version=2017-10-01')
   .reply(200, "{\r\n  \"status\": \"Succeeded\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '29',
@@ -279,7 +279,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operations/38a656c7-bd92-417d-847b-d1a791554c7b?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operations/38a656c7-bd92-417d-847b-d1a791554c7b?api-version=2017-10-01')
   .reply(200, "{\r\n  \"status\": \"Succeeded\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '29',
@@ -297,7 +297,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-10-01')
   .reply(200, "{\r\n  \"name\": \"updateNextHopTypeFromVirtualApplianceToAnyName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName\",\r\n  \"etag\": \"W/\\\"c0b66509-4d2b-41f2-a87e-0438e5ba1b13\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"addressPrefix\": \"10.0.0.0/16\",\r\n    \"nextHopType\": \"VnetLocal\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '459',
@@ -316,7 +316,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-10-01')
   .reply(200, "{\r\n  \"name\": \"updateNextHopTypeFromVirtualApplianceToAnyName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName\",\r\n  \"etag\": \"W/\\\"c0b66509-4d2b-41f2-a87e-0438e5ba1b13\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"addressPrefix\": \"10.0.0.0/16\",\r\n    \"nextHopType\": \"VnetLocal\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '459',
@@ -335,7 +335,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-10-01')
   .reply(200, "{\r\n  \"name\": \"updateNextHopTypeFromVirtualApplianceToAnyName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName\",\r\n  \"etag\": \"W/\\\"c0b66509-4d2b-41f2-a87e-0438e5ba1b13\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"addressPrefix\": \"10.0.0.0/16\",\r\n    \"nextHopType\": \"VnetLocal\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '459',
@@ -354,7 +354,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-10-01')
   .reply(200, "{\r\n  \"name\": \"updateNextHopTypeFromVirtualApplianceToAnyName\",\r\n  \"id\": \"/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName\",\r\n  \"etag\": \"W/\\\"c0b66509-4d2b-41f2-a87e-0438e5ba1b13\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"addressPrefix\": \"10.0.0.0/16\",\r\n    \"nextHopType\": \"VnetLocal\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '459',
@@ -373,15 +373,15 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .delete('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-09-01')
+  .delete('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-10-01')
   .reply(202, "", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '0',
   expires: '-1',
-  location: 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operationResults/24be4825-95ce-4171-b4d5-64e2158283e3?api-version=2017-09-01',
+  location: 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operationResults/24be4825-95ce-4171-b4d5-64e2158283e3?api-version=2017-10-01',
   'retry-after': '10',
   'x-ms-request-id': '24be4825-95ce-4171-b4d5-64e2158283e3',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operations/24be4825-95ce-4171-b4d5-64e2158283e3?api-version=2017-09-01',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operations/24be4825-95ce-4171-b4d5-64e2158283e3?api-version=2017-10-01',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1197',
@@ -393,15 +393,15 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .delete('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-09-01')
+  .delete('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/resourceGroups/xplat-test-route/providers/Microsoft.Network/routeTables/routeTableName/routes/updateNextHopTypeFromVirtualApplianceToAnyName?api-version=2017-10-01')
   .reply(202, "", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '0',
   expires: '-1',
-  location: 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operationResults/24be4825-95ce-4171-b4d5-64e2158283e3?api-version=2017-09-01',
+  location: 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operationResults/24be4825-95ce-4171-b4d5-64e2158283e3?api-version=2017-10-01',
   'retry-after': '10',
   'x-ms-request-id': '24be4825-95ce-4171-b4d5-64e2158283e3',
-  'azure-asyncoperation': 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operations/24be4825-95ce-4171-b4d5-64e2158283e3?api-version=2017-09-01',
+  'azure-asyncoperation': 'https://management.azure.com/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operations/24be4825-95ce-4171-b4d5-64e2158283e3?api-version=2017-10-01',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
   'x-ms-ratelimit-remaining-subscription-writes': '1197',
@@ -413,7 +413,7 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operations/24be4825-95ce-4171-b4d5-64e2158283e3?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operations/24be4825-95ce-4171-b4d5-64e2158283e3?api-version=2017-10-01')
   .reply(200, "{\r\n  \"status\": \"Succeeded\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '29',
@@ -431,7 +431,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operations/24be4825-95ce-4171-b4d5-64e2158283e3?api-version=2017-09-01')
+  .get('/subscriptions/9532a63e-f2eb-4649-bb23-5ed01077ce80/providers/Microsoft.Network/locations/westus/operations/24be4825-95ce-4171-b4d5-64e2158283e3?api-version=2017-10-01')
   .reply(200, "{\r\n  \"status\": \"Succeeded\"\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '29',
