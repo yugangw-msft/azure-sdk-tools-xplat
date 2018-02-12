@@ -87,7 +87,7 @@
     "jsonminify": "^0.4.1",
     "jsrsasign": "4.8.2 ",
     "jwt-decode": "^2.1.0",
-    "kuduscript": "1.0.15",
+    "kuduscript": "1.0.16",
     "moment": "^2.8.0",
     "ms-rest": "^2.2.1",
     "ms-rest-azure": "^2.5.2",
