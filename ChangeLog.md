@@ -1,3 +1,8 @@
+## 2018-03-23 Version 0.10.18
+* General
+  * cloud shell: able to work with accounts created by CLI 2.0 in the cloud shell  #3684
+  * Update KuduScript to 1.0.16 #3680 
+
 ## 2017-11-16 Version 0.10.17
 * General
   * Updated AzureUSGovernment environment portalUrl from manage.windowsazure.us to portal.azure.us #3669
