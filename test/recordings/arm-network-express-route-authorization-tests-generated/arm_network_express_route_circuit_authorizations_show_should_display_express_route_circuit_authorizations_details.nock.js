@@ -29,7 +29,7 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-authorization/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/authorizations/expressRouteCircuitAuthorizationName?api-version=2017-09-01')
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-authorization/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/authorizations/expressRouteCircuitAuthorizationName?api-version=2017-10-01')
   .reply(200, "{\r\n  \"name\": \"expressRouteCircuitAuthorizationName\",\r\n  \"id\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-authorization/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/authorizations/expressRouteCircuitAuthorizationName\",\r\n  \"etag\": \"W/\\\"f0a9fdc4-7fc3-445c-b388-2d579853d07f\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"authorizationKey\": \"91c636a4-13cc-4db3-b362-6441f82b76d9\",\r\n    \"authorizationUseStatus\": \"Available\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '512',
@@ -47,7 +47,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-authorization/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/authorizations/expressRouteCircuitAuthorizationName?api-version=2017-09-01')
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-authorization/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/authorizations/expressRouteCircuitAuthorizationName?api-version=2017-10-01')
   .reply(200, "{\r\n  \"name\": \"expressRouteCircuitAuthorizationName\",\r\n  \"id\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-authorization/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName/authorizations/expressRouteCircuitAuthorizationName\",\r\n  \"etag\": \"W/\\\"f0a9fdc4-7fc3-445c-b388-2d579853d07f\\\"\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"authorizationKey\": \"91c636a4-13cc-4db3-b362-6441f82b76d9\",\r\n    \"authorizationUseStatus\": \"Available\"\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '512',

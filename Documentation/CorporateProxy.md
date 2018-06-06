@@ -14,3 +14,6 @@ For now, a good solution is to set up a public proxy of your own and connect to 
 
 ## Others
 Interestingly, there was a similar issue reported in `npm` project. You can find many solutions from the community here: https://github.com/npm/npm/issues/2866. For more questions, please feel free to contact us.
+
+## Using npm behind a corporate proxy
+This [link](http://wil.boayue.com/blog/2013/06/14/using-npm-behind-a-proxy/) provides useful information about using npm behind a corporate proxy

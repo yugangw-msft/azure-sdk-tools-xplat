@@ -14,7 +14,7 @@
     "Chen, Hao <hach@microsoft.com>",
     "Krishnan, Balaji <balajik@microsoft.com>"
   ],
-  "version": "0.10.17",
+  "version": "0.10.18",
   "description": "Microsoft Azure Cross Platform Command Line tool",
   "tags": [
     "azure",
@@ -45,7 +45,7 @@
     "azure-arm-insights": "0.11.3",
     "azure-arm-iothub": "1.0.1-preview",
     "azure-arm-servermanagement": "0.1.2",
-    "azure-arm-network": "4.0.1",
+    "azure-arm-network": "5.1.0",
     "azure-arm-powerbiembedded": "0.1.0",
     "azure-arm-trafficmanager": "1.1.0-preview",
     "azure-arm-dns": "2.0.0-preview",
@@ -87,10 +87,10 @@
     "jsonminify": "^0.4.1",
     "jsrsasign": "4.8.2 ",
     "jwt-decode": "^2.1.0",
-    "kuduscript": "1.0.15",
+    "kuduscript": "1.0.16",
     "moment": "^2.8.0",
     "ms-rest": "^2.2.1",
-    "ms-rest-azure": "^2.2.1",
+    "ms-rest-azure": "^2.5.2",
     "node-forge": "0.6.23",
     "omelette": "0.3.2",
     "openssl-wrapper": "0.2.1",
@@ -115,7 +115,7 @@
     "read": "^1.0.7"
   },
   "devDependencies": {
-    "istanbul": "0.3.19",
+    "istanbul": "0.4.5",
     "mocha": "1.16.0",
     "jshint": "<= 2.6.0",
     "sinon": "^2.1.0",

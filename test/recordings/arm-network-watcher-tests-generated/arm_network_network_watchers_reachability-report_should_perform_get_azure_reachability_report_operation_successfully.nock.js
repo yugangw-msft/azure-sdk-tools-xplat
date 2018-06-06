@@ -29,7 +29,7 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatcherName?api-version=2017-09-01')
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatcherName?api-version=2017-10-01')
   .reply(200, "{\r\n  \"name\": \"networkWatcherName\",\r\n  \"id\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatcherName\",\r\n  \"etag\": \"W/\\\"1b69abe7-d0ec-4b18-9e63-0fb946927909\\\"\",\r\n  \"type\": \"Microsoft.Network/networkWatchers\",\r\n  \"location\": \"westcentralus\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"runningOperationIds\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '429',
@@ -48,7 +48,7 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatcherName?api-version=2017-09-01')
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatcherName?api-version=2017-10-01')
   .reply(200, "{\r\n  \"name\": \"networkWatcherName\",\r\n  \"id\": \"/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatcherName\",\r\n  \"etag\": \"W/\\\"1b69abe7-d0ec-4b18-9e63-0fb946927909\\\"\",\r\n  \"type\": \"Microsoft.Network/networkWatchers\",\r\n  \"location\": \"westcentralus\",\r\n  \"properties\": {\r\n    \"provisioningState\": \"Succeeded\",\r\n    \"runningOperationIds\": []\r\n  }\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '429',
@@ -68,13 +68,13 @@ function (nock) {
 var result = 
 nock('http://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.post('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatcherName/azureReachabilityReport?api-version=2017-09-01', '*')
+.post('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatcherName/azureReachabilityReport?api-version=2017-10-01', '*')
   .reply(202, "null", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '4',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  location: 'https://management.azure.com/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/providers/Microsoft.Network/locations/westcentralus/operationResults/c5d95ff2-e8eb-44c1-9877-ae8a5f1840fc?api-version=2017-09-01',
+  location: 'https://management.azure.com/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/providers/Microsoft.Network/locations/westcentralus/operationResults/c5d95ff2-e8eb-44c1-9877-ae8a5f1840fc?api-version=2017-10-01',
   'retry-after': '10',
   'x-ms-request-id': 'c5d95ff2-e8eb-44c1-9877-ae8a5f1840fc',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
@@ -89,13 +89,13 @@ function (nock) {
 var result = 
 nock('https://management.azure.com:443')
   .filteringRequestBody(function (path) { return '*';})
-.post('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatcherName/azureReachabilityReport?api-version=2017-09-01', '*')
+.post('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/resourceGroups/xplat-test-watcher/providers/Microsoft.Network/networkWatchers/networkWatcherName/azureReachabilityReport?api-version=2017-10-01', '*')
   .reply(202, "null", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '4',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  location: 'https://management.azure.com/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/providers/Microsoft.Network/locations/westcentralus/operationResults/c5d95ff2-e8eb-44c1-9877-ae8a5f1840fc?api-version=2017-09-01',
+  location: 'https://management.azure.com/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/providers/Microsoft.Network/locations/westcentralus/operationResults/c5d95ff2-e8eb-44c1-9877-ae8a5f1840fc?api-version=2017-10-01',
   'retry-after': '10',
   'x-ms-request-id': 'c5d95ff2-e8eb-44c1-9877-ae8a5f1840fc',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
@@ -109,13 +109,13 @@ nock('https://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/providers/Microsoft.Network/locations/westcentralus/operationResults/c5d95ff2-e8eb-44c1-9877-ae8a5f1840fc?api-version=2017-09-01')
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/providers/Microsoft.Network/locations/westcentralus/operationResults/c5d95ff2-e8eb-44c1-9877-ae8a5f1840fc?api-version=2017-10-01')
   .reply(200, "{\r\n  \"aggregationLevel\": \"State\",\r\n  \"providerLocation\": {\r\n    \"country\": \"United States\",\r\n    \"state\": \"Washington\"\r\n  },\r\n  \"reachabilityReport\": [\r\n    {\r\n      \"latencies\": []\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '196',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  location: 'https://management.azure.com/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/providers/Microsoft.Network/locations/westcentralus/operationResults/c5d95ff2-e8eb-44c1-9877-ae8a5f1840fc?api-version=2017-09-01',
+  location: 'https://management.azure.com/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/providers/Microsoft.Network/locations/westcentralus/operationResults/c5d95ff2-e8eb-44c1-9877-ae8a5f1840fc?api-version=2017-10-01',
   'x-ms-request-id': 'c5d95ff2-e8eb-44c1-9877-ae8a5f1840fc',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
@@ -128,13 +128,13 @@ nock('http://management.azure.com:443')
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
-  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/providers/Microsoft.Network/locations/westcentralus/operationResults/c5d95ff2-e8eb-44c1-9877-ae8a5f1840fc?api-version=2017-09-01')
+  .get('/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/providers/Microsoft.Network/locations/westcentralus/operationResults/c5d95ff2-e8eb-44c1-9877-ae8a5f1840fc?api-version=2017-10-01')
   .reply(200, "{\r\n  \"aggregationLevel\": \"State\",\r\n  \"providerLocation\": {\r\n    \"country\": \"United States\",\r\n    \"state\": \"Washington\"\r\n  },\r\n  \"reachabilityReport\": [\r\n    {\r\n      \"latencies\": []\r\n    }\r\n  ]\r\n}", { 'cache-control': 'no-cache',
   pragma: 'no-cache',
   'content-length': '196',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
-  location: 'https://management.azure.com/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/providers/Microsoft.Network/locations/westcentralus/operationResults/c5d95ff2-e8eb-44c1-9877-ae8a5f1840fc?api-version=2017-09-01',
+  location: 'https://management.azure.com/subscriptions/947d47b4-7883-4bb9-9d85-c5e8e2f572ce/providers/Microsoft.Network/locations/westcentralus/operationResults/c5d95ff2-e8eb-44c1-9877-ae8a5f1840fc?api-version=2017-10-01',
   'x-ms-request-id': 'c5d95ff2-e8eb-44c1-9877-ae8a5f1840fc',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   server: 'Microsoft-HTTPAPI/2.0',
