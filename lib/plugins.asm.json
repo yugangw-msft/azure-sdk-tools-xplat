@@ -27954,6 +27954,15 @@
                   "description": "the reserved IP service name"
                 },
                 {
+                  "flags": "-d, --deployment-name <deployment-name>",
+                  "required": -23,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-d",
+                  "long": "--deployment-name",
+                  "description": "the deployment name"
+                },
+                {
                   "flags": "-s, --subscription <id>",
                   "required": -20,
                   "optional": 0,
@@ -28106,7 +28115,7 @@
               "name": "associate",
               "description": "Set a reserved IP address and cloud service association",
               "fullName": "network reserved-ip associate",
-              "usage": "[options] <name> <service-name>",
+              "usage": "[options] <name> <service-name> <deployment-name>",
               "filePath": "commands/asm/network/network._js",
               "options": [
                 {
@@ -28149,7 +28158,7 @@
               "name": "disassociate",
               "description": "Remove a reserved IP address and cloud service association",
               "fullName": "network reserved-ip disassociate",
-              "usage": "[options] <name> <service-name>",
+              "usage": "[options] <name> <service-name> <deployment-name>",
               "filePath": "commands/asm/network/network._js",
               "options": [
                 {
