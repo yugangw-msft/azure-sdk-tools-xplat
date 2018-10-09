@@ -714,12 +714,12 @@
                   "description": "the management portal URL"
                 },
                 {
-                  "flags": "--publishing-profile-url <publishingProfileUrl>",
-                  "required": -26,
+                  "flags": "--azure-data-lake-analytics-catalog-and-job-endpoint-suffix <azureDataLakeAnalyticsCatalogAndJobEndpointSuffix>",
+                  "required": -61,
                   "optional": 0,
                   "bool": true,
-                  "long": "--publishing-profile-url",
-                  "description": "the publish settings file URL"
+                  "long": "--azure-data-lake-analytics-catalog-and-job-endpoint-suffix",
+                  "description": "the data lake analytics job and catalog service dns suffix"
                 },
                 {
                   "flags": "--management-endpoint-url <managementEndpointUrl>",
@@ -762,12 +762,12 @@
                   "description": "the Active Directory login endpoint"
                 },
                 {
-                  "flags": "--active-directory-resource-id <activeDirectoryResourceId>",
-                  "required": -32,
+                  "flags": "--publishing-profile-url <publishingProfileUrl>",
+                  "required": -26,
                   "optional": 0,
                   "bool": true,
-                  "long": "--active-directory-resource-id",
-                  "description": "The resource ID to obtain AD tokens for"
+                  "long": "--publishing-profile-url",
+                  "description": "the publish settings file URL"
                 },
                 {
                   "flags": "--gallery-endpoint-url <galleryEndpointUrl>",
@@ -818,12 +818,12 @@
                   "description": "the data lake store filesystem service dns suffix"
                 },
                 {
-                  "flags": "--azure-data-lake-analytics-catalog-and-job-endpoint-suffix <azureDataLakeAnalyticsCatalogAndJobEndpointSuffix>",
-                  "required": -61,
+                  "flags": "--active-directory-resource-id <activeDirectoryResourceId>",
+                  "required": -32,
                   "optional": 0,
                   "bool": true,
-                  "long": "--azure-data-lake-analytics-catalog-and-job-endpoint-suffix",
-                  "description": "the data lake analytics job and catalog service dns suffix"
+                  "long": "--active-directory-resource-id",
+                  "description": "The resource ID to obtain AD tokens for"
                 }
               ]
             },
@@ -876,12 +876,12 @@
                   "description": "the management portal URL"
                 },
                 {
-                  "flags": "--azure-data-lake-analytics-catalog-and-job-endpoint-suffix <azureDataLakeAnalyticsCatalogAndJobEndpointSuffix>",
-                  "required": -61,
+                  "flags": "--active-directory-resource-id <activeDirectoryResourceId>",
+                  "required": -32,
                   "optional": 0,
                   "bool": true,
-                  "long": "--azure-data-lake-analytics-catalog-and-job-endpoint-suffix",
-                  "description": "the data lake analytics job and catalog service dns suffix"
+                  "long": "--active-directory-resource-id",
+                  "description": "The resource ID to obtain AD tokens for"
                 },
                 {
                   "flags": "--management-endpoint-url <managementEndpointUrl>",
@@ -924,12 +924,12 @@
                   "description": "the Active Directory login endpoint"
                 },
                 {
-                  "flags": "--publishing-profile-url <publishingProfileUrl>",
-                  "required": -26,
+                  "flags": "--azure-data-lake-analytics-catalog-and-job-endpoint-suffix <azureDataLakeAnalyticsCatalogAndJobEndpointSuffix>",
+                  "required": -61,
                   "optional": 0,
                   "bool": true,
-                  "long": "--publishing-profile-url",
-                  "description": "the publish settings file URL"
+                  "long": "--azure-data-lake-analytics-catalog-and-job-endpoint-suffix",
+                  "description": "the data lake analytics job and catalog service dns suffix"
                 },
                 {
                   "flags": "--gallery-endpoint-url <galleryEndpointUrl>",
@@ -980,12 +980,12 @@
                   "description": "the data lake store filesystem service dns suffix"
                 },
                 {
-                  "flags": "--active-directory-resource-id <activeDirectoryResourceId>",
-                  "required": -32,
+                  "flags": "--publishing-profile-url <publishingProfileUrl>",
+                  "required": -26,
                   "optional": 0,
                   "bool": true,
-                  "long": "--active-directory-resource-id",
-                  "description": "The resource ID to obtain AD tokens for"
+                  "long": "--publishing-profile-url",
+                  "description": "the publish settings file URL"
                 }
               ]
             },
@@ -27945,6 +27945,24 @@
                   "description": "the reserved IP address label"
                 },
                 {
+                  "flags": "-r, --service-name <service-name>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-r",
+                  "long": "--service-name",
+                  "description": "the reserved IP service name"
+                },
+                {
+                  "flags": "-d, --deployment-name <deployment-name>",
+                  "required": -23,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-d",
+                  "long": "--deployment-name",
+                  "description": "the deployment name"
+                },
+                {
                   "flags": "-s, --subscription <id>",
                   "required": -20,
                   "optional": 0,
@@ -28081,6 +28099,92 @@
                   "short": "-q",
                   "long": "--quiet",
                   "description": "quiet mode, do not ask for delete confirmation"
+                },
+                {
+                  "flags": "-s, --subscription <id>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-s",
+                  "long": "--subscription",
+                  "description": "the subscription id"
+                }
+              ]
+            },
+            {
+              "name": "associate",
+              "description": "Set a reserved IP address and cloud service association",
+              "fullName": "network reserved-ip associate",
+              "usage": "[options] <name> <service-name> <deployment-name>",
+              "filePath": "commands/asm/network/network._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
+                },
+                {
+                  "flags": "-s, --subscription <id>",
+                  "required": -20,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-s",
+                  "long": "--subscription",
+                  "description": "the subscription id"
+                }
+              ]
+            },
+            {
+              "name": "disassociate",
+              "description": "Remove a reserved IP address and cloud service association",
+              "fullName": "network reserved-ip disassociate",
+              "usage": "[options] <name> <service-name> <deployment-name>",
+              "filePath": "commands/asm/network/network._js",
+              "options": [
+                {
+                  "flags": "-v, --verbose",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "short": "-v",
+                  "long": "--verbose",
+                  "description": "use verbose output"
+                },
+                {
+                  "flags": "-vv",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "-vv",
+                  "description": "more verbose with debug output"
+                },
+                {
+                  "flags": "--json",
+                  "required": 0,
+                  "optional": 0,
+                  "bool": true,
+                  "long": "--json",
+                  "description": "use json output"
                 },
                 {
                   "flags": "-s, --subscription <id>",
@@ -34415,12 +34519,12 @@
               "description": "Create a deployment script for python website"
             },
             {
-              "flags": "--functionApp",
+              "flags": "--functionApp [projectFilePath]",
               "required": 0,
-              "optional": 0,
+              "optional": -15,
               "bool": true,
               "long": "--functionApp",
-              "description": "Create a deployment script for function App"
+              "description": "Create a deployment script for function App, specify the project file path if using msbuild"
             },
             {
               "flags": "--basic",
@@ -34439,27 +34543,27 @@
               "description": "Create a deployment script for .NET console application, specify the project file path"
             },
             {
-              "flags": "-s, --solutionFile [file path]",
-              "required": 0,
-              "optional": -20,
+              "flags": "-s, --solutionFile <file path>",
+              "required": -20,
+              "optional": 0,
               "bool": true,
               "short": "-s",
               "long": "--solutionFile",
               "description": "The solution file path (sln)"
             },
             {
-              "flags": "-p, --sitePath [directory path]",
-              "required": 0,
-              "optional": -16,
+              "flags": "-p, --sitePath <directory path>",
+              "required": -16,
+              "optional": 0,
               "bool": true,
               "short": "-p",
               "long": "--sitePath",
               "description": "The path to the site being deployed (default: same as repositoryRoot)"
             },
             {
-              "flags": "-t, --scriptType [batch|bash|posh]",
-              "required": 0,
-              "optional": -18,
+              "flags": "-t, --scriptType <batch|bash|posh>",
+              "required": -18,
+              "optional": 0,
               "bool": true,
               "short": "-t",
               "long": "--scriptType",
